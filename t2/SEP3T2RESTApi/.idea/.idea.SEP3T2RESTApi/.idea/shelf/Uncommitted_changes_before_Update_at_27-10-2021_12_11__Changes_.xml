@@ -1,0 +1,24 @@
+﻿<changelist name="Uncommitted_changes_before_Update_at_27-10-2021_12_11_[Changes]" date="1635329514071" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.SEP3T2RESTApi/.idea/shelf/Uncommitted_changes_before_Update_at_27-10-2021_12_11_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 27-10-2021 12:11 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/SEP3BlazorT1Client.assets.cache" />
+    <option name="AFTER_PATH" value="../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/SEP3BlazorT1Client.assets.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.SEP3T2RESTApi/.idea/shelf/Uncommitted_changes_before_Update_at_27-10-2021_12_11_[Changes]/SEP3BlazorT1Client.assets.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.assets.cache" />
+    <option name="AFTER_PATH" value="SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.assets.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.SEP3T2RESTApi/.idea/shelf/Uncommitted_changes_before_Update_at_27-10-2021_12_11_[Changes]/SEP3T2RESTApi.assets.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="SEP3T2RESTApi/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="SEP3T2RESTApi/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.SEP3T2RESTApi/.idea/shelf/Uncommitted_changes_before_Update_at_27-10-2021_12_11_[Changes]/project.nuget.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.SEP3T2RESTApi/.idea/shelf/Uncommitted_changes_before_Update_at_27-10-2021_12_11_[Changes]/project.nuget1.cache" />
+  </binary>
+</changelist>
