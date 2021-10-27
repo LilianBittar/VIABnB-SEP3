@@ -1,7 +1,7 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="https://concept-test.com/v1/concept"
-           targetNamespace="https://concept-test.com/v1/concept" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://viabnb.dk/api/v1/concept"
+           targetNamespace="http://viabnb.dk/api/v1/concept" elementFormDefault="qualified">
 
-    <xs:element name="getConceptMessageRequest">
+    <xs:element name="GetConceptMessageRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="id" type="xs:int"/>
@@ -9,15 +9,15 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="getConceptMessageResponse">
+    <xs:element name="GetConceptMessageResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="conceptMessage" type="tns:conceptMessage"/>
+                <xs:element name="ConceptMessage" type="tns:ConceptMessage"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="conceptMessage">
+    <xs:complexType name="ConceptMessage">
         <xs:sequence>
             <xs:element name="id" type="xs:int"/>
             <xs:element name="message" type="xs:string"/>

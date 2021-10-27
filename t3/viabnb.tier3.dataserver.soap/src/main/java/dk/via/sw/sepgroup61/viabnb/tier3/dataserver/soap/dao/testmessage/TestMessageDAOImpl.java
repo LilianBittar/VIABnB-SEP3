@@ -1,8 +1,9 @@
 package dk.via.sw.sepgroup61.viabnb.tier3.dataserver.soap.dao.testmessage;
 
 import dk.via.sw.sepgroup61.viabnb.tier3.dataserver.soap.dao.BaseDao;
-import https.concept_test_com.v1.concept.ConceptMessage;
+import dk.viabnb.api.v1.concept.ConceptMessage;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-@Component
+@Service
 public class TestMessageDAOImpl extends BaseDao implements TestMessageDAO
 {
 
@@ -35,7 +36,7 @@ public class TestMessageDAOImpl extends BaseDao implements TestMessageDAO
     return instance;
   }
 
-  @Override public https.concept_test_com.v1.concept.ConceptMessage GetMessage(int msgId) throws SQLException
+  @Override public ConceptMessage GetMessage(int msgId) throws SQLException
   {
     try(Connection connection = getConnection())
     {
