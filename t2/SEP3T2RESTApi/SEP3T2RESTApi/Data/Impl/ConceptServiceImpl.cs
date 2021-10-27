@@ -10,7 +10,9 @@ namespace SEP3T2RESTApi.Data.Impl
         
         public ConceptMessage ConceptActivation(int ID)
         {
-            conceptMessage.message = t3.ConceptActivation(ID);
+         //   conceptMessage.message = t3.ConceptActivation(ID);
+         conceptMessage.ID = ID;
+         return conceptMessage;
         }
     }
 }
