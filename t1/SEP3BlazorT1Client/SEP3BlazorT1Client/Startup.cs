@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SEP3BlazorT1Client.Data;
+using SEP3BlazorT1Client.Data.Impl;
 
 namespace SEP3BlazorT1Client
 {
@@ -29,6 +30,7 @@ namespace SEP3BlazorT1Client
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddScoped<IConceptService, ConceptServiceImpl>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
