@@ -1,6 +1,6 @@
 package dk.via.sw.sepgroup61.viabnb.tier3.dataserver.soap.dao.testmessage;
 
-import dk.via.sw.sepgroup61.viabnb.tier3.dataserver.soap.models.ConceptMessage;
+import https.concept_test_com.v1.concept.ConceptMessage;
 
 import java.sql.SQLException;
 

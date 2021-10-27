@@ -1,7 +1,28 @@
+@inject IConceptService ConceptService;
 @page "/"
+@using SEP3BlazorT1Client.Models
+@using SEP3BlazorT1Client.Data
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?"/>
+
+<div>
+    <Input type="text" @bind-value="id"/> 
+    <button type="submit" @onclick="fetchConceptMessage">
+        
+    </button>
+</div>
+
+@code
+{
+    private int id;
+    private ConceptMessage _conceptMessage;
+
+    public async Task fetchConceptMessage()
+    {
+       _conceptMessage = await ConceptService.getMessage(id);
+    }
+}

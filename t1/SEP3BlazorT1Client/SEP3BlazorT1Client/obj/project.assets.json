@@ -8,19 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Kasper\\.nuget\\packages\\": {}
+    "C:\\Users\\bitta\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kasper\\Git\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+      "projectUniqueName": "C:\\Users\\bitta\\repos\\dnp1.assignment2\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
       "projectName": "SEP3BlazorT1Client",
-      "projectPath": "C:\\Users\\Kasper\\Git\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
-      "packagesPath": "C:\\Users\\Kasper\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kasper\\Git\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\obj\\",
+      "projectPath": "C:\\Users\\bitta\\repos\\dnp1.assignment2\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+      "packagesPath": "C:\\Users\\bitta\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bitta\\repos\\dnp1.assignment2\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Kasper\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\bitta\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
