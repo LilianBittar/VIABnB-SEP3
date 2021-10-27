@@ -1,7 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8c67a4d8-4091-4c20-aee6-6a6b4e803832" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/Controllers/ConceptController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/Data/IConceptService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/Data/Impl/ConceptServiceImpl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/Model/ConceptMessage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Humanizer.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.AspNetCore.Razor.Language.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.Bcl.AsyncInterfaces.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.CodeAnalysis.CSharp.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.CodeAnalysis.Razor.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.CodeAnalysis.Workspaces.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.CodeAnalysis.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.OpenApi.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.VisualStudio.Web.CodeGeneration.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Newtonsoft.Json.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/SEP3T2RESTApi.deps.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/SEP3T2RESTApi.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/SEP3T2RESTApi.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/SEP3T2RESTApi.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/SEP3T2RESTApi.runtimeconfig.dev.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/SEP3T2RESTApi.runtimeconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/System.Composition.AttributedModel.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/System.Composition.Convention.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/System.Composition.Hosting.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/System.Composition.Runtime.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/System.Composition.TypedParts.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/appsettings.Development.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/appsettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/cs/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/de/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/de/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/dotnet-aspnet-codegenerator-design.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/es/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/es/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/fr/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/it/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/it/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ja/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ko/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/pl/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/pt-BR/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ref/SEP3T2RESTApi.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/ru/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/runtimes/win-arm/lib/net5.0/dotnet-aspnet-codegenerator-design.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/runtimes/win-arm64/lib/net5.0/dotnet-aspnet-codegenerator-design.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/tr/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/bin/Debug/net5.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/.nupkg.metadata" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/.signature.p7s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/Icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator.5.0.2.nupkg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator.5.0.2.nupkg.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator.nuspec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/DotnetToolSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/Microsoft.Extensions.FileProviders.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/Microsoft.Extensions.FileProviders.Physical.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/Microsoft.Extensions.FileSystemGlobbing.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/Microsoft.Extensions.Primitives.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/Newtonsoft.Json.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/build/microsoft.visualstudio.web.codegeneration.tools.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/buildMultiTargeting/microsoft.visualstudio.web.codegeneration.tools.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/dotnet-aspnet-codegenerator.deps.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/dotnet-aspnet-codegenerator.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/dotnet-aspnet-codegenerator.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/dotnet-aspnet-codegenerator.runtimeconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/dotnet-aspnet-codegenerator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/shims/win-x64/dotnet-aspnet-codegenerator.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/shims/win-x86/dotnet-aspnet-codegenerator.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/dotnet-aspnet-codegenerator/5.0.2/tools/net5.0/any/toolassets/net5.0/Microsoft.VisualStudio.Web.CodeGeneration.Msbuild.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/project.assets.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/.store/dotnet-aspnet-codegenerator/5.0.2/restore.csproj.nuget.g.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.MvcApplicationPartsAssemblyInfo.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.RazorTargetAssemblyInfo.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.csproj.AssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.csproj.CopyComplete" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.genruntimeconfig.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/apphost.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/ref/SEP3T2RESTApi.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/staticwebassets/SEP3T2RESTApi.StaticWebAssets.Manifest.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/staticwebassets/SEP3T2RESTApi.StaticWebAssets.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/SEP3T2RESTApi.csproj.codegeneration.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/dotnet-aspnet-codegenerator.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/.idea/.idea.SEP3BlazorT1Client/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/.idea/.idea.SEP3BlazorT1Client/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/App.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/App.razor.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Pages/Counter.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Pages/Counter.razor.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Pages/FetchData.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Pages/FetchData.razor.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Pages/Index.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Pages/Index.razor.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Shared/MainLayout.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Shared/MainLayout.razor.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Shared/NavMenu.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Shared/NavMenu.razor.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Shared/SurveyPrompt.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/Shared/SurveyPrompt.razor.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/_Imports.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/RazorDeclaration/_Imports.razor.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/SEP3BlazorT1Client.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/SEP3BlazorT1Client.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/SEP3BlazorT1Client.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/Debug/net5.0/SEP3BlazorT1Client.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/SEP3BlazorT1Client.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/SEP3BlazorT1Client.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/SEP3BlazorT1Client.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/SEP3BlazorT1Client.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/../../t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3T2RESTApi/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3T2RESTApi/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3T2RESTApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3T2RESTApi/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/Controllers/WeatherForecastController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/SEP3T2RESTApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3T2RESTApi/SEP3T2RESTApi.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3T2RESTApi/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/WeatherForecast.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/Debug/net5.0/SEP3T2RESTApi.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/obj/SEP3T2RESTApi.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/SEP3T2RESTApi.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/obj/SEP3T2RESTApi.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/SEP3T2RESTApi.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3T2RESTApi/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3T2RESTApi/obj/rider.project.restore.info" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="20570UfJBvxhADzhvp108v3nzNY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.SEP3T2RESTApi">
     <configuration name="SEP3T2RESTApi" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
@@ -34,5 +221,34 @@
         <option name="Build" />
       </method>
     </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8c67a4d8-4091-4c20-aee6-6a6b4e803832" name="Changes" comment="" />
+      <created>1635322372223</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635322372223</updated>
+      <workItem from="1635322379446" duration="2082000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
