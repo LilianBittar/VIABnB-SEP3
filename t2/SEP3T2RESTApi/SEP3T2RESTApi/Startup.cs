@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SEP3T2RESTApi.Data;
+using SEP3T2RESTApi.Data.Impl;
 
 namespace SEP3T2RESTApi
 {
@@ -31,6 +33,7 @@ namespace SEP3T2RESTApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "SEP3T2RESTApi", Version = "v1"});
             });
+            services.AddScoped<IConceptService, ConceptServiceImpl>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
