@@ -6414,24 +6414,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kasper\\.nuget\\packages\\": {}
+    "C:\\Users\\kkash\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kasper\\Git\\SEP3\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj",
+      "projectUniqueName": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj",
       "projectName": "SEP3T2RESTApi",
-      "projectPath": "C:\\Users\\Kasper\\Git\\SEP3\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj",
-      "packagesPath": "C:\\Users\\Kasper\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kasper\\Git\\SEP3\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\obj\\",
+      "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj",
+      "packagesPath": "C:\\Users\\kkash\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Kasper\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\kkash\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
