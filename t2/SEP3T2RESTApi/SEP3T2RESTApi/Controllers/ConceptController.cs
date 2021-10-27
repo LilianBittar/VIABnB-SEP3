@@ -5,15 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SEP3T2RESTApi.Data;
+using SEP3T2RESTApi.Model;
 
 namespace SEP3T2RESTApi.Controllers
 {
     
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ConceptController : ControllerBase
     {
         private IConceptService ConceptService;
+        private ConceptMessage conceptMessage;
 
         public ConceptController(IConceptService conceptService)
         {
@@ -21,14 +23,14 @@ namespace SEP3T2RESTApi.Controllers
         }
 
         // GET: Concept
-        [HttpGet("ID:int")]
-        public async Task<ActionResult> GetButtonUpdate([FromRoute] int ID)
+        [HttpGet("{ID:int}")]
+        public async Task<ActionResult<ConceptMessage>> GetConceptUpdate([FromRoute] int ID)
         {
             try
             {
-                ConceptService.ConceptActivation(ID);
+                  conceptMessage= ConceptService.ConceptActivation(ID);
 
-                return Ok();
+                return Ok(conceptMessage);
             }
             catch (Exception e)
             {
