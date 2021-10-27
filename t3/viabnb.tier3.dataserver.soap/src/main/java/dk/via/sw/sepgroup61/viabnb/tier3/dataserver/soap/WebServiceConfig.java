@@ -31,9 +31,9 @@ public class WebServiceConfig extends WsConfigurerAdapter
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema conceptMessagesSchema)
   {
     DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-    wsdl11Definition.setPortTypeName("ConceptMessagesPort");
+    wsdl11Definition.setPortTypeName("ConceptMessages");
     wsdl11Definition.setLocationUri("/ws");
-    wsdl11Definition.setTargetNamespace("https://concept-test.com/v1/concept");
+    wsdl11Definition.setTargetNamespace("http://viabnb.dk/api/v1/concept");
     wsdl11Definition.setSchema(conceptMessagesSchema);
     return wsdl11Definition;
   }
