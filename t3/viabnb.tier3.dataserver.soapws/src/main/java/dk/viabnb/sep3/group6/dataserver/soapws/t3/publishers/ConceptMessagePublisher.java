@@ -13,8 +13,12 @@ public class ConceptMessagePublisher
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
         SpringConfig.class);
 
-    ConceptMessageService conceptMessageService = applicationContext.getBean("conceptMessageServiceImpl", ConceptMessageService.class);
-    System.out.println(conceptMessageService);
-    Endpoint.publish("http://localhost:8080/ws/conceptmessage", conceptMessageService);
+    final String ENDPOINT_ADDRESS = "http://localhost:8080/ws/conceptmessage";
+    ConceptMessageService conceptMessageService = applicationContext.getBean(
+        "conceptMessageServiceImpl", ConceptMessageService.class);
+    System.out.println("Starting Data server endpoint on: " + ENDPOINT_ADDRESS +"\n"+"WSDL can be found on " + ENDPOINT_ADDRESS + "?wsdl" );
+    Endpoint.publish(ENDPOINT_ADDRESS,
+        conceptMessageService);
+
   }
 }
