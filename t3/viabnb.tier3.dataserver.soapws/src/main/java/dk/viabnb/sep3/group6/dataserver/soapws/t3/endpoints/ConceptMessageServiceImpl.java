@@ -28,8 +28,7 @@ public class ConceptMessageServiceImpl implements ConceptMessageService
     this.testMessageDao = testMessageDao;
   }
 
-  @WebMethod
-  @Override public ConceptMessage getConceptMessage(@WebParam(name = "id") int id)
+  @Override public ConceptMessage getConceptMessage(int id)
   {
     ConceptMessage conceptMessage = null;
     try

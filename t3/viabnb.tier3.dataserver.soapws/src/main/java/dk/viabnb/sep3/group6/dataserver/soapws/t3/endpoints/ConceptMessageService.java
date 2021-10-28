@@ -3,6 +3,7 @@ package dk.viabnb.sep3.group6.dataserver.soapws.t3.endpoints;
 import dk.viabnb.sep3.group6.dataserver.soapws.t3.models.ConceptMessage;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 
@@ -10,5 +11,5 @@ import javax.jws.soap.SOAPBinding;
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public interface ConceptMessageService
 {
-  @WebMethod ConceptMessage getConceptMessage(int id);
+  @WebMethod ConceptMessage getConceptMessage(@WebParam(name="id") int id);
 }
