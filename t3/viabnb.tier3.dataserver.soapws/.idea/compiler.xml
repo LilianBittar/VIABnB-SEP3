@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="viabnb.tier3.dataserver.soapws" />
         <module name="data-soapws-t3" />
       </profile>
     </annotationProcessing>

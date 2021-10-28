@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "npSvRaWWcPOgBIFmJ7J9luWXDaKmbiETK1R1c8+Bj1ORIVGAAjY4LQcolchEm9aPDb2h4ZMHNYRq4fPX6WKFZQ==",
+  "dgSpecHash": "hBpWd7eWeTNokJHIRNLY8njt6AxhTj+c3fpaV0Jc1q90GYcQ9Xasi3+nkoWfVxPTXpz2svPNESB8M/2Q2g0U3w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj",
   "expectedPackageFiles": [
@@ -118,7 +118,11 @@
     "C:\\Users\\Micha\\.nuget\\packages\\system.security.cryptography.xml\\4.7.0\\system.security.cryptography.xml.4.7.0.nupkg.sha512",
     "C:\\Users\\Micha\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\Micha\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\Micha\\.nuget\\packages\\system.servicemodel.duplex\\4.8.1\\system.servicemodel.duplex.4.8.1.nupkg.sha512",
+    "C:\\Users\\Micha\\.nuget\\packages\\system.servicemodel.http\\4.8.1\\system.servicemodel.http.4.8.1.nupkg.sha512",
+    "C:\\Users\\Micha\\.nuget\\packages\\system.servicemodel.nettcp\\4.8.1\\system.servicemodel.nettcp.4.8.1.nupkg.sha512",
     "C:\\Users\\Micha\\.nuget\\packages\\system.servicemodel.primitives\\4.9.0-rc2.21473.1\\system.servicemodel.primitives.4.9.0-rc2.21473.1.nupkg.sha512",
+    "C:\\Users\\Micha\\.nuget\\packages\\system.servicemodel.security\\4.8.1\\system.servicemodel.security.4.8.1.nupkg.sha512",
     "C:\\Users\\Micha\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\Micha\\.nuget\\packages\\system.text.encoding.codepages\\4.5.1\\system.text.encoding.codepages.4.5.1.nupkg.sha512",
     "C:\\Users\\Micha\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",
@@ -130,7 +134,10 @@
     "C:\\Users\\Micha\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\Micha\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
     "C:\\Users\\Micha\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\Micha\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\Micha\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\Micha\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Micha\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Micha\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

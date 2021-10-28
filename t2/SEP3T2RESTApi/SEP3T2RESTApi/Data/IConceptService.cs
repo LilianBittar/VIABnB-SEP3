@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using SEP3T2RESTApi.Model;
+using ConceptMessageService;
 
 namespace SEP3T2RESTApi.Data
 {
     public interface IConceptService
     {
-       public Task<ConceptMessage> FetchConceptMessageAsync(int id);
+       public Task<conceptMessage> FetchConceptMessageAsync(int id);
     }
 }

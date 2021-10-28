@@ -33,7 +33,7 @@ public class ConceptMessageServiceImpl implements ConceptMessageService
     ConceptMessage conceptMessage = null;
     try
     {
-     conceptMessage = testMessageDao.GetMessage(1);
+     conceptMessage = testMessageDao.GetMessage(id);
     }
     catch (NoSuchElementException e)
     {
