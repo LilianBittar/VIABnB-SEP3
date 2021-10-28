@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.NoSuchElementException;
 
@@ -26,7 +28,8 @@ public class ConceptMessageServiceImpl implements ConceptMessageService
     this.testMessageDao = testMessageDao;
   }
 
-  @Override public ConceptMessage getConceptMessage(int id)
+  @WebMethod
+  @Override public ConceptMessage getConceptMessage(@WebParam(name = "id") int id)
   {
     ConceptMessage conceptMessage = null;
     try
