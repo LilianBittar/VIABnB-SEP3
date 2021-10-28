@@ -1,6 +1,7 @@
-package dk.viabnb.sep3.group6.dataserver.soapws.t3.endpoints;
+package dk.viabnb.sep3.group6.dataserver.soapws.t3.publishers;
 
 import dk.viabnb.sep3.group6.dataserver.soapws.t3.SpringConfig;
+import dk.viabnb.sep3.group6.dataserver.soapws.t3.endpoints.ConceptMessageService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.xml.ws.Endpoint;
