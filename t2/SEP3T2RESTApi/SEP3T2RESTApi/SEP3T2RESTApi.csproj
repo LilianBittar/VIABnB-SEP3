@@ -10,4 +10,8 @@
         <PackageReference Include="System.ServiceModel.Primitives" Version="4.9.0-rc2.21473.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Service References\ConceptMessageServiceImplService" />
+    </ItemGroup>
+
 </Project>
