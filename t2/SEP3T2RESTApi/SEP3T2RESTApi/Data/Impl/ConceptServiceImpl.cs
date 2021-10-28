@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using SEP3T2RESTApi.Model;
 
 namespace SEP3T2RESTApi.Data.Impl
@@ -8,10 +9,10 @@ namespace SEP3T2RESTApi.Data.Impl
         private ConceptMessage conceptMessage = new ConceptMessage();
         
         
-        public ConceptMessage ConceptActivation(int ID)
+        public async Task<ConceptMessage> FetchConceptMessageAsync(int id)
         {
          //   conceptMessage.message = t3.ConceptActivation(ID);
-         conceptMessage.ID = ID;
+         conceptMessage.ID = id;
          return conceptMessage;
         }
     }

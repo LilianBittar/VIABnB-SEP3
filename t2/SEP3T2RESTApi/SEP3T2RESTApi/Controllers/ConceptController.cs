@@ -28,7 +28,7 @@ namespace SEP3T2RESTApi.Controllers
         {
             try
             {
-                  conceptMessage= ConceptService.ConceptActivation(ID);
+                  conceptMessage= await ConceptService.FetchConceptMessageAsync(ID);
 
                 return Ok(conceptMessage);
             }
