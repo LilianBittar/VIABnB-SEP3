@@ -2,6 +2,7 @@
 {
     public class ConceptMessage
     {
-        private string Message;
+        public int Id { get; set; }
+        public string Message { get; set; }
     }
 }

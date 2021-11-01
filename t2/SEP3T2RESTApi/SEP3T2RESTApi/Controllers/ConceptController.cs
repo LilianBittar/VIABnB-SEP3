@@ -24,8 +24,9 @@ namespace SEP3T2RESTApi.Controllers
 
         // GET: Concept
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<conceptMessage>> GetConceptUpdate([FromRoute] int id)
+        public async Task<ActionResult<conceptMessage>> GetConceptMessage([FromRoute] int id)
         {
+            Console.WriteLine($"{this} received an request {nameof(GetConceptMessage)}");
             conceptMessage conceptMessage = null; 
             try
             {

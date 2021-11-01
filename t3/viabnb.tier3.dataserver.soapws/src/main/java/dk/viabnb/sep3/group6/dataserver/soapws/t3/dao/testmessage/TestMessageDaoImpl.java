@@ -38,6 +38,7 @@ public class TestMessageDaoImpl extends BaseDao implements TestMessageDao
 
   @Override public ConceptMessage GetMessage(int msgId)
   {
+    System.out.println("TestMessageDao called");
     try(Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement

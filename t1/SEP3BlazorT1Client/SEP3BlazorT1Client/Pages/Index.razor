@@ -3,26 +3,35 @@
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Data
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?"/>
+<h1>Proof of concept</h1>
+<span>T1 --> T2 REST API --> T3 SOAP API with Postgres DB
+</span>
 
 <div>
-    <Input type="text" @bind-value="id"/> 
-    <button type="submit" @onclick="fetchConceptMessage">
-        
+    
+    <p>Fetched Message: </p>
+    @if (_conceptMessage != null)
+    {
+    <p>@_conceptMessage.Message</p>
+    }
+    <Input type="number" @oninput="(e) => { _id = Int32.Parse(e.Value.ToString()); }"/>
+    <button type="submit" @onclick="FetchConceptMessage" class="btn btn-primary">
+        FETCH CONCEPT MESSAGE
     </button>
 </div>
 
 @code
 {
-    private int id;
+    private int _id;
     private ConceptMessage _conceptMessage;
 
-    public async Task fetchConceptMessage()
+    protected override async Task OnInitializedAsync()
     {
-       _conceptMessage = await ConceptService.getMessage(id);
+        _id = 0;
+    }
+
+    private async Task FetchConceptMessage()
+    {
+       _conceptMessage = await ConceptService.getMessage(_id);
     }
 }

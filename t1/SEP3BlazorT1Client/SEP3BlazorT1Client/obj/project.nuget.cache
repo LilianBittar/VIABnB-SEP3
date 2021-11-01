@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "7p4pz7r5NG8hdovSvOfomlAAQzP+wn8BFiYaSGPSDFySAFGays1ORYBqyDTphZutOTQU5aMLW6K8ysUl6X/2Qg==",
+  "dgSpecHash": "t1Aq2blR7X+1AHiNa9EsdvGk132wc7z5itA0tiQ2nCGFn5hhG6nSu1KCJri/YUhayR03QHCLwb33jD43ceSHJw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\bitta\\repos\\dnp1.assignment2\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Micha\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Micha\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Micha\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

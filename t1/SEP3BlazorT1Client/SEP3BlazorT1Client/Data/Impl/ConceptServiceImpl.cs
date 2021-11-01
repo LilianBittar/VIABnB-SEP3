@@ -10,7 +10,7 @@ namespace SEP3BlazorT1Client.Data.Impl
         public async Task<ConceptMessage> getMessage(int id)
         {
             using HttpClient client = new HttpClient();
-            HttpResponseMessage responseMessage = await client.GetAsync($"http://localhost:5001/Concept/{id}");
+            HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:5001/Concept/{id}");
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new($"@Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
