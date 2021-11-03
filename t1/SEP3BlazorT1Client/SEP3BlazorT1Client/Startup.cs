@@ -29,8 +29,8 @@ namespace SEP3BlazorT1Client
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
             services.AddScoped<IConceptService, ConceptServiceImpl>();
+            services.AddScoped<IResidenceService, GraphQlResidenceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

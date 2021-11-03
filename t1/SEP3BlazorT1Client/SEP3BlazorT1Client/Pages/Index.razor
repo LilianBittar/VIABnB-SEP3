@@ -1,7 +1,9 @@
 @inject IConceptService ConceptService;
+@inject IResidenceService ResidenceService;
 @page "/"
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Data
+
 
 <h1>Proof of concept</h1>
 <span>T1 --> T2 REST API --> T3 SOAP API with Postgres DB
@@ -10,9 +12,9 @@
 <div>
     
     <p>Fetched Message: </p>
-    @if (_conceptMessage != null)
+    @if (_residence != null)
     {
-    <p>@_conceptMessage.Message</p>
+    <p>@_residence.ToString()</p>
     }
     <Input type="number" @oninput="(e) => { _id = Int32.Parse(e.Value.ToString()); }"/>
     <button type="submit" @onclick="FetchConceptMessage" class="btn btn-primary">
@@ -23,7 +25,7 @@
 @code
 {
     private int? _id;
-    private ConceptMessage _conceptMessage;
+    private Residence _residence;
 
     protected override async Task OnInitializedAsync()
     {
@@ -41,6 +43,8 @@
         {
             myInt = (int) _id;
         }
-       _conceptMessage = await ConceptService.getMessage(myInt);
+       _residence = await ResidenceService.GetResidenceAsync(1);
+        Console.WriteLine("Fetched");
+        Console.WriteLine(_residence.ToString());
     }
 }

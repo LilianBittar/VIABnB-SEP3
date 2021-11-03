@@ -83,14 +83,14 @@ using SEP3BlazorT1Client.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
+#line 4 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
 using SEP3BlazorT1Client.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
+#line 5 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
 using SEP3BlazorT1Client.Data;
 
 #line default
@@ -105,10 +105,10 @@ using SEP3BlazorT1Client.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 24 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
+#line 26 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
  
     private int? _id;
-    private ConceptMessage _conceptMessage;
+    private Residence _residence;
 
     protected override async Task OnInitializedAsync()
     {
@@ -126,12 +126,15 @@ using SEP3BlazorT1Client.Data;
         {
             myInt = (int) _id;
         }
-       _conceptMessage = await ConceptService.getMessage(myInt);
+       _residence = await ResidenceService.GetResidenceAsync(1);
+        Console.WriteLine("Fetched");
+        Console.WriteLine(_residence.ToString());
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IResidenceService ResidenceService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IConceptService ConceptService { get; set; }
     }
 }

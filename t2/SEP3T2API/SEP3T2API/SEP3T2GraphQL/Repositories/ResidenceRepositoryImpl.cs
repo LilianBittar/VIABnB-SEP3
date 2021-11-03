@@ -7,6 +7,9 @@ namespace SEP3T2GraphQL.Repositories
     {
         public async Task<Residence> GetResidenceById(int id)
         {
+            if (id == 1)
+            {
+                
             return new Residence()
             {
                 Id = 1, Address = new Address()
@@ -20,6 +23,11 @@ namespace SEP3T2GraphQL.Repositories
                 IsAvailable = false,
                 PricePerNight = 2000000,
             }; 
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public Task<Residence> CreateResidenceAsync(Residence residence)

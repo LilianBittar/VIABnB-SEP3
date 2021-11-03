@@ -45,6 +45,20 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "GraphQL.Client": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "GraphQL.Client.Serializer.Newtonsoft": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "StrawberryShake.Transport.Http": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
