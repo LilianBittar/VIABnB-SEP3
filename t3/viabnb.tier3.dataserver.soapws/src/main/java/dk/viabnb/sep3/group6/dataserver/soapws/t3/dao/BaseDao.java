@@ -9,7 +9,7 @@ public class BaseDao
   protected Connection getConnection() throws SQLException
   {
     Connection result = DriverManager.getConnection(
-        "jdbc:postgresql://hattie.db.elephantsql.com:5432/hebcxvqa?currentSchema=viabnb",
+        "jdbc:postgresql://hattie.db.elephantsql.com:5432/hebcxvqa?currentSchema=public",
         "hebcxvqa", "sLY8ygJklmdHewJNp6sZxN1CZts8zmRD");
     result.setAutoCommit(false);
     return result;

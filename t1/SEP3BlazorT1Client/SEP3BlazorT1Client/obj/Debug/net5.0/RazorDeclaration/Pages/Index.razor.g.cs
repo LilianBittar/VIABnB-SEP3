@@ -107,7 +107,7 @@ using SEP3BlazorT1Client.Data;
 #nullable restore
 #line 24 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
  
-    private int _id;
+    private int? _id;
     private ConceptMessage _conceptMessage;
 
     protected override async Task OnInitializedAsync()
@@ -117,7 +117,16 @@ using SEP3BlazorT1Client.Data;
 
     private async Task FetchConceptMessage()
     {
-       _conceptMessage = await ConceptService.getMessage(_id);
+        int myInt = 0; 
+        if (_id == null)
+        {
+            myInt = 0; 
+        }
+        else
+        {
+            myInt = (int) _id;
+        }
+       _conceptMessage = await ConceptService.getMessage(myInt);
     }
 
 #line default

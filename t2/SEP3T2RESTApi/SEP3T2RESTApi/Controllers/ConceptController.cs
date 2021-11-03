@@ -35,6 +35,7 @@ namespace SEP3T2RESTApi.Controllers
                 {
                     return NotFound("No Concept Was Found");
                 }
+                ConceptService.CreateMessage("Hello");
                 return Ok(conceptMessage);
             }
             catch (Exception e)

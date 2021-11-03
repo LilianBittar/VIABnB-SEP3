@@ -6,5 +6,6 @@ namespace SEP3T2RESTApi.Data
     public interface IConceptService
     {
        public Task<conceptMessage> FetchConceptMessageAsync(int id);
+       public void CreateMessage(string message);
     }
 }
