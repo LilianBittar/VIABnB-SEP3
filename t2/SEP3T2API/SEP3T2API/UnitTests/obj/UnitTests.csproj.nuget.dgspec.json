@@ -1,31 +1,152 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dokumenter D\\Git\\SEP3\\network-switch-sprint2\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj": {}
+    "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj": {}
   },
   "projects": {
-    "D:\\Dokumenter D\\Git\\SEP3\\network-switch-sprint2\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj": {
+    "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dokumenter D\\Git\\SEP3\\network-switch-sprint2\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
-        "projectName": "UnitTests",
-        "projectPath": "D:\\Dokumenter D\\Git\\SEP3\\network-switch-sprint2\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
-        "packagesPath": "C:\\Users\\kaspe\\.nuget\\packages\\",
-        "outputPath": "D:\\Dokumenter D\\Git\\SEP3\\network-switch-sprint2\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\obj\\",
+        "projectUniqueName": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj",
+        "projectName": "SEP3T2GraphQL",
+        "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj",
+        "packagesPath": "C:\\Users\\kkash\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\kaspe\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\kkash\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            },
+            "GraphQL": {
+              "target": "Package",
+              "version": "[4.6.1, )"
+            },
+            "GraphQL.Client.Serializer.Newtonsoft": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "GraphQL.Server.Transports.AspNetCore": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "GraphQL.Server.Transports.AspNetCore.SystemTextJson": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "GraphQL.Server.Transports.Subscriptions.WebSockets": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "GraphQL.Server.Ui.Altair": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "GraphQL.Server.Ui.GraphiQL": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "GraphQL.Server.Ui.Playground": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "GraphQL.Server.Ui.Voyager": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "GraphQL.SystemTextJson": {
+              "target": "Package",
+              "version": "[4.6.1, )"
+            },
+            "HotChocolate.AspNetCore": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "HotChocolate.AspNetCore.Playground": {
+              "target": "Package",
+              "version": "[10.5.5, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.6.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
+        "projectName": "UnitTests",
+        "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
+        "packagesPath": "C:\\Users\\kkash\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kkash\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj": {
+                "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -66,11 +187,14 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

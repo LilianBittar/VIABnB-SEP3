@@ -203,3 +203,7 @@ C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3Blazo
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterResidence\RegisterResidence.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterResidence\RegisterResidence.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\RegisterResidence\RegisterResidence.razor.rz.scp.css
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\MatBlazor.dll
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterResidence\RegisterResidence.razor.g.cs
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterResidence\RegisterResidence.razor.g.cs
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\RegisterResidence\RegisterResidence.razor.rz.scp.css
