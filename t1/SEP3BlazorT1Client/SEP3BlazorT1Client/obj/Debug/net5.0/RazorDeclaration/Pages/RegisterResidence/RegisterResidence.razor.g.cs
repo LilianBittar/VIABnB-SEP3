@@ -89,6 +89,13 @@ using MatBlazor;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\RegisterResidence\RegisterResidence.razor"
+using SEP3BlazorT1Client.Models;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/registerresidence")]
     public partial class RegisterResidence : Microsoft.AspNetCore.Components.ComponentBase
     {

@@ -3,6 +3,17 @@
 
 h1[b-k9ofycq017] {
     font-size: 24px;
+    font-weight: bold;
+}
+
+h2[b-k9ofycq017] {
+    font-size: 18px;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+h3[b-k9ofycq017] {
+    font-size: 16px;
 }
 /* _content/SEP3BlazorT1Client/Shared/MainLayout.razor.rz.scp.css */
 a[b-9bhvrerbv1] {

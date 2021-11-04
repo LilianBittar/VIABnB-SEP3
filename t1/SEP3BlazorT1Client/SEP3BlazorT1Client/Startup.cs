@@ -33,6 +33,7 @@ namespace SEP3BlazorT1Client
             services.AddScoped<IConceptService, ConceptServiceImpl>();
             services.AddScoped<IResidenceService, GraphQlResidenceService>();
             services.AddMatBlazor();
+            services.AddScoped<MatDialogService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
