@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -17,7 +18,7 @@ namespace SEP3T2GraphQL.Repositories
             client = new HttpClient();
         }
 
-        public async Task<Residence> GetResidenceById(int id)
+        public async Task<Residence> GetResidenceByIdAsync(int id)
         {
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/Residence/{id}");
 
@@ -47,6 +48,11 @@ namespace SEP3T2GraphQL.Repositories
             }
 
             return residence;
+        }
+
+        public Task<IList<Residence>> GetAllMyResidencesAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEP3T2GraphQL", "SEP3T2GraphQL\SEP3T2GraphQL.csproj", "{5615B299-92FC-4D9B-9738-A2C8072F8543}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{F229A044-D462-406E-A6DC-B550C2DC17F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{5615B299-92FC-4D9B-9738-A2C8072F8543}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5615B299-92FC-4D9B-9738-A2C8072F8543}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5615B299-92FC-4D9B-9738-A2C8072F8543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F229A044-D462-406E-A6DC-B550C2DC17F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F229A044-D462-406E-A6DC-B550C2DC17F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F229A044-D462-406E-A6DC-B550C2DC17F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F229A044-D462-406E-A6DC-B550C2DC17F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
