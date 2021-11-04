@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MatBlazor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,7 @@ namespace SEP3BlazorT1Client
             services.AddServerSideBlazor();
             services.AddScoped<IConceptService, ConceptServiceImpl>();
             services.AddScoped<IResidenceService, GraphQlResidenceService>();
+            services.AddMatBlazor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

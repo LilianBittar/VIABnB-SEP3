@@ -1,3 +1,11 @@
+a[b-9bhvrerbv1] {
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover[b-9bhvrerbv1] {
+    opacity: 0.7;
+}
+
 .page[b-9bhvrerbv1] {
     position: relative;
     display: flex;

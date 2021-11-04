@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace SEP3BlazorT1Client.Pages
+namespace SEP3BlazorT1Client.Pages.RegisterResidence
 {
     #line hidden
     using System;
@@ -89,60 +89,14 @@ using MatBlazor;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 4 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
-using SEP3BlazorT1Client.Models;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 5 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
-using SEP3BlazorT1Client.Data;
-
-#line default
-#line hidden
-#nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/")]
-    public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/registerresidence")]
+    public partial class RegisterResidence : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
-#nullable restore
-#line 26 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
- 
-    private int? _id;
-    private Residence _residence;
-
-    protected override async Task OnInitializedAsync()
-    {
-        _id = 0;
-    }
-
-    private async Task FetchConceptMessage()
-    {
-        int myInt = 0; 
-        if (_id == null)
-        {
-            myInt = 0; 
-        }
-        else
-        {
-            myInt = (int) _id;
-        }
-       _residence = await ResidenceService.GetResidenceAsync(1);
-        Console.WriteLine("Fetched");
-        Console.WriteLine(_residence.ToString());
-    }
-
-#line default
-#line hidden
-#nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IResidenceService ResidenceService { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IConceptService ConceptService { get; set; }
     }
 }
 #pragma warning restore 1591

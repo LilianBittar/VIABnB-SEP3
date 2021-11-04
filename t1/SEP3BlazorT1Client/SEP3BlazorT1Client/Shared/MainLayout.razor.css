@@ -1,3 +1,11 @@
+a {
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
 .page {
     position: relative;
     display: flex;

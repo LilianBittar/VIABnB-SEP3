@@ -1,4 +1,18 @@
+/* _content/SEP3BlazorT1Client/Pages/RegisterResidence/RegisterResidence.razor.rz.scp.css */
+
+
+h1[b-k9ofycq017] {
+    font-size: 24px;
+}
 /* _content/SEP3BlazorT1Client/Shared/MainLayout.razor.rz.scp.css */
+a[b-9bhvrerbv1] {
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover[b-9bhvrerbv1] {
+    opacity: 0.7;
+}
+
 .page[b-9bhvrerbv1] {
     position: relative;
     display: flex;
