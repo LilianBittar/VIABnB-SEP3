@@ -1238,11 +1238,7 @@
       "System.Text.Encodings.Web/4.5.0": {},
       "System.Text.Json/4.7.2": {},
       "System.Threading.Channels/4.7.0": {},
-      "System.Threading.Tasks.Dataflow/5.0.0": {
-        "compile": {
-          "lib/netstandard2.0/System.Threading.Tasks.Dataflow.dll": {}
-        }
-      },
+      "System.Threading.Tasks.Dataflow/5.0.0": {},
       "System.Threading.Tasks.Extensions/4.5.4": {},
       "System.Reactive.Reference/4.4.0.0": {
         "runtime": {

@@ -1,39 +1,49 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 
 namespace SEP3T2GraphQL.Repositories
 {
     public class ResidenceRepositoryImpl: IResidenceRepository
     {
-        public async Task<Residence> GetResidenceById(int id)
+        private string uri = "https://localhost:5003";
+        private readonly HttpClient client;
+
+        public ResidenceRepositoryImpl()
         {
-            if (id == 1)
-            {
-                
-            return new Residence()
-            {
-                Id = 1, Address = new Address()
-                {
-                    Id = 1, StreetName = "Bobstreet", CityName = "BobCity", HouseNumber = "Bob1", StreetNumber = "1",
-                    ZipCode = 8700
-                },
-                Description = "BOB",
-                Type = "Bob",
-                AverageRating = 10,
-                IsAvailable = false,
-                PricePerNight = 2000000,
-            }; 
-            }
-            else
-            {
-                return null;
-            }
+            client = new HttpClient();
         }
 
-        public Task<Residence> CreateResidenceAsync(Residence residence)
+        public async Task<Residence> GetResidenceById(int id)
         {
-            //TODO: Make Http request to T3 REST API
-            return null; 
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/Residence/{id}");
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            }
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            Residence residence = JsonSerializer.Deserialize<Residence>(result, new JsonSerializerOptions(
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                }));
+            return residence;
+        }
+
+        public async Task CreateResidenceAsync(Residence residence)
+        {
+            string newResidence = JsonSerializer.Serialize(residence);
+            StringContent content = new StringContent(newResidence, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/Residence", content);
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            }
         }
     }
 }

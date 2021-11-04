@@ -496,11 +496,7 @@
           "lib/net5.0/StrawberryShake.Transport.Http.dll": {}
         }
       },
-      "System.Collections.Immutable/5.0.0": {
-        "compile": {
-          "lib/netstandard2.0/System.Collections.Immutable.dll": {}
-        }
-      },
+      "System.Collections.Immutable/5.0.0": {},
       "System.Reactive/4.3.2": {},
       "System.Reactive.Reference/4.3.0.0": {
         "runtime": {
