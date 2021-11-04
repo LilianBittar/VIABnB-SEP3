@@ -15,5 +15,11 @@ namespace SEP3BlazorT1Client.Models
         public string StreetNumber { get; set; }
         [Required]
         public int ZipCode { get; set; }
+
+        public string ToString()
+        {
+            return $"{StreetName}-{StreetNumber}-{HouseNumber}-{CityName}-{ZipCode}";
+                
+        }
     }
 }

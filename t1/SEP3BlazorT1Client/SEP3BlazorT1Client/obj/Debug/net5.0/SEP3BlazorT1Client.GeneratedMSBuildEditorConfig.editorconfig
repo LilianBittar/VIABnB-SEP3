@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = SEP3BlazorT1Client
-build_property.ProjectDir = C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\
+build_property.ProjectDir = C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\
