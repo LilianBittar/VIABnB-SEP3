@@ -27,11 +27,11 @@ namespace SEP3T2GraphQL.Services
             }
         }
 
-        public async Task CreateResidenceAsync(Residence residence)
+        public async Task<Residence> CreateResidenceAsync(Residence residence)
         {
             try
             {
-                await _residenceRepository.CreateResidenceAsync(residence);
+               return  await _residenceRepository.CreateResidenceAsync(residence);
             }
             catch (Exception e)
             {

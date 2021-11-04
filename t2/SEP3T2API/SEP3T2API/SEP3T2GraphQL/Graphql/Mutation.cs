@@ -7,9 +7,9 @@ namespace SEP3T2GraphQL.Graphql
 {
     public class Mutation
     {
-        public async Task CreateResidence(Residence residence, [ScopedService] IResidenceService residenceService)
+        public async Task<Residence> CreateResidence(Residence residence, [ScopedService] IResidenceService residenceService)
         {
-            await residenceService.CreateResidenceAsync(residence); 
+            return await residenceService.CreateResidenceAsync(residence); 
         }
     }
 }

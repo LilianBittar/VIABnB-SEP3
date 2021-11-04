@@ -6,6 +6,6 @@ namespace SEP3T2GraphQL.Repositories
     public interface IResidenceRepository
     {
         Task<Residence> GetResidenceById(int id);
-        Task CreateResidenceAsync(Residence residence); 
+        Task<Residence> CreateResidenceAsync(Residence residence); 
     }
 }

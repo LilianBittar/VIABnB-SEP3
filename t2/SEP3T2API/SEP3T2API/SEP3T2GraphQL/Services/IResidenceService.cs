@@ -7,6 +7,6 @@ namespace SEP3T2GraphQL.Services
     public interface IResidenceService
     {
         Task<Residence> GetResidenceByIdAsync(int id);
-        Task CreateResidenceAsync(Residence residence); 
+        Task<Residence>  CreateResidenceAsync(Residence residence); 
     }
 }
