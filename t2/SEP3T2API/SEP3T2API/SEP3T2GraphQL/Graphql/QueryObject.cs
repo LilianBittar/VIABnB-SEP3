@@ -22,7 +22,7 @@ namespace SEP3T2GraphQL.Graphql
                     {
                         Name = "id",
                     }),
-                context => residenceRepository.GetResidenceById(context.GetArgument<int>("id")));
+                context => residenceRepository.GetResidenceByIdAsync(context.GetArgument<int>("id")));
         }
     }
 }

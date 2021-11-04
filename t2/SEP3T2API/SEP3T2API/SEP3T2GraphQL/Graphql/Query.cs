@@ -9,7 +9,7 @@ namespace SEP3T2GraphQL.Graphql
     {
         public async Task<Residence> GetResidence(int id, [Service]IResidenceRepository residenceRepository)
         {
-            return await residenceRepository.GetResidenceById(id); 
+            return await residenceRepository.GetResidenceByIdAsync(id); 
         }
         
     }
