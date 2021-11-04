@@ -89,13 +89,6 @@ using MatBlazor;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 2 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Shared\MainLayout.razor"
-using SEP3BlazorT1Client.Components;
-
-#line default
-#line hidden
-#nullable disable
     public partial class MainLayout : LayoutComponentBase
     {
         #pragma warning disable 1998
@@ -104,7 +97,7 @@ using SEP3BlazorT1Client.Components;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 69 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Shared\MainLayout.razor"
+#line 68 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Shared\MainLayout.razor"
  
     private bool _opened = false;
 
