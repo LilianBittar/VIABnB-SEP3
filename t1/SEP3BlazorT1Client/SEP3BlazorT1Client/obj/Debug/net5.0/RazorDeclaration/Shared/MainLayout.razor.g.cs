@@ -103,6 +103,20 @@ using SEP3BlazorT1Client.Components;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 69 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Shared\MainLayout.razor"
+ 
+    private bool _opened = false;
+
+    private void MenuClicked()
+    {
+        _opened = !_opened;
+    }
+    
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591

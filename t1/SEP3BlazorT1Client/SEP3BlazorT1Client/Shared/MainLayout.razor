@@ -21,10 +21,12 @@
 
 @* New Navigation links will go into MatAppBarSection *@
 @* Documentation for MatBlazor can be found at: https://www.matblazor.com/ *@
+
 <MatAppBarContainer>
     <MatAppBar Fixed="true">
         <MatAppBarRow>
             <MatAppBarSection>
+                <MatIconButton Icon="menu" @onclick="MenuClicked"></MatIconButton>
                 <MatAppBarTitle>VIA BnB</MatAppBarTitle>
             </MatAppBarSection>
             <MatAppBarSection Align="@MatAppBarSectionAlign.End">
@@ -32,15 +34,44 @@
                     Home
                 </MatButtonLink>
                 <MatButtonLink class="text-white nav-link" href="/registerresidence">
-                    Register residence
+                    About
                 </MatButtonLink>
-                <MatButtonLink class="text-white nav-link" href="">
-                    Link3
+                <MatButtonLink class="text-white nav-link" href="" Style="background-color: darkred">
+                    Become Host
                 </MatButtonLink>
             </MatAppBarSection>
         </MatAppBarRow>
     </MatAppBar>
+    
     <MatAppBarContent>
-        @Body
+        @* Navigation modal. Opens the side menu *@
+        <MatDrawerContainer Style="width: 100vw; height: 100vh">
+            <MatDrawer @bind-Opened="_opened" Mode="MatDrawerMode.Modal">
+            <MatListGroup>
+                <MatListGroupSubHeader Style="margin-top: 1rem">Manage residences</MatListGroupSubHeader>
+                <MatList>
+                    <MatListItem Href="/registerresidence" >
+                        Register Residence
+                    </MatListItem>
+                </MatList>
+            </MatListGroup>
+            </MatDrawer>
+            <MatDrawerContent>
+                <div class="container">
+                @Body
+                </div>
+            </MatDrawerContent>
+        </MatDrawerContainer>
     </MatAppBarContent>
 </MatAppBarContainer>
+
+@code
+{
+    private bool _opened = false;
+
+    private void MenuClicked()
+    {
+        _opened = !_opened;
+    }
+    
+}
