@@ -18,6 +18,10 @@ public class Residence
   private Date availableFrom;
   private Date availableTo;
 
+  public Residence()
+  {
+  }
+
   public Residence(int id, Address address, String description, String type,
       double averageRating, boolean isAvailable, double pricePerNight,
       List<Rule> rules, List<Facility> facilities, String imageURL,
@@ -155,5 +159,16 @@ public class Residence
   public void setAvailableTo(Date availableTo)
   {
     this.availableTo = availableTo;
+  }
+
+  @Override public String toString()
+  {
+    return "Residence{" + "id=" + id + ", address=" + address
+        + ", description='" + description + '\'' + ", type='" + type + '\''
+        + ", averageRating=" + averageRating + ", isAvailable=" + isAvailable
+        + ", pricePerNight=" + pricePerNight + ", rules=" + rules
+        + ", facilities=" + facilities + ", imageURL='" + imageURL + '\''
+        + ", availableFrom=" + availableFrom + ", availableTo=" + availableTo
+        + '}';
   }
 }

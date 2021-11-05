@@ -1,12 +1,18 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Residence;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Type;
+
+import com.google.gson.reflect.TypeToken;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository @Scope("singleton") public class ResidenceJsonDAO
@@ -19,26 +25,45 @@ import java.util.List;
   public ResidenceJsonDAO()
   {
     File file = new File(RESIDENCE_FILE);
-    try
+    if (!file.exists())
     {
-      FileReader fileReader = new FileReader(file);
-      BufferedReader reader = new BufferedReader(fileReader);
-      String residencesAsJson ="";
-      while((residencesAsJson = reader.readLine())!= null)
+      try
       {
-        System.out.println(residencesAsJson);
+        file.createNewFile();
+        residences = new ArrayList<>();
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
       }
 
-      residences = gson.fromJson(residencesAsJson, ArrayList.class);
+    }
+    else
+    {
 
-    }
-    catch (FileNotFoundException e)
-    {
-      e.printStackTrace();
-    }
-    catch (IOException e)
-    {
-      e.printStackTrace();
+      try
+      {
+        FileReader fileReader = new FileReader(file);
+        BufferedReader reader = new BufferedReader(fileReader);
+        String residencesAsJson = "";
+        while ((residencesAsJson = reader.readLine()) != null)
+        {
+          Type l = new TypeToken<ArrayList<Residence>>()
+          {
+          }.getType();
+          List<Residence> rList = gson.fromJson(residencesAsJson, l);
+          residences = rList;
+          for (Residence r : residences)
+          {
+            System.out.println(r.toString());
+          }
+        }
+
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
+      }
     }
 
   }
@@ -58,6 +83,7 @@ import java.util.List;
     File file = new File(RESIDENCE_FILE);
     try
     {
+      System.out.println(residence.toString());
       residences.add(residence);
       FileWriter fileWriter = new FileWriter(file);
       fileWriter.write(gson.toJson(residences));
