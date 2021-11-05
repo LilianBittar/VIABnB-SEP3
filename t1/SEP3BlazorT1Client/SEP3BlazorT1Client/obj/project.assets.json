@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "CatQL.GraphQL.Client/1.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/net5.0/CatQLClient.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/CatQLClient.dll": {}
+        }
+      },
       "GraphQL.Client/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -284,7 +296,7 @@
           "lib/netcoreapp3.1/Microsoft.JSInterop.dll": {}
         }
       },
-      "Newtonsoft.Json/12.0.3": {
+      "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -354,6 +366,18 @@
     }
   },
   "libraries": {
+    "CatQL.GraphQL.Client/1.2.0": {
+      "sha512": "OaQAti92QLayGLJtB4Bazr/mhydt4NRZD6C1SbW1vzMqKknOh2Hfo2ZBj2gbTk2gYybk8j+QYse8Tx9Wk8vJug==",
+      "type": "package",
+      "path": "catql.graphql.client/1.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "catql.graphql.client.1.2.0.nupkg.sha512",
+        "catql.graphql.client.nuspec",
+        "lib/net5.0/CatQLClient.dll"
+      ]
+    },
     "GraphQL.Client/4.0.1": {
       "sha512": "2heiFzRU6J+zaHyAqIPO3/1xDSqTg10/bY9HcO1Ku6SNpPKA7HBQ0+hs0SCkIGYWD4t6BEqJnmqvny1vsckO0w==",
       "type": "package",
@@ -729,10 +753,10 @@
         "microsoft.jsinterop.nuspec"
       ]
     },
-    "Newtonsoft.Json/12.0.3": {
-      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "type": "package",
-      "path": "newtonsoft.json/12.0.3",
+      "path": "newtonsoft.json/13.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -751,11 +775,7 @@
         "lib/netstandard1.3/Newtonsoft.Json.xml",
         "lib/netstandard2.0/Newtonsoft.Json.dll",
         "lib/netstandard2.0/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
@@ -860,6 +880,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "CatQL.GraphQL.Client >= 1.2.0",
       "GraphQL.Client >= 4.0.1",
       "GraphQL.Client.Serializer.Newtonsoft >= 4.0.1",
       "MatBlazor >= 2.8.0",
@@ -867,19 +888,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kkash\\.nuget\\packages\\": {}
+    "C:\\Users\\Shark\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+      "projectUniqueName": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
       "projectName": "SEP3BlazorT1Client",
-      "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
-      "packagesPath": "C:\\Users\\kkash\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\obj\\",
+      "projectPath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+      "packagesPath": "C:\\Users\\Shark\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\kkash\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Shark\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -905,6 +931,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "CatQL.GraphQL.Client": {
+            "target": "Package",
+            "version": "[1.2.0, )"
+          },
           "GraphQL.Client": {
             "target": "Package",
             "version": "[4.0.1, )"

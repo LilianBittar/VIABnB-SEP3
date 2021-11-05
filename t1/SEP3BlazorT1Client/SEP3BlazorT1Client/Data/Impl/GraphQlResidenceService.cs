@@ -1,9 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using CatQL.GraphQL.Client;
 using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Models;
 
+  /*
+    Usage of client can be found at: https://github.com/michaelbui99/CatQL-GraphQL-Client
+  */
 namespace SEP3BlazorT1Client.Data.Impl
 {
     public class GraphQlResidenceService : IResidenceService
@@ -12,45 +18,71 @@ namespace SEP3BlazorT1Client.Data.Impl
 
         public async Task<Residence> GetResidenceAsync(int id)
         {
-            var graphQlClient = new GraphQLHttpClient(Url, new NewtonsoftJsonSerializer());
-            var residenceQuery = new GraphQLRequest()
+            GqlClient client = new GqlClient(Url);
+            var residenceQuery = new GqlQuery()
             {
-                Query = @"query{
-  residence(id:1){
-    id, 
-    address{
-      id,
-      streetName,
-      houseNumber,
-      cityName,
-      streetNumber,
-      zipCode
-    }, 
-    description,
-    type,
-    averageRating,
-    isAvailable,
-    pricePerNight,
-    rules{
-      description
-    },
-    facilities{
-      name
-    }
-  }
-}
-"
-                // ,
-                // Variables = new {residenceId = id}
+                Query = @"query($id: int){
+                          residence(id: $id){
+                            id, 
+                            address{
+                              id,
+                              streetName,
+                              houseNumber,
+                              cityName,
+                              streetNumber,
+                              zipCode
+                            }, 
+                            description,
+                            type,
+                            averageRating,
+                            isAvailable,
+                            pricePerNight,
+                            rules{
+                              description
+                            },
+                            facilities{
+                              name
+                            }
+                          }
+                        }
+",
+                Variables = $"{{id:{id}}}" // {{ = {  in Interpolated strings. 
             };
-            var graphQlResponse = await graphQlClient.SendQueryAsync<Residence>(residenceQuery);
+            var graphQlResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceQuery);
          
-            return graphQlResponse.Data; 
+            return graphQlResponse.Data.Residence; 
         }
 
-        public Task<Residence> CreateResidenceAsync(Residence residence)
+        public async Task<Residence>  CreateResidenceAsync(Residence residence)
         {
-            throw new System.NotImplementedException();
+            GqlClient client = new GqlClient(Url);
+            GqlQuery residenceMutation = new GqlQuery()
+            {
+                Query = @"mutation($residence: ResidenceInput){
+                  createResidence(residence: $residence){
+                        id,
+                        address{
+                          id, zipCode
+                        },
+                        description,
+                        type,
+                        averageRating,
+                        isAvailable,
+                        pricePerNight,
+                        rules{
+                          id, description
+                        },
+                        facilities{
+                          id, name
+                        },
+                        imageUrl,
+                  }
+                }",
+                Variables= $"{{residence: {residence}}}"
+            };
+            var mutationResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceMutation);
+            return mutationResponse.Data.Residence;
         }
     }
 }
+ 
