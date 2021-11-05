@@ -867,24 +867,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bitta\\.nuget\\packages\\": {}
+    "C:\\Users\\kkash\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bitta\\repos\\viaBnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+      "projectUniqueName": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
       "projectName": "SEP3BlazorT1Client",
-      "projectPath": "C:\\Users\\bitta\\repos\\viaBnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
-      "packagesPath": "C:\\Users\\bitta\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bitta\\repos\\viaBnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\obj\\",
+      "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+      "packagesPath": "C:\\Users\\kkash\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\bitta\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\kkash\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -938,7 +940,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
