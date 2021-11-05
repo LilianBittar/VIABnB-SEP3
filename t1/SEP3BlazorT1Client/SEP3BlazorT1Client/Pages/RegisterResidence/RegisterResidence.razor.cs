@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
+using SEP3BlazorT1Client.Data;
 using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Pages.RegisterResidence
@@ -9,6 +10,10 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
     public partial class RegisterResidence
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
+        [Inject]
+        public IResidenceService ResidenceService { get; set; }
+        
+        
 
         private bool _showFacilityDialog = false;
 
@@ -52,6 +57,11 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             _showFacilityDialog = false;
             StateHasChanged();
             }
+        }
+
+        private async void RegisterNewResidence()
+        {
+            await ResidenceService.CreateResidenceAsync(_residenceToBeAdded); 
         }
     }
 }

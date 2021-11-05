@@ -60,6 +60,10 @@
               "target": "Package",
               "version": "[2.8.0, )"
             },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.2, )"
+            },
             "StrawberryShake.Transport.Http": {
               "target": "Package",
               "version": "[12.0.1, )"

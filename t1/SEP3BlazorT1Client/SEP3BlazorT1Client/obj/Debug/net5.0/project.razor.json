@@ -45,6 +45,39 @@
         }
       },
       {
+        "HashCode": -209895421,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.Index",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Index"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.Index"
+        }
+      },
+      {
+        "HashCode": -655810388,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.Index",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SEP3BlazorT1Client.Pages.Index"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.Index",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": 1921438637,
         "Kind": "Components.Component",
         "Name": "SEP3BlazorT1Client.Pages.BuildingsOverview.BuildingsOverview",
@@ -107,39 +140,6 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "SEP3BlazorT1Client.Pages.Counter",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -209895421,
-        "Kind": "Components.Component",
-        "Name": "SEP3BlazorT1Client.Pages.Index",
-        "AssemblyName": "SEP3BlazorT1Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "SEP3BlazorT1Client.Pages.Index"
-        }
-      },
-      {
-        "HashCode": -655810388,
-        "Kind": "Components.Component",
-        "Name": "SEP3BlazorT1Client.Pages.Index",
-        "AssemblyName": "SEP3BlazorT1Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "SEP3BlazorT1Client.Pages.Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "SEP3BlazorT1Client.Pages.Index",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -226,6 +226,39 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "SEP3BlazorT1Client.Shared.SurveyPrompt",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1367091731,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Shared.NavMenu",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "NavMenu"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Shared.NavMenu"
+        }
+      },
+      {
+        "HashCode": -2036762452,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Shared.NavMenu",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SEP3BlazorT1Client.Shared.NavMenu"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Shared.NavMenu",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -322,39 +355,6 @@
           "Runtime.Name": "Components.None",
           "Common.TypeName": "SEP3BlazorT1Client.Shared.MainLayout.Body",
           "Components.IsSpecialKind": "Components.ChildContent",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 1367091731,
-        "Kind": "Components.Component",
-        "Name": "SEP3BlazorT1Client.Shared.NavMenu",
-        "AssemblyName": "SEP3BlazorT1Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "NavMenu"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "SEP3BlazorT1Client.Shared.NavMenu"
-        }
-      },
-      {
-        "HashCode": -2036762452,
-        "Kind": "Components.Component",
-        "Name": "SEP3BlazorT1Client.Shared.NavMenu",
-        "AssemblyName": "SEP3BlazorT1Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "SEP3BlazorT1Client.Shared.NavMenu"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "SEP3BlazorT1Client.Shared.NavMenu",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },

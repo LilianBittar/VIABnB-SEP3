@@ -2,6 +2,7 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes
 {
     public class AddressInput
     {
+        
         public int Id { get; set; }
         public string StreetName { get; set; }
         

@@ -90,14 +90,14 @@ using MatBlazor;
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "c:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
+#line 3 "c:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
 using SEP3BlazorT1Client.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "c:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
+#line 4 "c:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
 using SEP3BlazorT1Client.Data;
 
 #line default
@@ -112,7 +112,7 @@ using SEP3BlazorT1Client.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 26 "c:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
+#line 25 "c:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
  
     private int? _id;
     private Residence _residence;
@@ -142,7 +142,6 @@ using SEP3BlazorT1Client.Data;
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IResidenceService ResidenceService { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IConceptService ConceptService { get; set; }
     }
 }
 #pragma warning restore 1591

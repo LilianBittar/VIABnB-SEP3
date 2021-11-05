@@ -7,6 +7,7 @@
             <h1>Register your residence</h1>
             <div class="mat-layout-grid-inner">
                 <div class="mat-layout-grid-cell">
+                    @* LEFT COLUMN *@
                     <h2>Address Information</h2>
                     <EditForm Model="_residenceToBeAdded.Address">
                         <MatTextField Label="Street name" @bind-Value="@_residenceToBeAdded.Address.StreetName"/>
@@ -24,6 +25,7 @@
                     </EditForm>
                 </div>
                 <div class="mat-layout-grid-cell">
+                    @* MIDDLE COLUMN *@
                     <h2>Residence Info:</h2>
                     <EditForm Model="_residenceToBeAdded">
                         <MatSelect Label="Residence type" @bind-Value="_residenceType" Style="margin-top:1rem;"/>
@@ -49,6 +51,7 @@
                     </MatDialog>
                 </div>
                 <div class="mat-layout-grid-cell">
+                    @* RIGHT COLUMN *@
                     <h2>You have added: </h2>
                     <MatListGroup>
                         <MatListGroupSubHeader Style="font-weight: 400">Rules: </MatListGroupSubHeader>
@@ -72,11 +75,11 @@
                             <MatListItem>No Facilities have been added.</MatListItem>
                         }
                     </MatListGroup>
-
+                       <MatButton>Register residence</MatButton>
                 </div>
             </div>
         </div>
-
+     
 
     </div>
 </div>

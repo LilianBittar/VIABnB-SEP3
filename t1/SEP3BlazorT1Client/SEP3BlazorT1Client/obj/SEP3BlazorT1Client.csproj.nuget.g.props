@@ -27,6 +27,7 @@
     </Content>
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)nunit\3.13.2\build\NUnit.props" Condition="Exists('$(NuGetPackageRoot)nunit\3.13.2\build\NUnit.props')" />
     <Import Project="$(NuGetPackageRoot)matblazor\2.8.0\buildTransitive\MatBlazor.props" Condition="Exists('$(NuGetPackageRoot)matblazor\2.8.0\buildTransitive\MatBlazor.props')" />
   </ImportGroup>
 </Project>

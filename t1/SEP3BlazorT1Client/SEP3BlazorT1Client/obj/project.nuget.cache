@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9POiqOr0AYwrTnjtS37vFs7mJhYlS117ytChQuqXvK4FSvO8jmZN5L5OdpZRHnyMl0bp8D5RydPkneCrTRWO/g==",
+  "dgSpecHash": "8bDJOGLWTbLsIhhnY6Q3069qvoIn3bItr7u7v8TVLx9a2w1FSDM/0jEILs30WR1MNdSc6T0zAAp84Wu0JDA54Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
   "expectedPackageFiles": [
@@ -28,7 +28,10 @@
     "C:\\Users\\Shark\\.nuget\\packages\\microsoft.extensions.options\\3.1.10\\microsoft.extensions.options.3.1.10.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.10\\microsoft.extensions.primitives.3.1.10.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\microsoft.jsinterop\\3.1.10\\microsoft.jsinterop.3.1.10.nupkg.sha512",
+    "C:\\Users\\Shark\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Shark\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Shark\\.nuget\\packages\\nunit\\3.13.2\\nunit.3.13.2.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\strawberryshake.core\\12.0.1\\strawberryshake.core.12.0.1.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\strawberryshake.resources\\12.0.1\\strawberryshake.resources.12.0.1.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\strawberryshake.transport.http\\12.0.1\\strawberryshake.transport.http.12.0.1.nupkg.sha512",
