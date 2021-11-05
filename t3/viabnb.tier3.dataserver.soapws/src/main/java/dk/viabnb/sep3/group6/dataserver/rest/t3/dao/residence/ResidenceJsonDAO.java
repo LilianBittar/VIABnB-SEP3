@@ -1,15 +1,19 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence;
 
+import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Residence;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
+import java.io.*;
 import java.util.List;
-//TODO: Implement this later. Use ResidenceJsonDAO as tempoary storage.
+
 @Repository
 @Scope("singleton")
-public class ResidenceDAOImpl implements ResidenceDAO
+public class ResidenceJsonDAO implements ResidenceDAO
 {
+  private final String RESIDENCE_FILE = "residences.json";
+  private Gson gson = new Gson();
 
   @Override public Residence getByResidenceId(int id)
   {
@@ -23,6 +27,18 @@ public class ResidenceDAOImpl implements ResidenceDAO
 
   @Override public Residence createResidence(Residence residence)
   {
-    return null;
+    File file = new File(RESIDENCE_FILE);
+    try
+    {
+      FileWriter fileWriter = new FileWriter(file);
+      fileWriter.write(gson.toJson(residence));
+      fileWriter.close();
+      return residence;
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  return null;
   }
 }
