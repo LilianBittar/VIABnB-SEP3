@@ -38,7 +38,6 @@ namespace SEP3T2GraphQL.Repositories
 
         public async Task<Residence> CreateResidenceAsync(Residence residence)
         {
-            //TODO fide out how what to return!! You got it right
             string newResidence = JsonSerializer.Serialize(residence);
             StringContent content = new StringContent(newResidence, Encoding.UTF8, "application/json");
             HttpResponseMessage responseMessage = await client.PostAsync(uri + "/Residence", content);
@@ -47,7 +46,8 @@ namespace SEP3T2GraphQL.Repositories
                 throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
             }
 
-            return residence;
+            Residence r = JsonSerializer.Deserialize<Residence>(await responseMessage.Content.ReadAsStringAsync());
+            return r;
         }
 
         public async Task<IList<Residence>> GetAllMyResidencesAsync()
