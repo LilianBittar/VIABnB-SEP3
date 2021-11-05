@@ -1,4 +1,4 @@
-package dk.viabnb.sep3.group6.dataserver.soapws.t3.dao;
+package dk.viabnb.sep3.group6.dataserver.rest.t3.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

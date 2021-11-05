@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>dk.viabnb.sep3.group6</groupId>
-    <artifactId>data-soapws-t3</artifactId>
+    <artifactId>data-rest-t3</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 <dependencies>
