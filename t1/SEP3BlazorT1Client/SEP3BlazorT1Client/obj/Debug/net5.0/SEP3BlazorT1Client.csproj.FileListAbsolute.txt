@@ -280,9 +280,5 @@ C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\De
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.genruntimeconfig.cache
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\BuildingsOverview\BuildingsOverview.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\BuildingsOverview\BuildingsOverview.razor.g.cs
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\MatBlazor.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\BuildingsOverview\BuildingsOverview.razor.g.cs
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterResidence\RegisterResidence.razor.g.cs
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\BuildingsOverview\BuildingsOverview.razor.g.cs
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterResidence\RegisterResidence.razor.g.cs
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\RegisterResidence\RegisterResidence.razor.rz.scp.css
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\BuildingsOverview\BuildingsOverview.razor.g.cs
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\BuildingsOverview\BuildingsOverview.razor.g.cs

@@ -1,27 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj": {}
+    "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj": {
+    "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj",
+        "projectUniqueName": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj",
         "projectName": "SEP3T2RESTApi",
-        "projectPath": "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj",
-        "packagesPath": "C:\\Users\\Micha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\obj\\",
+        "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\SEP3T2RESTApi.csproj",
+        "packagesPath": "C:\\Users\\kkash\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2RESTApi\\SEP3T2RESTApi\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Micha\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\kkash\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -85,20 +79,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
