@@ -40,7 +40,7 @@ namespace SEP3T2GraphQL.Repositories
         {
             string newResidence = JsonSerializer.Serialize(residence);
             StringContent content = new StringContent(newResidence, Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/Residence", content);
+            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/residence", content);
             if (!responseMessage.IsSuccessStatusCode)
             {
                 throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
