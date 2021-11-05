@@ -12,6 +12,8 @@ namespace SEP3BlazorT1Client.Models
         public decimal AverageRating { get; set; }
         public bool IsAvailable { get; set; }
         public decimal PricePerNight { get; set; }
+        
+        public string photo { get; set; }
         public IList<Rule> Rules { get; set; } = new List<Rule>();
         public IList<Facility> Facilities { get; set; } = new List<Facility>();
 
@@ -19,5 +21,7 @@ namespace SEP3BlazorT1Client.Models
         {
             return JsonSerializer.Serialize(this); 
         }
+
+        
     }
 }
