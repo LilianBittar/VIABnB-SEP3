@@ -10,7 +10,7 @@ namespace SEP3T2GraphQL.Repositories
 {
     public class ResidenceRepositoryImpl: IResidenceRepository
     {
-        private string uri = "https://localhost:5003";
+        private string uri = "http://localhost:8080";
         private readonly HttpClient client;
 
         public ResidenceRepositoryImpl()
@@ -38,7 +38,11 @@ namespace SEP3T2GraphQL.Repositories
 
         public async Task<Residence> CreateResidenceAsync(Residence residence)
         {
-            string newResidence = JsonSerializer.Serialize(residence);
+            string newResidence = JsonSerializer.Serialize(residence, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            Console.WriteLine(newResidence);
             StringContent content = new StringContent(newResidence, Encoding.UTF8, "application/json");
             HttpResponseMessage responseMessage = await client.PostAsync(uri + "/residence", content);
             if (!responseMessage.IsSuccessStatusCode)
@@ -46,7 +50,10 @@ namespace SEP3T2GraphQL.Repositories
                 throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
             }
 
-            Residence r = JsonSerializer.Deserialize<Residence>(await responseMessage.Content.ReadAsStringAsync());
+            Residence r = JsonSerializer.Deserialize<Residence>(await responseMessage.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
             return r;
         }
 
