@@ -1,4 +1,4 @@
-package dk.viabnb.sep3.group6.dataserver.soapws.t3.models;
+package dk.viabnb.sep3.group6.dataserver.rest.t3.models;
 
 import java.util.Date;
 import java.util.List;
