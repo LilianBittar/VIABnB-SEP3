@@ -1,14 +1,12 @@
 package dk.viabnb.sep3.group6.dataserver.soapws.t3.dao.testmessage;
 
 import dk.viabnb.sep3.group6.dataserver.soapws.t3.dao.BaseDao;
-import dk.viabnb.sep3.group6.dataserver.soapws.t3.models.ConceptMessage;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.NoSuchElementException;
 //import java.util.concurrent.locks.Lock;
 //import java.util.concurrent.locks.ReentrantLock;
