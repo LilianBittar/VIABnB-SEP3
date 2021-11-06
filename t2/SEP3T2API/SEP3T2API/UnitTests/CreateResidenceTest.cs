@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using HotChocolate.Types.Relay;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
@@ -57,6 +59,12 @@ namespace UnitTests
                 Rules = rules,
                 Facilities = facilities
             };
+        }
+
+        [Test]
+        public void CreateResidenceSunnyScenario()
+        {
+            Assert.DoesNotThrowAsync(() => residenceService.CreateResidenceAsync(residence));
         }
     }
 }

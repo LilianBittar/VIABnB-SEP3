@@ -159,17 +159,33 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[16.9.4, )"
             },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.16.1, )"
+            },
             "NUnit": {
               "target": "Package",
-              "version": "[3.13.1, )"
+              "version": "[3.13.2, )"
             },
             "NUnit3TestAdapter": {
               "target": "Package",
               "version": "[3.17.0, )"
+            },
+            "NUnitTestAdapter.WithFramework": {
+              "target": "Package",
+              "version": "[2.0.0-beta, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             },
             "coverlet.collector": {
               "target": "Package",
