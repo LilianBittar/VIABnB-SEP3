@@ -77,5 +77,6 @@ namespace SEP3T2GraphQL.Repositories
 
             return residences;
         }
+        
     }
 }

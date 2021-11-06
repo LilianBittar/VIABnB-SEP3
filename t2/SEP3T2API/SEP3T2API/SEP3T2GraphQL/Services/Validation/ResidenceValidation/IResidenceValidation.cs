@@ -10,5 +10,6 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
         bool IsValidFacilities(IList<Facility> facilities);
         bool IsValidResidence(Residence residence);
         bool IsLettersOnly(string arg);
+        
     }
 }
