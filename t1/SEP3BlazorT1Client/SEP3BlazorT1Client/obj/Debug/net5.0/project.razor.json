@@ -45,39 +45,6 @@
         }
       },
       {
-        "HashCode": -209895421,
-        "Kind": "Components.Component",
-        "Name": "SEP3BlazorT1Client.Pages.Index",
-        "AssemblyName": "SEP3BlazorT1Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "SEP3BlazorT1Client.Pages.Index"
-        }
-      },
-      {
-        "HashCode": -655810388,
-        "Kind": "Components.Component",
-        "Name": "SEP3BlazorT1Client.Pages.Index",
-        "AssemblyName": "SEP3BlazorT1Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "SEP3BlazorT1Client.Pages.Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "SEP3BlazorT1Client.Pages.Index",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
         "HashCode": 1921438637,
         "Kind": "Components.Component",
         "Name": "SEP3BlazorT1Client.Pages.BuildingsOverview.BuildingsOverview",
@@ -107,6 +74,39 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "SEP3BlazorT1Client.Pages.BuildingsOverview.BuildingsOverview",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -209895421,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.Index",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Index"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.Index"
+        }
+      },
+      {
+        "HashCode": -655810388,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.Index",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SEP3BlazorT1Client.Pages.Index"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.Index",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -355,6 +355,69 @@
           "Runtime.Name": "Components.None",
           "Common.TypeName": "SEP3BlazorT1Client.Shared.MainLayout.Body",
           "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 216541139,
+        "Kind": "Components.Component",
+        "Name": "Bunit.TestDoubles.Stub<TComponent>",
+        "AssemblyName": "Bunit.Core",
+        "Documentation": "\n            <summary>\n            Represents a test double stub of a component of type <typeparamref name=\"TComponent\" />.\n            </summary>\n            <typeparam name=\"TComponent\">The stub type.</typeparam>\n        ",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Stub"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "TComponent",
+            "TypeName": "System.Type",
+            "Documentation": "Specifies the type of the type parameter TComponent for the Bunit.TestDoubles.Stub<TComponent> component.",
+            "Metadata": {
+              "Common.PropertyName": "TComponent",
+              "Components.TypeParameter": "True",
+              "Components.TypeParameterIsCascading": "False"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "Bunit.TestDoubles.Stub<TComponent>",
+          "Components.GenericTyped": "True"
+        }
+      },
+      {
+        "HashCode": 1907389059,
+        "Kind": "Components.Component",
+        "Name": "Bunit.TestDoubles.Stub<TComponent>",
+        "AssemblyName": "Bunit.Core",
+        "Documentation": "\n            <summary>\n            Represents a test double stub of a component of type <typeparamref name=\"TComponent\" />.\n            </summary>\n            <typeparam name=\"TComponent\">The stub type.</typeparam>\n        ",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Bunit.TestDoubles.Stub"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "TComponent",
+            "TypeName": "System.Type",
+            "Documentation": "Specifies the type of the type parameter TComponent for the Bunit.TestDoubles.Stub<TComponent> component.",
+            "Metadata": {
+              "Common.PropertyName": "TComponent",
+              "Components.TypeParameter": "True",
+              "Components.TypeParameterIsCascading": "False"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "Bunit.TestDoubles.Stub<TComponent>",
+          "Components.GenericTyped": "True",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },

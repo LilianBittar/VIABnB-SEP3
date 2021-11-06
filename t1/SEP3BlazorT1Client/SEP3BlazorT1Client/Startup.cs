@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SEP3BlazorT1Client.Data;
 using SEP3BlazorT1Client.Data.Impl;
+using SEP3BlazorT1Client.Pages.RegisterResidence;
+using SEP3BlazorT1Client.ViewModels;
 
 namespace SEP3BlazorT1Client
 {
@@ -33,6 +35,7 @@ namespace SEP3BlazorT1Client
             services.AddScoped<IResidenceService, GraphQlResidenceService>();
             services.AddMatBlazor();
             services.AddScoped<MatDialogService>();
+            services.AddScoped<RegisterResidenceViewModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
