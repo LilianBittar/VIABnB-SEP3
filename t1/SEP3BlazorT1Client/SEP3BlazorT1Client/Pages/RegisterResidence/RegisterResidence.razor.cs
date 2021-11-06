@@ -1,31 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using SEP3BlazorT1Client.Data;
 using SEP3BlazorT1Client.Models;
+using SEP3BlazorT1Client.ViewModels;
 
 namespace SEP3BlazorT1Client.Pages.RegisterResidence
 {
     public partial class RegisterResidence
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
+    
         [Inject]
-        public IResidenceService ResidenceService { get; set; }
-        
-        
+        public RegisterResidenceViewModel ViewModel { get; set; }
 
+        public EditContext FormEditContext { get; set; }
+
+
+
+        public string Name { get; set; }
         private bool _showFacilityDialog = false;
 
-        private Residence _residenceToBeAdded = new Residence()
-        {
-            Address = new Address(), Facilities = new List<Facility>(), Rules = new List<Rule>()
-        };
-
         private string _residenceType;
-        private IList<string> _residenceTypes = new List<string>() {"hej", "hej2"};
-        private IList<Facility> _allFacilities = new List<Facility>() {new Facility() {Name = "Wifi"}};
         private Facility _facilityToBeAdded = new Facility();
+
+
+        protected override async Task OnInitializedAsync()
+        {
+            // Subscribing to the ViewModel's PropertyChanged event
+            // Everytime a ViewModel property changes, then StateHasChanged gets invoked, 
+            // such that View's state reflects ViewModel's state
+            ViewModel.PropertyChanged += async (sender, e) =>
+            {
+                await InvokeAsync(() =>
+                {
+                    StateHasChanged();
+                });
+            };
+            FormEditContext = new EditContext(ViewModel.ResidenceToBeAdded);
+            await base.OnInitializedAsync();
+        }
 
         private async void AddNewRule()
         {
@@ -34,12 +51,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 Description = await MatDialogService.PromptAsync("Enter rule", "")
             };
 
-            if (!string.IsNullOrEmpty(newRule.Description))
-            {
-                _residenceToBeAdded.Rules.Add(newRule);
-                Console.WriteLine(_residenceToBeAdded.Rules.Count);
-                StateHasChanged();
-            }
+            ViewModel.AddNewRule(newRule); 
         }
 
         private void OpenAddFacilityDialog()
@@ -53,15 +65,20 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             Console.WriteLine(_facilityToBeAdded.Name);
             if (!string.IsNullOrEmpty(_facilityToBeAdded.Name))
             {
-            _residenceToBeAdded.Facilities.Add(_facilityToBeAdded);
+            ViewModel.ResidenceToBeAdded.Facilities.Add(_facilityToBeAdded);
             _showFacilityDialog = false;
-            StateHasChanged();
             }
         }
 
         private async void RegisterNewResidence()
         {
-            await ResidenceService.CreateResidenceAsync(_residenceToBeAdded); 
+            await ViewModel.RegisterResidenceAsync();
         }
+
+        private void TriggerValidation()
+        {
+            FormEditContext.Validate(); 
+        }
+     
     }
 }
