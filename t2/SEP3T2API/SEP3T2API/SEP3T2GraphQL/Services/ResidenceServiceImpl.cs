@@ -38,6 +38,7 @@ namespace SEP3T2GraphQL.Services
             {
                 try
                 {
+                    System.Console.WriteLine($"{this} creating new residence...");
                     return  await _residenceRepository.CreateResidenceAsync(residence);
                 }
                 catch (Exception e)

@@ -62,7 +62,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery residenceMutation = new GqlQuery()
             {
                 Query = @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){id,address{id, zipCode, streetName, houseNumber, cityName, streetNumber, zipCode},description,type,averageRating,isAvailable,pricePerNight,rules{id, description},facilities{id, name},imageUrl,}}",
-                Variables= new ResidenceInput{residenceInput = residence}
+                Variables= new {residenceInput = residence}
             };
             var mutationResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceMutation);
             return mutationResponse.Data.Residence;

@@ -58,6 +58,7 @@ namespace SEP3T2GraphQL.Repositories
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
+                Console.WriteLine(r.ToString()); 
                 return r;
             }
 
