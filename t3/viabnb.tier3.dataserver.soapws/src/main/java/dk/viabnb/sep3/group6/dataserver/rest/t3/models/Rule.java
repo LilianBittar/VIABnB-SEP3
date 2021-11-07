@@ -30,4 +30,9 @@ public class Rule
   {
     this.description = description;
   }
+
+  @Override public String toString()
+  {
+    return "Rule{" + "id=" + id + ", description='" + description + '\'' + '}';
+  }
 }
