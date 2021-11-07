@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController public class ResidenceController
 {
@@ -21,6 +22,19 @@ import org.springframework.web.client.HttpServerErrorException;
   @Autowired public ResidenceController(@Qualifier("residenceJsonDAO") ResidenceDAO residenceDAO)
   {
     this.residenceDAO = residenceDAO;
+  }
+
+
+  @GetMapping("/residence/{id}")
+  public ResponseEntity<List<Residence>> getAllResidencesByHostId(@PathVariable int id)
+  {
+    List<Residence> residences;
+   residences = residenceDAO.getAllResidenceByHostId(id);
+    if (residences == null)
+    {
+      return ResponseEntity.internalServerError().build();
+    }
+    return new ResponseEntity<>(residences, HttpStatus.OK);
   }
 
 

@@ -8,6 +8,6 @@ namespace SEP3T2GraphQL.Repositories
     {
         Task<Residence> GetResidenceByIdAsync(int id);
         Task<Residence> CreateResidenceAsync(Residence residence);
-        Task<IList<Residence>> ShowAllRegisteredResidencesByHostAsync(Host host);
+        Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id);
     }
 }
