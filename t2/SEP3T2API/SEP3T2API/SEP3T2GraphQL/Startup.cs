@@ -21,6 +21,7 @@ using SEP3T2GraphQL.Graphql;
 using SEP3T2GraphQL.Graphql.Schema;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services;
+using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
 
 namespace SEP3T2GraphQL
 {
@@ -42,6 +43,7 @@ namespace SEP3T2GraphQL
                 .AddMutationType<Mutation>();
             services.AddScoped<IResidenceRepository, ResidenceRepositoryImpl>();
             services.AddScoped<IResidenceService, ResidenceServiceImpl>();
+            services.AddScoped<IResidenceValidation, ResidenceValidationImpl>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

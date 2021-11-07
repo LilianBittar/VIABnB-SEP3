@@ -79,4 +79,12 @@ public class Address
   {
     this.zipCode = zipCode;
   }
+
+  @Override public String toString()
+  {
+    return "Address{" + "id=" + id + ", streetName='" + streetName + '\''
+        + ", houseNumber='" + houseNumber + '\'' + ", cityName='" + cityName
+        + '\'' + ", streetNumber='" + streetNumber + '\'' + ", zipCode="
+        + zipCode + '}';
+  }
 }

@@ -3,9 +3,9 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.models;
 public class Facility
 {
   private int id;
-  private int name;
+  private String name;
 
-  public Facility(int id, int name)
+  public Facility(int id, String name)
   {
     this.id = id;
     this.name = name;
@@ -21,13 +21,18 @@ public class Facility
     this.id = id;
   }
 
-  public int getName()
+  public String getName()
   {
     return name;
   }
 
-  public void setName(int name)
+  public void setName(String name)
   {
     this.name = name;
+  }
+
+  @Override public String toString()
+  {
+    return "Facility{" + "id=" + id + ", name='" + name + '\'' + '}';
   }
 }
