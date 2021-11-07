@@ -23,8 +23,8 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlClient client = new GqlClient(Url);
             var residenceQuery = new GqlQuery()
             {
-                Query = @"query($id: int){
-                          residence(id: $id){
+                Query = @"query($residenceId: int){
+                          residence(id: $residenceId){
                             id, 
                             address{
                               id,
@@ -48,7 +48,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                           }
                         }
 ",
-                Variables = $"{{id:{id}}}" // {{ = {  in Interpolated strings. 
+                Variables = new {residenceId = id}
             };
             var graphQlResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceQuery);
          
