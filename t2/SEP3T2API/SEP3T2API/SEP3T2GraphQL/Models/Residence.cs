@@ -14,7 +14,7 @@ namespace SEP3T2GraphQL.Models
         public double PricePerNight { get; set; }
         public IList<Rule> Rules { get; set; } = new List<Rule>();
         public IList<Facility> Facilities { get; set; } = new List<Facility>(); 
-        public string ImageURL { get; set; }
+        public string ImageUrl { get; set; }
         public DateTime AvailableFrom { get; set; }
         public DateTime AvailableTo { get; set; }
     }

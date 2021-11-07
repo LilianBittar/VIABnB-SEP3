@@ -2,6 +2,8 @@
 {
     public class Host
     {
+        public int Id { get; set; }
+        
         
     }
 }

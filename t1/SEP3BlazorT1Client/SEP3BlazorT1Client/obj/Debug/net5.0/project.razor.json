@@ -78,6 +78,39 @@
         }
       },
       {
+        "HashCode": -1189878025,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.Counter",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Counter"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.Counter"
+        }
+      },
+      {
+        "HashCode": 1766935874,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.Counter",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SEP3BlazorT1Client.Pages.Counter"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.Counter",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": -209895421,
         "Kind": "Components.Component",
         "Name": "SEP3BlazorT1Client.Pages.Index",
@@ -107,6 +140,221 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "SEP3BlazorT1Client.Pages.Index",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 711617745,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.App",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "App"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.App"
+        }
+      },
+      {
+        "HashCode": -1629308800,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.App",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SEP3BlazorT1Client.App"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.App",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -724099332,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Shared.SurveyPrompt",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SurveyPrompt"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Shared.SurveyPrompt"
+        }
+      },
+      {
+        "HashCode": -662681387,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Shared.SurveyPrompt",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SEP3BlazorT1Client.Shared.SurveyPrompt"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Shared.SurveyPrompt",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1367091731,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Shared.NavMenu",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "NavMenu"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Shared.NavMenu"
+        }
+      },
+      {
+        "HashCode": -2036762452,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Shared.NavMenu",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SEP3BlazorT1Client.Shared.NavMenu"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Shared.NavMenu",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1237298644,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Shared.MainLayout",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "MainLayout"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Body",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Documentation": "\n            <summary>\n            Gets the content to be rendered inside the layout.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Body",
+              "Components.ChildContent": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Shared.MainLayout"
+        }
+      },
+      {
+        "HashCode": 542837509,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Shared.MainLayout",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SEP3BlazorT1Client.Shared.MainLayout"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Body",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Documentation": "\n            <summary>\n            Gets the content to be rendered inside the layout.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Body",
+              "Components.ChildContent": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Shared.MainLayout",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 435059868,
+        "Kind": "Components.ChildContent",
+        "Name": "SEP3BlazorT1Client.Shared.MainLayout.Body",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "Documentation": "\n            <summary>\n            Gets the content to be rendered inside the layout.\n            </summary>\n        ",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Body",
+            "ParentTag": "MainLayout"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "SEP3BlazorT1Client.Shared.MainLayout.Body",
+          "Components.IsSpecialKind": "Components.ChildContent"
+        }
+      },
+      {
+        "HashCode": -1092068649,
+        "Kind": "Components.ChildContent",
+        "Name": "SEP3BlazorT1Client.Shared.MainLayout.Body",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "Documentation": "\n            <summary>\n            Gets the content to be rendered inside the layout.\n            </summary>\n        ",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Body",
+            "ParentTag": "SEP3BlazorT1Client.Shared.MainLayout"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "SEP3BlazorT1Client.Shared.MainLayout.Body",
+          "Components.IsSpecialKind": "Components.ChildContent",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },

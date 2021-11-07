@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NmiihIdq0kwI7nXy6QO+pXvC0NMcZeeDb9yO8+D8sJiLSP8fhgr8VcHA6fPfQHgxLnh6DuE7NWGYCjeND20E8A==",
+  "dgSpecHash": "7+ZPtdq6+1jgJsGCZURZcOQ6M4ibaGDScAa51RyZN1xAYSCELwXQcQZ6HxxuFTNsXFivtHlvJa2eexMWJisMxA==",
   "success": true,
-  "projectFilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj",
+  "projectFilePath": "C:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Shark\\.nuget\\packages\\autofac\\6.3.0\\autofac.6.3.0.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\graphql\\4.6.1\\graphql.4.6.1.nupkg.sha512",

@@ -33,7 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "SEP3BlazorT1Client/1.0.0": {
         "dependencies": {
-          "CatQL.GraphQL.Client": "1.2.3",
+          "CatQL.GraphQL.Client": "2.0.0",
           "GraphQL.Client": "4.0.1",
           "GraphQL.Client.Serializer.Newtonsoft": "4.0.1",
           "MatBlazor": "2.8.0",
@@ -439,14 +439,14 @@
           "lib/net5.0/Bunit.Web.dll": {}
         }
       },
-      "CatQL.GraphQL.Client/1.2.3": {
+      "CatQL.GraphQL.Client/2.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/CatQLClient.dll": {
-            "assemblyVersion": "1.2.3.0",
-            "fileVersion": "1.2.3.0"
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
           }
         },
         "compile": {
@@ -2453,12 +2453,12 @@
       "path": "bunit.web/1.2.49",
       "hashPath": "bunit.web.1.2.49.nupkg.sha512"
     },
-    "CatQL.GraphQL.Client/1.2.3": {
+    "CatQL.GraphQL.Client/2.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-pX83kJ+p1TTKQqt4uIKLC70Iyiv5b1T+c3RcibhwU0Z7kaAXEeMHEvLkvbWGFH7F6sQzIgP7hof7h/EVXth3/A==",
-      "path": "catql.graphql.client/1.2.3",
-      "hashPath": "catql.graphql.client.1.2.3.nupkg.sha512"
+      "sha512": "sha512-lV/ovXxodEpy+AgqWgYjQRWna0MHoD0vqnGOiTeiZ2/bmTgJtW7txRKqF6H9WL/ye6X1/6DdyQ8pRK3zYvQnCw==",
+      "path": "catql.graphql.client/2.0.0",
+      "hashPath": "catql.graphql.client.2.0.0.nupkg.sha512"
     },
     "GraphQL.Client/4.0.1": {
       "type": "package",

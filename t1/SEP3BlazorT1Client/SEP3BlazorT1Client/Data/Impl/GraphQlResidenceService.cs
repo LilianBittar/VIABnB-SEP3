@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
 using GraphQL;
@@ -56,11 +57,12 @@ namespace SEP3BlazorT1Client.Data.Impl
 
         public async Task<Residence>  CreateResidenceAsync(Residence residence)
         {
+
             GqlClient client = new GqlClient(Url){EnableLogging=true};
             GqlQuery residenceMutation = new GqlQuery()
             {
-                Query = @"mutation createResidence($residence: ResidenceInput){createResidence(residence: $residence){id,address{id, zipCode, streetName, houseNumber, cityName, streetNumber, zipCode},description,type,averageRating,isAvailable,pricePerNight,rules{id, description},facilities{id, name},imageUrl,}}",
-                Variables= $"{{residence: {JsonConvert.SerializeObject(residence)}}}"
+                Query = @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){id,address{id, zipCode, streetName, houseNumber, cityName, streetNumber, zipCode},description,type,averageRating,isAvailable,pricePerNight,rules{id, description},facilities{id, name},imageUrl,}}",
+                Variables= new ResidenceInput{residenceInput = residence}
             };
             var mutationResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceMutation);
             return mutationResponse.Data.Residence;
