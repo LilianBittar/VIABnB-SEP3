@@ -13,10 +13,10 @@ namespace SEP3BlazorT1Client.Models
         public string CityName { get; set; }
         [Required]
         public string StreetNumber { get; set; }
-        [Required]
+        [Required, Range(1, int.MaxValue, ErrorMessage ="Must be a positive number")]
         public int ZipCode { get; set; }
 
-        public string ToString()
+        public override string ToString()
         {
             return $"{StreetName}-{StreetNumber}-{HouseNumber}-{CityName}-{ZipCode}";
                 
