@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
@@ -39,6 +40,7 @@ namespace SEP3T2GraphQL.Services
                 try
                 {
                     System.Console.WriteLine($"{this} creating new residence...");
+                    System.Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(residence)}");
                     return  await _residenceRepository.CreateResidenceAsync(residence);
                 }
                 catch (Exception e)

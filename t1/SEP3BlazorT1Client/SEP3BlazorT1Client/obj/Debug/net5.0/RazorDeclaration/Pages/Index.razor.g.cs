@@ -149,8 +149,8 @@ using SEP3BlazorT1Client.Data;
             
         };
         var result = await ResidenceService.CreateResidenceAsync(newResidence); 
-        System.Console.WriteLine(result.Id);
-        _residence = result; 
+        _residence = result;
+        StateHasChanged();
     }
     private async Task FetchConceptMessage()
     {

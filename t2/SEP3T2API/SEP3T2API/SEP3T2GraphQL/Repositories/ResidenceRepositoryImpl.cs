@@ -15,8 +15,9 @@ namespace SEP3T2GraphQL.Repositories
         private readonly HttpClient client;
         private IResidenceValidation _residenceValidation;
 
-        public ResidenceRepositoryImpl()
+        public ResidenceRepositoryImpl(IResidenceValidation residenceValidation)
         {
+            _residenceValidation = residenceValidation; 
             client = new HttpClient();
         }
 
@@ -40,6 +41,7 @@ namespace SEP3T2GraphQL.Repositories
 
         public async Task<Residence> CreateResidenceAsync(Residence residence)
         {
+            System.Console.WriteLine($"{this} was passed args: {JsonSerializer.Serialize(residence)}");
             if (_residenceValidation.IsValidResidence(residence))
             {
                 string newResidence = JsonSerializer.Serialize(residence, new JsonSerializerOptions()

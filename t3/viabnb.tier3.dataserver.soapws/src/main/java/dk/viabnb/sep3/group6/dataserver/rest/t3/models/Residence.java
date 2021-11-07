@@ -14,7 +14,7 @@ public class Residence
   private double pricePerNight;
   private List<Rule> rules;
   private List<Facility> facilities;
-  private String imageURL;
+  private String imageUrl;
   private Date availableFrom;
   private Date availableTo;
 
@@ -36,7 +36,7 @@ public class Residence
     this.pricePerNight = pricePerNight;
     this.rules = rules;
     this.facilities = facilities;
-    this.imageURL = imageURL;
+    this.imageUrl = imageURL;
     this.availableFrom = availableFrom;
     this.availableTo = availableTo;
   }
@@ -133,12 +133,12 @@ public class Residence
 
   public String getImageURL()
   {
-    return imageURL;
+    return imageUrl;
   }
 
   public void setImageURL(String imageURL)
   {
-    this.imageURL = imageURL;
+    this.imageUrl = imageURL;
   }
 
   public Date getAvailableFrom()
@@ -167,7 +167,7 @@ public class Residence
         + ", description='" + description + '\'' + ", type='" + type + '\''
         + ", averageRating=" + averageRating + ", isAvailable=" + isAvailable
         + ", pricePerNight=" + pricePerNight + ", rules=" + rules
-        + ", facilities=" + facilities + ", imageURL='" + imageURL + '\''
+        + ", facilities=" + facilities + ", imageURL='" + imageUrl + '\''
         + ", availableFrom=" + availableFrom + ", availableTo=" + availableTo
         + '}';
   }

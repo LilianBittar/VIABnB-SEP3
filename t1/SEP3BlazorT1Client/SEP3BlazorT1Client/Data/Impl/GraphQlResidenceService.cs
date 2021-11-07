@@ -52,6 +52,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
             var graphQlResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceQuery);
          
+            System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Residence.ToString()}");
             return graphQlResponse.Data.Residence; 
         }
 
@@ -64,8 +65,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Query = @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){id,address{id, zipCode, streetName, houseNumber, cityName, streetNumber, zipCode},description,type,averageRating,isAvailable,pricePerNight,rules{id, description},facilities{id, name},imageUrl,}}",
                 Variables= new {residenceInput = residence}
             };
-            var mutationResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceMutation);
-            return mutationResponse.Data.Residence;
+            var mutationResponse = await client.PostQueryAsync<CreateResidenceMutationResponseType>(residenceMutation);
+            System.Console.WriteLine($"{this} received: {mutationResponse.Data.CreateResidence}");
+
+            return mutationResponse.Data.CreateResidence;
         }
     }
 }
