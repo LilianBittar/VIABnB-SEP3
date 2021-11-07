@@ -122,6 +122,36 @@ using SEP3BlazorT1Client.Data;
         _id = 0;
     }
 
+    private async Task CreateNewResidence()
+    {
+        Residence newResidence = new Residence()
+        {
+            Address = new Address()
+            {
+                CityName = "420City", 
+                HouseNumber ="420", 
+                Id= 420, 
+                StreetName = "420 Street",
+                StreetNumber = "420",
+                ZipCode=420
+            },
+            AvailableFrom = DateTime.ParseExact("07/11/2021", "dd/MM/yyyy", null),
+            AvailableTo = DateTime.ParseExact("07/12/2021", "dd/MM/yyyy", null), 
+            AverageRating = 5, 
+            Description ="420 des",
+            Facilities = new List<Facility>(), 
+            Id = 420, 
+            ImageUrl = "420", 
+            IsAvailable = false, 
+            PricePerNight = 2000,
+            Rules = new List<Rule>(), 
+            Type = "420 blaze"
+            
+        };
+        var result = await ResidenceService.CreateResidenceAsync(newResidence); 
+        System.Console.WriteLine(result.Id);
+        _residence = result; 
+    }
     private async Task FetchConceptMessage()
     {
         int myInt = 0; 

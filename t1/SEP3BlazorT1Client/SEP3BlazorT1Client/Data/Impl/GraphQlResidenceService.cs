@@ -4,6 +4,7 @@ using CatQL.GraphQL.Client;
 using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
+using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Models;
 
@@ -55,30 +56,11 @@ namespace SEP3BlazorT1Client.Data.Impl
 
         public async Task<Residence>  CreateResidenceAsync(Residence residence)
         {
-            GqlClient client = new GqlClient(Url);
+            GqlClient client = new GqlClient(Url){EnableLogging=true};
             GqlQuery residenceMutation = new GqlQuery()
             {
-                Query = @"mutation($residence: ResidenceInput){
-                  createResidence(residence: $residence){
-                        id,
-                        address{
-                          id, zipCode
-                        },
-                        description,
-                        type,
-                        averageRating,
-                        isAvailable,
-                        pricePerNight,
-                        rules{
-                          id, description
-                        },
-                        facilities{
-                          id, name
-                        },
-                        imageUrl,
-                  }
-                }",
-                Variables= $"{{residence: {residence}}}"
+                Query = @"mutation createResidence($residence: ResidenceInput){createResidence(residence: $residence){id,address{id, zipCode, streetName, houseNumber, cityName, streetNumber, zipCode},description,type,averageRating,isAvailable,pricePerNight,rules{id, description},facilities{id, name},imageUrl,}}",
+                Variables= $"{{residence: {JsonConvert.SerializeObject(residence)}}}"
             };
             var mutationResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceMutation);
             return mutationResponse.Data.Residence;

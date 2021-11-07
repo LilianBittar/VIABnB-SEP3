@@ -129,7 +129,7 @@ using SEP3BlazorT1Client.Models;
             PricePerNight = 1000,
             Rules = new List<Rule>(),
             Facilities = new List<Facility>(),
-            photo = "https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero-852x479.jpg"
+            ImageUrl = "https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero-852x479.jpg"
         },
 
         new Residence
@@ -151,7 +151,7 @@ using SEP3BlazorT1Client.Models;
             PricePerNight = 1000,
             Rules = new List<Rule>(),
             Facilities = new List<Facility>(),
-            photo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"
+            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"
         },
     };
 

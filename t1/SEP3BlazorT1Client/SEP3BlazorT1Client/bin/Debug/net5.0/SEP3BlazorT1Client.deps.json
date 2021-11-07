@@ -33,10 +33,11 @@
     ".NETCoreApp,Version=v5.0": {
       "SEP3BlazorT1Client/1.0.0": {
         "dependencies": {
-          "CatQL.GraphQL.Client": "1.2.0",
+          "CatQL.GraphQL.Client": "1.2.3",
           "GraphQL.Client": "4.0.1",
           "GraphQL.Client.Serializer.Newtonsoft": "4.0.1",
           "MatBlazor": "2.8.0",
+          "NUnit": "3.13.2",
           "StrawberryShake.Transport.Http": "12.0.1",
           "bunit": "1.2.49",
           "System.Reactive.Reference": "4.3.0.0",
@@ -438,14 +439,14 @@
           "lib/net5.0/Bunit.Web.dll": {}
         }
       },
-      "CatQL.GraphQL.Client/1.2.0": {
+      "CatQL.GraphQL.Client/1.2.3": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net5.0/CatQLClient.dll": {
-            "assemblyVersion": "1.2.0.0",
-            "fileVersion": "1.2.0.0"
+            "assemblyVersion": "1.2.3.0",
+            "fileVersion": "1.2.3.0"
           }
         },
         "compile": {
@@ -604,6 +605,11 @@
       "Microsoft.Extensions.Primitives/5.0.0": {},
       "Microsoft.JSInterop/5.0.0": {},
       "Microsoft.NETCore.Platforms/5.0.0": {},
+      "NETStandard.Library/2.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "5.0.0"
+        }
+      },
       "Newtonsoft.Json/13.0.1": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
@@ -613,6 +619,20 @@
         },
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "NUnit/3.13.2": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/nunit.framework.dll": {
+            "assemblyVersion": "3.13.2.0",
+            "fileVersion": "3.13.2.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/nunit.framework.dll": {}
         }
       },
       "StrawberryShake.Core/12.0.1": {
@@ -2433,12 +2453,12 @@
       "path": "bunit.web/1.2.49",
       "hashPath": "bunit.web.1.2.49.nupkg.sha512"
     },
-    "CatQL.GraphQL.Client/1.2.0": {
+    "CatQL.GraphQL.Client/1.2.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-OaQAti92QLayGLJtB4Bazr/mhydt4NRZD6C1SbW1vzMqKknOh2Hfo2ZBj2gbTk2gYybk8j+QYse8Tx9Wk8vJug==",
-      "path": "catql.graphql.client/1.2.0",
-      "hashPath": "catql.graphql.client.1.2.0.nupkg.sha512"
+      "sha512": "sha512-pX83kJ+p1TTKQqt4uIKLC70Iyiv5b1T+c3RcibhwU0Z7kaAXEeMHEvLkvbWGFH7F6sQzIgP7hof7h/EVXth3/A==",
+      "path": "catql.graphql.client/1.2.3",
+      "hashPath": "catql.graphql.client.1.2.3.nupkg.sha512"
     },
     "GraphQL.Client/4.0.1": {
       "type": "package",
@@ -2601,12 +2621,26 @@
       "path": "microsoft.netcore.platforms/5.0.0",
       "hashPath": "microsoft.netcore.platforms.5.0.0.nupkg.sha512"
     },
+    "NETStandard.Library/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
+      "path": "netstandard.library/2.0.0",
+      "hashPath": "netstandard.library.2.0.0.nupkg.sha512"
+    },
     "Newtonsoft.Json/13.0.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "path": "newtonsoft.json/13.0.1",
       "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "NUnit/3.13.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-u+fz/lXyR4vlamySNAEMrXvh+GhAQiB6/aVZtU5WjivR5zF26Ui0tfteDtWqT90k9D8y6g8rFKYQC97Z7d195w==",
+      "path": "nunit/3.13.2",
+      "hashPath": "nunit.3.13.2.nupkg.sha512"
     },
     "StrawberryShake.Core/12.0.1": {
       "type": "package",

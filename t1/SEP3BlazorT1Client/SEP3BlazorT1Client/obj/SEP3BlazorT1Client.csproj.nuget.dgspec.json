@@ -46,7 +46,7 @@
           "dependencies": {
             "CatQL.GraphQL.Client": {
               "target": "Package",
-              "version": "[1.2.0, )"
+              "version": "[1.2.3, )"
             },
             "GraphQL.Client": {
               "target": "Package",
