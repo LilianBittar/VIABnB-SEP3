@@ -55,7 +55,7 @@ namespace UnitTests
                 Address = address,
                 Description = "DescriptionTest",
                 Type = "TypeTes",
-                AverageRating = 1,
+                AverageRating = 0,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -71,7 +71,7 @@ namespace UnitTests
         public void CreateResidenceSunnyScenario()
         {
             //TODO find out why a nullPointer is being thrown
-            residenceRepository.CreateResidenceAsync(residence);
+            
             Assert.DoesNotThrowAsync(() => residenceService.CreateResidenceAsync(residence));
         }
     }

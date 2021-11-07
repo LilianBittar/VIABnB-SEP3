@@ -64,7 +64,7 @@ namespace SEP3T2GraphQL.Repositories
             throw new ArgumentException("Invalid Residence");
         }
 
-        public async Task<IList<Residence>> GetAllMyResidencesAsync()
+        public async Task<IList<Residence>> ShowAllRegisteredResidencesByHostAsync(Host host)
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Residence");
 

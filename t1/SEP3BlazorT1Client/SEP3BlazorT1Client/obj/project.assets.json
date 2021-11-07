@@ -1443,32 +1443,30 @@
       "GraphQL.Client >= 4.0.1",
       "GraphQL.Client.Serializer.Newtonsoft >= 4.0.1",
       "MatBlazor >= 2.8.0",
+      "NUnit >= 3.13.2",
       "StrawberryShake.Transport.Http >= 12.0.1",
-      "bunit >= 1.2.49",
-      "nunit >= 3.13.2"
+      "bunit >= 1.2.49"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kkash\\.nuget\\packages\\": {}
+    "C:\\Users\\kaspe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+      "projectUniqueName": "D:\\Dokumenter D\\Git\\SEP3\\network-switch-sprint2\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
       "projectName": "SEP3BlazorT1Client",
-      "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
-      "packagesPath": "C:\\Users\\kkash\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\obj\\",
+      "projectPath": "D:\\Dokumenter D\\Git\\SEP3\\network-switch-sprint2\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+      "packagesPath": "C:\\Users\\kaspe\\.nuget\\packages\\",
+      "outputPath": "D:\\Dokumenter D\\Git\\SEP3\\network-switch-sprint2\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kkash\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\kaspe\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1503,6 +1501,10 @@
             "target": "Package",
             "version": "[2.8.0, )"
           },
+          "NUnit": {
+            "target": "Package",
+            "version": "[3.13.2, )"
+          },
           "StrawberryShake.Transport.Http": {
             "target": "Package",
             "version": "[12.0.1, )"
@@ -1510,10 +1512,6 @@
           "bunit": {
             "target": "Package",
             "version": "[1.2.49, )"
-          },
-          "nunit": {
-            "target": "Package",
-            "version": "[3.13.2, )"
           }
         },
         "imports": [
@@ -1534,7 +1532,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
