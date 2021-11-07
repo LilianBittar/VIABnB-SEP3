@@ -2,14 +2,20 @@
 using HotChocolate;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Services;
 
 namespace SEP3T2GraphQL.Graphql
 {
     public class Query
     {
-        public async Task<Residence> GetResidence(int id, [Service]IResidenceRepository residenceRepository)
+        private IResidenceService _residenceService; 
+        public Query(IResidenceService residenceService)
         {
-            return await residenceRepository.GetResidenceByIdAsync(id); 
+            _residenceService = residenceService; 
+        }
+        public async Task<Residence> GetResidence(int id)
+        {
+            return await _residenceService.GetResidenceByIdAsync(id); 
         }
         
     }

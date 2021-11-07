@@ -40,7 +40,7 @@ namespace SEP3T2GraphQL
             services.AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddType<ListType>()
-                .AddMutationType<Mutation>();
+                .AddMutationType<Mutation>().ModifyRequestOptions(opt => opt.IncludeExceptionDetails =true);
             services.AddScoped<IResidenceRepository, ResidenceRepositoryImpl>();
             services.AddScoped<IResidenceService, ResidenceServiceImpl>();
             services.AddScoped<IResidenceValidation, ResidenceValidationImpl>();
