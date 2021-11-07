@@ -38,32 +38,40 @@ namespace UnitTests
             facilities = new List<Facility>();
             facilities.Add(new Facility
             {
+                Id = 1,
                 Name = "FacilityTest"
             });
             
             rules = new List<Rule>();
             rules.Add(new Rule()
             {
+                Id = 1,
                 Description = "DescriptionTest"
             });
-            
+
             residence = new Residence()
             {
                 Id = 1,
                 Address = address,
                 Description = "DescriptionTest",
-                Type = "TypeTest",
-                AverageRating = 1.5,
+                Type = "TypeTes",
+                AverageRating = 1,
                 IsAvailable = false,
-                PricePerNight = 100.5,
+                PricePerNight = 1,
                 Rules = rules,
-                Facilities = facilities
+                Facilities = facilities,
+                ImageURL = "URLTest",
+                AvailableFrom = DateTime.Now,
+                AvailableTo = DateTime.Now
             };
+            
         }
 
         [Test]
         public void CreateResidenceSunnyScenario()
         {
+            //TODO find out why a nullPointer is being thrown
+            residenceRepository.CreateResidenceAsync(residence);
             Assert.DoesNotThrowAsync(() => residenceService.CreateResidenceAsync(residence));
         }
     }
