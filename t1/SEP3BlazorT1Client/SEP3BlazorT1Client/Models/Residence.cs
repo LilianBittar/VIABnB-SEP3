@@ -14,10 +14,11 @@ namespace SEP3BlazorT1Client.Models
         
         public Address Address { get; set; }
         [JsonProperty("description")]
-        
-        public string Description { get; set; }
         [Required]
+        public string Description { get; set; }
         [JsonProperty("type")]
+        [Required (AllowEmptyStrings =false)]
+        [DisplayFormat(ConvertEmptyStringToNull =false)]
         public string Type { get; set; }
         [JsonProperty("averageRating")]
         public decimal AverageRating { get; set; }

@@ -103,19 +103,20 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             TriggerValidation(); 
             var validationContext = new ValidationContext(_newResidenceAddress, null, null);
             var validationResults = new List<ValidationResult>();
+            _newResidence.Address = _newResidenceAddress; 
             bool residenceIsValid = Validator.TryValidateObject(_newResidenceAddress, validationContext, validationResults, true);
             validationResults.ForEach(r => System.Console.WriteLine($"Error: {r}"));
-            //     if (residenceIsValid)
-            //     {
-            //         await ResidenceService.CreateResidenceAsync(_newResidence);
-            //     }
+            if (residenceIsValid)
+                {
+                    await ResidenceService.CreateResidenceAsync(_newResidence);
+                }
             }
 
             private void TriggerValidation()
         {
             FormEditContextResidence.Validate();
             FormEditContextAddress.Validate();
-            System.Console.WriteLine(JsonConvert.SerializeObject(_newResidence));
+            System.Console.WriteLine(JsonConvert.SerializeObject(_newResidenceAddress));
             System.Console.WriteLine("Validation triggered");
             System.Console.WriteLine(FormEditContextAddress.Validate());
             System.Console.WriteLine(FormEditContextResidence.Validate());

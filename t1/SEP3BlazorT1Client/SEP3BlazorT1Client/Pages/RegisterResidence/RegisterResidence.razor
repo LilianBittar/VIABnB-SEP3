@@ -9,6 +9,7 @@
                         @* LEFT COLUMN *@
                         <h2>Address Information</h2>
                         <EditForm EditContext=@FormEditContextAddress>
+                            <DataAnnotationsValidator/>
                             <MatTextField Label="Street name" @bind-Value="@_newResidenceAddress.StreetName"/>
                             <ValidationMessage For="@(() => _newResidenceAddress.StreetName)"/>
 
@@ -27,7 +28,10 @@
                         @* MIDDLE COLUMN *@
                         <h2>Residence Info:</h2>
                         <EditForm EditContext=@FormEditContextResidence>
+                            <DataAnnotationsValidator/>
+
                             <MatSelect Label="Residence type" @bind-Value="_residenceType" Style="margin-top:1rem;"/>
+                            <ValidationMessage For="@(()=>_newResidence.Type)" />
                             <MatTextField Label="Residence Description" @bind-Value="_newResidence.Description" TextArea="@true"/>
                             <ValidationMessage For="@(() => _newResidence.Description)"/>
                             <MatTextField Label="Price / night in DKK" @bind-Value="_newResidence.PricePerNight"/>
