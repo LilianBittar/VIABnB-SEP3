@@ -4,6 +4,7 @@ using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services;
+using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
 
 namespace UnitTests
 {
@@ -12,6 +13,8 @@ namespace UnitTests
     {
         private IResidenceService residenceService;
         private IResidenceRepository residenceRepository;
+        private IResidenceValidation _residenceValidation;
+        
         private Address address;
         private IList<Facility> facilities;
         private IList<Rule> rules;
@@ -20,7 +23,8 @@ namespace UnitTests
         [SetUp]
         public void SetUp()
         {
-            residenceRepository = new ResidenceRepositoryImpl();
+            _residenceValidation = new ResidenceValidationImpl();
+            residenceRepository = new ResidenceRepositoryImpl(_residenceValidation);
             residenceService = new ResidenceServiceImpl(residenceRepository);
             
             address = new Address()
@@ -58,17 +62,16 @@ namespace UnitTests
                 PricePerNight = 1,
                 Rules = rules,
                 Facilities = facilities,
-                ImageURL = "URLTest",
-                AvailableFrom = DateTime.Now,
-                AvailableTo = DateTime.Now
+                ImageUrl = "URLTest",
+                AvailableFrom = new DateTime(2050, 11, 11),
+                AvailableTo = new DateTime(2050, 11, 11)
             };
-            residenceRepository.CreateResidenceAsync(residence);
         }
 
         [Test]
         public void CreateResidenceSunnyScenarioTest()
         {
-            //TODO find out why a nullPointer is being thrown
+            Assert.DoesNotThrowAsync(() => residenceRepository.CreateResidenceAsync(residence));
             Assert.DoesNotThrowAsync(() => residenceService.CreateResidenceAsync(residence));
         }
 
@@ -86,7 +89,7 @@ namespace UnitTests
                 PricePerNight = 1,
                 Rules = rules,
                 Facilities = facilities,
-                ImageURL = "Test",
+                ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
@@ -122,7 +125,7 @@ namespace UnitTests
                 PricePerNight = 1,
                 Rules = rules,
                 Facilities = facilities,
-                ImageURL = "Test",
+                ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
@@ -158,7 +161,7 @@ namespace UnitTests
                 PricePerNight = 1,
                 Rules = rules,
                 Facilities = facilities,
-                ImageURL = "Test",
+                ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
@@ -192,7 +195,7 @@ namespace UnitTests
                 PricePerNight = 1,
                 Rules = rules,
                 Facilities = facilities,
-                ImageURL = "Test",
+                ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
@@ -226,7 +229,7 @@ namespace UnitTests
                 PricePerNight = 1,
                 Rules = rules,
                 Facilities = facilities,
-                ImageURL = "Test",
+                ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
@@ -260,7 +263,7 @@ namespace UnitTests
                 PricePerNight = ppn,
                 Rules = rules,
                 Facilities = facilities,
-                ImageURL = "Test",
+                ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
@@ -291,7 +294,7 @@ namespace UnitTests
                 PricePerNight = 1,
                 Rules = rules,
                 Facilities = facilities,
-                ImageURL = "Test",
+                ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
@@ -339,7 +342,7 @@ namespace UnitTests
                 PricePerNight = 1,
                 Rules = rs,
                 Facilities = fs,
-                ImageURL = "Test",
+                ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
@@ -372,7 +375,7 @@ namespace UnitTests
                 PricePerNight = 1,
                 Rules = rules,
                 Facilities = facilities,
-                ImageURL = "Test",
+                ImageUrl = "Test",
                 AvailableFrom = from,
                 AvailableTo = to
             };
