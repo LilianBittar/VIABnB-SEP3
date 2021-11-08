@@ -1,6 +1,5 @@
 ﻿@page "/registerresidence"
 @using SEP3BlazorT1Client.Models
-<CascadingValue Value=@ViewModel name="ViewModel">
     <div class="mat-layout-grid mat-layout-grid-align-left" style="width: 100%;">
         <div class="mat-layout-grid-inner">
             <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
@@ -9,40 +8,47 @@
                     <div class="mat-layout-grid-cell">
                         @* LEFT COLUMN *@
                         <h2>Address Information</h2>
-                        <EditForm EditContext=@FormEditContext>
-                            <MatTextField Label="Street name" @bind-Value="@ViewModel.ResidenceToBeAdded.Address.StreetName"/>
-                            <ValidationMessage For="@(() => ViewModel.ResidenceToBeAdded.Address.StreetName)"/>
+                        <EditForm EditContext=@FormEditContextAddress>
+                            <MatTextField Label="Street name" @bind-Value="@_newResidenceAddress.StreetName"/>
+                            <ValidationMessage For="@(() => _newResidenceAddress.StreetName)"/>
 
-                            <MatTextField Label="Street Number" @bind-Value="@ViewModel.ResidenceToBeAdded.Address.StreetNumber"/>
-                            <ValidationMessage For="@(() => ViewModel.ResidenceToBeAdded.Address.StreetNumber)"/>
+                            <MatTextField Label="Street Number" @bind-Value="@_newResidenceAddress.StreetNumber"/>
+                            <ValidationMessage For="@(() => _newResidenceAddress.StreetNumber)"/>
 
-                            <MatTextField Label="House Number" @bind-Value="@ViewModel.ResidenceToBeAdded.Address.HouseNumber"/>
-                            <ValidationMessage For="@(() => ViewModel.ResidenceToBeAdded.Address.HouseNumber)"/>
+                            <MatTextField Label="House Number" @bind-Value="@_newResidenceAddress.HouseNumber"/>
+                            <ValidationMessage For="@(() => _newResidenceAddress.HouseNumber)"/>
 
 
-                            <MatTextField Label="Zipcode" @bind-Value="@ViewModel.ResidenceToBeAdded.Address.ZipCode"/>
-                            <ValidationMessage For="@(() => ViewModel.ResidenceToBeAdded.Address.ZipCode)"/>
+                            <MatTextField Label="Zipcode" @bind-Value="@_newResidenceAddress.ZipCode"/>
+                            <ValidationMessage For="@(() => _newResidenceAddress.ZipCode)"/>
                         </EditForm>
                     </div>
                     <div class="mat-layout-grid-cell">
                         @* MIDDLE COLUMN *@
                         <h2>Residence Info:</h2>
-                        <EditForm EditContext=@FormEditContext>
+                        <EditForm EditContext=@FormEditContextResidence>
                             <MatSelect Label="Residence type" @bind-Value="_residenceType" Style="margin-top:1rem;"/>
-                            <MatTextField Label="Residence Description" @bind-Value="ViewModel.ResidenceToBeAdded.Description" TextArea="@true"/>
-                            <ValidationMessage For="@(() => ViewModel.ResidenceToBeAdded.Description)"/>
-                            <MatTextField Label="Price / night in DKK" @bind-Value="ViewModel.ResidenceToBeAdded.PricePerNight"/>
-                            <ValidationMessage For="@(() => ViewModel.ResidenceToBeAdded.PricePerNight)"/>
+                            <MatTextField Label="Residence Description" @bind-Value="_newResidence.Description" TextArea="@true"/>
+                            <ValidationMessage For="@(() => _newResidence.Description)"/>
+                            <MatTextField Label="Price / night in DKK" @bind-Value="_newResidence.PricePerNight"/>
+                            <ValidationMessage For="@(() => _newResidence.PricePerNight)"/>
                             <MatButton OnClick="@(() => AddNewRule())">Add new Rule</MatButton>
                             <MatButton OnClick="@(() => OpenAddFacilityDialog())">Add Facility</MatButton>
                         </EditForm>
                         <MatDialog @bind-IsOpen="_showFacilityDialog">
                             <MatDialogTitle>Choose an facility</MatDialogTitle>
                             <MatSelect Label="Facility" @bind-Value="_facilityToBeAdded.Name">
-                                @foreach (Facility facility in ViewModel.AllFacilities)
+                               @if(_allFacilities.Any())
+                               {
+                                @foreach (Facility facility in _allFacilities)
                                 {
                                     <MatOptionString Value="@facility.Name">@facility.Name</MatOptionString>
                                 }
+                               }
+                               else 
+                               {
+                                   <MatOptionString>No Factilities available</MatOptionString>
+                               }
                             </MatSelect>
                             <MatDialogActions>
                                 <MatButton OnClick="@(() => _showFacilityDialog = false)">Cancel</MatButton>
@@ -55,32 +61,30 @@
                         <h2>You have added: </h2>
                         <MatListGroup>
                             <MatListGroupSubHeader Style="font-weight: 400">Rules: </MatListGroupSubHeader>
-                            @foreach (Rule rule in ViewModel.ResidenceToBeAdded.Rules)
+                            @foreach (Rule rule in _newResidence.Rules)
                             {
                                 <MatListItem>@rule.Description</MatListItem>
                             }
-                            @if (!ViewModel.ResidenceToBeAdded.Rules.Any())
+                            @if (!_newResidence.Rules.Any())
                             {
                                 <MatListItem>No rules have been added.</MatListItem>
                             }
                         </MatListGroup>
                         <MatListGroup>
                             <MatListGroupSubHeader Style="font-weight: 400">Facilities:</MatListGroupSubHeader>
-                            @foreach (Facility facility in ViewModel.ResidenceToBeAdded.Facilities)
+                            @foreach (Facility facility in _newResidence.Facilities)
                             {
                                 <MatList>@facility.Name</MatList>
                             }
-                            @if (!ViewModel.ResidenceToBeAdded.Facilities.Any())
+                            @if (!_newResidence.Facilities.Any())
                             {
                                 <MatListItem>No Facilities have been added.</MatListItem>
                             }
                         </MatListGroup>
-                        <MatButton OnClick="@(()=>TriggerValidation())" >Register residence</MatButton>
+                        <MatButton OnClick="@TriggerValidation" >Register residence</MatButton>
                     </div>
                 </div>
             </div>
-        
 
         </div>
     </div>
-</CascadingValue>

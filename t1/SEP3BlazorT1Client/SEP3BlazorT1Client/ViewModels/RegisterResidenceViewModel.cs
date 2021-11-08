@@ -15,7 +15,7 @@ namespace SEP3BlazorT1Client.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         private IResidenceService _residenceService;
         private Residence _residenceToBeAdded = new Residence(){ Address = new Address(), Facilities = new List<Facility>(), Rules = new List<Rule>()};
-    private IList<Facility> _allFacilities = new List<Facility>() {new Facility() {Name = "Wifi"}};
+        private IList<Facility> _allFacilities = new List<Facility>() {new Facility() {Name = "Wifi"}};
         private IList<string> _allResidenceTypes; 
         public Residence ResidenceToBeAdded
          {
