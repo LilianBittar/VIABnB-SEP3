@@ -350,10 +350,9 @@ namespace UnitTests
             Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
         }
 
-        [TestCase(null, null)]
-        [TestCase("01.01.2000", "01.01.2000")]
-        [TestCase("01.01.2050", "01.01.2050")]
-        public void CreateResidenceWithInvalidFromAndToDatesTest(DateTime from, DateTime to)
+        [TestCase( 2000, 11, 11)]
+        [TestCase(2050, 11, 11)]
+        public void CreateResidenceWithInvalidFromDateTest(int year, int month, int day)
         {
             Address a = new Address()
             {
@@ -376,8 +375,40 @@ namespace UnitTests
                 Rules = rules,
                 Facilities = facilities,
                 ImageUrl = "Test",
-                AvailableFrom = from,
-                AvailableTo = to
+                AvailableFrom = new DateTime(year, month, day),
+                AvailableTo = DateTime.Now
+            };
+            Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
+            Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
+        }
+        
+        [TestCase( 2000, 11, 11)]
+        [TestCase(2050, 11, 11)]
+        public void CreateResidenceWithInvalidToDateTest(int year, int month, int day)
+        {
+            Address a = new Address()
+            {
+                Id = 1,
+                StreetName = "Test",
+                HouseNumber = "Test",
+                CityName = "Test",
+                StreetNumber = "2A",
+                ZipCode = 1111
+            };
+            Residence r = new Residence()
+            {
+                Id = 2,
+                Address = a,
+                Description = "Test",
+                Type = "Test",
+                AverageRating = 1,
+                IsAvailable = false,
+                PricePerNight = 1,
+                Rules = rules,
+                Facilities = facilities,
+                ImageUrl = "Test",
+                AvailableFrom = DateTime.Now,
+                AvailableTo = new DateTime(year, month, day)
             };
             Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
             Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
