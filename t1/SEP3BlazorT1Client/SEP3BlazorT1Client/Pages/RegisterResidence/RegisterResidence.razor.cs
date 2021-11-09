@@ -20,7 +20,10 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
         // public RegisterResidenceViewModel ViewModel { get; set; }
         [Inject]
         public IResidenceService ResidenceService { get; set; }
-
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+        
+        
 
         public EditContext FormEditContextResidence { get; set; }
         public EditContext FormEditContextAddress { get; set; }
@@ -33,15 +36,17 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
         public string Name { get; set; }
         private bool _showFacilityDialog = false;
         private IList<Facility> _allFacilities = new List<Facility>() {new Facility() {Name = "Wifi"}};
-        private IList<string> _allResidenceTypes = new List<string>(); 
+        private IList<string> _allResidenceTypes = new List<string>() {"House", "Apartment", "Room"};
 
         private Facility _facilityToBeAdded = new Facility();
-        private Address _newResidenceAddress = new Address(); 
+        private Address _newResidenceAddress = new Address();
 
+        private string _registerResidenceErrorMessage = ""; 
         protected override async Task OnInitializedAsync()
         {
 
             // TODO: Fetch residence types on mount
+            // TODO: Fetch all available facilities on mount
             // Subscribing to the ViewModel's PropertyChanged event
             // Everytime a ViewModel property changes, then StateHasChanged gets invoked, 
             // such that View's state reflects ViewModel's state
@@ -100,27 +105,51 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
 
         private async void RegisterNewResidence()
         {
-            TriggerValidation(); 
             var validationContext = new ValidationContext(_newResidenceAddress, null, null);
             var validationResults = new List<ValidationResult>();
             _newResidence.Address = _newResidenceAddress; 
+            TriggerValidation(); 
             bool residenceIsValid = Validator.TryValidateObject(_newResidenceAddress, validationContext, validationResults, true);
-            validationResults.ForEach(r => System.Console.WriteLine($"Error: {r}"));
             if (residenceIsValid)
-                {
-                    await ResidenceService.CreateResidenceAsync(_newResidence);
+            {
+                try{
+                await ResidenceService.CreateResidenceAsync(_newResidence);
+                ResetModels(); 
+
+                NavigationManager.NavigateTo("/buildingsoverview");
+                } catch (Exception e) {
+                    _registerResidenceErrorMessage = e.Message; 
                 }
+            }
             }
 
             private void TriggerValidation()
         {
             FormEditContextResidence.Validate();
             FormEditContextAddress.Validate();
-            System.Console.WriteLine(JsonConvert.SerializeObject(_newResidenceAddress));
-            System.Console.WriteLine("Validation triggered");
-            System.Console.WriteLine(FormEditContextAddress.Validate());
-            System.Console.WriteLine(FormEditContextResidence.Validate());
+            PrintDebugMessages(); 
             StateHasChanged();
+        }
+
+        private void ResetModels()
+        {
+            _newResidenceAddress = new Address(); 
+            _newResidence = new Residence()
+            {
+                Rules = new List<Rule>(),
+                Facilities = new List<Facility>(),
+                AvailableFrom = DateTime.Now,
+                AvailableTo = DateTime.Now,
+                Address = new Address()
+            };
+        }
+        private void PrintDebugMessages()
+        {
+            System.Console.WriteLine($"Residence address: {JsonConvert.SerializeObject(_newResidenceAddress)}");
+            System.Console.WriteLine($"Residence: {JsonConvert.SerializeObject(_newResidence)}");
+            System.Console.WriteLine("Validation triggered");
+            System.Console.WriteLine($"Address is valid: {FormEditContextAddress.Validate()}");
+            System.Console.WriteLine($"Residence is valid: {FormEditContextResidence.Validate()}");
         }
      
     }

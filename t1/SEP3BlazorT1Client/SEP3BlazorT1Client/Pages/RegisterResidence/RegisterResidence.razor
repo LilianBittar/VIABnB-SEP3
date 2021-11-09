@@ -22,6 +22,10 @@
 
                             <MatTextField Label="Zipcode" @bind-Value="@_newResidenceAddress.ZipCode"/>
                             <ValidationMessage For="@(() => _newResidenceAddress.ZipCode)"/>
+                            <MatTextField Label="City" @bind-Value="@_newResidenceAddress.CityName"/>
+                            <ValidationMessage For="@(() => _newResidenceAddress.CityName)"/>
+
+                                
                         </EditForm>
                     </div>
                     <div class="mat-layout-grid-cell">
@@ -30,7 +34,12 @@
                         <EditForm EditContext=@FormEditContextResidence>
                             <DataAnnotationsValidator/>
 
-                            <MatSelect Label="Residence type" @bind-Value="_residenceType" Style="margin-top:1rem;"/>
+                            <MatSelect Label="Residence type" @bind-Value="_newResidence.Type" Style="margin-top:1rem;">
+                                @foreach(var type in _allResidenceTypes)
+                                {
+                                    <MatOptionString Value="@type">@type</MatOptionString>
+                                }
+                            </MatSelect>
                             <ValidationMessage For="@(()=>_newResidence.Type)" />
                             <MatTextField Label="Residence Description" @bind-Value="_newResidence.Description" TextArea="@true"/>
                             <ValidationMessage For="@(() => _newResidence.Description)"/>
@@ -85,7 +94,8 @@
                                 <MatListItem>No Facilities have been added.</MatListItem>
                             }
                         </MatListGroup>
-                        <MatButton OnClick="@TriggerValidation" >Register residence</MatButton>
+                        <MatButton OnClick="@RegisterNewResidence" >Register residence</MatButton>
+                        <p style="color: red;">@_registerResidenceErrorMessage</p>
                     </div>
                 </div>
             </div>
