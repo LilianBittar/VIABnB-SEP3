@@ -32,7 +32,6 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
 
 
 
-        private string _residenceType ="";
         public string Name { get; set; }
         private bool _showFacilityDialog = false;
         private IList<Facility> _allFacilities = new List<Facility>() {new Facility() {Name = "Wifi"}};
@@ -61,8 +60,8 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             {
                 Rules = new List<Rule>(),
                 Facilities = new List<Facility>(),
-                AvailableFrom = DateTime.Now,
-                AvailableTo = DateTime.Now,
+                AvailableFrom = DateTime.MaxValue,
+                AvailableTo = DateTime.MaxValue,
                 Address = new Address()
             };
             FormEditContextResidence = new EditContext(_newResidence);
@@ -103,7 +102,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
 
         }
 
-        private async void RegisterNewResidence()
+        private async Task RegisterNewResidence()
         {
             var validationContext = new ValidationContext(_newResidenceAddress, null, null);
             var validationResults = new List<ValidationResult>();
@@ -117,7 +116,8 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 ResetModels(); 
 
                 NavigationManager.NavigateTo("/buildingsoverview");
-                } catch (Exception e) {
+                } catch (ArgumentException e) {
+                    System.Console.WriteLine($"{this} ArgumentException Caught");
                     _registerResidenceErrorMessage = e.Message; 
                 }
             }
@@ -138,8 +138,8 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             {
                 Rules = new List<Rule>(),
                 Facilities = new List<Facility>(),
-                AvailableFrom = DateTime.Now,
-                AvailableTo = DateTime.Now,
+                AvailableFrom = DateTime.MaxValue,
+                AvailableTo = DateTime.MaxValue,
                 Address = new Address()
             };
         }

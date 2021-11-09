@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using Newtonsoft.Json;
 
+// TODO: Possibly change data type of PricerPerNight to support bigger prices.
 namespace SEP3BlazorT1Client.Models
 {
     public class Residence

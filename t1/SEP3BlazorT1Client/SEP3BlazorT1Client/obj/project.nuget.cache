@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nfpc5zgcb1pReoei5QhUYh4hc4tOyB2/BrXUW9SUezRSO5R+5TgA5qBQB0AldmY+Knx5Or2cb1TIQ+MuvxgXiQ==",
+  "dgSpecHash": "vmAisZzanxHM9bV0oqW2IndCl+g0/6WaEFhY0z2Htz0/HM5IOuR53e3XruFT1AVvX7aGniOLqqR8IOCNNjOIFg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
   "expectedPackageFiles": [
@@ -11,7 +11,7 @@
     "C:\\Users\\Shark\\.nuget\\packages\\bunit\\1.2.49\\bunit.1.2.49.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\bunit.core\\1.2.49\\bunit.core.1.2.49.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\bunit.web\\1.2.49\\bunit.web.1.2.49.nupkg.sha512",
-    "C:\\Users\\Shark\\.nuget\\packages\\catql.graphql.client\\2.1.0\\catql.graphql.client.2.1.0.nupkg.sha512",
+    "C:\\Users\\Shark\\.nuget\\packages\\catql.graphql.client\\2.1.1\\catql.graphql.client.2.1.1.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\graphql.client\\4.0.1\\graphql.client.4.0.1.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\graphql.client.abstractions\\4.0.1\\graphql.client.abstractions.4.0.1.nupkg.sha512",
     "C:\\Users\\Shark\\.nuget\\packages\\graphql.client.abstractions.websocket\\4.0.1\\graphql.client.abstractions.websocket.4.0.1.nupkg.sha512",

@@ -98,7 +98,7 @@
           "lib/net5.0/Bunit.Web.dll": {}
         }
       },
-      "CatQL.GraphQL.Client/2.1.0": {
+      "CatQL.GraphQL.Client/2.1.1": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "13.0.1"
@@ -638,14 +638,14 @@
         "lib/netstandard2.1/Bunit.Web.xml"
       ]
     },
-    "CatQL.GraphQL.Client/2.1.0": {
-      "sha512": "LdyY1JnZaX0MqiMFYFmSNLUzVA/CFEQCu43MZYaYJHvghftgmUrR0ZAvAasLDfSAXbkWKvJTRwDCNM9DcRlxAg==",
+    "CatQL.GraphQL.Client/2.1.1": {
+      "sha512": "/ADwT2I549IyrATUWeP6aIJTDokz8/V/hK1DHyLgJAsyoEEUtT65VVo8CRqs6DE7FSCTM9hB8ZjSLX9nSdFuYQ==",
       "type": "package",
-      "path": "catql.graphql.client/2.1.0",
+      "path": "catql.graphql.client/2.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "catql.graphql.client.2.1.0.nupkg.sha512",
+        "catql.graphql.client.2.1.1.nupkg.sha512",
         "catql.graphql.client.nuspec",
         "lib/net5.0/CatQLClient.dll"
       ]
@@ -1439,7 +1439,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "CatQL.GraphQL.Client >= 2.1.0",
+      "CatQL.GraphQL.Client >= 2.1.1",
       "GraphQL.Client >= 4.0.1",
       "GraphQL.Client.Serializer.Newtonsoft >= 4.0.1",
       "MatBlazor >= 2.8.0",
@@ -1455,11 +1455,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+      "projectUniqueName": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
       "projectName": "SEP3BlazorT1Client",
-      "projectPath": "C:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+      "projectPath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
       "packagesPath": "C:\\Users\\Shark\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\obj\\",
+      "outputPath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1494,7 +1494,7 @@
         "dependencies": {
           "CatQL.GraphQL.Client": {
             "target": "Package",
-            "version": "[2.1.0, )"
+            "version": "[2.1.1, )"
           },
           "GraphQL.Client": {
             "target": "Package",
