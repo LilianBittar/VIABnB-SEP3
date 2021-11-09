@@ -98,7 +98,7 @@
           "lib/net5.0/Bunit.Web.dll": {}
         }
       },
-      "CatQL.GraphQL.Client/2.0.0": {
+      "CatQL.GraphQL.Client/2.1.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "13.0.1"
@@ -638,14 +638,14 @@
         "lib/netstandard2.1/Bunit.Web.xml"
       ]
     },
-    "CatQL.GraphQL.Client/2.0.0": {
-      "sha512": "lV/ovXxodEpy+AgqWgYjQRWna0MHoD0vqnGOiTeiZ2/bmTgJtW7txRKqF6H9WL/ye6X1/6DdyQ8pRK3zYvQnCw==",
+    "CatQL.GraphQL.Client/2.1.0": {
+      "sha512": "LdyY1JnZaX0MqiMFYFmSNLUzVA/CFEQCu43MZYaYJHvghftgmUrR0ZAvAasLDfSAXbkWKvJTRwDCNM9DcRlxAg==",
       "type": "package",
-      "path": "catql.graphql.client/2.0.0",
+      "path": "catql.graphql.client/2.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "catql.graphql.client.2.0.0.nupkg.sha512",
+        "catql.graphql.client.2.1.0.nupkg.sha512",
         "catql.graphql.client.nuspec",
         "lib/net5.0/CatQLClient.dll"
       ]
@@ -1439,7 +1439,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "CatQL.GraphQL.Client >= 2.0.0",
+      "CatQL.GraphQL.Client >= 2.1.0",
       "GraphQL.Client >= 4.0.1",
       "GraphQL.Client.Serializer.Newtonsoft >= 4.0.1",
       "MatBlazor >= 2.8.0",
@@ -1494,7 +1494,7 @@
         "dependencies": {
           "CatQL.GraphQL.Client": {
             "target": "Package",
-            "version": "[2.0.0, )"
+            "version": "[2.1.0, )"
           },
           "GraphQL.Client": {
             "target": "Package",
