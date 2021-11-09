@@ -69,7 +69,7 @@ namespace SEP3T2GraphQL.Repositories
 
         public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Residence");
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Residence/{id}");
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");

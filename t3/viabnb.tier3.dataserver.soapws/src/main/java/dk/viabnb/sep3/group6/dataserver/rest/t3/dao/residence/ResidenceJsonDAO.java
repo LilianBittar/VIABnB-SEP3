@@ -11,6 +11,8 @@ import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -73,8 +75,34 @@ import java.util.List;
     return null;
   }
 
-  @Override public List<Residence> getAllResidenceByHostId(int id)
-  {
+  @Override public List<Residence> getAllResidenceByHostId(int id) {
+    List<Residence> residencesByHost;
+    try {
+
+      // create a reader
+      Reader reader = Files.newBufferedReader(Paths.get("residences.json"));
+
+      // convert JSON array to list of residences
+      residencesByHost = new Gson().fromJson(reader, new TypeToken<List<Residence>>() {
+      }.getType());
+
+      for ( Residence residence: residencesByHost)
+      {
+       //TODO need host check
+      }
+
+
+      // print residences
+      residencesByHost.forEach(System.out::println);
+
+      // close reader
+      reader.close();
+
+      return residencesByHost;
+
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
     return null;
   }
 
