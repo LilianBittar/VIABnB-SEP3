@@ -43,4 +43,16 @@ class ResidenceJsonDAOTest
   {
     assertDoesNotThrow(() -> residenceDAO.createResidence(residence));
   }
+
+  @Test void getAllResidenceByHostIdSunnyDoesNotThrowWithOneResident()
+  {
+    //arrange
+    residenceDAO.createResidence(residence);
+
+    //act and assert
+    assertDoesNotThrow(()->residenceDAO.getAllResidenceByHostId(1));
+  }
+
+
+
 }

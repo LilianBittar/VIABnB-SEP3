@@ -21,7 +21,7 @@ namespace SEP3T2GraphQL.Services
 
         public async Task<Residence> GetResidenceByIdAsync(int id)
         {
-            //TODO implement logic
+            //TODO no logic needed?
             try
             {
                 return await _residenceRepository.GetResidenceByIdAsync(id);
@@ -53,9 +53,9 @@ namespace SEP3T2GraphQL.Services
             throw new ArgumentException("Invalid residence!!");
         }
 
-        public  async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
+        public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
         {
-            //TODO implement logic
+            //TODO no logic needed?
             try
             {
                 return await _residenceRepository.GetAllRegisteredResidencesByHostIdAsync(id);
