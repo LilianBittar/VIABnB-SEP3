@@ -7,10 +7,12 @@ namespace SEP3T2GraphQL.Graphql
 {
     public class Mutation
     {
-        private IResidenceService _residenceService; 
-        public Mutation(IResidenceService residenceService)
+        private IResidenceService _residenceService;
+        private IGuestRegistrationRequestService _guestRegistrationRequestService;
+        public Mutation(IResidenceService residenceService, IGuestRegistrationRequestService guestRegistrationRequestService)
         {
             _residenceService = residenceService;
+            _guestRegistrationRequestService = guestRegistrationRequestService; 
         }
         public async Task<Residence> CreateResidence(Residence residence)
         {
@@ -19,7 +21,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<GuestRegistrationRequest> CreateGuestRegistrationRequestAsync(GuestRegistrationRequest guestRegistrationRequest)
         {
-
+            return await _guestRegistrationRequestService.CreateGuestRegistrationRequest(guestRegistrationRequest); 
         }
     }
 }
