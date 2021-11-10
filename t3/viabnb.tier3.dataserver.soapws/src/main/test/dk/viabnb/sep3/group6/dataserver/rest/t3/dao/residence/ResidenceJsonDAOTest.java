@@ -24,7 +24,7 @@ class ResidenceJsonDAOTest
 
   @BeforeEach void setUp()
   {
-    //TODO the possibility of creating validation in t3 to increase the test scope?
+    //TODO assert return and null + some stuff
     residenceDAO = new ResidenceJsonDAO();
 
     address = new Address(1, "streetNameTest", "h1", "cityTest", "s1", 1111);
