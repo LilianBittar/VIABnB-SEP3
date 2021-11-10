@@ -25,7 +25,7 @@ import java.util.List;
   }
 
 
-  @GetMapping("/Residence/{id}")
+  @GetMapping("/residence/{id}")
   public ResponseEntity<List<Residence>> getAllResidencesByHostId(@PathVariable int id)
   {
     List<Residence> residences;
@@ -38,7 +38,7 @@ import java.util.List;
   }
 
 
-  @PostMapping("/Residence")
+  @PostMapping("/residence")
   public ResponseEntity<Residence> createResidence(@RequestBody Residence residence)
   {
     Residence newResidence = residenceDAO.createResidence(residence);
