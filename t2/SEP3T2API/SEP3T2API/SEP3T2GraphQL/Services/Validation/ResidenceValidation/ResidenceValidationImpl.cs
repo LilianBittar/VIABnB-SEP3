@@ -7,6 +7,7 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
 {
     public class ResidenceValidationImpl : IResidenceValidation
     {
+        //TODO move thow and test here
         public bool IsValidAddress(Address address)
         {
             return address != null && 

@@ -9,6 +9,8 @@ namespace UnitTests
 {
     public class GetResidencesByHostTests
     {
+        // Todo Do over, take repository out of the test + add [Test] + boundary test (+1, 0, -1)
+
         private IResidenceService residenceService;
         private IResidenceRepository residenceRepository;
         private IResidenceValidation _residenceValidation;

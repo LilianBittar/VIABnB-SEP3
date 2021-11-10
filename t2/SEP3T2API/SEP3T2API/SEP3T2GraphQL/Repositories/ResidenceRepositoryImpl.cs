@@ -11,6 +11,7 @@ namespace SEP3T2GraphQL.Repositories
 {
     public class ResidenceRepositoryImpl: IResidenceRepository
     {
+        // Todo id must be incremented based on all residences/ or just leave it to the database serial attribute
         private string uri = "http://localhost:8080";
         private readonly HttpClient client;
         private IResidenceValidation _residenceValidation;
@@ -23,7 +24,7 @@ namespace SEP3T2GraphQL.Repositories
 
         public async Task<Residence> GetResidenceByIdAsync(int id)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/Residence/{id}");
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/residence/{id}");
 
             if (!responseMessage.IsSuccessStatusCode)
             {
@@ -42,34 +43,29 @@ namespace SEP3T2GraphQL.Repositories
         public async Task<Residence> CreateResidenceAsync(Residence residence)
         {
             System.Console.WriteLine($"{this} was passed args: {JsonSerializer.Serialize(residence)}");
-            if (_residenceValidation.IsValidResidence(residence))
+            string newResidence = JsonSerializer.Serialize(residence, new JsonSerializerOptions()
             {
-                string newResidence = JsonSerializer.Serialize(residence, new JsonSerializerOptions()
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                });
-                Console.WriteLine(newResidence);
-                StringContent content = new StringContent(newResidence, Encoding.UTF8, "application/json");
-                HttpResponseMessage responseMessage = await client.PostAsync(uri + "/residence", content);
-                if (!responseMessage.IsSuccessStatusCode)
-                {
-                    throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
-                }
-
-                Residence r = JsonSerializer.Deserialize<Residence>(await responseMessage.Content.ReadAsStringAsync(), new JsonSerializerOptions()
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                });
-                Console.WriteLine(r.ToString()); 
-                return r;
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            Console.WriteLine(newResidence);
+            StringContent content = new StringContent(newResidence, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/residence", content);
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
             }
 
-            throw new ArgumentException("Invalid Residence");
+            Residence r = JsonSerializer.Deserialize<Residence>(await responseMessage.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            Console.WriteLine(r.ToString()); 
+            return r;
         }
 
         public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Residence/{id}");
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residence/{id}");
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");

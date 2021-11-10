@@ -11,6 +11,7 @@ namespace UnitTests
     [TestFixture]
     public class CreateResidenceTest
     {
+        // Todo Do over, take repository out of the test
         private IResidenceService residenceService;
         private IResidenceRepository residenceRepository;
         private IResidenceValidation _residenceValidation;
@@ -71,7 +72,7 @@ namespace UnitTests
         [Test]
         public void CreateResidenceSunnyScenarioTest()
         {
-            Assert.DoesNotThrowAsync(() => residenceRepository.CreateResidenceAsync(residence));
+           // Assert.DoesNotThrowAsync(() => residenceRepository.CreateResidenceAsync(residence));
             Assert.DoesNotThrowAsync(() => residenceService.CreateResidenceAsync(residence));
         }
 

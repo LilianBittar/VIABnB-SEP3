@@ -21,7 +21,7 @@ namespace SEP3T2GraphQL.Services
 
         public async Task<Residence> GetResidenceByIdAsync(int id)
         {
-            //TODO no logic needed?
+            //TODO validation on residence id and null goes here
             try
             {
                 return await _residenceRepository.GetResidenceByIdAsync(id);
@@ -39,8 +39,8 @@ namespace SEP3T2GraphQL.Services
             {
                 try
                 {
-                    System.Console.WriteLine($"{this} creating new residence...");
-                    System.Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(residence)}");
+                    Console.WriteLine($"{this} creating new residence...");
+                    Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(residence)}");
                     return  await _residenceRepository.CreateResidenceAsync(residence);
                 }
                 catch (Exception e)
@@ -55,7 +55,7 @@ namespace SEP3T2GraphQL.Services
 
         public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
         {
-            //TODO no logic needed?
+            //TODO validation on host id goes here 
             try
             {
                 return await _residenceRepository.GetAllRegisteredResidencesByHostIdAsync(id);
