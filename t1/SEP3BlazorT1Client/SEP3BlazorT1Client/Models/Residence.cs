@@ -22,13 +22,13 @@ namespace SEP3BlazorT1Client.Models
         [DisplayFormat(ConvertEmptyStringToNull =false)]
         public string Type { get; set; }
         [JsonProperty("averageRating")]
-        public decimal AverageRating { get; set; }
+        public double AverageRating { get; set; }
         [JsonProperty("isAvailable")]
         public bool IsAvailable { get; set; }
         [Required]
         [JsonProperty("pricePerNight")]
         [Range(0, int.MaxValue)]
-        public decimal PricePerNight { get; set; }
+        public double PricePerNight { get; set; }
         [JsonProperty("imageUrl")]
         public string ImageUrl { get; set; }
         [Required]
@@ -38,9 +38,9 @@ namespace SEP3BlazorT1Client.Models
         [JsonProperty("facilities")]
         public IList<Facility> Facilities { get; set; } = new List<Facility>();
         [JsonProperty("availableFrom")]
-        public DateTime AvailableFrom { get; set; }
+        public DateTime? AvailableFrom { get; set; }
         [JsonProperty("availableTo")]
-        public DateTime AvailableTo { get; set; }
+        public DateTime? AvailableTo { get; set; }
         
         
         

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace SEP3T2GraphQL.Models
+namespace SEP3BlazorT1Client.Models
 {
     public class Host
     {

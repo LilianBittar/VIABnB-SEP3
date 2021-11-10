@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace SEP3BlazorT1Client.Models
 {
@@ -7,7 +8,7 @@ namespace SEP3BlazorT1Client.Models
         [JsonProperty("id")]
         public int Id { get; set; }
         
-        
+        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
     }
