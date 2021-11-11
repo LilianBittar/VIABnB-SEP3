@@ -7,10 +7,10 @@ namespace SEP3T2GraphQL.Services
 {
     public interface IGuestRegistrationRequestService
     {
-        Task<GuestRegistrationRequest> CreateGuestRegistrationRequest(GuestRegistrationRequest guestRegistrationRequest); 
-        Task<IEnumerable<GuestRegistrationRequest>> GetAllGuestRegistrationRequests();
-        Task<GuestRegistrationRequest> ApproveGusetRegistrationRequset(int requestId); 
-        Task<GuestRegistrationRequest> RejectGusetRegistrationRequset(int requestId); 
+        Task<GuestRegistrationRequest> CreateGuestRegistrationRequestAsync(GuestRegistrationRequest guestRegistrationRequest); 
+        Task<IEnumerable<GuestRegistrationRequest>> GetAllGuestRegistrationRequestsAsync();
+        Task<GuestRegistrationRequest> ApproveGusetRegistrationRequsetAsync(int requestId); 
+        Task<GuestRegistrationRequest> RejectGusetRegistrationRequsetAsync(int requestId); 
 
     }
 }
