@@ -21,7 +21,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<GuestRegistrationRequest> CreateGuestRegistrationRequestAsync(GuestRegistrationRequest guestRegistrationRequest)
         {
-            return await _guestRegistrationRequestService.CreateGuestRegistrationRequest(guestRegistrationRequest); 
+            return await _guestRegistrationRequestService.CreateGuestRegistrationRequestAsync(guestRegistrationRequest); 
         }
     }
 }

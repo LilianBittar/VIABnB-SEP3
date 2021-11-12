@@ -15,7 +15,7 @@ namespace SEP3T2GraphQL.Services.Impl
         {
             _guestRegistrationRequestRepository = guestRegistrationRequestRepository; 
         }
-        public Task<GuestRegistrationRequest> ApproveGusetRegistrationRequsetAsync(int requestId)
+        public Task<GuestRegistrationRequest> ApproveGuestRegistrationRequestAsync(int requestId)
         {
             throw new System.NotImplementedException();
         }
@@ -31,7 +31,7 @@ namespace SEP3T2GraphQL.Services.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<GuestRegistrationRequest> RejectGusetRegistrationRequsetAsync(int requestId)
+        public Task<GuestRegistrationRequest> RejectGuestRegistrationRequestAsync(int requestId)
         {
             throw new System.NotImplementedException();
         }

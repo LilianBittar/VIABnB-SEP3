@@ -10,6 +10,12 @@ namespace SEP3T2GraphQL.Models
         public int StudentNumber { get; set; }
         [Required]
         public string StudentIdImage { get; set; }
-        
+        [Required]
+        public RequestStatus Status { get; set; } = RequestStatus.NotAnswered ;
+
+        public enum RequestStatus
+        {
+            Approved, NotApproved, NotAnswered
+        }
     }
 }
