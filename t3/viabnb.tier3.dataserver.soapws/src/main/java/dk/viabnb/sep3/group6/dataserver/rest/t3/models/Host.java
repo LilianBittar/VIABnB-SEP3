@@ -12,10 +12,11 @@ public class Host
   private String password;
   private List<HostReview> hostReviews;
   private String profileImageUrl;
+  private boolean isApprovedHost;
 
   public Host(int id, String firstName, String lastName, String phoneNumber,
       String email, String password, List<HostReview> hostReviews,
-      String profileImageUrl)
+      String profileImageUrl, boolean isApprovedHost)
   {
     this.id = id;
     this.firstName = firstName;
@@ -25,6 +26,7 @@ public class Host
     this.password = password;
     this.hostReviews = hostReviews;
     this.profileImageUrl = profileImageUrl;
+    this.isApprovedHost = isApprovedHost;
   }
 
   public int getId()
