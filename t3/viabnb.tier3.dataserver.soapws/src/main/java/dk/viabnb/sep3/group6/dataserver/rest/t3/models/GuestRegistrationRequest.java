@@ -56,8 +56,4 @@ public class GuestRegistrationRequest
     this.status = status;
   }
 
-  public enum RequestStatus
-  {
-    Approved, NotApproved, NotAnswered
-  }
 }
