@@ -14,4 +14,9 @@
   <ItemGroup>
     <Folder Include="Components" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Pages\AdminView\AdministrateUsers.cs">
+      <DependentUpon>Administration.razor</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
