@@ -1,0 +1,73 @@
+﻿
+
+.sign-up-container {
+    display: flex;
+    background-color: #EBECF5;
+}
+.sign-up-container .left-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 100vh;
+    background-color: #2B2D42;
+}
+.sign-up-container .left-section img {
+    height: 50%;
+    width: 50%;
+}
+.sign-up-container .right-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 100vh;
+}
+.sign-up-container .right-section .form-group {
+    display: flex;
+    flex-direction: column;
+}
+.sign-up-container .right-section .form-group input {
+    border-radius: 5px;
+    border: none;
+    width: 20rem;
+    height: 2.5rem;
+    padding-left: 1rem;
+    background-color: #2B2D42;
+    color: white;
+}
+.sign-up-container .right-section .form-group input::placeholder {
+    color: white;
+}
+.sign-up-container .right-section .form-group input:last-of-type {
+    margin-bottom: 1rem;
+}
+.sign-up-container .right-section button {
+    background-color: #2B2D42;
+    width: 20rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 0.5rem;
+}
+.sign-up-container .right-section button:hover {
+    opacity: 0.7;
+}
+.sign-up-container .right-section p.p-go-to-login span {
+    cursor: pointer;
+    color: #292D85;
+    transition: all 0.2s ease-in-out;
+}
+.sign-up-container .right-section p.p-go-to-login span:hover {
+    font-weight: bold;
+}
+.sign-up-container .error-label {
+    color: red;
+}
+
+input::placeholder {
+    color: gray;
+}

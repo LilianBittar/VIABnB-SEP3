@@ -7,15 +7,16 @@ namespace SEP3BlazorT1Client.Models
     {
         [Required]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter your firstname")]
         public string FirstName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter your lastname")]
         public string LastName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter your phone number")]
         public string PhoneNumber { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter your E-mail address")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter your password")]
         public string Password { get; set; }
         public IList<HostReview> HostReviews { get; set; } = new List<HostReview>();
         public string ProfileImageUrl { get; set; }
