@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using SEP3BlazorT1Client.Models;
+using SEP3T2GraphQL.Models;
 
-namespace SEP3BlazorT1Client.Data
+namespace SEP3T2GraphQL.Services
 {
     public interface IHostService
     {
