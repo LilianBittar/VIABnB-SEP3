@@ -6,14 +6,16 @@ public class HostRegistrationRequest
   private String personalImage;
   private String cprNumber;
   private RequestStatus status = RequestStatus.NotAnswered;
+  private Host host;
 
   public HostRegistrationRequest(int id, String personalImage, String cprNumber,
-      RequestStatus status)
+      RequestStatus status, Host host)
   {
     this.id = id;
     this.personalImage = personalImage;
     this.cprNumber = cprNumber;
     this.status = status;
+    this.host = host;
   }
 
   public int getId()
@@ -54,5 +56,13 @@ public class HostRegistrationRequest
   public void setStatus(RequestStatus status)
   {
     this.status = status;
+  }
+
+  public Host getHost() {
+    return host;
+  }
+
+  public void setHost(Host host) {
+    this.host = host;
   }
 }
