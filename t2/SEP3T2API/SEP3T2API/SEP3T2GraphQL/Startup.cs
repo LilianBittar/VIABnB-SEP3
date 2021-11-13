@@ -22,6 +22,9 @@ using SEP3T2GraphQL.Graphql.Schema;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Repositories.Impl;
 using SEP3T2GraphQL.Services;
+using SEP3T2GraphQL.Services.Impl;
+using SEP3T2GraphQL.Services.Validation.HostValidation;
+using SEP3T2GraphQL.Services.Validation.HostValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
 
 namespace SEP3T2GraphQL
@@ -45,6 +48,10 @@ namespace SEP3T2GraphQL
             services.AddScoped<IResidenceRepository, ResidenceRepositoryImpl>();
             services.AddScoped<IResidenceService, ResidenceServiceImpl>();
             services.AddScoped<IResidenceValidation, ResidenceValidationImpl>();
+            services.AddScoped<IHostRepository, HostRepositoryImpl>();
+            services.AddScoped<IHostService, HostServiceImpl>();
+            services.AddScoped<IHostValidation, HostValidationImpl>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
