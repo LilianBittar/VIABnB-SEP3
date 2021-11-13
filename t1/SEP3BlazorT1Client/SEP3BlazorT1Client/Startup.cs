@@ -35,6 +35,7 @@ namespace SEP3BlazorT1Client
             services.AddMatBlazor();
             services.AddScoped<MatDialogService>();
             services.AddScoped<IResidenceService, GraphQlResidenceService>();
+            services.AddScoped<IHostService, GraphQlHostService>();
             services.AddScoped<RegisterResidenceViewModel>();
         }
 
