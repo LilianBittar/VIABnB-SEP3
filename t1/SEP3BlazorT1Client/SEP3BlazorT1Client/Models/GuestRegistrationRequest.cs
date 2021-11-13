@@ -9,6 +9,8 @@ namespace SEP3BlazorT1Client.Models
         [Required]
         public int StudentNumber { get; set; }
         [Required]
+        public Host Host { get; set; }
+        [Required]
         public string StudentIdImage { get; set; }
         [Required]
         public RequestStatus Status { get; set; } = RequestStatus.NotAnswered ;
