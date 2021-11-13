@@ -8,8 +8,8 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation
         bool IsValidEmail(string email);
         bool IsValidFirstname(string firstname);
         bool IsValidLastname(string lastname);
-        bool IsValidPassword(string password);
-        bool IsValidPhoneNumber(string phenumber);
+        bool IsValidPassword(string passWord);
+        bool IsValidPhoneNumber(string phoneNumber);
         bool IsValidHost(Host host);
         
     }
