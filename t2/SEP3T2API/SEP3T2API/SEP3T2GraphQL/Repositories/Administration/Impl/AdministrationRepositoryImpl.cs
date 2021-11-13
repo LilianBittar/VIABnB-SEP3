@@ -67,6 +67,7 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
             return request;
+            
         }
 
         public async Task IsValidHost(int requestId, RequestStatus status)

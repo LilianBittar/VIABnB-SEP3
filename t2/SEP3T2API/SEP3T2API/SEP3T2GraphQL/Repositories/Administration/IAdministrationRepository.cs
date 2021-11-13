@@ -10,5 +10,6 @@ namespace SEP3T2GraphQL.Repositories.Administration
         Task<IList<HostRegistrationRequest>> GetHostRegistrationRequestsByHostId(int hostId);
         Task<HostRegistrationRequest> GetHostRegistrationRequestsById(int requestId);
         Task IsValidHost(int requestId, RequestStatus status);
+        
     }
 }
