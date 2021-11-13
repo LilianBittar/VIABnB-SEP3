@@ -4,5 +4,11 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.CreateResidenceTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GetResidencesByHostTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestRegistrationRequestServiceTests.CreateGuestRegistrationRequestTest.CreateRequest_RequestIsNull_ThrowsArgumentExceptions&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestRegistrationRequestServiceTests.CreateGuestRegistrationRequestTest.CreateRequest_HostNotApproved_ThrowsArgumentException&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestRegistrationRequestServiceTests.CreateGuestRegistrationRequestTest.CreateRequest_StudentIdImageIsNull_ThrowsArgumentExceptions&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestRegistrationRequestServiceTests.CreateGuestRegistrationRequestTest.CreateRequest_RequestIsValid_DoesNotThrow&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestRegistrationRequestServiceTests.CreateGuestRegistrationRequestTest.CreateRequest_StudentNumberIsZeroOrLess_ThrowsArgumentException&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestRegistrationRequestServiceTests.CreateGuestRegistrationRequestTest.CreateRequest_StudentNumberLengthIsNotSixCharactersAsString_ThrowsArgumentException&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -56,7 +56,7 @@ namespace SEP3T2GraphQL.Services.Impl
                 throw new ArgumentException("Request cannot be null");
             }
 
-            if (guestRegistrationRequest.StudentNumber < 0 || guestRegistrationRequest.ToString().Length < 6)
+            if (guestRegistrationRequest.StudentNumber <= 0 || guestRegistrationRequest.ToString().Length != 6  )
             {
                 throw new ArgumentException("Student Number is invalid");
             }

@@ -307,3 +307,4 @@ C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2Gr
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\scopedcss\bundle\SEP3T2GraphQL.styles.css
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.genruntimeconfig.cache
+C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.CopyComplete
