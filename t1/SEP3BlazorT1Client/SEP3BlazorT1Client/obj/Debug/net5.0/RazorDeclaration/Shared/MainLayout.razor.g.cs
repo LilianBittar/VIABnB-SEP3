@@ -97,7 +97,7 @@ using MatBlazor;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 75 "D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Shared\MainLayout.razor"
+#line 78 "D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Shared\MainLayout.razor"
  
     private bool _opened = false;
 

@@ -1,5 +1,75 @@
 @import '';
 
+/* _content/SEP3BlazorT1Client/Pages/RegisterHost/RegisterHost.razor.rz.scp.css */
+
+
+.sign-up-container[b-rrcjnl38of] {
+    display: flex;
+    background-color: #EBECF5;
+}
+.sign-up-container .left-section[b-rrcjnl38of] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 100vh;
+    background-color: #2B2D42;
+}
+.sign-up-container .left-section img[b-rrcjnl38of] {
+    height: 50%;
+    width: 50%;
+}
+.sign-up-container .right-section[b-rrcjnl38of] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 100vh;
+}
+.sign-up-container .right-section .form-group[b-rrcjnl38of] {
+    display: flex;
+    flex-direction: column;
+}
+.sign-up-container .right-section .form-group input[b-rrcjnl38of] {
+    border-radius: 5px;
+    border: none;
+    width: 20rem;
+    height: 2.5rem;
+    padding-left: 1rem;
+    background-color: #2B2D42;
+    color: white;
+}
+.sign-up-container .right-section .form-group input[b-rrcjnl38of]::placeholder {
+    color: white;
+}
+.sign-up-container .right-section .form-group input:last-of-type[b-rrcjnl38of] {
+    margin-bottom: 1rem;
+}
+.sign-up-container .right-section button[b-rrcjnl38of] {
+    background-color: #2B2D42;
+    width: 20rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 0.5rem;
+}
+.sign-up-container .right-section button:hover[b-rrcjnl38of] {
+    opacity: 0.7;
+}
+.sign-up-container .right-section p.p-go-to-login span[b-rrcjnl38of] {
+    cursor: pointer;
+    color: #292D85;
+    transition: all 0.2s ease-in-out;
+}
+.sign-up-container .right-section p.p-go-to-login span:hover[b-rrcjnl38of] {
+    font-weight: bold;
+}
+.sign-up-container .error-label[b-rrcjnl38of] {
+    color: red;
+}
 /* _content/SEP3BlazorT1Client/Pages/RegisterResidence/RegisterResidence.razor.rz.scp.css */
 
 
