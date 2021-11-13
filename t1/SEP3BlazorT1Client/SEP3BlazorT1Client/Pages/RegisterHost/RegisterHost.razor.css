@@ -67,3 +67,7 @@
 .sign-up-container .error-label {
     color: red;
 }
+
+input::placeholder {
+    color: gray;
+}
