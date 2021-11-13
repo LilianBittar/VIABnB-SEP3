@@ -20,6 +20,7 @@ using HotChocolate.Types;
 using SEP3T2GraphQL.Graphql;
 using SEP3T2GraphQL.Graphql.Schema;
 using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Repositories.Impl;
 using SEP3T2GraphQL.Services;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
 
