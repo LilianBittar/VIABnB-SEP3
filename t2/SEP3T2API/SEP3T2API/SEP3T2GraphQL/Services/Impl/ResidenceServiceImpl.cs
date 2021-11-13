@@ -21,16 +21,19 @@ namespace SEP3T2GraphQL.Services
 
         public async Task<Residence> GetResidenceByIdAsync(int id)
         {
-            //TODO validation on residence id and null goes here
-            try
+            if (id is > 0 and < int.MaxValue && id !=null)
             {
-                return await _residenceRepository.GetResidenceByIdAsync(id);
+                try
+                {
+                    return await _residenceRepository.GetResidenceByIdAsync(id);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            throw new Exception("ID must be bigger than 0");
         }
 
         public async Task<Residence> CreateResidenceAsync(Residence residence)
@@ -41,7 +44,7 @@ namespace SEP3T2GraphQL.Services
                 {
                     Console.WriteLine($"{this} creating new residence...");
                     Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(residence)}");
-                    return  await _residenceRepository.CreateResidenceAsync(residence);
+                    return await _residenceRepository.CreateResidenceAsync(residence);
                 }
                 catch (Exception e)
                 {
@@ -49,24 +52,24 @@ namespace SEP3T2GraphQL.Services
                     throw;
                 }
             }
-
-            throw new ArgumentException("Invalid residence!!");
+            throw new ArgumentException("Invalid residence");
         }
 
         public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
         {
-            //TODO validation on host id goes here 
-            try
+            if (id is > 0 and < int.MaxValue  && id !=null)
             {
-                return await _residenceRepository.GetAllRegisteredResidencesByHostIdAsync(id);
+                try
+                {
+                    return await _residenceRepository.GetAllRegisteredResidencesByHostIdAsync(id);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            throw new Exception("ID must be bigger than 0");
         }
-
-    
     }
 }
