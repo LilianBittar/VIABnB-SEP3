@@ -5,7 +5,6 @@ namespace SEP3BlazorT1Client.Data
 {
     public interface IHostService
     {
-        
         Task<Host> RegisterHostAsync(Host host);
     }
 }

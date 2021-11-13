@@ -125,32 +125,38 @@ using SEP3BlazorT1Client.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 51 "D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\RegisterHost\RegisterHost.razor"
+#line 63 "D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\RegisterHost\RegisterHost.razor"
        
     private string _errorText;
-    private string _passwordConfirmation; 
+    private string _passwordConfirmation;
     private Host _newHost = new Host();
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
-    
+
     private async void CreateHost()
     {
-
+        //clear error messages
         validationResults.Clear();
+        // the validator validates in hte context of a host object
         ValidationContext validationContext = new ValidationContext(_newHost);
-        bool userIsValid = Validator.TryValidateObject(_newHost, validationContext, validationResults, true);
+        
+        //validates all host properties in context of host model
+        bool hostIsValid = Validator.TryValidateObject(_newHost, validationContext, validationResults, true);
+       
+        
         foreach (var validationResult in validationResults)
         {
     //Debugging
             Console.WriteLine(validationResult);
         }
 
+        //checks if passwords match
         if (!PasswordConfirmationMatches())
         {
             _errorText = "Passwords does not match";
-            return; 
+            return;
         }
-        
-        if (userIsValid)
+
+        if (hostIsValid)
         {
             try
             {
@@ -164,15 +170,20 @@ using SEP3BlazorT1Client.Models;
                 return;
             }
     //User is logged on upon successful account creation
-         //   await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_newUser.Username, _newUser.Password);
-           // NavigationManager.NavigateTo("/");
+    //   await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_newUser.Username, _newUser.Password);
+            NavigationManager.NavigateTo("/");
         }
     }
 
     private bool PasswordConfirmationMatches()
     {
+        if (_passwordConfirmation==null)
+        {
+            _errorText = "Please confirm password";
+        }
         return _passwordConfirmation == _newHost.Password;
     }
+
 
 #line default
 #line hidden

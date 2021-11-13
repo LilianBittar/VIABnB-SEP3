@@ -106,6 +106,18 @@ using MatBlazor;
         _opened = !_opened;
     }
     
+    
+    public async Task LogOut()
+    {
+        /*try
+        {
+            ((CustomAuthenticationStateProvider) authenticationStateProvider).Logout();
+            navigationManager.NavigateTo("/login");
+        }
+        catch (Exception e)
+        {
+        }*/
+    }
 
 #line default
 #line hidden

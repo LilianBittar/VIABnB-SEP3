@@ -8,39 +8,51 @@
 <h3>RegisterUser</h3>
 
 @* <AuthorizeView> *@
-    @* <NotAuthorized> *@
-        <div class="sign-up-container">
-            <div class="left-section">
-<img src="images/Asset 18.svg" alt="Greeting illustration">
-            </div>
+@* <NotAuthorized> *@
+<div class="sign-up-container">
+    <div class="left-section">
+        <img src="https://i.imgur.com/KWl6pqT.jpg" alt="Greeting illustration">
+    </div>
 
-            <div class="right-section">
-                <h2>Create an account</h2>
-                <div class="form-group">
-                    <label>E-mail*</label>
-                    <input type="text" placeholder="Username" @bind-value="_newHost.Email">
-                </div>
-
-                <div class="form-group">
-                    <label>Password*</label>
-                    <input type="password" placeholder="Password" @bind-value="_newHost.Password">
-                </div>  <div class="form-group">
-                    <label>Confirm Password*</label>
-                    <input type="password" placeholder="Confirm password" @bind-value="_passwordConfirmation">
-                </div>
-
-                @foreach (var errorMessage in validationResults)
-                {
-                    <p class="error-label">@errorMessage</p>
-                }
-                <p class="error-label">@_errorText</p>
-                <button @onclick="CreateHost">Create</button>
-                <p class="p-go-to-login">Already have an account? <span @onclick='() => NavigationManager.NavigateTo("/Login")'>Go to login</span></p>
-            </div>
+    <div class="right-section">
+        <h2>Create an account</h2>
+        <div class="form-group">
+            <label>Firstname*</label>
+            <input type="text" placeholder="Firstname" @bind-value="_newHost.FirstName">
         </div>
-    @* </NotAuthorized> *@
+        <div class="form-group">
+            <label>Lastname*</label>
+            <input type="text" placeholder="Lastname" @bind-value="_newHost.LastName">
+        </div>
+        <div class="form-group">
+            <label>E-mail*</label>
+            <input type="text" placeholder="E-mail" @bind-value="_newHost.Email">
+        </div>
+        <div class="form-group">
+            <label>Phonenumber*</label>
+            <input type="text" placeholder="Phonenumber" @bind-value="_newHost.PhoneNumber">
+        </div>
+        <div class="form-group">
+            <label>Password*</label>
+            <input type="password" placeholder="Password" @bind-value="_newHost.Password">
+        </div>
+        <div class="form-group">
+            <label>Confirm Password*</label>
+            <input type="password" placeholder="Confirm password" @bind-value="_passwordConfirmation">
+        </div>
 
-    @*<Authorized>
+        @foreach (var errorMessage in validationResults)
+        {
+            <p class="error-label">@errorMessage</p>
+        }
+        <p class="error-label">@_errorText</p>
+        <button @onclick="CreateHost">Create</button>
+        <p class="p-go-to-login">Already have an account? <span @onclick='() => NavigationManager.NavigateTo("/Login")'>Go to login</span></p>
+    </div>
+</div>
+@* </NotAuthorized> *@
+
+@*<Authorized>
         <p>Already logged in, redirecting...</p>
     </Authorized>
 </AuthorizeView>*@
@@ -50,29 +62,29 @@
 
 @code {
     private string _errorText;
-    private string _passwordConfirmation; 
+    private string _passwordConfirmation;
     private Host _newHost = new Host();
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
-    
+
     private async void CreateHost()
     {
-
+        //clear error messages
         validationResults.Clear();
+        // the validator validates in hte context of a host object
         ValidationContext validationContext = new ValidationContext(_newHost);
-        bool userIsValid = Validator.TryValidateObject(_newHost, validationContext, validationResults, true);
-        foreach (var validationResult in validationResults)
-        {
-    //Debugging
-            Console.WriteLine(validationResult);
-        }
+        
+        //validates all host properties in context of host model
+        bool hostIsValid = Validator.TryValidateObject(_newHost, validationContext, validationResults, true);
+        
 
+        //checks if passwords match
         if (!PasswordConfirmationMatches())
         {
             _errorText = "Passwords does not match";
-            return; 
+            return;
         }
-        
-        if (userIsValid)
+
+        if (hostIsValid)
         {
             try
             {
@@ -86,13 +98,18 @@
                 return;
             }
     //User is logged on upon successful account creation
-         //   await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_newUser.Username, _newUser.Password);
-           // NavigationManager.NavigateTo("/");
+    //   await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_newUser.Username, _newUser.Password);
+            NavigationManager.NavigateTo("/");
         }
     }
 
     private bool PasswordConfirmationMatches()
     {
+        if (_passwordConfirmation==null)
+        {
+            _errorText = "Please confirm password";
+        }
         return _passwordConfirmation == _newHost.Password;
     }
+
 }

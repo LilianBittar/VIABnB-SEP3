@@ -41,6 +41,9 @@
                 <MatButtonLink class="text-white nav-link" href="/Administration" Style="background-color: darkgreen">
                     Administration
                 </MatButtonLink>
+                 <MatButtonLink class="text-white nav-link" OnClick="LogOut" Style="background-color: darkgreen">
+                                    Log out
+                                </MatButtonLink>
             </MatAppBarSection>
         </MatAppBarRow>
     </MatAppBar>
@@ -58,6 +61,9 @@
                     <MatListItem Href="/buildingsoverview" >
                         Buildings overview 
                     </MatListItem>
+                     <MatListItem Href="/registerhost" >
+                                            Register 
+                                        </MatListItem>
                     
                 </MatList>
             </MatListGroup>
@@ -80,4 +86,16 @@
         _opened = !_opened;
     }
     
+    
+    public async Task LogOut()
+    {
+        /*try
+        {
+            ((CustomAuthenticationStateProvider) authenticationStateProvider).Logout();
+            navigationManager.NavigateTo("/login");
+        }
+        catch (Exception e)
+        {
+        }*/
+    }
 }
