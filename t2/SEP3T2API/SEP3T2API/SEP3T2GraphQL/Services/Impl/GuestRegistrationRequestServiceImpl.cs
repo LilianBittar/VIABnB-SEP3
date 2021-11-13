@@ -8,32 +8,45 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public class GuestRegistrationRequestServiceImpl : IGuestRegistrationRequestService
     {
+        private IGuestRegistrationRequestRepository _guestRegistrationRequestRepository;
 
-        private IGuestRegistrationRequestRepository _guestRegistrationRequestRepository; 
-
-        public GuestRegistrationRequestServiceImpl(IGuestRegistrationRequestRepository guestRegistrationRequestRepository)
+        public GuestRegistrationRequestServiceImpl(
+            IGuestRegistrationRequestRepository guestRegistrationRequestRepository)
         {
-            _guestRegistrationRequestRepository = guestRegistrationRequestRepository; 
-        }
-        public Task<GuestRegistrationRequest> ApproveGuestRegistrationRequestAsync(int requestId)
-        {
-            throw new System.NotImplementedException();
+            _guestRegistrationRequestRepository = guestRegistrationRequestRepository;
         }
 
-        public async Task<GuestRegistrationRequest> CreateGuestRegistrationRequestAsync(GuestRegistrationRequest guestRegistrationRequest)
+        public async Task<GuestRegistrationRequest> ApproveGuestRegistrationRequestAsync(int requestId)
+        {
+            if (requestId <= 0)
+            {
+                throw new ArgumentException("Invalid requestID");
+            }
+
+            return await _guestRegistrationRequestRepository.ApproveGuestRegistrationRequestAsync(requestId);
+        }
+
+        public async Task<GuestRegistrationRequest> CreateGuestRegistrationRequestAsync(
+            GuestRegistrationRequest guestRegistrationRequest)
         {
             ValidateGuestRegistrationRequest(guestRegistrationRequest);
-            return await _guestRegistrationRequestRepository.CreateGuestRegistrationRequestAsync(guestRegistrationRequest); 
+            return await _guestRegistrationRequestRepository.CreateGuestRegistrationRequestAsync(
+                guestRegistrationRequest);
         }
 
-        public Task<IEnumerable<GuestRegistrationRequest>> GetAllGuestRegistrationRequestsAsync()
+        public async Task<IEnumerable<GuestRegistrationRequest>> GetAllGuestRegistrationRequestsAsync()
         {
-            throw new System.NotImplementedException();
+            return await _guestRegistrationRequestRepository.GetAllGuestRegistrationRequestsAsync();
         }
 
-        public Task<GuestRegistrationRequest> RejectGuestRegistrationRequestAsync(int requestId)
+        public async Task<GuestRegistrationRequest> RejectGuestRegistrationRequestAsync(int requestId)
         {
-            throw new System.NotImplementedException();
+            if (requestId <= 0)
+            {
+                throw new ArgumentException("Invalid requestID");
+            }
+
+            return await _guestRegistrationRequestRepository.RejectGuestRegistrationRequestAsync(requestId);
         }
 
         private void ValidateGuestRegistrationRequest(GuestRegistrationRequest guestRegistrationRequest)
@@ -42,15 +55,21 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("Request cannot be null");
             }
+
             if (guestRegistrationRequest.StudentNumber < 0 || guestRegistrationRequest.ToString().Length < 6)
             {
-                throw new ArgumentException("Student Number is invalid"); 
+                throw new ArgumentException("Student Number is invalid");
             }
+
             if (guestRegistrationRequest.StudentIdImage == null)
             {
-                throw new ArgumentNullException("Image of Student ID is required");
+                throw new ArgumentException("Image of Student Id is required");
             }
-      
+
+            if (!guestRegistrationRequest.Host.IsApprovedHost)
+            {
+                throw new ArgumentException("Host must be approved");
+            }
         }
     }
 }
