@@ -1,5 +1,6 @@
-package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.administration;
+package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.administration;
 
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.GuestRegistrationRequest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.HostRegistrationRequest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RequestStatus;
 
@@ -26,6 +27,28 @@ public class AdministrationDAOImpl implements AdministrationDAO
   }
 
   @Override public boolean isValidHost(int requestId, RequestStatus status)
+  {
+    return false;
+  }
+
+  @Override public List<GuestRegistrationRequest> getAllGuestRegistrationRequest()
+  {
+    return null;
+  }
+
+  @Override public List<GuestRegistrationRequest> getGuestRegistrationRequestByHosttId(
+      int hostId)
+  {
+    return null;
+  }
+
+  @Override public GuestRegistrationRequest getGuestRegistrationRequestById(
+      int requestId)
+  {
+    return null;
+  }
+
+  @Override public boolean isValidGuest(int requestId, RequestStatus status)
   {
     return false;
   }

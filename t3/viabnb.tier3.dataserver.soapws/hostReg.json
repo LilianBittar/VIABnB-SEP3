@@ -1,0 +1,19 @@
+[
+  {
+    "id": 1,
+    "personalImage": "Hi",
+    "cprNumber": "123456",
+    "status": "NotAnswered",
+    "host": {
+      "id": 1,
+      "firstName": "hello",
+      "lastName": "there",
+      "phoneNumber": "12344",
+      "email": "asd@asd",
+      "password": "password",
+      "hostReviews": null,
+      "profileImageUrl": "img",
+      "isApprovedHost": false
+    }
+  }
+]
