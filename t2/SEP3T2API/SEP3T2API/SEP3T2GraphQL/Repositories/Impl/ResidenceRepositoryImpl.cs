@@ -42,6 +42,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Residence> CreateResidenceAsync(Residence residence)
         {
+            residence.Id = this.GetTheLastAddedResidence().Id + 1;
             System.Console.WriteLine($"{this} was passed args: {JsonSerializer.Serialize(residence)}");
             string newResidence = JsonSerializer.Serialize(residence, new JsonSerializerOptions()
             {
@@ -76,6 +77,20 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
             return residences;
         }
-        
+
+        public async Task<Residence> GetTheLastAddedResidence()
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residence");
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            string result = await responseMessage.Content.ReadAsStringAsync();
+
+            List<Residence> residences = JsonSerializer.Deserialize<List<Residence>>(result,
+                new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+
+            return residences[residences.Capacity - 1];
+        }
+
     }
 }

@@ -239,7 +239,6 @@ C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\De
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\Counter.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
-C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\SurveyPrompt.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterResidence\RegisterResidence.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\MainLayout.razor.g.cs
@@ -252,7 +251,6 @@ C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\De
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\App.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\Counter.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
-C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\SurveyPrompt.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterResidence\RegisterResidence.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\MainLayout.razor.g.cs
@@ -387,3 +385,16 @@ D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3Blazo
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterHost\RegisterHost.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterHost\RegisterHost.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\RegisterHost\RegisterHost.razor.rz.scp.css
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharp.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharp.Css.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharp.Diffing.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharpWrappers.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\Bunit.Core.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\Bunit.Web.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\CatQLClient.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\nunit.framework.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\AdminView\Administration.razor.g.cs
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterHost\RegisterHost.razor.g.cs
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\AdminView\Administration.razor.g.cs
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterHost\RegisterHost.razor.g.cs
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\RegisterHost\RegisterHost.razor.rz.scp.css

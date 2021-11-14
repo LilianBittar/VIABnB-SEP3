@@ -2804,19 +2804,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kaspe\\.nuget\\packages\\": {}
+    "C:\\Users\\bitta\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dokumenter D\\Git\\SEP3\\main branch\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj",
+      "projectUniqueName": "C:\\Users\\bitta\\repos\\VIABnb-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj",
       "projectName": "SEP3T2GraphQL",
-      "projectPath": "D:\\Dokumenter D\\Git\\SEP3\\main branch\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj",
-      "packagesPath": "C:\\Users\\kaspe\\.nuget\\packages\\",
-      "outputPath": "D:\\Dokumenter D\\Git\\SEP3\\main branch\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\obj\\",
+      "projectPath": "C:\\Users\\bitta\\repos\\VIABnb-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj",
+      "packagesPath": "C:\\Users\\bitta\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bitta\\repos\\VIABnb-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kaspe\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\bitta\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -2915,7 +2915,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
