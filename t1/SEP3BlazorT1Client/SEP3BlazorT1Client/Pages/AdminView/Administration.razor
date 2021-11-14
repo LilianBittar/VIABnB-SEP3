@@ -1,6 +1,84 @@
 ﻿@page "/Administration"
-<h3>Administration</h3>
+@using SEP3BlazorT1Client.Models
 
-@code {
-    
-}
+<MatTabGroup>
+    <MatTab Label="Hosts Requests">
+        <ChildContent>
+            @foreach (var h in hostRequestList)
+            {
+                <MatAccordion>
+                    <MatExpansionPanel @bind-Expanded="@panelOpenState">
+                        <MatExpansionPanelSummary>
+                            <MatExpansionPanelHeader><p>@h.CprNumber</p></MatExpansionPanelHeader>
+                        </MatExpansionPanelSummary>
+                        <MatExpansionPanelDetails>
+                            <div class="form-group"><p>@h.Id</p></div>
+                            <div class="form-group"><p>@h.CprNumber</p></div>
+                            <div class="form-group"><p>@h.PersonalImage</p></div>
+                            <EditForm Model="@h" OnValidSubmit="@ValidateHost">
+                                <DataAnnotationsValidator/>
+                                <ValidationSummary/>
+                                <div class="form-group">
+                                    <p>@h.Status</p>
+                                    <form>
+                                        <select name="Status">
+                                            <option value="@RequestStatus.NotAnswered">Not Answered</option>
+                                            <option value="@RequestStatus.NotApproved">Not Approved</option>
+                                            <option value="@RequestStatus.Approved">Approved</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </EditForm>
+                        </MatExpansionPanelDetails>
+                    </MatExpansionPanel>
+                </MatAccordion>
+            }
+        </ChildContent>
+    </MatTab>
+    <MatTab Label="Guests Requests">
+        <ChildContent>
+            @foreach (var g in guestRequestList)
+            {
+                <MatAccordion>
+                    <MatExpansionPanel @bind-Expanded="@panelOpenState">
+                        <MatExpansionPanelSummary>
+                            <MatExpansionPanelHeader><p>@g.StudentNumber</p></MatExpansionPanelHeader>
+                        </MatExpansionPanelSummary>
+                        <MatExpansionPanelDetails>
+                            <div class="form-group"><p>@g.Id</p></div>
+                            <div class="form-group"><p>@g.StudentNumber</p></div>
+                            <div class="form-group">
+                                <p>Host:</p>
+                                <br/>
+                                <p>@g.Host.Id</p>
+                                <p>@g.Host.FirstName</p>
+                                <p>@g.Host.LastName</p>
+                                <p>@g.Host.PhoneNumber</p>
+                                <p>@g.Host.Email</p>
+                                <p>@g.Host.Password</p>
+                                <p>@g.Host.HostReviews</p>
+                                <p>@g.Host.ProfileImageUrl</p>
+                                <p>@g.Host.IsApprovedHost</p>
+                            </div>
+                            <div class="form-group"><p>@g.StudentIdImage</p></div>
+                            <EditForm Model="@g" OnValidSubmit="@ValidateGuest">
+                                <DataAnnotationsValidator/>
+                                <ValidationSummary/>
+                                <div class="form-group">
+                                    <p>@g.Status</p>
+                                    <form>
+                                        <select name="Status">
+                                            <option value="@RequestStatus.NotAnswered">Not Answered</option>
+                                            <option value="@RequestStatus.NotApproved">Not Approved</option>
+                                            <option value="@RequestStatus.Approved">Approved</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </EditForm>
+                        </MatExpansionPanelDetails>
+                    </MatExpansionPanel>
+                </MatAccordion>
+            }
+        </ChildContent>
+    </MatTab>
+</MatTabGroup>

@@ -89,6 +89,13 @@ using MatBlazor;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\AdminView\Administration.razor"
+using SEP3BlazorT1Client.Models;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/Administration")]
     public partial class Administration : Microsoft.AspNetCore.Components.ComponentBase
     {
