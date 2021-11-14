@@ -2,7 +2,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.administration.AdministrationDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.administration.AdministrationDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.HostRegistrationRequest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RequestStatus;
 import org.springframework.beans.factory.annotation.Autowired;
