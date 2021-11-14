@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace SEP3BlazorT1Client
+namespace SEP3BlazorT1Client.Pages.BecomeGuest
 {
     #line hidden
     using System;
@@ -89,13 +89,38 @@ using MatBlazor;
 #line default
 #line hidden
 #nullable disable
-    public partial class App : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 2 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\BecomeGuest\BecomeGuest.razor"
+using SEP3BlazorT1Client.Models;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/BecomeGuest")]
+    public partial class BecomeGuest : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 34 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\BecomeGuest\BecomeGuest.razor"
+       
+    //TODO: Fetch auth user and set as Host in new Request, wrap components in CascadingAuthenticationState
+    private GuestRegistrationRequest _newGuestRegistrationRequest = new GuestRegistrationRequest() {Status = RequestStatus.NotAnswered, Id = 0, Host = null};
+    private bool _dialogIsOpen = false;
+
+    private void OpenDialog()
+    {
+        _dialogIsOpen = true;
+    }
+
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private MatDialogService MatDialogService { get; set; }
     }
 }
 #pragma warning restore 1591

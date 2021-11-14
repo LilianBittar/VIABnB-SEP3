@@ -1,0 +1,44 @@
+﻿@page "/BecomeGuest"
+@using SEP3BlazorT1Client.Models
+@inject MatDialogService MatDialogService
+
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
+            <h1>Are you<br/> a student of <br/>VIA University College?</h1>
+            <h2>Need a tempoary place to stay while on e.g. internship?</h2>
+            <p>Make a request to become an approved guest and start renting cheap tempoary residences around all of Denmark, today.</p>
+            <MatButton Label="Become Guest" Raised="true" OnClick="@OpenDialog"/>
+            <MatDialog @bind-IsOpen="@_dialogIsOpen">
+                <MatDialogTitle>Request to become a Guest</MatDialogTitle>
+                <MatDialogContent>
+                    <EditForm Model="@_newGuestRegistrationRequest">
+                        <DataAnnotationsValidator/>
+                        <MatTextField @bind-Value="@_newGuestRegistrationRequest.StudentNumber" Label="Student Number" HelperText="e.g 293886"/>
+                        <ValidationMessage For="@(() => _newGuestRegistrationRequest.StudentNumber)"/>
+                    </EditForm>
+                </MatDialogContent>
+                <MatDialogActions>
+                    <MatButton>Send Requset</MatButton>
+                    <MatButton OnClick="@(()=>_dialogIsOpen=false)">Cancel</MatButton>
+                </MatDialogActions>
+            </MatDialog>
+        </div>
+        <div class="mat-layout-grid-cell">
+            <img src="assets/via_campus_horsens.jpg" alt="campus horsens" style="max-height: 500px; max-width:600px">
+        </div>
+    </div>
+</div>
+
+@code {
+    //TODO: Fetch auth user and set as Host in new Request, wrap components in CascadingAuthenticationState
+    private GuestRegistrationRequest _newGuestRegistrationRequest = new GuestRegistrationRequest() {Status = RequestStatus.NotAnswered, Id = 0, Host = null};
+    private bool _dialogIsOpen = false;
+
+    private void OpenDialog()
+    {
+        _dialogIsOpen = true;
+    }
+
+}
