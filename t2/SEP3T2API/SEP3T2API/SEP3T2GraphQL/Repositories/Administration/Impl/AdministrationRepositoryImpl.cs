@@ -17,6 +17,7 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
         {
             client = new HttpClient();
         }
+        //Host
 
         public async Task<IList<HostRegistrationRequest>> GetAllHostRegistrationRequests()
         {
@@ -77,6 +78,71 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
                 Encoding.UTF8,
                 "application/json");
             HttpResponseMessage responseMessage = await client.PatchAsync(uri + $"/hostRequests/{requestId}", content);
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            }
+        }
+        //Guest
+
+        public async Task<IList<GuestRegistrationRequest>> GetAllGuestRegistrationRequests()
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/guestRequests");
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            }
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            List<GuestRegistrationRequest> requests = JsonSerializer.Deserialize<List<GuestRegistrationRequest>>(result,
+                new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+            return requests;
+        }
+
+        public async Task<IList<GuestRegistrationRequest>> GetGuestRegistrationRequestsByHostId(int hostId)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/guestRequests/{hostId}");
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            }
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            List<GuestRegistrationRequest> requests = JsonSerializer.Deserialize<List<GuestRegistrationRequest>>(result,
+                new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+            return requests;
+        }
+
+        public async Task<GuestRegistrationRequest> GetGuestRegistrationRequestsById(int requestId)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/guestRequests/{requestId}");
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            }
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            GuestRegistrationRequest request = JsonSerializer.Deserialize<GuestRegistrationRequest>(result,
+                new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+            return request;
+        }
+
+        public async Task IsValidGuest(int requestId, RequestStatus status)
+        {
+            string statusToUpdate = JsonSerializer.Serialize(status);
+            HttpContent content = new StringContent(statusToUpdate,
+                Encoding.UTF8,
+                "application/json");
+            HttpResponseMessage responseMessage = await client.PatchAsync(uri + $"/guestRequests/{requestId}", content);
             if (!responseMessage.IsSuccessStatusCode)
             {
                 throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
