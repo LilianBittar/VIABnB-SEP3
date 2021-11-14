@@ -29,7 +29,7 @@
             <input type="text" placeholder="E-mail" @bind-value="_newHost.Email">
         </div>
         <div class="form-group">
-            <label>Phonenumber*</label>
+            <label>Phone number*</label>
             <input type="text" placeholder="Phonenumber" @bind-value="_newHost.PhoneNumber">
         </div>
         <div class="form-group">
@@ -88,7 +88,7 @@
         {
             try
             {
-    //Throws exception if user already exists.
+        //Throws exception if user already exists.
                 await _hostservice.RegisterHostAsync(_newHost);
             }
             catch (Exception e)
@@ -97,7 +97,7 @@
                 StateHasChanged();
                 return;
             }
-    //User is logged on upon successful account creation
+            //User is logged on upon successful account creation
     //   await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_newUser.Username, _newUser.Password);
             NavigationManager.NavigateTo("/");
         }
