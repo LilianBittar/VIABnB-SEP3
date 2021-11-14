@@ -15,7 +15,7 @@ public interface AdministrationDAO
   boolean isValidHost(int requestId, RequestStatus status);
   //Guest
   List<GuestRegistrationRequest> getAllGuestRegistrationRequest();
-  List<GuestRegistrationRequest> getGuestRegistrationRequestByGuestId(int hostId);
+  List<GuestRegistrationRequest> getGuestRegistrationRequestByHosttId(int hostId);
   GuestRegistrationRequest getGuestRegistrationRequestById(int requestId);
   boolean isValidGuest(int requestId, RequestStatus status);
 }

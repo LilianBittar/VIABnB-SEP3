@@ -103,10 +103,10 @@ public class AdministrationController
   }
 
   @GetMapping("/guestRequests/{id}")
-  public ResponseEntity<List<GuestRegistrationRequest>> getGuestRegistrationRequestsByGuestId(@PathVariable("id") int id)
+  public ResponseEntity<List<GuestRegistrationRequest>> getGuestRegistrationRequestsByHostId(@PathVariable("id") int id)
   {
     List<GuestRegistrationRequest> requests;
-    requests = administrationDAO.getGuestRegistrationRequestByGuestId(id);
+    requests = administrationDAO.getGuestRegistrationRequestByHosttId(id);
     if (requests == null)
     {
       return ResponseEntity.internalServerError().build();

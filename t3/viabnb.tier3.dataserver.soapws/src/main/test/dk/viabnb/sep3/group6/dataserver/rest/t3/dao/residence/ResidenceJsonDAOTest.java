@@ -24,7 +24,6 @@ class ResidenceJsonDAOTest
 
   @BeforeEach void setUp()
   {
-    //TODO assert return and null + some stuff
     residenceDAO = new ResidenceJsonDAO();
 
     address = new Address(1, "streetNameTest", "h1", "cityTest", "s1", 1111);
@@ -42,6 +41,10 @@ class ResidenceJsonDAOTest
   @Test void createResidenceSunnyScenario()
   {
     assertDoesNotThrow(() -> residenceDAO.createResidence(residence));
+  }
+  @Test void createNullResidenceTest()
+  {
+    assertThrows(NullPointerException.class, ()-> residenceDAO.createResidence(null));
   }
 
   @Test void getAllResidenceByHostIdSunnyDoesNotThrowWithOneResident()

@@ -229,7 +229,7 @@ import java.util.List;
     return null;
   }
 
-  @Override public List<GuestRegistrationRequest> getGuestRegistrationRequestByGuestId(
+  @Override public List<GuestRegistrationRequest> getGuestRegistrationRequestByHosttId(
       int hostId)
   {
     //Todo need a Guest
