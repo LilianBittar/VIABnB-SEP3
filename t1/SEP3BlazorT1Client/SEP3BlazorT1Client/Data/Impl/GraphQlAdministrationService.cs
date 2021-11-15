@@ -15,6 +15,26 @@ namespace SEP3BlazorT1Client.Data.Impl
         private const string Url = "https://localhost:5001/graphql";
         private GqlClient client = new GqlClient(Url) {EnableLogging = true};
 
+        public Task<IList<HostRegistrationRequest>> GetAllHostRegistrationRequestsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<HostRegistrationRequest> GetHostRegistrationRequestsByHostIdAsync(int hostId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<HostRegistrationRequest> GetHostRegistrationRequestByIdAsync(int requestId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task IsValidHost(int requestId, RequestStatus status)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<GuestRegistrationRequest> CreateGuestRegistrationRequestAsync(
             GuestRegistrationRequest guestRegistrationRequest)
         {

@@ -25,21 +25,21 @@ namespace SEP3T2GraphQL.Services.Administration.Impl
             return await _administrationRepository.GetAllHostRegistrationRequests();
         }
 
-        public async Task<IList<HostRegistrationRequest>> GetHostRegistrationRequestsByHostId(int hostId)
+        public async Task<HostRegistrationRequest> GetHostRegistrationRequestsByHostId(int hostId)
         {
             if (_adminValidation.IsValidId(hostId))
             {
-                return await _administrationRepository.GetHostRegistrationRequestsByHostId(hostId);
+                return await _administrationRepository.GetHostRegistrationRequestByHostId(hostId);
             }
 
             throw new ArgumentException("Invalid Host ID");
         }
 
-        public async Task<HostRegistrationRequest> GetHostRegistrationRequestsById(int requestId)
+        public async Task<HostRegistrationRequest> GetHostRegistrationRequestById(int requestId)
         {
             if (_adminValidation.IsValidId(requestId))
             {
-                return await _administrationRepository.GetHostRegistrationRequestsById(requestId);
+                return await _administrationRepository.GetHostRegistrationRequestById(requestId);
             }
 
             throw new ArgumentException("Invalid Request ID");
@@ -61,21 +61,21 @@ namespace SEP3T2GraphQL.Services.Administration.Impl
             return await _administrationRepository.GetAllGuestRegistrationRequests();
         }
 
-        public async Task<IList<GuestRegistrationRequest>> GetGuestRegistrationRequestsByHostId(int hostId)
+        public async Task<GuestRegistrationRequest> GetGuestRegistrationRequestsByHostId(int hostId)
         {
             if (_adminValidation.IsValidId(hostId))
             {
-                return await _administrationRepository.GetGuestRegistrationRequestsByHostId(hostId);
+                return await _administrationRepository.GetGuestRegistrationRequestByHostId(hostId);
             }
 
             throw new ArgumentException("Invalid Host ID");
         }
 
-        public async Task<GuestRegistrationRequest> GetGuestRegistrationRequestsById(int requestId)
+        public async Task<GuestRegistrationRequest> GetGuestRegistrationRequestById(int requestId)
         {
             if (_adminValidation.IsValidId(requestId))
             {
-                return await _administrationRepository.GetGuestRegistrationRequestsById(requestId);
+                return await _administrationRepository.GetGuestRegistrationRequestById(requestId);
             }
 
             throw new ArgumentException("Invalid Request ID");

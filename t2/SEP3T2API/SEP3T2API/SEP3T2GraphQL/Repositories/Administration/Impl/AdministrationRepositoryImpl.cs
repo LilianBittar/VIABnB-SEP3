@@ -36,7 +36,7 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
             return requests;
         }
 
-        public async Task<IList<HostRegistrationRequest>> GetHostRegistrationRequestsByHostId(int hostId)
+        public async Task<HostRegistrationRequest> GetHostRegistrationRequestByHostId(int hostId)
         {
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/hostRequests/{hostId}");
             if (!responseMessage.IsSuccessStatusCode)
@@ -45,15 +45,15 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
             }
 
             string result = await responseMessage.Content.ReadAsStringAsync();
-            List<HostRegistrationRequest> requests = JsonSerializer.Deserialize<List<HostRegistrationRequest>>(result,
+            HostRegistrationRequest request = JsonSerializer.Deserialize<HostRegistrationRequest>(result,
                 new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
-            return requests;
+            return request;
         }
 
-        public async Task<HostRegistrationRequest> GetHostRegistrationRequestsById(int requestId)
+        public async Task<HostRegistrationRequest> GetHostRegistrationRequestById(int requestId)
         {
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/hostRequests/{requestId}");
             if (!responseMessage.IsSuccessStatusCode)
@@ -102,7 +102,7 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
             return requests;
         }
 
-        public async Task<IList<GuestRegistrationRequest>> GetGuestRegistrationRequestsByHostId(int hostId)
+        public async Task<GuestRegistrationRequest> GetGuestRegistrationRequestByHostId(int hostId)
         {
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/guestRequests/{hostId}");
             if (!responseMessage.IsSuccessStatusCode)
@@ -111,15 +111,15 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
             }
 
             string result = await responseMessage.Content.ReadAsStringAsync();
-            List<GuestRegistrationRequest> requests = JsonSerializer.Deserialize<List<GuestRegistrationRequest>>(result,
+            GuestRegistrationRequest request = JsonSerializer.Deserialize<GuestRegistrationRequest>(result,
                 new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
-            return requests;
+            return request;
         }
 
-        public async Task<GuestRegistrationRequest> GetGuestRegistrationRequestsById(int requestId)
+        public async Task<GuestRegistrationRequest> GetGuestRegistrationRequestById(int requestId)
         {
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/guestRequests/{requestId}");
             if (!responseMessage.IsSuccessStatusCode)

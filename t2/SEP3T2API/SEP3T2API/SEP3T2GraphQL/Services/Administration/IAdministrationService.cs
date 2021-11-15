@@ -8,13 +8,13 @@ namespace SEP3T2GraphQL.Services.Administration
     public interface IAdministrationService
     {
         Task<IList<HostRegistrationRequest>> GetAllHostRegistrationRequests();
-        Task<IList<HostRegistrationRequest>> GetHostRegistrationRequestsByHostId(int hostId);
-        Task<HostRegistrationRequest> GetHostRegistrationRequestsById(int requestId);
+        Task<HostRegistrationRequest> GetHostRegistrationRequestsByHostId(int hostId);
+        Task<HostRegistrationRequest> GetHostRegistrationRequestById(int requestId);
         Task IsValidHost(int requestId, RequestStatus status);
         //Guest
         Task<IList<GuestRegistrationRequest>> GetAllGuestRegistrationRequests();
-        Task<IList<GuestRegistrationRequest>> GetGuestRegistrationRequestsByHostId(int hostId);
-        Task<GuestRegistrationRequest> GetGuestRegistrationRequestsById(int requestId);
+        Task<GuestRegistrationRequest> GetGuestRegistrationRequestsByHostId(int hostId);
+        Task<GuestRegistrationRequest> GetGuestRegistrationRequestById(int requestId);
         Task IsValidGuest(int requestId, RequestStatus status);
     }
 }
