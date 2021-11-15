@@ -6,7 +6,7 @@ namespace SEP3BlazorT1Client.Models
     {
         [Required]
         public int Id { get; set; }
-        [Required]
+        [Required, Range(0, 999999)]
         public int StudentNumber { get; set; }
         [Required]
         public Host Host { get; set; }

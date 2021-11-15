@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
@@ -22,7 +24,7 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("Invalid requestID");
             }
-
+            
             return await _guestRegistrationRequestRepository.ApproveGuestRegistrationRequestAsync(requestId);
         }
 
@@ -70,6 +72,7 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("Host must be approved");
             }
+
         }
     }
 }
