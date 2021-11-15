@@ -96,6 +96,13 @@ using SEP3BlazorT1Client.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\BecomeGuest\BecomeGuest.razor"
+using SEP3BlazorT1Client.Data;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/BecomeGuest")]
     public partial class BecomeGuest : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -105,21 +112,47 @@ using SEP3BlazorT1Client.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 34 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\BecomeGuest\BecomeGuest.razor"
+#line 38 "C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\BecomeGuest\BecomeGuest.razor"
        
     //TODO: Fetch auth user and set as Host in new Request, wrap components in CascadingAuthenticationState
     private GuestRegistrationRequest _newGuestRegistrationRequest = new GuestRegistrationRequest() {Status = RequestStatus.NotAnswered, Id = 0, Host = null};
     private bool _dialogIsOpen = false;
+    private string _errorLabel = "";
 
     private void OpenDialog()
     {
         _dialogIsOpen = true;
     }
 
+    private async void CreateGuestRegistrationRequest()
+    {
+        try
+        {
+            _errorLabel = "";
+            await _administrationService.CreateGuestRegistrationRequestAsync(_newGuestRegistrationRequest);
+            _dialogIsOpen = false; 
+            ResetModel();
+            StateHasChanged();
+            NavigationManager.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            _errorLabel = e.Message; 
+            StateHasChanged();
+        }
+    }
+
+    private void ResetModel()
+    {
+        _newGuestRegistrationRequest = new GuestRegistrationRequest() {Status = RequestStatus.NotAnswered, Id = 0, Host = null};
+    }
+
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IAdministrationService _administrationService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private MatDialogService MatDialogService { get; set; }
     }
 }

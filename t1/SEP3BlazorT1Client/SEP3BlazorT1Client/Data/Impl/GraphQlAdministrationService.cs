@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using SEP3BlazorT1Client.Models;
 using CatQL.GraphQL.Client;
 using CatQLClient.QueryResponses;
+using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 
 namespace SEP3BlazorT1Client.Data.Impl
@@ -12,8 +13,10 @@ namespace SEP3BlazorT1Client.Data.Impl
     public class GraphQlAdministrationService : IAdministrationService
     {
         private const string Url = "https://localhost:5001/graphql";
-        private GqlClient client = new GqlClient(Url); 
-        public async Task<GuestRegistrationRequest> CreateGuestRegistrationRequestAsync(GuestRegistrationRequest guestRegistrationRequest)
+        private GqlClient client = new GqlClient(Url) {EnableLogging = true};
+
+        public async Task<GuestRegistrationRequest> CreateGuestRegistrationRequestAsync(
+            GuestRegistrationRequest guestRegistrationRequest)
         {
             var createGuestRegistrationRequestQuery = new GqlQuery()
             {
@@ -43,14 +46,23 @@ namespace SEP3BlazorT1Client.Data.Impl
                         ",
                 Variables = new {request = guestRegistrationRequest}
             };
-            var response = await client.PostQueryAsync<GuestRegistrationRequestResponse>(createGuestRegistrationRequestQuery);
-
-            if (response.Errors != null)
+            try
             {
-                throw new Exception("Something went wrong, try again later..."); 
-            }
+                var response =
+                    await client.PostQueryAsync<GuestRegistrationRequestResponse>(createGuestRegistrationRequestQuery);
+                if (response.Errors != null)
+                {
+                    Console.WriteLine($"{this} caught exception");
+                    throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4].Split(":")[2]);
+                }
+                return response.Data.CreateGuestRegistrationRequest;
 
-            return response.Data.CreateGuestRegistrationRequest; 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"{this} caught exception");
+                throw new Exception("Something went wrong, try again later...");
+            }
         }
 
         public Task<IEnumerable<GuestRegistrationRequest>> GetAllGuestRegistrationRequestsAsync()
