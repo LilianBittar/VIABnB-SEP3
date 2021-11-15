@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = UnitTests
-build_property.ProjectDir = C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\UnitTests\
+build_property.ProjectDir = C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\UnitTests\
