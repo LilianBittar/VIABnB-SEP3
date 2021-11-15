@@ -2,6 +2,10 @@
 @page "/"
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Data
+@using Authentication
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
 
 
 @* <h1>Proof of concept</h1> *@
@@ -34,24 +38,24 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <MatTextField @bind-Value="@MyString4" Label="Sign in" Outlined="true" Style="margin-left: 3em"></MatTextField>
+                                        <MatTextField @bind-Value="@email" Label="Email" Outlined="true" Style="margin-left: 3em"></MatTextField>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <MatTextField @bind-Value="@MyString4" Dense="true" Label="Password" Outlined="true" Style="margin-left: 3em;"></MatTextField>
+                                        <MatTextField @bind-Value="@password" Dense="true" Label="Password" Outlined="true" Style="margin-left: 3em;"></MatTextField>
                                     </td>
                                 </tr>
                                   <tr>
                                       <td>
-                                           <MatButton Raised="true" Style="margin-left: 8em;">Log in</MatButton>
+                                           <MatButton Raised="true" Style="margin-left: 8em;" OnClick="@(() =>PerformLogin())">Log in</MatButton>
                                       </td>
                                       </tr>
                             </table>
                         </MatCardContent>
                         <MatDivider Inset="true"></MatDivider>
                                 <MatCardActions>
-                                    <MatButton>Don't have an account, register here</MatButton>
+                                    <MatButton Link="/registerhost">Don't have an account, register here</MatButton>
                                 </MatCardActions>
                             </MatCard>
                 </div>
@@ -63,58 +67,24 @@
 
 @code
 {
-    private int? _id;
-    private Residence _residence;
-    private string MyString4;
-    
-    protected override async Task OnInitializedAsync()
+    private string email;
+    private string password;
+    private string ErrorMessage;
+
+    public async Task PerformLogin()
     {
-        _id = 0;
+        Console.WriteLine("Loggin in");
+        ErrorMessage = "";
+        try {
+            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).StartConnection();
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(Email, Password);
+            Email = "";
+            Password = "";
+            NavigationManager.NavigateTo("/");
+        } catch (Exception e) {
+            ErrorMessage = e.Message;
+        }
     }
 
-    private async Task CreateNewResidence()
-    {
-        Residence newResidence = new Residence()
-        {
-            Address = new Address()
-            {
-                CityName = "420City", 
-                HouseNumber ="420", 
-                Id= 420, 
-                StreetName = "420 Street",
-                StreetNumber = "420",
-                ZipCode=420
-            },
-            AvailableFrom = DateTime.ParseExact("07/12/2021", "dd/MM/yyyy", null),
-            AvailableTo = DateTime.ParseExact("24/12/2021", "dd/MM/yyyy", null), 
-            AverageRating = 5, 
-            Description ="420 des",
-            Facilities = new List<Facility>(), 
-            Id = 420, 
-            IsAvailable = false, 
-            PricePerNight = 2000,
-            Rules = new List<Rule>(), 
-            Type = "420 blaze",
-            ImageUrl ="420"
-            
-        };
-        var result = await ResidenceService.CreateResidenceAsync(newResidence); 
-        _residence = result;
-        StateHasChanged();
-    }
-    private async Task FetchConceptMessage()
-    {
-        int myInt = 0; 
-        if (_id == null)
-        {
-            myInt = 0; 
-        }
-        else
-        {
-            myInt = (int) _id;
-        }
-       _residence = await ResidenceService.GetResidenceAsync(1);
-        Console.WriteLine("Fetched");
-        Console.WriteLine(_residence.ToString());
-    }
+
 }

@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -97,4 +97,4 @@ namespace SEP3BlazorT1Client.Authentication
         }
 }
     }
-*/
+
