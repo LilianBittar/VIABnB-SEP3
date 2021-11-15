@@ -118,34 +118,10 @@ import java.util.List;
     return null;
   }
 
-  @Override public List<HostRegistrationRequest> getHostRegistrationRequestsByHostId(
+  @Override public HostRegistrationRequest getHostRegistrationRequestsByHostId(
       int hostId)
   {
     //Todo need a host!!
-    /*List<HostRegistrationRequest> requestsList;
-    List<HostRegistrationRequest> requestsListToReturn = new ArrayList<>();
-    HostRegistrationRequest request;
-    try
-    {
-      Reader reader = Files.newBufferedReader(Paths.get(JSON_FILE_NAME_G));
-      requestsList = new Gson().fromJson(reader,
-          new TypeToken<List<HostRegistrationRequest>>()
-          {
-          }.getType());
-      for (HostRegistrationRequest r : requestsList)
-      {
-        if (r.getHost.getId == hostId)
-        {
-          request = r;
-          requestsListToReturn.add(request);
-          return requestsListToReturn;
-        }
-      }
-    }
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }*/
     return null;
   }
 
@@ -229,58 +205,30 @@ import java.util.List;
     return null;
   }
 
-  @Override public List<GuestRegistrationRequest> getGuestRegistrationRequestByHosttId(
+  @Override public GuestRegistrationRequest getGuestRegistrationRequestByHostId(
       int hostId)
   {
     //Todo need a Guest
-    /*List<GuestRegistrationRequest> requestsList;
-    List<GuestRegistrationRequest> requestsListToReturn = new ArrayList<>();
-    GuestRegistrationRequest request;
-    try
-    {
-      Reader reader = Files.newBufferedReader(Paths.get(JSON_FILE_NAME_G));
-      requestsList = new Gson().fromJson(reader,
-          new TypeToken<List<GuestRegistrationRequest>>()
-          {
-          }.getType());
-      for (GuestRegistrationRequest r : requestsList)
-      {
-        if (r.getHost.getId == hostId)
-        {
-          request = r;
-          requestsListToReturn.add(request);
-          return requestsListToReturn;
-        }
-      }
-    }
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }*/
     return null;
   }
 
   @Override public GuestRegistrationRequest getGuestRegistrationRequestById(
       int requestId)
   {
-    List<GuestRegistrationRequest> requestsList;
     GuestRegistrationRequest request;
     try
     {
       Reader reader = Files.newBufferedReader(Paths.get(JSON_FILE_NAME_G));
-      requestsList = new Gson().fromJson(reader,
-          new TypeToken<List<GuestRegistrationRequest>>()
+      request = new Gson().fromJson(reader,
+          new TypeToken<GuestRegistrationRequest>()
           {
           }.getType());
-      for (GuestRegistrationRequest r : requestsList)
-      {
-        if (r.getId() == requestId)
+
+        if (request.getId() == requestId)
         {
-          request = r;
           return request;
         }
         throw new NotFound();
-      }
     }
     catch (IOException | NotFound e)
     {

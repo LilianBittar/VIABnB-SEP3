@@ -10,12 +10,12 @@ public interface AdministrationDAO
 {
   //Host
   List<HostRegistrationRequest> getAllHostRegistrationRequests();
-  List<HostRegistrationRequest> getHostRegistrationRequestsByHostId(int hostId);
+  HostRegistrationRequest getHostRegistrationRequestsByHostId(int hostId);
   HostRegistrationRequest getHostRegistrationRequestsById(int requestId);
   boolean isValidHost(int requestId, RequestStatus status);
   //Guest
   List<GuestRegistrationRequest> getAllGuestRegistrationRequest();
-  List<GuestRegistrationRequest> getGuestRegistrationRequestByHosttId(int hostId);
+  GuestRegistrationRequest getGuestRegistrationRequestByHostId(int hostId);
   GuestRegistrationRequest getGuestRegistrationRequestById(int requestId);
   boolean isValidGuest(int requestId, RequestStatus status);
 }

@@ -55,13 +55,13 @@ public class AdministrationController
   @GetMapping("/hostRequests/{id}")
   public ResponseEntity<List<HostRegistrationRequest>> getHostRegistrationRequestsByHostId(@PathVariable("id") int id)
   {
-    List<HostRegistrationRequest> requests;
-    requests = administrationDAO.getHostRegistrationRequestsByHostId(id);
-    if (requests == null)
+    HostRegistrationRequest request;
+    request = administrationDAO.getHostRegistrationRequestsByHostId(id);
+    if (request == null)
     {
       return ResponseEntity.internalServerError().build();
     }
-    return new ResponseEntity<>(requests, HttpStatus.OK);
+    return new ResponseEntity(request, HttpStatus.OK);
   }
 
   @GetMapping("/hostRequests/{id2}")
@@ -105,13 +105,13 @@ public class AdministrationController
   @GetMapping("/guestRequests/{id}")
   public ResponseEntity<List<GuestRegistrationRequest>> getGuestRegistrationRequestsByHostId(@PathVariable("id") int id)
   {
-    List<GuestRegistrationRequest> requests;
-    requests = administrationDAO.getGuestRegistrationRequestByHosttId(id);
-    if (requests == null)
+    GuestRegistrationRequest request;
+    request = administrationDAO.getGuestRegistrationRequestByHostId(id);
+    if (request == null)
     {
       return ResponseEntity.internalServerError().build();
     }
-    return new ResponseEntity<>(requests, HttpStatus.OK);
+    return new ResponseEntity(request, HttpStatus.OK);
   }
 
   @GetMapping("/guestRequests/{id2}")

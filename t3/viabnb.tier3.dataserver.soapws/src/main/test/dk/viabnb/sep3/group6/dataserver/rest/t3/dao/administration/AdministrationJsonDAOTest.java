@@ -49,7 +49,7 @@ class AdministrationJsonDAOTest
 
   @Test void getGuestRegistrationRequestByHostIdSunnyScenario()
   {
-    assertDoesNotThrow(()-> administrationDAO.getGuestRegistrationRequestByHosttId(host.getId()));
+    assertDoesNotThrow(()-> administrationDAO.getGuestRegistrationRequestByHostId(host.getId()));
   }
 
   @Test void getGuestRegistrationRequestByIdSunnyScenario()

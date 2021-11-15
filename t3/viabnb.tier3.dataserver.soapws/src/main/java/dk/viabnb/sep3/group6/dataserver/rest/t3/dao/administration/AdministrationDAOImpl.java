@@ -14,7 +14,7 @@ public class AdministrationDAOImpl implements AdministrationDAO
     return null;
   }
 
-  @Override public List<HostRegistrationRequest> getHostRegistrationRequestsByHostId(
+  @Override public HostRegistrationRequest getHostRegistrationRequestsByHostId(
       int hostId)
   {
     return null;
@@ -36,7 +36,7 @@ public class AdministrationDAOImpl implements AdministrationDAO
     return null;
   }
 
-  @Override public List<GuestRegistrationRequest> getGuestRegistrationRequestByHosttId(
+  @Override public GuestRegistrationRequest getGuestRegistrationRequestByHostId(
       int hostId)
   {
     return null;
