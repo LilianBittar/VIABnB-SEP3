@@ -19,7 +19,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
                 }
             }
 
-            throw new ArgumentException("Invalid email");
+            throw new FormatException("Invalid email");
         }
 
         public bool IsValidFirstname(string firstname)
@@ -44,40 +44,49 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 
         public bool IsValidPassword(string passWord)
         {
-            if (passWord == null) return false;
             int validConditions = 0;
+            if (passWord == null)
+            {
+                throw new ArgumentException("invalid password");
+            }
+
+            if (passWord.Length < 8)
+            {
+                throw new ArgumentException("password must at least be a length of 8 characters");
+            }
+
+
             foreach (char c in passWord)
             {
-                if (c >= 'a' && c <= 'z')
+                if (passWord.Any(char.IsLower))
                 {
                     validConditions++;
                     break;
                 }
 
-                throw new Exception("password must contain at least one lowercase letter");
+                throw new ArgumentException("password must contain at least one lowercase letter");
             }
 
             foreach (char c in passWord)
             {
-                if (c >= 'A' && c <= 'Z')
+                if (passWord.Any(char.IsUpper))
                 {
                     validConditions++;
                     break;
                 }
 
-                throw new Exception("password must contain at least one uppercase letter");
+                throw new ArgumentException("password must contain at least one uppercase letter");
             }
-
-            if (validConditions == 0) return false;
+            
             foreach (char c in passWord)
             {
-                if (c >= '0' && c <= '9')
+                if (passWord.Any(char.IsDigit))
                 {
                     validConditions++;
                     break;
                 }
 
-                throw new Exception("password must contain at least one number");
+                throw new ArgumentException("password must contain at least one number");
             }
 
             if (validConditions == 3)
@@ -85,19 +94,18 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
                 return true;
             }
 
-            throw new Exception("password invalid");
+            throw new ArgumentException("password invalid");
         }
 
 
         public bool IsValidPhoneNumber(string phoneNumber)
         {
-            bool result = phoneNumber.Any(x => !char.IsLetter(x));
-            if (phoneNumber != null && result)
+            if (phoneNumber != null && !phoneNumber.Any(char.IsLetter) && !phoneNumber.Any(char.IsSymbol))
             {
                 return true;
             }
 
-            return false;
+            throw new ArgumentException("invalid phone number");
         }
 
         public bool IsValidHost(Host host)
@@ -108,7 +116,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
                 return true;
             }
 
-            throw new Exception("Invalid host");
+            throw new ArgumentException("Invalid host");
         }
 
         public bool IsLettersOnly(string arg)
