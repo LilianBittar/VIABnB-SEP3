@@ -18,7 +18,7 @@ namespace SEP3T2GraphQL.Services.Impl
             _guestRegistrationRequestRepository = guestRegistrationRequestRepository;
         }
 
-        public async Task<GuestRegistrationRequest> ApproveGuestRegistrationRequestAsync(int requestId)
+        /*public async Task<GuestRegistrationRequest> ApproveGuestRegistrationRequestAsync(int requestId)
         {
             if (requestId <= 0)
             {
@@ -26,7 +26,7 @@ namespace SEP3T2GraphQL.Services.Impl
             }
             
             return await _guestRegistrationRequestRepository.ApproveGuestRegistrationRequestAsync(requestId);
-        }
+        }*/
 
         public async Task<GuestRegistrationRequest> CreateGuestRegistrationRequestAsync(
             GuestRegistrationRequest guestRegistrationRequest)
@@ -41,7 +41,7 @@ namespace SEP3T2GraphQL.Services.Impl
             return await _guestRegistrationRequestRepository.GetAllGuestRegistrationRequestsAsync();
         }
 
-        public async Task<GuestRegistrationRequest> RejectGuestRegistrationRequestAsync(int requestId)
+        /*public async Task<GuestRegistrationRequest> RejectGuestRegistrationRequestAsync(int requestId)
         {
             if (requestId <= 0)
             {
@@ -49,7 +49,7 @@ namespace SEP3T2GraphQL.Services.Impl
             }
 
             return await _guestRegistrationRequestRepository.RejectGuestRegistrationRequestAsync(requestId);
-        }
+        }*/
 
         private void ValidateGuestRegistrationRequest(GuestRegistrationRequest guestRegistrationRequest)
         {

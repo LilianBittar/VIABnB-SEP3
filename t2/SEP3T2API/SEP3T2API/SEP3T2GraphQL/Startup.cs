@@ -51,7 +51,11 @@ namespace SEP3T2GraphQL
             services.AddScoped<IHostRepository, HostRepositoryImpl>();
             services.AddScoped<IHostService, HostServiceImpl>();
             services.AddScoped<IHostValidation, HostValidationImpl>();
-            
+            services.AddScoped<IHostRegistrationRequestRepository, HostRegistrationRequestRepositoryImpl>();
+            services.AddScoped<IGuestRegistrationRequestRepository, WebGuestRegistrationRequestRepository>();
+            services.AddScoped<IHostRegistrationRequestService, HostRegistrationRequestServiceImpl>();
+            services.AddScoped<IGuestRegistrationRequestService, GuestRegistrationRequestServiceImpl>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

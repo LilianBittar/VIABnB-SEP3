@@ -39,7 +39,19 @@ namespace SEP3T2GraphQL.Repositories.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<GuestRegistrationRequest> ApproveGuestRegistrationRequestAsync(int requestId)
+        public async Task UpdateGuestRegistrationRequestAsync(GuestRegistrationRequest request)
+        {
+            string requestAsJson = JsonSerializer.Serialize(request);
+            HttpContent content = new StringContent(requestAsJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage response =
+                await _client.PatchAsync(ApiUri + $"/{request.Id}", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {response.StatusCode}, {response.ReasonPhrase}");
+            }
+        }
+
+        /*public Task<GuestRegistrationRequest> ApproveGuestRegistrationRequestAsync(int requestId)
         {
             throw new System.NotImplementedException();
         }
@@ -48,5 +60,6 @@ namespace SEP3T2GraphQL.Repositories.Impl
         {
             throw new System.NotImplementedException();
         }
+        */
     }
 }
