@@ -28,7 +28,7 @@ class HostJsonDAOTest {
     }
 
     @Test
-    void createResidenceSunnyScenario()
+    void createHostSunnyScenario()
     {
         //arrange
        int hostId = 1;
