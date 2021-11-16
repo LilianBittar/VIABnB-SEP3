@@ -9,5 +9,10 @@ namespace SEP3BlazorT1Client.Data.Impl
         {
             throw new System.NotImplementedException();
         }
+
+        public Task<Host> ValidateHostAsync(string email, string password)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
