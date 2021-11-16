@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
@@ -32,6 +33,14 @@ namespace SEP3T2GraphQL.Services.Impl
             GuestRegistrationRequest guestRegistrationRequest)
         {
             ValidateGuestRegistrationRequest(guestRegistrationRequest);
+            var allGuestRegistrationRequests = await GetAllGuestRegistrationRequestsAsync();
+            var requestWithSameStudentNumber = allGuestRegistrationRequests.FirstOrDefault(r => r.StudentNumber == guestRegistrationRequest.StudentNumber);
+            if (requestWithSameStudentNumber != null)
+            {
+                throw new ArgumentException(
+                    "A host with the provided Student number has already requested to be an guest"); 
+;            }
+            
             return await _guestRegistrationRequestRepository.CreateGuestRegistrationRequestAsync(
                 guestRegistrationRequest);
         }
