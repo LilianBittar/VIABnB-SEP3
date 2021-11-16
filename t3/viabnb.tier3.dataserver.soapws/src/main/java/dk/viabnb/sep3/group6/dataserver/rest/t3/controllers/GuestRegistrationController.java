@@ -5,6 +5,8 @@ import dk.viabnb.sep3.group6.dataserver.rest.t3.models.GuestRegistrationRequest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RequestStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +35,31 @@ public class GuestRegistrationController {
 
     @GetMapping("/guestregistrationrequests")
     public ResponseEntity<List<GuestRegistrationRequest>> getAllGuestRegistrationRequests() {
+       /*
+       Maybe??
+       List<GuestRegistrationRequest> requests;
+        requests = administrationDAO.getAllGuestRegistrationRequest();
+        if (requests == null)
+        {
+            return ResponseEntity.internalServerError().build();
+        }
+        return new ResponseEntity<>(requests, HttpStatus.OK);*/
         return ResponseEntity.ok(guestRegistrationRequestDAO.getAllGuestRegistrationRequests());
     }
+
+    /*
+    former AdministrationController method
+    @RequestMapping(value = "/guestRequests/{id}", method = RequestMethod.PATCH,
+        consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<RequestStatus> isValidGuest(@RequestBody RequestStatus update, @PathVariable("id") int id)
+    {
+        administrationDAO.isValidHost(id, update);
+        if (update == null)
+        {
+            return ResponseEntity.internalServerError().build();
+        }
+        return new ResponseEntity<>(update, HttpStatus.OK);
+    }*/
 
     @PatchMapping("/guestregistrationrequests/{id}")
     public ResponseEntity<GuestRegistrationRequest> updateRequestStatus(@RequestBody GuestRegistrationRequest request) {
@@ -53,5 +78,28 @@ public class GuestRegistrationController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/guestRequests/{id}")
+    public ResponseEntity<List<GuestRegistrationRequest>> getGuestRegistrationRequestsByHostId(@PathVariable("id") int id)
+    {
+        GuestRegistrationRequest request;
+        request = guestRegistrationRequestDAO.getGuestRegistrationRequestByHostId(id);
+        if (request == null)
+        {
+            return ResponseEntity.internalServerError().build();
+        }
+        return new ResponseEntity(request, HttpStatus.OK);
+    }
 
+    @GetMapping("/guestRequests/{id2}")
+    public ResponseEntity<GuestRegistrationRequest> getGuestRegistrationRequestsById(@PathVariable("id2") int id)
+    {
+        //Todo check @PathVariable
+        GuestRegistrationRequest request;
+        request = guestRegistrationRequestDAO.getGuestRegistrationRequestById(id);
+        if (request == null)
+        {
+            return ResponseEntity.internalServerError().build();
+        }
+        return new ResponseEntity<>(request, HttpStatus.OK);
+    }
 }

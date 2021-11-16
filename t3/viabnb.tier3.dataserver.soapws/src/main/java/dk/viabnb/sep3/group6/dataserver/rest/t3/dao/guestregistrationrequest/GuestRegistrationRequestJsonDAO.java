@@ -6,11 +6,14 @@ import com.google.gson.reflect.TypeToken;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.GuestRegistrationRequest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.HostRegistrationRequest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RequestStatus;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -69,6 +72,27 @@ public class GuestRegistrationRequestJsonDAO implements GuestRegistrationRequest
     @Override
     public List<GuestRegistrationRequest> getAllGuestRegistrationRequests() {
         return allRequests;
+    }
+
+    @Override public GuestRegistrationRequest getGuestRegistrationRequestByHostId(
+        int hostId)
+    {
+        //TODO update model class to include a host or a host id
+        return null;
+    }
+
+    @Override public GuestRegistrationRequest getGuestRegistrationRequestById(
+        int requestId)
+    {
+        GuestRegistrationRequest request = null;
+        for (GuestRegistrationRequest req : allRequests)
+        {
+            if (req.getId() == requestId)
+            {
+                request = req;
+            }
+        }
+        return request;
     }
 
     @Override

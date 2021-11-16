@@ -12,4 +12,8 @@ public interface GuestRegistrationRequestDAO {
     public GuestRegistrationRequest approveGuestRegistrationRequest(GuestRegistrationRequest request);
 
     public GuestRegistrationRequest rejectGuestRegistrationRequest(GuestRegistrationRequest request);
+
+    GuestRegistrationRequest getGuestRegistrationRequestByHostId(int hostId);
+
+    GuestRegistrationRequest getGuestRegistrationRequestById(int requestId);
 }
