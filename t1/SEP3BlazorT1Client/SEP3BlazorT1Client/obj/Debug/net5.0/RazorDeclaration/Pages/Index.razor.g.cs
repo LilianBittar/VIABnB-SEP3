@@ -129,11 +129,11 @@ using Authentication;
     {
         Console.WriteLine("Loggin in");
         ErrorMessage = "";
-        try {
-            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).StartConnection();
-            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(Email, Password);
-            Email = "";
-            Password = "";
+        try
+        {
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email, password);
+            email = "";
+            password = "";
             NavigationManager.NavigateTo("/");
         } catch (Exception e) {
             ErrorMessage = e.Message;

@@ -10,6 +10,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
 {
     public class WebGuestRegistrationRequestRepository : IGuestRegistrationRequestRepository
     {
+        
         private const string ApiUri = "http://localhost:8080/guestregistrationrequests";
         private HttpClient _client = new HttpClient();
 
