@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
@@ -32,6 +33,7 @@ namespace SEP3T2GraphQL.Services.Impl
             GuestRegistrationRequest guestRegistrationRequest)
         {
             ValidateGuestRegistrationRequest(guestRegistrationRequest);
+
             return await _guestRegistrationRequestRepository.CreateGuestRegistrationRequestAsync(
                 guestRegistrationRequest);
         }
@@ -51,14 +53,25 @@ namespace SEP3T2GraphQL.Services.Impl
             return await _guestRegistrationRequestRepository.RejectGuestRegistrationRequestAsync(requestId);
         }*/
 
-        private void ValidateGuestRegistrationRequest(GuestRegistrationRequest guestRegistrationRequest)
+        private async void ValidateGuestRegistrationRequest(GuestRegistrationRequest guestRegistrationRequest)
         {
+            var allGuestRegistrationRequests = await GetAllGuestRegistrationRequestsAsync();
+            var requestWithSameStudentNumber =
+                allGuestRegistrationRequests.FirstOrDefault(r =>
+                    r.StudentNumber == guestRegistrationRequest.StudentNumber);
+
             if (guestRegistrationRequest == null)
             {
                 throw new ArgumentException("Request cannot be null");
             }
 
-            if (guestRegistrationRequest.StudentNumber <= 0 || guestRegistrationRequest.ToString().Length != 6  )
+            if (requestWithSameStudentNumber != null)
+            {
+                throw new ArgumentException(
+                    "A host with the provided Student number has already been registered in the system");
+            }
+
+            if (guestRegistrationRequest.StudentNumber <= 0 || guestRegistrationRequest.ToString().Length != 6)
             {
                 throw new ArgumentException("Student Number is invalid");
             }
@@ -72,7 +85,6 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("Host must be approved");
             }
-
         }
     }
 }

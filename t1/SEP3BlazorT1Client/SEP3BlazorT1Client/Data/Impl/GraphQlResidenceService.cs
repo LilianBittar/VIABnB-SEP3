@@ -16,6 +16,7 @@ namespace SEP3BlazorT1Client.Data.Impl
 {
     public class GraphQlResidenceService : IResidenceService
     {
+        //connected to t2 
         private const string Url = "https://localhost:5001/graphql";
 
         public async Task<Residence> GetResidenceAsync(int id)

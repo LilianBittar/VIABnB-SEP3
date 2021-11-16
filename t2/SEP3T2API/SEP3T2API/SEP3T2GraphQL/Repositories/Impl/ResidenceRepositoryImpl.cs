@@ -38,6 +38,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
                     PropertyNameCaseInsensitive = true
                 }));
             return residence;
+            
+            
         }
 
         public async Task<Residence> CreateResidenceAsync(Residence residence)

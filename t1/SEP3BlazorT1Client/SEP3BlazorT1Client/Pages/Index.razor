@@ -33,7 +33,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <img class="profile-img" style="margin-left: 6em; margin-bottom: 2em" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
+                                        <img class="profile-img" style="margin-left: 6em; margin-bottom: 2em" width="120" height="120" src="https://cdn.pixabay.com/photo/2017/03/21/02/00/user-2160923_1280.png" alt="">
                                     </td>
                                 </tr>
                                 <tr>
@@ -75,11 +75,11 @@
     {
         Console.WriteLine("Loggin in");
         ErrorMessage = "";
-        try {
-            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).StartConnection();
-            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(Email, Password);
-            Email = "";
-            Password = "";
+        try
+        {
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email, password);
+            email = "";
+            password = "";
             NavigationManager.NavigateTo("/");
         } catch (Exception e) {
             ErrorMessage = e.Message;
