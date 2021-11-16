@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services.Validation.HostValidation;
 using SEP3T2GraphQL.Services.Validation.HostValidation.Impl;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
-    public class HostServiceImpl :IHostService
+    public class HostServiceImpl : IHostService
     {
         private string uri = "http://localhost:8080";
         private readonly HttpClient client;
@@ -38,34 +41,56 @@ namespace SEP3T2GraphQL.Services.Impl
                     throw;
                 }
             }
+
             throw new ArgumentException("Invalid host");
         }
 
         public async Task<Host> GetHostByEmail(string email)
         {
-            return email;
-        }
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host?email={email}");
 
-       public async Task<Host> ValidateHostAsync(Host host)
-       {
-           return null;
-       }
-
-        public async Task<Host> GetHostById(int id)
-        {
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host/{id}");
-            
             if (!responseMessage.IsSuccessStatusCode)
             {
                 throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
             }
-            Host host =  JsonSerializer.Deserialize<Residence>(result, new JsonSerializerOptions(
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                }));
-            return host;
+
             string result = await responseMessage.Content.ReadAsStringAsync();
+            Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            return host;
+        }
+
+        public async Task<Host> ValidateHostAsync(Host host)
+        {
+            var returnedHost = await GetHostByEmail(host.Email);
+            if (returnedHost != null && returnedHost.Password == host.Password)
+            {
+                return host;
+            }
+            else return null;
+        }
+
+      
+
+        public async Task<Host> GetHostById(int id)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host/{id}");
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            }
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            return host;
         }
     }
 }

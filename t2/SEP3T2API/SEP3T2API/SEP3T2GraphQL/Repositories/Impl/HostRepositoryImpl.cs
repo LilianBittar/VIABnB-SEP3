@@ -45,8 +45,52 @@ namespace SEP3T2GraphQL.Repositories.Impl
             Console.WriteLine(h.ToString()); 
             return h;
         }
-        
-        
-        
+
+
+        public async Task<Host> GetHostByEmail(string email)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host/{email}");
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            }
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions(
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                }));
+            return host;
+        }
+
+        public async Task<Host> GetHostById(int id)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host/{id}");
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            }
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions(
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                }));
+            return host;
+        }
+
+        public async Task<Host> ValidateHostAsync(Host host)
+        {
+            var returnedHost = await GetHostByEmail(host.Email);
+            if (returnedHost != null && returnedHost.Password == host.Password)
+            {
+                return host;
+            }
+            else return null;
+        }
     }
 }
