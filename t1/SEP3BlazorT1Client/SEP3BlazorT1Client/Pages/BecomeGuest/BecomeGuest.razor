@@ -1,6 +1,8 @@
 ﻿@page "/BecomeGuest"
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Data
+@using System.IO
+@using System.Text
 @inject MatDialogService MatDialogService
 @inject IAdministrationService _administrationService
 @inject NavigationManager NavigationManager
@@ -20,6 +22,11 @@
                         <DataAnnotationsValidator/>
                         <MatTextField @bind-Value="@_newGuestRegistrationRequest.StudentNumber" Label="Student Number" HelperText="e.g 293886"/>
                         <ValidationMessage For="@(() => _newGuestRegistrationRequest.StudentNumber)"/>
+                        <InputFile/>
+                        @foreach (var file in _loadedFiles)
+                        {
+                            <p>@($"File: {file.Name} {file.Size}")</p>
+                        }
                         <p class="error-label">@_errorLabel</p>
                     </EditForm>
                 </MatDialogContent>
@@ -40,6 +47,8 @@
     private GuestRegistrationRequest _newGuestRegistrationRequest = new GuestRegistrationRequest() {Status = RequestStatus.NotAnswered, Id = 0, Host = null};
     private bool _dialogIsOpen = false;
     private string _errorLabel = "";
+    private IList<IBrowserFile> _loadedFiles = new List<IBrowserFile>();
+        private const int MaxAllowedFiles = 1;
 
     private void OpenDialog()
     {
@@ -52,14 +61,14 @@
         {
             _errorLabel = "";
             await _administrationService.CreateGuestRegistrationRequestAsync(_newGuestRegistrationRequest);
-            _dialogIsOpen = false; 
+            _dialogIsOpen = false;
             ResetModel();
             StateHasChanged();
             NavigationManager.NavigateTo("/");
         }
         catch (Exception e)
         {
-            _errorLabel = e.Message; 
+            _errorLabel = e.Message;
             StateHasChanged();
         }
     }
@@ -68,5 +77,23 @@
     {
         _newGuestRegistrationRequest = new GuestRegistrationRequest() {Status = RequestStatus.NotAnswered, Id = 0, Host = null};
     }
+
+    private async Task LoadImageFiles(InputFileChangeEventArgs e)
+    {
+        _loadedFiles.Clear();
+        foreach (var file in e.GetMultipleFiles(MaxAllowedFiles))
+        {
+            _loadedFiles.Add(file);
+            // Converts the image file to png and resizes to specified maxWidth and maxHeight
+            var image = await file.RequestImageFileAsync("image/png", 800, 800);
+            // Buffer for containing the image data as bytes. 
+            var buffer = new byte[image.Size];
+            // Reads the image data and stores it in the buffer. 
+            await image.OpenReadStream().ReadAsync(buffer);
+            _newGuestRegistrationRequest.StudentIdImage = Encoding.Default.GetString(buffer); 
+        }
+    }
+
+
 
 }
