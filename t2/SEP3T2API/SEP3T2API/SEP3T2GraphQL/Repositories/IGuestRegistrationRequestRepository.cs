@@ -9,8 +9,8 @@ namespace SEP3T2GraphQL.Repositories
       
         Task<GuestRegistrationRequest> CreateGuestRegistrationRequestAsync(GuestRegistrationRequest guestRegistrationRequest); 
         Task<IEnumerable<GuestRegistrationRequest>> GetAllGuestRegistrationRequestsAsync();
-        Task<GuestRegistrationRequest> ApproveGuestRegistrationRequestAsync(int requestId); 
-        Task<GuestRegistrationRequest> RejectGuestRegistrationRequestAsync(int requestId); 
-
+        /*Task<GuestRegistrationRequest> ApproveGuestRegistrationRequestAsync(int requestId); 
+        Task<GuestRegistrationRequest> RejectGuestRegistrationRequestAsync(int requestId); */
+        Task UpdateGuestRegistrationRequestAsync(GuestRegistrationRequest request);
     }
 }

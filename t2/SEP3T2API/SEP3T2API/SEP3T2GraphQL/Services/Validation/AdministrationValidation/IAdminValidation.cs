@@ -2,7 +2,5 @@
 {
     public interface IAdminValidation
     {
-        bool IsValidId(int id);
-        bool IsValidStatus(string status);
     }
 }
