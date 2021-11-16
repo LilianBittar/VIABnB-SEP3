@@ -1,17 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Services.Validation.HostRegistrationRequestValidation;
+using SEP3T2GraphQL.Services.Validation.HostRegistrationRequestValidation.Impl;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
     public class HostRegistrationRequestServiceImpl : IHostRegistrationRequestService
     {
         private IHostRegistrationRequestRepository hostRegistrationRequestRepository;
+        private IHostRegistrationRequestValidation validation;
 
         public HostRegistrationRequestServiceImpl(IHostRegistrationRequestRepository hostRegistrationRequestRepository)
         {
             this.hostRegistrationRequestRepository = hostRegistrationRequestRepository;
+            validation = new HostRegistrationRequestValidationImpl();
         }
 
         public async Task<IList<HostRegistrationRequest>> GetAllHostRegistrationRequestsAsync()
@@ -21,17 +26,30 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<HostRegistrationRequest> GetHostRegistrationRequestByHostIdAsync(int hostId)
         {
-            return await hostRegistrationRequestRepository.GetHostRegistrationRequestByHostId(hostId);
+            if (validation.IsValidId(hostId))
+            {
+                return await hostRegistrationRequestRepository.GetHostRegistrationRequestByHostId(hostId);
+            }
+
+            throw new ArgumentException("Invalid ID");
         }
 
         public async Task<HostRegistrationRequest> GetHostRegistrationRequestByIdAsync(int requestId)
         {
-            return await hostRegistrationRequestRepository.GetHostRegistrationRequestById(requestId);
+            if (validation.IsValidId(requestId))
+            {
+                return await hostRegistrationRequestRepository.GetHostRegistrationRequestById(requestId);
+            }
+
+            throw new ArgumentException("Invalid ID");
         }
 
         public async Task UpdateHostRegistrationRequestAsync(HostRegistrationRequest request)
         {
-            await hostRegistrationRequestRepository.UpdateHostRegistrationRequest(request);
+            if (validation.IsValidRequest(request))
+            {
+                await hostRegistrationRequestRepository.UpdateHostRegistrationRequest(request);
+            }
         }
     }
 }
