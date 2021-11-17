@@ -47,6 +47,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Host> GetHostByEmail(string email)
         {
+            //Todo call repo + if logic if needed 
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host?email={email}");
 
             if (!responseMessage.IsSuccessStatusCode)
@@ -77,6 +78,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Host> GetHostById(int id)
         {
+            //Todo call repo + if logic if needed 
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host/{id}");
 
             if (!responseMessage.IsSuccessStatusCode)
