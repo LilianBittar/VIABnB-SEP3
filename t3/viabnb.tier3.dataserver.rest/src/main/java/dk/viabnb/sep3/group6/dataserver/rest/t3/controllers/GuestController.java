@@ -24,10 +24,16 @@ public class GuestController {
 
     @PostMapping("/guests")
     public ResponseEntity<Guest> createGuest(@RequestBody Guest guest) {
-        Guest createdRequest = guestDAO.createGuestRegistrationRequest(guest);
+        Guest createdRequest = null;
+        try {
+            createdRequest = guestDAO.createGuest(guest);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
         if (createdRequest == null) {
             return ResponseEntity.internalServerError().build();
         }
+
         return ResponseEntity.ok(createdRequest);
     }
 
@@ -42,7 +48,7 @@ public class GuestController {
             return ResponseEntity.internalServerError().build();
         }
         return new ResponseEntity<>(requests, HttpStatus.OK);*/
-        return ResponseEntity.ok(guestDAO.getAllGuestRegistrationRequests());
+        return ResponseEntity.ok(guestDAO.getAllGuests());
     }
 
     /*
@@ -80,7 +86,7 @@ public class GuestController {
     public ResponseEntity<List<GuestRegistrationRequest>> getGuestByHostId(@PathVariable("id") int id)
     {
         Guest guest;
-        guest = guestDAO.getGuestRegistrationRequestByHostId(id);
+        guest = guestDAO.getGuestByHostId(id);
         if (guest == null)
         {
             return ResponseEntity.internalServerError().build();

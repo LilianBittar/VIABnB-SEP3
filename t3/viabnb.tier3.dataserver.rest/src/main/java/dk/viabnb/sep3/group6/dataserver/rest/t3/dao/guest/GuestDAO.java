@@ -5,15 +5,15 @@ import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
 import java.util.List;
 
 public interface GuestDAO {
-    public Guest createGuestRegistrationRequest(Guest request);
+    public Guest createGuest(Guest guest);
 
-    public List<Guest> getAllGuestRegistrationRequests();
+    public List<Guest> getAllGuests();
 
-    public Guest approveGuestRegistrationRequest(Guest request);
+    public Guest approveGuest(Guest guest);
 
-    public Guest rejectGuestRegistrationRequest(Guest request);
+    public Guest rejectGuest(Guest guest);
 
-    Guest getGuestRegistrationRequestByHostId(int hostId);
+    Guest getGuestByHostId(int id);
 
     Guest getGuestRegistrationRequestById(int requestId);
 }
