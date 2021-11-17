@@ -39,6 +39,7 @@ namespace SEP3BlazorT1Client
             services.AddScoped<IResidenceService, GraphQlResidenceService>();
             services.AddScoped<IHostService, GraphQlHostService>();
             services.AddScoped<IGuestRegistrationRequestService, GraphQlAdministrationService>();
+            services.AddScoped<IHostRegistrationRequestService, GraphQlAdministrationService>();
             services.AddScoped<RegisterResidenceViewModel>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
         }

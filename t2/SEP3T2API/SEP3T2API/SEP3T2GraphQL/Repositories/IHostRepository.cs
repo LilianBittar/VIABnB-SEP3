@@ -14,5 +14,6 @@ namespace SEP3T2GraphQL.Repositories
         Task<Host> GetHostByEmail(string email);
         Task<Host> GetHostById(int id);
         Task<Host> ValidateHostAsync(Host host);
+        Task<Host> UpdateHost(Host host);
     }
 }

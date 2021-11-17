@@ -11,6 +11,7 @@ namespace SEP3T2GraphQL.Services.Impl
     public class HostRegistrationRequestServiceImpl : IHostRegistrationRequestService
     {
         private IHostRegistrationRequestRepository hostRegistrationRequestRepository;
+        private IHostService hostService;
         private IHostRegistrationRequestValidation validation;
 
         public HostRegistrationRequestServiceImpl(IHostRegistrationRequestRepository hostRegistrationRequestRepository)

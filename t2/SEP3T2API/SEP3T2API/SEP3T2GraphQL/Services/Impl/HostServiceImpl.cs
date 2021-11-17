@@ -25,6 +25,11 @@ namespace SEP3T2GraphQL.Services.Impl
         }
 
 
+        public Task<Host> UpdateHost(Host host)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Host> RegisterHostAsync(Host host)
         {
             if (_hostValidation.IsValidHost(host))

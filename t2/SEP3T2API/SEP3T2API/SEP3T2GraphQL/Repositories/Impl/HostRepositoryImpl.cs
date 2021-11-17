@@ -92,5 +92,10 @@ namespace SEP3T2GraphQL.Repositories.Impl
             }
             else return null;
         }
+
+        public Task<Host> UpdateHost(Host host)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

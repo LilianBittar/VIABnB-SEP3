@@ -41,9 +41,9 @@
                 <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/Administration" Style="margin-right: 1em;">
                     Administration
                 </MatButtonLink>
-                 <MatButtonLink class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
-                                    Log out
-                                </MatButtonLink>
+                <MatButton class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
+                    Log out
+                </MatButton>
             </MatAppBarSection>
         </MatAppBarRow>
     </MatAppBar>
@@ -52,26 +52,26 @@
         @* Navigation modal. Opens the side menu *@
         <MatDrawerContainer Style="width: 100vw; height: 100vh">
             <MatDrawer @bind-Opened="_opened" Mode="MatDrawerMode.Modal">
-            <MatListGroup>
-                <MatListGroupSubHeader Style="margin-top: 1rem">Manage residences</MatListGroupSubHeader>
-                <MatList>
-                    <MatListItem Href="/registerresidence" >
-                        Register Residence
-                    </MatListItem>
-                    <MatListItem Href="/buildingsoverview" >
-                        Buildings overview 
-                    </MatListItem>
-                     <MatListItem Href="/registerhost" >
-                                            Register 
-                                        </MatListItem>
+                <MatListGroup>
+                    <MatListGroupSubHeader Style="margin-top: 1rem">Manage residences</MatListGroupSubHeader>
+                    <MatList>
+                        <MatListItem Href="/registerresidence" >
+                            Register Residence
+                        </MatListItem>
+                        <MatListItem Href="/buildingsoverview" >
+                            Buildings overview 
+                        </MatListItem>
+                        <MatListItem Href="/registerhost" >
+                            Register 
+                        </MatListItem>
                     
-                </MatList>
-            </MatListGroup>
+                    </MatList>
+                </MatListGroup>
             </MatDrawer>
             <MatDrawerContent>
                 <div class="container"> 
-                @Body 
-                 </div> 
+                    @Body 
+                </div> 
             </MatDrawerContent>
         </MatDrawerContainer>
     </MatAppBarContent>
@@ -89,7 +89,7 @@
     
     public async Task LogOut()
     {
-        /*try
+    /*try
         {
             ((CustomAuthenticationStateProvider) authenticationStateProvider).Logout();
             navigationManager.NavigateTo("/login");

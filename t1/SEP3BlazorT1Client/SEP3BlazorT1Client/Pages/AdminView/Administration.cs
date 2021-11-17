@@ -13,7 +13,8 @@ namespace SEP3BlazorT1Client.Pages.AdminView
     {
 
         [Inject] public MatDialogService MatDialogService { get; set; }
-        [Inject] public  IAdministrationService AdministrationService { get; set; }
+        [Inject] public IGuestRegistrationRequestService GuestRegistrationRequestService { get; set; }
+        [Inject] public IHostRegistrationRequestService HostRegistrationRequestService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         
         private IList<GuestRegistrationRequest> guestRequestList = new List<GuestRegistrationRequest>();

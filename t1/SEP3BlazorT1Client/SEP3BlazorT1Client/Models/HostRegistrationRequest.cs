@@ -10,6 +10,7 @@ namespace SEP3BlazorT1Client.Models
         public string PersonalImage { get; set; }
         [Required]
         public string CprNumber { get; set; }
+        public Host Host { get; set; }
 
         [Required] public RequestStatus Status { get; set; } = RequestStatus.NotAnswered;
     }

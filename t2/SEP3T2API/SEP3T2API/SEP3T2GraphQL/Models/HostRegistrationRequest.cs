@@ -10,6 +10,7 @@ namespace SEP3T2GraphQL.Models
         public string PersonalImage { get; set; }
         [Required]
         public string CprNumber { get; set; }
+        private Host Host { get; set; }
 
         [Required] public RequestStatus Status { get; set; } = RequestStatus.NotAnswered;
 
