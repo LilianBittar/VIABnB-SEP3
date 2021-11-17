@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Services.Validation.HostValidation;
@@ -346,6 +345,52 @@ namespace UnitTests
             //act and assert
             Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPassword(host.Password));
         }
+        
+        
+
+        [TestCase("1")]
+        [TestCase("12345")]
+        [TestCase("1234567")]
+        public void IsValidPassword_lengthLessThan8_Throws(string password)
+        {
+            //arrange
+            host = new Host()
+            {
+                Id = 0,
+                FirstName = "Bob",
+                LastName = "Bobsen",
+                Email = "email@gmail.com",
+                HostReviews = null,
+                IsApprovedHost = false,
+                Password = password,
+                PhoneNumber = "12345678",
+                ProfileImageUrl = null
+            };
+            //act and assert
+            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPassword(host.Password));
+        }
+        
+        [TestCase("Aa345678")]
+        [TestCase("Aa3456789")]
+        [TestCase("Aa345679123456789")]
+        public void IsValidPassword_length8orHigher_DoesNotThrow(string password)
+        {
+            //arrange
+            host = new Host()
+            {
+                Id = 0,
+                FirstName = "Bob",
+                LastName = "Bobsen",
+                Email = "email@gmail.com",
+                HostReviews = null,
+                IsApprovedHost = false,
+                Password = password,
+                PhoneNumber = "12345678",
+                ProfileImageUrl = null
+            };
+            //act and assert
+            Assert.DoesNotThrow(() => _hostValidationImpl.IsValidPassword(host.Password));
+        }
 
         [Test]
         public void IsValidPassword_lengthLessThan8_Throws()
@@ -366,7 +411,7 @@ namespace UnitTests
             //act and assert
             Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPassword(host.Password));
         }
-
+        
         [Test]
         public void IsValidPassword_ContainsNoLowerCaseLetter_Throws()
         {
