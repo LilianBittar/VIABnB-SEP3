@@ -4,16 +4,10 @@ import static org.mockito.Mockito.*;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.Impl.HostJsonDAO;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guestregistrationrequest.GuestRegistrationRequestDAO;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.GuestRegistrationRequest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.HostReview;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RequestStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 

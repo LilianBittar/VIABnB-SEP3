@@ -20,6 +20,8 @@ namespace SEP3T2GraphQL.Models
         public string Password { get; set; }
         public IList<HostReview> HostReviews { get; set; } = new List<HostReview>();
         public string ProfileImageUrl { get; set; }
+        [Required]
+        public string Cpr { get; set; }
         public bool IsApprovedHost { get; set; } = false; 
     }
 }

@@ -19,6 +19,9 @@ namespace SEP3BlazorT1Client.Models
         [Required(ErrorMessage = "Please enter your password")]
         public string Password { get; set; }
         public IList<HostReview> HostReviews { get; set; } = new List<HostReview>();
+        [Required]
+        public string Cpr { get; set; }
+
         public string ProfileImageUrl { get; set; }
         public bool IsApprovedHost { get; set; } = false; 
     }
