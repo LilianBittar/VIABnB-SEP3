@@ -1,26 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using GraphQL.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using GraphQL.Server.Ui.Altair;
 using GraphQL.Server.Ui.GraphiQL;
-using GraphQL.Server.Ui.Voyager;
 using HotChocolate.Types;
 using SEP3T2GraphQL.Graphql;
-using SEP3T2GraphQL.Graphql.Schema;
 using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Repositories.Impl;
 using SEP3T2GraphQL.Services;
+using SEP3T2GraphQL.Services.Impl;
+using SEP3T2GraphQL.Services.Validation.HostValidation;
+using SEP3T2GraphQL.Services.Validation.HostValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
 
 namespace SEP3T2GraphQL
@@ -44,6 +35,14 @@ namespace SEP3T2GraphQL
             services.AddScoped<IResidenceRepository, ResidenceRepositoryImpl>();
             services.AddScoped<IResidenceService, ResidenceServiceImpl>();
             services.AddScoped<IResidenceValidation, ResidenceValidationImpl>();
+            services.AddScoped<IHostRepository, HostRepositoryImpl>();
+            services.AddScoped<IHostService, HostServiceImpl>();
+            services.AddScoped<IHostValidation, HostValidationImpl>();
+            services.AddScoped<IHostRegistrationRequestRepository, HostRegistrationRequestRepositoryImpl>();
+            services.AddScoped<IGuestRegistrationRequestRepository, WebGuestRegistrationRequestRepository>();
+            services.AddScoped<IHostRegistrationRequestService, HostRegistrationRequestServiceImpl>();
+            services.AddScoped<IGuestRegistrationRequestService, GuestRegistrationRequestServiceImpl>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

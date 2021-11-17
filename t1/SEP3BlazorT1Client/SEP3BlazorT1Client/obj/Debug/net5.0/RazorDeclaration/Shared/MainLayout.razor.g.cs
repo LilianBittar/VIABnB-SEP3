@@ -97,7 +97,7 @@ using MatBlazor;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 72 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Shared\MainLayout.razor"
+#line 81 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Shared\MainLayout.razor"
  
     private bool _opened = false;
 
@@ -106,6 +106,18 @@ using MatBlazor;
         _opened = !_opened;
     }
     
+    
+    public async Task LogOut()
+    {
+    /*try
+        {
+            ((CustomAuthenticationStateProvider) authenticationStateProvider).Logout();
+            navigationManager.NavigateTo("/login");
+        }
+        catch (Exception e)
+        {
+        }*/
+    }
 
 #line default
 #line hidden

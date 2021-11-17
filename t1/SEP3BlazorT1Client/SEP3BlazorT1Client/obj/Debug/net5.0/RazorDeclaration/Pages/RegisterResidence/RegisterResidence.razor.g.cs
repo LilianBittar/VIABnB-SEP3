@@ -9,9 +9,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
     #line hidden
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Components;
 #nullable restore
 #line 1 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using System.Net.Http;
@@ -92,6 +90,20 @@ using MatBlazor;
 #nullable restore
 #line 2 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\RegisterResidence\RegisterResidence.razor"
 using SEP3BlazorT1Client.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\RegisterResidence\RegisterResidence.razor"
+using Microsoft.AspNetCore.Components;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\RegisterResidence\RegisterResidence.razor"
+using System.Linq;
 
 #line default
 #line hidden

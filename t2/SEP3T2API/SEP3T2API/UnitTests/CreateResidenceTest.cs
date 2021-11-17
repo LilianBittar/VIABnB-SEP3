@@ -11,9 +11,7 @@ namespace UnitTests
     [TestFixture]
     public class CreateResidenceTest
     {
-        // Todo Do over, take repository out of the test
-        private IResidenceService residenceService;
-        private IResidenceRepository residenceRepository;
+        
         private IResidenceValidation _residenceValidation;
         
         private Address address;
@@ -25,9 +23,7 @@ namespace UnitTests
         public void SetUp()
         {
             _residenceValidation = new ResidenceValidationImpl();
-            residenceRepository = new ResidenceRepositoryImpl(_residenceValidation);
-            residenceService = new ResidenceServiceImpl(residenceRepository);
-            
+
             address = new Address()
             {
                 Id = 1,
@@ -72,8 +68,7 @@ namespace UnitTests
         [Test]
         public void CreateResidenceSunnyScenarioTest()
         {
-           // Assert.DoesNotThrowAsync(() => residenceRepository.CreateResidenceAsync(residence));
-            Assert.DoesNotThrowAsync(() => residenceService.CreateResidenceAsync(residence));
+            Assert.DoesNotThrow(() => _residenceValidation.IsValidResidence(residence));
         }
 
         [Test]
@@ -94,8 +89,7 @@ namespace UnitTests
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
-            Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
-            Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
 
         [TestCase(null, "Test", "Test")]
@@ -131,10 +125,9 @@ namespace UnitTests
                 AvailableTo = DateTime.Now
             };
 
-            Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
-            Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidAddress(a));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
-
         [TestCase(-1)]
         [TestCase(0)]
         [TestCase(1)]
@@ -166,13 +159,14 @@ namespace UnitTests
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
-            Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
-            Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidAddress(a));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
         
         [TestCase(null)]
         [TestCase("")]
         [TestCase("1")]
+        [TestCase("1a")]
         [TestCase("1A")]
         public void CreateResidenceWithAnAddressWithAnInvalidCityNameTest(string cityName)
         {
@@ -200,8 +194,8 @@ namespace UnitTests
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
-            Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
-            Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidAddress(a));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
 
         [TestCase(null, "Test")]
@@ -210,19 +204,10 @@ namespace UnitTests
         [TestCase("Test", "")]
         public void CreateResidenceWithAnInvalidTypeAndDescriptionTest(string type, string description)
         {
-            Address a = new Address()
-            {
-                Id = 1,
-                StreetName = "Test",
-                HouseNumber = "Test",
-                CityName = "Test",
-                StreetNumber = "2A",
-                ZipCode = 1111
-            };
             Residence r = new Residence()
             {
                 Id = 2,
-                Address = a,
+                Address = address,
                 Description = description,
                 Type = type,
                 AverageRating = 1,
@@ -234,8 +219,7 @@ namespace UnitTests
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
-            Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
-            Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
 
         [TestCase(null, 1)]
@@ -244,19 +228,10 @@ namespace UnitTests
         [TestCase(1, -1)]
         public void CreateResidenceWithAnInvalidPricePerNightAndAverageRatingTest(double avgRating, int ppn)
         {
-            Address a = new Address()
-            {
-                Id = 1,
-                StreetName = "Test",
-                HouseNumber = "Test",
-                CityName = "Test",
-                StreetNumber = "2A",
-                ZipCode = 1111
-            };
             Residence r = new Residence()
             {
                 Id = 2,
-                Address = a,
+                Address = address,
                 Description = "Test",
                 Type = "Test",
                 AverageRating = avgRating,
@@ -268,26 +243,16 @@ namespace UnitTests
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
-            Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
-            Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
 
         [TestCase(null)]
         public void CreateResidenceWithANullIsAvailableTest(bool isAvp)
         {
-            Address a = new Address()
-            {
-                Id = 1,
-                StreetName = "Test",
-                HouseNumber = "Test",
-                CityName = "Test",
-                StreetNumber = "2A",
-                ZipCode = 1111
-            };
             Residence r = new Residence()
             {
                 Id = 2,
-                Address = a,
+                Address = address,
                 Description = "Test",
                 Type = "Test",
                 AverageRating = 1,
@@ -299,8 +264,7 @@ namespace UnitTests
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
-            Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
-            Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
 
         [TestCase(null, "Test")]
@@ -323,19 +287,10 @@ namespace UnitTests
                     Name = name
                 }
             );
-            Address a = new Address()
-            {
-                Id = 1,
-                StreetName = "Test",
-                HouseNumber = "Test",
-                CityName = "Test",
-                StreetNumber = "2A",
-                ZipCode = 1111
-            };
             Residence r = new Residence()
             {
                 Id = 2,
-                Address = a,
+                Address = address,
                 Description = "Test",
                 Type = "Test",
                 AverageRating = 1,
@@ -347,27 +302,17 @@ namespace UnitTests
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
             };
-            Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
-            Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
 
         [TestCase( 2000, 11, 11)]
         [TestCase(2050, 11, 11)]
         public void CreateResidenceWithInvalidFromDateTest(int year, int month, int day)
         {
-            Address a = new Address()
-            {
-                Id = 1,
-                StreetName = "Test",
-                HouseNumber = "Test",
-                CityName = "Test",
-                StreetNumber = "2A",
-                ZipCode = 1111
-            };
             Residence r = new Residence()
             {
                 Id = 2,
-                Address = a,
+                Address = address,
                 Description = "Test",
                 Type = "Test",
                 AverageRating = 1,
@@ -379,27 +324,17 @@ namespace UnitTests
                 AvailableFrom = new DateTime(year, month, day),
                 AvailableTo = DateTime.Now
             };
-            Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
-            Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
         
         [TestCase( 2000, 11, 11)]
         [TestCase(2050, 11, 11)]
         public void CreateResidenceWithInvalidToDateTest(int year, int month, int day)
         {
-            Address a = new Address()
-            {
-                Id = 1,
-                StreetName = "Test",
-                HouseNumber = "Test",
-                CityName = "Test",
-                StreetNumber = "2A",
-                ZipCode = 1111
-            };
             Residence r = new Residence()
             {
                 Id = 2,
-                Address = a,
+                Address = address,
                 Description = "Test",
                 Type = "Test",
                 AverageRating = 1,
@@ -411,8 +346,7 @@ namespace UnitTests
                 AvailableFrom = DateTime.Now,
                 AvailableTo = new DateTime(year, month, day)
             };
-            Assert.ThrowsAsync<ArgumentException>(() => residenceRepository.CreateResidenceAsync(r));
-            Assert.ThrowsAsync<ArgumentException>(() => residenceService.CreateResidenceAsync(r));
+            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
     }
 }

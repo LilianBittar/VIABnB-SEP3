@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
@@ -14,6 +16,7 @@ namespace SEP3BlazorT1Client.Data.Impl
 {
     public class GraphQlResidenceService : IResidenceService
     {
+        //connected to t2 
         private const string Url = "https://localhost:5001/graphql";
 
         public async Task<Residence> GetResidenceAsync(int id)
@@ -54,6 +57,29 @@ namespace SEP3BlazorT1Client.Data.Impl
             return graphQlResponse.Data.Residence; 
         }
 
+        public async Task<List<Residence>> GetResidenceByHostId(int Id)
+        {
+            GqlClient client = new GqlClient(Url);
+            var residenceQuery = new GqlQuery()
+            {
+                Query = @"query($hostId: int){
+                          host(id: $hostId){
+                            id,
+                            firstName,
+                            lastName,
+                            phoneNumber,
+                            email,
+                            password
+                            }
+                          }
+",
+                Variables = new {hostId = Id}
+            };
+            var graphQlResponse = await client.PostQueryAsync<ResidenceListQueryResponseType>(residenceQuery);
+            
+            System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Residences.ToString()}");
+            return graphQlResponse.Data.Residences;
+        }
         public async Task<Residence>  CreateResidenceAsync(Residence residence)
         {
 
@@ -83,6 +109,8 @@ namespace SEP3BlazorT1Client.Data.Impl
 
             return mutationResponse.Data.CreateResidence;
         }
+
+     
     }
 }
  

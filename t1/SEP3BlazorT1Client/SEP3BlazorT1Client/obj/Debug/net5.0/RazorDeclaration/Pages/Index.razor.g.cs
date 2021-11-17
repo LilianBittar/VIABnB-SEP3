@@ -103,6 +103,13 @@ using SEP3BlazorT1Client.Data;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
+using Authentication;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/")]
     public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -112,65 +119,34 @@ using SEP3BlazorT1Client.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 25 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
+#line 69 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\Index.razor"
  
-    private int? _id;
-    private Residence _residence;
+    private string email;
+    private string password;
+    private string ErrorMessage;
 
-    protected override async Task OnInitializedAsync()
+    public async Task PerformLogin()
     {
-        _id = 0;
+        Console.WriteLine("Loggin in");
+        ErrorMessage = "";
+        try
+        {
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email, password);
+            email = "";
+            password = "";
+            NavigationManager.NavigateTo("/");
+        } catch (Exception e) {
+            ErrorMessage = e.Message;
+        }
     }
 
-    private async Task CreateNewResidence()
-    {
-        Residence newResidence = new Residence()
-        {
-            Address = new Address()
-            {
-                CityName = "420City", 
-                HouseNumber ="420", 
-                Id= 420, 
-                StreetName = "420 Street",
-                StreetNumber = "420",
-                ZipCode=420
-            },
-            AvailableFrom = DateTime.ParseExact("07/12/2021", "dd/MM/yyyy", null),
-            AvailableTo = DateTime.ParseExact("24/12/2021", "dd/MM/yyyy", null), 
-            AverageRating = 5, 
-            Description ="420 des",
-            Facilities = new List<Facility>(), 
-            Id = 420, 
-            IsAvailable = false, 
-            PricePerNight = 2000,
-            Rules = new List<Rule>(), 
-            Type = "420 blaze",
-            ImageUrl ="420"
-            
-        };
-        var result = await ResidenceService.CreateResidenceAsync(newResidence); 
-        _residence = result;
-        StateHasChanged();
-    }
-    private async Task FetchConceptMessage()
-    {
-        int myInt = 0; 
-        if (_id == null)
-        {
-            myInt = 0; 
-        }
-        else
-        {
-            myInt = (int) _id;
-        }
-       _residence = await ResidenceService.GetResidenceAsync(1);
-        Console.WriteLine("Fetched");
-        Console.WriteLine(_residence.ToString());
-    }
+
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IResidenceService ResidenceService { get; set; }
     }
 }

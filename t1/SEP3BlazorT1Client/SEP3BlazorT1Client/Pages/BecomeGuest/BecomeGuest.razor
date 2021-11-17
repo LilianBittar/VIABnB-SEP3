@@ -1,0 +1,99 @@
+﻿@page "/BecomeGuest"
+@using SEP3BlazorT1Client.Models
+@using SEP3BlazorT1Client.Data
+@using System.IO
+@using System.Text
+@inject MatDialogService MatDialogService
+@inject IGuestRegistrationRequestService guestRegistrationRequest
+@inject NavigationManager NavigationManager
+
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
+            <h1>Are you<br/> a student of <br/>VIA University College?</h1>
+            <h2>Need a tempoary place to stay while on e.g. internship?</h2>
+            <p>Make a request to become an approved guest and start renting cheap tempoary residences around all of Denmark, today.</p>
+            <MatButton Label="Become Guest" Raised="true" OnClick="@OpenDialog"/>
+            <MatDialog @bind-IsOpen="@_dialogIsOpen">
+                <MatDialogTitle>Request to become a Guest</MatDialogTitle>
+                <MatDialogContent>
+                    <EditForm Model="@_newGuestRegistrationRequest">
+                        <DataAnnotationsValidator/>
+                        <MatTextField @bind-Value="@_newGuestRegistrationRequest.StudentNumber" Label="Student Number" HelperText="e.g 293886"/>
+                        <ValidationMessage For="@(() => _newGuestRegistrationRequest.StudentNumber)"/>
+                        <InputFile/>
+                        @foreach (var file in _loadedFiles)
+                        {
+                            <p>@($"File: {file.Name} {file.Size}")</p>
+                        }
+                        <p class="error-label">@_errorLabel</p>
+                    </EditForm>
+                </MatDialogContent>
+                <MatDialogActions>
+                    <MatButton OnClick="@CreateGuestRegistrationRequest">Send Request</MatButton>
+                    <MatButton OnClick="@(() => _dialogIsOpen = false)">Cancel</MatButton>
+                </MatDialogActions>
+            </MatDialog>
+        </div>
+        <div class="mat-layout-grid-cell">
+            <img src="assets/via_campus_horsens.jpg" alt="campus horsens" style="max-height: 500px; max-width:600px">
+        </div>
+    </div>
+</div>
+
+@code {
+    //TODO: Fetch auth user and set as Host in new Request, wrap components in CascadingAuthenticationState
+    private GuestRegistrationRequest _newGuestRegistrationRequest = new GuestRegistrationRequest() {Status = RequestStatus.NotAnswered, Id = 0, Host = null};
+    private bool _dialogIsOpen = false;
+    private string _errorLabel = "";
+    private IList<IBrowserFile> _loadedFiles = new List<IBrowserFile>();
+        private const int MaxAllowedFiles = 1;
+
+    private void OpenDialog()
+    {
+        _dialogIsOpen = true;
+    }
+
+    private async void CreateGuestRegistrationRequest()
+    {
+        try
+        {
+            _errorLabel = "";
+            await guestRegistrationRequest.CreateGuestRegistrationRequestAsync(_newGuestRegistrationRequest);
+            _dialogIsOpen = false;
+            ResetModel();
+            StateHasChanged();
+            NavigationManager.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            _errorLabel = e.Message;
+            StateHasChanged();
+        }
+    }
+
+    private void ResetModel()
+    {
+        _newGuestRegistrationRequest = new GuestRegistrationRequest() {Status = RequestStatus.NotAnswered, Id = 0, Host = null};
+    }
+
+    private async Task LoadImageFiles(InputFileChangeEventArgs e)
+    {
+        _loadedFiles.Clear();
+        foreach (var file in e.GetMultipleFiles(MaxAllowedFiles))
+        {
+            _loadedFiles.Add(file);
+            // Converts the image file to png and resizes to specified maxWidth and maxHeight
+            var image = await file.RequestImageFileAsync("image/png", 800, 800);
+            // Buffer for containing the image data as bytes. 
+            var buffer = new byte[image.Size];
+            // Reads the image data and stores it in the buffer. 
+            await image.OpenReadStream().ReadAsync(buffer);
+            _newGuestRegistrationRequest.StudentIdImage = Encoding.Default.GetString(buffer); 
+        }
+    }
+
+
+
+}

@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
+  "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\SEP3BlazorT1Client.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "5.0",
@@ -11,6 +11,39 @@
   },
   "ProjectWorkspaceState": {
     "TagHelpers": [
+      {
+        "HashCode": -642178805,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.AdminView.Administration",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Administration"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.AdminView.Administration"
+        }
+      },
+      {
+        "HashCode": -1908132788,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.AdminView.Administration",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SEP3BlazorT1Client.Pages.AdminView.Administration"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.AdminView.Administration",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
       {
         "HashCode": -1276696456,
         "Kind": "Components.Component",
@@ -144,6 +177,72 @@
         }
       },
       {
+        "HashCode": -1786461106,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.BecomeGuest.BecomeGuest",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BecomeGuest"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.BecomeGuest.BecomeGuest"
+        }
+      },
+      {
+        "HashCode": -2077666189,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.BecomeGuest.BecomeGuest",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SEP3BlazorT1Client.Pages.BecomeGuest.BecomeGuest"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.BecomeGuest.BecomeGuest",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 829092476,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.RegisterHost.RegisterHost",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "RegisterHost"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.RegisterHost.RegisterHost"
+        }
+      },
+      {
+        "HashCode": -639474584,
+        "Kind": "Components.Component",
+        "Name": "SEP3BlazorT1Client.Pages.RegisterHost.RegisterHost",
+        "AssemblyName": "SEP3BlazorT1Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SEP3BlazorT1Client.Pages.RegisterHost.RegisterHost"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "SEP3BlazorT1Client.Pages.RegisterHost.RegisterHost",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": 711617745,
         "Kind": "Components.Component",
         "Name": "SEP3BlazorT1Client.App",
@@ -173,59 +272,6 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "SEP3BlazorT1Client.App",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -724099332,
-        "Kind": "Components.Component",
-        "Name": "SEP3BlazorT1Client.Shared.SurveyPrompt",
-        "AssemblyName": "SEP3BlazorT1Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "SurveyPrompt"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title"
-            }
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "SEP3BlazorT1Client.Shared.SurveyPrompt"
-        }
-      },
-      {
-        "HashCode": -662681387,
-        "Kind": "Components.Component",
-        "Name": "SEP3BlazorT1Client.Shared.SurveyPrompt",
-        "AssemblyName": "SEP3BlazorT1Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "SEP3BlazorT1Client.Shared.SurveyPrompt"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title"
-            }
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "SEP3BlazorT1Client.Shared.SurveyPrompt",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -75605,58 +75651,68 @@
   "RootNamespace": "SEP3BlazorT1Client",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\BuildingsOverview\\BuildingsOverview.razor",
-      "TargetPath": "Pages\\BuildingsOverview\\BuildingsOverview.razor",
-      "FileKind": "component"
-    },
-    {
-      "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\_Imports.razor",
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\_Imports.razor",
       "TargetPath": "_Imports.razor",
       "FileKind": "componentImport"
     },
     {
-      "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\App.razor",
-      "TargetPath": "App.razor",
-      "FileKind": "component"
-    },
-    {
-      "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\Index.razor",
-      "TargetPath": "Pages\\Index.razor",
-      "FileKind": "component"
-    },
-    {
-      "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\RegisterResidence\\RegisterResidence.razor",
-      "TargetPath": "Pages\\RegisterResidence\\RegisterResidence.razor",
-      "FileKind": "component"
-    },
-    {
-      "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\Error.cshtml",
-      "TargetPath": "Pages\\Error.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\_Host.cshtml",
-      "TargetPath": "Pages\\_Host.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\Counter.razor",
-      "TargetPath": "Pages\\Counter.razor",
-      "FileKind": "component"
-    },
-    {
-      "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Shared\\SurveyPrompt.razor",
-      "TargetPath": "Shared\\SurveyPrompt.razor",
-      "FileKind": "component"
-    },
-    {
-      "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Shared\\NavMenu.razor",
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Shared\\NavMenu.razor",
       "TargetPath": "Shared\\NavMenu.razor",
       "FileKind": "component"
     },
     {
-      "FilePath": "c:\\Users\\Shark\\Documents\\Coding\\SEP3\\VIABnB-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Shared\\MainLayout.razor",
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\_Host.cshtml",
+      "TargetPath": "Pages\\_Host.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\BecomeGuest\\BecomeGuest.razor",
+      "TargetPath": "Pages\\BecomeGuest\\BecomeGuest.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Shared\\MainLayout.razor",
       "TargetPath": "Shared\\MainLayout.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\App.razor",
+      "TargetPath": "App.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\Counter.razor",
+      "TargetPath": "Pages\\Counter.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\Error.cshtml",
+      "TargetPath": "Pages\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\RegisterHost\\RegisterHost.razor",
+      "TargetPath": "Pages\\RegisterHost\\RegisterHost.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\AdminView\\Administration.razor",
+      "TargetPath": "Pages\\AdminView\\Administration.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\RegisterResidence\\RegisterResidence.razor",
+      "TargetPath": "Pages\\RegisterResidence\\RegisterResidence.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\Index.razor",
+      "TargetPath": "Pages\\Index.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\bitta\\repos\\VIABnb-SEP3\\t1\\SEP3BlazorT1Client\\SEP3BlazorT1Client\\Pages\\BuildingsOverview\\BuildingsOverview.razor",
+      "TargetPath": "Pages\\BuildingsOverview\\BuildingsOverview.razor",
       "FileKind": "component"
     }
   ],

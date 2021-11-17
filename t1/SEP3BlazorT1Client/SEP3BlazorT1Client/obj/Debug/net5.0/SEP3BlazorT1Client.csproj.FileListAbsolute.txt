@@ -98,7 +98,6 @@ C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Clien
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\Counter.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\SurveyPrompt.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\MainLayout.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\NavMenu.razor.g.cs
@@ -110,7 +109,6 @@ C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Clien
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\App.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\Counter.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\SurveyPrompt.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\MainLayout.razor.g.cs
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\NavMenu.razor.g.cs
@@ -166,7 +164,6 @@ C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3Blazo
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\Counter.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\SurveyPrompt.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\MainLayout.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\NavMenu.razor.g.cs
@@ -178,7 +175,6 @@ C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3Blazo
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\App.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\Counter.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\SurveyPrompt.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\MainLayout.razor.g.cs
 C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\NavMenu.razor.g.cs
@@ -241,7 +237,6 @@ C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\De
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\Counter.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
-C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\SurveyPrompt.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterResidence\RegisterResidence.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\MainLayout.razor.g.cs
@@ -254,7 +249,6 @@ C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\De
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\App.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\Counter.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
-C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\SurveyPrompt.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterResidence\RegisterResidence.razor.g.cs
 C:\Users\bitta\repos\viaBnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\MainLayout.razor.g.cs
@@ -300,3 +294,119 @@ C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Clien
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\Bunit.Web.dll
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\CatQLClient.dll
 C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\nunit.framework.dll
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\AdminView\Administration.razor.g.cs
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\AdminView\Administration.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.csproj.AssemblyReference.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.AssemblyInfoInputs.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.AssemblyInfo.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.csproj.CoreCompileInputs.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.MvcApplicationPartsAssemblyInfo.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.RazorComponent.input.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\AdminView\Administration.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\BuildingsOverview\BuildingsOverview.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\Counter.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterHost\RegisterHost.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterResidence\RegisterResidence.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\MainLayout.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Shared\NavMenu.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.RazorComponent.output.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\ref\SEP3BlazorT1Client.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.pdb
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\appsettings.Development.json
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\appsettings.json
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\SEP3BlazorT1Client.StaticWebAssets.xml
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\SEP3BlazorT1Client.exe
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\SEP3BlazorT1Client.deps.json
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\SEP3BlazorT1Client.runtimeconfig.json
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\SEP3BlazorT1Client.runtimeconfig.dev.json
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\SEP3BlazorT1Client.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\ref\SEP3BlazorT1Client.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\SEP3BlazorT1Client.pdb
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\SEP3BlazorT1Client.Views.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\SEP3BlazorT1Client.Views.pdb
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharp.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharp.Css.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharp.Diffing.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharpWrappers.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\Bunit.Core.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\Bunit.Web.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\CatQLClient.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\GraphQL.Client.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\GraphQL.Client.Abstractions.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\GraphQL.Client.Abstractions.Websocket.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\GraphQL.Client.Serializer.Newtonsoft.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\GraphQL.Primitives.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\MatBlazor.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\nunit.framework.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\StrawberryShake.Core.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\StrawberryShake.Resources.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\StrawberryShake.Transport.Http.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\System.Reactive.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\System.Reactive.xml
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\SEP3BlazorT1Client.dll
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.TagHelpers.input.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.TagHelpers.output.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.RazorCoreGenerate.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\App.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\AdminView\Administration.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\BuildingsOverview\BuildingsOverview.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\Counter.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterHost\RegisterHost.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterResidence\RegisterResidence.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\MainLayout.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Shared\NavMenu.razor.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\Error.cshtml.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\_Host.cshtml.g.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.RazorAssemblyInfo.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.RazorAssemblyInfo.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\staticwebassets\SEP3BlazorT1Client.StaticWebAssets.Manifest.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\staticwebassets\SEP3BlazorT1Client.StaticWebAssets.xml
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\RegisterResidence\RegisterResidence.razor.rz.scp.css
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\bundle\SEP3BlazorT1Client.styles.css
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\projectbundle\SEP3BlazorT1Client.bundle.scp.css
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.RazorTargetAssemblyInfo.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.RazorTargetAssemblyInfo.cs
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.Views.pdb
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.csproj.CopyComplete
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\SEP3BlazorT1Client.genruntimeconfig.cache
+D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\RegisterHost\RegisterHost.razor.rz.scp.css
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterHost\RegisterHost.razor.g.cs
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterHost\RegisterHost.razor.g.cs
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\RegisterHost\RegisterHost.razor.rz.scp.css
+C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\AdminView\Administration.razor.g.cs
+C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterHost\RegisterHost.razor.g.cs
+C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\AdminView\Administration.razor.g.cs
+C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterHost\RegisterHost.razor.g.cs
+C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\RegisterHost\RegisterHost.razor.rz.scp.css
+C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\BecomeGuest\BecomeGuest.razor.g.cs
+C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\BecomeGuest\BecomeGuest.razor.g.cs
+C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\BecomeGuest\BecomeGuest.razor.rz.scp.css
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\BecomeGuest\BecomeGuest.razor.g.cs
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\BecomeGuest\BecomeGuest.razor.g.cs
+C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\BecomeGuest\BecomeGuest.razor.rz.scp.css
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharp.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharp.Css.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharp.Diffing.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\AngleSharpWrappers.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\Bunit.Core.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\Bunit.Web.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\CatQLClient.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\bin\Debug\net5.0\nunit.framework.dll
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\AdminView\Administration.razor.g.cs
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\BecomeGuest\BecomeGuest.razor.g.cs
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterHost\RegisterHost.razor.g.cs
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\AdminView\Administration.razor.g.cs
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\BecomeGuest\BecomeGuest.razor.g.cs
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\Razor\Pages\RegisterHost\RegisterHost.razor.g.cs
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\BecomeGuest\BecomeGuest.razor.rz.scp.css
+C:\Users\bitta\repos\VIABnb-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\Pages\RegisterHost\RegisterHost.razor.rz.scp.css

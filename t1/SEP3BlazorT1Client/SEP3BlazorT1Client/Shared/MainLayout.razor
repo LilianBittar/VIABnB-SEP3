@@ -22,22 +22,28 @@
 @* Documentation for MatBlazor can be found at: https://www.matblazor.com/ *@
 
 <MatAppBarContainer>
-    <MatAppBar Fixed="true">
+    <MatAppBar Fixed="true" class="mat-elevation-z4">
         <MatAppBarRow>
             <MatAppBarSection>
                 <MatIconButton Icon="menu" @onclick="MenuClicked"></MatIconButton>
                 <MatAppBarTitle>VIA BnB</MatAppBarTitle>
             </MatAppBarSection>
             <MatAppBarSection Align="@MatAppBarSectionAlign.End">
-                <MatButtonLink class="text-white nav-link" Match="NavLinkMatch.All" href="/">
+                <MatButtonLink class="text-white nav-link mat-elevation-z14" Match="NavLinkMatch.All" href="/" Style="margin-right: 1em;">
                     Home
                 </MatButtonLink>
-                <MatButtonLink class="text-white nav-link" href="/registerresidence">
+                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/registerresidence" Style="margin-right: 1em;">
                     About
                 </MatButtonLink>
-                <MatButtonLink class="text-white nav-link" href="" Style="background-color: darkred">
-                    Become Host
+                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/BecomeGuest" Style="margin-right: 1em;">
+                    Become Guest
                 </MatButtonLink>
+                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/Administration" Style="margin-right: 1em;">
+                    Administration
+                </MatButtonLink>
+                <MatButton class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
+                    Log out
+                </MatButton>
             </MatAppBarSection>
         </MatAppBarRow>
     </MatAppBar>
@@ -46,23 +52,26 @@
         @* Navigation modal. Opens the side menu *@
         <MatDrawerContainer Style="width: 100vw; height: 100vh">
             <MatDrawer @bind-Opened="_opened" Mode="MatDrawerMode.Modal">
-            <MatListGroup>
-                <MatListGroupSubHeader Style="margin-top: 1rem">Manage residences</MatListGroupSubHeader>
-                <MatList>
-                    <MatListItem Href="/registerresidence" >
-                        Register Residence
-                    </MatListItem>
-                    <MatListItem Href="/buildingsoverview" >
-                        Buildings overview 
-                    </MatListItem>
+                <MatListGroup>
+                    <MatListGroupSubHeader Style="margin-top: 1rem">Manage residences</MatListGroupSubHeader>
+                    <MatList>
+                        <MatListItem Href="/registerresidence" >
+                            Register Residence
+                        </MatListItem>
+                        <MatListItem Href="/buildingsoverview" >
+                            Buildings overview 
+                        </MatListItem>
+                        <MatListItem Href="/registerhost" >
+                            Register 
+                        </MatListItem>
                     
-                </MatList>
-            </MatListGroup>
+                    </MatList>
+                </MatListGroup>
             </MatDrawer>
             <MatDrawerContent>
-                <div class="container">
-                @Body
-                </div>
+                <div class="container"> 
+                    @Body 
+                </div> 
             </MatDrawerContent>
         </MatDrawerContainer>
     </MatAppBarContent>
@@ -77,4 +86,16 @@
         _opened = !_opened;
     }
     
+    
+    public async Task LogOut()
+    {
+    /*try
+        {
+            ((CustomAuthenticationStateProvider) authenticationStateProvider).Logout();
+            navigationManager.NavigateTo("/login");
+        }
+        catch (Exception e)
+        {
+        }*/
+    }
 }
