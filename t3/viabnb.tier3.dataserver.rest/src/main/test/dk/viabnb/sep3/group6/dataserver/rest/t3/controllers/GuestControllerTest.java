@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 
-class GuestRegistrationControllerTest {
+class GuestControllerTest {
     private GuestDAO guestDAO;
     private GuestController controller;
 
