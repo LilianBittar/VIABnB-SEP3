@@ -4,7 +4,7 @@
 @using System.IO
 @using System.Text
 @inject MatDialogService MatDialogService
-@inject IAdministrationService _administrationService
+@inject IGuestRegistrationRequestService guestRegistrationRequest
 @inject NavigationManager NavigationManager
 
 
@@ -60,7 +60,7 @@
         try
         {
             _errorLabel = "";
-            await _administrationService.CreateGuestRegistrationRequestAsync(_newGuestRegistrationRequest);
+            await guestRegistrationRequest.CreateGuestRegistrationRequestAsync(_newGuestRegistrationRequest);
             _dialogIsOpen = false;
             ResetModel();
             StateHasChanged();

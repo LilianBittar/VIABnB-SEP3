@@ -10,7 +10,7 @@ using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 namespace SEP3BlazorT1Client.Data.Impl
 {
     //TODO: Maybe rename this service to UserService or RegistrationRequestService, since administration is maybe a bit vague? - Micmic
-    public class GraphQlAdministrationService : IAdministrationService
+    public class GraphQlAdministrationService : IGuestRegistrationRequestService
     {
         private const string Url = "https://localhost:5001/graphql";
         private GqlClient client = new GqlClient(Url) {EnableLogging = true};
@@ -88,6 +88,11 @@ namespace SEP3BlazorT1Client.Data.Impl
         public Task<IEnumerable<GuestRegistrationRequest>> GetAllGuestRegistrationRequestsAsync()
         {
             throw new System.NotImplementedException();
+        }
+
+        public Task UpdateGuestRegistrationRequestAsync(GuestRegistrationRequest request)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<GuestRegistrationRequest> ApproveGuestRegistrationRequestAsync(int requestId)
