@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HostAuthenticationDAOTest {
 
-    private HostAuthenticationDAO hostAuthenticationDAO;
+    private HostDAO hostDAO;
     private String email;
     private int id;
 
@@ -23,7 +23,7 @@ class HostAuthenticationDAOTest {
     @BeforeEach
     void setUp()
     {
-        hostAuthenticationDAO = new HostAuthenticationDAOTest();
+        hostDAO = new HostJsonDAO();
         email = "catman@catnet.com";
         id = 1;
 
@@ -32,13 +32,13 @@ class HostAuthenticationDAOTest {
     @Test
     void getHostByIdSunnyScenario()
     {
-        assertDoesNotThrow(() -> hostAuthenticationDAO.getHostById(id));
+        assertDoesNotThrow(() -> hostDAO.getHostById(id));
     }
 
 
     @Test
     void getHostByEmailSunnyScenario()
     {
-        assertDoesNotThrow(() -> hostAuthenticationDAO.getHostByEmail(email));
+        assertDoesNotThrow(() -> hostDAO.getHostByEmail(email));
     }
 }

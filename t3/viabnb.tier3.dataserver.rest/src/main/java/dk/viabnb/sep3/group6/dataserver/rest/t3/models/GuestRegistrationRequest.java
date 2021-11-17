@@ -5,14 +5,16 @@ public class GuestRegistrationRequest
   private int id;
   private int studentNumber;
   private String studentImage;
+  private Host host;
   private RequestStatus status = RequestStatus.NotAnswered;
 
   public GuestRegistrationRequest(int id, int studentNumber,
-      String studentImage, RequestStatus status)
+      String studentImage, Host host, RequestStatus status)
   {
     this.id = id;
     this.studentNumber = studentNumber;
     this.studentImage = studentImage;
+    this.host = host;
     this.status = status;
   }
 
@@ -56,4 +58,13 @@ public class GuestRegistrationRequest
     this.status = status;
   }
 
+  public Host getHost()
+  {
+    return host;
+  }
+
+  public void setHost(Host host)
+  {
+    this.host = host;
+  }
 }

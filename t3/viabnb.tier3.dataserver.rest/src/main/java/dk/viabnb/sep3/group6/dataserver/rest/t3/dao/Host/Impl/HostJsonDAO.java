@@ -65,5 +65,25 @@ public class HostJsonDAO implements HostDAO {
         }
         return null;
     }
+
+    @Override public Host getHostById(int Id)
+    {
+        for (int i = 0; i < hosts.size(); i++){
+            if(hosts.get(i).getId()==Id){
+                return hosts.get(i);
+            }
+        }
+        return null;
+    }
+    @Override public Host getHostByEmail(String email)
+    {
+        for (int i = 0; i < hosts.size(); i++){
+            if(hosts.get(i).getEmail().equals(email)){
+                return hosts.get(i);
+            }
+        }
+        return null;
+    }
+
 }
 

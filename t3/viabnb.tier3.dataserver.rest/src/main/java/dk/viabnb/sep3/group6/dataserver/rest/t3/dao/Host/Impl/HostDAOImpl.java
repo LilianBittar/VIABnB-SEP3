@@ -9,4 +9,14 @@ public class HostDAOImpl implements HostDAO {
     public Host RegisterHost(Host host) {
         return null;
     }
+
+    @Override public Host getHostByEmail(String email)
+    {
+        return null;
+    }
+
+    @Override public Host getHostById(int Id)
+    {
+        return null;
+    }
 }
