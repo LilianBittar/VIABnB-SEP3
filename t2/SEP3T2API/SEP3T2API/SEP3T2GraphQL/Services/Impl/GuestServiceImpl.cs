@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
@@ -20,12 +21,9 @@ namespace SEP3T2GraphQL.Services.Impl
         {
             GuestValidator.ValidateGuest(guest);
             var allGuests = await GetAllGuests();
-            foreach (var g in allGuests)
+            if (allGuests.Any(g => g.ViaId == guest.ViaId))
             {
-                if (g.ViaId == guest.ViaId)
-                {
-                    throw new ArgumentException("Guest with provided student number already exists"); 
-                }
+                throw new ArgumentException("Guest with provided student number already exists");
             }
 
             guest.IsApprovedGuest = false; 
