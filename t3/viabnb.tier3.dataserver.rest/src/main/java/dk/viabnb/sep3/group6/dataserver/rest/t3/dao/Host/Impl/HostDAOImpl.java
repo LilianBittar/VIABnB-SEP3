@@ -63,7 +63,9 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                         result.getString("cprnumber"),
                         result.getBoolean("isapproved")
                     );
+                hostsToReturn.add(hostToAdd);
             }
+            return hostsToReturn;
         }
         catch (SQLException throwables)
         {
