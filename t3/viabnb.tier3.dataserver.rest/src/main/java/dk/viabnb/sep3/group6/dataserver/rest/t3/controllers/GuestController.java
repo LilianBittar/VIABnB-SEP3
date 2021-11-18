@@ -2,7 +2,6 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.GuestRegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -83,7 +82,7 @@ public class GuestController {
         }
     }
     @GetMapping("/guests/{id}")
-    public ResponseEntity<List<GuestRegistrationRequest>> getGuestByHostId(@PathVariable("id") int id)
+    public ResponseEntity<List<Guest>> getGuestByHostId(@PathVariable("id") int id)
     {
         Guest guest;
         guest = guestDAO.getGuestByHostId(id);

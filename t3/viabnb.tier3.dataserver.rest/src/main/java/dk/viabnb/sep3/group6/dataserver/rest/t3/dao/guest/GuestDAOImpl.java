@@ -45,8 +45,4 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
         return null;
     }
 
-    @Override
-    public Guest getGuestRegistrationRequestById(int requestId) {
-        return null;
-    }
 }
