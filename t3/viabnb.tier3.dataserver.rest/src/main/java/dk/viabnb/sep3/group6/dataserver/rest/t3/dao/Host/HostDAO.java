@@ -11,7 +11,7 @@ public interface HostDAO {
     Host getHostById(int Id);
     List<Host> getAllHosts();
     List<Host> getAllNotApprovedHosts();
-    void approveHost(Host host);
-    void rejectHost(Host host);
+    Host approveHost(Host host);
+    Host rejectHost(Host host);
 
 }

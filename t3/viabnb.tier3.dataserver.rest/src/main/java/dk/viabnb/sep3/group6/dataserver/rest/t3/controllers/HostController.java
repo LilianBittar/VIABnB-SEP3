@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public class HostController {
 
@@ -25,9 +25,6 @@ public class HostController {
     {
         this.hostDAO = hostDAO;
     }
-
-
-
 
     @PostMapping("/host")
     public ResponseEntity<Host> createHost(@RequestBody Host host  )
@@ -59,5 +56,40 @@ public class HostController {
             return ResponseEntity.internalServerError().build();
         }
         return new ResponseEntity<>(host, HttpStatus.OK);
+    }
+
+    @GetMapping("/hosts?isApprovedHost=false")
+    public ResponseEntity<List<Host>> getAllNotApprovedHosts()
+    {
+        List<Host> hostsToReturn;
+        hostsToReturn = hostDAO.getAllNotApprovedHosts();
+        if (hostsToReturn == null)
+        {
+            return ResponseEntity.internalServerError().build();
+        }
+        return new ResponseEntity<>(hostsToReturn, HttpStatus.OK);
+    }
+
+    @PatchMapping("/host/approval/{id}")
+    public ResponseEntity<Host> updateHostStatus(@RequestBody Host host)
+    {
+        try
+        {
+            if (host.isApprovedHost())
+            {
+                Host approvedHost = hostDAO.approveHost(host);
+                return ResponseEntity.ok(approvedHost);
+            }
+            else if (!host.isApprovedHost())
+            {
+                Host rejectedHost = hostDAO.rejectHost(host);
+                return ResponseEntity.ok(rejectedHost);
+            }
+            return ResponseEntity.badRequest().build();
+        }
+        catch (NoSuchElementException e)
+        {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

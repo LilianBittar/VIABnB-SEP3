@@ -73,7 +73,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
         return null;
     }
 
-    @Override public void approveHost(Host host)
+    @Override public Host approveHost(Host host)
     {
         try(Connection connection = getConnection())
         {
@@ -82,14 +82,16 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             stm.setInt(1, host.getId());
             stm.executeUpdate();
             connection.commit();
+            return host;
         }
         catch (SQLException throwables)
         {
             throwables.printStackTrace();
         }
+        return null;
     }
 
-    @Override public void rejectHost(Host host)
+    @Override public Host rejectHost(Host host)
     {
         try(Connection connection = getConnection())
         {
@@ -98,10 +100,12 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             stm.setInt(1, host.getId());
             stm.executeUpdate();
             connection.commit();
+            return host;
         }
         catch (SQLException throwables)
         {
             throwables.printStackTrace();
         }
+        return null;
     }
 }
