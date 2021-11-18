@@ -2,7 +2,6 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.Impl;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -74,13 +73,35 @@ public class HostDAOImpl extends BaseDao implements HostDAO
         return null;
     }
 
-    @Override public Host approveGuest(Guest guest)
+    @Override public void approveHost(Host host)
     {
-        return null;
+        try(Connection connection = getConnection())
+        {
+            PreparedStatement stm = connection.prepareStatement
+                ("UPDATE viabnb.host SET isapproved = true WHERE hostid = ?");
+            stm.setInt(1, host.getId());
+            stm.executeUpdate();
+            connection.commit();
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
 
-    @Override public Host rejectGuest(Guest guest)
+    @Override public void rejectHost(Host host)
     {
-        return null;
+        try(Connection connection = getConnection())
+        {
+            PreparedStatement stm = connection.prepareStatement
+                ("DELETE FROM viabnb.host WHERE hostid = ?");
+            stm.setInt(1, host.getId());
+            stm.executeUpdate();
+            connection.commit();
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
 }
