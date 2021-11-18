@@ -12,11 +12,12 @@ public class Host
   private String password;
   private List<HostReview> hostReviews;
   private String profileImageUrl;
+  private String cpr;
   private boolean isApprovedHost;
 
   public Host(int id, String firstName, String lastName, String phoneNumber,
       String email, String password, List<HostReview> hostReviews,
-      String profileImageUrl, boolean isApprovedHost)
+      String profileImageUrl, String cpr, boolean isApprovedHost)
   {
     this.id = id;
     this.firstName = firstName;
@@ -26,6 +27,7 @@ public class Host
     this.password = password;
     this.hostReviews = hostReviews;
     this.profileImageUrl = profileImageUrl;
+    this.cpr = cpr;
     this.isApprovedHost = isApprovedHost;
   }
 
@@ -107,5 +109,25 @@ public class Host
   public void setProfileImageUrl(String profileImageUrl)
   {
     this.profileImageUrl = profileImageUrl;
+  }
+
+  public String getCpr()
+  {
+    return cpr;
+  }
+
+  public void setCpr(String cpr)
+  {
+    this.cpr = cpr;
+  }
+
+  public boolean isApprovedHost()
+  {
+    return isApprovedHost;
+  }
+
+  public void setApprovedHost(boolean approvedHost)
+  {
+    isApprovedHost = approvedHost;
   }
 }

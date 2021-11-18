@@ -11,6 +11,7 @@ public interface HostDAO {
     Host getHostByEmail(String email);
     Host getHostById(int Id);
     List<Host> getAllHosts();
+    List<Host> getAllNotApprovedHosts();
     Host approveGuest(Guest guest);
     Host rejectGuest(Guest guest);
 
