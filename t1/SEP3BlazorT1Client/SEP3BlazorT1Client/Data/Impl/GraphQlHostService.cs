@@ -30,31 +30,12 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new System.NotImplementedException();
         }
 
-        public async Task<List<Host>> GetAllNotApprovedHostsAsync(bool status)
+        public async Task<List<Host>> GetAllNotApprovedHostsAsync()
         {
             GqlClient client = new GqlClient(Url);
             var hostQuery = new GqlQuery()
             {
-                Query = @"query{
-                          allNotApporvedHost{
-                            id, 
-                            firstName,
-                            lastName,
-                            phoneNumber,
-                            email,
-                            password,
-                            hostReviews{
-                            id,
-                            rating,
-                            text,
-                            viaId
-                            }
-                            cpr,
-                            profileImageUrl,
-                            isApprovedHost
-                          }
-                        }
-                        "
+                Query = @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId}cpr,profileImageUrl,isApprovedHost}}"
             };
             var graphQLResponse = await client.PostQueryAsync<HostListResponseType>(hostQuery);
             return graphQLResponse.Data.Hosts;
