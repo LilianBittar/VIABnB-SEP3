@@ -78,11 +78,14 @@ namespace SEP3BlazorT1Client.Authentication
         {
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, host.FirstName));
-            claims.Add(new Claim("Last name", host.LastName));
+            claims.Add(new Claim("Lastname", host.LastName));
             claims.Add(new Claim("Email", host.Email));
             claims.Add(new Claim("Password", host.Password));
-          
-        
+            claims.Add(new Claim("Id", host.Id.ToString()));
+            claims.Add(new Claim("PhoneNumber", host.PhoneNumber));
+            claims.Add(new Claim("Cpr", host.Cpr));
+            claims.Add(new Claim("ProfileImageUrl", host.ProfileImageUrl));
+            claims.Add(new Claim("IsApprovedHost", host.IsApprovedHost.ToString()));
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }
