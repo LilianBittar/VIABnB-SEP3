@@ -58,7 +58,7 @@ public class HostController {
         return new ResponseEntity<>(host, HttpStatus.OK);
     }
 
-    @GetMapping("/hosts?isApprovedHost=false")
+    @GetMapping("/hosts/notApproved")
     public ResponseEntity<List<Host>> getAllNotApprovedHosts()
     {
         List<Host> hostsToReturn;
@@ -67,6 +67,7 @@ public class HostController {
         {
             return ResponseEntity.internalServerError().build();
         }
+        System.out.println(hostsToReturn.get(1).getId());
         return new ResponseEntity<>(hostsToReturn, HttpStatus.OK);
     }
 
