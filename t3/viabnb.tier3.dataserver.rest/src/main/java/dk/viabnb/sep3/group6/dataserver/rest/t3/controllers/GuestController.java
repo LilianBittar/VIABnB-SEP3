@@ -29,6 +29,7 @@ public class GuestController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
+
         if (createdRequest == null) {
             return ResponseEntity.internalServerError().build();
         }
@@ -37,17 +38,17 @@ public class GuestController {
     }
 
     @GetMapping("/guests")
-    public ResponseEntity<List<Guest>> getAllGuests() {
-       /*
-       Maybe??
-       List<GuestRegistrationRequest> requests;
-        requests = administrationDAO.getAllGuestRegistrationRequest();
-        if (requests == null)
-        {
-            return ResponseEntity.internalServerError().build();
+    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam Boolean isApproved) {
+
+        try {
+            List<Guest> allGuests = guestDAO.getAllGuests();
+            if (isApproved != null){
+                allGuests.removeIf(g -> g.isApprovedGuest() != isApproved);
+            }
+            return ResponseEntity.ok(allGuests);
+        } catch (Exception e) {
+           return ResponseEntity.internalServerError().build();
         }
-        return new ResponseEntity<>(requests, HttpStatus.OK);*/
-        return ResponseEntity.ok(guestDAO.getAllGuests());
     }
 
     /*
@@ -82,15 +83,15 @@ public class GuestController {
         }
     }
     @GetMapping("/guests/{id}")
-    public ResponseEntity<List<Guest>> getGuestByHostId(@PathVariable("id") int id)
+    public ResponseEntity<Guest> getGuestByHostId(@PathVariable("id") int id)
     {
         Guest guest;
         guest = guestDAO.getGuestByHostId(id);
-        if (guest == null)
-        {
+        try {
+            return ResponseEntity.ok(guest);
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
-        return new ResponseEntity(guest, HttpStatus.OK);
     }
 
 }

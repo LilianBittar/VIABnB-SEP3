@@ -2,7 +2,6 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
-import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +27,25 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
 
     @Override
     public List<Guest> getAllGuests() {
-        return null;
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement("select * from host h join guest g on h.hostid = g.guestid");
+            ResultSet result = stm.executeQuery();
+            List<Guest> allGuests = new ArrayList<>();
+            while (result.next()){
+            Guest existingGuest =  new Guest(result.getInt("hostid"),
+                    result.getString("fname"), result.getString("lname"),
+                    result.getString("phonenumber"), result.getString("email"),
+                    result.getString("password"), new ArrayList<>(),
+                    result.getString("personalimage"),
+                    result.getString("cprnumber"),
+                    result.getBoolean("isapproved"), result.getInt("viaid"),
+                    result.getBoolean("isapprovedguest"));
+                allGuests.add(existingGuest);
+            }
+            return allGuests;
+        } catch (SQLException throwables) {
+            throw new IllegalStateException(throwables.getMessage());
+        }
     }
 
     @Override
