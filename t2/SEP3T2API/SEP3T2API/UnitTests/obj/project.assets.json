@@ -8306,28 +8306,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Micha\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet": {}
+    "C:\\Users\\kkash\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
       "projectName": "UnitTests",
-      "projectPath": "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
-      "packagesPath": "C:\\Users\\Micha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\obj\\",
+      "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
+      "packagesPath": "C:\\Users\\kkash\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Micha\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\kkash\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -8340,8 +8332,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj": {
-              "projectPath": "C:\\Users\\Micha\\Documents\\Coding\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj"
+            "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj": {
+              "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj"
             }
           }
         }
@@ -8399,20 +8391,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[5.0.0, 5.0.0]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[5.0.0, 5.0.0]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[5.0.0, 5.0.0]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"

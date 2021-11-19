@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 
 namespace SEP3T2GraphQL.Services
@@ -10,5 +11,7 @@ namespace SEP3T2GraphQL.Services
         Task<Host> ValidateHostAsync(Host host);
         Task<Host> GetHostByEmail(string email);
         Task<Host> GetHostById(int id);
+        Task<List<Host>> GetAllNotApprovedHostsAsync();
+        Task<Host> UpdateHostStatusAsync(Host host);
     }
 }

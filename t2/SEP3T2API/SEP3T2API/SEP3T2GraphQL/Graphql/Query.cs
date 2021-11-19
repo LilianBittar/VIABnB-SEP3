@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using HotChocolate;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
@@ -8,15 +9,21 @@ namespace SEP3T2GraphQL.Graphql
 {
     public class Query
     {
-        private IResidenceService _residenceService; 
-        public Query(IResidenceService residenceService)
+        private IResidenceService _residenceService;
+        private IHostService _hostService;
+        public Query(IResidenceService residenceService, IHostService hostService)
         {
-            _residenceService = residenceService; 
+            _residenceService = residenceService;
+            _hostService = hostService;
         }
         public async Task<Residence> GetResidence(int id)
         {
             return await _residenceService.GetResidenceByIdAsync(id); 
         }
-        
+
+        public async Task<List<Host>> GetAllNotApporvedHost()
+        {
+            return await _hostService.GetAllNotApprovedHostsAsync();
+        }
     }
 }

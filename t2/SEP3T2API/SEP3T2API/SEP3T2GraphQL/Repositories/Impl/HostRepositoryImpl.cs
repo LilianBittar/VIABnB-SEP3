@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -96,6 +97,35 @@ namespace SEP3T2GraphQL.Repositories.Impl
         public Task<Host> UpdateHost(Host host)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<Host>> GetAllNotApprovedHosts()
+        {
+            HttpResponseMessage response = await client.GetAsync(uri + $"hosts/notApproved");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {response.StatusCode}, {response.ReasonPhrase}");
+            }
+
+            string result = await response.Content.ReadAsStringAsync();
+            List<Host> hostListToReturn = JsonSerializer.Deserialize<List<Host>>(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return hostListToReturn;
+        }
+
+        public async Task<Host> UpdateHostStatus(Host host)
+        {
+            string hostAsJson = JsonSerializer.Serialize(host);
+            HttpContent content = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PatchAsync(uri + $"/host/{host.Id}/approval", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"$Error: {response.StatusCode}, {response.ReasonPhrase}");
+            }
+
+            return host;
         }
     }
 }
