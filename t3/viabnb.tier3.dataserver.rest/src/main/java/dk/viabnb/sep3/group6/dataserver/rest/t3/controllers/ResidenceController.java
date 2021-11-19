@@ -19,7 +19,7 @@ import java.util.List;
   private ResidenceDAO residenceDAO;
   private Gson gson = new GsonBuilder().serializeNulls().create();
 
-  @Autowired public ResidenceController(@Qualifier("residenceJsonDAO") ResidenceDAO residenceDAO)
+  @Autowired public ResidenceController(/*@Qualifier("residenceJsonDAO")*/ ResidenceDAO residenceDAO)
   {
     this.residenceDAO = residenceDAO;
   }

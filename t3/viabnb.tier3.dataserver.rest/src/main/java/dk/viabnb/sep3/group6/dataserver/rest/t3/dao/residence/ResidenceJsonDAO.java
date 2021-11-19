@@ -1,3 +1,4 @@
+/*
 package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository @Scope("singleton") public class ResidenceJsonDAO
-    implements ResidenceDAO
 {
   private final String RESIDENCE_FILE = "residences.json";
   private List<Residence> residences;
@@ -125,3 +125,4 @@ import java.util.List;
     return null;
   }
 }
+*/
