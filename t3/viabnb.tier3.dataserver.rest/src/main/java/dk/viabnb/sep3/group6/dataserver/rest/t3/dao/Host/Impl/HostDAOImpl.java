@@ -78,7 +78,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
         try(Connection connection = getConnection())
         {
             PreparedStatement stm = connection.prepareStatement
-                ("UPDATE viabnb.host SET isapproved = true WHERE hostid = ?");
+                ("UPDATE host SET isapproved = true WHERE hostid = ?");
             stm.setInt(1, host.getId());
             stm.executeUpdate();
             connection.commit();
@@ -96,7 +96,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
         try(Connection connection = getConnection())
         {
             PreparedStatement stm = connection.prepareStatement
-                ("DELETE FROM viabnb.host WHERE hostid = ?");
+                ("DELETE FROM host WHERE hostid = ?");
             stm.setInt(1, host.getId());
             stm.executeUpdate();
             connection.commit();

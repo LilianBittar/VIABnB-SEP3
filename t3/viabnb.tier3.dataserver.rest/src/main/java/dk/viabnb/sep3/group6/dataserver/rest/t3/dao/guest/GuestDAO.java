@@ -1,6 +1,7 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
 
 import java.util.List;
 
@@ -10,5 +11,6 @@ public interface GuestDAO {
     public Guest approveGuest(Guest guest);
     public Guest rejectGuest(Guest guest);
     Guest getGuestByHostId(int id);
+    //List<Guest> getAllNotApprovedGuests();
 
 }
