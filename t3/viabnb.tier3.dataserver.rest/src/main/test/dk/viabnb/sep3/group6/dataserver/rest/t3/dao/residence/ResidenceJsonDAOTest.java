@@ -24,7 +24,7 @@ class ResidenceJsonDAOTest
 
   @BeforeEach void setUp()
   {
-    residenceDAO = new ResidenceJsonDAO();
+    residenceDAO = new ResidenceDAOImpl();
 
     address = new Address(1, "streetNameTest", "h1", "cityTest", "s1", 1111);
 

@@ -15,13 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class HostController {
+@RestController
+public class HostController
+{
 
     private HostDAO hostDAO;
     private Gson gson = new GsonBuilder().serializeNulls().create();
 
     @Autowired
-    public HostController(@Qualifier("HostJsonDAO") HostDAO hostDAO)
+    public HostController(/*@Qualifier("HostDAOImpl") */HostDAO hostDAO)
     {
         this.hostDAO = hostDAO;
     }
