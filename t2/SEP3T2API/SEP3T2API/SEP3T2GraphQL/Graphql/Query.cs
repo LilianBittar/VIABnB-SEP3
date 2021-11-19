@@ -21,7 +21,7 @@ namespace SEP3T2GraphQL.Graphql
             return await _residenceService.GetResidenceByIdAsync(id); 
         }
 
-        public async Task<List<Host>> GetAllNotApporvedHost()
+        public async Task<List<Host>> GetAllNotApprovedHost()
         {
             return await _hostService.GetAllNotApprovedHostsAsync();
         }
