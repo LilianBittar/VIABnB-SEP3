@@ -6,9 +6,9 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public partial class GuestServiceImpl : IGuestService
     {
-        public Task<Guest> GetGuestById(int id)
+        public async Task<Guest> GetGuestById(int id)
         {
-            throw new System.NotImplementedException();
+            return await _guestRepository.GetGuestById(id); 
         }
 
         public Task<Guest> GetGuestByEmail(string email)
@@ -21,9 +21,9 @@ namespace SEP3T2GraphQL.Services.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<IList<Guest>> GetAllGuests()
+        public async Task<IList<Guest>> GetAllGuests()
         {
-            throw new System.NotImplementedException();
+            return await _guestRepository.GetAllGuests(); 
         }
 
         public Task<IList<Guest>> GetAllNotApprovedGuests()
