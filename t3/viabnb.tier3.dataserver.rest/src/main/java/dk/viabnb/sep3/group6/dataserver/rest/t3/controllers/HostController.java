@@ -69,7 +69,6 @@ public class HostController
         {
             return ResponseEntity.internalServerError().build();
         }
-        System.out.println(hostsToReturn.get(1).getId());
         return new ResponseEntity<>(hostsToReturn, HttpStatus.OK);
     }
 

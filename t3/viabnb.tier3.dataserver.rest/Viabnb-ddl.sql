@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS Guest
     viaId           INT,
     isApprovedGuest BOOLEAN,
     PRIMARY KEY (guestId),
-    FOREIGN KEY (guestId) REFERENCES Host (hostid)
+    FOREIGN KEY (guestId) REFERENCES Host (hostid) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS GuestReview
