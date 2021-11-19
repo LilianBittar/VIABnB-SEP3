@@ -70,8 +70,8 @@ public class HostController {
         return new ResponseEntity<>(hostsToReturn, HttpStatus.OK);
     }
 
-    @PatchMapping("/host/approval/{id}")
-    public ResponseEntity<Host> updateHostStatus(@RequestBody Host host)
+    @PatchMapping("/host/{id}/approval")
+    public ResponseEntity<Host> updateHostStatus(@RequestBody Host host, @RequestParam("id") int id )
     {
         try
         {
