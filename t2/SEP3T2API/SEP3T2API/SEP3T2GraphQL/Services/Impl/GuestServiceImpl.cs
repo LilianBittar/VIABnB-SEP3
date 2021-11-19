@@ -11,14 +11,26 @@ namespace SEP3T2GraphQL.Services.Impl
     public partial class GuestServiceImpl : IGuestService
     {
         private IGuestRepository _guestRepository;
+        private IHostService _hostService; 
 
-        public GuestServiceImpl(IGuestRepository guestRepository)
+        public GuestServiceImpl(IGuestRepository guestRepository, IHostService hostService)
         {
             _guestRepository = guestRepository;
+            _hostService = hostService;
         }
 
         public async Task<Guest> CreateGuestAsync(Guest guest)
         {
+            if (guest == null)
+            {
+                throw new ArgumentException("guest cannot be null"); 
+            }
+            var existingHost = await _hostService.GetHostById(guest.Id);
+            if (existingHost == null)
+            {
+                throw new KeyNotFoundException("Host does not exist"); 
+            }
+            
             GuestValidator.ValidateGuest(guest);
             var allGuests = await GetAllGuests();
             if (allGuests.Any(g => g.ViaId == guest.ViaId))
