@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
@@ -30,7 +31,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new System.NotImplementedException();
         }
 
-        public async Task<List<Host>> GetAllNotApprovedHostsAsync()
+        public async Task<IList<Host>> GetAllNotApprovedHostsAsync()
         {
             GqlClient client = new GqlClient(Url);
             var hostQuery = new GqlQuery()
@@ -38,6 +39,11 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Query = @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId}cpr,profileImageUrl,isApprovedHost}}"
             };
             var graphQLResponse = await client.PostQueryAsync<HostListResponseType>(hostQuery);
+            Console.WriteLine(graphQLResponse.Data.Hosts);
+            foreach (Host host in graphQLResponse.Data.Hosts)
+            {
+                Console.WriteLine(host.ToString());
+            }
             return graphQLResponse.Data.Hosts;
         }
 

@@ -23,6 +23,12 @@ namespace SEP3BlazorT1Client.Models
         public string Cpr { get; set; }
 
         public string ProfileImageUrl { get; set; }
-        public bool IsApprovedHost { get; set; } = false; 
+        public bool IsApprovedHost { get; set; } = false;
+
+        public override string ToString()
+        {
+            return
+                $"{Id} {FirstName} {LastName} {PhoneNumber} {Email} {Password} {Cpr} {ProfileImageUrl} {IsApprovedHost}";
+        }
     }
 }
