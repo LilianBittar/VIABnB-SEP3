@@ -10,10 +10,12 @@ public class Guest extends Host
 
   public Guest(int id, String firstName, String lastName, String phoneNumber,
       String email, String password, List<HostReview> hostReviews,
-      String profileImageUrl, String cpr, boolean isApprovedHost)
+      String profileImageUrl, String cpr, boolean isApprovedHost, int viaId, boolean isApprovedGuest)
   {
     super(id, firstName, lastName, phoneNumber, email, password, hostReviews,
         profileImageUrl, cpr, isApprovedHost);
+    this.viaId = viaId;
+    this.isApprovedGuest = isApprovedGuest;
   }
 
   public int getViaId()

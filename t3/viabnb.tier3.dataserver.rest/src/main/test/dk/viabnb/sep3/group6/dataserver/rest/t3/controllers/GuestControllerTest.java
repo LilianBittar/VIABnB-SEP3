@@ -26,10 +26,10 @@ class GuestControllerTest {
 
     @Test
     void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNull() {
-//        Guest guest = new Guest(1, "test", "test", "+4588888888", "test@test.test", "test", new ArrayList<HostReview>(), "test", false, 293886, new ArrayList<GuestReview>(), false);
-//        when(guestDAO.createGuest(guest)).thenReturn(null);
-//        ResponseEntity<Guest> response = controller.createGuest(guest);
-//        Assertions.assertEquals(ResponseEntity.internalServerError().build(), response);
+        Guest guest = new Guest(1, "test", "test", "+4588888888", "test@test.com", "test123", new ArrayList<>(), null, "111111-1111", false, 293886, false);
+        when(guestDAO.createGuest(guest)).thenReturn(null);
+        ResponseEntity<Guest> response = controller.createGuest(guest);
+        Assertions.assertEquals(ResponseEntity.internalServerError().build(), response);
 
     }
 }

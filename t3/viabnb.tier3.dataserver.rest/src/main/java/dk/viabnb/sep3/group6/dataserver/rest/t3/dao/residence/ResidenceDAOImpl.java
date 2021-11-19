@@ -6,8 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 //TODO: Implement this later. Use ResidenceJsonDAO as tempoary storage.
-@Repository
-@Scope("singleton")
+
 public class ResidenceDAOImpl implements ResidenceDAO
 {
 

@@ -6,10 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public class GuestDAOImpl extends BaseDao implements GuestDAO {
     @Override
     public Guest createGuest(Guest guest) {
@@ -42,7 +43,22 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
 
     @Override
     public Guest getGuestByHostId(int id) {
-        return null;
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement("select * from host h join guest g on h.hostid = g.guestid where h.hostid = ?");
+            stm.setInt(1, id);
+            ResultSet result = stm.executeQuery();
+            result.next();
+            return new Guest(result.getInt("hostid"),
+                    result.getString("fname"), result.getString("lname"),
+                    result.getString("phonenumber"), result.getString("email"),
+                    result.getString("password"), new ArrayList<>(),
+                    result.getString("personalimage"),
+                    result.getString("cprnumber"),
+                    result.getBoolean("isapproved"), result.getInt("viaid"),
+                    result.getBoolean("isapprovedguest"));
+        } catch (SQLException throwables) {
+            throw new IllegalStateException(throwables.getMessage());
+        }
     }
 
 }
