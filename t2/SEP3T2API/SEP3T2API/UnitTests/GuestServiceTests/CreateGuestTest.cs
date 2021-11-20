@@ -47,6 +47,7 @@ namespace UnitTests.GuestServiceTests
         [Test]
         public void CreateGuest_HostDoesNotExist_ThrowsKeyNotFoundException()
         {
+            //This test caught an bug where NullReferenceException was thrown instead of KeyNotfound
             Guest guest = new()
             {
                 Id = 2, Cpr = "222222-2222", Email = "test@test.com", Password = "test123123", FirstName = "test",

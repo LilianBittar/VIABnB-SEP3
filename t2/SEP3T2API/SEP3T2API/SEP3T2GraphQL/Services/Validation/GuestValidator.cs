@@ -32,9 +32,20 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <param name="guest">Guest who's email is to be validated </param>
         /// <exception cref="ArgumentException">Email does not contain @</exception>
         /// <exception cref="ArgumentException">Email ends with a dot</exception>
+        /// <exception cref="ArgumentException">Email is null</exception>
         private static void ValidateEmail(Guest guest)
         {
+            if (guest.Email == null)
+            {
+                throw new ArgumentException("Email cannot be null"); 
+            }
+            
             if (guest.Email.Trim().EndsWith("."))
+            {
+                throw new ArgumentException("Invalid email");
+            }
+
+            if (!guest.Email.Contains("."))
             {
                 throw new ArgumentException("Invalid email");
             }
