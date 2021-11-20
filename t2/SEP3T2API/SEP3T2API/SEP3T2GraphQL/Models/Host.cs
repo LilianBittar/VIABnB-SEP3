@@ -18,7 +18,7 @@ namespace SEP3T2GraphQL.Models
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-        public IList<HostReview> HostReviews { get; set; } = new List<HostReview>();
+        public IList<HostReview>? HostReviews { get; set; } = new List<HostReview>();
         public string ProfileImageUrl { get; set; }
         [Required]
         public string Cpr { get; set; }

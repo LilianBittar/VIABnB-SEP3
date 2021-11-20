@@ -39,7 +39,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlClient client = new GqlClient(Url);
             var hostQuery = new GqlQuery()
             {
-                Query = @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},cpr,profileImageUrl,isApprovedHost}}",
+                Query = @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
             };
             GqlRequestResponse<HostListResponseType> graphQlResponse = await client.PostQueryAsync<HostListResponseType>(hostQuery);
             Console.WriteLine(JsonSerializer.Serialize(graphQlResponse));
