@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
+using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Models;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3BlazorT1Client.Data.Impl
 {
@@ -46,9 +47,22 @@ namespace SEP3BlazorT1Client.Data.Impl
             return graphQlResponse.Data.Hosts;
         }
 
-        public Task<Host> UpdateHostStatusAsync(Host host)
+        public async Task<Host> UpdateHostStatusAsync(Host host)
         {
-            throw new System.NotImplementedException();
+            GqlClient client = new GqlClient(Url) {EnableLogging = true};
+            GqlQuery hostMutation = new GqlQuery()
+            {
+                Query =
+                    "@mutation($hostInput: HostInput){updateHostStatus(host: $hostInput){id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
+                Variables = new {hostInput = host}
+            };
+            var response = await client.PostQueryAsync<UpdateHostMutationResponseType>(hostMutation);
+            if (response.Errors != null)
+            {
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4].Split(":")[2]);
+            }
+
+            return response.Data.UpdateHost;
         }
 
         public Task<Host> UpdateHost(Host host)

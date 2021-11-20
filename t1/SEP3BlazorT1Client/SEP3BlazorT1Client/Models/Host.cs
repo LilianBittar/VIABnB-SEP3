@@ -26,7 +26,7 @@ namespace SEP3BlazorT1Client.Models
         [JsonProperty("password")]
         public string Password { get; set; }
         [JsonProperty("hostReviews", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<HostReview> HostReviews { get; set; } = new List<HostReview>();
+        public IList<HostReview>? HostReviews { get; set; } = new List<HostReview>();
         [JsonProperty("profileImageUrl")]
         public string ProfileImageUrl { get; set; }
         [Required]
