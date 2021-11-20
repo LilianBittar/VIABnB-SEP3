@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
+using CatQL.GraphQL.QueryResponses;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Models;
 
@@ -36,15 +39,11 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlClient client = new GqlClient(Url);
             var hostQuery = new GqlQuery()
             {
-                Query = @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId}cpr,profileImageUrl,isApprovedHost}}"
+                Query = @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},cpr,profileImageUrl,isApprovedHost}}",
             };
-            var graphQLResponse = await client.PostQueryAsync<HostListResponseType>(hostQuery);
-            Console.WriteLine(graphQLResponse.Data.Hosts);
-            foreach (Host host in graphQLResponse.Data.Hosts)
-            {
-                Console.WriteLine(host.ToString());
-            }
-            return graphQLResponse.Data.Hosts;
+            GqlRequestResponse<HostListResponseType> graphQlResponse = await client.PostQueryAsync<HostListResponseType>(hostQuery);
+            Console.WriteLine(JsonSerializer.Serialize(graphQlResponse));
+            return graphQlResponse.Data.Hosts;
         }
 
         public Task<Host> UpdateHostStatusAsync(Host host)
