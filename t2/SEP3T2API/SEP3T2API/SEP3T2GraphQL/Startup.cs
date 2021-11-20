@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using GraphQL.Server.Ui.GraphiQL;
+using GraphQL.Server.Ui.Playground;
 using HotChocolate.Types;
 using SEP3T2GraphQL.Graphql;
 using SEP3T2GraphQL.Repositories;
@@ -56,10 +57,15 @@ namespace SEP3T2GraphQL
                 endpoints.MapGraphQL();
             });
 
-            app.UseGraphQLGraphiQL(new GraphiQLOptions()
+            // app.UseGraphQLGraphiQL(new GraphiQLOptions()
+            // {
+            //     GraphQLEndPoint = "/graphql"
+            // }, "/graphql-ui");
+
+            app.UseGraphQLPlayground(new PlaygroundOptions()
             {
                 GraphQLEndPoint = "/graphql"
-            }, "/graphql-ui");
+            },"/graphql-ui" );
         }
     }
 }
