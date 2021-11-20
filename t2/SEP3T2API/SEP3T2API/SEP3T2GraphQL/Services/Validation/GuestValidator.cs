@@ -10,21 +10,20 @@ namespace SEP3T2GraphQL.Services.Validation
     public static class GuestValidator
     {
         /// <summary>
-        /// Utility class for validating a guest based on data annotations. 
+        /// Utility class for validating a guest based on data annotations, email,
+        /// student number(viaId) and if the guest has been approved as host. 
         /// </summary>
         /// <param name="guest">the guest to be validated</param>
-        /// <exception cref="ArgumentException">if guest is invalid</exception>
+        /// <exception cref="ArgumentException">if guest has invalid email, i.e. no contains no @ or ends with dot</exception>
+        /// <exception cref="ArgumentException">if guest's fields doesn't satisfy to models data annotations</exception>
+        /// <exception cref="ArgumentException">if guest's student number is invalid, i.e. not 6 digits or negative number</exception>
+        /// <exception cref="ArgumentException">if guest is not approved as host before becoming guest</exception>
         public static void ValidateGuest(Guest guest)
         {
-            var context = new ValidationContext(guest, null, null);
-            List<ValidationResult> validationResults = new();
-            bool isValidGuest = Validator.TryValidateObject(guest, context, validationResults, true);
+            ValidateHostApproval(guest);
+            ValidateStudentNumber(guest);
             ValidateEmail(guest);
-            ValidateStudentNumber(guest); 
-            if (!isValidGuest)
-            {
-                throw new ArgumentException(validationResults[0].ErrorMessage);
-            }
+            ValidateDataAnnotations(guest);
         }
 
         /// <summary>
@@ -63,9 +62,39 @@ namespace SEP3T2GraphQL.Services.Validation
             {
                 throw new ArgumentException("Invalid student number");
             }
+
             if (guest.ViaId < 0)
             {
                 throw new ArgumentException("Invalid student number");
+            }
+        }
+
+        /// <summary>
+        /// Validates if the fields of the guest satisfy the data annotations
+        /// </summary>
+        /// <param name="guest">the guest which is to be validated</param>
+        /// <exception cref="ArgumentException">if field does not satisfy a data annotation</exception>
+        private static void ValidateDataAnnotations(Guest guest)
+        {
+            var context = new ValidationContext(guest, null, null);
+            List<ValidationResult> validationResults = new();
+            bool isValidGuest = Validator.TryValidateObject(guest, context, validationResults, true);
+            if (!isValidGuest)
+            {
+                throw new ArgumentException(validationResults[0].ErrorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Validates if the guest has been approved as a host before becoming a guest
+        /// </summary>
+        /// <param name="guest">the guest which host approval is to be validated</param>
+        /// <exception cref="ArgumentException">if the guest has not been approved as a host before becoming guest</exception>
+        private static void ValidateHostApproval(Guest guest)
+        {
+            if (!guest.IsApprovedHost)
+            {
+                throw new ArgumentException("Must be approved as host before becoming guest");
             }
         }
     }
