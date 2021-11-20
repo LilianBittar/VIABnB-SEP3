@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
+using CatQL.GraphQL.QueryResponses;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Models;
 
@@ -30,15 +34,16 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new System.NotImplementedException();
         }
 
-        public async Task<List<Host>> GetAllNotApprovedHostsAsync()
+        public async Task<IList<Host>> GetAllNotApprovedHostsAsync()
         {
             GqlClient client = new GqlClient(Url);
             var hostQuery = new GqlQuery()
             {
-                Query = @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId}cpr,profileImageUrl,isApprovedHost}}"
+                Query = @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
             };
-            var graphQLResponse = await client.PostQueryAsync<HostListResponseType>(hostQuery);
-            return graphQLResponse.Data.Hosts;
+            GqlRequestResponse<HostListResponseType> graphQlResponse = await client.PostQueryAsync<HostListResponseType>(hostQuery);
+            Console.WriteLine(JsonSerializer.Serialize(graphQlResponse));
+            return graphQlResponse.Data.Hosts;
         }
 
         public Task<Host> UpdateHostStatusAsync(Host host)
