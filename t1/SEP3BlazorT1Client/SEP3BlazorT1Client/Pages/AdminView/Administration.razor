@@ -40,14 +40,16 @@
                                     <DataAnnotationsValidator/>
                                     <ValidationSummary/>
                                     <div class="form-group">
-                                        <p>@h.IsApprovedHost</p>
+                                        <p bind-value="@HostToStatusUpdate.IsApprovedHost">@h.IsApprovedHost</p>
                                         <form>
                                             <select name="Status">
+                                                <option value=""></option>
                                                 <option value="@false">Don't Aapprove</option>
                                                 <option value="@true">Approved</option>
                                             </select>
                                         </form>
                                     </div>
+                                    <button @onclick="ValidateHost">Validate</button>
                                 </EditForm>
                             </MatExpansionPanelDetails>
                         </MatExpansionPanel>

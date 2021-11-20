@@ -19,6 +19,7 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         
         private IList<Guest> guestRequestList = new List<Guest>();
         private IList<Host> hostRequestList = new List<Host>();
+        private Host HostToStatusUpdate { get; set; } = new Host();
 
         private bool panelOpenState;
 
@@ -27,9 +28,9 @@ namespace SEP3BlazorT1Client.Pages.AdminView
             hostRequestList = await HostService.GetAllNotApprovedHostsAsync();
         }
         
-        private Task ValidateHost()
+        private async Task ValidateHost()
         {
-            throw new NotImplementedException();
+            await HostService.UpdateHostStatusAsync(HostToStatusUpdate);
         }
         private Task ValidateGuest()
         {
