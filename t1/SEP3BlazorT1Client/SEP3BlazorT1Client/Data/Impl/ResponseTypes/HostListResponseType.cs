@@ -6,6 +6,6 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes
 {
     public class HostListResponseType
     {
-        [JsonProperty("Host")] public IList<Host> Hosts { get; set; } = new List<Host>();
+        [JsonProperty("allNotApprovedHost")] public IList<Host> Hosts { get; set; } = new List<Host>();
     }
 }
