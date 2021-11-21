@@ -49,7 +49,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery updateStatusMutation = new GqlQuery()
             {
                 Query =
-                    @"query {allNotApprovedGuest{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
+                    @"mutation($updateGuest:Guest) {allNotApprovedGuest(guest:$updateGuest){viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
                 Variables = new {updateGuest = guest}
             };
             var response = await _client.PostQueryAsync<UpdateGuestMutationResponseType>(updateStatusMutation);
