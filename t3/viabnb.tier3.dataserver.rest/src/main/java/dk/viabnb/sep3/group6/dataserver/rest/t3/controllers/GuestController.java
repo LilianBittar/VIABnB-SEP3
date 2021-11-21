@@ -74,7 +74,7 @@ public class GuestController {
         return new ResponseEntity<>(guestsToReturn, HttpStatus.OK);
     }
 
-    @PatchMapping("/guest/{id}/approval")
+    @PatchMapping("/guests/{id}/approval")
     public ResponseEntity<Guest> updateGuestStatus(@RequestBody Guest guest, @RequestParam("id") int id)
     {
         try
