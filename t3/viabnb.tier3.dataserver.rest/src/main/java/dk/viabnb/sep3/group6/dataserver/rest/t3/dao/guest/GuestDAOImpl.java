@@ -90,7 +90,7 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
                             result.getString("phonenumber"),
                             result.getString("email"),
                             result.getString("password"),
-                            null,
+                            new ArrayList<>(),
                             result.getString("personalimage"),
                             result.getString("cprnumber"),
                             result.getBoolean("isapproved"),

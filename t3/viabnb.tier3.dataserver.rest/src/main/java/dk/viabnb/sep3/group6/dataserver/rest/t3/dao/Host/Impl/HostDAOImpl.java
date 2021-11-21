@@ -57,7 +57,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                         result.getString("phonenumber"),
                         result.getString("email"),
                         result.getString("password"),
-                        null,
+                        new ArrayList<>(),
                         result.getString("personalimage"),
                         result.getString("cprnumber"),
                         result.getBoolean("isapproved")
