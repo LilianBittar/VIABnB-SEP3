@@ -47,7 +47,6 @@ namespace SEP3T2GraphQL.Repositories.Impl
             {
                 throw new Exception(await response.Content.ReadAsStringAsync()); 
             }
-
             var fetchedGuests = JsonSerializer.Deserialize<List<Guest>>(await response.Content.ReadAsStringAsync());
             return fetchedGuests;
         }
@@ -59,9 +58,11 @@ namespace SEP3T2GraphQL.Repositories.Impl
             {
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
-
             var result = await response.Content.ReadAsStringAsync();
-            var guestListToReturn = JsonSerializer.Deserialize<List<Guest>>(result);
+            var guestListToReturn = JsonSerializer.Deserialize<List<Guest>>(result,  new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
             return guestListToReturn;
         }
     }

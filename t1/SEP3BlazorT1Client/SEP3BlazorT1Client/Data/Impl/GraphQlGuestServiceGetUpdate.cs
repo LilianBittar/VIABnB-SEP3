@@ -1,6 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CatQL.GraphQL.Client;
+using CatQL.GraphQL.QueryResponses;
+using Newtonsoft.Json;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Models;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3BlazorT1Client.Data.Impl
 {
@@ -26,9 +32,33 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<IList<Guest>> GetAllNotApprovedGuests()
+        public async Task<IList<Guest>> GetAllNotApprovedGuests()
         {
-            throw new System.NotImplementedException();
+            var guestQuery = new GqlQuery()
+            {
+                Query = @"query {allNotApprovedGuest{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}"
+            };
+            GqlRequestResponse<GuestListResponse> graphQlResponse =
+                await _client.PostQueryAsync<GuestListResponse>(guestQuery);
+            Console.WriteLine(JsonSerializer.Serialize(graphQlResponse));
+            return graphQlResponse.Data.Guests;
+        }
+
+        public async Task<Host> UpdateGuestStatusAsync(Guest guest)
+        {
+            GqlQuery updateStatusMutation = new GqlQuery()
+            {
+                Query =
+                    @"query {allNotApprovedGuest{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
+                Variables = new {updateGuest = guest}
+            };
+            var response = await _client.PostQueryAsync<UpdateGuestMutationResponseType>(updateStatusMutation);
+            if (response.Errors != null)
+            {
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4].Split(":")[2]);
+            }
+
+            return response.Data.UpdateGuest;
         }
     }
 }
