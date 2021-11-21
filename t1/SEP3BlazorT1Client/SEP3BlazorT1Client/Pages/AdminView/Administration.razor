@@ -10,51 +10,47 @@
             }
             else
             {
-                
-                @foreach (var h in hostRequestList)
-                {
-                    <MatAccordion>
-                        <MatExpansionPanel @bind-Expanded="@panelOpenState">
-                            <MatExpansionPanelSummary>
-                                <MatExpansionPanelHeader>
-                                    <p>@h.Id</p></MatExpansionPanelHeader>
-                            </MatExpansionPanelSummary>
-                            <MatExpansionPanelDetails>
-                                <div class="form-group">
-                                    <p>@h.Id</p></div>
-                                <div class="form-group">
-                                    <p>@h.FirstName</p></div>
-                                <div class="form-group">
-                                    <p>@h.LastName</p></div>
-                                <div class="form-group">
-                                    <p>@h.PhoneNumber</p></div>
-                                <div class="form-group">
-                                    <p>@h.Email</p></div>
-                                <div class="form-group">
-                                    <p>@h.Password</p></div>
-                                <div class="form-group">
-                                    <p>@h.Cpr</p></div>
-                                <div class="form-group">
-                                    <p>@h.ProfileImageUrl</p></div>
-                                <EditForm Model="@h" OnValidSubmit="@ValidateHost">
-                                    <DataAnnotationsValidator/>
-                                    <ValidationSummary/>
+                <MatAccordion Multi="true">
+                    @foreach (var h in hostRequestList)
+                    {
+                        <EditForm Model="@h" OnValidSubmit="@(() => ValidateHost(@h.Id))">
+                            <DataAnnotationsValidator/>
+                            <ValidationSummary/>
+                            <MatExpansionPanel>
+                                <MatExpansionPanelSummary>
+                                    <MatExpansionPanelHeader>
+                                        <p>@h.Id</p></MatExpansionPanelHeader>
+                                </MatExpansionPanelSummary>
+                                <MatExpansionPanelDetails>
                                     <div class="form-group">
-                                        <p bind-value="@HostToStatusUpdate.IsApprovedHost">@h.IsApprovedHost</p>
+                                        <p>Host ID: @h.Id</p></div>
+                                    <div class="form-group">
+                                        <p>First Nmae: @h.FirstName</p></div>
+                                    <div class="form-group">
+                                        <p>Last Name: @h.LastName</p></div>
+                                    <div class="form-group">
+                                        <p>Phone Number: @h.PhoneNumber</p></div>
+                                    <div class="form-group">
+                                        <p>E-mail Address: @h.Email</p></div>
+                                    <div class="form-group">
+                                        <p>CPR-Number: @h.Cpr</p></div>
+                                    <div class="form-group">
                                         <form>
                                             <select name="Status">
-                                                <option value=""></option>
-                                                <option value="@false">Don't Aapprove</option>
-                                                <option value="@true">Approved</option>
+                                                <option value="">Waiting</option>
+                                                <option value="@false" bind-value="@h.IsApprovedHost">Don't Aapprove</option>
+                                                <option value="@true" bind-value="@h.IsApprovedHost">Approved</option>
                                             </select>
                                         </form>
                                     </div>
-                                    <button @onclick="ValidateHost">Validate</button>
-                                </EditForm>
-                            </MatExpansionPanelDetails>
-                        </MatExpansionPanel>
-                    </MatAccordion>
-                }
+                                    <div class="form-group">
+                                        <button type="submit">Validate</button>
+                                    </div>
+                                </MatExpansionPanelDetails>
+                            </MatExpansionPanel>
+                        </EditForm>
+                    }
+                </MatAccordion>
             }
         </ChildContent>
     </MatTab>

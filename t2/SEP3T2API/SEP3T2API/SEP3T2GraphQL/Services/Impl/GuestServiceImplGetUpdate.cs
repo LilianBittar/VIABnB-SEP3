@@ -16,9 +16,9 @@ namespace SEP3T2GraphQL.Services.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<Guest> UpdateGuest(Guest guest)
+        public async Task<Guest> UpdateGuest(Guest guest)
         {
-            throw new System.NotImplementedException();
+            return await _guestRepository.UpdateGuest(guest);
         }
 
         public async Task<IList<Guest>> GetAllGuests()
@@ -26,9 +26,9 @@ namespace SEP3T2GraphQL.Services.Impl
             return await _guestRepository.GetAllGuests(); 
         }
 
-        public Task<IList<Guest>> GetAllNotApprovedGuests()
+        public async Task<IList<Guest>> GetAllNotApprovedGuests()
         {
-            throw new System.NotImplementedException();
+            return await _guestRepository.GetAllNotApprovedGuests();
         }
     }
 }

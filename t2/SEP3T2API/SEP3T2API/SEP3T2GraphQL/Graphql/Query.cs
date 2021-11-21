@@ -11,6 +11,7 @@ namespace SEP3T2GraphQL.Graphql
     {
         private IResidenceService _residenceService;
         private IHostService _hostService;
+        private IGuestService _guestService;
         public Query(IResidenceService residenceService, IHostService hostService)
         {
             _residenceService = residenceService;
@@ -24,6 +25,11 @@ namespace SEP3T2GraphQL.Graphql
         public async Task<List<Host>> GetAllNotApprovedHost()
         {
             return await _hostService.GetAllNotApprovedHostsAsync();
+        }
+
+        public async Task<IList<Guest>> GetAllNotApprovedGuest()
+        {
+            return await _guestService.GetAllNotApprovedGuests();
         }
     }
 }

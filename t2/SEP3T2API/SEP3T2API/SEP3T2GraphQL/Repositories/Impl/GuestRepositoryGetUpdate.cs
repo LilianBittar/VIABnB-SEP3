@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
@@ -26,9 +27,17 @@ namespace SEP3T2GraphQL.Repositories.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<Guest> UpdateGuest(Guest guest)
+        public async Task<Guest> UpdateGuest(Guest guest)
         {
-            throw new System.NotImplementedException();
+            var guestAsJson = JsonSerializer.Serialize(guest);
+            HttpContent content = new StringContent(guestAsJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _client.PatchAsync(Uri + $"/{guest.Id}/approval", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            return guest;
         }
 
         public async Task<IList<Guest>> GetAllGuests()
@@ -43,9 +52,17 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return fetchedGuests;
         }
 
-        public Task<IList<Guest>> GetAllNotApprovedGuests()
+        public async Task<IList<Guest>> GetAllNotApprovedGuests()
         {
-            throw new System.NotImplementedException();
+            HttpResponseMessage response = await _client.GetAsync(Uri + $"/notApproved");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            var result = await response.Content.ReadAsStringAsync();
+            var guestListToReturn = JsonSerializer.Deserialize<List<Guest>>(result);
+            return guestListToReturn;
         }
     }
 }

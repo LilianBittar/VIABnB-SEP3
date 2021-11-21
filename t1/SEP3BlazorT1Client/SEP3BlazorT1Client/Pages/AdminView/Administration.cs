@@ -9,7 +9,6 @@ using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Pages.AdminView
 {
-    //Todo implement methods. Change from dummy data to AdministrationService. Add submit buttons
     public partial class Administration
     {
 
@@ -19,7 +18,6 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         
         private IList<Guest> guestRequestList = new List<Guest>();
         private IList<Host> hostRequestList = new List<Host>();
-        private Host HostToStatusUpdate { get; set; } = new Host();
 
         private bool panelOpenState;
 
@@ -28,9 +26,9 @@ namespace SEP3BlazorT1Client.Pages.AdminView
             hostRequestList = await HostService.GetAllNotApprovedHostsAsync();
         }
         
-        private async Task ValidateHost()
+        private async Task ValidateHost(int hostId)
         {
-            await HostService.UpdateHostStatusAsync(HostToStatusUpdate);
+            await HostService.UpdateHostStatusAsync(hostRequestList.First(host => host.Id == hostId));
         }
         private Task ValidateGuest()
         {

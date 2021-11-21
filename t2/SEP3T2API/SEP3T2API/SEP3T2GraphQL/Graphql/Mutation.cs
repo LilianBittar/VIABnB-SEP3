@@ -30,5 +30,10 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _guestService.CreateGuestAsync(guest); 
         }
+
+        public async Task<Guest> UpdateGuestStatus(Guest guest)
+        {
+            return await _guestService.UpdateGuest(guest);
+        }
     }
 }

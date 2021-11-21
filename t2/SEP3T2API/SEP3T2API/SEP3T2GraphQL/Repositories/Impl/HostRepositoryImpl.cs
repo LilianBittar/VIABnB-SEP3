@@ -104,11 +104,11 @@ namespace SEP3T2GraphQL.Repositories.Impl
             HttpResponseMessage response = await client.GetAsync(uri + $"/hosts/notApproved");
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception($"$Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
             }
 
-            string result = await response.Content.ReadAsStringAsync();
-            List<Host> hostListToReturn = JsonSerializer.Deserialize<List<Host>>(result, new JsonSerializerOptions
+            var result = await response.Content.ReadAsStringAsync();
+            var hostListToReturn = JsonSerializer.Deserialize<List<Host>>(result, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
@@ -117,12 +117,12 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Host> UpdateHostStatus(Host host)
         {
-            string hostAsJson = JsonSerializer.Serialize(host);
+            var hostAsJson = JsonSerializer.Serialize(host);
             HttpContent content = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PatchAsync(uri + $"/host/{host.Id}/approval", content);
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception($"$Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
             }
 
             return host;

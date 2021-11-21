@@ -7,7 +7,7 @@ namespace SEP3T2GraphQL.Models
     {
         [Required] 
         public int ViaId { get; set; }
-        public IList<GuestReview> GuestReviews { get; set; } = new List<GuestReview>();
+        public IList<GuestReview>? GuestReviews { get; set; } = new List<GuestReview>();
         public bool IsApprovedGuest { get; set; } = false; 
     }
 }
