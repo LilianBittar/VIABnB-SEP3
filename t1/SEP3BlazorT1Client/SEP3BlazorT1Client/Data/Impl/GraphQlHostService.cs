@@ -53,8 +53,8 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery hostMutation = new GqlQuery()
             {
                 Query =
-                    "@mutation($hostInput: HostInput){updateHostStatus(host: $hostInput){id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
-                Variables = new {hostInput = host}
+                    "@mutation($updatedHost: Host){updateHostStatus(host: $updatedHost){id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
+                Variables = new {updatedHost = host}
             };
             var response = await client.PostQueryAsync<UpdateHostMutationResponseType>(hostMutation);
             if (response.Errors != null)
