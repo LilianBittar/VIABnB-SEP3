@@ -12,5 +12,6 @@ namespace SEP3BlazorT1Client.Data
         Task<Guest> UpdateGuest(Guest guest); 
         Task<IList<Guest>> GetAllGuests(); 
         Task<IList<Guest>> GetAllNotApprovedGuests();
+        Task<Host> UpdateGuestStatusAsync(Guest guest);
     }
 }

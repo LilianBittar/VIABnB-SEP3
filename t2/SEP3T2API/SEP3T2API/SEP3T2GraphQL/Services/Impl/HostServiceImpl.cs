@@ -101,7 +101,7 @@ namespace SEP3T2GraphQL.Services.Impl
             return host;
         }
 
-        public async Task<List<Host>> GetAllNotApprovedHostsAsync()
+        public async Task<IList<Host>> GetAllNotApprovedHostsAsync()
         {
             return await _hostRepository.GetAllNotApprovedHosts();
         }

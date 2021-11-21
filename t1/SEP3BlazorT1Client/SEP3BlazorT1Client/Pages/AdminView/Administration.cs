@@ -14,6 +14,7 @@ namespace SEP3BlazorT1Client.Pages.AdminView
 
         [Inject] public MatDialogService MatDialogService { get; set; }
         [Inject] public IHostService HostService { get; set; }
+        [Inject] public IGuestService GuestService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         
         private IList<Guest> guestRequestList = new List<Guest>();
@@ -24,15 +25,16 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         protected override async Task OnInitializedAsync()
         {
             hostRequestList = await HostService.GetAllNotApprovedHostsAsync();
+            guestRequestList = await GuestService.GetAllNotApprovedGuests();
         }
         
         private async Task ValidateHost(int hostId)
         {
             await HostService.UpdateHostStatusAsync(hostRequestList.First(host => host.Id == hostId));
         }
-        private Task ValidateGuest()
+        private async Task ValidateGuest(int guestId)
         {
-            throw new NotImplementedException();
+            await GuestService.UpdateGuestStatusAsync(guestRequestList.First(guest => guest.Id == guestId));
         }
 
     }
