@@ -11,6 +11,6 @@ public interface GuestDAO {
     public Guest approveGuest(Guest guest);
     public Guest rejectGuest(Guest guest);
     Guest getGuestByHostId(int id);
-    //List<Guest> getAllNotApprovedGuests();
+    List<Guest> getAllNotApprovedGuests();
 
 }

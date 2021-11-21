@@ -44,7 +44,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
         try(Connection connection = getConnection())
         {
             PreparedStatement stm = connection.prepareStatement
-                ("SELECT * FROM viabnb.host WHERE isapproved = ?");
+                ("SELECT * FROM host WHERE isapproved = ?");
             stm.setBoolean(1, false);
             ResultSet result = stm.executeQuery();
             while (result.next())
@@ -68,9 +68,8 @@ public class HostDAOImpl extends BaseDao implements HostDAO
         }
         catch (SQLException throwables)
         {
-            throwables.printStackTrace();
+            throw new IllegalStateException(throwables.getMessage());
         }
-        return null;
     }
 
     @Override public Host approveHost(Host host)
@@ -86,9 +85,8 @@ public class HostDAOImpl extends BaseDao implements HostDAO
         }
         catch (SQLException throwables)
         {
-            throwables.printStackTrace();
+            throw new IllegalStateException(throwables.getMessage());
         }
-        return null;
     }
 
     @Override public Host rejectHost(Host host)
@@ -104,8 +102,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
         }
         catch (SQLException throwables)
         {
-            throwables.printStackTrace();
+            throw new IllegalStateException(throwables.getMessage());
         }
-        return null;
     }
 }

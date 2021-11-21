@@ -51,37 +51,6 @@ public class GuestController {
         }
     }
 
-    /*
-    former AdministrationController method
-    @RequestMapping(value = "/guestRequests/{id}", method = RequestMethod.PATCH,
-        consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RequestStatus> isValidGuest(@RequestBody RequestStatus update, @PathVariable("id") int id)
-    {
-        administrationDAO.isValidHost(id, update);
-        if (update == null)
-        {
-            return ResponseEntity.internalServerError().build();
-        }
-        return new ResponseEntity<>(update, HttpStatus.OK);
-    }*/
-
-    @PatchMapping("/guests/{id}")
-    public ResponseEntity<Guest> updateRequestStatus(@RequestBody Guest guest) {
-        try {
-//            if (guest.isApprovedGuest() == RequestStatus.Approved) {
-//                Guest approvedRequest = guestDAO.approveGuestRegistrationRequest(guest);
-//                return ResponseEntity.ok(approvedRequest);
-//            }
-//            else if (guest.isApprovedGuest() == RequestStatus.NotApproved){
-//                Guest rejectedRequest = guestDAO.rejectGuestRegistrationRequest(guest);
-//                return ResponseEntity.ok(rejectedRequest);
-//            }
-
-            return ResponseEntity.badRequest().build();
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
     @GetMapping("/guests/{id}")
     public ResponseEntity<Guest> getGuestByHostId(@PathVariable("id") int id)
     {
@@ -94,4 +63,37 @@ public class GuestController {
         }
     }
 
+    @GetMapping("/guests/notApproved")
+    public ResponseEntity<List<Guest>> getAllNotApprovedGuests()
+    {
+        List<Guest> guestsToReturn = guestDAO.getAllNotApprovedGuests();
+        if (guestsToReturn == null)
+        {
+            return ResponseEntity.internalServerError().build();
+        }
+        return new ResponseEntity<>(guestsToReturn, HttpStatus.OK);
+    }
+
+    @PatchMapping("/guest/{id}/approval")
+    public ResponseEntity<Guest> updateGuestStatus(@RequestBody Guest guest, @RequestParam("id") int id)
+    {
+        try
+        {
+            if (guest.isApprovedGuest())
+            {
+                Guest approvedGuest = guestDAO.approveGuest(guest);
+                return ResponseEntity.ok(approvedGuest);
+            }
+            else if (!guest.isApprovedGuest())
+            {
+                Guest rejectedGuest = guestDAO.rejectGuest(guest);
+                return ResponseEntity.ok(rejectedGuest);
+            }
+            return ResponseEntity.badRequest().build();
+        }
+        catch (NoSuchElementException e)
+        {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

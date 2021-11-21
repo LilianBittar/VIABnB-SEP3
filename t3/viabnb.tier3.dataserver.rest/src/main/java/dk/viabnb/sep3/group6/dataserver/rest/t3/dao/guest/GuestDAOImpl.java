@@ -2,6 +2,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,15 +49,6 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
         }
     }
 
-    @Override
-    public Guest approveGuest(Guest guest) {
-        return null;
-    }
-
-    @Override
-    public Guest rejectGuest(Guest guest) {
-        return null;
-    }
 
     @Override
     public Guest getGuestByHostId(int id) {
@@ -74,6 +66,79 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
                     result.getBoolean("isapproved"), result.getInt("viaid"),
                     result.getBoolean("isapprovedguest"));
         } catch (SQLException throwables) {
+            throw new IllegalStateException(throwables.getMessage());
+        }
+    }
+
+    @Override public List<Guest> getAllNotApprovedGuests()
+    {
+        List<Guest> guestsToReturn = new ArrayList<>();
+        try(Connection connection = getConnection())
+        {
+            PreparedStatement stm = connection.prepareStatement(
+                ("SELECT * FROM host h JOIN guest g on h.hostid = g.guestid WHERE isapprovedguest = ?")
+            );
+                stm.setBoolean(1, false);
+                ResultSet result = stm.executeQuery();
+                while (result.next())
+                {
+                    Guest guestToAdd = new Guest
+                        (
+                            result.getInt("hostid"),
+                            result.getString("fname"),
+                            result.getString("lname"),
+                            result.getString("phonenumber"),
+                            result.getString("email"),
+                            result.getString("password"),
+                            null,
+                            result.getString("personalimage"),
+                            result.getString("cprnumber"),
+                            result.getBoolean("isapproved"),
+                            result.getInt("viaid"),
+                            result.getBoolean("isapprovedguest")
+                        );
+                    guestsToReturn.add(guestToAdd);
+                }
+            return guestsToReturn;
+        }
+        catch (SQLException throwables)
+        {
+            throw new IllegalStateException(throwables.getMessage());
+        }
+    }
+
+    @Override
+    public Guest approveGuest(Guest guest)
+    {
+        try(Connection connection = getConnection())
+        {
+            PreparedStatement stm = connection.prepareStatement
+                ("UPDATE guest SET isapprovedguest = true WHERE guestid = ?");
+            stm.setInt(1, guest.getId());
+            stm.executeUpdate();
+            connection.commit();
+            return guest;
+        }
+        catch (SQLException throwables)
+        {
+            throw new IllegalStateException(throwables.getMessage());
+        }
+    }
+
+    @Override
+    public Guest rejectGuest(Guest guest)
+    {
+        try(Connection connection = getConnection())
+        {
+            PreparedStatement stm = connection.prepareStatement
+                ("DELETE FROM guest WHERE guestid = ?");
+            stm.setInt(1, guest.getId());
+            stm.executeUpdate();
+            connection.commit();
+            return guest;
+        }
+        catch (SQLException throwables)
+        {
             throw new IllegalStateException(throwables.getMessage());
         }
     }
