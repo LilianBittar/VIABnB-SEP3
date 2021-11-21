@@ -1,466 +1,545 @@
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.Development.json
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.json
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.exe
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.deps.json
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.json
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.dev.json
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\ref\SEP3T2GraphQL.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.pdb
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Autofac.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL-Parser.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.Websocket.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Serializer.Newtonsoft.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.DataLoader.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.NewtonsoftJson.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Primitives.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Core.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.Abstractions.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Altair.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemReactive.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemTextJson.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Newtonsoft.Json.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.IO.Pipelines.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Core.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Linq.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.xml
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.AssemblyReference.cache
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfoInputs.cache
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfo.cs
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.CoreCompileInputs.cache
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.Manifest.cache
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.xml
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\scopedcss\bundle\SEP3T2GraphQL.styles.css
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\ref\SEP3T2GraphQL.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.pdb
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.genruntimeconfig.cache
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.WebSockets.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.GraphiQL.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Playground.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Voyager.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GreenDonut.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Abstractions.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Abstractions.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Playground.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Execution.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Fetching.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.SyntaxTree.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Utf8.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Visitors.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Server.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.InMemory.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.CursorPagination.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.OffsetPagination.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.Scalars.Upload.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.Introspection.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Validation.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Extensions.DiagnosticAdapter.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.Development.json
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.json
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.exe
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.deps.json
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.json
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.dev.json
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\ref\SEP3T2GraphQL.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.pdb
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Autofac.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL-Parser.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.Websocket.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Serializer.Newtonsoft.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.DataLoader.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.NewtonsoftJson.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Primitives.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Core.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.Abstractions.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.WebSockets.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Altair.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.GraphiQL.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Playground.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Voyager.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemReactive.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemTextJson.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GreenDonut.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Abstractions.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Abstractions.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Playground.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Execution.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Fetching.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.SyntaxTree.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Utf8.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Visitors.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Server.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.InMemory.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.CursorPagination.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.OffsetPagination.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.Scalars.Upload.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.Introspection.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Validation.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Extensions.DiagnosticAdapter.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Newtonsoft.Json.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.IO.Pipelines.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Core.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Linq.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.xml
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.AssemblyReference.cache
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfoInputs.cache
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfo.cs
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.CoreCompileInputs.cache
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.Manifest.cache
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.xml
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\scopedcss\bundle\SEP3T2GraphQL.styles.css
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\ref\SEP3T2GraphQL.dll
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.pdb
-C:\Users\kkash\RiderProjects\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.genruntimeconfig.cache
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.Development.json
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.json
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.exe
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.deps.json
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.json
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.dev.json
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\ref\SEP3T2GraphQL.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.pdb
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Autofac.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL-Parser.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.Websocket.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Serializer.Newtonsoft.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.DataLoader.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.NewtonsoftJson.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Primitives.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Core.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.Abstractions.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.WebSockets.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Altair.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.GraphiQL.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Playground.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Voyager.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemReactive.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemTextJson.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GreenDonut.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Abstractions.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Abstractions.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Playground.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Execution.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Fetching.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.SyntaxTree.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Utf8.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Visitors.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Server.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.InMemory.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.CursorPagination.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.OffsetPagination.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.Scalars.Upload.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.Introspection.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Validation.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Extensions.DiagnosticAdapter.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.OpenApi.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Newtonsoft.Json.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.IO.Pipelines.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Core.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Linq.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.xml
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.AssemblyReference.cache
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfoInputs.cache
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfo.cs
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.CoreCompileInputs.cache
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.Manifest.cache
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.xml
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\scopedcss\bundle\SEP3T2GraphQL.styles.css
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.CopyComplete
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\ref\SEP3T2GraphQL.dll
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.pdb
-D:\Dokumenter D\Git\SEP3\network-switch-sprint2\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.genruntimeconfig.cache
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.AssemblyReference.cache
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfoInputs.cache
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfo.cs
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.CoreCompileInputs.cache
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\ref\SEP3T2GraphQL.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.pdb
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.Development.json
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.json
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.exe
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.deps.json
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.json
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.dev.json
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\ref\SEP3T2GraphQL.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.pdb
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Autofac.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL-Parser.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.Websocket.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Serializer.Newtonsoft.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.DataLoader.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.NewtonsoftJson.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Primitives.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Core.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.Abstractions.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.WebSockets.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Altair.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.GraphiQL.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Playground.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Voyager.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemReactive.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemTextJson.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GreenDonut.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Abstractions.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Abstractions.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Playground.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Execution.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Fetching.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.SyntaxTree.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Utf8.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Visitors.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Server.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.InMemory.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.CursorPagination.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.OffsetPagination.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.Scalars.Upload.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.Introspection.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Validation.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Extensions.DiagnosticAdapter.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Newtonsoft.Json.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.IO.Pipelines.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Core.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Linq.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.dll
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.xml
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.Manifest.cache
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.xml
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\scopedcss\bundle\SEP3T2GraphQL.styles.css
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.genruntimeconfig.cache
-C:\Users\Shark\Documents\Coding\SEP3\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.CopyComplete
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.Development.json
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.json
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.exe
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.deps.json
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.json
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.dev.json
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\ref\SEP3T2GraphQL.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.pdb
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Autofac.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL-Parser.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.Websocket.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Serializer.Newtonsoft.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.DataLoader.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.NewtonsoftJson.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Primitives.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Core.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.Abstractions.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.WebSockets.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Altair.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.GraphiQL.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Playground.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Voyager.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemReactive.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemTextJson.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GreenDonut.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Abstractions.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Abstractions.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Playground.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Execution.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Fetching.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.SyntaxTree.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Utf8.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Visitors.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Server.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.InMemory.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.CursorPagination.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.OffsetPagination.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.Scalars.Upload.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.Introspection.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Validation.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Extensions.DiagnosticAdapter.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.OpenApi.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Newtonsoft.Json.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.IO.Pipelines.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Core.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Linq.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.xml
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.AssemblyReference.cache
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfoInputs.cache
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfo.cs
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.CoreCompileInputs.cache
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.Manifest.cache
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.xml
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\scopedcss\bundle\SEP3T2GraphQL.styles.css
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.CopyComplete
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\ref\SEP3T2GraphQL.dll
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.pdb
-D:\Dokumenter D\Git\SEP3\main branch\VIABnB-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.genruntimeconfig.cache
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.Development.json
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\appsettings.json
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.exe
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.deps.json
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.json
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.runtimeconfig.dev.json
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\ref\SEP3T2GraphQL.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\SEP3T2GraphQL.pdb
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Autofac.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL-Parser.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Abstractions.Websocket.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Client.Serializer.Newtonsoft.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.DataLoader.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.NewtonsoftJson.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Primitives.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Core.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.Abstractions.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Transports.Subscriptions.WebSockets.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Altair.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.GraphiQL.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Playground.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.Server.Ui.Voyager.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemReactive.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GraphQL.SystemTextJson.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\GreenDonut.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Abstractions.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Abstractions.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.AspNetCore.Playground.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Execution.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Fetching.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.SyntaxTree.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Utf8.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Language.Visitors.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Server.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Subscriptions.InMemory.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.CursorPagination.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.OffsetPagination.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Types.Scalars.Upload.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Utilities.Introspection.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\HotChocolate.Validation.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.Extensions.DiagnosticAdapter.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Newtonsoft.Json.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.IO.Pipelines.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Core.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.Linq.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\bin\Debug\net5.0\System.Reactive.xml
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.AssemblyReference.cache
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfoInputs.cache
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.AssemblyInfo.cs
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.CoreCompileInputs.cache
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.Manifest.cache
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\staticwebassets\SEP3T2GraphQL.StaticWebAssets.xml
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\scopedcss\bundle\SEP3T2GraphQL.styles.css
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.csproj.CopyComplete
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\ref\SEP3T2GraphQL.dll
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.pdb
-C:\Users\bitta\repos\VIABnb-SEP3\t2\SEP3T2API\SEP3T2API\SEP3T2GraphQL\obj\Debug\net5.0\SEP3T2GraphQL.genruntimeconfig.cache
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.Development.json
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.json
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.exe
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.deps.json
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.json
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.dev.json
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/ref/SEP3T2GraphQL.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.pdb
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Autofac.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL-Parser.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.Websocket.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Serializer.Newtonsoft.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.DataLoader.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.NewtonsoftJson.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Primitives.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Core.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.Abstractions.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.WebSockets.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Altair.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.GraphiQL.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Playground.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Voyager.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemReactive.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemTextJson.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GreenDonut.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Abstractions.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Abstractions.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Playground.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Execution.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Fetching.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.SyntaxTree.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Utf8.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Visitors.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Server.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.InMemory.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.CursorPagination.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.OffsetPagination.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.Scalars.Upload.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.Introspection.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Validation.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Bcl.AsyncInterfaces.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Extensions.DiagnosticAdapter.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.OpenApi.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Newtonsoft.Json.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.IO.Pipelines.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Core.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Linq.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.xml
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.AssemblyReference.cache
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfoInputs.cache
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfo.cs
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CoreCompileInputs.cache
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.Manifest.cache
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.xml
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/scopedcss/bundle/SEP3T2GraphQL.styles.css
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/ref/SEP3T2GraphQL.dll
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.pdb
+C:/Users/kkash/RiderProjects/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.genruntimeconfig.cache
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.Development.json
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.json
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.exe
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.deps.json
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.json
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.dev.json
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/ref/SEP3T2GraphQL.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.pdb
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Autofac.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL-Parser.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.Websocket.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Serializer.Newtonsoft.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.DataLoader.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.NewtonsoftJson.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Primitives.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Core.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.Abstractions.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.WebSockets.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Altair.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.GraphiQL.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Playground.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Voyager.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemReactive.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemTextJson.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GreenDonut.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Abstractions.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Abstractions.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Playground.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Execution.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Fetching.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.SyntaxTree.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Utf8.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Visitors.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Server.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.InMemory.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.CursorPagination.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.OffsetPagination.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.Scalars.Upload.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.Introspection.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Validation.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Bcl.AsyncInterfaces.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Extensions.DiagnosticAdapter.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.OpenApi.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Newtonsoft.Json.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.IO.Pipelines.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Core.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Linq.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.xml
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.AssemblyReference.cache
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfoInputs.cache
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfo.cs
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CoreCompileInputs.cache
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.Manifest.cache
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.xml
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/scopedcss/bundle/SEP3T2GraphQL.styles.css
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CopyComplete
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/ref/SEP3T2GraphQL.dll
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.pdb
+D:/Dokumenter D/Git/SEP3/network-switch-sprint2/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.genruntimeconfig.cache
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.AssemblyReference.cache
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfoInputs.cache
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfo.cs
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CoreCompileInputs.cache
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/ref/SEP3T2GraphQL.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.pdb
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.Development.json
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.json
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.exe
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.deps.json
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.json
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.dev.json
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/ref/SEP3T2GraphQL.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.pdb
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Autofac.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL-Parser.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.Websocket.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Serializer.Newtonsoft.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.DataLoader.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.NewtonsoftJson.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Primitives.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Core.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.Abstractions.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.WebSockets.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Altair.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.GraphiQL.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Playground.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Voyager.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemReactive.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemTextJson.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GreenDonut.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Abstractions.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Abstractions.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Playground.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Execution.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Fetching.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.SyntaxTree.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Utf8.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Visitors.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Server.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.InMemory.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.CursorPagination.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.OffsetPagination.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.Scalars.Upload.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.Introspection.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Validation.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Bcl.AsyncInterfaces.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Extensions.DiagnosticAdapter.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.OpenApi.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Newtonsoft.Json.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.IO.Pipelines.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Core.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Linq.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.dll
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.xml
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.Manifest.cache
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.xml
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/scopedcss/bundle/SEP3T2GraphQL.styles.css
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.genruntimeconfig.cache
+C:/Users/Shark/Documents/Coding/SEP3/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CopyComplete
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.Development.json
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.json
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.exe
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.deps.json
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.json
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.dev.json
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/ref/SEP3T2GraphQL.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.pdb
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Autofac.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL-Parser.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.Websocket.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Serializer.Newtonsoft.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.DataLoader.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.NewtonsoftJson.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Primitives.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Core.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.Abstractions.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.WebSockets.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Altair.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.GraphiQL.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Playground.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Voyager.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemReactive.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemTextJson.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GreenDonut.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Abstractions.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Abstractions.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Playground.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Execution.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Fetching.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.SyntaxTree.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Utf8.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Visitors.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Server.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.InMemory.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.CursorPagination.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.OffsetPagination.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.Scalars.Upload.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.Introspection.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Validation.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Bcl.AsyncInterfaces.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Extensions.DiagnosticAdapter.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.OpenApi.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Newtonsoft.Json.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.IO.Pipelines.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Core.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Linq.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.xml
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.AssemblyReference.cache
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfoInputs.cache
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfo.cs
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CoreCompileInputs.cache
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.Manifest.cache
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.xml
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/scopedcss/bundle/SEP3T2GraphQL.styles.css
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CopyComplete
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/ref/SEP3T2GraphQL.dll
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.pdb
+D:/Dokumenter D/Git/SEP3/main branch/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.genruntimeconfig.cache
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.Development.json
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.json
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.exe
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.deps.json
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.json
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.dev.json
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/ref/SEP3T2GraphQL.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.pdb
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Autofac.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL-Parser.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.Websocket.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Serializer.Newtonsoft.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.DataLoader.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.NewtonsoftJson.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Primitives.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Core.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.Abstractions.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.WebSockets.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Altair.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.GraphiQL.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Playground.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Voyager.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemReactive.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemTextJson.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GreenDonut.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Abstractions.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Abstractions.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Playground.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Execution.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Fetching.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.SyntaxTree.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Utf8.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Visitors.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Server.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.InMemory.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.CursorPagination.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.OffsetPagination.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.Scalars.Upload.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.Introspection.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Validation.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Bcl.AsyncInterfaces.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Extensions.DiagnosticAdapter.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.OpenApi.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Newtonsoft.Json.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.IO.Pipelines.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Core.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Linq.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.xml
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.AssemblyReference.cache
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfoInputs.cache
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfo.cs
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CoreCompileInputs.cache
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.Manifest.cache
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.xml
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/scopedcss/bundle/SEP3T2GraphQL.styles.css
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CopyComplete
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/ref/SEP3T2GraphQL.dll
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.pdb
+C:/Users/bitta/repos/VIABnb-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.genruntimeconfig.cache
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.Development.json
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.json
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.deps.json
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.json
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.dev.json
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/ref/SEP3T2GraphQL.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.pdb
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Autofac.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL-Parser.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.Websocket.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Serializer.Newtonsoft.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.DataLoader.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.NewtonsoftJson.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Primitives.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Core.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.Abstractions.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.WebSockets.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Altair.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.GraphiQL.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Playground.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Voyager.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemReactive.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemTextJson.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GreenDonut.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Abstractions.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Abstractions.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Playground.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Execution.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Fetching.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.SyntaxTree.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Utf8.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Visitors.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Server.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.InMemory.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.CursorPagination.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.OffsetPagination.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.Scalars.Upload.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.Introspection.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Validation.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Bcl.AsyncInterfaces.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Extensions.DiagnosticAdapter.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.OpenApi.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Newtonsoft.Json.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.IO.Pipelines.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Core.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Linq.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.xml
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.AssemblyReference.cache
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfoInputs.cache
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfo.cs
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CoreCompileInputs.cache
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/scopedcss/bundle/SEP3T2GraphQL.styles.css
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.Manifest.cache
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CopyComplete
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/ref/SEP3T2GraphQL.dll
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.pdb
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.genruntimeconfig.cache
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.Development.json
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/appsettings.json
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.exe
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.deps.json
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.json
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.runtimeconfig.dev.json
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/ref/SEP3T2GraphQL.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.pdb
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Autofac.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL-Parser.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Abstractions.Websocket.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Client.Serializer.Newtonsoft.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.DataLoader.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.NewtonsoftJson.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Primitives.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Core.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.AspNetCore.SystemTextJson.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.Abstractions.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Transports.Subscriptions.WebSockets.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Altair.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.GraphiQL.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Playground.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.Server.Ui.Voyager.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemReactive.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GraphQL.SystemTextJson.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/GreenDonut.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Abstractions.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Abstractions.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.AspNetCore.Playground.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Execution.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Fetching.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.SyntaxTree.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Utf8.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Language.Visitors.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Server.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Subscriptions.InMemory.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.CursorPagination.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.OffsetPagination.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Types.Scalars.Upload.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Utilities.Introspection.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/HotChocolate.Validation.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Bcl.AsyncInterfaces.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.Extensions.DiagnosticAdapter.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Microsoft.OpenApi.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Newtonsoft.Json.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.IO.Pipelines.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Core.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.Linq.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/System.Reactive.xml
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.AssemblyReference.cache
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfoInputs.cache
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.AssemblyInfo.cs
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CoreCompileInputs.cache
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.Manifest.cache
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/staticwebassets/SEP3T2GraphQL.StaticWebAssets.xml
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/scopedcss/bundle/SEP3T2GraphQL.styles.css
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.RazorTargetAssemblyInfo.cache
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.csproj.CopyComplete
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/ref/SEP3T2GraphQL.dll
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.pdb
+C:/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/obj/Debug/net5.0/SEP3T2GraphQL.genruntimeconfig.cache
+/mnt/c/Users/Micha/Documents/Coding/VIABnB-SEP3/t2/SEP3T2API/SEP3T2API/SEP3T2GraphQL/bin/Debug/net5.0/SEP3T2GraphQL.StaticWebAssets.xml

@@ -25,6 +25,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
             if (!response.IsSuccessStatusCode)
             {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
 

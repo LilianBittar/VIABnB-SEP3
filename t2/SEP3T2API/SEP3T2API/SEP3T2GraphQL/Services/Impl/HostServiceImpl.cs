@@ -15,7 +15,7 @@ namespace SEP3T2GraphQL.Services.Impl
     public class HostServiceImpl : IHostService
     {
         private string uri = "http://localhost:8080";
-        private readonly HttpClient client;
+        private readonly HttpClient client = new HttpClient();
         private IHostRepository _hostRepository;
         private IHostValidation _hostValidation;
 
@@ -84,7 +84,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Host> GetHostById(int id)
         {
-            //Todo call repo + if logic if needed 
+            //Todo move this to  HostRepository, call HostRepository add business logic if needed, such as what happens if null is found?.  
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host/{id}");
 
             if (!responseMessage.IsSuccessStatusCode)
@@ -95,7 +95,7 @@ namespace SEP3T2GraphQL.Services.Impl
             string result = await responseMessage.Content.ReadAsStringAsync();
             Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions
             {
-                PropertyNameCaseInsensitive = true
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
 
             return host;

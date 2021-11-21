@@ -1,7 +1,10 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
+import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +15,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 public class GuestController {
-
+    private static final Logger LOGGER= LoggerFactory.getLogger(GuestController.class);
     private GuestDAO guestDAO;
 
     @Autowired
@@ -23,28 +26,33 @@ public class GuestController {
 
     @PostMapping("/guests")
     public ResponseEntity<Guest> createGuest(@RequestBody Guest guest) {
-        Guest createdRequest = null;
+        LOGGER.info("Received createGuest request with params " + new Gson().toJson(guest) );
+        Guest createGuest = null;
         try {
-            createdRequest = guestDAO.createGuest(guest);
+            createGuest = guestDAO.createGuest(guest);
         } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("createGuest request failed with: " + e.getMessage());
             return ResponseEntity.internalServerError().build();
         }
 
-        if (createdRequest == null) {
+        if (createGuest == null) {
+            LOGGER.error("createGuest request failed, new guest could not be created...");
             return ResponseEntity.internalServerError().build();
         }
 
-        return ResponseEntity.ok(createdRequest);
+        return ResponseEntity.ok(createGuest);
     }
 
     @GetMapping("/guests")
-    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam Boolean isApproved) {
+    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam(required = false) Boolean isApproved) {
 
         try {
             List<Guest> allGuests = guestDAO.getAllGuests();
             if (isApproved != null){
                 allGuests.removeIf(g -> g.isApprovedGuest() != isApproved);
             }
+            LOGGER.info("getAllGuests returned: " + new Gson().toJson(allGuests));
             return ResponseEntity.ok(allGuests);
         } catch (Exception e) {
            return ResponseEntity.internalServerError().build();

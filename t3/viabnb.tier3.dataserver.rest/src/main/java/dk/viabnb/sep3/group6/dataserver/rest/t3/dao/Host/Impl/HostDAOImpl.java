@@ -14,94 +14,104 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-public class HostDAOImpl extends BaseDao implements HostDAO
-{
+public class HostDAOImpl extends BaseDao implements HostDAO {
 
     @Override
     public Host RegisterHost(Host host) {
         return null;
     }
 
-    @Override public Host getHostByEmail(String email)
-    {
+    @Override
+    public Host getHostByEmail(String email) {
         return null;
     }
 
-    @Override public Host getHostById(int Id)
-    {
+    @Override
+    public Host getHostById(int Id) {
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM host where hostid = ?");
+            stm.setInt(1, Id);
+            ResultSet result = stm.executeQuery();
+            result.next();
+            return new Host
+                    (
+                            result.getInt("hostid"),
+                            result.getString("fname"),
+                            result.getString("lname"),
+                            result.getString("phonenumber"),
+                            result.getString("email"),
+                            result.getString("password"),
+                            new ArrayList<>(),
+                            result.getString("personalimage"),
+                            result.getString("cprnumber"),
+                            result.getBoolean("isapproved")
+                    );
+
+        } catch (SQLException throwables) {
+            throw new IllegalStateException(throwables.getMessage());
+        }
+
+    }
+
+    @Override
+    public List<Host> getAllHosts() {
         return null;
     }
 
-    @Override public List<Host> getAllHosts()
-    {
-        return null;
-    }
-
-    @Override public List<Host> getAllNotApprovedHosts()
-    {
+    @Override
+    public List<Host> getAllNotApprovedHosts() {
         List<Host> hostsToReturn = new ArrayList<>();
-        try(Connection connection = getConnection())
-        {
+        try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement
-                ("SELECT * FROM host WHERE isapproved = ?");
+                    ("SELECT * FROM host WHERE isapproved = ?");
             stm.setBoolean(1, false);
             ResultSet result = stm.executeQuery();
-            while (result.next())
-            {
+            while (result.next()) {
                 Host hostToAdd = new Host
-                    (
-                        result.getInt("hostid"),
-                        result.getString("fname"),
-                        result.getString("lname"),
-                        result.getString("phonenumber"),
-                        result.getString("email"),
-                        result.getString("password"),
-                        new ArrayList<>(),
-                        result.getString("personalimage"),
-                        result.getString("cprnumber"),
-                        result.getBoolean("isapproved")
-                    );
+                        (
+                                result.getInt("hostid"),
+                                result.getString("fname"),
+                                result.getString("lname"),
+                                result.getString("phonenumber"),
+                                result.getString("email"),
+                                result.getString("password"),
+                                new ArrayList<>(),
+                                result.getString("personalimage"),
+                                result.getString("cprnumber"),
+                                result.getBoolean("isapproved")
+                        );
                 hostsToReturn.add(hostToAdd);
             }
             return hostsToReturn;
-        }
-        catch (SQLException throwables)
-        {
+        } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());
         }
     }
 
-    @Override public Host approveHost(Host host)
-    {
-        try(Connection connection = getConnection())
-        {
+    @Override
+    public Host approveHost(Host host) {
+        try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement
-                ("UPDATE host SET isapproved = true WHERE hostid = ?");
+                    ("UPDATE host SET isapproved = true WHERE hostid = ?");
             stm.setInt(1, host.getId());
             stm.executeUpdate();
             connection.commit();
             return host;
-        }
-        catch (SQLException throwables)
-        {
+        } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());
         }
     }
 
-    @Override public Host rejectHost(Host host)
-    {
-        try(Connection connection = getConnection())
-        {
+    @Override
+    public Host rejectHost(Host host) {
+        try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement
-                ("DELETE FROM host WHERE hostid = ?");
+                    ("DELETE FROM host WHERE hostid = ?");
             stm.setInt(1, host.getId());
             stm.executeUpdate();
             connection.commit();
             return host;
-        }
-        catch (SQLException throwables)
-        {
+        } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());
         }
     }

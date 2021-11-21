@@ -1,8 +1,11 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest;
 
+import dk.viabnb.sep3.group6.dataserver.rest.t3.controllers.GuestController;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,13 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuestDAOImpl extends BaseDao implements GuestDAO {
+    private static final Logger LOGGER= LoggerFactory.getLogger(GuestDAO.class);
+
     @Override
     public Guest createGuest(Guest guest) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement("insert into guest(guestid, viaid, isapprovedguest) VALUES (?, ? ,false)");
             stm.setInt(1, guest.getId());
             stm.setInt(2, guest.getViaId());
-            stm.execute();
+            stm.executeUpdate();
+            connection.commit();
+            LOGGER.info("executed update: createGuest");
             return getGuestByHostId(guest.getId());
 
         } catch (SQLException throwables) {
@@ -56,7 +63,7 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
             PreparedStatement stm = connection.prepareStatement("select * from host h join guest g on h.hostid = g.guestid where h.hostid = ?");
             stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
-            result.next();
+            if (result.next()){
             return new Guest(result.getInt("hostid"),
                     result.getString("fname"), result.getString("lname"),
                     result.getString("phonenumber"), result.getString("email"),
@@ -65,6 +72,8 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
                     result.getString("cprnumber"),
                     result.getBoolean("isapproved"), result.getInt("viaid"),
                     result.getBoolean("isapprovedguest"));
+            }
+            return null;
         } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());
         }

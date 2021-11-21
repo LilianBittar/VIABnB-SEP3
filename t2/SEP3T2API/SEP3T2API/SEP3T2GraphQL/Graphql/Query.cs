@@ -35,5 +35,10 @@ namespace SEP3T2GraphQL.Graphql
             Console.WriteLine(JsonSerializer.Serialize(_guestService.GetAllNotApprovedGuests()));
             return await _guestService.GetAllNotApprovedGuests();
         }
+        
+        public async Task<Host> GetHostById(int id)
+        {
+            return await _hostService.GetHostById(id); 
+        }
     }
 }
