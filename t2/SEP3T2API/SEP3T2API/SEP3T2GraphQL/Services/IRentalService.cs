@@ -21,6 +21,7 @@ namespace SEP3T2GraphQL.Services
         Task<RentRequest> ApproveRentRequestAsync(RentRequest request);
         Task<RentRequest> RejectRentRequestAsync(RentRequest request);
         Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync();
+        Task<IEnumerable<RentRequest>> GetAllRentRequestByResidenceId(int residenceId); 
         Task<RentRequest> GetRentRequestAsync(int id);
     }
 }
