@@ -11,14 +11,16 @@ namespace SEP3T2GraphQL.Graphql
 {
     public class Query
     {
-        private IResidenceService _residenceService;
-        private IHostService _hostService;
-        private IGuestService _guestService;
-        public Query(IResidenceService residenceService, IHostService hostService, IGuestService guestService)
+        private readonly IResidenceService _residenceService;
+        private readonly IHostService _hostService;
+        private readonly IGuestService _guestService;
+        private readonly IRentalService _rentalService;
+        public Query(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
             _guestService = guestService;
+            _rentalService = rentalService; 
         }
         public async Task<Residence> GetResidence(int id)
         {

@@ -9,7 +9,8 @@ namespace SEP3T2GraphQL.Graphql
     {
         private readonly IResidenceService _residenceService;
         private readonly IHostService _hostService;
-        private readonly IGuestService _guestService; 
+        private readonly IGuestService _guestService;
+        private readonly IRentalService _rentalService; 
         public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService)
         {
             _residenceService = residenceService;
