@@ -11,11 +11,12 @@ namespace SEP3T2GraphQL.Graphql
         private readonly IHostService _hostService;
         private readonly IGuestService _guestService;
         private readonly IRentalService _rentalService; 
-        public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService)
+        public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
             _guestService = guestService;
+            _rentalService = rentalService; 
         }
         public async Task<Residence> CreateResidence(Residence residence)
         {
@@ -35,6 +36,11 @@ namespace SEP3T2GraphQL.Graphql
         public async Task<Guest> UpdateGuestStatus(Guest guest)
         {
             return await _guestService.UpdateGuest(guest);
+        }
+
+        public async Task<RentRequest> RentResidence(RentRequest request)
+        {
+            return await _rentalService.CreateRentRequest(request);
         }
     }
 }

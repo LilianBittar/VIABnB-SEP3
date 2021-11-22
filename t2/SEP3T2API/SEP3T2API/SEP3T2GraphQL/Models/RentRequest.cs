@@ -15,8 +15,10 @@ namespace SEP3T2GraphQL.Models
         public int NumberOfGuests { get; set; }
         [Required]
         public RentRequest Status { get; set; }
-
+        [Required]
         public Guest Guest { get; set; }
+        [Required]
+        public Residence Residence { get; set; }
     }
 
 
