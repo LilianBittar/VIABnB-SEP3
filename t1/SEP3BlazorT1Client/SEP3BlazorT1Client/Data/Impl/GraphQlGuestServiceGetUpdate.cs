@@ -40,7 +40,6 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
             GqlRequestResponse<GuestListResponse> graphQlResponse =
                 await _client.PostQueryAsync<GuestListResponse>(guestQuery);
-            Console.WriteLine(JsonSerializer.Serialize(graphQlResponse));
             return graphQlResponse.Data.Guests;
         }
 
@@ -55,7 +54,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             var response = await _client.PostQueryAsync<UpdateGuestMutationResponseType>(updateStatusMutation);
             if (response.Errors != null)
             {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4].Split(":")[2]);
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
             }
 
             return response.Data.UpdateGuest;

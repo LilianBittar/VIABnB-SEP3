@@ -43,26 +43,42 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Query = @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
             };
             GqlRequestResponse<HostListResponseType> graphQlResponse = await client.PostQueryAsync<HostListResponseType>(hostQuery);
-            Console.WriteLine(JsonSerializer.Serialize(graphQlResponse));
             return graphQlResponse.Data.Hosts;
         }
 
         public async Task<Host> UpdateHostStatusAsync(Host host)
         {
-            GqlClient client = new GqlClient(Url) {EnableLogging = true};
-            GqlQuery hostMutation = new GqlQuery()
+            GqlClient client = new GqlClient(Url);
+            GqlQuery updateHostStatusMutation = new GqlQuery()
             {
-                Query =
-                    "@mutation($updatedHost: Host){updateHostStatus(host: $updatedHost){id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
-                Variables = new {updatedHost = host}
+                Query = @"mutation($newHost:HostInput){
+                          updateHostStatus(host:$newHost){
+                            id,
+                            firstName,
+                            lastName,
+                            phoneNumber,
+                            email,
+                            password,
+                            hostReviews{
+                              id,
+                              viaId,
+                              rating,
+                              text
+                            },
+                            profileImageUrl,
+                            cpr,
+                            isApprovedHost
+                          }
+                        }",
+                Variables = new {newHost = host}
             };
-            var response = await client.PostQueryAsync<UpdateHostMutationResponseType>(hostMutation);
+            var response = await client.PostQueryAsync<UpdateHostMutationResponseType>(updateHostStatusMutation);
             if (response.Errors != null)
             {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4].Split(":")[2]);
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
             }
 
-            return response.Data.UpdateHost;
+            return response.Data.updateHostStatus;
         }
 
         public Task<Host> UpdateHost(Host host)

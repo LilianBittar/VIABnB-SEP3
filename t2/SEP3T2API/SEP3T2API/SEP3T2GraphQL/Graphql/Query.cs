@@ -34,7 +34,6 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<IList<Guest>> GetAllNotApprovedGuest()
         {
-            Console.WriteLine(JsonSerializer.Serialize(_guestService.GetAllNotApprovedGuests()));
             return await _guestService.GetAllNotApprovedGuests();
         }
         

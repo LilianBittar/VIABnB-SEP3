@@ -107,8 +107,20 @@ namespace SEP3T2GraphQL.Services.Impl
         }
 
         public async Task<Host> UpdateHostStatusAsync(Host host)
-        {
-           return await _hostRepository.UpdateHostStatus(host);
+        { 
+            Console.WriteLine($"{this} {nameof(UpdateHostStatusAsync)} received params: {JsonSerializer.Serialize(host)}");
+            if (host == null)
+            {
+                throw new ArgumentException("Host cant be null");
+            }
+
+            var updatedHost = await _hostRepository.UpdateHostStatus(host);
+            if (updatedHost == null)
+            {
+                throw new Exception("Cant update the host status!!!");
+            }
+
+            return updatedHost;
         }
     }
 }

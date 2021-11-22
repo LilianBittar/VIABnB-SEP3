@@ -117,15 +117,25 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Host> UpdateHostStatus(Host host)
         {
-            var hostAsJson = JsonSerializer.Serialize(host);
+            var hostAsJson = JsonSerializer.Serialize(host, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
             HttpContent content = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PatchAsync(uri + $"/host/{host.Id}/approval", content);
+            HttpResponseMessage response = await client.PatchAsync($"{uri}/host/{host.Id}", content);
             if (!response.IsSuccessStatusCode)
             {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
 
-            return host;
+            var updatedHost = JsonSerializer.Deserialize<Host>(await response.Content.ReadAsStringAsync(),
+                new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+
+            return updatedHost;
         }
     }
 }

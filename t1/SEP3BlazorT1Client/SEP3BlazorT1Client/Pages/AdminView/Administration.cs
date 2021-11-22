@@ -30,7 +30,35 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         
         private async Task ValidateHost(int hostId)
         {
-            await HostService.UpdateHostStatusAsync(hostRequestList.First(host => host.Id == hostId));
+            try
+            {
+                Host hostToUpdate = hostRequestList.First(h => h.Id == hostId);
+                if (hostToUpdate == null)
+                {
+                    Console.WriteLine("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                    throw new Exception("Host cant be found");
+                }
+                await HostService.UpdateHostStatusAsync(hostToUpdate);
+                hostRequestList.Remove(hostToUpdate);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Here...............................................");
+                throw;
+            }
+            /*Host test = new Host()
+            {
+                Id = 5,
+                FirstName = "Kutaiba",
+                LastName = "Kashmar",
+                Email = "kkashmar94.kk@gmail.com",
+                PhoneNumber = "91640761",
+                Password = "Test@test231",
+                Cpr = "11111111111",
+                IsApprovedHost = false,
+                ProfileImageUrl = "no"
+            };
+            await HostService.UpdateHostStatusAsync(test);*/
         }
         private async Task ValidateGuest(int guestId)
         {

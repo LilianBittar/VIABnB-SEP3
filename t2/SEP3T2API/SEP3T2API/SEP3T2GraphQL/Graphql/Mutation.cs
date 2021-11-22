@@ -25,7 +25,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<Host> UpdateHostStatus(Host host)
         {
-            return await _hostService.UpdateHost(host);
+            return await _hostService.UpdateHostStatusAsync(host);
         }
 
         public async Task<Guest> CreateGuest(Guest guest)
