@@ -14,8 +14,8 @@ public class AdministrationController
   private Gson gson = new GsonBuilder().serializeNulls().create();
 
   @Autowired
-  public AdministrationController(@Qualifier("administrationJsonDAO") AdministrationDAO administrationDAO)
+  public AdministrationController()
   {
-    this.administrationDAO = administrationDAO;
+
   }
 }
