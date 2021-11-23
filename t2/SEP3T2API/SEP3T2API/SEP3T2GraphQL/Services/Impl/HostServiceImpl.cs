@@ -54,6 +54,18 @@ namespace SEP3T2GraphQL.Services.Impl
         public async Task<Host> GetHostByEmail(string email)
         {
             //Todo call repo + if logic if needed 
+            if (_hostValidation.IsValidEmail(email))
+            {
+                try
+                {
+                    _hostRepository.GetHostByEmail(email);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host?email={email}");
 
             if (!responseMessage.IsSuccessStatusCode)
@@ -70,12 +82,13 @@ namespace SEP3T2GraphQL.Services.Impl
             return host;
         }
 
-        public async Task<Host> ValidateHostAsync(Host host)
+        public async Task<Host> ValidateHostAsync(string email, string password)
         {
-            var returnedHost = await GetHostByEmail(host.Email);
-            if (returnedHost != null && returnedHost.Password == host.Password)
+            var returnedHost = await GetHostByEmail(email);
+            if (returnedHost == null) throw new KeyNotFoundException("user not found");
+            if (returnedHost.Password != password)
             {
-                return host;
+                throw new Exception("the password is not matching");
             }
             else return null;
         }
@@ -85,20 +98,21 @@ namespace SEP3T2GraphQL.Services.Impl
         public async Task<Host> GetHostById(int id)
         {
             //Todo move this to  HostRepository, call HostRepository add business logic if needed, such as what happens if null is found?.  
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host/{id}");
 
-            if (!responseMessage.IsSuccessStatusCode)
+            if (id is > 0 and < int.MaxValue && id != null)
             {
-                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                try
+                {
+                    return await _hostRepository.GetHostById(id);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
 
-            string result = await responseMessage.Content.ReadAsStringAsync();
-            Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
-
-            return host;
+            throw new Exception("Id must be bigger than 0");
         }
 
         public async Task<IEnumerable<Host>> GetAllNotApprovedHostsAsync()

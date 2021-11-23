@@ -452,3 +452,7 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/bin/
+/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/
+/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/bin/
+/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/obj/
