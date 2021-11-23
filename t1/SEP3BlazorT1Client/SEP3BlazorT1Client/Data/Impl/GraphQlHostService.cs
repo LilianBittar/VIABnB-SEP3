@@ -14,6 +14,7 @@ namespace SEP3BlazorT1Client.Data.Impl
     public class GraphQlHostService : IHostService
     {
         private const string Url = "https://localhost:5001/graphql";
+        private readonly GqlClient _client = new(Url) { EnableLogging = true };
 
         public Task<Host> RegisterHostAsync(Host host)
         {
@@ -36,14 +37,14 @@ namespace SEP3BlazorT1Client.Data.Impl
                            profileImageUrl,
                            cpr,
                            isApprovedHost}}",
-                Variables = new {emailHost = email, passwordHost = password}
+                Variables = new { emailHost = email, passwordHost = password }
             };
-            
+
             var graphQlResponse = await client.PostQueryAsync<HostResponseType>(validateHostQuery);
             Console.WriteLine(graphQlResponse.Data.ToString());
-         
+
             System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Host.ToString()}");
-            return graphQlResponse.Data.Host; 
+            return graphQlResponse.Data.Host;
         }
 
         public Task<Host> GetHostByEmail(string email)
@@ -51,9 +52,34 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<Host> GetHostById(int id)
+        public async Task<Host> GetHostById(int id)
         {
-            throw new System.NotImplementedException();
+            GqlQuery query = new()
+            {
+                Query = @"query($hostId: Int!) {
+                                hostById(id: $hostId) {
+                                    id
+                                    firstName
+                                    lastName
+                                    phoneNumber
+                                    email
+                                    password
+                                    hostReviews {
+                                    id
+                                    rating
+                                    text
+                                    viaId
+                                    }
+                                    profileImageUrl
+                                    cpr
+                                    isApprovedHost
+                                }
+                            }
+                            ",
+                Variables = new { hostId = id }
+            };
+            var response = await _client.PostQueryAsync<HostByIdQueryResponseType>(query);
+            return response.Data.HostById;
         }
 
         public async Task<IEnumerable<Host>> GetAllNotApprovedHostsAsync()
@@ -91,7 +117,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                             isApprovedHost
                           }
                         }",
-                Variables = new {newHost = host}
+                Variables = new { newHost = host }
             };
             var response = await client.PostQueryAsync<UpdateHostMutationResponseType>(updateHostStatusMutation);
             if (response.Errors != null)
