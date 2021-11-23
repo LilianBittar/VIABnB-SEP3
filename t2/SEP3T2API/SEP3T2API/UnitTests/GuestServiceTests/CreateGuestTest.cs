@@ -28,7 +28,7 @@ namespace UnitTests.GuestServiceTests
             Host nullHost = null; 
             //Mock setup for test where guest have same student number
             var guestRepository = new Mock<IGuestRepository>();
-            guestRepository.Setup<IList<Guest>>(x => x.GetAllGuests().Result)
+            guestRepository.Setup<IEnumerable<Guest>>(x => x.GetAllGuests().Result)
                 .Returns(new List<Guest>() {guestWithSameStudentNumber});
             //Mock setup for test where host does not exist in the system 
             var hostService = new Mock<IHostService>();

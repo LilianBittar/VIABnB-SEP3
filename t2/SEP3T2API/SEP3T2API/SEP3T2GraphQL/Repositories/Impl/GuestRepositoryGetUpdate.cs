@@ -32,7 +32,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             throw new NotImplementedException();
         }
 
-        public async Task<IList<Guest>> GetAllGuests()
+        public async Task<IEnumerable<Guest>> GetAllGuests()
         {
             HttpResponseMessage response = await _client.GetAsync($"{Uri}");
             if (!response.IsSuccessStatusCode)
@@ -43,7 +43,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return fetchedGuests;
         }
 
-        public async Task<IList<Guest>> GetAllNotApprovedGuests()
+        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuests()
         {
             HttpResponseMessage response = await _client.GetAsync(Uri + $"/notApproved");
             if (!response.IsSuccessStatusCode)

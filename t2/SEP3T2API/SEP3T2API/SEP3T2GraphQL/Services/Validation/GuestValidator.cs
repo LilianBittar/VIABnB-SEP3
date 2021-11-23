@@ -7,10 +7,13 @@ using SEP3T2GraphQL.Models;
 
 namespace SEP3T2GraphQL.Services.Validation
 {
+    /// <summary>
+    /// Utility class for validating a Guest
+    /// </summary>
     public static class GuestValidator
     {
         /// <summary>
-        /// Utility class for validating a guest based on data annotations, email,
+        /// Validates a guest based on data annotations, email,
         /// student number(viaId) and if the guest has been approved as host. 
         /// </summary>
         /// <param name="guest">the guest to be validated</param>
