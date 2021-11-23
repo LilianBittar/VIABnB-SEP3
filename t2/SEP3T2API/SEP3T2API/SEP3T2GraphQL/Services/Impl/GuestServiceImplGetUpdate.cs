@@ -51,7 +51,7 @@ namespace SEP3T2GraphQL.Services.Impl
             var updatedGuest = await _guestRepository.UpdateGuestStatus(guest);
             if (updatedGuest == null)
             {
-                throw new Exception("Can't update the guest status!!!");
+                throw new ArgumentException("Can't update the guest status!!!");
             }
 
             return updatedGuest;
