@@ -22,10 +22,10 @@
                             <ValidationMessage For="@(() => _newResidenceAddress.HouseNumber)"/>
 
 
-                            <MatTextField Label="Zipcode" @bind-Value="@_newResidenceAddress.ZipCode"/>
-                            <ValidationMessage For="@(() => _newResidenceAddress.ZipCode)"/>
-                            <MatTextField Label="City" @bind-Value="@_newResidenceAddress.CityName"/>
-                            <ValidationMessage For="@(() => _newResidenceAddress.CityName)"/>
+                            <MatTextField Label="Zipcode" @bind-Value="@_newResidenceAddress.City.ZipCode"/>
+                            <ValidationMessage For="@(() => _newResidenceAddress.City.ZipCode)"/>
+                            <MatTextField Label="City" @bind-Value="@_newResidenceAddress.City.CityName"/>
+                            <ValidationMessage For="@(() => _newResidenceAddress.City.CityName)"/>
 
                                 
                         </EditForm>
