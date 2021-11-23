@@ -6,7 +6,14 @@
         <ChildContent>
             @if (hostRequestList == null)
             {
-                <p>Nothing to show</p>
+                <h3 class="mat-subtitle1">Loading</h3>
+                <MatProgressCircle Indeterminate="true" />
+            }
+            else if (!hostRequestList.Any())
+            {
+                <p>
+                    <em>There are no host requests at the moment....</em>
+                </p>
             }
             else
             {
@@ -50,7 +57,14 @@
         <ChildContent>
             @if (guestRequestList == null)
             {
-                <p>Nothing to show</p>
+                <h3 class="mat-subtitle1">Loading</h3>
+                <MatProgressCircle Indeterminate="true" />
+            }
+            else if (!guestRequestList.Any())
+            {
+                <p>
+                    <em>There are no guest requests at the moment....</em>
+                </p>
             }
             else
             {
