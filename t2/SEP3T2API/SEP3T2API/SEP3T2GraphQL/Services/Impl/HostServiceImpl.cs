@@ -103,7 +103,13 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<IEnumerable<Host>> GetAllNotApprovedHostsAsync()
         {
-            return await _hostRepository.GetAllNotApprovedHosts();
+            var hostListToReturn = await _hostRepository.GetAllNotApprovedHosts();
+            if (hostListToReturn == null)
+            {
+                throw new ArgumentException("Host list is null");
+            }
+
+            return hostListToReturn;
         }
 
         public async Task<Host> UpdateHostStatusAsync(Host host)

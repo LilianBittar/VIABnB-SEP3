@@ -31,7 +31,13 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<IEnumerable<Guest>> GetAllNotApprovedGuests()
         {
-            return await _guestRepository.GetAllNotApprovedGuests();
+            var guestListToReturn = await _guestRepository.GetAllNotApprovedGuests();
+            if (guestListToReturn == null)
+            {
+                throw new ArgumentException("Guest list is null");
+            }
+
+            return guestListToReturn;
         }
 
         public async Task<Guest> UpdateGuestStatus(Guest guest)
