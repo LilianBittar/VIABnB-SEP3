@@ -20,6 +20,10 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <summary>
         /// Validates an request for residence availability, number of guests, rent period overlaps and rent period. 
         /// </summary>
+        /// <remarks>
+        /// Throws ArgumentException if request is not valid.
+        /// If request is valid then no exceptions are thrown and void is returned
+        /// </remarks>
         /// <param name="request">The request which is to be validated</param>
         /// <exception cref="ArgumentException">Request is null</exception>
         /// <exception cref="ArgumentException">Number of guests is less than 1</exception>
