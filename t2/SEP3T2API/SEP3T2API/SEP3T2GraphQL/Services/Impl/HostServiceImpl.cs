@@ -115,9 +115,15 @@ namespace SEP3T2GraphQL.Services.Impl
             throw new Exception("Id must be bigger than 0");
         }
 
-        public async Task<IList<Host>> GetAllNotApprovedHostsAsync()
+        public async Task<IEnumerable<Host>> GetAllNotApprovedHostsAsync()
         {
-            return await _hostRepository.GetAllNotApprovedHosts();
+            var hostListToReturn = await _hostRepository.GetAllNotApprovedHosts();
+            if (hostListToReturn == null)
+            {
+                throw new ArgumentException("Host list is null");
+            }
+
+            return hostListToReturn;
         }
 
         public async Task<Host> UpdateHostStatusAsync(Host host)
@@ -125,13 +131,13 @@ namespace SEP3T2GraphQL.Services.Impl
             Console.WriteLine($"{this} {nameof(UpdateHostStatusAsync)} received params: {JsonSerializer.Serialize(host)}");
             if (host == null)
             {
-                throw new ArgumentException("Host cant be null");
+                throw new ArgumentException("Host can't be null");
             }
 
             var updatedHost = await _hostRepository.UpdateHostStatus(host);
             if (updatedHost == null)
             {
-                throw new Exception("Cant update the host status!!!");
+                throw new Exception("Can't update the host status!!!");
             }
 
             return updatedHost;

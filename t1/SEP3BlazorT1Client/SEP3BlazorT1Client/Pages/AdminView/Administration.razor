@@ -1,55 +1,53 @@
 ﻿@page "/Administration"
 @using SEP3BlazorT1Client.Models
 
-@*<button class="btn btn-outline-dark" @onclick="ValidateHost">Test</button>*@
 <MatTabGroup>
     <MatTab Label="Hosts Requests">
         <ChildContent>
             @if (hostRequestList == null)
             {
-                <p>Nothing to show</p>
+                <h3 class="mat-subtitle1">Loading</h3>
+                <MatProgressCircle Indeterminate="true" />
+            }
+            else if (!hostRequestList.Any())
+            {
+                <p>
+                    <em>There are no host requests at the moment....</em>
+                </p>
             }
             else
             {
                 <MatAccordion Multi="true">
                     @foreach (var h in hostRequestList)
                     {
-                        <EditForm Model="@h" OnValidSubmit="@(() => ValidateHost(@h.Id))">
-                            <DataAnnotationsValidator/>
-                            <ValidationSummary/>
-                            <MatExpansionPanel>
-                                <MatExpansionPanelSummary>
-                                    <MatExpansionPanelHeader>
-                                        <p>@h.Id</p></MatExpansionPanelHeader>
-                                </MatExpansionPanelSummary>
-                                <MatExpansionPanelDetails>
-                                    <div class="form-group">
-                                        <p>Host ID: @h.Id</p></div>
-                                    <div class="form-group">
-                                        <p>First Nmae: @h.FirstName</p></div>
-                                    <div class="form-group">
-                                        <p>Last Name: @h.LastName</p></div>
-                                    <div class="form-group">
-                                        <p>Phone Number: @h.PhoneNumber</p></div>
-                                    <div class="form-group">
-                                        <p>E-mail Address: @h.Email</p></div>
-                                    <div class="form-group">
-                                        <p>CPR-Number: @h.Cpr</p></div>
-                                    <div class="form-group">
-                                        <form>
-                                            <select name="Status">
-                                                <option value="">Waiting</option>
-                                                <option value="@false" bind-value="@h.IsApprovedHost">Don't Aapprove</option>
-                                                <option value="@true" bind-value="@h.IsApprovedHost">Approved</option>
-                                            </select>
-                                        </form>
+                        <MatExpansionPanel>
+                            <MatExpansionPanelSummary>
+                                <MatExpansionPanelHeader>
+                                    <p>@h.Id</p></MatExpansionPanelHeader>
+                            </MatExpansionPanelSummary>
+                            <MatExpansionPanelDetails>
+                                <div class="form-group">
+                                    <p>Host ID: @h.Id</p></div>
+                                <div class="form-group">
+                                    <p>First Nmae: @h.FirstName</p></div>
+                                <div class="form-group">
+                                    <p>Last Name: @h.LastName</p></div>
+                                <div class="form-group">
+                                    <p>Phone Number: @h.PhoneNumber</p></div>
+                                <div class="form-group">
+                                    <p>E-mail Address: @h.Email</p></div>
+                                <div class="form-group">
+                                    <p>CPR-Number: @h.Cpr</p></div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button class="btn btn-outline-dark" @onclick="(()=> ApproveHost(h.Id))">Approve</button>
+                                            <button class="btn btn-outline-dark" @onclick="(()=> RejectHost(h.Id))">Reject</button>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <button type="submit">Validate</button>
-                                    </div>
-                                </MatExpansionPanelDetails>
-                            </MatExpansionPanel>
-                        </EditForm>
+                                </div>
+                            </MatExpansionPanelDetails>
+                        </MatExpansionPanel>
                     }
                 </MatAccordion>
             }
@@ -59,49 +57,48 @@
         <ChildContent>
             @if (guestRequestList == null)
             {
-                <p>Nothing to show</p>
+                <h3 class="mat-subtitle1">Loading</h3>
+                <MatProgressCircle Indeterminate="true" />
+            }
+            else if (!guestRequestList.Any())
+            {
+                <p>
+                    <em>There are no guest requests at the moment....</em>
+                </p>
             }
             else
             {
                 <MatAccordion Multi="true">
                     @foreach (var g in guestRequestList)
                     {
-                        <EditForm Model="@g" OnValidSubmit="@(() => ValidateGuest(@g.Id))">
-                            <DataAnnotationsValidator/>
-                            <ValidationSummary/>
-                            <MatExpansionPanel>
-                                <MatExpansionPanelSummary>
-                                    <MatExpansionPanelHeader>
-                                        <p>@g.Id</p></MatExpansionPanelHeader>
-                                </MatExpansionPanelSummary>
-                                <MatExpansionPanelDetails>
-                                    <div class="form-group">
-                                        <p>Guest ID: @g.Id</p></div>
-                                    <div class="form-group">
-                                        <p>First Nmae: @g.FirstName</p></div>
-                                    <div class="form-group">
-                                        <p>Last Name: @g.LastName</p></div>
-                                    <div class="form-group">
-                                        <p>Phone Number: @g.PhoneNumber</p></div>
-                                    <div class="form-group">
-                                        <p>E-mail Address: @g.Email</p></div>
-                                    <div class="form-group">
-                                        <p>VIA-ID: @g.ViaId</p></div>
-                                    <div class="form-group">
-                                        <form>
-                                            <select name="Status">
-                                                <option value="">Waiting</option>
-                                                <option value="@false" bind-value="@g.IsApprovedGuest">Don't Aapprove</option>
-                                                <option value="@true" bind-value="@g.IsApprovedGuest">Approved</option>
-                                            </select>
-                                        </form>
+                        <MatExpansionPanel>
+                            <MatExpansionPanelSummary>
+                                <MatExpansionPanelHeader>
+                                    <p>@g.Id</p></MatExpansionPanelHeader>
+                            </MatExpansionPanelSummary>
+                            <MatExpansionPanelDetails>
+                                <div class="form-group">
+                                    <p>Guest ID: @g.Id</p></div>
+                                <div class="form-group">
+                                    <p>First Nmae: @g.FirstName</p></div>
+                                <div class="form-group">
+                                    <p>Last Name: @g.LastName</p></div>
+                                <div class="form-group">
+                                    <p>Phone Number: @g.PhoneNumber</p></div>
+                                <div class="form-group">
+                                    <p>E-mail Address: @g.Email</p></div>
+                                <div class="form-group">
+                                    <p>VIA-ID: @g.ViaId</p></div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button class="btn btn-outline-dark" @onclick="(()=> ApproveGuest(g.Id))">Approve</button>
+                                            <button class="btn btn-outline-dark" @onclick="(()=> RejectGuest(g.Id))">Reject</button>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <button type="submit">Validate</button>
-                                    </div>
-                                </MatExpansionPanelDetails>
-                            </MatExpansionPanel>
-                        </EditForm>
+                                </div>
+                            </MatExpansionPanelDetails>
+                        </MatExpansionPanel>
                     }
                 </MatAccordion>
             }

@@ -27,12 +27,12 @@ namespace SEP3T2GraphQL.Graphql
             return await _residenceService.GetResidenceByIdAsync(id); 
         }
 
-        public async Task<IList<Host>> GetAllNotApprovedHost()
+        public async Task<IEnumerable<Host>> GetAllNotApprovedHost()
         {
             return await _hostService.GetAllNotApprovedHostsAsync();
         }
 
-        public async Task<IList<Guest>> GetAllNotApprovedGuest()
+        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuest()
         {
             return await _guestService.GetAllNotApprovedGuests();
         }

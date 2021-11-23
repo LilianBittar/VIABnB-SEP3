@@ -99,7 +99,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             throw new NotImplementedException();
         }
 
-        public async Task<IList<Host>> GetAllNotApprovedHosts()
+        public async Task<IEnumerable<Host>> GetAllNotApprovedHosts()
         {
             HttpResponseMessage response = await client.GetAsync(uri + $"/hosts/notApproved");
             if (!response.IsSuccessStatusCode)
@@ -122,7 +122,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             HttpContent content = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PatchAsync($"{uri}/host/{host.Id}", content);
+            HttpResponseMessage response = await client.PatchAsync($"{uri}/hosts/{host.Id}/approval", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");

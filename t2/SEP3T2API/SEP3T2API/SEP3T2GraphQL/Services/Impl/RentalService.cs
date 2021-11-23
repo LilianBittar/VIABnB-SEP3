@@ -11,11 +11,17 @@ namespace SEP3T2GraphQL.Services.Impl
     public class RentalService : IRentalService
     {
         private readonly IRentRequestRepository _rentRequestRepository;
+        private readonly CreateRentRequestValidator _createRentRequestValidator;
+
+        public RentalService(IRentRequestRepository rentRequestRepository, CreateRentRequestValidator createRentRequestValidator)
+        {
+            _rentRequestRepository = rentRequestRepository;
+            _createRentRequestValidator = createRentRequestValidator;
+        }
 
         /// <summary>
-        /// This implementation of the IRentalService uses an <see cref="RentRequestValidator"/> for validating
-        /// the business logic that does not require any services. All business logic that requires calling other services
-        /// is handled inside this method itself.  
+        /// This implementation of the IRentalService uses an <see cref="CreateRentRequestValidator"/> for validating
+        /// the business logic of creating a new RentRequest. 
         /// </summary>
         public async Task<RentRequest> CreateRentRequest(RentRequest request)
         {
@@ -23,16 +29,7 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("Request cannot be null");
             }
-
-            RentRequestValidator.ValidateRentRequest(request);
-            var allRequestsForSameResidence = await GetAllRentRequestByResidenceId(request.Residence.Id);
-            if (allRequestsForSameResidence.Any(r =>
-                (r.StartDate == request.StartDate && r.EndDate == request.EndDate) &&
-                (r.Status == RentRequestStatus.Approved)))
-            {
-                throw new ArgumentException("Approved rent request for same rent period already exists"); 
-            }
-
+            _createRentRequestValidator.ValidateRentRequest(request);
             return await _rentRequestRepository.CreateAsync(request);
         }
 

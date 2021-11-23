@@ -27,12 +27,12 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<IList<Guest>> GetAllGuests()
+        public Task<IEnumerable<Guest>> GetAllGuests()
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<IList<Guest>> GetAllNotApprovedGuests()
+        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuests()
         {
             var guestQuery = new GqlQuery()
             {
@@ -48,8 +48,8 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery updateStatusMutation = new GqlQuery()
             {
                 Query =
-                    @"mutation($updateGuest:Guest) {allNotApprovedGuest(guest:$updateGuest){viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
-                Variables = new {updateGuest = guest}
+                    @"mutation($newGuest:GuestInput){updateGuestStatus(guest:$newGuest){viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
+                Variables = new {newGuest = guest}
             };
             var response = await _client.PostQueryAsync<UpdateGuestMutationResponseType>(updateStatusMutation);
             if (response.Errors != null)

@@ -76,9 +76,8 @@ import java.util.NoSuchElementException;
     return new ResponseEntity<>(hostsToReturn, HttpStatus.OK);
   }
 
-  //@PatchMapping("/host/{id}/approval")
-  @RequestMapping(value = "/host/{id}/approval", produces = "application/json", method = RequestMethod.PATCH) public ResponseEntity<Host> updateHostStatus(
-      @RequestBody Host host, /*@RequestParam("id")*/
+  @RequestMapping(value = "/hosts/{id}/approval", produces = "application/json", method = RequestMethod.PATCH) public ResponseEntity<Host> updateHostStatus(
+      @RequestBody Host host,
       @PathVariable("id") int id)
   {
     LOGGER.info("Recived updated host from t2: " + new Gson().toJson(host));

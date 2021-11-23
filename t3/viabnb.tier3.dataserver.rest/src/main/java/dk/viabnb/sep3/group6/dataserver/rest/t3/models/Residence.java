@@ -17,6 +17,7 @@ public class Residence
   private String imageUrl;
   private Date availableFrom;
   private Date availableTo;
+  private int maxNumberOfGuests;
 
   public Residence()
   {
@@ -25,7 +26,7 @@ public class Residence
   public Residence(int id, Address address, String description, String type,
       double averageRating, boolean isAvailable, double pricePerNight,
       List<Rule> rules, List<Facility> facilities, String imageURL,
-      Date availableFrom, Date availableTo)
+      Date availableFrom, Date availableTo, int maxNumberOfGuests)
   {
     this.id = id;
     this.address = address;
@@ -39,6 +40,7 @@ public class Residence
     this.imageUrl = imageURL;
     this.availableFrom = availableFrom;
     this.availableTo = availableTo;
+    this.maxNumberOfGuests = maxNumberOfGuests;
   }
 
   public int getId()
@@ -159,6 +161,22 @@ public class Residence
   public void setAvailableTo(Date availableTo)
   {
     this.availableTo = availableTo;
+  }
+
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
+
+  public int getMaxNumberOfGuests() {
+    return maxNumberOfGuests;
+  }
+
+  public void setMaxNumberOfGuests(int maxNumberOfGuests) {
+    this.maxNumberOfGuests = maxNumberOfGuests;
   }
 
   @Override public String toString()

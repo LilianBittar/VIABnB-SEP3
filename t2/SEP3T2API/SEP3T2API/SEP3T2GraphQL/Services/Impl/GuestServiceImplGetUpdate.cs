@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
@@ -18,17 +21,40 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Guest> UpdateGuest(Guest guest)
         {
-            return await _guestRepository.UpdateGuest(guest);
+            throw new System.NotImplementedException();
         }
 
-        public async Task<IList<Guest>> GetAllGuests()
+        public async Task<IEnumerable<Guest>> GetAllGuests()
         {
             return await _guestRepository.GetAllGuests(); 
         }
 
-        public async Task<IList<Guest>> GetAllNotApprovedGuests()
+        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuests()
         {
-            return await _guestRepository.GetAllNotApprovedGuests();
+            var guestListToReturn = await _guestRepository.GetAllNotApprovedGuests();
+            if (guestListToReturn == null)
+            {
+                throw new ArgumentException("Guest list is null");
+            }
+
+            return guestListToReturn;
+        }
+
+        public async Task<Guest> UpdateGuestStatus(Guest guest)
+        {
+            Console.WriteLine($"{this} {nameof(UpdateGuestStatus)} received params: {JsonSerializer.Serialize(guest)}");
+            if (guest == null)
+            {
+                throw new ArgumentException("Guest can't be null");
+            }
+
+            var updatedGuest = await _guestRepository.UpdateGuestStatus(guest);
+            if (updatedGuest == null)
+            {
+                throw new Exception("Can't update the guest status!!!");
+            }
+
+            return updatedGuest;
         }
     }
 }

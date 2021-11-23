@@ -35,7 +35,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new System.NotImplementedException();
         }
 
-        public async Task<IList<Host>> GetAllNotApprovedHostsAsync()
+        public async Task<IEnumerable<Host>> GetAllNotApprovedHostsAsync()
         {
             GqlClient client = new GqlClient(Url);
             var hostQuery = new GqlQuery()
