@@ -1,4 +1,4 @@
 ﻿<StaticWebAssets Version="1.0">
-  <ContentRoot BasePath="_content/MatBlazor" Path="C:\Users\Micha\.nuget\packages\matblazor\2.8.0\build\..\staticwebassets\" />
-  <ContentRoot BasePath="/" Path="C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="_content/MatBlazor" Path="C:\Users\Bruger\.nuget\packages\matblazor\2.8.0\build\..\staticwebassets\" />
+  <ContentRoot BasePath="/" Path="C:\Git\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\obj\Debug\net5.0\scopedcss\bundle\" />
 </StaticWebAssets>
