@@ -70,12 +70,13 @@ namespace SEP3T2GraphQL.Services.Impl
             return host;
         }
 
-        public async Task<Host> ValidateHostAsync(Host host)
+        public async Task<Host> ValidateHostAsync(string email, string password)
         {
-            var returnedHost = await GetHostByEmail(host.Email);
-            if (returnedHost != null && returnedHost.Password == host.Password)
+            var returnedHost = await GetHostByEmail(email);
+            if (returnedHost == null) throw new KeyNotFoundException("user not found");
+            if (returnedHost.Password != password)
             {
-                return host;
+                throw new Exception("the password is not matching");
             }
             else return null;
         }

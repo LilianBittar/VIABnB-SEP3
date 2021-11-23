@@ -8,7 +8,7 @@ namespace SEP3T2GraphQL.Services
     {
         Task<Host> UpdateHost(Host host);
         Task<Host> RegisterHostAsync(Host host);
-        Task<Host> ValidateHostAsync(Host host);
+        Task<Host> ValidateHostAsync(string email, string password);
         Task<Host> GetHostByEmail(string email);
         Task<Host> GetHostById(int id);
         Task<IList<Host>> GetAllNotApprovedHostsAsync();

@@ -23,7 +23,26 @@ public class HostDAOImpl extends BaseDao implements HostDAO {
 
     @Override
     public Host getHostByEmail(String email) {
-        return null;
+        try (Connection connection = getConnection()){
+            PreparedStatement stm = connection.prepareStatement("select * from host where email = ?");
+            stm.setString(1, email);
+            ResultSet result = stm.executeQuery();
+            result.next();
+            return new Host(
+                    result.getInt("hostid"),
+                    result.getString("fname"),
+                    result.getString("lname"),
+                    result.getString("phonenumber"),
+                    result.getString("email"),
+                    result.getString("password"),
+                    new ArrayList<>(),
+                    result.getString("personalimage"),
+                    result.getString("cprnumber"),
+                    result.getBoolean("isapproved")
+            );
+        } catch (SQLException throwables){
+            throw new IllegalStateException(throwables.getMessage());
+        }
     }
 
     @Override
@@ -55,7 +74,32 @@ public class HostDAOImpl extends BaseDao implements HostDAO {
 
     @Override
     public List<Host> getAllHosts() {
-        return null;
+        List<Host> hostsToReturn = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement(
+                    "select * from host"
+            );
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                Host hostToAdd = new Host
+                        (
+                                result.getInt("hostid"),
+                                result.getString("fname"),
+                                result.getString("lname"),
+                                result.getString("phonenumber"),
+                                result.getString("email"),
+                                result.getString("password"),
+                                new ArrayList<>(),
+                                result.getString("personalimage"),
+                                result.getString("cprnumber"),
+                                result.getBoolean("isapproved")
+                        );
+                hostsToReturn.add(hostToAdd);
+            }
+            return hostsToReturn;
+        }catch (SQLException throwables) {
+            throw new IllegalStateException(throwables.getMessage());
+        }
     }
 
     @Override

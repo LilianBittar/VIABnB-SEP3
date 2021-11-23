@@ -8306,34 +8306,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kkash\\.nuget\\packages\\": {}
+    "C:\\Users\\bitta\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\bitta\\repos\\VIABnb-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
       "projectName": "UnitTests",
-      "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
-      "packagesPath": "C:\\Users\\kkash\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\obj\\",
+      "projectPath": "C:\\Users\\bitta\\repos\\VIABnb-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\UnitTests.csproj",
+      "packagesPath": "C:\\Users\\bitta\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bitta\\repos\\VIABnb-SEP3\\t2\\SEP3T2API\\SEP3T2API\\UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kkash\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\bitta\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj": {
-              "projectPath": "C:\\Users\\kkash\\RiderProjects\\VIABnB-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj"
+            "C:\\Users\\bitta\\repos\\VIABnb-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj": {
+              "projectPath": "C:\\Users\\bitta\\repos\\VIABnb-SEP3\\t2\\SEP3T2API\\SEP3T2API\\SEP3T2GraphQL\\SEP3T2GraphQL.csproj"
             }
           }
         }
@@ -8399,7 +8397,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   },

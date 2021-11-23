@@ -76,6 +76,7 @@ namespace SEP3BlazorT1Client.Authentication
         
         private ClaimsIdentity SetupClaimsForUser(Host host)
         {
+            // make an if statment to see if guest found already in the system, so he should have a claim permission
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, host.FirstName));
             claims.Add(new Claim("Lastname", host.LastName));
