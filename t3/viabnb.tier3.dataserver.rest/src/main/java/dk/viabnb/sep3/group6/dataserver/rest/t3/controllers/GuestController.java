@@ -71,6 +71,10 @@ public class GuestController {
         }
     }
 
+    /**
+     * End point of method type GET to get list of Guest objects with isApprovedGuest boolean value false
+     * @return List<Guest>
+     * */
     @GetMapping("/guests/notApproved")
     public ResponseEntity<List<Guest>> getAllNotApprovedGuests()
     {
@@ -82,6 +86,13 @@ public class GuestController {
         return new ResponseEntity<>(guestsToReturn, HttpStatus.OK);
     }
 
+    /**
+     * End point of method type PATCH to update isApprovedGuest attribute for a given guest
+     * @param guest The targeted Guest object
+     * @param id The path variable used to identify the correct guest
+     * @return A newly updated Guest object or ResponseEntity with bad request (depends on the given Guest object).
+     * or ResponseEntity with not found when catching NoSuchElementException
+     * */
     @RequestMapping(value = "/guests/{id}/approval", produces = "application/json", method = RequestMethod.PATCH)
     public ResponseEntity<Guest> updateGuestStatus(@RequestBody Guest guest, @PathVariable("id") int id)
     {

@@ -63,8 +63,10 @@ import java.util.NoSuchElementException;
     return new ResponseEntity<>(host, HttpStatus.OK);
   }
 
-
-
+  /**
+   * End point of method type GET to get list of Host objects with isApprovedHost boolean value false
+   * @return List<Host>
+   * */
   @GetMapping("/hosts/notApproved") public ResponseEntity<List<Host>> getAllNotApprovedHosts()
   {
     List<Host> hostsToReturn;
@@ -76,6 +78,13 @@ import java.util.NoSuchElementException;
     return new ResponseEntity<>(hostsToReturn, HttpStatus.OK);
   }
 
+  /**
+   * End point of method type PATCH to update isApprovedHost attribute for a given host
+   * @param host The targeted Host object
+   * @param id The path variable used to identify the correct host
+   * @return A newly updated Host object or ResponseEntity with bad request (depends on the given Host object).
+   * or ResponseEntity with not found when catching NoSuchElementException
+   * */
   @RequestMapping(value = "/hosts/{id}/approval", produces = "application/json", method = RequestMethod.PATCH) public ResponseEntity<Host> updateHostStatus(
       @RequestBody Host host,
       @PathVariable("id") int id)
