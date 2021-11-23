@@ -63,7 +63,7 @@ public class RentRequestController {
     @GetMapping("/rentrequests/{id}")
     public ResponseEntity<RentRequest> getRentRequest(@PathVariable int id) {
         RentRequest existingRequest = rentRequestDAO.getById(id);
-        if (existingRequest == null){
+        if (existingRequest == null) {
             return ResponseEntity.notFound().build();
         }
 
@@ -71,10 +71,10 @@ public class RentRequestController {
     }
 
     @PutMapping("/rentrequests/{id}")
-    public ResponseEntity<RentRequest> replaceRentRequest(@PathVariable int id,@RequestBody(required = true) RentRequest request){
+    public ResponseEntity<RentRequest> replaceRentRequest(@PathVariable int id, @RequestBody(required = true) RentRequest request) {
         RentRequest existingRentRequest = rentRequestDAO.getById(id);
         RentRequest updatedRequest = null;
-        if (existingRentRequest == null){
+        if (existingRentRequest == null) {
             updatedRequest = rentRequestDAO.create(request);
             return ResponseEntity.ok(updatedRequest);
         }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
+using SEP3T2GraphQL.Repositories;
 
 namespace SEP3T2GraphQL.Services.Validation
 {
@@ -10,11 +11,11 @@ namespace SEP3T2GraphQL.Services.Validation
     /// </summary>
     public class CreateRentRequestValidator
     {
-        private readonly IRentalService _rentalService;
+        private readonly IRentRequestRepository _rentRequestRepository;
 
-        public CreateRentRequestValidator(IRentalService rentalService)
+        public CreateRentRequestValidator(IRentRequestRepository rentRequestRepository)
         {
-            _rentalService = rentalService;
+            _rentRequestRepository = rentRequestRepository;
         }
 
         /// <summary>
@@ -134,7 +135,8 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">If approved rent request exist for request's residence in same rent period as the request.</exception>
         private async Task ValidateRentPeriodOverlaps(RentRequest request)
         {
-            var allRequestsForSameResidence = await _rentalService.GetAllRentRequestByResidenceId(request.Residence.Id);
+            var allRequests = await _rentRequestRepository.GetAllAsync();
+            var allRequestsForSameResidence = allRequests.Where(r => r.Residence.Id == request.Id);
             if (allRequestsForSameResidence.Any(r =>
                 (r.StartDate == request.StartDate && r.EndDate == request.EndDate) &&
                 (r.Status == RentRequestStatus.Approved)))
