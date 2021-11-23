@@ -1,24 +1,37 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 
 namespace SEP3T2GraphQL.Services.Validation
 {
-    public static class RentRequestValidator
+    /// <summary>
+    /// Utility class for validating the CreateRentRequest event.
+    /// </summary>
+    public class CreateRentRequestValidator
     {
+        private readonly IRentalService _rentalService;
+
+        public CreateRentRequestValidator(IRentalService rentalService)
+        {
+            _rentalService = rentalService;
+        }
+
         /// <summary>
-        /// Utility class for validating an request for residence availability, number of guests and rent period. 
+        /// Validates an request for residence availability, number of guests, rent period overlaps and rent period. 
         /// </summary>
         /// <param name="request">The request which is to be validated</param>
         /// <exception cref="ArgumentException">Request is null</exception>
-        /// /// <exception cref="ArgumentException">Number of guests is less than 1</exception>
+        /// <exception cref="ArgumentException">Number of guests is less than 1</exception>
         /// <exception cref="ArgumentException">Number of guests exceeds the max specified by host</exception>
-        ///  /// <exception cref="ArgumentException">if the start date and end date is the same</exception>
+        /// <exception cref="ArgumentException">if the start date and end date is the same</exception>
         /// <exception cref="ArgumentException">if end date is earlier than start date</exception>
         /// <exception cref="ArgumentException">if start date is earlier than today</exception>
         /// <exception cref="ArgumentException">if end date is earlier than today</exception>
         /// <exception cref="ArgumentException">if rent period of request is outside the available from and available to date of the residence</exception>
         /// <exception cref="ArgumentException">If residence is not available</exception>
-        public static void ValidateRentRequest(RentRequest request)
+        /// <exception cref="ArgumentException">If approved rent request exist for request's residence in same rent period as the request.</exception>
+        public async Task ValidateRentRequest(RentRequest request)
         {
             if (request == null)
             {
@@ -28,6 +41,7 @@ namespace SEP3T2GraphQL.Services.Validation
             ValidateResidenceAvailability(request);
             ValidateRentPeriod(request);
             ValidateNumberOfGuests(request);
+            await ValidateRentPeriodOverlaps(request);
         }
 
         /// <summary>
@@ -37,7 +51,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <param name="request"></param>
         /// <exception cref="ArgumentException">Number of guests is less than 1</exception>
         /// <exception cref="ArgumentException">Number of guests exceeds the max specified by host</exception>
-        private static void ValidateNumberOfGuests(RentRequest request)
+        private void ValidateNumberOfGuests(RentRequest request)
         {
             //TODO: Add max number of guests for an residence and then check if the requests number of guests exceeds the max. 
             if (request.NumberOfGuests < 1)
@@ -56,7 +70,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">if start date is earlier than today</exception>
         /// <exception cref="ArgumentException">if end date is earlier than today</exception>
         /// <exception cref="ArgumentException">if rent period of request is outside the available from and available to date of the residence</exception>
-        private static void ValidateRentPeriod(RentRequest request)
+        private void ValidateRentPeriod(RentRequest request)
         {
             if (DateTime.Compare(request.StartDate, request.EndDate) == 0)
             {
@@ -96,11 +110,28 @@ namespace SEP3T2GraphQL.Services.Validation
         /// </summary>
         /// <param name="request">The request which is being validated</param>
         /// <exception cref="ArgumentException">If residence is not available</exception>
-        private static void ValidateResidenceAvailability(RentRequest request)
+        private void ValidateResidenceAvailability(RentRequest request)
         {
             if (!request.Residence.IsAvailable)
             {
                 throw new ArgumentException("The residence is not available for rent");
+            }
+        }
+
+        /// <summary>
+        /// Validates if there exists any approved rent requests for the same residence in the same rent period
+        /// as the method param.
+        /// </summary>
+        /// <param name="request">The request which is being validated</param>
+        /// <exception cref="ArgumentException">If approved rent request exist for request's residence in same rent period as the request.</exception>
+        private async Task ValidateRentPeriodOverlaps(RentRequest request)
+        {
+            var allRequestsForSameResidence = await _rentalService.GetAllRentRequestByResidenceId(request.Residence.Id);
+            if (allRequestsForSameResidence.Any(r =>
+                (r.StartDate == request.StartDate && r.EndDate == request.EndDate) &&
+                (r.Status == RentRequestStatus.Approved)))
+            {
+                throw new ArgumentException("Approved rent request for same rent period already exists");
             }
         }
     }
