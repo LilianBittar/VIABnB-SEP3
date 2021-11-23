@@ -10,8 +10,8 @@ namespace SEP3T2GraphQL.Repositories
         Task<Guest> GetGuestById(int id);
         Task<Guest> GetGuestByEmail(string email);
         Task<Guest> UpdateGuest(Guest guest); 
-        Task<IList<Guest>> GetAllGuests(); 
-        Task<IList<Guest>> GetAllNotApprovedGuests();
+        Task<IEnumerable<Guest>> GetAllGuests(); 
+        Task<IEnumerable<Guest>> GetAllNotApprovedGuests();
         Task<Guest> UpdateGuestStatus(Guest guest); 
     }
 }

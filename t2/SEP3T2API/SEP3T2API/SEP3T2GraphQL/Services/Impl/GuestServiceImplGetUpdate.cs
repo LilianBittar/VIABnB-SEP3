@@ -24,12 +24,12 @@ namespace SEP3T2GraphQL.Services.Impl
             throw new System.NotImplementedException();
         }
 
-        public async Task<IList<Guest>> GetAllGuests()
+        public async Task<IEnumerable<Guest>> GetAllGuests()
         {
             return await _guestRepository.GetAllGuests(); 
         }
 
-        public async Task<IList<Guest>> GetAllNotApprovedGuests()
+        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuests()
         {
             return await _guestRepository.GetAllNotApprovedGuests();
         }
