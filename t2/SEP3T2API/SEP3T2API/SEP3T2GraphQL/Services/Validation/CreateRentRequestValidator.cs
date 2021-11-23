@@ -57,10 +57,14 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">Number of guests exceeds the max specified by host</exception>
         private void ValidateNumberOfGuests(RentRequest request)
         {
-            //TODO: Add max number of guests for an residence and then check if the requests number of guests exceeds the max. 
             if (request.NumberOfGuests < 1)
             {
                 throw new ArgumentException("Number of guests must be over 0");
+            }
+
+            if (request.NumberOfGuests > request.Residence.MaxNumberOfGuests)
+            {
+                throw new ArgumentException("Number of guests exceeds the maximum allowed for residence");
             }
         }
 
