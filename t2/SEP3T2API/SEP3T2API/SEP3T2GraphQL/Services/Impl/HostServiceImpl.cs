@@ -53,12 +53,14 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Host> GetHostByEmail(string email)
         {
-            //Todo call repo + if logic if needed 
+            
             if (_hostValidation.IsValidEmail(email))
             {
                 try
                 {
-                    _hostRepository.GetHostByEmail(email);
+                    Console.WriteLine($"{this} logging in...");
+                    Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(email)}");
+                    return await _hostRepository.GetHostByEmail(email);
                 }
                 catch (Exception e)
                 {
@@ -66,20 +68,8 @@ namespace SEP3T2GraphQL.Services.Impl
                     throw;
                 }
             }
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host?email={email}");
 
-            if (!responseMessage.IsSuccessStatusCode)
-            {
-                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
-            }
-
-            string result = await responseMessage.Content.ReadAsStringAsync();
-            Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions()
-            {
-                PropertyNameCaseInsensitive = true
-            });
-
-            return host;
+            throw new ArgumentException("No user with such email");
         }
 
         public async Task<Host> ValidateHostAsync(string email, string password)
@@ -90,7 +80,7 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new Exception("the password is not matching");
             }
-            else return null;
+            else return returnedHost;
         }
 
       

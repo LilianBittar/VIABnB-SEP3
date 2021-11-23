@@ -20,9 +20,30 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<Host> ValidateHostAsync(string email, string password)
+        public async Task<Host> ValidateHostAsync(string email, string password)
         {
-            throw new System.NotImplementedException();
+            GqlClient client = new GqlClient(Url);
+            var validateHostQuery = new GqlQuery()
+            {
+                Query = @"query($emailHost: String, $passwordHost: String) {
+                          validatehostLogin(email: $emailHost, password: $passwordHost)
+                           {id,
+                           firstName,
+                           lastName,
+                           phoneNumber,
+                           email,
+                           password,
+                           profileImageUrl,
+                           cpr,
+                           isApprovedHost}}",
+                Variables = new {emailHost = email, passwordHost = password}
+            };
+            
+            var graphQlResponse = await client.PostQueryAsync<HostResponseType>(validateHostQuery);
+            Console.WriteLine(graphQlResponse.Data.ToString());
+         
+            System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Host.ToString()}");
+            return graphQlResponse.Data.Host; 
         }
 
         public Task<Host> GetHostByEmail(string email)

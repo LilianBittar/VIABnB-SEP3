@@ -8,22 +8,6 @@
 @inject NavigationManager NavigationManager
 
 
-@* <h1>Proof of concept</h1> *@
-@* <span>T1 --> T2 REST API --> T3 SOAP API with Postgres DB *@
-@* </span> *@
-@* *@
-@* <div> *@
-@*      *@
-@*     <p>Fetched Message: </p> *@
-@*     @if (_residence != null) *@
-@*     { *@
-@*     <p>@_residence.ToString()</p> *@
-@*     } *@
-@*     <Input type="number" @oninput="(e) => { _id = Int32.Parse(e.Value.ToString()); }"/> *@
-@*     <button type="submit" @onclick="CreateNewResidence" class="btn btn-primary"> *@
-@*         FETCH CONCEPT MESSAGE *@
-@*     </button> *@
-@* </div> *@
  <div class="mat-layout-grid">
             <div class="mat-layout-grid-inner">
                 <div class="mat-layout-grid-cell"></div>
@@ -80,9 +64,10 @@
             await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email, password);
             email = "";
             password = "";
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("/BuildingsOverview");
         } catch (Exception e) {
             ErrorMessage = e.Message;
+            Console.WriteLine(e.Message);
         }
     }
 

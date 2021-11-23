@@ -53,6 +53,7 @@ namespace SEP3BlazorT1Client.Authentication
              try
              {
                 Host user = await _hostService.ValidateHostAsync(email, password);
+                Console.WriteLine(user.Email);
                 identity = SetupClaimsForUser(user);
                 string serialisedData = JsonSerializer.Serialize(user);
                 jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);
