@@ -44,7 +44,6 @@ import java.util.NoSuchElementException;
     return new ResponseEntity<>(newHost, HttpStatus.OK);
   }
 
-  //TODO: This is conflicting with the handler for /host/{id}. Move this into a getAllHosts method and make email and query param instead. -micmic2
       @GetMapping("/host/email={email}")
       public ResponseEntity<Host> getHostByEmail(@PathVariable String email)
       {
