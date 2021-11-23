@@ -111,13 +111,13 @@ namespace SEP3T2GraphQL.Services.Impl
             Console.WriteLine($"{this} {nameof(UpdateHostStatusAsync)} received params: {JsonSerializer.Serialize(host)}");
             if (host == null)
             {
-                throw new ArgumentException("Host cant be null");
+                throw new ArgumentException("Host can't be null");
             }
 
             var updatedHost = await _hostRepository.UpdateHostStatus(host);
             if (updatedHost == null)
             {
-                throw new Exception("Cant update the host status!!!");
+                throw new Exception("Can't update the host status!!!");
             }
 
             return updatedHost;
