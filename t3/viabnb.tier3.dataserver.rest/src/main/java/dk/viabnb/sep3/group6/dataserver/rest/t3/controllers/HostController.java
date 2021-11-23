@@ -27,8 +27,7 @@ import java.util.NoSuchElementException;
   private HostDAO hostDAO;
   private Gson gson = new GsonBuilder().serializeNulls().create();
 
-  @Autowired public HostController(/*@Qualifier("HostDAOImpl") */
-      HostDAO hostDAO)
+  @Autowired public HostController(HostDAO hostDAO)
   {
     this.hostDAO = hostDAO;
   }
@@ -44,16 +43,18 @@ import java.util.NoSuchElementException;
     return new ResponseEntity<>(newHost, HttpStatus.OK);
   }
 
-      @GetMapping("/host/email={email}")
-      public ResponseEntity<Host> getHostByEmail(@PathVariable String email)
-      {
-          Host host;
-          host = hostDAO.getHostByEmail(email);
-          if (host == null){
-              return ResponseEntity.internalServerError().build();
-          }
-          return new ResponseEntity<>(host, HttpStatus.OK);
-      }
+  @GetMapping("/host/email={email}") public ResponseEntity<Host> getHostByEmail(
+      @PathVariable String email)
+  {
+    Host host;
+    host = hostDAO.getHostByEmail(email);
+    if (host == null)
+    {
+      return ResponseEntity.internalServerError().build();
+    }
+    return new ResponseEntity<>(host, HttpStatus.OK);
+  }
+
   @GetMapping("/host/{id}") public ResponseEntity<Host> getHostById(
       @PathVariable int id)
   {
@@ -65,8 +66,9 @@ import java.util.NoSuchElementException;
 
   /**
    * End point of method type GET to get list of Host objects with isApprovedHost boolean value false
+   *
    * @return List<Host>
-   * */
+   */
   @GetMapping("/hosts/notApproved") public ResponseEntity<List<Host>> getAllNotApprovedHosts()
   {
     List<Host> hostsToReturn;
@@ -80,14 +82,14 @@ import java.util.NoSuchElementException;
 
   /**
    * End point of method type PATCH to update isApprovedHost attribute for a given host
+   *
    * @param host The targeted Host object
-   * @param id The path variable used to identify the correct host
+   * @param id   The path variable used to identify the correct host
    * @return A newly updated Host object or ResponseEntity with bad request (depends on the given Host object).
    * or ResponseEntity with not found when catching NoSuchElementException
-   * */
+   */
   @RequestMapping(value = "/hosts/{id}/approval", produces = "application/json", method = RequestMethod.PATCH) public ResponseEntity<Host> updateHostStatus(
-      @RequestBody Host host,
-      @PathVariable("id") int id)
+      @RequestBody Host host, @PathVariable("id") int id)
   {
     LOGGER.info("Recived updated host from t2: " + new Gson().toJson(host));
     Host updatedHost = null;

@@ -1,10 +1,7 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import com.sun.jdi.event.ExceptionEvent;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RentRequest;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

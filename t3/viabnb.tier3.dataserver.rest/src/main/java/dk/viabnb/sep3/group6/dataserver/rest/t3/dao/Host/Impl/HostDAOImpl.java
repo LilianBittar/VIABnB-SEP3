@@ -2,7 +2,10 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.Impl;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HostDAOImpl extends BaseDao implements HostDAO {
+public class HostDAOImpl extends BaseDao implements HostDAO
+{
+    private static final Logger LOGGER= LoggerFactory.getLogger(HostDAO.class);
 
     @Override
     public Host RegisterHost(Host host) {

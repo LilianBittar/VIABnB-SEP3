@@ -1,9 +1,6 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence;
 
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Address;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Facility;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Residence;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Rule;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,12 +18,14 @@ class ResidenceJsonDAOTest
   private List<Facility> facilities;
   private List<Rule> rules;
   private Residence residence;
+  private City city;
 
   @BeforeEach void setUp()
   {
     residenceDAO = new ResidenceDAOImpl();
 
-    address = new Address(1, "streetNameTest", "h1", "cityTest", "s1", 1111);
+    city = new City(1, "cityNameTest", 1111);
+    address = new Address(1, "streetNameTest", "h1", "cityTest", city);
 
     facilities = new ArrayList<>();
     facilities.add(new Facility(1, "nameTest"));
@@ -34,8 +33,8 @@ class ResidenceJsonDAOTest
     rules = new ArrayList<>();
     rules.add(new Rule(1, "descriptionTest"));
 
-    residence = new Residence(1, address, "descriptionTest", "typeTest",
-        1.5, false, 1.5, rules, facilities, "urlTest", new Date("11/11/2021"), new Date("11/11/2021"));
+
+    residence = new Residence(1, address, "des", "ty", 1, false, 1, rules, facilities, "s", new Date("11/11/2021"), new Date("11/11/2021"), 10);
   }
 
   @Test void createResidenceSunnyScenario()
