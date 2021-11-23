@@ -31,9 +31,13 @@ namespace SEP3BlazorT1Client.Data.Impl
                               id,
                               streetName,
                               houseNumber,
-                              cityName,
                               streetNumber,
-                              zipCode
+                              City
+                                {
+                                    id,
+                                    cityName,
+                                    zipCode
+                                }
                             }, 
                             description,
                             type,
@@ -86,7 +90,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlClient client = new GqlClient(Url){EnableLogging=true};
             GqlQuery residenceMutation = new GqlQuery()
             {
-                Query = @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){id,address{id, zipCode, streetName, houseNumber, cityName, streetNumber, zipCode},description,type,averageRating,isAvailable,pricePerNight,rules{id, description},facilities{id, name},imageUrl,}}",
+                Query = @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){id,address{id, zipCode, streetName, houseNumber, streetNumber, City{id, cityName, zipCode}},description,type,averageRating,isAvailable,pricePerNight,rules{id, description},facilities{id, name},imageUrl,}}",
                 Variables= new {residenceInput = residence}
             };
             var mutationResponse = await client.PostQueryAsync<CreateResidenceMutationResponseType>(residenceMutation);

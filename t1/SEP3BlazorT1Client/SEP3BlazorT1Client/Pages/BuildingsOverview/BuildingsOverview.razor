@@ -67,9 +67,12 @@
                 Id = 1,
                 StreetName = "Sally",
                 HouseNumber = "2",
-                CityName = "Horsens",
                 StreetNumber = "3b",
-                ZipCode = 8700,
+                City = new City()
+                {
+                    CityName = "Horsens",
+                    ZipCode = 8700
+                }
             },
             Description = "beautiful house full of cats!",
             Type = "villa",
@@ -89,9 +92,12 @@
                 Id = 2,
                 StreetName = "Reshee",
                 HouseNumber = "B",
-                CityName = "Horsens",
                 StreetNumber = "A1",
-                ZipCode = 8700,
+                City = new City()
+                {
+                    CityName = "Horsens",
+                    ZipCode = 8700
+                }
             },
             Description = "amazing house full of flowers and books",
             Type = "house",

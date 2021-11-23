@@ -13,84 +13,84 @@ namespace SEP3BlazorT1Client.Pages.BuildingsOverview
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
+#line 1 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
+#line 2 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
+#line 3 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
+#line 4 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
+#line 5 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
+#line 6 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
+#line 7 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
+#line 8 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
+#line 9 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using SEP3BlazorT1Client;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
+#line 10 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using SEP3BlazorT1Client.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
+#line 11 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\_Imports.razor"
 using MatBlazor;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\BuildingsOverview\BuildingsOverview.razor"
+#line 2 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\BuildingsOverview\BuildingsOverview.razor"
 using SEP3BlazorT1Client.Models;
 
 #line default
@@ -105,7 +105,7 @@ using SEP3BlazorT1Client.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 58 "C:\Users\Micha\Documents\Coding\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\BuildingsOverview\BuildingsOverview.razor"
+#line 58 "C:\Users\kkash\RiderProjects\VIABnB-SEP3\t1\SEP3BlazorT1Client\SEP3BlazorT1Client\Pages\BuildingsOverview\BuildingsOverview.razor"
        
 
     Residence[] Residences = new[]
@@ -118,9 +118,12 @@ using SEP3BlazorT1Client.Models;
                 Id = 1,
                 StreetName = "Sally",
                 HouseNumber = "2",
-                CityName = "Horsens",
                 StreetNumber = "3b",
-                ZipCode = 8700,
+                City = new City()
+                {
+                    CityName = "Horsens",
+                    ZipCode = 8700
+                }
             },
             Description = "beautiful house full of cats!",
             Type = "villa",
@@ -140,9 +143,12 @@ using SEP3BlazorT1Client.Models;
                 Id = 2,
                 StreetName = "Reshee",
                 HouseNumber = "B",
-                CityName = "Horsens",
                 StreetNumber = "A1",
-                ZipCode = 8700,
+                City = new City()
+                {
+                    CityName = "Horsens",
+                    ZipCode = 8700
+                }
             },
             Description = "amazing house full of flowers and books",
             Type = "house",
