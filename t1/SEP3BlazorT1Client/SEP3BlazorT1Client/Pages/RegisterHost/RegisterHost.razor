@@ -26,7 +26,12 @@
         </div>
         <div class="form-group">
             <label>E-mail*</label>
-            <input type="text" placeholder="E-mail" @bind-value="_newHost.Email">
+            <input type="text" placeholder="Ex. myemail@mail.com " @bind-value="_newHost.Email">
+        </div>
+        <div class="form-group">
+            
+            <label>CPR number*</label>
+            <input type="text" placeholder="Ex. 123456-1234" @bind-value="_newHost.Cpr">
         </div>
         <div class="form-group">
             <label>Phone number*</label>
@@ -68,16 +73,16 @@
 
     private async void CreateHost()
     {
-        //clear error messages
+    //clear error messages
         validationResults.Clear();
-        // the validator validates in hte context of a host object
+    // the validator validates in hte context of a host object
         ValidationContext validationContext = new ValidationContext(_newHost);
-        
-        //validates all host properties in context of host model
-        bool hostIsValid = Validator.TryValidateObject(_newHost, validationContext, validationResults, true);
-        
 
-        //checks if passwords match
+    //validates all host properties in context of host model
+        bool hostIsValid = Validator.TryValidateObject(_newHost, validationContext, validationResults, true);
+
+
+    //checks if passwords match
         if (!PasswordConfirmationMatches())
         {
             _errorText = "Passwords does not match";
@@ -88,7 +93,7 @@
         {
             try
             {
-        //Throws exception if user already exists.
+    //Throws exception if user already exists.
                 await _hostservice.RegisterHostAsync(_newHost);
             }
             catch (Exception e)
@@ -97,7 +102,7 @@
                 StateHasChanged();
                 return;
             }
-            //User is logged on upon successful account creation
+    //User is logged on upon successful account creation
     //   await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_newUser.Username, _newUser.Password);
             NavigationManager.NavigateTo("/");
         }
@@ -105,7 +110,7 @@
 
     private bool PasswordConfirmationMatches()
     {
-        if (_passwordConfirmation==null)
+        if (_passwordConfirmation == null)
         {
             _errorText = "Please confirm password";
         }
