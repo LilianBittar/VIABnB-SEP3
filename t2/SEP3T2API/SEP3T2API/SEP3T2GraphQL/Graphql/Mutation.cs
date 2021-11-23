@@ -35,7 +35,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<Guest> UpdateGuestStatus(Guest guest)
         {
-            return await _guestService.UpdateGuest(guest);
+            return await _guestService.UpdateGuestStatus(guest);
         }
 
         public async Task<RentRequest> RentResidence(RentRequest request)

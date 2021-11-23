@@ -28,29 +28,35 @@ namespace SEP3BlazorT1Client.Pages.AdminView
             guestRequestList = await GuestService.GetAllNotApprovedGuests();
         }
         
-        private async Task ValidateHost(int hostId)
+        private async Task ApproveHost(int hostId)
         {
-            try
-            {
-                Host hostToUpdate = hostRequestList.First(h => h.Id == hostId);
-                if (hostToUpdate == null)
-                {
-                    Console.WriteLine("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-                    throw new Exception("Host cant be found");
-                }
-                await HostService.UpdateHostStatusAsync(hostToUpdate);
-                //hostRequestList.Remove(hostToUpdate);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Here...............................................");
-                throw;
-            }
+            var approvedHost = hostRequestList.First(host => host.Id == hostId);
+            approvedHost.IsApprovedHost = true;
+            await HostService.UpdateHostStatusAsync(approvedHost);
+            StateHasChanged();
         }
-        private async Task ValidateGuest(int guestId)
+        
+        private async Task RejectHost(int hostId)
         {
-            await GuestService.UpdateGuestStatusAsync(guestRequestList.First(guest => guest.Id == guestId));
+            var rejectedHost = hostRequestList.First(host => host.Id == hostId);
+            rejectedHost.IsApprovedHost = false;
+            await HostService.UpdateHostStatusAsync(rejectedHost);
+            StateHasChanged();
         }
 
+        private async Task ApproveGuest(int guestId)
+        {
+            var approvedGuest = guestRequestList.First(guest => guest.Id == guestId);
+            approvedGuest.IsApprovedGuest = true;
+            await GuestService.UpdateGuestStatusAsync(approvedGuest);
+            StateHasChanged();
+        }
+        private async Task RejectGuest(int guestId)
+        {
+            var rejectedGuest = guestRequestList.First(guest => guest.Id == guestId);
+            rejectedGuest.IsApprovedGuest = false;
+            await GuestService.UpdateGuestStatusAsync(rejectedGuest);
+            StateHasChanged();
+        }
     }
 }
