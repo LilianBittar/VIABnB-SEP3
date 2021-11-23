@@ -22,5 +22,6 @@ namespace SEP3T2GraphQL.Services
         Task<Guest> UpdateGuest(Guest guest); 
         Task<IList<Guest>> GetAllGuests(); 
         Task<IList<Guest>> GetAllNotApprovedGuests();
+        Task<Guest> UpdateGuestStatus(Guest guest);
     }
 }

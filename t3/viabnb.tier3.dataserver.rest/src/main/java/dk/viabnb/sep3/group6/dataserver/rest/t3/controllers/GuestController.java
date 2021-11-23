@@ -82,8 +82,8 @@ public class GuestController {
         return new ResponseEntity<>(guestsToReturn, HttpStatus.OK);
     }
 
-    @PatchMapping("/guests/{id}/approval")
-    public ResponseEntity<Guest> updateGuestStatus(@RequestBody Guest guest, @RequestParam("id") int id)
+    @RequestMapping(value = "/guests/{id}/approval", produces = "application/json", method = RequestMethod.PATCH)
+    public ResponseEntity<Guest> updateGuestStatus(@RequestBody Guest guest, @PathVariable("id") int id)
     {
         try
         {

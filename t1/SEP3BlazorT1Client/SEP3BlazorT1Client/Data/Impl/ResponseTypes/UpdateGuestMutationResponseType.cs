@@ -5,7 +5,7 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes
 {
     public class UpdateGuestMutationResponseType
     {
-        [JsonProperty("updateGuest")]
+        [JsonProperty("updateGuestStatus")]
         public Guest UpdateGuest { get; set; }
     }
 }
