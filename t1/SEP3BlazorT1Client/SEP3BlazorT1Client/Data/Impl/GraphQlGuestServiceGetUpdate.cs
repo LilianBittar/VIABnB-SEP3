@@ -27,12 +27,12 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<IList<Guest>> GetAllGuests()
+        public Task<IEnumerable<Guest>> GetAllGuests()
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<IList<Guest>> GetAllNotApprovedGuests()
+        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuests()
         {
             var guestQuery = new GqlQuery()
             {

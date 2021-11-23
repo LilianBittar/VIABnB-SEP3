@@ -17,8 +17,8 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         [Inject] public IGuestService GuestService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         
-        private IList<Guest> guestRequestList = new List<Guest>();
-        private IList<Host> hostRequestList = new List<Host>();
+        private IEnumerable<Guest> guestRequestList = new List<Guest>();
+        private IEnumerable<Host> hostRequestList = new List<Host>();
 
         private bool panelOpenState;
 
