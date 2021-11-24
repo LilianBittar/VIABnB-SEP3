@@ -25,7 +25,7 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
 
         public bool IsValidRules(IList<Rule> rules)
         {
-            if (rules != null && (rules.All(rule => (rule.Id >= 0) && !string.IsNullOrEmpty(rule.Description))))
+            if (rules != null && (rules.All(rule =>  !string.IsNullOrEmpty(rule.Description))))
             {
                 return true;
             }
@@ -52,13 +52,12 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
                  (IsValidAddress(residence.Address)) &&
                  (!string.IsNullOrEmpty(residence.Description)) &&
                  (!string.IsNullOrEmpty(residence.Type)) &&
-                 ((residence.AverageRating >= 0) &&
                   (residence.IsAvailable != null) &&
                   (residence.PricePerNight >= 0) &&
                   IsValidRules(residence.Rules) &&
                   (IsValidFacilities(residence.Facilities)) &&
                   (residence.AvailableFrom != null && residence.AvailableFrom >= DateTime.Now) &&
-                  (residence.AvailableTo != null && residence.AvailableTo >= DateTime.Now))))
+                  (residence.AvailableTo != null && residence.AvailableTo >= DateTime.Now)))
             {
                 return true;
             }
