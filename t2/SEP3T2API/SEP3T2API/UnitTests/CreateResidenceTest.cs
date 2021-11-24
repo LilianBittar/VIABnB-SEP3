@@ -15,6 +15,7 @@ namespace UnitTests
         private IResidenceValidation _residenceValidation;
         
         private Address address;
+        private City city;
         private IList<Facility> facilities;
         private IList<Rule> rules;
         private Residence residence;
@@ -24,14 +25,20 @@ namespace UnitTests
         {
             _residenceValidation = new ResidenceValidationImpl();
 
+            city = new City()
+            {
+                Id = 1,
+                CityName = "Horsens",
+                ZipCode = 8700
+            };
+
             address = new Address()
             {
                 Id = 1,
                 StreetName = "StreetNameTest",
                 HouseNumber = "1A",
-                CityName = "CityTest",
                 StreetNumber = "2A",
-                ZipCode = 1111
+                City = city
             };
             
             facilities = new List<Facility>();
@@ -44,7 +51,6 @@ namespace UnitTests
             rules = new List<Rule>();
             rules.Add(new Rule()
             {
-                Id = 1,
                 Description = "DescriptionTest"
             });
 
@@ -54,7 +60,6 @@ namespace UnitTests
                 Address = address,
                 Description = "DescriptionTest",
                 Type = "TypeTes",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -80,7 +85,6 @@ namespace UnitTests
                 Address = null,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -92,22 +96,30 @@ namespace UnitTests
             Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
 
-        [TestCase(null, "Test", "Test")]
-        [TestCase("Test", null, "Test")]
-        [TestCase("Test", "Test", null)]
-        [TestCase("", "Test", "Test")]
-        [TestCase("Test", "", "Test")]
-        [TestCase("Test", "Test", "")]
-        public void CreateResidenceWithAnAddressWithANullOrEmptyStreetNameHouseNumberAndStreetNumberTest(string streetName, string houseNumber, string streetNumber)
+        [TestCase(null, "Test", "Test", "Test", 1111)]
+        [TestCase("Test", null, "Test", "Test", 1111)]
+        [TestCase("Test", "Test", "Test", null, 1111)]
+        [TestCase("Test", "Test", "Test", "Test", -1111)]
+        [TestCase("Test", "Test", null, "Test", 1111)]
+        [TestCase("", "Test", "Test", "Test", 1111)]
+        [TestCase("Test", "", "Test", "Test", 1111)]
+        [TestCase("Test", "Test", "", "Test", 1111)]
+        [TestCase("Test", "Test", "Test", "", 1111)]
+        [TestCase("Test", "Test", "Test", "Test", 0)]
+        public void CreateResidenceWithAnAddressWithInvalidAddressTest(string streetName, string houseNumber, string streetNumber, string cityName, int zipCode)
         {
             Address a = new Address()
             {
                 Id = 1,
                 StreetName = streetName,
                 HouseNumber = houseNumber,
-                CityName = "CityTest",
                 StreetNumber = streetNumber,
-                ZipCode = 1111
+                City = new City()
+                {
+                    Id = 1,
+                    CityName = cityName,
+                    ZipCode = zipCode
+                }
             };
             Residence r = new Residence()
             {
@@ -115,7 +127,6 @@ namespace UnitTests
                 Address = a,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -128,41 +139,7 @@ namespace UnitTests
             Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidAddress(a));
             Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
-        [TestCase(-1)]
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(999)]
-        [TestCase(null)]
-        public void CreateResidenceWithAnAddressWithAZipCodeOutOfRangeTest(int zipCode)
-        {
-            Address a = new Address()
-            {
-                Id = 1,
-                StreetName = "Test",
-                HouseNumber = "Test",
-                CityName = "CityTest",
-                StreetNumber = "2A",
-                ZipCode = zipCode
-            };
-            Residence r = new Residence()
-            {
-                Id = 2,
-                Address = a,
-                Description = "Test",
-                Type = "Test",
-                AverageRating = 1,
-                IsAvailable = false,
-                PricePerNight = 1,
-                Rules = rules,
-                Facilities = facilities,
-                ImageUrl = "Test",
-                AvailableFrom = DateTime.Now,
-                AvailableTo = DateTime.Now
-            };
-            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidAddress(a));
-            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
-        }
-        
+
         [TestCase(null)]
         [TestCase("")]
         [TestCase("1")]
@@ -175,9 +152,13 @@ namespace UnitTests
                 Id = 1,
                 StreetName = "Test",
                 HouseNumber = "Test",
-                CityName = cityName,
                 StreetNumber = "2A",
-                ZipCode = 1111
+                City = new City()
+                {
+                    Id = 2,
+                    CityName = cityName,
+                    ZipCode = 1111
+                }
             };
             Residence r = new Residence()
             {
@@ -185,7 +166,6 @@ namespace UnitTests
                 Address = a,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -210,7 +190,6 @@ namespace UnitTests
                 Address = address,
                 Description = description,
                 Type = type,
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -234,7 +213,6 @@ namespace UnitTests
                 Address = address,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = avgRating,
                 IsAvailable = false,
                 PricePerNight = ppn,
                 Rules = rules,
@@ -255,7 +233,6 @@ namespace UnitTests
                 Address = address,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = isAvp,
                 PricePerNight = 1,
                 Rules = rules,
@@ -276,7 +253,6 @@ namespace UnitTests
             IList<Rule> rs = new List<Rule>();
             rs.Add(new Rule()
                 {
-                    Id = 2,
                     Description = des
                 }
             );
@@ -293,7 +269,6 @@ namespace UnitTests
                 Address = address,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rs,
@@ -315,7 +290,6 @@ namespace UnitTests
                 Address = address,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -337,7 +311,6 @@ namespace UnitTests
                 Address = address,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -49,13 +50,13 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Host> GetHostByEmail(string email)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host/{email}");
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host?email={email}");
 
             if (!responseMessage.IsSuccessStatusCode)
             {
                 throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
             }
-
+            
             string result = await responseMessage.Content.ReadAsStringAsync();
             Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions(
                 new JsonSerializerOptions
@@ -96,6 +97,45 @@ namespace SEP3T2GraphQL.Repositories.Impl
         public Task<Host> UpdateHost(Host host)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Host>> GetAllNotApprovedHosts()
+        {
+            HttpResponseMessage response = await client.GetAsync(uri + $"/hosts/notApproved");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            var result = await response.Content.ReadAsStringAsync();
+            var hostListToReturn = JsonSerializer.Deserialize<List<Host>>(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return hostListToReturn;
+        }
+
+        public async Task<Host> UpdateHostStatus(Host host)
+        {
+            var hostAsJson = JsonSerializer.Serialize(host, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            HttpContent content = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PatchAsync($"{uri}/hosts/{host.Id}/approval", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            var updatedHost = JsonSerializer.Deserialize<Host>(await response.Content.ReadAsStringAsync(),
+                new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+
+            return updatedHost;
         }
     }
 }

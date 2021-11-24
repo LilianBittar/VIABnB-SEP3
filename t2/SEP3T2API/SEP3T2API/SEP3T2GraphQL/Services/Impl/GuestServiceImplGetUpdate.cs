@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
     public partial class GuestServiceImpl : IGuestService
     {
-        public Task<Guest> GetGuestById(int id)
+        public async Task<Guest> GetGuestById(int id)
         {
-            throw new System.NotImplementedException();
+            return await _guestRepository.GetGuestById(id); 
         }
 
         public Task<Guest> GetGuestByEmail(string email)
@@ -16,19 +19,42 @@ namespace SEP3T2GraphQL.Services.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<Guest> UpdateGuest(Guest guest)
+        public async Task<Guest> UpdateGuest(Guest guest)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IList<Guest>> GetAllGuests()
+        public async Task<IEnumerable<Guest>> GetAllGuests()
         {
-            throw new System.NotImplementedException();
+            return await _guestRepository.GetAllGuests(); 
         }
 
-        public Task<IList<Guest>> GetAllNotApprovedGuests()
+        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuests()
         {
-            throw new System.NotImplementedException();
+            var guestListToReturn = await _guestRepository.GetAllNotApprovedGuests();
+            if (guestListToReturn == null)
+            {
+                throw new ArgumentException("Guest list is null");
+            }
+
+            return guestListToReturn;
+        }
+
+        public async Task<Guest> UpdateGuestStatus(Guest guest)
+        {
+            Console.WriteLine($"{this} {nameof(UpdateGuestStatus)} received params: {JsonSerializer.Serialize(guest)}");
+            if (guest == null)
+            {
+                throw new ArgumentException("Guest can't be null");
+            }
+
+            var updatedGuest = await _guestRepository.UpdateGuestStatus(guest);
+            if (updatedGuest == null)
+            {
+                throw new ArgumentException("Can't update the guest status!!!");
+            }
+
+            return updatedGuest;
         }
     }
 }

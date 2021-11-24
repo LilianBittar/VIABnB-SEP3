@@ -9,45 +9,33 @@
 
 @* <AuthorizeView> *@
 @* <NotAuthorized> *@
-<div class="sign-up-container">
-    <div class="left-section">
-        <img src="https://i.imgur.com/KWl6pqT.jpg" alt="Greeting illustration">
-    </div>
-
-    <div class="right-section">
-        <h2>Create an account</h2>
-        <div class="form-group">
-            <label>Firstname*</label>
-            <input type="text" placeholder="Firstname" @bind-value="_newHost.FirstName">
-        </div>
-        <div class="form-group">
-            <label>Lastname*</label>
-            <input type="text" placeholder="Lastname" @bind-value="_newHost.LastName">
-        </div>
-        <div class="form-group">
-            <label>E-mail*</label>
-            <input type="text" placeholder="E-mail" @bind-value="_newHost.Email">
-        </div>
-        <div class="form-group">
-            <label>Phone number*</label>
-            <input type="text" placeholder="Phonenumber" @bind-value="_newHost.PhoneNumber">
-        </div>
-        <div class="form-group">
-            <label>Password*</label>
-            <input type="password" placeholder="Password" @bind-value="_newHost.Password">
-        </div>
-        <div class="form-group">
-            <label>Confirm Password*</label>
-            <input type="password" placeholder="Confirm password" @bind-value="_passwordConfirmation">
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
+            <img src="https://i.imgur.com/KWl6pqT.jpg" alt="Greeting illustration">
         </div>
 
-        @foreach (var errorMessage in validationResults)
-        {
-            <p class="error-label">@errorMessage</p>
-        }
-        <p class="error-label">@_errorText</p>
-        <button @onclick="CreateHost">Create</button>
-        <p class="p-go-to-login">Already have an account? <span @onclick='() => NavigationManager.NavigateTo("/Login")'>Go to login</span></p>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
+            <h2>Create an account</h2>
+            
+            <MatTextField Label="Firstname*" @bind-Value="_newHost.FirstName"/>
+            <MatTextField Label="Lastname*" @bind-Value="_newHost.LastName"/>
+            <MatTextField Label="E-mail*" @bind-Value="_newHost.Email"/>
+            <MatTextField Label="CPR number*" @bind-Value="_newHost.Cpr"/>
+            <MatTextField Label="Phone number*" @bind-Value="_newHost.PhoneNumber"/>
+            <MatTextField Label="Password*" @bind-Value="_newHost.Password"/>
+            <MatTextField Label="Confirm password*" @bind-Value="_passwordConfirmation"/>
+           
+
+            @foreach (var errorMessage in validationResults)
+            {
+                <p class="error-label">@errorMessage</p>
+            }
+            <p class="error-label">@_errorText</p>
+            <button @onclick="CreateHost">Create</button>
+            <p class="p-go-to-login">Already have an account? <span @onclick='() => NavigationManager.NavigateTo("/Login")'>Go to login</span></p>
+        </div>
     </div>
 </div>
 @* </NotAuthorized> *@
@@ -68,16 +56,16 @@
 
     private async void CreateHost()
     {
-        //clear error messages
+    //clear error messages
         validationResults.Clear();
-        // the validator validates in hte context of a host object
+    // the validator validates in hte context of a host object
         ValidationContext validationContext = new ValidationContext(_newHost);
-        
-        //validates all host properties in context of host model
-        bool hostIsValid = Validator.TryValidateObject(_newHost, validationContext, validationResults, true);
-        
 
-        //checks if passwords match
+    //validates all host properties in context of host model
+        bool hostIsValid = Validator.TryValidateObject(_newHost, validationContext, validationResults, true);
+
+
+    //checks if passwords match
         if (!PasswordConfirmationMatches())
         {
             _errorText = "Passwords does not match";
@@ -88,7 +76,7 @@
         {
             try
             {
-        //Throws exception if user already exists.
+    //Throws exception if user already exists.
                 await _hostservice.RegisterHostAsync(_newHost);
             }
             catch (Exception e)
@@ -97,7 +85,7 @@
                 StateHasChanged();
                 return;
             }
-            //User is logged on upon successful account creation
+    //User is logged on upon successful account creation
     //   await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_newUser.Username, _newUser.Password);
             NavigationManager.NavigateTo("/");
         }
@@ -105,7 +93,7 @@
 
     private bool PasswordConfirmationMatches()
     {
-        if (_passwordConfirmation==null)
+        if (_passwordConfirmation == null)
         {
             _errorText = "Please confirm password";
         }

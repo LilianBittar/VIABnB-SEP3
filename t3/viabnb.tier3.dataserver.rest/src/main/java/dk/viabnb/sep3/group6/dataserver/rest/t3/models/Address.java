@@ -5,19 +5,17 @@ public class Address
   private int id;
   private String streetName;
   private String houseNumber;
-  private String cityName;
   private String streetNumber;
-  private int zipCode;
+  private City city;
 
-  public Address(int id, String streetName, String houseNumber, String cityName,
-      String streetNumber, int zipCode)
+  public Address(int id, String streetName, String houseNumber,
+      String streetNumber, City city)
   {
     this.id = id;
     this.streetName = streetName;
     this.houseNumber = houseNumber;
-    this.cityName = cityName;
     this.streetNumber = streetNumber;
-    this.zipCode = zipCode;
+    this.city = city;
   }
 
   public int getId()
@@ -50,16 +48,6 @@ public class Address
     this.houseNumber = houseNumber;
   }
 
-  public String getCityName()
-  {
-    return cityName;
-  }
-
-  public void setCityName(String cityName)
-  {
-    this.cityName = cityName;
-  }
-
   public String getStreetNumber()
   {
     return streetNumber;
@@ -70,21 +58,20 @@ public class Address
     this.streetNumber = streetNumber;
   }
 
-  public int getZipCode()
+  public City getCity()
   {
-    return zipCode;
+    return city;
   }
 
-  public void setZipCode(int zipCode)
+  public void setCity(City city)
   {
-    this.zipCode = zipCode;
+    this.city = city;
   }
 
   @Override public String toString()
   {
     return "Address{" + "id=" + id + ", streetName='" + streetName + '\''
-        + ", houseNumber='" + houseNumber + '\'' + ", cityName='" + cityName
-        + '\'' + ", streetNumber='" + streetNumber + '\'' + ", zipCode="
-        + zipCode + '}';
+        + ", houseNumber='" + houseNumber + '\'' + ", streetNumber='"
+        + streetNumber + '\'' + ", city=" + city.toString() + '}';
   }
 }

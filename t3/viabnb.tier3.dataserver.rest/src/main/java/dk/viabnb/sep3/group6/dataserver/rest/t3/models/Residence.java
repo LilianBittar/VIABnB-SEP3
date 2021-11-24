@@ -9,7 +9,6 @@ public class Residence
   private Address address;
   private String description;
   private String type;
-  private double averageRating;
   private boolean isAvailable;
   private double pricePerNight;
   private List<Rule> rules;
@@ -17,28 +16,34 @@ public class Residence
   private String imageUrl;
   private Date availableFrom;
   private Date availableTo;
+  private int maxNumberOfGuests;
+  private Host host;
+  private List<ResidenceReview> residenceReviews;
 
   public Residence()
   {
   }
 
   public Residence(int id, Address address, String description, String type,
-      double averageRating, boolean isAvailable, double pricePerNight,
-      List<Rule> rules, List<Facility> facilities, String imageURL,
-      Date availableFrom, Date availableTo)
+      boolean isAvailable, double pricePerNight, List<Rule> rules,
+      List<Facility> facilities, String imageUrl, Date availableFrom,
+      Date availableTo, int maxNumberOfGuests, Host host,
+      List<ResidenceReview> residenceReviews)
   {
     this.id = id;
     this.address = address;
     this.description = description;
     this.type = type;
-    this.averageRating = averageRating;
     this.isAvailable = isAvailable;
     this.pricePerNight = pricePerNight;
     this.rules = rules;
     this.facilities = facilities;
-    this.imageUrl = imageURL;
+    this.imageUrl = imageUrl;
     this.availableFrom = availableFrom;
     this.availableTo = availableTo;
+    this.maxNumberOfGuests = maxNumberOfGuests;
+    this.host = host;
+    this.residenceReviews = residenceReviews;
   }
 
   public int getId()
@@ -79,16 +84,6 @@ public class Residence
   public void setType(String type)
   {
     this.type = type;
-  }
-
-  public double getAverageRating()
-  {
-    return averageRating;
-  }
-
-  public void setAverageRating(double averageRating)
-  {
-    this.averageRating = averageRating;
   }
 
   public boolean isAvailable()
@@ -161,11 +156,47 @@ public class Residence
     this.availableTo = availableTo;
   }
 
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
+
+  public int getMaxNumberOfGuests() {
+    return maxNumberOfGuests;
+  }
+
+  public void setMaxNumberOfGuests(int maxNumberOfGuests) {
+    this.maxNumberOfGuests = maxNumberOfGuests;
+  }
+
+  public Host getHost()
+  {
+    return host;
+  }
+
+  public void setHost(Host host)
+  {
+    this.host = host;
+  }
+
+  public List<ResidenceReview> getResidenceReviews()
+  {
+    return residenceReviews;
+  }
+
+  public void setResidenceReviews(List<ResidenceReview> residenceReviews)
+  {
+    this.residenceReviews = residenceReviews;
+  }
+
   @Override public String toString()
   {
     return "Residence{" + "id=" + id + ", address=" + address
         + ", description='" + description + '\'' + ", type='" + type + '\''
-        + ", averageRating=" + averageRating + ", isAvailable=" + isAvailable
+        + ", isAvailable=" + isAvailable
         + ", pricePerNight=" + pricePerNight + ", rules=" + rules
         + ", facilities=" + facilities + ", imageURL='" + imageUrl + '\''
         + ", availableFrom=" + availableFrom + ", availableTo=" + availableTo

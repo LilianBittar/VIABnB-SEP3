@@ -14,7 +14,6 @@ namespace SEP3T2GraphQL.Models
         public string Description { get; set; }
         [Required]
         public string Type { get; set; }
-        public double AverageRating { get; set; }
         [Required]
         public bool IsAvailable { get; set; }
         [Required]
@@ -26,5 +25,12 @@ namespace SEP3T2GraphQL.Models
         public string ImageUrl { get; set; }
         public DateTime? AvailableFrom { get; set; }
         public DateTime? AvailableTo { get; set; }
+        [Required, Range(1, int.MaxValue)]
+        public int MaxNumberOfGuests { get; set; }
+        
+        [Required]
+        public Host Host { get; set; }
+
+        public IEnumerable<ResidenceReview> ResidenceReviews { get; set; }
     }
 }

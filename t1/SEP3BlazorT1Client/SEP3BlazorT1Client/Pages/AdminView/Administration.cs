@@ -1,116 +1,63 @@
-﻿// using System;
-// using System.Collections.Generic;
-// using System.Threading.Tasks;
-// using MatBlazor;
-// using Microsoft.AspNetCore.Components;
-// using SEP3BlazorT1Client.Data;
-// using SEP3BlazorT1Client.Models;
-//
-// namespace SEP3BlazorT1Client.Pages.AdminView
-// {
-//     //Todo implement methods. Change from dummy data to AdministrationService. Add submit buttons
-//     public partial class Administration
-//     {
-//
-//         [Inject] public MatDialogService MatDialogService { get; set; }
-//         [Inject] public IGuestRegistrationRequestService GuestRegistrationRequestService { get; set; }
-//         [Inject] public IHostRegistrationRequestService HostRegistrationRequestService { get; set; }
-//         [Inject] public NavigationManager NavigationManager { get; set; }
-//         
-//         private IList<GuestRegistrationRequest> guestRequestList = new List<GuestRegistrationRequest>();
-//         private IList<HostRegistrationRequest> hostRequestList = new List<HostRegistrationRequest>();
-//
-//         private bool panelOpenState;
-//
-//         private Task ValidateHost()
-//         {
-//             throw new NotImplementedException();
-//         }
-//         private Task ValidateGuest()
-//         {
-//             throw new NotImplementedException();
-//         }
-//
-//         protected override async Task OnInitializedAsync()
-//         {
-//             hostRequestList.Add(new HostRegistrationRequest()
-//             {
-//                 Id = 1,
-//                 CprNumber = "111111-1111",
-//                 PersonalImage = "Image1",
-//                 Status = RequestStatus.NotAnswered
-//             });    
-//             hostRequestList.Add(new HostRegistrationRequest()
-//             {
-//                 Id = 2,
-//                 CprNumber = "222222-2222",
-//                 PersonalImage = "Image2",
-//                 Status = RequestStatus.NotAnswered
-//             });    
-//             hostRequestList.Add(new HostRegistrationRequest()
-//             {
-//                 Id = 3,
-//                 CprNumber = "333333-3333",
-//                 PersonalImage = "Image3",
-//                 Status = RequestStatus.NotAnswered
-//             });
-//             guestRequestList.Add(new GuestRegistrationRequest()
-//             {
-//                 Id = 1,
-//                 Host = new Host()
-//                 {
-//                     Email = "test1@test.test",
-//                     FirstName = "Name1",
-//                     HostReviews = null,
-//                     Id = 1,
-//                     IsApprovedHost = false,
-//                     LastName = "Last",
-//                     Password = "1234",
-//                     PhoneNumber = "123456",
-//                     ProfileImageUrl = "url1"
-//                 },
-//                 Status = RequestStatus.NotAnswered,
-//                 StudentIdImage = "Image1",
-//                 StudentNumber = 1
-//             });
-//             guestRequestList.Add(new GuestRegistrationRequest()
-//             {
-//                 Id = 2,
-//                 Host = new Host()
-//                 {
-//                     Email = "test2@test.test",
-//                     FirstName = "Name2",
-//                     HostReviews = null,
-//                     Id = 2,
-//                     IsApprovedHost = false,
-//                     LastName = "Last2",
-//                     Password = "1234",
-//                     PhoneNumber = "123456",
-//                     ProfileImageUrl = "url2"
-//                 },
-//                 Status = RequestStatus.NotAnswered,
-//                 StudentIdImage = "Image2",
-//                 StudentNumber = 2
-//             });
-//             guestRequestList.Add(new GuestRegistrationRequest()
-//             {
-//                 Id = 3,
-//                 Host = new Host()
-//                 {
-//                     Email = "test3@test.test",
-//                     FirstName = "Name3",
-//                     HostReviews = null,
-//                     Id = 1,
-//                     IsApprovedHost = false,
-//                     LastName = "Last3",
-//                     Password = "1234",
-//                     PhoneNumber = "123456",
-//                     ProfileImageUrl = "url3"
-//                 },
-//                 Status = RequestStatus.NotAnswered,
-//                 StudentIdImage = "Image3",
-//                 StudentNumber = 3
-//             });
-//         }
-//     }
-// }
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MatBlazor;
+using Microsoft.AspNetCore.Components;
+using SEP3BlazorT1Client.Data;
+using SEP3BlazorT1Client.Models;
+
+namespace SEP3BlazorT1Client.Pages.AdminView
+{
+    public partial class Administration
+    {
+
+        [Inject] public MatDialogService MatDialogService { get; set; }
+        [Inject] public IHostService HostService { get; set; }
+        [Inject] public IGuestService GuestService { get; set; }
+        [Inject] public NavigationManager NavigationManager { get; set; }
+        
+        private IEnumerable<Guest> guestRequestList = new List<Guest>();
+        private IEnumerable<Host> hostRequestList = new List<Host>();
+
+        private bool panelOpenState;
+
+        protected override async Task OnInitializedAsync()
+        {
+            hostRequestList = await HostService.GetAllNotApprovedHostsAsync();
+            guestRequestList = await GuestService.GetAllNotApprovedGuests();
+            StateHasChanged();
+        }
+        
+        private async Task ApproveHost(int hostId)
+        {
+            var approvedHost = hostRequestList.First(host => host.Id == hostId);
+            approvedHost.IsApprovedHost = true;
+            await HostService.UpdateHostStatusAsync(approvedHost);
+            StateHasChanged();
+        }
+        
+        private async Task RejectHost(int hostId)
+        {
+            var rejectedHost = hostRequestList.First(host => host.Id == hostId);
+            rejectedHost.IsApprovedHost = false;
+            await HostService.UpdateHostStatusAsync(rejectedHost);
+            StateHasChanged();
+        }
+
+        private async Task ApproveGuest(int guestId)
+        {
+            var approvedGuest = guestRequestList.First(guest => guest.Id == guestId);
+            approvedGuest.IsApprovedGuest = true;
+            await GuestService.UpdateGuestStatusAsync(approvedGuest);
+            StateHasChanged();
+        }
+        private async Task RejectGuest(int guestId)
+        {
+            var rejectedGuest = guestRequestList.First(guest => guest.Id == guestId);
+            rejectedGuest.IsApprovedGuest = false;
+            await GuestService.UpdateGuestStatusAsync(rejectedGuest);
+            StateHasChanged();
+        }
+    }
+}

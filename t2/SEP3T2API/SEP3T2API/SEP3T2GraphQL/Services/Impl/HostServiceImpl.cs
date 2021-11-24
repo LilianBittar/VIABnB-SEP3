@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace SEP3T2GraphQL.Services.Impl
     public class HostServiceImpl : IHostService
     {
         private string uri = "http://localhost:8080";
-        private readonly HttpClient client;
+        private readonly HttpClient client = new HttpClient();
         private IHostRepository _hostRepository;
         private IHostValidation _hostValidation;
 
@@ -52,52 +53,82 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Host> GetHostByEmail(string email)
         {
-            //Todo call repo + if logic if needed 
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host?email={email}");
-
-            if (!responseMessage.IsSuccessStatusCode)
+            
+            if (_hostValidation.IsValidEmail(email))
             {
-                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                try
+                {
+                    Console.WriteLine($"{this} logging in...");
+                    Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(email)}");
+                    return await _hostRepository.GetHostByEmail(email);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
 
-            string result = await responseMessage.Content.ReadAsStringAsync();
-            Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions()
-            {
-                PropertyNameCaseInsensitive = true
-            });
-
-            return host;
+            throw new ArgumentException("No user with such email");
         }
 
-        public async Task<Host> ValidateHostAsync(Host host)
+        public async Task<Host> ValidateHostAsync(string email, string password)
         {
-            var returnedHost = await GetHostByEmail(host.Email);
-            if (returnedHost != null && returnedHost.Password == host.Password)
+            var returnedHost = await GetHostByEmail(email);
+            if (returnedHost == null) throw new KeyNotFoundException("user not found");
+            if (returnedHost.Password != password)
             {
-                return host;
+                throw new ArgumentException("the password is not matching");
             }
-            else return null;
+            else return returnedHost;
         }
 
       
 
         public async Task<Host> GetHostById(int id)
         {
-            //Todo call repo + if logic if needed 
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host/{id}");
-
-            if (!responseMessage.IsSuccessStatusCode)
+            if (id is > 0 and < int.MaxValue && id != null)
             {
-                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                try
+                {
+                    return await _hostRepository.GetHostById(id);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
 
-            string result = await responseMessage.Content.ReadAsStringAsync();
-            Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
+            throw new Exception("Id must be bigger than 0");
+        }
 
-            return host;
+        public async Task<IEnumerable<Host>> GetAllNotApprovedHostsAsync()
+        {
+            var hostListToReturn = await _hostRepository.GetAllNotApprovedHosts();
+            if (hostListToReturn == null)
+            {
+                throw new ArgumentException("Host list is null");
+            }
+
+            return hostListToReturn;
+        }
+
+        public async Task<Host> UpdateHostStatusAsync(Host host)
+        { 
+            Console.WriteLine($"{this} {nameof(UpdateHostStatusAsync)} received params: {JsonSerializer.Serialize(host)}");
+            if (host == null)
+            {
+                throw new ArgumentException("Host can't be null");
+            }
+
+            var updatedHost = await _hostRepository.UpdateHostStatus(host);
+            if (updatedHost == null)
+            {
+                throw new ArgumentException("Can't update the host status!!!");
+            }
+
+            return updatedHost;
         }
     }
 }

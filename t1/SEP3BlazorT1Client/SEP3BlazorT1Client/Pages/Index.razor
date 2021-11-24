@@ -8,22 +8,6 @@
 @inject NavigationManager NavigationManager
 
 
-@* <h1>Proof of concept</h1> *@
-@* <span>T1 --> T2 REST API --> T3 SOAP API with Postgres DB *@
-@* </span> *@
-@* *@
-@* <div> *@
-@*      *@
-@*     <p>Fetched Message: </p> *@
-@*     @if (_residence != null) *@
-@*     { *@
-@*     <p>@_residence.ToString()</p> *@
-@*     } *@
-@*     <Input type="number" @oninput="(e) => { _id = Int32.Parse(e.Value.ToString()); }"/> *@
-@*     <button type="submit" @onclick="CreateNewResidence" class="btn btn-primary"> *@
-@*         FETCH CONCEPT MESSAGE *@
-@*     </button> *@
-@* </div> *@
  <div class="mat-layout-grid">
             <div class="mat-layout-grid-inner">
                 <div class="mat-layout-grid-cell"></div>
@@ -46,16 +30,22 @@
                                         <MatTextField @bind-Value="@password" Dense="true" Label="Password" Outlined="true" Style="margin-left: 3em;"></MatTextField>
                                     </td>
                                 </tr>
-                                  <tr>
-                                      <td>
-                                           <MatButton Raised="true" Style="margin-left: 8em;" OnClick="@(() =>PerformLogin())">Log in</MatButton>
-                                      </td>
-                                      </tr>
+                                <tr>
+                                    <td>
+                                        <p style="color: red">@ErrorMessage</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+
+                                        <MatButton Raised="true" Style="margin-left: 8em;" OnClick="@(() => PerformLogin())">Log in</MatButton>
+                                    </td>
+                                </tr>
                             </table>
                         </MatCardContent>
                         <MatDivider Inset="true"></MatDivider>
                                 <MatCardActions>
-                                    <MatButton Link="/registerhost">Don't have an account, register here</MatButton>
+                                    <MatButton Link="/registerhost">Don't have an account? register here</MatButton>
                                 </MatCardActions>
                             </MatCard>
                 </div>
@@ -80,9 +70,10 @@
             await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email, password);
             email = "";
             password = "";
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("/BuildingsOverview");
         } catch (Exception e) {
             ErrorMessage = e.Message;
+            Console.WriteLine(e.Message);
         }
     }
 

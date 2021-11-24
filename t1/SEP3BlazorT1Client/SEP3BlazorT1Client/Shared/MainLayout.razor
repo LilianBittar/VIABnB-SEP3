@@ -1,4 +1,7 @@
+@using SEP3BlazorT1Client.Authentication
 @inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @* <div class="page"> *@
 @*     <div class="sidebar"> *@
 @*         <NavMenu/> *@
@@ -89,13 +92,13 @@
     
     public async Task LogOut()
     {
-    /*try
+    try
         {
-            ((CustomAuthenticationStateProvider) authenticationStateProvider).Logout();
-            navigationManager.NavigateTo("/login");
+            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+            NavigationManager.NavigateTo("/");
         }
         catch (Exception e)
         {
-        }*/
+        }
     }
 }

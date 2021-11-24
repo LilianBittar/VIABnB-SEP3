@@ -15,13 +15,15 @@ CREATE TABLE IF NOT EXISTS Admin
 
 CREATE TABLE IF NOT EXISTS Host
 (
-    hostId     serial,
-    fName      VARCHAR,
-    lName      VARCHAR,
-    email      VARCHAR,
-    password   VARCHAR,
-    cprNumber  VARCHAR,
-    isApproved BOOLEAN,
+    hostId        serial,
+    fName         VARCHAR,
+    lName         VARCHAR,
+    email         VARCHAR,
+    phoneNumber   VARCHAR,
+    password      VARCHAR,
+    cprNumber     VARCHAR,
+    isApproved    BOOLEAN,
+    personalImage VARCHAR,
     PRIMARY KEY (hostID)
 );
 
@@ -94,7 +96,7 @@ CREATE TABLE IF NOT EXISTS Guest
     viaId           INT,
     isApprovedGuest BOOLEAN,
     PRIMARY KEY (guestId),
-    FOREIGN KEY (guestId) REFERENCES Host (hostid)
+    FOREIGN KEY (guestId) REFERENCES Host (hostid) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS GuestReview

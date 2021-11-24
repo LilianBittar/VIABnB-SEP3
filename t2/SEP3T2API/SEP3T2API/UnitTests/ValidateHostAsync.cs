@@ -42,7 +42,7 @@ namespace UnitTests
                 };
                 
                 Assert.DoesNotThrowAsync(()=>HostRepository.ValidateHostAsync(Host));
-                Assert.DoesNotThrowAsync(() => HostService.ValidateHostAsync(Host));
+               // Assert.DoesNotThrowAsync(() => HostService.ValidateHostAsync(Host));
             }
             
     }

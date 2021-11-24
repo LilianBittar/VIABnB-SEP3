@@ -1,98 +1,153 @@
-﻿@* @page "/BecomeGuest" *@
-@* @using SEP3BlazorT1Client.Models *@
-@* @using SEP3BlazorT1Client.Data *@
-@* @using System.IO *@
-@* @using System.Text *@
-@* @inject MatDialogService MatDialogService *@
-@* @inject NavigationManager NavigationManager *@
-@* *@
-@* *@
-@* <div class="mat-layout-grid"> *@
-@*     <div class="mat-layout-grid-inner"> *@
-@*         <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6"> *@
-@*             <h1>Are you<br/> a student of <br/>VIA University College?</h1> *@
-@*             <h2>Need a tempoary place to stay while on e.g. internship?</h2> *@
-@*             <p>Make a request to become an approved guest and start renting cheap tempoary residences around all of Denmark, today.</p> *@
-@*             <MatButton Label="Become Guest" Raised="true" OnClick="@OpenDialog"/> *@
-@*             <MatDialog @bind-IsOpen="@_dialogIsOpen"> *@
-@*                 <MatDialogTitle>Request to become a Guest</MatDialogTitle> *@
-@*                 <MatDialogContent> *@
-@*                     <EditForm Model="@_newGuestRegistrationRequest"> *@
-@*                         <DataAnnotationsValidator/> *@
-@*                         <MatTextField @bind-Value="@_newGuestRegistrationRequest.StudentNumber" Label="Student Number" HelperText="e.g 293886"/> *@
-@*                         <ValidationMessage For="@(() => _newGuestRegistrationRequest.StudentNumber)"/> *@
-@*                         <InputFile/> *@
-@*                         @foreach (var file in _loadedFiles) *@
-@*                         { *@
-@*                             <p>@($"File: {file.Name} {file.Size}")</p> *@
-@*                         } *@
-@*                         <p class="error-label">@_errorLabel</p> *@
-@*                     </EditForm> *@
-@*                 </MatDialogContent> *@
-@*                 <MatDialogActions> *@
-@*                     <MatButton OnClick="@CreateGuestRegistrationRequest">Send Request</MatButton> *@
-@*                     <MatButton OnClick="@(() => _dialogIsOpen = false)">Cancel</MatButton> *@
-@*                 </MatDialogActions> *@
-@*             </MatDialog> *@
-@*         </div> *@
-@*         <div class="mat-layout-grid-cell"> *@
-@*             <img src="assets/via_campus_horsens.jpg" alt="campus horsens" style="max-height: 500px; max-width:600px"> *@
-@*         </div> *@
-@*     </div> *@
-@* </div> *@
-@* *@
-@* @code { *@
-@*     //TODO: Fetch auth user and set as Host in new Request, wrap components in CascadingAuthenticationState *@
-@*     private Guest _newGuestRegistrationRequest = new Guest();  *@
-@*     private bool _dialogIsOpen = false; *@
-@*     private string _errorLabel = ""; *@
-@*     private IList<IBrowserFile> _loadedFiles = new List<IBrowserFile>(); *@
-@*         private const int MaxAllowedFiles = 1; *@
-@* *@
-@*     private void OpenDialog() *@
-@*     { *@
-@*         _dialogIsOpen = true; *@
-@*     } *@
-@* *@
-@*     private async void CreateGuestRegistrationRequest() *@
-@*     { *@
-@*         try *@
-@*         { *@
-@*             _errorLabel = ""; *@
-@*             // await guestRegistrationRequest.CreateGuestRegistrationRequestAsync(_newGuestRegistrationRequest); *@
-@*             _dialogIsOpen = false; *@
-@*             ResetModel(); *@
-@*             StateHasChanged(); *@
-@*             NavigationManager.NavigateTo("/"); *@
-@*         } *@
-@*         catch (Exception e) *@
-@*         { *@
-@*             _errorLabel = e.Message; *@
-@*             StateHasChanged(); *@
-@*         } *@
-@*     } *@
-@* *@
-@*     private void ResetModel() *@
-@*     { *@
-@*         // _newGuestRegistrationRequest = new GuestRegistrationRequest() {Status = RequestStatus.NotAnswered, Id = 0, Host = null}; *@
-@*     } *@
-@* *@
-@*     private async Task LoadImageFiles(InputFileChangeEventArgs e) *@
-@*     { *@
-@*         _loadedFiles.Clear(); *@
-@*         foreach (var file in e.GetMultipleFiles(MaxAllowedFiles)) *@
-@*         { *@
-@*             _loadedFiles.Add(file); *@
-@*             // Converts the image file to png and resizes to specified maxWidth and maxHeight *@
-@*             var image = await file.RequestImageFileAsync("image/png", 800, 800); *@
-@*             // Buffer for containing the image data as bytes.  *@
-@*             var buffer = new byte[image.Size]; *@
-@*             // Reads the image data and stores it in the buffer.  *@
-@*             await image.OpenReadStream().ReadAsync(buffer); *@
-@*             // _newGuestRegistrationRequest.StudentIdImage = Encoding.Default.GetString(buffer);  *@
-@*         } *@
-@*     } *@
-@* *@
-@* *@
-@* *@
-@* } *@
+﻿@page "/BecomeGuest"
+@using SEP3BlazorT1Client.Models
+@using SEP3BlazorT1Client.Data
+@using System.IO
+@using System.Text
+@using SEP3BlazorT1Client.Authentication
+@inject MatDialogService MatDialogService
+@inject NavigationManager NavigationManager
+@inject IHostService HostService
+@inject IGuestService GuestService
+@inject AuthenticationStateProvider AuthStateProvider
+
+@if (_newGuest != null && _host != null)
+{
+    <div class="mat-layout-grid">
+        <div class="mat-layout-grid-inner">
+            <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
+                <h1>Are you<br /> a student of <br />VIA University College?</h1>
+                <h2>Need a tempoary place to stay while on e.g. internship?</h2>
+                <p>Make a request to become an approved guest and start renting cheap tempoary residences around all of
+                    Denmark, today.</p>
+                <MatButton Label="Become Guest" Raised="true" OnClick="@OpenDialog" />
+                <MatDialog @bind-IsOpen="@_dialogIsOpen">
+                    <MatDialogTitle>Request to become a Guest</MatDialogTitle>
+                    <MatDialogContent>
+                        <EditForm Model="@_newGuest">
+                            <DataAnnotationsValidator />
+                            <MatTextField @bind-Value="@_newGuest.ViaId" Label="Student Number" HelperText="e.g 293886" />
+                            <ValidationMessage For="@(() => _newGuest.ViaId)" />
+                            <p class="error-label">@_errorLabel</p>
+                        </EditForm>
+                    </MatDialogContent>
+                    <MatDialogActions>
+                        <MatButton OnClick="@CreateGuestRegistrationRequest">Send Request</MatButton>
+                        <MatButton OnClick="@(() => _dialogIsOpen = false)">Cancel</MatButton>
+                    </MatDialogActions>
+                </MatDialog>
+            </div>
+            <div class="mat-layout-grid-cell">
+                <img src="assets/via_campus_horsens.jpg" alt="campus horsens" style="max-height: 500px; max-width:600px">
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="mat-layout-grid">
+        <div class="mat-layout-grid-inner">
+            <div class="mat-layout-grid-cell mat-layout-grid-cell-align-middle">
+                <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium" />
+
+            </div>
+        </div>
+
+
+    </div>
+
+}
+
+@code {
+    //TODO: Fetch auth user and set as Host in new Request, wrap components in CascadingAuthenticationState
+    private Host _host;
+    private Guest _newGuest;
+    private bool _dialogIsOpen = false;
+    private string _errorLabel = "";
+
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthStat { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //TODO: Fetch host by id, by parsing to int authState.User.claims.first(c => c.Type=="id").ToString();
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        Console.WriteLine("\nClaims:");
+        foreach (var claim in user.Claims)
+        {
+            Console.WriteLine($"{claim.Type.ToString()} {claim.Value}");
+        }
+        _host = await HostService.GetHostById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
+
+        _newGuest = new Guest
+        {
+            FirstName = _host.FirstName,
+            LastName = _host.LastName,
+            Cpr = _host.Cpr,
+            Email = _host.Email,
+            Id = _host.Id,
+            IsApprovedHost = _host.IsApprovedHost,
+            Password = _host.Password,
+            HostReviews = _host.HostReviews,
+            GuestReviews = new List<GuestReview>(),
+            IsApprovedGuest = false,
+            ViaId = 0,
+            PhoneNumber = _host.PhoneNumber,
+            ProfileImageUrl = _host.ProfileImageUrl
+        };
+
+
+        if (!user.Identity.IsAuthenticated)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    private void OpenDialog()
+    {
+        _dialogIsOpen = true;
+    }
+
+    private async void CreateGuestRegistrationRequest()
+    {
+        try
+        {
+            _errorLabel = "";
+            await GuestService.CreateGuestAsync(_newGuest);
+            _dialogIsOpen = false;
+            ResetModel();
+            StateHasChanged();
+            NavigationManager.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            _errorLabel = e.Message;
+            StateHasChanged();
+        }
+    }
+
+    private void ResetModel()
+    {
+        _host = null;
+        _newGuest = new Guest
+        {
+            FirstName = _host.FirstName,
+            LastName = _host.LastName,
+            Cpr = _host.Cpr,
+            Email = _host.Email,
+            Id = _host.Id,
+            IsApprovedHost = _host.IsApprovedHost,
+            Password = _host.Password,
+            HostReviews = _host.HostReviews,
+            GuestReviews = new List<GuestReview>(),
+            IsApprovedGuest = false,
+            ViaId = 0,
+            PhoneNumber = _host.PhoneNumber,
+            ProfileImageUrl = _host.ProfileImageUrl
+        };
+    }
+
+
+
+
+}

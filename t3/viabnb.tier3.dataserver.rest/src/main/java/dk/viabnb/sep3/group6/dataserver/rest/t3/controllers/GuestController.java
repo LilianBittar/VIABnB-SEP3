@@ -1,8 +1,10 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
+import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.GuestRegistrationRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 public class GuestController {
-
+    private static final Logger LOGGER= LoggerFactory.getLogger(GuestController.class);
     private GuestDAO guestDAO;
 
     @Autowired
@@ -24,68 +26,93 @@ public class GuestController {
 
     @PostMapping("/guests")
     public ResponseEntity<Guest> createGuest(@RequestBody Guest guest) {
-        Guest createdRequest = guestDAO.createGuestRegistrationRequest(guest);
-        if (createdRequest == null) {
+        LOGGER.info("Received createGuest request with params " + new Gson().toJson(guest) );
+        Guest createGuest = null;
+        try {
+            createGuest = guestDAO.createGuest(guest);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("createGuest request failed with: " + e.getMessage());
             return ResponseEntity.internalServerError().build();
         }
-        return ResponseEntity.ok(createdRequest);
+
+        if (createGuest == null) {
+            LOGGER.error("createGuest request failed, new guest could not be created...");
+            return ResponseEntity.internalServerError().build();
+        }
+
+        return ResponseEntity.ok(createGuest);
     }
 
     @GetMapping("/guests")
-    public ResponseEntity<List<Guest>> getAllGuests() {
-       /*
-       Maybe??
-       List<GuestRegistrationRequest> requests;
-        requests = administrationDAO.getAllGuestRegistrationRequest();
-        if (requests == null)
-        {
-            return ResponseEntity.internalServerError().build();
+    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam(required = false) Boolean isApproved) {
+
+        try {
+            List<Guest> allGuests = guestDAO.getAllGuests();
+            if (isApproved != null){
+                allGuests.removeIf(g -> g.isApprovedGuest() != isApproved);
+            }
+            LOGGER.info("getAllGuests returned: " + new Gson().toJson(allGuests));
+            return ResponseEntity.ok(allGuests);
+        } catch (Exception e) {
+           return ResponseEntity.internalServerError().build();
         }
-        return new ResponseEntity<>(requests, HttpStatus.OK);*/
-        return ResponseEntity.ok(guestDAO.getAllGuestRegistrationRequests());
     }
 
-    /*
-    former AdministrationController method
-    @RequestMapping(value = "/guestRequests/{id}", method = RequestMethod.PATCH,
-        consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RequestStatus> isValidGuest(@RequestBody RequestStatus update, @PathVariable("id") int id)
+    @GetMapping("/guests/{id}")
+    public ResponseEntity<Guest> getGuestByHostId(@PathVariable("id") int id)
     {
-        administrationDAO.isValidHost(id, update);
-        if (update == null)
+        Guest guest;
+        guest = guestDAO.getGuestByHostId(id);
+        try {
+            return ResponseEntity.ok(guest);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    /**
+     * End point of method type GET to get list of Guest objects with isApprovedGuest boolean value false
+     * @return List<Guest>
+     * */
+    @GetMapping("/guests/notApproved")
+    public ResponseEntity<List<Guest>> getAllNotApprovedGuests()
+    {
+        List<Guest> guestsToReturn = guestDAO.getAllNotApprovedGuests();
+        if (guestsToReturn == null)
         {
             return ResponseEntity.internalServerError().build();
         }
-        return new ResponseEntity<>(update, HttpStatus.OK);
-    }*/
+        return new ResponseEntity<>(guestsToReturn, HttpStatus.OK);
+    }
 
-    @PatchMapping("/guests/{id}")
-    public ResponseEntity<Guest> updateRequestStatus(@RequestBody Guest guest) {
-        try {
-//            if (guest.isApprovedGuest() == RequestStatus.Approved) {
-//                Guest approvedRequest = guestDAO.approveGuestRegistrationRequest(guest);
-//                return ResponseEntity.ok(approvedRequest);
-//            }
-//            else if (guest.isApprovedGuest() == RequestStatus.NotApproved){
-//                Guest rejectedRequest = guestDAO.rejectGuestRegistrationRequest(guest);
-//                return ResponseEntity.ok(rejectedRequest);
-//            }
-
+    /**
+     * End point of method type PATCH to update isApprovedGuest attribute for a given guest
+     * @param guest The targeted Guest object
+     * @param id The path variable used to identify the correct guest
+     * @return A newly updated Guest object or ResponseEntity with bad request (depends on the given Guest object).
+     * or ResponseEntity with not found when catching NoSuchElementException
+     * */
+    @RequestMapping(value = "/guests/{id}/approval", produces = "application/json", method = RequestMethod.PATCH)
+    public ResponseEntity<Guest> updateGuestStatus(@RequestBody Guest guest, @PathVariable("id") int id)
+    {
+        try
+        {
+            if (guest.isApprovedGuest())
+            {
+                Guest approvedGuest = guestDAO.approveGuest(guest);
+                return ResponseEntity.ok(approvedGuest);
+            }
+            else if (!guest.isApprovedGuest())
+            {
+                Guest rejectedGuest = guestDAO.rejectGuest(guest);
+                return ResponseEntity.ok(rejectedGuest);
+            }
             return ResponseEntity.badRequest().build();
-        } catch (NoSuchElementException e) {
+        }
+        catch (NoSuchElementException e)
+        {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping("/guests/{id}")
-    public ResponseEntity<List<GuestRegistrationRequest>> getGuestByHostId(@PathVariable("id") int id)
-    {
-        Guest guest;
-        guest = guestDAO.getGuestRegistrationRequestByHostId(id);
-        if (guest == null)
-        {
-            return ResponseEntity.internalServerError().build();
-        }
-        return new ResponseEntity(guest, HttpStatus.OK);
-    }
-
 }
