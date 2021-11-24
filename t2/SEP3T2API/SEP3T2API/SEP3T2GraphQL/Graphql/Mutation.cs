@@ -42,5 +42,10 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _rentalService.CreateRentRequest(request);
         }
+        
+        public async Task<Host> RegisterHost(Host host)
+        {
+            return await _hostService.RegisterHostAsync(host);
+        }
     }
 }

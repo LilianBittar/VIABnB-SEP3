@@ -14,11 +14,35 @@ namespace SEP3BlazorT1Client.Data.Impl
     public class GraphQlHostService : IHostService
     {
         private const string Url = "https://localhost:5001/graphql";
-        private readonly GqlClient _client = new(Url) { EnableLogging = true };
+        private readonly GqlClient _client = new(Url) {EnableLogging = true};
 
-        public Task<Host> RegisterHostAsync(Host host)
+        public async Task<Host> RegisterHostAsync(Host host)
         {
-            throw new System.NotImplementedException();
+            GqlQuery registerHostMutation = new GqlQuery()
+            {
+                Query = @"mutation($newHost:HostInput){
+                          registerHost(host:$newHost){
+                            id,
+                            firstName,
+                            lastName,
+                            phoneNumber,
+                            email,
+                            password,
+                            profileImageUrl,
+                            cpr,
+                            isApprovedHost
+                          }
+                        }",
+                Variables = new {newHost = host}
+            };
+
+            var response = await _client.PostQueryAsync<RegisterHostResponseType>(registerHostMutation);
+            if (response.Errors != null)
+            {
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4].Split(":")[2]);
+            }
+
+            return response.Data.RegisterHost;
         }
 
         public async Task<Host> ValidateHostAsync(string email, string password)
@@ -37,7 +61,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                            profileImageUrl,
                            cpr,
                            isApprovedHost}}",
-                Variables = new { emailHost = email, passwordHost = password }
+                Variables = new {emailHost = email, passwordHost = password}
             };
 
             var graphQlResponse = await client.PostQueryAsync<HostResponseType>(validateHostQuery);
@@ -76,7 +100,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 }
                             }
                             ",
-                Variables = new { hostId = id }
+                Variables = new {hostId = id}
             };
             var response = await _client.PostQueryAsync<HostByIdQueryResponseType>(query);
             return response.Data.HostById;
@@ -87,9 +111,11 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlClient client = new GqlClient(Url);
             var hostQuery = new GqlQuery()
             {
-                Query = @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
+                Query =
+                    @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
             };
-            GqlRequestResponse<HostListResponseType> graphQlResponse = await client.PostQueryAsync<HostListResponseType>(hostQuery);
+            GqlRequestResponse<HostListResponseType> graphQlResponse =
+                await client.PostQueryAsync<HostListResponseType>(hostQuery);
             return graphQlResponse.Data.Hosts;
         }
 
@@ -117,7 +143,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                             isApprovedHost
                           }
                         }",
-                Variables = new { newHost = host }
+                Variables = new {newHost = host}
             };
             var response = await client.PostQueryAsync<UpdateHostMutationResponseType>(updateHostStatusMutation);
             if (response.Errors != null)
