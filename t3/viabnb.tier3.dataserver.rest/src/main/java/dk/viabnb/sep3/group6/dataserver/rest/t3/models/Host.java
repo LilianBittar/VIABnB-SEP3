@@ -1,5 +1,7 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class Host
@@ -121,6 +123,7 @@ public class Host
     this.cpr = cpr;
   }
 
+  @JsonProperty("isApprovedHost")
   public boolean isApprovedHost()
   {
     return isApprovedHost;
