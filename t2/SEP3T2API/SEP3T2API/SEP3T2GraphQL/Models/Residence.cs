@@ -28,5 +28,8 @@ namespace SEP3T2GraphQL.Models
         public DateTime? AvailableTo { get; set; }
         [Required, Range(1, int.MaxValue)]
         public int MaxNumberOfGuests { get; set; }
+        
+        [Required]
+        public Host Host { get; set; }
     }
 }

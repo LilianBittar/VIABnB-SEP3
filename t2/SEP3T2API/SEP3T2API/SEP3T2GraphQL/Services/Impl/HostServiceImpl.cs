@@ -78,7 +78,7 @@ namespace SEP3T2GraphQL.Services.Impl
             if (returnedHost == null) throw new KeyNotFoundException("user not found");
             if (returnedHost.Password != password)
             {
-                throw new Exception("the password is not matching");
+                throw new ArgumentException("the password is not matching");
             }
             else return returnedHost;
         }
@@ -87,8 +87,6 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Host> GetHostById(int id)
         {
-            //Todo move this to  HostRepository, call HostRepository add business logic if needed, such as what happens if null is found?.  
-
             if (id is > 0 and < int.MaxValue && id != null)
             {
                 try

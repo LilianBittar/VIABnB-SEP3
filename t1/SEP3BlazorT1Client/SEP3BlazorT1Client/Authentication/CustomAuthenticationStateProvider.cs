@@ -52,8 +52,12 @@ namespace SEP3BlazorT1Client.Authentication
             ClaimsIdentity identity = new ClaimsIdentity();
             try
             {
+                Console.WriteLine(1);
                 Host user = await _hostService.ValidateHostAsync(email, password);
+                Console.WriteLine(2);
+                if (user == null) throw new Exception("Email or password are not correct");
                 Console.WriteLine(user.Email);
+                Console.WriteLine(3);
                 identity = SetupClaimsForUser(user);
                 string serialisedData = JsonSerializer.Serialize(user);
                 await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);
