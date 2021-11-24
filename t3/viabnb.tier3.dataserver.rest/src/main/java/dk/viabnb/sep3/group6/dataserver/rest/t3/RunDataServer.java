@@ -2,6 +2,10 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.Impl.HostDAOImpl;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.AddressDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.AddressDAOImpl;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.CityDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.CityDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
@@ -15,38 +19,44 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 
-@SpringBootApplication
-public class RunDataServer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RunDataServer.class);
+@SpringBootApplication public class RunDataServer
+{
+  private static final Logger LOGGER = LoggerFactory.getLogger(
+      RunDataServer.class);
 
-    public static void main(String[] args) {
-        SpringApplication.run(RunDataServer.class, args);
-        LOGGER.info("Swagger-UI at: http://localhost:8080/swagger-ui.html");
-    }
+  public static void main(String[] args)
+  {
+    SpringApplication.run(RunDataServer.class, args);
+    LOGGER.info("Swagger-UI at: http://localhost:8080/swagger-ui.html");
+  }
 
-    @Bean
-    @Scope("singleton")
-    GuestDAO guestDAO() {
-        return new GuestDAOImpl();
-    }
+  @Bean @Scope("singleton") GuestDAO guestDAO()
+  {
+    return new GuestDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    HostDAO hostDAO() {
-        return new HostDAOImpl();
-    }
+  @Bean @Scope("singleton") HostDAO hostDAO()
+  {
+    return new HostDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    ResidenceDAO residenceDAO() {
-        return new ResidenceDAOImpl();
-    }
+  @Bean @Scope("singleton") ResidenceDAO residenceDAO()
+  {
+    return new ResidenceDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    RentRequestDAO rentRequestDAO() {
-        return new RentRequestDAOImpl();
-    }
+  @Bean @Scope("singleton") RentRequestDAO rentRequestDAO()
+  {
+    return new RentRequestDAOImpl();
+  }
 
+  @Bean @Scope("singleton") AddressDAO addressDAO()
+  {
+    return new AddressDAOImpl();
+  }
 
+  @Bean @Scope("singleton") CityDAO cityDAO()
+  {
+    return new CityDAOImpl();
+  }
 }

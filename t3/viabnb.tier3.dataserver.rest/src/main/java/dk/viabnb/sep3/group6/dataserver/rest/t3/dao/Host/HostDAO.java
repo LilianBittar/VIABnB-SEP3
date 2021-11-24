@@ -13,21 +13,21 @@ public interface HostDAO
     /**
      * Query a list of Host objects that have a false isApprovedHost boolean value
      * @return List<Host>
-     * @throws IllegalStateException on SQL failure
+     * @throws IllegalStateException
      * */
     List<Host> getAllNotApprovedHosts();
     /**
      * Update the boolean isApprovedHost value of a given host from false to true
      * @param host The targeted host
      * @return Updated Host object with isApprovedHost boolean value true
-     * @throws IllegalStateException on SQL failure or invalid host
+     * @throws IllegalStateException invalid host
      * */
     Host approveHost(Host host);
     /**
      * Delete a Host object that have a boolean isApprovedHost value false
      * @param host The targeted host
      * @return Updated host object with isApprovedHost boolean value of false
-     * @throws IllegalStateException on SQL failure or invalid host
+     * @throws IllegalStateException invalid host
      * */
     Host rejectHost(Host host);
 }

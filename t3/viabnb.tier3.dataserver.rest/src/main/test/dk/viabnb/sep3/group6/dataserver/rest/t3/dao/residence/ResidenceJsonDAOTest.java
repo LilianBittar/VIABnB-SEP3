@@ -31,10 +31,10 @@ class ResidenceJsonDAOTest
     facilities.add(new Facility(1, "nameTest"));
 
     rules = new ArrayList<>();
-    rules.add(new Rule(1, "descriptionTest"));
+    //rules.add(new Rule(1, "descriptionTest"));
 
 
-    residence = new Residence(1, address, "des", "ty", 1, false, 1, rules, facilities, "s", new Date("11/11/2021"), new Date("11/11/2021"), 10);
+    //residence = new Residence(1, address, "des", "ty", 1, false, 1, rules, facilities, "s", new Date("11/11/2021"), new Date("11/11/2021"), 10);
   }
 
   @Test void createResidenceSunnyScenario()
