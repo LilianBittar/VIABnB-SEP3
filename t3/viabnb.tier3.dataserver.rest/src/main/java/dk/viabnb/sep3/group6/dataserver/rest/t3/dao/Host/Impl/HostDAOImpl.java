@@ -23,7 +23,23 @@ public class HostDAOImpl extends BaseDao implements HostDAO
 
     @Override
     public Host RegisterHost(Host host) {
-        return null;
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement("insert into host(fname, lname, email, phonenumber, password,cprnumber,isapproved,personalimage) values (?,?,?,?,?,?,?,?)");
+            stm.setString(1, host.getFirstName());
+            stm.setString(2, host.getLastName());
+            stm.setString(3, host.getEmail());
+            stm.setString(4, host.getPhoneNumber());
+            stm.setString(5, host.getPassword());
+            stm.setString(6, host.getCpr());
+            stm.setBoolean(7,host.isApprovedHost());
+            stm.setString(8,host.getProfileImageUrl());
+            stm.executeUpdate();
+            connection.commit();
+            return host;
+
+        } catch (SQLException throwables) {
+            throw new IllegalStateException(throwables.getMessage());
+        }
     }
 
     @Override
