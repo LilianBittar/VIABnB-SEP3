@@ -22,6 +22,6 @@ namespace SEP3T2GraphQL.Models
         public string ProfileImageUrl { get; set; }
         [Required]
         public string Cpr { get; set; }
-        public bool IsApprovedHost { get; set; } = false; 
+        public bool IsApprovedHost { get; set; } 
     }
 }

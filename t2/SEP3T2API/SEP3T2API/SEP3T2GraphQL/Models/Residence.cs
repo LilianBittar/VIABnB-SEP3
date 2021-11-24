@@ -14,7 +14,6 @@ namespace SEP3T2GraphQL.Models
         public string Description { get; set; }
         [Required]
         public string Type { get; set; }
-        public double AverageRating { get; set; }
         [Required]
         public bool IsAvailable { get; set; }
         [Required]
@@ -31,5 +30,7 @@ namespace SEP3T2GraphQL.Models
         
         [Required]
         public Host Host { get; set; }
+
+        public IEnumerable<ResidenceReview> ResidenceReviews { get; set; }
     }
 }

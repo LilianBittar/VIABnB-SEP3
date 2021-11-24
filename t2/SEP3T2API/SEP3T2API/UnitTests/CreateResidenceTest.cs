@@ -51,7 +51,6 @@ namespace UnitTests
             rules = new List<Rule>();
             rules.Add(new Rule()
             {
-                Id = 1,
                 Description = "DescriptionTest"
             });
 
@@ -61,7 +60,6 @@ namespace UnitTests
                 Address = address,
                 Description = "DescriptionTest",
                 Type = "TypeTes",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -87,7 +85,6 @@ namespace UnitTests
                 Address = null,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -130,7 +127,6 @@ namespace UnitTests
                 Address = a,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -170,7 +166,6 @@ namespace UnitTests
                 Address = a,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -195,7 +190,6 @@ namespace UnitTests
                 Address = address,
                 Description = description,
                 Type = type,
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -219,7 +213,6 @@ namespace UnitTests
                 Address = address,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = avgRating,
                 IsAvailable = false,
                 PricePerNight = ppn,
                 Rules = rules,
@@ -240,7 +233,6 @@ namespace UnitTests
                 Address = address,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = isAvp,
                 PricePerNight = 1,
                 Rules = rules,
@@ -261,7 +253,6 @@ namespace UnitTests
             IList<Rule> rs = new List<Rule>();
             rs.Add(new Rule()
                 {
-                    Id = 2,
                     Description = des
                 }
             );
@@ -278,7 +269,6 @@ namespace UnitTests
                 Address = address,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rs,
@@ -300,7 +290,6 @@ namespace UnitTests
                 Address = address,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,
@@ -322,7 +311,6 @@ namespace UnitTests
                 Address = address,
                 Description = "Test",
                 Type = "Test",
-                AverageRating = 1,
                 IsAvailable = false,
                 PricePerNight = 1,
                 Rules = rules,

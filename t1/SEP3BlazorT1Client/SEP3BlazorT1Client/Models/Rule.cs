@@ -6,9 +6,6 @@ namespace SEP3BlazorT1Client.Models
 {
     public class Rule
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-        
         [Required]
         [JsonProperty("description")]
         public string Description { get; set; }

@@ -26,6 +26,7 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         {
             hostRequestList = await HostService.GetAllNotApprovedHostsAsync();
             guestRequestList = await GuestService.GetAllNotApprovedGuests();
+            StateHasChanged();
         }
         
         private async Task ApproveHost(int hostId)

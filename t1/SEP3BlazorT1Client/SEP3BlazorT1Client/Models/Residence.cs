@@ -21,8 +21,6 @@ namespace SEP3BlazorT1Client.Models
         [Required (AllowEmptyStrings =false)]
         [DisplayFormat(ConvertEmptyStringToNull =false)]
         public string Type { get; set; }
-        [JsonProperty("averageRating")]
-        public double AverageRating { get; set; }
         [JsonProperty("isAvailable")]
         public bool IsAvailable { get; set; }
         [Required]
@@ -42,10 +40,11 @@ namespace SEP3BlazorT1Client.Models
         [JsonProperty("availableTo")]
         public DateTime? AvailableTo { get; set; }
         [Required, Range(1, int.MaxValue)]
-                public int MaxNumberOfGuests { get; set; }
-        
-        
-
+        public int MaxNumberOfGuests { get; set; }
+        [JsonProperty("host")]
+        public Host Host { get; set; }
+        [JsonProperty("residenceReviews")]
+        public IEnumerable<ResidenceReview> ResidenceReviews { get; set; }
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this); 

@@ -49,6 +49,7 @@ namespace UnitTests.AdministrationTest
             
             var hostRepository = new Mock<IHostRepository>();
             hostRepository.Setup(ex => ex.GetAllNotApprovedHosts().Result).Returns(_hostList);
+            hostRepository.Setup(ex => ex.UpdateHostStatus(host1).Result).Returns(host1);
 
             _hostService = new HostServiceImpl(hostRepository.Object);
         }
