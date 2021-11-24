@@ -30,11 +30,17 @@
                                         <MatTextField @bind-Value="@password" Dense="true" Label="Password" Outlined="true" Style="margin-left: 3em;"></MatTextField>
                                     </td>
                                 </tr>
-                                  <tr>
-                                      <td>
-                                           <MatButton Raised="true" Style="margin-left: 8em;" OnClick="@(() =>PerformLogin())">Log in</MatButton>
-                                      </td>
-                                      </tr>
+                                <tr>
+                                    <td>
+                                        <p style="color: red">@ErrorMessage</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+
+                                        <MatButton Raised="true" Style="margin-left: 8em;" OnClick="@(() => PerformLogin())">Log in</MatButton>
+                                    </td>
+                                </tr>
                             </table>
                         </MatCardContent>
                         <MatDivider Inset="true"></MatDivider>

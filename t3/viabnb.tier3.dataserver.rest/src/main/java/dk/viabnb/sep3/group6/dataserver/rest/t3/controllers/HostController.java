@@ -43,8 +43,8 @@ import java.util.NoSuchElementException;
     return new ResponseEntity<>(newHost, HttpStatus.OK);
   }
 
-  @GetMapping("/host/email={email}") public ResponseEntity<Host> getHostByEmail(
-      @PathVariable String email)
+  @GetMapping("/host") public ResponseEntity<Host> getHostByEmail(
+      @RequestParam(required = false) String email)
   {
     Host host;
     host = hostDAO.getHostByEmail(email);

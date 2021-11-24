@@ -11,7 +11,6 @@ namespace SEP3T2GraphQL.Repositories.Impl
 {
     public class ResidenceRepositoryImpl: IResidenceRepository
     {
-        // Todo id must be incremented based on all residences/ or just leave it to the database serial attribute
         private string uri = "http://localhost:8080";
         private readonly HttpClient client;
         private IResidenceValidation _residenceValidation;

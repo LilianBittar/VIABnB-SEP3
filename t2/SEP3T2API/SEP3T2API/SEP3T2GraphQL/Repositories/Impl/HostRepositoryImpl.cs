@@ -50,7 +50,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Host> GetHostByEmail(string email)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host/email={email}");
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host?email={email}");
 
             if (!responseMessage.IsSuccessStatusCode)
             {
