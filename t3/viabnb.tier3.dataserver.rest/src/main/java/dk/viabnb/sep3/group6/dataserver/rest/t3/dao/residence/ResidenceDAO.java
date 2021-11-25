@@ -12,7 +12,7 @@ public interface ResidenceDAO
    * @return Residence object
    * @throws IllegalStateException on SQL failure or invalid id
    * */
-  Residence getByResidenceId(int id);
+  Residence getByResidenceId(int id) throws IllegalStateException;
   /**
    * Return a list of Residence objects based on a host id
    * @param id The id of the host who owns the residence
@@ -26,5 +26,12 @@ public interface ResidenceDAO
    * @return newly created Residence object
    * @throws IllegalStateException on SQL failure or invalid residence
    * */
-  Residence createResidence(Residence residence);
+  Residence createResidence(Residence residence) throws IllegalStateException;
+
+  /**
+   * Returns all residences registered in the system
+   * @return List of all residences
+   * @throws IllegalStateException if connection to data source could not be established.
+   * */
+  List<Residence> getAllResidences() throws IllegalStateException;
 }
