@@ -38,16 +38,22 @@ public class RentRequestController {
         List<RentRequest> requestsToReturn = rentRequestDAO.getAll();
         if (residenceId != null) {
             requestsToReturn.forEach((request) -> {
-                if (request.getResidence().getId() != residenceId.intValue()) {
+                if (request.getResidence().getId() != residenceId) {
                     requestsToReturn.remove(request);
                 }
             });
         }
 
-        //TODO: iterate requests and remove all where request.getHost().getId() != hostId.
+        if (hostId != null){
+            requestsToReturn.forEach((request) -> {
+                if (request.getResidence().getHost().getId() != hostId){
+                    requestsToReturn.remove(request);
+                }
+            });
+        }
         if (guestId != null) {
             requestsToReturn.forEach((request) -> {
-                if (request.getGuest().getId() != guestId.intValue()) {
+                if (request.getGuest().getId() != guestId) {
                     requestsToReturn.remove(request);
                 }
             });
@@ -70,13 +76,11 @@ public class RentRequestController {
     @PutMapping("/rentrequests/{id}")
     public ResponseEntity<RentRequest> replaceRentRequest(@PathVariable int id, @RequestBody(required = true) RentRequest request) {
         RentRequest existingRentRequest = rentRequestDAO.getById(id);
-        RentRequest updatedRequest = null;
         if (existingRentRequest == null) {
-            updatedRequest = rentRequestDAO.create(request);
-            return ResponseEntity.ok(updatedRequest);
+            return ResponseEntity.notFound().build();
         }
 
-        updatedRequest = rentRequestDAO.update(request);
+        RentRequest updatedRequest = rentRequestDAO.update(request);
         return ResponseEntity.ok(updatedRequest);
     }
 

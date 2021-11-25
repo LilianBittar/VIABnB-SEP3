@@ -15,7 +15,6 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
     @Override
     public RentRequest create(RentRequest request) {
         try (Connection connection = getConnection()){
-            //TODO: Add Host to request model class and guestId to rentrequest in db.
             PreparedStatement stm = connection.prepareStatement("insert into rentrequest(startdate, enddate, numberofguests, status, hostid) values (?,?,?,?,?)");
             stm.setDate(1, Date.valueOf(request.getStartDate().toString()));
             stm.setDate(2, Date.valueOf(request.getEndDate().toString()));
