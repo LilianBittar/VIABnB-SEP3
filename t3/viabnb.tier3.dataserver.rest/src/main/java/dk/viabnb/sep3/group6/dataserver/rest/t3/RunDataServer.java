@@ -6,6 +6,8 @@ import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.AddressDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.AddressDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.CityDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.CityDAOImpl;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.administration.AdministrationDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.administration.AdministrationDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
@@ -58,5 +60,10 @@ import org.springframework.context.annotation.Scope;
   @Bean @Scope("singleton") CityDAO cityDAO()
   {
     return new CityDAOImpl();
+  }
+
+  @Bean @Scope("singleton") AdministrationDAO administrationDAO()
+  {
+    return new AdministrationDAOImpl();
   }
 }
