@@ -21,6 +21,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             stm.setDate(2, Date.valueOf(request.getEndDate().toString()));
             stm.setInt(3, request.getNumberOfGuests());
             stm.setString(4, RentRequestStatus.NOTANSWERED.name());
+            stm.setInt(5, request.getResidence().getHost().getId());
             stm.executeUpdate();
             connection.commit();
             return request;
