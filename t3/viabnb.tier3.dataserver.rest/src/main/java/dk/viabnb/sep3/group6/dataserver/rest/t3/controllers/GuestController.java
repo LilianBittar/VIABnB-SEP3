@@ -23,7 +23,12 @@ public class GuestController {
         this.guestDAO = guestDAO;
     }
 
-
+    /**
+     * Handles requests for creating new guests at endpoint /guests.
+     * @param guest the Guest that is to be created.
+     * @return HTTP OK with the newly created guest in the response body or
+     * HTTP Internal Server Error response if Guest could not be created.
+     * */
     @PostMapping("/guests")
     public ResponseEntity<Guest> createGuest(@RequestBody Guest guest) {
         LOGGER.info("Received createGuest request with params " + new Gson().toJson(guest) );
@@ -44,6 +49,13 @@ public class GuestController {
         return ResponseEntity.ok(createGuest);
     }
 
+    /**
+     * Handles request for getting all guests in the system at endpoint /guests.
+     * @param isApproved Optional field for filtering guests by isApproved value.
+     * @return HTTP OK with all Guests in response body. If isApproved is provided,
+     * then the list is filtered.
+     * If Data access fails, then HTTP Internal Server Error is returned.
+     * */
     @GetMapping("/guests")
     public ResponseEntity<List<Guest>> getAllGuests(@RequestParam(required = false) Boolean isApproved) {
 
