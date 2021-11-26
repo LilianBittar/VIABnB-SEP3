@@ -1,0 +1,119 @@
+@page "/RentResidence/{ResidenceId:int}"
+@using SEP3BlazorT1Client.Data
+@using SEP3BlazorT1Client.Models
+@using System.ComponentModel.DataAnnotations
+@inject IGuestService GuestService
+@inject IResidenceService ResidenceService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+@if (_newRentRequest.Residence != null)
+{
+    <div class="container-fluid d-flex justify-content-center align-items-center">
+        <div class="row">
+            <div class="col">
+                <MatPaper Elevation="11" Rounded="true" Style="border-radius: 10px">
+
+                    <div class="card">
+                        <div class="card__header">
+                            <div class="d-flex justify-content-between">
+                                <h1>@_newRentRequest.Residence.PricePerNight DKK.- / night</h1>
+                                <span>@_newRentRequest.Residence.GetAverageRating() Average rating</span>
+                            </div>
+                            <hr>
+                        </div>
+
+                        <div class="card__content">
+                            <div class="d-flex flex-row">
+                                <MatDatePicker @bind-Value="@_newRentRequest.StartDate" Required="true" Outlined="true" Label="Start date" OnInput="@(StateHasChanged)"/>
+                                <MatDatePicker @bind-Value="@_newRentRequest.EndDate" Required="true" Outlined="true" Label="End date" OnInput="@(StateHasChanged)"/>
+                            </div>
+                            <EditForm EditContext="@EditContext">
+                                <DataAnnotationsValidator/>
+                                <MatTextField @bind-Value="_newRentRequest.NumberOfGuests" Label="Number of guests" Style="width: 100%"/>
+                                <ValidationMessage For="@(() => _newRentRequest.NumberOfGuests)"/>
+                            </EditForm>
+
+                            <MatButton Label="Send Request" Style="width: 100%" Raised="true"/>
+                            <hr>
+                            <div class="d-flex flex-row justify-content-between">
+                                <span style="text-decoration: underline">@(GetTotalDays()) days x @_testResidence.PricePerNight DKK.-</span>
+                                <span>@(GetTotalDays() * _testResidence.PricePerNight) DKK.-</span>
+                            </div>
+                            <div class="d-flex flex-row justify-content-between">
+                                <span style="text-decoration: underline">@_newRentRequest.NumberOfGuests guests</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex flex-row justify-content-between">
+                                <span style="font-weight: bold">Price in total</span>
+                                <span style="font-weight: bold">@_newRentRequest.GetTotalPrice() DKK.-</span>
+                            </div>
+                        </div>
+                    </div>
+                </MatPaper>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+}
+
+@code {
+
+    [Parameter]
+    public int ResidenceId { get; set; }
+
+    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now};
+
+    [CascadingParameter]
+    public EditContext EditContext { get; private set; }
+
+    private Residence _testResidence;
+
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(_newRentRequest);
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+    // if (user.Identity.IsAuthenticated)
+    // {
+    // var guest = await GuestService.GetGuestById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
+    // var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
+    // if (guest != null)
+    // {
+    //     _newRentRequest.Guest = guest;
+    // }
+    // if (residence != null)
+    // {
+    //     _newRentRequest.Residence = residence;
+    // }
+
+    //FOR TESTING ONLY
+        _testResidence = new()
+        {
+            Address = null, Description = null, Facilities = null, Host = null,
+            Id = 1, Rules = null, Type = null,
+            AvailableFrom = DateTime.Now, AvailableTo = DateTime.MaxValue,
+            PricePerNight = 2000, MaxNumberOfGuests = 2, ResidenceReviews = new List<ResidenceReview>()
+        };
+        _newRentRequest.Residence = _testResidence;
+        Console.WriteLine(_newRentRequest.Residence.PricePerNight);
+        _newRentRequest.Status = RentRequestStatus.NotAnswered;
+    // }
+    //     else
+    //     {
+    // NavigationManager.NavigateTo("/login");
+    //     }
+    }
+
+    private int GetTotalDays()
+    {
+        return (_newRentRequest.EndDate - _newRentRequest.StartDate).Days;
+    }
+
+
+
+}
+
