@@ -12,6 +12,7 @@ namespace SEP3T2GraphQL.Models
         [Required]
         public DateTime EndDate { get; set; }
         [Required]
+        [Range(1, Int32.MaxValue, ErrorMessage = "Number of guests must be 1 or above")]
         public int NumberOfGuests { get; set; }
         [Required]
         public RentRequestStatus Status { get; set; }

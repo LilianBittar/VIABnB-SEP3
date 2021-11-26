@@ -4,6 +4,7 @@
 @using System.ComponentModel.DataAnnotations
 @inject IGuestService GuestService
 @inject IResidenceService ResidenceService
+@inject IRentalService RentalService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 
@@ -34,7 +35,15 @@
                                 <ValidationMessage For="@(() => _newRentRequest.NumberOfGuests)"/>
                             </EditForm>
 
-                            <MatButton Label="Send Request" Style="width: 100%" Raised="true"/>
+                            <MatButton Label="Send Request" OnClick="@CreateRequest" Style="width: 100%" Raised="true" />
+                            
+                            <p style="font-weight: lighter; font-style: italic; font-size: 15px; margin-top: 0.5rem">
+                                An request will be sent to the Host. The Host can either choose to approve or reject the rent request.
+                                To check the status of request after sending, navigate to ...
+                            </p>
+                            
+                            
+                            <p style="color:red">@_errorMessage</p>
                             <hr>
                             <div class="d-flex flex-row justify-content-between">
                                 <span style="text-decoration: underline">@(GetTotalDays()) days x @_testResidence.PricePerNight DKK.-</span>
@@ -71,6 +80,8 @@ else
     public EditContext EditContext { get; private set; }
 
     private Residence _testResidence;
+
+    private string _errorMessage=""; 
 
     protected override async Task OnInitializedAsync()
     {
@@ -113,7 +124,16 @@ else
         return (_newRentRequest.EndDate - _newRentRequest.StartDate).Days;
     }
 
-
-
+    private async void CreateRequest()
+    {
+        try
+        {
+            await RentalService.CreateRentRequest(_newRentRequest);
+        }
+        catch (Exception e)
+        {
+            _errorMessage = e.Message;
+        }
+    }
 }
 
