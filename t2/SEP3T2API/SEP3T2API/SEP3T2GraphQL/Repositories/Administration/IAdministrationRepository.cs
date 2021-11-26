@@ -8,5 +8,6 @@ namespace SEP3T2GraphQL.Repositories.Administration
     {
         Task<Administrator> GetAdminByEmail(string email);
         Task<IEnumerable<Administrator>> GetAllAdmins();
+        Task<Administrator> ValidateAdmin(Administrator administrator);
     }
 }

@@ -78,5 +78,10 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _ruleService.GetAllRules();
         }
+
+        public async Task<Administrator> ValidateAdmin(string email, string password)
+        {
+            return await _administrationService.ValidateAdmin(email, password);
+        }
     }
 }

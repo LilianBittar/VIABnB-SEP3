@@ -37,5 +37,21 @@ namespace SEP3T2GraphQL.Services.Administration.Impl
 
             return administratorsToReturn;
         }
+
+        public async Task<Administrator> ValidateAdmin(string email, string password)
+        {
+            var adminToValidate = await GetAdminByEmail(email);
+            if (adminToValidate == null)
+            {
+                throw new ArgumentException("No admin with email matching the given email");
+            }
+
+            if (adminToValidate.Password != password)
+            {
+                throw new ArgumentException("The given password is incorrect");
+            }
+
+            return adminToValidate;
+        }
     }
 }
