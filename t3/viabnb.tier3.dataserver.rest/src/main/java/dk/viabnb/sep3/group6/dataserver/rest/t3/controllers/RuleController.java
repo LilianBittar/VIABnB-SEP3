@@ -33,7 +33,7 @@ import java.util.List;
     return new ResponseEntity<>(ruleListToReturn, HttpStatus.OK);
   }
 
-  @PostMapping("/Rule") public ResponseEntity<Rule> createRule(
+  @PostMapping("/rule") public ResponseEntity<Rule> createRule(
       @RequestBody Rule rule)
   {
     Rule newRule = ruleDAO.createRule(rule);
