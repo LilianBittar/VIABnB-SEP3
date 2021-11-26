@@ -10,6 +10,8 @@ using SEP3T2GraphQL.Graphql;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Repositories.Impl;
 using SEP3T2GraphQL.Services;
+using SEP3T2GraphQL.Services.Administration;
+using SEP3T2GraphQL.Services.Administration.Impl;
 using SEP3T2GraphQL.Services.Impl;
 using SEP3T2GraphQL.Services.Validation;
 using SEP3T2GraphQL.Services.Validation.HostValidation;
@@ -47,6 +49,7 @@ namespace SEP3T2GraphQL
             services.AddScoped<CreateRentRequestValidator>();
             services.AddScoped<IFacilityService, FacilityService>();
             services.AddScoped<IRuleService, RuleService>();
+            services.AddScoped<IAdministrationService, AdministrationServiceImpl>();
 
         }
 
