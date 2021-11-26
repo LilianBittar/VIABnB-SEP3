@@ -6,6 +6,7 @@ namespace SEP3T2GraphQL.Repositories.Administration
 {
     public interface IAdministrationRepository
     {
-        
+        Task<Administrator> GetAdminByEmail(string email);
+        Task<IEnumerable<Administrator>> GetAllAdmins();
     }
 }

@@ -14,8 +14,6 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public class HostServiceImpl : IHostService
     {
-        private string uri = "http://localhost:8080";
-        private readonly HttpClient client = new HttpClient();
         private IHostRepository _hostRepository;
         private IHostValidation _hostValidation;
 

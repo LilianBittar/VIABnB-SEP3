@@ -6,5 +6,6 @@ namespace SEP3T2GraphQL.Models
     {
         [Required]
         public string Description { get; set; }
+        [Required] public int ResidenceId { get; set; }
     }
 }
