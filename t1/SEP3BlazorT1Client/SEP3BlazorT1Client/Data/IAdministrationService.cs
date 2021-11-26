@@ -8,5 +8,6 @@ namespace SEP3BlazorT1Client.Data
     {
         Task<Administrator> GetAdminByEmail(string email);
         Task<IEnumerable<Administrator>> GetAllAdmins();
+        Task<Administrator> ValidateAdmin(string email, string password);
     }
 }
