@@ -8,4 +8,5 @@ public interface FacilityDAO
 {
   Facility createFacility(Facility facility);
   List<Facility> getAllFacilities();
+  Facility getFacilityById(int id);
 }
