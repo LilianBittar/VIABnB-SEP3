@@ -6,6 +6,7 @@ using HotChocolate;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services;
+using SEP3T2GraphQL.Services.Administration;
 
 namespace SEP3T2GraphQL.Graphql
 {
@@ -15,12 +16,18 @@ namespace SEP3T2GraphQL.Graphql
         private readonly IHostService _hostService;
         private readonly IGuestService _guestService;
         private readonly IRentalService _rentalService;
-        public Query(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService)
+        private readonly IAdministrationService _administrationService;
+        private IFacilityService _facilityService;
+        private IRuleService _ruleService;
+        public Query(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IAdministrationService administrationService, IFacilityService facilityService, IRuleService ruleService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
             _guestService = guestService;
-            _rentalService = rentalService; 
+            _rentalService = rentalService;
+            _administrationService = administrationService;
+            _facilityService = facilityService;
+            _ruleService = ruleService;
         }
         public async Task<Residence> GetResidence(int id)
         {
@@ -45,6 +52,31 @@ namespace SEP3T2GraphQL.Graphql
         public async Task<Host> ValidatehostLogin(string email, string password)
         {
             return await _hostService.ValidateHostAsync(email, password);
+        }
+
+        public async Task<Administrator> GetAdminByEmail(string email)
+        {
+            return await _administrationService.GetAdminByEmail(email);
+        }
+
+        public async Task<IEnumerable<Administrator>> GetAllAdmins()
+        {
+            return await _administrationService.GetAllAdmins();
+        }
+
+        public async Task<IEnumerable<Facility>> GetAllFacilities()
+        {
+            return await _facilityService.GetAllFacilities();
+        }
+
+        public async Task<Facility> GetFacilityById(int id)
+        {
+            return await _facilityService.GetFacilityById(id);
+        }
+
+        public async Task<IEnumerable<Rule>> GetAllRules()
+        {
+            return await _ruleService.GetAllRules();
         }
     }
 }
