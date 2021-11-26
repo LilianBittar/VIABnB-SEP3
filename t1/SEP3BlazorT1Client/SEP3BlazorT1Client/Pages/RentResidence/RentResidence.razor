@@ -34,7 +34,12 @@
                                 <ValidationMessage For="@(() => _newRentRequest.NumberOfGuests)"/>
                             </EditForm>
 
-                            <MatButton Label="Send Request" Style="width: 100%" Raised="true"/>
+                            <MatButton Label="Send Request" OnClick="@CreateRequest" Style="width: 100%" Raised="true" />
+                            
+                            <p style="font-weight: lighter; font-style: italic; font-size: 15px; margin-top: 0.5rem">
+                                An request will be sent to the Host. The Host can either choose to approve or reject the rent request.
+                                To check the status of request after sending, navigate to ...
+                            </p>
                             <hr>
                             <div class="d-flex flex-row justify-content-between">
                                 <span style="text-decoration: underline">@(GetTotalDays()) days x @_testResidence.PricePerNight DKK.-</span>
@@ -113,7 +118,10 @@ else
         return (_newRentRequest.EndDate - _newRentRequest.StartDate).Days;
     }
 
-
+    private void CreateRequest()
+    {
+        
+    }
 
 }
 
