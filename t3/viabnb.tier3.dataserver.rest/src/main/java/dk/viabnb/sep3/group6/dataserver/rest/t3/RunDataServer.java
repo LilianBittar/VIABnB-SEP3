@@ -8,12 +8,16 @@ import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.CityDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.CityDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.administration.AdministrationDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.administration.AdministrationDAOImpl;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.facility.FacilityDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.facility.FacilityDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAOImpl;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rule.RuleDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rule.RuleDAOImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -66,4 +70,18 @@ import org.springframework.context.annotation.Scope;
   {
     return new AdministrationDAOImpl();
   }
+
+  @Bean @Scope("singleton") FacilityDAO facilityDAO()
+
+  {
+    return new FacilityDAOImpl();
+  }
+
+  @Bean @Scope("singleton") RuleDAO ruleDAO()
+
+  {
+    return new RuleDAOImpl();
+  }
+
 }
+
