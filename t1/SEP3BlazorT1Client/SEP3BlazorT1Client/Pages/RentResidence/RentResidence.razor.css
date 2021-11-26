@@ -1,0 +1,25 @@
+h1 {
+    font-size: 24px;
+}
+
+.card{
+    max-width: 600px;
+    min-width: 500px;
+    padding:2rem;
+    margin-top: 2rem;
+    border-radius: 10px;
+}
+
+.card__content{
+}
+
+.card-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__header{
+    
+}
+

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text.Json;
 using Newtonsoft.Json;
 
@@ -50,6 +51,17 @@ namespace SEP3BlazorT1Client.Models
             return JsonConvert.SerializeObject(this); 
         }
 
+        public double GetAverageRating()
+        {
+            if (!ResidenceReviews.Any() || ResidenceReviews == null)
+            {
+                return 0; 
+            }
+
+            double sum = ResidenceReviews.Sum(residenceReview => residenceReview.Rating);
+
+            return sum / ResidenceReviews.Count();
+        }
         
     }
 }

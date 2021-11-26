@@ -22,8 +22,12 @@ namespace SEP3BlazorT1Client.Models
 
         public decimal GetTotalPrice()
         {
-            var rentPeriodInDays = (EndDate - StartDate).Days;
-            return (decimal) (rentPeriodInDays * Residence.PricePerNight); 
+            return (decimal) (GetRentPeriodInDays() * Residence.PricePerNight * NumberOfGuests); 
+        }
+
+        public int GetRentPeriodInDays()
+        {
+            return (EndDate - StartDate).Days;
         }
     }
 

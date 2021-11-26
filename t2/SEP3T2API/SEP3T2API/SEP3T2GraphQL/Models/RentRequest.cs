@@ -22,8 +22,12 @@ namespace SEP3T2GraphQL.Models
 
         public decimal GetTotalPrice()
         {
-            var rentPeriodInDays = (EndDate - StartDate).Days;
-            return (decimal) (rentPeriodInDays * Residence.PricePerNight); 
+            return (decimal) (GetRentPeriodInDays() * Residence.PricePerNight * NumberOfGuests); 
+        }
+
+        public int GetRentPeriodInDays()
+        {
+            return (EndDate - StartDate).Days;
         }
     }
 

@@ -69,7 +69,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        //TODO: Fetch host by id, by parsing to int authState.User.claims.first(c => c.Type=="id").ToString();
         var authState = await AuthStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         Console.WriteLine("\nClaims:");
