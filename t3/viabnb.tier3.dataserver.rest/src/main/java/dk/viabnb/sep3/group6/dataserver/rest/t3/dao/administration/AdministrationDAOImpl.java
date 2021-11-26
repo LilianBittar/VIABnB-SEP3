@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdministrationDAOImpl extends BaseDao implements AdministrationDAO
 {
@@ -35,6 +37,35 @@ public class AdministrationDAOImpl extends BaseDao implements AdministrationDAO
     catch (SQLException throwables)
     {
       throw new IllegalStateException(throwables.getMessage());
+    }
+  }
+
+  @Override public List<Administrator> getAllAdministrators()
+  {
+    List<Administrator> administratorListToReturn = new ArrayList<>();
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement
+          ("SELECT * FROM admin");
+      ResultSet result = stm.executeQuery();
+      while (result.next())
+      {
+        Administrator administrator = new Administrator
+            (
+                result.getInt("adminid"),
+                result.getString("fname"),
+                result.getString("lname"),
+                result.getString("email"),
+                result.getString("phonenumber"),
+                result.getString("password")
+            );
+        administratorListToReturn.add(administrator);
+      }
+      return administratorListToReturn;
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalArgumentException(throwables.getMessage());
     }
   }
 }

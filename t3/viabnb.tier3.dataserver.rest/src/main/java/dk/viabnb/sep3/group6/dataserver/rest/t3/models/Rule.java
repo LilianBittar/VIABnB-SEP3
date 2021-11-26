@@ -3,10 +3,12 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.models;
 public class Rule
 {
   private String description;
+  private int residenceId;
 
-  public Rule(String description)
+  public Rule(String description, int residenceId)
   {
     this.description = description;
+    this.residenceId = residenceId;
   }
 
   public String getDescription()
@@ -19,8 +21,19 @@ public class Rule
     this.description = description;
   }
 
+  public int getResidenceId()
+  {
+    return residenceId;
+  }
+
+  public void setResidenceId(int residenceId)
+  {
+    this.residenceId = residenceId;
+  }
+
   @Override public String toString()
   {
-    return "Rule{" + "description='" + description + '\'' + '}';
+    return "Rule{" + "description='" + description + '\'' + ", residenceId="
+        + residenceId + '}';
   }
 }
