@@ -40,7 +40,8 @@ namespace SEP3BlazorT1Client
             services.AddScoped<IHostService, GraphQlHostService>();
             services.AddScoped<RegisterResidenceViewModel>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-            services.AddScoped<IGuestService, GraphQlGuestService>(); 
+            services.AddScoped<IGuestService, GraphQlGuestService>();
+            services.AddScoped<IRentalService, GraphQlRentalService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
