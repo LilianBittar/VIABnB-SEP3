@@ -6,6 +6,6 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes
 {
     public class AdminListResponseType
     {
-        [JsonProperty("getAllAdmin")] public IEnumerable<Administrator> Administrators { get; set; }
+        [JsonProperty("allAdmins")] public IEnumerable<Administrator> Administrators { get; set; }
     }
 }

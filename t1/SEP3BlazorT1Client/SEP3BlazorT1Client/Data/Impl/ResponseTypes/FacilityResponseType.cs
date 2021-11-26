@@ -5,6 +5,6 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes
 {
     public class FacilityResponseType
     {
-        [JsonProperty("getFacilityById")] public Facility Facility { get; set; }
+        [JsonProperty("facilityById")] public Facility Facility { get; set; }
     }
 }
