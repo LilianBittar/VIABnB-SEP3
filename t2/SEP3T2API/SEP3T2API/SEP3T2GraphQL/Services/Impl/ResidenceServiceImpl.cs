@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
@@ -70,6 +71,12 @@ namespace SEP3T2GraphQL.Services
                 }
             }
             throw new Exception("ID must be bigger than 0");
+        }
+
+        public async Task<IList<Residence>> GetAvailableResidencesAsync()
+        {
+            var allResidences = await _residenceRepository.GetAll();
+            return allResidences.Where(r => r.IsAvailable).ToList(); 
         }
     }
 }

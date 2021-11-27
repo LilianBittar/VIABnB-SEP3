@@ -93,5 +93,10 @@ namespace SEP3T2GraphQL.Graphql
         {
             return _rentalService.GetRentRequestAsync(id);
         }
+
+        public async Task<IList<Residence>> GetAvailableResidences()
+        {
+            return await _residenceService.GetAvailableResidencesAsync(); 
+        }
     }
 }

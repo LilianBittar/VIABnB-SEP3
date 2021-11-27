@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -25,10 +26,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
         {
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/residence/{id}");
 
-            if (!responseMessage.IsSuccessStatusCode)
-            {
-                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
-            }
+            await HandleErrorResponse(responseMessage);
+
 
             string result = await responseMessage.Content.ReadAsStringAsync();
             Residence residence = JsonSerializer.Deserialize<Residence>(result, new JsonSerializerOptions(
@@ -52,10 +51,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
             Console.WriteLine(newResidence);
             StringContent content = new StringContent(newResidence, Encoding.UTF8, "application/json");
             HttpResponseMessage responseMessage = await client.PostAsync(uri + "/residence", content);
-            if (!responseMessage.IsSuccessStatusCode)
-            {
-                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
-            }
+            await HandleErrorResponse(responseMessage);
+
 
             Residence r = JsonSerializer.Deserialize<Residence>(await responseMessage.Content.ReadAsStringAsync(), new JsonSerializerOptions()
             {
@@ -69,8 +66,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residence/{id}");
 
-            if (!responseMessage.IsSuccessStatusCode)
-                throw new Exception($"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            await HandleErrorResponse(responseMessage);
+
             string result = await responseMessage.Content.ReadAsStringAsync();
 
             List<Residence> residences = JsonSerializer.Deserialize<List<Residence>>(result,
@@ -79,12 +76,25 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return residences;
         }
 
+        public async Task<IList<Residence>> GetAll()
+        {
+            HttpResponseMessage response = await client.GetAsync($"{url}/residences");
+            await HandleErrorResponse(response);
+        }
+
+        private static async Task HandleErrorResponse(HttpResponseMessage response)
+        {
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+        }
+
         public async Task<Residence> GetTheLastAddedResidence()
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residence");
 
-            if (!responseMessage.IsSuccessStatusCode)
-                throw new Exception($"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+            await HandleErrorResponse(responseMessage);
             string result = await responseMessage.Content.ReadAsStringAsync();
 
             List<Residence> residences = JsonSerializer.Deserialize<List<Residence>>(result,
