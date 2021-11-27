@@ -23,6 +23,9 @@ public class RentRequestController {
         }
         try {
             RentRequest createdRentRequest = rentRequestDAO.create(request);
+            if (createdRentRequest == null) {
+                return ResponseEntity.internalServerError().build();
+            }
             return ResponseEntity.ok(createdRentRequest);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
@@ -44,9 +47,9 @@ public class RentRequestController {
             });
         }
 
-        if (hostId != null){
+        if (hostId != null) {
             requestsToReturn.forEach((request) -> {
-                if (request.getResidence().getHost().getId() != hostId){
+                if (request.getResidence().getHost().getId() != hostId) {
                     requestsToReturn.remove(request);
                 }
             });
