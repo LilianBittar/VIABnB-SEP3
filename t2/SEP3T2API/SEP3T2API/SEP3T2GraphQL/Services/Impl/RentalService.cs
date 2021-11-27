@@ -29,7 +29,7 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("Request cannot be null");
             }
-            _createRentRequestValidator.ValidateRentRequest(request);
+            await _createRentRequestValidator.ValidateRentRequest(request);
             return await _rentRequestRepository.CreateAsync(request);
         }
 
