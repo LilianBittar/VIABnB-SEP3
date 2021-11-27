@@ -46,6 +46,7 @@
 .residence-card__content .available-period {
   display: flex;
   justify-content: space-between;
+  color: gray;
 }
 
 /*# sourceMappingURL=ResidenceCard.razor.css.map */
