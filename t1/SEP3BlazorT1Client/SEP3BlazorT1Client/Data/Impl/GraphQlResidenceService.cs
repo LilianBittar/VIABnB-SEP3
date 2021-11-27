@@ -84,6 +84,12 @@ namespace SEP3BlazorT1Client.Data.Impl
             System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Residences.ToString()}");
             return graphQlResponse.Data.Residences;
         }
+
+        public Task<IList<Residence>> GetAllAvailableResidences()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Residence>  CreateResidenceAsync(Residence residence)
         {
 
