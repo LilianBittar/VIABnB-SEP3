@@ -88,7 +88,7 @@ namespace UnitTests.RentalServiceTests
         public void CreateRentRequest_NullRequest_ThrowsArgumentException()
         {
             RentRequest request = null;
-            TestCreateThrowsAsync<ArgumentException>(request);
+            TestCreateThrowsArgumentExceptionAsync(request);
         }
 
         [Test]
@@ -104,7 +104,7 @@ namespace UnitTests.RentalServiceTests
                 Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("30/12/2021"),
                 NumberOfGuests = numberOfGuests
             };
-            TestCreateThrowsAsync<ArgumentException>(request);
+            TestCreateThrowsArgumentExceptionAsync(request);
         }
 
         [TestCase(5)]
@@ -120,7 +120,7 @@ namespace UnitTests.RentalServiceTests
                 Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("30/12/2021"),
                 NumberOfGuests = numberOfGuests
             };
-            TestCreateThrowsAsync<ArgumentException>(request);
+            TestCreateThrowsArgumentExceptionAsync(request);
         }
 
         [Test]
@@ -132,7 +132,7 @@ namespace UnitTests.RentalServiceTests
                 Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("02/12/2021"),
                 NumberOfGuests = 2
             };
-            TestCreateThrowsAsync<ArgumentException>(request);
+            TestCreateThrowsArgumentExceptionAsync(request);
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace UnitTests.RentalServiceTests
                 Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("31/12/2021"),
                 NumberOfGuests = 2
             };
-            TestCreateThrowsAsync<ArgumentException>(request);
+            TestCreateThrowsArgumentExceptionAsync(request);
         }
 
         [Test]
@@ -163,7 +163,7 @@ namespace UnitTests.RentalServiceTests
                 Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("31/12/2021"),
                 NumberOfGuests = 2
             };
-            TestCreateThrowsAsync<ArgumentException>(request);
+            TestCreateThrowsArgumentExceptionAsync(request);
         }
 
         [Test]
@@ -175,7 +175,7 @@ namespace UnitTests.RentalServiceTests
                 Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = DateTime.Now.AddDays(20),
                 NumberOfGuests = 2
             };
-            TestCreateThrowsAsync<ArgumentException>(request);
+            TestCreateThrowsArgumentExceptionAsync(request);
         }
 
         [Test]
@@ -187,7 +187,7 @@ namespace UnitTests.RentalServiceTests
                 Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = DateTime.Now.AddDays(20),
                 NumberOfGuests = 2
             };
-            TestCreateThrowsAsync<ArgumentException>(request);
+            TestCreateThrowsArgumentExceptionAsync(request);
         }
 
         [Test]
@@ -199,7 +199,7 @@ namespace UnitTests.RentalServiceTests
                 Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = DateTime.Now.AddDays(-1),
                 NumberOfGuests = 2
             };
-            TestCreateThrowsAsync<ArgumentException>(request);
+            TestCreateThrowsArgumentExceptionAsync(request);
         }
 
         [Test]
@@ -213,7 +213,7 @@ namespace UnitTests.RentalServiceTests
                 Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("30/12/2021"),
                 NumberOfGuests = 2
             };
-            TestCreateThrowsAsync<ArgumentException>(request);
+            TestCreateThrowsArgumentExceptionAsync(request);
         }
 
         [Test]
@@ -245,7 +245,7 @@ namespace UnitTests.RentalServiceTests
                 NumberOfGuests = 2
             };
             
-            TestCreateThrowsAsync<ArgumentException>(request);
+            TestCreateThrowsArgumentExceptionAsync(request);
         }
 
         /// <summary>
@@ -259,11 +259,10 @@ namespace UnitTests.RentalServiceTests
         }
 
         /// <summary>
-        /// Tests if the async method CreateRentRequest in IRentalService throws the exception T.  
+        /// Helper method that tests if the async method CreateRentRequest in IRentalService throws the exception ArgumentException.  
         /// </summary>
         /// <param name="request">Request being tested</param>
-        /// <typeparam name="T">Type of the exception expected to be thrown</typeparam>
-        private void TestCreateThrowsAsync<T>(RentRequest request)
+        private void TestCreateThrowsArgumentExceptionAsync(RentRequest request)
         {
             Assert.ThrowsAsync<ArgumentException>(async () => await _rentalService.CreateRentRequest(request));
         }
