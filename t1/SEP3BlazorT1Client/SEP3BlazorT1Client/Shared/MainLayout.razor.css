@@ -11,6 +11,10 @@ a:hover {
     display: flex;
     flex-direction: column;
 }
+.content-body{
+    padding-left: 7rem;
+    padding-right: 7rem;
+}
 
 .main {
     flex: 1;

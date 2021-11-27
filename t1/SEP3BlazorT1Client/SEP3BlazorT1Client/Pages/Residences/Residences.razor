@@ -6,13 +6,24 @@
 
 @if (_residencesToShow != null)
 {
+    // FILTERS DO NOT WORK YET, TO BE IMPLEMENTED WHEN WE WORK ON THAT USERSTORY.
     <div class="page-container">
-        <div class="residence-directory">
-            <div class="container-fluid d-flex">
-                <ResidenceCard Residence="_testResidence"/>
-            </div>
+        <div class="container-fluid d-flex flex-row residence-filters">
+            <MatTextField @bind-Value="@_cityFilter" Label="filter by city name" Outlined="true"/>
+        </div>
+        <div class="container-fluid d-flex flex-wrap residence-directory">
+            @foreach (var r in _residencesToShow)
+            {
+                <MatRipple>
+                <ResidenceCard Residence="@r"/>
+                </MatRipple>
+            }
         </div>
     </div>
+}
+else if (_residencesToShow.Count == 0)
+{
+    <p>No available residences.</p>
 }
 else
 {
@@ -23,6 +34,7 @@ else
 
     private IList<Residence> _availableResidences;
     private IList<Residence> _residencesToShow;
+    private string _cityFilter = ""; 
 
     private Residence _testResidence = new()
     {
@@ -76,6 +88,83 @@ else
                 Type = "house",
                 IsAvailable = true,
                 PricePerNight = 1000,
+                AvailableFrom = DateTime.Now.Date,
+                AvailableTo = DateTime.Now.Date,
+                Rules = new List<Rule>(),
+                Facilities = new List<Facility>(),
+                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"
+            },
+            new Residence()
+            {
+                Id = 2,
+                Address = new Address()
+                {
+                    Id = 2,
+                    StreetName = "Reshee",
+                    HouseNumber = "B",
+                    StreetNumber = "A1",
+                    City = new City()
+                    {
+                        CityName = "Horsens",
+                        ZipCode = 8700
+                    }
+                },
+                Description = "amazing house full of flowers and books",
+                Type = "house",
+                IsAvailable = true,
+                PricePerNight = 1000,
+                AvailableFrom = DateTime.Now.Date,
+                AvailableTo = DateTime.Now.Date,
+                Rules = new List<Rule>(),
+                Facilities = new List<Facility>(),
+                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"
+            },
+            new Residence()
+            {
+                Id = 2,
+                Address = new Address()
+                {
+                    Id = 2,
+                    StreetName = "Reshee",
+                    HouseNumber = "B",
+                    StreetNumber = "A1",
+                    City = new City()
+                    {
+                        CityName = "Horsens",
+                        ZipCode = 8700
+                    }
+                },
+                Description = "amazing house full of flowers and books",
+                Type = "house",
+                IsAvailable = true,
+                PricePerNight = 1000,
+                AvailableFrom = DateTime.Now.Date,
+                AvailableTo = DateTime.Now.Date,
+                Rules = new List<Rule>(),
+                Facilities = new List<Facility>(),
+                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"
+            },
+            new Residence()
+            {
+                Id = 2,
+                Address = new Address()
+                {
+                    Id = 2,
+                    StreetName = "Reshee",
+                    HouseNumber = "B",
+                    StreetNumber = "A1",
+                    City = new City()
+                    {
+                        CityName = "Horsens",
+                        ZipCode = 8700
+                    }
+                },
+                Description = "amazing house full of flowers and books",
+                Type = "house",
+                IsAvailable = true,
+                PricePerNight = 1000,
+                AvailableFrom = DateTime.Now.Date,
+                AvailableTo = DateTime.Now.Date,
                 Rules = new List<Rule>(),
                 Facilities = new List<Facility>(),
                 ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"

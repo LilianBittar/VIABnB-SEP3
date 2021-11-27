@@ -3,6 +3,14 @@
   animation-name: fade-in;
   animation-duration: 2s;
   animation-fill-mode: forwards;
+  
+  .residence-filters{
+    margin-bottom: 1rem;
+  }
+  
+  .residence-directory{
+    gap: 2rem;
+  }
 }
 
 @keyframes fade-in {

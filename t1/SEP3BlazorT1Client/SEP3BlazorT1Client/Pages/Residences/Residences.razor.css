@@ -4,6 +4,12 @@
   animation-duration: 2s;
   animation-fill-mode: forwards;
 }
+.page-container .residence-filters {
+  margin-bottom: 1rem;
+}
+.page-container .residence-directory {
+  gap: 2rem;
+}
 
 @keyframes fade-in {
   0% {

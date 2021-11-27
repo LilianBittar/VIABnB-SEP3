@@ -57,7 +57,7 @@
     
     <MatAppBarContent>
         @* Navigation modal. Opens the side menu *@
-        <MatDrawerContainer Style="width: 100vw; height: 100vh">
+        <MatDrawerContainer>
             <MatDrawer @bind-Opened="_opened" Mode="MatDrawerMode.Modal">
                 <MatListGroup>
                     <MatListGroupSubHeader Style="margin-top: 1rem">Manage residences</MatListGroupSubHeader>
@@ -75,12 +75,12 @@
                     </MatList>
                 </MatListGroup>
             </MatDrawer>
+        </MatDrawerContainer>
             <MatDrawerContent>
-                <div class="container"> 
+                <div class="content-body"> 
                     @Body 
                 </div> 
             </MatDrawerContent>
-        </MatDrawerContainer>
     </MatAppBarContent>
 </MatAppBarContainer>
 
