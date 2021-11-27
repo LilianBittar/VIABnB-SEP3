@@ -83,5 +83,15 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _administrationService.ValidateAdmin(email, password);
         }
+
+        public async Task<IEnumerable<RentRequest>> GetAllRentRequests()
+        {
+            return await _rentalService.GetAllRentRequestsAsync();
+        }
+
+        public Task<RentRequest> GetRentRequestById(int id)
+        {
+            return _rentalService.GetRentRequestAsync(id);
+        }
     }
 }
