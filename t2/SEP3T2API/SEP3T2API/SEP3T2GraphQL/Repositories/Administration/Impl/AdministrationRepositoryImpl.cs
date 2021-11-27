@@ -20,7 +20,7 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
 
         public async Task<Administrator> GetAdminByEmail(string email)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/admin?={email}");
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/admin/{email}");
             if (!responseMessage.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await responseMessage.Content.ReadAsStringAsync()} with status code {responseMessage.StatusCode}");

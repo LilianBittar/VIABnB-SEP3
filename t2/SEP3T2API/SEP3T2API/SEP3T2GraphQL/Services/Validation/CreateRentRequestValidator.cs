@@ -81,33 +81,33 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">if rent period of request is outside the available from and available to date of the residence</exception>
         private void ValidateRentPeriod(RentRequest request)
         {
-            if (DateTime.Compare(request.StartDate, request.EndDate) == 0)
+            if (DateTime.Compare(request.StartDate.Date, request.EndDate.Date) == 0)
             {
                 throw new ArgumentException("Start date and end date of the rent period cannot be the same");
             }
 
-            if (DateTime.Compare(request.EndDate, request.StartDate) < 0)
+            if (DateTime.Compare(request.EndDate.Date, request.StartDate.Date) < 0)
             {
                 throw new ArgumentException("End date cannot be earlier than start date");
             }
 
-            if (DateTime.Compare(request.StartDate, DateTime.Now) < 0)
+            if (DateTime.Compare(request.StartDate.Date, DateTime.Now.Date) < 0)
             {
                 throw new ArgumentException("Start date cannot be earlier than today");
             }
 
-            if (DateTime.Compare(request.EndDate, DateTime.Now) < 0)
+            if (DateTime.Compare(request.EndDate.Date, DateTime.Now.Date) < 0)
             {
                 throw new ArgumentException("End date cannot be earlier than today");
             }
 
-            if (DateTime.Compare(request.StartDate, request.Residence.AvailableFrom.Value) < 0)
+            if (DateTime.Compare(request.StartDate.Date, request.Residence.AvailableFrom.Value.Date) < 0)
             {
                 throw new ArgumentException(
                     "Start date of request cannot be earlier than the residence's available from date");
             }
 
-            if (DateTime.Compare(request.EndDate, request.Residence.AvailableTo.Value) > 0)
+            if (DateTime.Compare(request.EndDate.Date, request.Residence.AvailableTo.Value.Date) > 0)
             {
                 throw new ArgumentException(
                     "End date of request cannot be later than the residence's available to date");
