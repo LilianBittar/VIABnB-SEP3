@@ -13,7 +13,7 @@ import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO: Change routes to /residences as that is the standard for RESTful collections -mic
 @RestController public class ResidenceController
 {
   private ResidenceDAO residenceDAO;
@@ -38,7 +38,7 @@ import java.util.List;
   }
 
 
-  @PostMapping("/residence")
+  @PostMapping("/residences")
   public ResponseEntity<Residence> createResidence(@RequestBody Residence residence)
   {
     Residence newResidence = residenceDAO.createResidence(residence);
@@ -47,5 +47,10 @@ import java.util.List;
       return ResponseEntity.internalServerError().build();
     }
     return new ResponseEntity<>(newResidence, HttpStatus.OK);
+  }
+
+  @GetMapping("/residences")
+  public ResponseEntity<List<Residence>> getAll(){
+    return ResponseEntity.ok(residenceDAO.getAllResidences());
   }
 }

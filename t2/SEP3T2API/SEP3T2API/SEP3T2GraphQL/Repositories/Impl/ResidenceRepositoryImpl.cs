@@ -50,7 +50,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             });
             Console.WriteLine(newResidence);
             StringContent content = new StringContent(newResidence, Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/residence", content);
+            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/residences", content);
             await HandleErrorResponse(responseMessage);
 
 
