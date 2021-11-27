@@ -158,3 +158,5 @@ INSERT INTO Admin(fName, lName, email, phoneNumber, password) VALUES ('Kasper', 
 INSERT INTO Admin(fName, lName, email, phoneNumber, password) VALUES ('Lillian', 'Bittar', '293336@via.dk', '44444444', '1234');
 
 
+
+
