@@ -9,7 +9,7 @@ using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Pages.AdminView
 {
-    public partial class Administration
+    public partial class UserRequests
     {
 
         [Inject] public MatDialogService MatDialogService { get; set; }

@@ -1,0 +1,40 @@
+@page "/AdminLogin"
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell"></div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
+            <table>
+                <tr>
+                    <td>
+                        <img id="adminImage" src="media/administrator-counter-pngrepo-com.png" alt="admin icon"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <MatTextField @bind-Value="email" class="adminInputFields" Label="Email" Icon="mail_outline" FullWidth="true" Required="true"></MatTextField>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <MatTextField @bind-Value="password" Class="adminInputFields" Label="Password" Icon="lock_outline" FullWidth="true" Required="true" Type="password"></MatTextField>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p id="errorMessage">@errorMessage</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <MatButton Id="adminLoginButton" Raised="true" @onclick="LoginAsAdmin">Login</MatButton>
+                    </td>
+                </tr>
+            </table>
+            <MatDivider Inset="true"></MatDivider>
+            <MatCardActions>
+                <p>This is the administration login window if you are not an administrator, please <MatButton Link="/"> go back</MatButton> to main window</p>
+            </MatCardActions>
+        </div>
+        <div class="mat-layout-grid-cell"></div>
+    </div>
+</div>
