@@ -6,6 +6,7 @@
 }
 .page-container .residence-filters {
   margin-bottom: 1rem;
+  gap: 1rem;
 }
 .page-container .residence-directory {
   gap: 2rem;
