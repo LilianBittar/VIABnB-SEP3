@@ -3,7 +3,6 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAO;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Residence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,14 +42,16 @@ public class ResidenceController {
     }
 
 
-    @PostMapping("/residences")
-    public ResponseEntity<Residence> createResidence(@RequestBody Residence residence) {
-        Residence newResidence = residenceDAO.createResidence(residence);
-        if (newResidence == null) {
-            return ResponseEntity.internalServerError().build();
-        }
-        return new ResponseEntity<>(newResidence, HttpStatus.OK);
+  @PostMapping("/residences")
+  public ResponseEntity<Residence> createResidence(@RequestBody Residence residence)
+  {
+    Residence newResidence = residenceDAO.createResidence(residence);
+    if (newResidence == null)
+    {
+      return ResponseEntity.badRequest().build();
     }
+    return new ResponseEntity<>(newResidence, HttpStatus.OK);
+  }
 
     /**
      * Handles requests for getting all residences in the system

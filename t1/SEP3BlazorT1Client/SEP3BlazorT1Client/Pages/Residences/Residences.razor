@@ -3,6 +3,8 @@
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Components.ResidenceCard
 @inject IResidenceService ResidenceService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IGuestService GuestService
 
 @if (_residencesToShow != null)
 {
@@ -41,143 +43,16 @@ else
 
     private IList<Residence> _availableResidences;
     private IList<Residence> _residencesToShow;
+    private Guest guest;
     private string _cityFilter = "";
     private double _maxPriceFilter = 0;
-
-    private Residence _testResidence = new()
-    {
-        Id = 1,
-        Address = new Address()
-        {
-            Id = 1,
-            StreetName = "Sally",
-            HouseNumber = "2",
-            StreetNumber = "3b",
-            City = new City()
-            {
-                HostResidences = "Horsens",
-                ZipCode = 8700
-            }
-        },
-        Description = "beautiful house full of cats!",
-        Type = "villa",
-        IsAvailable = true,
-        PricePerNight = 1000,
-        AvailableFrom = DateTime.Now.Date,
-        AvailableTo = DateTime.Now.Date,
-        Rules = new List<Rule>(),
-        Facilities = new List<Facility>(),
-        ImageUrl = "https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero-852x479.jpg"
-    };
-
 
     protected override async Task OnInitializedAsync()
     {
     //TODO: Check if user is authenticated guest.
-    // _availableResidences = await ResidenceService.GetAllAvailableResidences();
-        _availableResidences = new List<Residence>()
-        {
-            _testResidence, new Residence()
-            {
-                Id = 2,
-                Address = new Address()
-                {
-                    Id = 2,
-                    StreetName = "Reshee",
-                    HouseNumber = "B",
-                    StreetNumber = "A1",
-                    City = new City()
-                    {
-                        HostResidences = "Horsens",
-                        ZipCode = 8700
-                    }
-                },
-                Description = "amazing house full of flowers and books",
-                Type = "house",
-                IsAvailable = true,
-                PricePerNight = 1000,
-                AvailableFrom = DateTime.Now.Date,
-                AvailableTo = DateTime.Now.Date,
-                Rules = new List<Rule>(),
-                Facilities = new List<Facility>(),
-                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"
-            },
-            new Residence()
-            {
-                Id = 2,
-                Address = new Address()
-                {
-                    Id = 2,
-                    StreetName = "Reshee",
-                    HouseNumber = "B",
-                    StreetNumber = "A1",
-                    City = new City()
-                    {
-                        HostResidences = "Horsens",
-                        ZipCode = 8700
-                    }
-                },
-                Description = "amazing house full of flowers and books",
-                Type = "house",
-                IsAvailable = true,
-                PricePerNight = 1000,
-                AvailableFrom = DateTime.Now.Date,
-                AvailableTo = DateTime.Now.Date,
-                Rules = new List<Rule>(),
-                Facilities = new List<Facility>(),
-                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"
-            },
-            new Residence()
-            {
-                Id = 2,
-                Address = new Address()
-                {
-                    Id = 2,
-                    StreetName = "Reshee",
-                    HouseNumber = "B",
-                    StreetNumber = "A1",
-                    City = new City()
-                    {
-                        HostResidences = "Horsens",
-                        ZipCode = 8700
-                    }
-                },
-                Description = "amazing house full of flowers and books",
-                Type = "house",
-                IsAvailable = true,
-                PricePerNight = 1000,
-                AvailableFrom = DateTime.Now.Date,
-                AvailableTo = DateTime.Now.Date,
-                Rules = new List<Rule>(),
-                Facilities = new List<Facility>(),
-                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"
-            },
-            new Residence()
-            {
-                Id = 2,
-                Address = new Address()
-                {
-                    Id = 2,
-                    StreetName = "Reshee",
-                    HouseNumber = "B",
-                    StreetNumber = "A1",
-                    City = new City()
-                    {
-                        HostResidences = "Horsens",
-                        ZipCode = 8700
-                    }
-                },
-                Description = "amazing house full of flowers and books",
-                Type = "house",
-                IsAvailable = true,
-                PricePerNight = 1000,
-                AvailableFrom = DateTime.Now.Date,
-                AvailableTo = DateTime.Now.Date,
-                Rules = new List<Rule>(),
-                Facilities = new List<Facility>(),
-                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"
-            },
-        };
+    // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    // var user = authState.User;
+        _availableResidences = await ResidenceService.GetAllAvailableResidencesAsync();
         _residencesToShow = _availableResidences;
     }
 
