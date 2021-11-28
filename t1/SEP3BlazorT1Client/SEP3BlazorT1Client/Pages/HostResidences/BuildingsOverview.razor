@@ -1,5 +1,7 @@
 ﻿@page "/BuildingsOverview"
 @using SEP3BlazorT1Client.Models
+@using SEP3BlazorT1Client.Data
+@inject IResidenceService ResidenceService
 
 
 <!--<h3>BuildingOverview</h3>-->
@@ -70,7 +72,7 @@
                 StreetNumber = "3b",
                 City = new City()
                 {
-                    CityName = "Horsens",
+                    HostResidences = "Horsens",
                     ZipCode = 8700
                 }
             },
@@ -94,7 +96,7 @@
                 StreetNumber = "A1",
                 City = new City()
                 {
-                    CityName = "Horsens",
+                    HostResidences = "Horsens",
                     ZipCode = 8700
                 }
             },
