@@ -76,7 +76,7 @@ public class RentRequestController {
         return ResponseEntity.ok(existingRequest);
     }
 
-    @PutMapping("/rentrequests/{id}")
+    @PatchMapping("/rentrequests/{id}")
     public ResponseEntity<RentRequest> replaceRentRequest(@PathVariable int id, @RequestBody(required = true) RentRequest request) {
         RentRequest existingRentRequest = rentRequestDAO.getById(id);
         if (existingRentRequest == null) {
