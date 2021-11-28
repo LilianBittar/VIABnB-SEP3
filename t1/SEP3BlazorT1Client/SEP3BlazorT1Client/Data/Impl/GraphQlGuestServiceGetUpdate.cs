@@ -36,7 +36,8 @@ namespace SEP3BlazorT1Client.Data.Impl
         {
             var guestQuery = new GqlQuery()
             {
-                Query = @"query {allNotApprovedGuest{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}"
+                Query =
+                    @"query {allNotApprovedGuest{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}"
             };
             GqlRequestResponse<GuestListResponse> graphQlResponse =
                 await _client.PostQueryAsync<GuestListResponse>(guestQuery);
@@ -48,7 +49,11 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery updateStatusMutation = new GqlQuery()
             {
                 Query =
-                    @"mutation($newGuest:GuestInput){updateGuestStatus(guest:$newGuest){viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
+                    @"mutation($newGuest:GuestInput)
+{updateGuestStatus(guest:$newGuest)
+{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, 
+firstName,lastName,phoneNumber,email,password,hostReviews
+{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
                 Variables = new {newGuest = guest}
             };
             var response = await _client.PostQueryAsync<UpdateGuestMutationResponseType>(updateStatusMutation);

@@ -62,6 +62,11 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return r;
         }
 
+        public Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residence/{id}");
