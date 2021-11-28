@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Residence;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,8 @@ import java.util.List;
 {
   private ResidenceDAO residenceDAO;
   private Gson gson = new GsonBuilder().serializeNulls().create();
+  private static final Logger LOGGER= LoggerFactory.getLogger(ResidenceController.class);
+
 
   @Autowired public ResidenceController(ResidenceDAO residenceDAO)
   {
@@ -49,8 +53,23 @@ import java.util.List;
     return new ResponseEntity<>(newResidence, HttpStatus.OK);
   }
 
+  /**
+   * Handles requests for getting all residences in the system
+   * @return HTTP OK with list of all residences if connection to Data source
+   *         could be established.
+   *         HTTP Internal server error if connection to Data source could not
+   *         be established.
+   * */
   @GetMapping("/residences")
   public ResponseEntity<List<Residence>> getAll(){
-    return ResponseEntity.ok(residenceDAO.getAllResidences());
+    try {
+      LOGGER.info("Request for all residences received");
+      List<Residence> residences = residenceDAO.getAllResidences();
+      LOGGER.info("Returning: " + gson.toJson(residences));
+      return ResponseEntity.ok(residences);
+    } catch (IllegalStateException e) {
+      LOGGER.error("Connection failed " + e.getMessage());
+      return ResponseEntity.internalServerError().build();
+    }
   }
 }

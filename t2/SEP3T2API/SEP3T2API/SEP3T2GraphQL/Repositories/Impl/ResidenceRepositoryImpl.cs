@@ -83,9 +83,13 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<IList<Residence>> GetAll()
         {
-            /*HttpResponseMessage response = await client.GetAsync($"{uri}/residences");
-             await HandleErrorResponse(response);*/
-            throw new NotImplementedException();
+            HttpResponseMessage response = await client.GetAsync($"{uri}/residences");
+             await HandleErrorResponse(response);
+             var residences = JsonSerializer.Deserialize<IList<Residence>>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+             {
+                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+             });
+             return residences;
         }
 
         private static async Task HandleErrorResponse(HttpResponseMessage response)
