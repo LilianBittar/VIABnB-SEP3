@@ -17,54 +17,74 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
 
     @Override
     public Residence getByResidenceId(int id) {
-        return null;
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement("SELECT * from residence"
+                    + " join address a on a.addressid = residence.addressid "
+                    + "join city c on c.cityid = a.cityid "
+                    + " join host h on residence.hostid = h.hostid"
+                    + " WHERE residenceid= ?");
+            stm.setInt(1, id);
+            ResultSet result = stm.executeQuery();
+            result.next();
+            City city = new City(result.getInt("cityid"), result.getString("cityname"), result.getInt("zipcode"));
+            Address address = new Address(result.getInt("addressid"), result.getString("streetname"), result.getString("housenumber"), result.getString("streetnumber"), city);
+            List<Facility> residenceFacilities = getFacilitiesByResidenceId(result.getInt("residenceid"));
+            List<Rule> residenceRules = getRulesByResidenceId(result.getInt("residenceid"));
+            List<ResidenceReview> residenceReviews = getResidenceReviewsByResidenceId(result.getInt("residenceid"));
+            //TODO: fetch the host reviews instead of just using a new List.
+            Host residenceHost = new Host(result.getInt("hostid"), result.getString("fname"),
+                    result.getString("lname"), result.getString("phonenumber"),
+                    result.getString("email"), result.getString("password"), new ArrayList<>(),
+                    null, result.getString("cprnumber"), result.getBoolean("isapproved"));
+           return new Residence(result.getInt("residenceid"), address,
+                    result.getString("description"), result.getString("type"),
+                    result.getBoolean("isavailable"), result.getDouble("priceprnight"),
+                    residenceRules, residenceFacilities, result.getString("imageurl"),
+                    result.getDate("availablefrom"), result.getDate("availableto"),
+                    result.getInt("maxnumberofguests"), residenceHost, residenceReviews);
+
+        } catch (SQLException throwables) {
+            throw new IllegalStateException(throwables.getMessage());
+        }
     }
 
     @Override
-    public List<Residence> getAllResidenceByHostId(int id) {
-        List<Residence> residences = new ArrayList<>();
+    public List<Residence> getAllResidenceByHostId(int id) throws IllegalStateException {
+
         try (Connection connection = getConnection()) {
-            //residence object
             PreparedStatement stm = connection.prepareStatement(
-                    "select *" +
-                            "from address," +
-                            "     residence," +
-                            "     city," +
-                            "     host, " +
-                            "     facility," +
-                            "     rule," +
-                            "     residencereview" +
-                            " where host.hostid = ?" +
-                            "  and host.hostid = residence.hostid" +
-                            "  and residence.addressid = address.addressid" +
-                            "  and address.cityid = city.cityid" +
-                            "  and residence.residenceid = facility.facilityid" +
-                            "  and rule.residenceid = residence.residenceid" +
-                            "  and residencereview.residenceid = residence.residenceid");
+                    "SELECT * from residence"
+                            + " join address a on a.addressid = residence.addressid "
+                            + "join city c on c.cityid = a.cityid "
+                            + " join host h on residence.hostid = h.hostid"
+                            + " WHERE hostid= ?");
             stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
-
-
+            List<Residence> residences = new ArrayList<>();
             while (result.next()) {
-                  /*TODO:
-                        1. Create Host from query result.
-                        2. Create list of facilities from query result
-                        3. Create list of rules from query result
-                        4. Create Residence from query result
-                        Might have to split into multiple queries to get the list of rules and facilities? yup
-                */
-
-
-                City city = new City(result.getInt("city.cityid"),result.getString("cityname"),result.getInt("zipcode"));
-                Address address = new Address(result.getInt("address.adressid"), result.getString("streetname"),result.getString("housenumber"),result.getString("streetnumber"),city);
-
-             //   Residence residence = new Residence(result.getInt("residenceid"), result.getObject("addressid"), result.getString("description"));
-              //  residences.add(residence);
+                City city = new City(result.getInt("cityid"), result.getString("cityname"), result.getInt("zipcode"));
+                Address address = new Address(result.getInt("addressid"), result.getString("streetname"), result.getString("housenumber"), result.getString("streetnumber"), city);
+                List<Facility> residenceFacilities = getFacilitiesByResidenceId(result.getInt("residenceid"));
+                List<Rule> residenceRules = getRulesByResidenceId(result.getInt("residenceid"));
+                List<ResidenceReview> residenceReviews = getResidenceReviewsByResidenceId(result.getInt("residenceid"));
+                //TODO: fetch the host reviews instead of just using a new List.
+                Host residenceHost = new Host(result.getInt("hostid"), result.getString("fname"),
+                        result.getString("lname"), result.getString("phonenumber"),
+                        result.getString("email"), result.getString("password"), new ArrayList<>(),
+                        null, result.getString("cprnumber"), result.getBoolean("isapproved"));
+                Residence residence = new Residence(result.getInt("residenceid"), address,
+                        result.getString("description"), result.getString("type"),
+                        result.getBoolean("isavailable"), result.getDouble("priceprnight"),
+                        residenceRules, residenceFacilities, result.getString("imageurl"),
+                        result.getDate("availablefrom"), result.getDate("availableto"),
+                        result.getInt("maxnumberofguests"), residenceHost, residenceReviews);
+                residences.add(residence);
             }
             return residences;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
+
     }
 
     @Override
@@ -101,8 +121,8 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
             ResultSet result = stm.executeQuery();
             List<Residence> residences = new ArrayList<>();
             while (result.next()) {
-                City city = new City(result.getInt("cityid"),result.getString("cityname"),result.getInt("zipcode"));
-                Address address = new Address(result.getInt("addressid"), result.getString("streetname"),result.getString("housenumber"),result.getString("streetnumber"),city);
+                City city = new City(result.getInt("cityid"), result.getString("cityname"), result.getInt("zipcode"));
+                Address address = new Address(result.getInt("addressid"), result.getString("streetname"), result.getString("housenumber"), result.getString("streetnumber"), city);
                 List<Facility> residenceFacilities = getFacilitiesByResidenceId(result.getInt("residenceid"));
                 List<Rule> residenceRules = getRulesByResidenceId(result.getInt("residenceid"));
                 List<ResidenceReview> residenceReviews = getResidenceReviewsByResidenceId(result.getInt("residenceid"));
@@ -110,13 +130,13 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
                 Host residenceHost = new Host(result.getInt("hostid"), result.getString("fname"),
                         result.getString("lname"), result.getString("phonenumber"),
                         result.getString("email"), result.getString("password"), new ArrayList<>(),
-                        null, result.getString("cprnumber"),result.getBoolean("isapproved"));
-                Residence residence = new Residence(result.getInt("residenceid"),address,
+                        null, result.getString("cprnumber"), result.getBoolean("isapproved"));
+                Residence residence = new Residence(result.getInt("residenceid"), address,
                         result.getString("description"), result.getString("type"),
                         result.getBoolean("isavailable"), result.getDouble("priceprnight"),
                         residenceRules, residenceFacilities, result.getString("imageurl"),
                         result.getDate("availablefrom"), result.getDate("availableto"),
-                        result.getInt("maxnumberofguests"),residenceHost, residenceReviews  );
+                        result.getInt("maxnumberofguests"), residenceHost, residenceReviews);
                 residences.add(residence);
             }
             return residences;
@@ -124,8 +144,31 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
             throw new IllegalStateException(throwables.getMessage());
         }
     }
-    private List<ResidenceReview> getResidenceReviewsByResidenceId(int residenceId){
-        try (Connection connection = getConnection()){
+
+    @Override
+    public Residence UpdateAvailabilityPeriod(Residence residence) throws IllegalStateException {
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement(
+                    "update residence " +
+                            "set isavailable   = ?," +
+                            "    availablefrom = ?," +
+                            "    availableto   = ? " +
+                            "where residenceid = ?;");
+
+            stm.setBoolean(1, residence.isAvailable());
+            stm.setDate(2, (Date) residence.getAvailableFrom());
+            stm.setDate(3, (Date) residence.getAvailableTo());
+            stm.setInt(4, residence.getId());
+            stm.executeUpdate();
+            connection.commit();
+            return residence;
+        } catch (SQLException throwables) {
+            throw new IllegalArgumentException(throwables.getMessage());
+        }
+    }
+
+    private List<ResidenceReview> getResidenceReviewsByResidenceId(int residenceId) {
+        try (Connection connection = getConnection()) {
             //TODO: implement this later when we work on review system, for now it just returns empty list.
             return new ArrayList<>();
         } catch (SQLException throwables) {
@@ -151,13 +194,13 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
         }
     }
 
-    private List<Facility> getFacilitiesByResidenceId(int residenceId){
-        try (Connection connection = getConnection()){
+    private List<Facility> getFacilitiesByResidenceId(int residenceId) {
+        try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM residencefacility rf join facility f on f.facilityid = rf.facilityid where residenceid = ?");
             stm.setInt(1, residenceId);
             ResultSet results = stm.executeQuery();
             List<Facility> facilities = new ArrayList<>();
-            while (results.next()){
+            while (results.next()) {
                 Facility facility = new Facility(results.getInt("facilityid"), results.getString("name"));
                 facilities.add(facility);
             }

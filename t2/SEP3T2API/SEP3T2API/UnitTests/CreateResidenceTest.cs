@@ -66,7 +66,7 @@ namespace UnitTests
                 Facilities = facilities,
                 ImageUrl = "URLTest",
                 AvailableFrom = new DateTime(2050, 11, 11),
-                AvailableTo = new DateTime(2050, 11, 11)
+                AvailableTo = new DateTime(2050, 11, 12)
             };
         }
 

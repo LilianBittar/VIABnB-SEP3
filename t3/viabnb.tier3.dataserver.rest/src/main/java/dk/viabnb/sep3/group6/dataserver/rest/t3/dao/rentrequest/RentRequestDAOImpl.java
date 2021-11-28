@@ -36,19 +36,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
 
   @Override public RentRequest update(RentRequest request)
   {
-    try (Connection connection = getConnection())
-    {
-      PreparedStatement stm = connection.prepareStatement(
-          "UPDATE rentrequest SET status = ?");
-      stm.setString(1, request.getStatus().name());
-      stm.executeUpdate();
-      connection.commit();
-      return request;
-    }
-    catch (SQLException throwables)
-    {
-      throw new IllegalArgumentException(throwables.getMessage());
-    }
+    return null;
   }
 
   @Override public RentRequest getById(int id)
@@ -101,6 +89,40 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
     catch (SQLException throwables)
     {
       throw new NotFoundException(throwables.getMessage());
+    }
+  }
+
+  @Override public RentRequest approveRequest(RentRequest request)
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement(
+          "UPDATE rentrequest SET status = 'APPROVED' WHERE rentrequestid = ?");
+      stm.setInt(1, request.getId());
+      stm.executeUpdate();
+      connection.commit();
+      return request;
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalArgumentException(throwables.getMessage());
+    }
+  }
+
+  @Override public RentRequest rejectRequest(RentRequest request)
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement(
+          "UPDATE rentrequest SET status = 'NOTAPPROVED' WHERE rentrequestid = ?");
+      stm.setInt(1, request.getId());
+      stm.executeUpdate();
+      connection.commit();
+      return request;
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalArgumentException(throwables.getMessage());
     }
   }
 

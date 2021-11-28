@@ -32,6 +32,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">if the start date and end date is the same</exception>
         /// <exception cref="ArgumentException">if end date is earlier than start date</exception>
         /// <exception cref="ArgumentException">if start date is earlier than today</exception>
+        /// <exception cref="ArgumentException">if start date of request is same as residence's available to date</exception>
         /// <exception cref="ArgumentException">if end date is earlier than today</exception>
         /// <exception cref="ArgumentException">if rent period of request is outside the available from and available to date of the residence</exception>
         /// <exception cref="ArgumentException">If residence is not available</exception>
@@ -79,8 +80,14 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">if start date is earlier than today</exception>
         /// <exception cref="ArgumentException">if end date is earlier than today</exception>
         /// <exception cref="ArgumentException">if rent period of request is outside the available from and available to date of the residence</exception>
+        /// <exception cref="ArgumentException">if start date of request is same as residence's available to date</exception>
         private void ValidateRentPeriod(RentRequest request)
         {
+            //TODO: Refactor the boolean expressions to separate methods with descriptive names for more readability.  
+            if (request.StartDate == null || request.EndDate == null)
+            {
+                throw new ArgumentException("Start date and end date is required");
+            }
             if (DateTime.Compare(request.StartDate.Date, request.EndDate.Date) == 0)
             {
                 throw new ArgumentException("Start date and end date of the rent period cannot be the same");
@@ -111,6 +118,12 @@ namespace SEP3T2GraphQL.Services.Validation
             {
                 throw new ArgumentException(
                     "End date of request cannot be later than the residence's available to date");
+            }
+
+            if (DateTime.Compare(request.StartDate.Date, request.Residence.AvailableTo.Value.Date) == 0)
+            {
+                throw new ArgumentException(
+                    "Start date of request cannot be the same as the residence's available to date"); 
             }
         }
 

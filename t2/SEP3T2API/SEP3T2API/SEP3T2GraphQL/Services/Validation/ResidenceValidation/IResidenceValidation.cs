@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SEP3T2GraphQL.Models;
 
 namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
@@ -10,6 +11,8 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
         bool IsValidFacilities(IList<Facility> facilities);
         bool IsValidResidence(Residence residence);
         bool IsLettersOnly(string arg);
-        
+
+        bool IsValidAvailabilityPeriod(DateTime? startDate, DateTime? EndDate);
+
     }
 }

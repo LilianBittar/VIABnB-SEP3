@@ -7,7 +7,7 @@
 @inject IRentalService RentalService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
-
+@* TODO: Add AuthorizeView *@
 @if (_newRentRequest.Residence != null)
 {
     <div class="container-fluid d-flex justify-content-center align-items-center">
@@ -35,14 +35,14 @@
                                 <ValidationMessage For="@(() => _newRentRequest.NumberOfGuests)"/>
                             </EditForm>
 
-                            <MatButton Label="Send Request" OnClick="@CreateRequest" Style="width: 100%" Raised="true" />
-                            
+                            <MatButton Label="Send Request" OnClick="@CreateRequest" Style="width: 100%" Raised="true"/>
+
                             <p style="font-weight: lighter; font-style: italic; font-size: 15px; margin-top: 0.5rem">
                                 An request will be sent to the Host. The Host can either choose to approve or reject the rent request.
                                 To check the status of request after sending, navigate to ...
                             </p>
-                            
-                            
+
+
                             <p style="color:red">@_errorMessage</p>
                             <hr>
                             <div class="d-flex flex-row justify-content-between">
@@ -74,49 +74,43 @@ else
     [Parameter]
     public int ResidenceId { get; set; }
 
-    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now};
+    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now, Status = RentRequestStatus.NotAnswered};
 
     [CascadingParameter]
     public EditContext EditContext { get; private set; }
 
     private Residence _testResidence;
 
-    private string _errorMessage=""; 
+    private string _errorMessage = "";
 
     protected override async Task OnInitializedAsync()
     {
         EditContext = new EditContext(_newRentRequest);
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
+    // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    // var user = authState.User;
     // if (user.Identity.IsAuthenticated)
     // {
+    //TODO: Get authenticated guest instead of hard-coded guest. 
     // var guest = await GuestService.GetGuestById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
-    // var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
-    // if (guest != null)
-    // {
-    //     _newRentRequest.Guest = guest;
-    // }
-    // if (residence != null)
-    // {
-    //     _newRentRequest.Residence = residence;
-    // }
-
-    //FOR TESTING ONLY
-        _testResidence = new()
+        var guest = await GuestService.GetGuestById(3);
+        var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
+        if (guest != null)
         {
-            Address = null, Description = null, Facilities = null, Host = null,
-            Id = 1, Rules = null, Type = null,
-            AvailableFrom = DateTime.Now, AvailableTo = DateTime.MaxValue,
-            PricePerNight = 2000, MaxNumberOfGuests = 2, ResidenceReviews = new List<ResidenceReview>()
-        };
-        _newRentRequest.Residence = _testResidence;
-        Console.WriteLine(_newRentRequest.Residence.PricePerNight);
-        _newRentRequest.Status = RentRequestStatus.NotAnswered;
+            _newRentRequest.Guest = guest;
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        if (residence != null)
+        {
+            _newRentRequest.Residence = residence;
+        }
     // }
-    //     else
-    //     {
-    // NavigationManager.NavigateTo("/login");
-    //     }
+    // else
+    // {
+    //     NavigationManager.NavigateTo("/login");
+    // }
     }
 
     private int GetTotalDays()
@@ -135,5 +129,5 @@ else
             _errorMessage = e.Message;
         }
     }
-}
 
+}

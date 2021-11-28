@@ -18,6 +18,9 @@
     <Compile Update="Pages\AdminView\AdminLogin.cs">
       <DependentUpon>AdminLogin.razor</DependentUpon>
     </Compile>
+    <Compile Update="Pages\RentRequest\RentRequests.cs">
+      <DependentUpon>RentRequests.razor</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Update="Pages\AdminView\UserRequests.css">
@@ -25,6 +28,9 @@
     </None>
     <None Update="Pages\AdminView\AdminLogin.css">
       <DependentUpon>AdminLogin.razor</DependentUpon>
+    </None>
+    <None Update="Pages\RentRequest\RentRequests.css">
+      <DependentUpon>RentRequests.razor</DependentUpon>
     </None>
   </ItemGroup>
 </Project>
