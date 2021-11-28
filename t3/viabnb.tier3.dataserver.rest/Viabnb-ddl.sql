@@ -48,16 +48,17 @@ CREATE TABLE IF NOT EXISTS Address
 
 CREATE TABLE IF NOT EXISTS Residence
 (
-    residenceId   serial,
-    addressId     INT,
-    type          VARCHAR,
-    description   VARCHAR,
-    isAvailable   BOOLEAN,
-    pricePrNight  DECIMAL,
-    availableFrom DATE,
-    availableTo   DATE,
-    imageUrl      VARCHAR,
-    hostId        INT,
+    residenceId       serial,
+    addressId         INT,
+    type              VARCHAR,
+    description       VARCHAR,
+    isAvailable       BOOLEAN,
+    pricePrNight      DECIMAL,
+    availableFrom     DATE,
+    availableTo       DATE,
+    imageUrl          VARCHAR,
+    maxNumberOfGuests INT,
+    hostId            INT,
     PRIMARY KEY (residenceId),
     FOREIGN KEY (addressId) REFERENCES Address (addressId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid)

@@ -33,17 +33,13 @@ public class RentRequestController {
     }
 
 
-    @GetMapping("/rentrequests/allrequests")
-    public ResponseEntity<List<RentRequest>> getAllRentRequests(/*@RequestParam(required = false) Integer residenceId,
+    @GetMapping("/rentrequests")
+    public ResponseEntity<List<RentRequest>> getAllRentRequests(@RequestParam(required = false) Integer residenceId,
                                                                 @RequestParam(required = false) Integer hostId,
-                                                                @RequestParam(required = false) Integer guestId*/) {
-
+                                                                @RequestParam(required = false) Integer guestId) {
+        //TODO: this endpoint works without the RequestParam. When using the RequestParam the result will be null
         List<RentRequest> requestsToReturn = rentRequestDAO.getAll();
-        if (requestsToReturn == null)
-        {
-            return ResponseEntity.badRequest().build();
-        }
-        /*if (residenceId != null) {
+        if (residenceId != null) {
             requestsToReturn.forEach((request) -> {
                 if (request.getResidence().getId() != residenceId) {
                     requestsToReturn.remove(request);
@@ -65,7 +61,6 @@ public class RentRequestController {
                 }
             });
         }
-*/
         return ResponseEntity.ok(requestsToReturn);
     }
 
