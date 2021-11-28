@@ -2,6 +2,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.*;
+import org.webjars.NotFoundException;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -63,13 +64,13 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
         return new RentRequest(result.getInt("rentrequestid"),
             result.getDate("startdate").toLocalDate().atStartOfDay(),
             result.getDate("enddate").toLocalDate().atStartOfDay(),
-            result.getInt("numberofhuests"),
-            RentRequestStatus.valueOf(result.getString("rentrequeststatus")),
+            result.getInt("numberofguests"),
+            RentRequestStatus.valueOf(result.getString("status")),
             new Guest(result.getInt("hostid"), result.getString("fname"),
                 result.getString("lname"), result.getString("phonenumber"),
                 result.getString("email"), result.getString("password"),
                 new ArrayList<>(), result.getString("personalimage"),
-                result.getString("cpr"), result.getBoolean("isapprovedhost"),
+                result.getString("cprnumber"), result.getBoolean("isapproved"),
                 result.getInt("viaid"), new ArrayList<>(),
                 result.getBoolean("isapprovedguest")),
             getResidenceByHostId(id));
@@ -84,7 +85,35 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
 
   @Override public List<RentRequest> getAll()
   {
-    return null;
+    List<RentRequest> rentRequestListToReturn = new ArrayList<>();
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement
+          ("SELECT * FROM rentrequest JOIN host h ON h.hostid = rentrequest JOIN guest g on h.hostid = g.guestid");
+      ResultSet result = stm.executeQuery();
+      while (result.next())
+      {
+        RentRequest request = new RentRequest(result.getInt("rentrequestid"),
+            result.getDate("startdate").toLocalDate().atStartOfDay(),
+            result.getDate("enddate").toLocalDate().atStartOfDay(),
+            result.getInt("numberofguests"),
+            RentRequestStatus.valueOf(result.getString("status")),
+            new Guest(result.getInt("hostid"), result.getString("fname"),
+                result.getString("lname"), result.getString("phonenumber"),
+                result.getString("email"), result.getString("password"),
+                new ArrayList<>(), result.getString("personalimage"),
+                result.getString("cprnumber"), result.getBoolean("isapproved"),
+                result.getInt("viaid"), new ArrayList<>(),
+                result.getBoolean("isapprovedguest")),
+            getResidenceByHostId(result.getInt("hostid")));
+        rentRequestListToReturn.add(request);
+      }
+      return rentRequestListToReturn;
+    }
+    catch (SQLException throwables)
+    {
+      throw new NotFoundException(throwables.getMessage());
+    }
   }
 
   private Residence getResidenceByHostId(int id)

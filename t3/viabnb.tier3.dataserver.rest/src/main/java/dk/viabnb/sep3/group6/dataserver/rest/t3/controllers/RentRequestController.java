@@ -33,13 +33,17 @@ public class RentRequestController {
     }
 
 
-    @GetMapping("/rentrequests")
-    public ResponseEntity<List<RentRequest>> getAllRentRequests(@RequestParam(required = false) Integer residenceId,
+    @GetMapping("/rentrequests/allrequests")
+    public ResponseEntity<List<RentRequest>> getAllRentRequests(/*@RequestParam(required = false) Integer residenceId,
                                                                 @RequestParam(required = false) Integer hostId,
-                                                                @RequestParam(required = false) Integer guestId) {
+                                                                @RequestParam(required = false) Integer guestId*/) {
 
         List<RentRequest> requestsToReturn = rentRequestDAO.getAll();
-        if (residenceId != null) {
+        if (requestsToReturn == null)
+        {
+            return ResponseEntity.badRequest().build();
+        }
+        /*if (residenceId != null) {
             requestsToReturn.forEach((request) -> {
                 if (request.getResidence().getId() != residenceId) {
                     requestsToReturn.remove(request);
@@ -61,7 +65,7 @@ public class RentRequestController {
                 }
             });
         }
-
+*/
         return ResponseEntity.ok(requestsToReturn);
     }
 

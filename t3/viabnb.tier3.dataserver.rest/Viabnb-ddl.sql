@@ -78,7 +78,6 @@ CREATE TABLE IF NOT EXISTS RentRequest
     numberOfGuests INT,
     status         VARCHAR,
     hostId         INT,
-    residenceId    INT,
     PRIMARY KEY (rentRequestId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid)
 );
