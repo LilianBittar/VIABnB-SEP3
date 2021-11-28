@@ -30,7 +30,8 @@ public class ResidenceController {
         this.residenceDAO = residenceDAO;
     }
 
-
+    //TODO: Move this to host controller maybe (/hosts/residences)? Or maybe the getAll method with a query param.
+    // e.g. /residence/1 SHOULD mean give me the residence with the id of 1.  -mic
     @GetMapping("/residence/{id}")
     public ResponseEntity<List<Residence>> getAllResidencesByHostId(@PathVariable int id) {
         List<Residence> residences;
@@ -40,6 +41,7 @@ public class ResidenceController {
         }
         return new ResponseEntity<>(residences, HttpStatus.OK);
     }
+
 
 
   @PostMapping("/residences")
