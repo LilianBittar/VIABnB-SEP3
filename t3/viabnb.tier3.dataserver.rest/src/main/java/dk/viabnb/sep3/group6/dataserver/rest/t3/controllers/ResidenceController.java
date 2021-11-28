@@ -67,7 +67,7 @@ import java.util.List;
       List<Residence> residences = residenceDAO.getAllResidences();
       LOGGER.info("Returning: " + gson.toJson(residences));
       return ResponseEntity.ok(residences);
-    } catch (IllegalStateException e) {
+    } catch (Exception e) {
       LOGGER.error("Connection failed " + e.getMessage());
       return ResponseEntity.internalServerError().build();
     }
