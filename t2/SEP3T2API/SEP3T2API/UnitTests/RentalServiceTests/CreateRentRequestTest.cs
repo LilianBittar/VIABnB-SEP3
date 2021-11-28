@@ -203,6 +203,18 @@ namespace UnitTests.RentalServiceTests
         }
 
         [Test]
+        public void CreateRentRequest_RequestStartDateIsSameAsResidenceAvailableToDate_ThrowsArgumentException()
+        {
+            RentRequest request = new()
+            {
+                Guest = _validGuest, Id = 1, StartDate = CreateDate("31/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("31/12/2021"),
+                NumberOfGuests = 2
+            };
+            TestCreateThrowsArgumentExceptionAsync(request);
+        }
+
+        [Test]
         public void CreateRentRequest_ResidenceIsUnAvailable_ThrowsArgumentException()
         {
             _residence.IsAvailable = false;

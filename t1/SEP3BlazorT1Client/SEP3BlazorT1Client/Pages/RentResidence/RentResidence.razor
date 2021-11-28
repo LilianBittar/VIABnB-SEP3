@@ -86,29 +86,31 @@ else
     protected override async Task OnInitializedAsync()
     {
         EditContext = new EditContext(_newRentRequest);
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        if (user.Identity.IsAuthenticated)
+    // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    // var user = authState.User;
+    // if (user.Identity.IsAuthenticated)
+    // {
+    //TODO: Get authenticated guest instead of hard-coded guest. 
+    // var guest = await GuestService.GetGuestById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
+        var guest = await GuestService.GetGuestById(3);
+        var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
+        if (guest != null)
         {
-            var guest = await GuestService.GetGuestById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
-            var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
-            if (guest != null)
-            {
-                _newRentRequest.Guest = guest;
-            }
-            else
-            {
-                NavigationManager.NavigateTo("/");
-            }
-            if (residence != null)
-            {
-                _newRentRequest.Residence = residence;
-            }
+            _newRentRequest.Guest = guest;
         }
         else
         {
-            NavigationManager.NavigateTo("/login");
+            NavigationManager.NavigateTo("/");
         }
+        if (residence != null)
+        {
+            _newRentRequest.Residence = residence;
+        }
+    // }
+    // else
+    // {
+    //     NavigationManager.NavigateTo("/login");
+    // }
     }
 
     private int GetTotalDays()
