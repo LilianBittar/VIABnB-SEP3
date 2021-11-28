@@ -4,9 +4,8 @@
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestServiceTests.CreateGuestTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestValidatorTest.ValidateGuest_InvalidEmailNoAtSign_ThrowsArgumentException&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestValidatorTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.ResidenceServiceTest.CreateNewResidenceTest.CreateValidResidenceDoesNotThrowExceptionsTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.ResidenceServiceTest.CreateNewResidenceTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.CreateResidenceTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.RegisterHostTest.IsValidCpr_ContainsDashAndLength11_DoesNotThrow&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.RegisterHostTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
@@ -31,6 +30,6 @@
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.RentalServiceTests.CreateRentRequestTest.CreateRentRequest_NumberOfGuestsExceedsHostsMaxNumberOfGuests_ThrowsArgumentException&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.RentalServiceTests.CreateRentRequestTest.CreateRentRequest_EndDateAndStartDateIsTheSame_ThrowsArgumentException&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.RentalServiceTests.CreateRentRequestTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.ResidenceServiceTest.CreateNewResidenceTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.RegisterHostTest.IsValidCpr_ContainsDashAndLength11_DoesNotThrow&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
