@@ -24,7 +24,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Residence> GetResidenceByIdAsync(int id)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/residence/{id}");
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/residences/{id}");
 
             await HandleErrorResponse(responseMessage);
 
@@ -39,6 +39,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             
             
         }
+        
 
         public async Task<Residence> CreateResidenceAsync(Residence residence)
         {

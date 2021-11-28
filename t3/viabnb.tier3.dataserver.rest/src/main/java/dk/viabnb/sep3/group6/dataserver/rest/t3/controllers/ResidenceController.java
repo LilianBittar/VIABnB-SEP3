@@ -43,6 +43,16 @@ public class ResidenceController {
     }
 
 
+    @GetMapping("/residences/{id}")
+    public ResponseEntity<Residence> getById(@PathVariable int id){
+        try {
+            Residence residence = residenceDAO.getByResidenceId(id);
+            return ResponseEntity.ok(residence);
+        } catch (IllegalStateException e) {
+            return ResponseEntity.internalServerError().build();
+        }
+
+    }
 
   @PostMapping("/residences")
   public ResponseEntity<Residence> createResidence(@RequestBody Residence residence)

@@ -17,7 +17,35 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
 
     @Override
     public Residence getByResidenceId(int id) {
-        return null;
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement("SELECT * from residence"
+                    + " join address a on a.addressid = residence.addressid "
+                    + "join city c on c.cityid = a.cityid "
+                    + " join host h on residence.hostid = h.hostid"
+                    + " WHERE residenceid= ?");
+            stm.setInt(1, id);
+            ResultSet result = stm.executeQuery();
+            result.next();
+            City city = new City(result.getInt("cityid"), result.getString("cityname"), result.getInt("zipcode"));
+            Address address = new Address(result.getInt("addressid"), result.getString("streetname"), result.getString("housenumber"), result.getString("streetnumber"), city);
+            List<Facility> residenceFacilities = getFacilitiesByResidenceId(result.getInt("residenceid"));
+            List<Rule> residenceRules = getRulesByResidenceId(result.getInt("residenceid"));
+            List<ResidenceReview> residenceReviews = getResidenceReviewsByResidenceId(result.getInt("residenceid"));
+            //TODO: fetch the host reviews instead of just using a new List.
+            Host residenceHost = new Host(result.getInt("hostid"), result.getString("fname"),
+                    result.getString("lname"), result.getString("phonenumber"),
+                    result.getString("email"), result.getString("password"), new ArrayList<>(),
+                    null, result.getString("cprnumber"), result.getBoolean("isapproved"));
+           return new Residence(result.getInt("residenceid"), address,
+                    result.getString("description"), result.getString("type"),
+                    result.getBoolean("isavailable"), result.getDouble("priceprnight"),
+                    residenceRules, residenceFacilities, result.getString("imageurl"),
+                    result.getDate("availablefrom"), result.getDate("availableto"),
+                    result.getInt("maxnumberofguests"), residenceHost, residenceReviews);
+
+        } catch (SQLException throwables) {
+            throw new IllegalStateException(throwables.getMessage());
+        }
     }
 
     @Override
@@ -29,7 +57,7 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
                             + " join address a on a.addressid = residence.addressid "
                             + "join city c on c.cityid = a.cityid "
                             + " join host h on residence.hostid = h.hostid"
-                            + " WHERE residence.residenceid = ?");
+                            + " WHERE hostid= ?");
             stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
             List<Residence> residences = new ArrayList<>();
