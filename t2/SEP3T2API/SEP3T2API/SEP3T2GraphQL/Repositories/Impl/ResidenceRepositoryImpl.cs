@@ -78,8 +78,9 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<IList<Residence>> GetAll()
         {
-            HttpResponseMessage response = await client.GetAsync($"{url}/residences");
-            await HandleErrorResponse(response);
+            /*HttpResponseMessage response = await client.GetAsync($"{uri}/residences");
+             await HandleErrorResponse(response);*/
+            throw new NotImplementedException();
         }
 
         private static async Task HandleErrorResponse(HttpResponseMessage response)
