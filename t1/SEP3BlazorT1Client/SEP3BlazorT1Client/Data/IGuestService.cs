@@ -23,5 +23,8 @@ namespace SEP3BlazorT1Client.Data
         /// <exception cref="ArgumentException">Thrown if the mutation response is null</exception>
         /// <returns>Guest object</returns>
         Task<Host> UpdateGuestStatusAsync(Guest guest);
+        
+        Task<Guest> ValidateGuestAsync(  string studentNumber,string password);
+        
     }
 }

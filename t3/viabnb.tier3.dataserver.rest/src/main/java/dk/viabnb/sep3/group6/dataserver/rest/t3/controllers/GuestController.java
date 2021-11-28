@@ -3,6 +3,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,17 @@ public class GuestController {
         }
     }
 
+    @GetMapping("/guests") public ResponseEntity<Guest> getGuestByStudentNumber(
+            @RequestParam(required = false) int studentNumber)
+    {
+        Guest guest;
+        guest = guestDAO.getGuestByStudentNumber(studentNumber);
+        if (guest == null)
+        {
+            return ResponseEntity.internalServerError().build();
+        }
+        return new ResponseEntity<>(guest, HttpStatus.OK);
+    }
     /**
      * End point of method type GET to get list of Guest objects with isApprovedGuest boolean value false
      * @return List<Guest>
