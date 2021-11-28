@@ -61,7 +61,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             return graphQlResponse.Data.Residence; 
         }
 
-        public Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence, bool available)
+        public Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
         {
             throw new NotImplementedException();
         }
