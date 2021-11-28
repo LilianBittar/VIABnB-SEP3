@@ -101,8 +101,8 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
             ResultSet result = stm.executeQuery();
             List<Residence> residences = new ArrayList<>();
             while (result.next()) {
-                City city = new City(result.getInt("city.cityid"),result.getString("cityname"),result.getInt("zipcode"));
-                Address address = new Address(result.getInt("address.adressid"), result.getString("streetname"),result.getString("housenumber"),result.getString("streetnumber"),city);
+                City city = new City(result.getInt("cityid"),result.getString("cityname"),result.getInt("zipcode"));
+                Address address = new Address(result.getInt("addressid"), result.getString("streetname"),result.getString("housenumber"),result.getString("streetnumber"),city);
                 List<Facility> residenceFacilities = getFacilitiesByResidenceId(result.getInt("residenceid"));
                 List<Rule> residenceRules = getRulesByResidenceId(result.getInt("residenceid"));
                 List<ResidenceReview> residenceReviews = getResidenceReviewsByResidenceId(result.getInt("residenceid"));
