@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
 @RestController
 public class RentRequestController {
     private RentRequestDAO rentRequestDAO;
@@ -75,7 +77,7 @@ public class RentRequestController {
         return ResponseEntity.ok(existingRequest);
     }
 
-    @PatchMapping("/rentrequests/{id}")
+    @PutMapping("/rentrequests/{id}")
     public ResponseEntity<RentRequest> replaceRentRequest(@PathVariable int id, @RequestBody(required = true) RentRequest request) {
         RentRequest existingRentRequest = rentRequestDAO.getById(id);
         if (existingRentRequest == null) {
@@ -86,4 +88,28 @@ public class RentRequestController {
         return ResponseEntity.ok(updatedRequest);
     }
 
+    @PatchMapping("/rentrequests/{id}/approval")
+    public ResponseEntity<RentRequest> updateRentRequestStatus(@RequestBody RentRequest request, @PathVariable("id") int id)
+    {
+        RentRequest updateRequest;
+        try
+        {
+            if (request.getStatus().equals("APPROVED"))
+            {
+                updateRequest = rentRequestDAO.approveRequest(request);
+                return ResponseEntity.ok(updateRequest);
+            }
+            else if (request.getStatus().equals("NOTAPPROVED"))
+            {
+                updateRequest = rentRequestDAO.rejectRequest(request);
+                return ResponseEntity.ok(updateRequest);
+            }
+            return ResponseEntity.badRequest().build();
+        }
+        catch (NoSuchElementException e)
+        {
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

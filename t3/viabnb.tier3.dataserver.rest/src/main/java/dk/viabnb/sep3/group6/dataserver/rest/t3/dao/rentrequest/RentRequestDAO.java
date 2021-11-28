@@ -15,4 +15,6 @@ public interface RentRequestDAO {
     RentRequest update(RentRequest request);
     RentRequest getById(int id);
     List<RentRequest> getAll();
+    RentRequest approveRequest(RentRequest request);
+    RentRequest rejectRequest(RentRequest request);
 }
