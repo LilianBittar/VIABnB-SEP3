@@ -48,7 +48,7 @@ import java.util.List;
     Residence newResidence = residenceDAO.createResidence(residence);
     if (newResidence == null)
     {
-      return ResponseEntity.internalServerError().build();
+      return ResponseEntity.badRequest().build();
     }
     return new ResponseEntity<>(newResidence, HttpStatus.OK);
   }
