@@ -124,6 +124,29 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
             throw new IllegalStateException(throwables.getMessage());
         }
     }
+
+    @Override
+    public Residence UpdateAvailabilityPeriod(Residence residence) throws IllegalStateException {
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement(
+                    "update residence " +
+                            "set isavailable   = ?," +
+                            "    availablefrom = ?," +
+                            "    availableto   = ? " +
+                            "where residenceid = ?;");
+
+            stm.setBoolean(1, residence.isAvailable());
+            stm.setDate(2, (Date) residence.getAvailableFrom());
+            stm.setDate(3, (Date) residence.getAvailableTo());
+            stm.setInt(4, residence.getId());
+            stm.executeUpdate();
+            connection.commit();
+            return residence;
+        } catch (SQLException throwables) {
+            throw new IllegalArgumentException(throwables.getMessage());
+        }
+    }
+
     private List<ResidenceReview> getResidenceReviewsByResidenceId(int residenceId){
         try (Connection connection = getConnection()){
             //TODO: implement this later when we work on review system, for now it just returns empty list.
