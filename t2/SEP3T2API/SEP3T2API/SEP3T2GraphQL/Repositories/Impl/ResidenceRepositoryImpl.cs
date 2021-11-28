@@ -62,9 +62,26 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return r;
         }
 
-        public Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
+        public async Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
         {
-            throw new NotImplementedException();
+            var guestAsJson = JsonSerializer.Serialize(residence, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            HttpContent content = new StringContent(guestAsJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PatchAsync($"{uri}/{residence.Id}/update", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            var updatedResidence = JsonSerializer.Deserialize<Residence>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+
+            return updatedResidence;
         }
 
         public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
