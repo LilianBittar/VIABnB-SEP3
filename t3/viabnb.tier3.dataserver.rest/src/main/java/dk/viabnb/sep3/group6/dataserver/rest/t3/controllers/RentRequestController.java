@@ -37,7 +37,7 @@ public class RentRequestController {
     public ResponseEntity<List<RentRequest>> getAllRentRequests(@RequestParam(required = false) Integer residenceId,
                                                                 @RequestParam(required = false) Integer hostId,
                                                                 @RequestParam(required = false) Integer guestId) {
-
+        //TODO: this endpoint works without the RequestParam. When using the RequestParam the result will be null
         List<RentRequest> requestsToReturn = rentRequestDAO.getAll();
         if (residenceId != null) {
             requestsToReturn.forEach((request) -> {
@@ -61,7 +61,6 @@ public class RentRequestController {
                 }
             });
         }
-
         return ResponseEntity.ok(requestsToReturn);
     }
 
@@ -76,7 +75,7 @@ public class RentRequestController {
         return ResponseEntity.ok(existingRequest);
     }
 
-    @PutMapping("/rentrequests/{id}")
+    @PatchMapping("/rentrequests/{id}")
     public ResponseEntity<RentRequest> replaceRentRequest(@PathVariable int id, @RequestBody(required = true) RentRequest request) {
         RentRequest existingRentRequest = rentRequestDAO.getById(id);
         if (existingRentRequest == null) {

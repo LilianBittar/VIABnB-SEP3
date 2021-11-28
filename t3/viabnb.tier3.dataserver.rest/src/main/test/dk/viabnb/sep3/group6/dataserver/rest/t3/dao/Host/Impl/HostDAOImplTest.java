@@ -37,4 +37,20 @@ class HostDAOImplTest
   {
     assertNotNull(hostDAO.getAllNotApprovedHosts());
   }
+
+  @Test void getHostByIdSunnySenario(){
+    assertDoesNotThrow(() -> hostDAO.getHostById(1));
+  }
+
+  @Test void getHostByIdRainySenario(){
+    assertThrows(IllegalStateException.class, () -> hostDAO.getHostById(-1));
+  }
+
+  @Test void getHostByEmailSunnySenario(){
+    assertDoesNotThrow(() -> hostDAO.getHostByEmail("Test@Test.tt"));
+  }
+
+  @Test void getHostByEmailRainySenario(){
+    assertThrows(IllegalStateException.class,() -> hostDAO.getHostByEmail("nottest@ho"));
+  }
 }

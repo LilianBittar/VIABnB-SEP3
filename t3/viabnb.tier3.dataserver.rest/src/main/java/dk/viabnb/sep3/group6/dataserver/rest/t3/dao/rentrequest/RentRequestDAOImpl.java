@@ -2,6 +2,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.*;
+import org.webjars.NotFoundException;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -55,7 +56,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement(
-          "SELECT * FROM rentrequest JOIN host h ON h.hostid = rentrequest.hostid JOIN guest g ON h.hostid = g.guestid WHERE rentrequestid = ?");
+          "SELECT * FROM rentrequest JOIN host h on h.hostid = rentrequest.hostid WHERE rentrequestid = ?");
       stm.setInt(1, id);
       ResultSet result = stm.executeQuery();
       if (result.next())
@@ -63,16 +64,10 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
         return new RentRequest(result.getInt("rentrequestid"),
             result.getDate("startdate").toLocalDate().atStartOfDay(),
             result.getDate("enddate").toLocalDate().atStartOfDay(),
-            result.getInt("numberofhuests"),
-            RentRequestStatus.valueOf(result.getString("rentrequeststatus")),
-            new Guest(result.getInt("hostid"), result.getString("fname"),
-                result.getString("lname"), result.getString("phonenumber"),
-                result.getString("email"), result.getString("password"),
-                new ArrayList<>(), result.getString("personalimage"),
-                result.getString("cpr"), result.getBoolean("isapprovedhost"),
-                result.getInt("viaid"), new ArrayList<>(),
-                result.getBoolean("isapprovedguest")),
-            getResidenceByHostId(id));
+            result.getInt("numberofguests"),
+            RentRequestStatus.valueOf(result.getString("status")),
+            getGuestById(result.getInt("hostid")),
+            getResidenceByHostId(result.getInt("hostid")));
       }
       throw new IllegalArgumentException("Rent request is null");
     }
@@ -84,7 +79,54 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
 
   @Override public List<RentRequest> getAll()
   {
-    return null;
+    List<RentRequest> rentRequestListToReturn = new ArrayList<>();
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement(
+          "SELECT * FROM rentrequest JOIN host h on h.hostid = rentrequest.hostid");
+      ResultSet result = stm.executeQuery();
+      while (result.next())
+      {
+        RentRequest request = new RentRequest(result.getInt("rentrequestid"),
+            result.getDate("startdate").toLocalDate().atStartOfDay(),
+            result.getDate("enddate").toLocalDate().atStartOfDay(),
+            result.getInt("numberofguests"),
+            RentRequestStatus.valueOf(result.getString("status")),
+            getGuestById(result.getInt("hostid")),
+            getResidenceByHostId(result.getInt("hostid")));
+        rentRequestListToReturn.add(request);
+      }
+      return rentRequestListToReturn;
+    }
+    catch (SQLException throwables)
+    {
+      throw new NotFoundException(throwables.getMessage());
+    }
+  }
+
+  private Guest getGuestById(int id)
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement(
+          "SELECT * FROM host h JOIN guest g ON h.hostid = g.guestid WHERE guestid = ?");
+      stm.setInt(1, id);
+      ResultSet result = stm.executeQuery();
+      if (result.next())
+      {
+        return new Guest(result.getInt("hostid"), result.getString("fname"),
+            result.getString("lname"), result.getString("phonenumber"),
+            result.getString("email"), result.getString("password"),
+            new ArrayList<>(), result.getString("personalimage"),
+            result.getString("cprnumber"), result.getBoolean("isapproved"),
+            result.getInt("viaid"), result.getBoolean("isapprovedguest"));
+      }
+      throw new IllegalStateException("Guest is null");
+    }
+    catch (SQLException throwables)
+    {
+      throw new NotFoundException(throwables.getMessage());
+    }
   }
 
   private Residence getResidenceByHostId(int id)
@@ -92,7 +134,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement(
-          "SELECT * FROM residence JOIN address a ON a.addressid = residence.addressid JOIN city c ON c.cityid = a.cityid WHERE hostid = ?");
+          "SELECT * FROM residence JOIN address a ON a.addressid = residence.addressid JOIN city c ON c.cityid = a.cityid JOIN host h on h.hostid = residence.hostid WHERE h.hostid = ?");
       stm.setInt(1, id);
       ResultSet result = stm.executeQuery();
       if (result.next())
@@ -105,7 +147,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
                 new City(result.getInt("cityid"), result.getString("cityname"),
                     result.getInt("zipcode"))), result.getString("description"),
             result.getString("type"), result.getBoolean("isavailable"),
-            result.getDouble("pricepernight"), new ArrayList<>(),
+            result.getDouble("priceprnight"), new ArrayList<>(),
             new ArrayList<>(), result.getString("imageurl"),
             result.getDate("availablefrom"), result.getDate("availableto"),
             result.getInt("maxnumberofguests"),
@@ -113,7 +155,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
                 result.getString("lname"), result.getString("phonenumber"),
                 result.getString("email"), result.getString("password"),
                 new ArrayList<>(), result.getString("personalimage"),
-                result.getString("cpr"), result.getBoolean("isapprovedhost")),
+                result.getString("cprnumber"), result.getBoolean("isapproved")),
             new ArrayList<>());
       }
       throw new IllegalArgumentException("residence is null");

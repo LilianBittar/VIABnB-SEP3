@@ -61,7 +61,12 @@ namespace SEP3BlazorT1Client.Data.Impl
             return graphQlResponse.Data.Residence; 
         }
 
-        public async Task<List<Residence>> GetResidenceByHostId(int Id)
+        public Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence, bool available)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Residence>> GetResidencesByHostIdAsync(int Id)
         {
             GqlClient client = new GqlClient(Url);
             var residenceQuery = new GqlQuery()
@@ -85,7 +90,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             return graphQlResponse.Data.Residences;
         }
 
-        public Task<IList<Residence>> GetAllAvailableResidences()
+        public Task<IList<Residence>> GetAllAvailableResidencesAsync()
         {
             throw new NotImplementedException();
         }

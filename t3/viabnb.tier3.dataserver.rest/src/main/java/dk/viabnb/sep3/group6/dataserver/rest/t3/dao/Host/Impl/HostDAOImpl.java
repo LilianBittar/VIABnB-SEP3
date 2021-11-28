@@ -45,7 +45,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
     @Override
     public Host getHostByEmail(String email) {
         try (Connection connection = getConnection()){
-            PreparedStatement stm = connection.prepareStatement("select * from host where email = ?");
+            PreparedStatement stm = connection.prepareStatement(" select * from host where email = ?");
             stm.setString(1, email);
             ResultSet result = stm.executeQuery();
             result.next();

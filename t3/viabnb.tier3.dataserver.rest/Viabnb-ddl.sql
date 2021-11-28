@@ -48,16 +48,17 @@ CREATE TABLE IF NOT EXISTS Address
 
 CREATE TABLE IF NOT EXISTS Residence
 (
-    residenceId   serial,
-    addressId     INT,
-    type          VARCHAR,
-    description   VARCHAR,
-    isAvailable   BOOLEAN,
-    pricePrNight  DECIMAL,
-    availableFrom DATE,
-    availableTo   DATE,
-    imageUrl      VARCHAR,
-    hostId        INT,
+    residenceId       serial,
+    addressId         INT,
+    type              VARCHAR,
+    description       VARCHAR,
+    isAvailable       BOOLEAN,
+    pricePrNight      DECIMAL,
+    availableFrom     DATE,
+    availableTo       DATE,
+    imageUrl          VARCHAR,
+    maxNumberOfGuests INT,
+    hostId            INT,
     PRIMARY KEY (residenceId),
     FOREIGN KEY (addressId) REFERENCES Address (addressId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid)
@@ -152,10 +153,14 @@ CREATE TABLE IF NOT EXISTS Rent
     FOREIGN KEY (residenceId) REFERENCES Residence (residenceId)
 );
 
-INSERT INTO Admin(fName, lName, email, phoneNumber, password) VALUES ('Kutaiba', 'Kashmar', '291597@via.dk', '11111111', '1234');
-INSERT INTO Admin(fName, lName, email, phoneNumber, password) VALUES ('Michael', 'Bui', '293885@via.dk', '22222222', '1234');
-INSERT INTO Admin(fName, lName, email, phoneNumber, password) VALUES ('Kasper', 'Jensen', '304218@via.dk', '33333333', '1234');
-INSERT INTO Admin(fName, lName, email, phoneNumber, password) VALUES ('Lillian', 'Bittar', '293336@via.dk', '44444444', '1234');
+INSERT INTO Admin(fName, lName, email, phoneNumber, password)
+VALUES ('Kutaiba', 'Kashmar', '291597@via.dk', '11111111', '1234');
+INSERT INTO Admin(fName, lName, email, phoneNumber, password)
+VALUES ('Michael', 'Bui', '293885@via.dk', '22222222', '1234');
+INSERT INTO Admin(fName, lName, email, phoneNumber, password)
+VALUES ('Kasper', 'Jensen', '304218@via.dk', '33333333', '1234');
+INSERT INTO Admin(fName, lName, email, phoneNumber, password)
+VALUES ('Lillian', 'Bittar', '293336@via.dk', '44444444', '1234');
 
 
 

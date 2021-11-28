@@ -20,6 +20,7 @@ class HostControllerTest
 {
   private HostDAO hostDAO;
   private HostController controller;
+  private Host host;
 
   @BeforeEach
   void setup()
@@ -36,4 +37,6 @@ class HostControllerTest
     ResponseEntity<List<Host>> response = controller.getAllNotApprovedHosts();
     Assertions.assertEquals(ResponseEntity.internalServerError().build(), response);
   }
+
+
 }
