@@ -50,4 +50,10 @@ class ResidenceControllerTest
     when(residenceDAO.createResidence(residenceTest)).thenReturn(null);
     assertEquals(ResponseEntity.internalServerError().build(), controller.createResidence(residenceTest));
   }
+    @Test
+    public void getAllReturnsInternalServerErrorWhenIllegalStateExceptionIsThrown(){
+        when(residenceDAO.getAllResidences()).thenThrow(IllegalStateException.class);
+        assertEquals(ResponseEntity.internalServerError().build(), controller.getAll());
+    }
+
 }
