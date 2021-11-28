@@ -49,8 +49,20 @@ import java.util.List;
     return new ResponseEntity<>(newResidence, HttpStatus.OK);
   }
 
+  /**
+   * Handles requests for getting all residences in the system
+   * @return HTTP OK with list of all residences if connection to Data source
+   *         could be established.
+   *         HTTP Internal server error if connection to Data source could not
+   *         be established.
+   * */
   @GetMapping("/residences")
   public ResponseEntity<List<Residence>> getAll(){
-    return ResponseEntity.ok(residenceDAO.getAllResidences());
+    try {
+      List<Residence> residences = residenceDAO.getAllResidences();
+      return ResponseEntity.ok(residences);
+    } catch (IllegalStateException e) {
+      return ResponseEntity.internalServerError().build();
+    }
   }
 }

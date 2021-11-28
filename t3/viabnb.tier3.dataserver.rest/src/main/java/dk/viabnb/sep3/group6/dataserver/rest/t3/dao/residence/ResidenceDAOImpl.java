@@ -97,26 +97,40 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
                     "SELECT * from residence"
                             + " join address a on a.addressid = residence.addressid "
                             + "join city c on c.cityid = a.cityid "
-                            + "join residencefacility r on residence.residenceid = r.residenceid "
-                            + "join rule r2 on residence.residenceid = r2.residenceid"
                             + " join host h on residence.hostid = h.hostid");
             ResultSet result = stm.executeQuery();
+            List<Residence> residences = new ArrayList<>();
             while (result.next()) {
-                /*TODO: 1. Create Host from query result.
-                        2. Create City from query result.
-                        3. Create Address from query result.
-                        4. Create list of facilities from query result
-                        5. Create list of rules from query result
-                        6. Create Residence from query result
-                        Might have to split into multiple queries to get the list of rules and facilities?
-                */
-
+                City city = new City(result.getInt("city.cityid"),result.getString("cityname"),result.getInt("zipcode"));
+                Address address = new Address(result.getInt("address.adressid"), result.getString("streetname"),result.getString("housenumber"),result.getString("streetnumber"),city);
+                List<Facility> residenceFacilities = getFacilitiesByResidenceId(result.getInt("residenceid"));
+                List<Rule> residenceRules = getRulesByResidenceId(result.getInt("residenceid"));
+                List<ResidenceReview> residenceReviews = getResidenceReviewsByResidenceId(result.getInt("residenceid"));
+                //TODO: fetch the host reviews instead of just using a new List.
+                Host residenceHost = new Host(result.getInt("hostid"), result.getString("fname"),
+                        result.getString("lname"), result.getString("phonenumber"),
+                        result.getString("email"), result.getString("password"), new ArrayList<>(),
+                        null, result.getString("cprnumber"),result.getBoolean("isapproved"));
+                Residence residence = new Residence(result.getInt("residenceid"),address,
+                        result.getString("description"), result.getString("type"),
+                        result.getBoolean("isavailable"), result.getDouble("priceprnight"),
+                        residenceRules, residenceFacilities, result.getString("imageurl"),
+                        result.getDate("availablefrom"), result.getDate("availableto"),
+                        result.getInt("maxnumberofguests"),residenceHost, residenceReviews  );
+                residences.add(residence);
             }
+            return residences;
         } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());
         }
-
-        return null;
+    }
+    private List<ResidenceReview> getResidenceReviewsByResidenceId(int residenceId){
+        try (Connection connection = getConnection()){
+            //TODO: implement this later when we work on review system, for now it just returns empty list.
+            return new ArrayList<>();
+        } catch (SQLException throwables) {
+            throw new IllegalStateException(throwables.getMessage());
+        }
     }
 
     private List<Rule> getRulesByResidenceId(int residenceId) {
@@ -134,6 +148,22 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
             return ruleListToReturn;
         } catch (SQLException throwables) {
             throw new IllegalArgumentException(throwables.getMessage());
+        }
+    }
+
+    private List<Facility> getFacilitiesByResidenceId(int residenceId){
+        try (Connection connection = getConnection()){
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM residencefacility rf join facility f on f.facilityid = rf.facilityid where residenceid = ?");
+            stm.setInt(1, residenceId);
+            ResultSet results = stm.executeQuery();
+            List<Facility> facilities = new ArrayList<>();
+            while (results.next()){
+                Facility facility = new Facility(results.getInt("facilityid"), results.getString("name"));
+                facilities.add(facility);
+            }
+            return facilities;
+        } catch (SQLException throwables) {
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 
