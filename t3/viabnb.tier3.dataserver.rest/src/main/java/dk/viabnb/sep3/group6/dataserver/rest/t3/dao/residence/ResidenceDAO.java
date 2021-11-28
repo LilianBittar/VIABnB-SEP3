@@ -34,4 +34,12 @@ public interface ResidenceDAO
    * @throws IllegalStateException if connection to data source could not be established.
    * */
   List<Residence> getAllResidences() throws IllegalStateException;
+
+  /**
+   * updates start date, end date and sets availability to true
+   * @param residence
+   * @return updated residence
+   * @throws IllegalStateException on SQL failure or invalid residence
+   */
+  Residence UpdateAvailabilityPeriod(Residence residence) throws IllegalStateException;
 }
