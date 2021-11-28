@@ -56,7 +56,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement(
-          "SELECT * FROM rentrequest JOIN host h ON h.hostid = rentrequest.hostid JOIN guest g ON h.hostid = g.guestid WHERE rentrequestid = ?");
+          "SELECT * FROM rentrequest JOIN host h on h.hostid = rentrequest.hostid WHERE rentrequestid = ?");
       stm.setInt(1, id);
       ResultSet result = stm.executeQuery();
       if (result.next())
@@ -66,7 +66,8 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
             result.getDate("enddate").toLocalDate().atStartOfDay(),
             result.getInt("numberofguests"),
             RentRequestStatus.valueOf(result.getString("status")),
-            getGuestById(result.getInt("hostid")), getResidenceByHostId(id));
+            getGuestById(result.getInt("hostid")),
+            getResidenceByHostId(result.getInt("hostid")));
       }
       throw new IllegalArgumentException("Rent request is null");
     }
