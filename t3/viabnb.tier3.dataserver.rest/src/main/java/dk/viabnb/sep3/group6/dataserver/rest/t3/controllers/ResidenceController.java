@@ -15,31 +15,31 @@ import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 //TODO: Change routes to /residences as that is the standard for RESTful collections -mic
-@RestController public class ResidenceController
-{
-  private ResidenceDAO residenceDAO;
-  private Gson gson = new GsonBuilder().serializeNulls().create();
-  private static final Logger LOGGER= LoggerFactory.getLogger(ResidenceController.class);
+@RestController
+public class ResidenceController {
+    private ResidenceDAO residenceDAO;
+    private Gson gson = new GsonBuilder().serializeNulls().create();
+    private static final Logger LOGGER = LoggerFactory.getLogger(ResidenceController.class);
 
 
-  @Autowired public ResidenceController(ResidenceDAO residenceDAO)
-  {
-    this.residenceDAO = residenceDAO;
-  }
-
-
-  @GetMapping("/residence/{id}")
-  public ResponseEntity<List<Residence>> getAllResidencesByHostId(@PathVariable int id)
-  {
-    List<Residence> residences;
-   residences = residenceDAO.getAllResidenceByHostId(id);
-    if (residences == null)
-    {
-      return ResponseEntity.internalServerError().build();
+    @Autowired
+    public ResidenceController(ResidenceDAO residenceDAO) {
+        this.residenceDAO = residenceDAO;
     }
-    return new ResponseEntity<>(residences, HttpStatus.OK);
-  }
+
+
+    @GetMapping("/residence/{id}")
+    public ResponseEntity<List<Residence>> getAllResidencesByHostId(@PathVariable int id) {
+        List<Residence> residences;
+        residences = residenceDAO.getAllResidenceByHostId(id);
+        if (residences == null) {
+            return ResponseEntity.internalServerError().build();
+        }
+        return new ResponseEntity<>(residences, HttpStatus.OK);
+    }
 
 
   @PostMapping("/residences")
@@ -53,23 +53,34 @@ import java.util.List;
     return new ResponseEntity<>(newResidence, HttpStatus.OK);
   }
 
-  /**
-   * Handles requests for getting all residences in the system
-   * @return HTTP OK with list of all residences if connection to Data source
-   *         could be established.
-   *         HTTP Internal server error if connection to Data source could not
-   *         be established.
-   * */
-  @GetMapping("/residences")
-  public ResponseEntity<List<Residence>> getAll(){
-    try {
-      LOGGER.info("Request for all residences received");
-      List<Residence> residences = residenceDAO.getAllResidences();
-      LOGGER.info("Returning: " + gson.toJson(residences));
-      return ResponseEntity.ok(residences);
-    } catch (Exception e) {
-      LOGGER.error("Connection failed " + e.getMessage());
-      return ResponseEntity.internalServerError().build();
+    /**
+     * Handles requests for getting all residences in the system
+     *
+     * @return HTTP OK with list of all residences if connection to Data source
+     * could be established.
+     * HTTP Internal server error if connection to Data source could not
+     * be established.
+     */
+    @GetMapping("/residences")
+    public ResponseEntity<List<Residence>> getAll() {
+        try {
+            LOGGER.info("Request for all residences received");
+            List<Residence> residences = residenceDAO.getAllResidences();
+            LOGGER.info("Returning: " + gson.toJson(residences));
+            return ResponseEntity.ok(residences);
+        } catch (Exception e) {
+            LOGGER.error("Connection failed " + e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
-  }
+
+    @RequestMapping(value = "/residences/{id}/approval", produces = "application/json", method = RequestMethod.PATCH)
+    public ResponseEntity<Guest> UpdateAvailabilityPeriod(@RequestBody Residence residence, @PathVariable("id") int id) {
+        try {
+        //TODO not implemented
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+        return null;
+    }
 }
