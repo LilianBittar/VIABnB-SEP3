@@ -1,6 +1,7 @@
 ﻿@page "/BuildingsOverview"
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Data
+@using System.Reflection.Metadata
 @inject IResidenceService ResidenceService
 
 
@@ -27,37 +28,93 @@
         @foreach (var residence in Residences)
         {
             <div class="mat-layout-grid-cell">
-                    <MatCard class="demo-mat-card">
-                                <MatCardContent>
-                                    <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
-                                    <div class="demo-mat-card-content">
-                                        <MatHeadline6 class="demo-mat-card-clean-margin">
-                                            Unique stays
-                                        </MatHeadline6>
-                                        <MatSubtitle2 class="demo-mat-card-clean-margin">
-                                            @residence.Address.ToString()
-                                        </MatSubtitle2>
-                                    </div>
-                
-                                    <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-                                        @residence.Description
-                                    </MatBody2>
-                                </MatCardContent>
-                                <MatCardActions>
-                                    <MatButton OnClick="@(() => residence.IsAvailable = true)">Ready for rent</MatButton>
-                                </MatCardActions>
-                            </MatCard>
+                <MatCard class="demo-mat-card">
+                    <MatCardContent>
+                        <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
+                        <div class="demo-mat-card-content">
+                            <MatHeadline6 class="demo-mat-card-clean-margin">
+                                Unique stays
+                            </MatHeadline6>
+                            <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                @residence.Address.ToString()
+                            </MatSubtitle2>
+                        </div>
+
+                        <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                            @residence.Description
+                        </MatBody2>
+                    </MatCardContent>
+                    <MatCardActions>
+                        <MatButton OnClick="@OpenDialog">Ready for rent</MatButton>
+                    </MatCardActions>
+                </MatCard>
             </div>
+            <MatDialog @bind-IsOpen="@dialogIsOpen">
+                <MatDialogTitle>Set the period of availability for the residence</MatDialogTitle>
+                <MatDialogContent>
+                    <p>
+                        <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@maxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
+                        </MatNumericUpDownField>
+                    </p>
+
+                    @* Availablefrom *@
+                    
+                    <p><b> Start Date</b></p>
+                    <MatDatePicker @bind-Value="@AvailableFrom"></MatDatePicker>
+                    
+                    <MatButton OnClick="@(_ => { AvailableFrom = DateTime.Now; })">
+                        Now
+                    </MatButton>
+                    <MatButton OnClick="@(_ => { AvailableFrom = null; })">
+                        Empty
+                    </MatButton>
+
+                    @* AvailableTO*@
+                     <p><b> End Date</b></p>
+                        <MatDatePicker @bind-Value="@AvailableTo"></MatDatePicker>
+                    
+                    <MatButton OnClick="@(_ => { AvailableTo = null; })">
+                        Empty
+                    </MatButton>
+                   
+
+                </MatDialogContent>
+
+
+                <MatDialogActions>
+                    <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
+                    <MatButton OnClick="@OkClick">Publish</MatButton>
+                </MatDialogActions>
+            </MatDialog>
         }
+
     </div>
 </div>
 
 
-
-
-
-
 @code {
+    public DateTime? AvailableFrom { get; set; } = DateTime.Now.AddDays(-10);
+    public DateTime? AvailableTo { get; set; } = DateTime.Now.AddDays(-10);
+    bool dialogIsOpen = false;
+    
+    string name = null;
+    string animal = null;
+    string dialogAnimal = null;
+    int maxNumberOfGuests;
+
+    void OpenDialog()
+    {
+        dialogAnimal = null;
+        dialogIsOpen = true;
+    }
+
+    void OkClick()
+    {
+        
+        
+       // ResidenceService.UpdateResidenceAvailabilityAsync(residence)
+        dialogIsOpen = false;
+    }
 
     private Residence[] Residences = new[]
     {
@@ -84,7 +141,6 @@
             Facilities = new List<Facility>(),
             ImageUrl = "https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero-852x479.jpg"
         },
-
         new Residence()
         {
             Id = 2,
@@ -109,5 +165,10 @@
             ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"
         },
     };
+
+    private async Task<Residence> ChangeAvailability(Residence residence)
+    {
+        return await ResidenceService.UpdateResidenceAvailabilityAsync(residence);
+    }
 
 }
