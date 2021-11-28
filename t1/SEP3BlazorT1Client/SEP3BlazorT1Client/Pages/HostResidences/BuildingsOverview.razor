@@ -1,7 +1,8 @@
-﻿@page "/BuildingsOverview"
+﻿@page "/HostResidences"
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Data
 @using System.Reflection.Metadata
+@using System.ComponentModel.DataAnnotations
 @inject IResidenceService ResidenceService
 
 
@@ -45,75 +46,100 @@
                         </MatBody2>
                     </MatCardContent>
                     <MatCardActions>
-                        <MatButton OnClick="@OpenDialog">Ready for rent</MatButton>
+                        <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
                     </MatCardActions>
                 </MatCard>
             </div>
-            <MatDialog @bind-IsOpen="@dialogIsOpen">
-                <MatDialogTitle>Set the period of availability for the residence</MatDialogTitle>
-                <MatDialogContent>
-                    <p>
-                        <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@maxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
-                        </MatNumericUpDownField>
-                    </p>
-
-                    @* Availablefrom *@
-                    
-                    <p><b> Start Date</b></p>
-                    <MatDatePicker @bind-Value="@AvailableFrom"></MatDatePicker>
-                    
-                    <MatButton OnClick="@(_ => { AvailableFrom = DateTime.Now; })">
-                        Now
-                    </MatButton>
-                    <MatButton OnClick="@(_ => { AvailableFrom = null; })">
-                        Empty
-                    </MatButton>
-
-                    @* AvailableTO*@
-                     <p><b> End Date</b></p>
-                        <MatDatePicker @bind-Value="@AvailableTo"></MatDatePicker>
-                    
-                    <MatButton OnClick="@(_ => { AvailableTo = null; })">
-                        Empty
-                    </MatButton>
-                   
-
-                </MatDialogContent>
-
-
-                <MatDialogActions>
-                    <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
-                    <MatButton OnClick="@OkClick">Publish</MatButton>
-                </MatDialogActions>
-            </MatDialog>
         }
 
+        <MatDialog @bind-IsOpen="@dialogIsOpen">
+            <MatDialogTitle>Set the period of availability for the residence</MatDialogTitle>
+            <MatDialogContent>
+                <p>
+                    <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@ResidenceForRent.MaxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
+                    </MatNumericUpDownField>
+                </p>
+
+                @* Availablefrom *@
+
+                <p>
+                    <b> Start Date</b>
+                </p>
+                <MatDatePicker @bind-Value="@ResidenceForRent.AvailableFrom"></MatDatePicker>
+
+                <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Now; })">
+                    Now
+                </MatButton>
+                <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = null; })">
+                    Empty
+                </MatButton>
+
+                @* AvailableTo*@
+                <p>
+                    <b> End Date</b>
+                </p>
+                <MatDatePicker @bind-Value="@ResidenceForRent.AvailableTo"></MatDatePicker>
+
+                <MatButton OnClick="@(_ => { ResidenceForRent.AvailableTo = null; })">
+                    Empty
+                </MatButton>
+            </MatDialogContent>
+            <MatDialogActions>
+                <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
+                <MatButton OnClick="@OkClick">Publish</MatButton>
+            </MatDialogActions>
+            @foreach (var errorMessage in validationResults)
+            {
+                <p class="error-label text-danger">@errorMessage</p>
+            }
+             <p class="error-label text-danger">@_errorText</p>
+        </MatDialog>
     </div>
 </div>
 
 
 @code {
-    public DateTime? AvailableFrom { get; set; } = DateTime.Now.AddDays(-10);
-    public DateTime? AvailableTo { get; set; } = DateTime.Now.AddDays(-10);
     bool dialogIsOpen = false;
-    
-    string name = null;
-    string animal = null;
-    string dialogAnimal = null;
     int maxNumberOfGuests;
+    private string _errorText;
+    private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
 
-    void OpenDialog()
+    Residence ResidenceForRent = new Residence();
+
+    void OpenDialog(Residence residence)
     {
-        dialogAnimal = null;
+        ResidenceForRent = residence;
         dialogIsOpen = true;
     }
 
-    void OkClick()
+    private async void OkClick()
     {
-        
-        
-       // ResidenceService.UpdateResidenceAvailabilityAsync(residence)
-        dialogIsOpen = false;
+    //clear error messages
+        validationResults.Clear();
+    // the validator validates in the context of a host object
+        ValidationContext validationContext = new ValidationContext(ResidenceForRent);
+
+    //validates all host properties in context of host model
+        bool rentIsValid = Validator.TryValidateObject(ResidenceForRent, validationContext, validationResults, true);
+
+
+        if (rentIsValid)
+        {
+            ResidenceForRent.IsAvailable = true;
+            try
+            {
+                await ResidenceService.UpdateResidenceAvailabilityAsync(ResidenceForRent);
+            }
+            catch (Exception e)
+            {
+                _errorText = e.Message;
+                StateHasChanged();
+                return;
+            }
+
+            dialogIsOpen = false;
+            Console.WriteLine("succes");
+        }
     }
 
     private Residence[] Residences = new[]
