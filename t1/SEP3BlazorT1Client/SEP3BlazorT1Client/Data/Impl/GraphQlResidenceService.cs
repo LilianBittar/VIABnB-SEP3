@@ -100,7 +100,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Variables = new {residenceId = id}
             };
             var graphQlResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceQuery);
-         
+            if (graphQlResponse.Errors != null)
+            {
+              throw new ArgumentException(JsonConvert.SerializeObject(graphQlResponse.Errors).Split(",")[4].Split(":")[2]); 
+            }
             System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Residence.ToString()}");
             return graphQlResponse.Data.Residence; 
         }

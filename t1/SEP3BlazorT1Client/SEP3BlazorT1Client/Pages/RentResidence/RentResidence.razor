@@ -133,10 +133,12 @@ else
             await RentalService.CreateRentRequest(_newRentRequest);
             StateHasChanged();
             //TODO: Navigate to list of rent requests.
+            NavigationManager.NavigateTo("/residences");
         }
         catch (Exception e)
         {
             _errorMessage = e.Message;
+            StateHasChanged();
         }
     }
 
