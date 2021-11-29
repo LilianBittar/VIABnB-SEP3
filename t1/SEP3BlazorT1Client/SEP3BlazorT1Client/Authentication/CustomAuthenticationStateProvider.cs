@@ -19,11 +19,20 @@ namespace SEP3BlazorT1Client.Authentication
         private readonly IGuestService _guestService;
         private Host cachedHost;
 
-        public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IHostService _hostService, IGuestService _guestService)
+        public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IHostService _hostService, IGuestService guestService)
         {
             this.jsRuntime = jsRuntime;
             this._hostService = _hostService;
-            this._guestService = _guestService;
+            _guestService = guestService;
+            if (_guestService != null)
+            {
+                Console.WriteLine(true);
+            }
+            else
+            {
+                Console.WriteLine(false);
+            }
+            
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
@@ -75,10 +84,10 @@ namespace SEP3BlazorT1Client.Authentication
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
-        public async Task ValidateLoginAsGuest(string studentNumber,string password)
+        public async Task ValidateLoginAsGuest(int studentNumber,string password)
         {
             if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
-            if (string.IsNullOrEmpty(studentNumber)) throw new Exception("Enter student number");
+            if (string.IsNullOrEmpty(studentNumber.ToString())) throw new Exception("Enter student number");
             
             Console.WriteLine("Validating log in as a guest.");
                 

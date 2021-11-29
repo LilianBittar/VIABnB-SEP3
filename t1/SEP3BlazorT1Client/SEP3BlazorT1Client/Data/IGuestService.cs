@@ -24,7 +24,7 @@ namespace SEP3BlazorT1Client.Data
         /// <returns>Guest object</returns>
         Task<Host> UpdateGuestStatusAsync(Guest guest);
         
-        Task<Guest> ValidateGuestAsync(string studentNumber,string password);
+        Task<Guest> ValidateGuestAsync(int studentNumber,string password);
         
     }
 }

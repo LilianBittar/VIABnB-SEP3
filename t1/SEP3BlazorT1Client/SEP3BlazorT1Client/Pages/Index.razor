@@ -6,6 +6,7 @@
 
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
+@inject IGuestService _guestService
 
 <div class="mat-layout-grid">
     <div class="mat-layout-grid-inner">
@@ -52,7 +53,7 @@
     private string password;
     private string ErrorMessage;
     private bool loginAsHost;
-    private string studentNumber;
+    private int studentNumber;
 
     private async Task PerformLogin()
     {
@@ -64,7 +65,7 @@
             {
                 await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLoginAsGuest( studentNumber, password);
                 password = "";
-                studentNumber = "";
+                studentNumber = 0;
                 NavigationManager.NavigateTo("/BuildingsOverview");
             }
             else

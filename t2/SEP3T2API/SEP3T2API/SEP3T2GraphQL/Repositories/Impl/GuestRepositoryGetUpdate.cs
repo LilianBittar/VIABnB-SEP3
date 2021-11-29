@@ -4,7 +4,9 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3T2GraphQL.Repositories.Impl
 {
@@ -32,7 +34,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 throw new Exception(await response.Content.ReadAsStringAsync()); 
             }
 
-            var fetchedGuest = JsonSerializer.Deserialize<Guest>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions(){PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+            var fetchedGuests = JsonConvert.DeserializeObject<List<Guest>>(await response.Content.ReadAsStringAsync());
+            var fetchedGuest = fetchedGuests[0];
             return fetchedGuest;
         }
 
