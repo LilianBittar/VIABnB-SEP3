@@ -16,6 +16,7 @@ namespace SEP3BlazorT1Client.Authentication
 
         private readonly IJSRuntime jsRuntime;
         private readonly IHostService _hostService;
+        private readonly IGuestService _guestService;
         private Host cachedHost;
 
         public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IHostService _hostService)
@@ -31,8 +32,8 @@ namespace SEP3BlazorT1Client.Authentication
                 string userAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
                 if (!string.IsNullOrEmpty(userAsJson))
                 {
-                    Host tmp = JsonSerializer.Deserialize<Host>(userAsJson);
-                    await ValidateLogin(tmp.Email, tmp.Password);
+                    var tmp = JsonSerializer.Deserialize<Host>(userAsJson);
+                    await ValidateLoginAsHost(tmp.Email, tmp.Password);
                 }
             }
             else
@@ -44,16 +45,18 @@ namespace SEP3BlazorT1Client.Authentication
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
         }
 
-        public async Task ValidateLogin(string email, string password)
+        public async Task ValidateLoginAsHost(string email, string password)
         {
-            Console.WriteLine("Validating log in");
             if (string.IsNullOrEmpty(email)) throw new Exception("Enter email");
             if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
-            ClaimsIdentity identity = new ClaimsIdentity();
+            
+            Console.WriteLine("Validating log in as a host.");
+                
+            ClaimsIdentity identity = new();
             try
             {
                 Console.WriteLine(1);
-                Host user = await _hostService.ValidateHostAsync(email, password);
+                var user = await _hostService.ValidateHostAsync(email, password);
                 Console.WriteLine(2);
                 if (user == null) throw new Exception("Email or password are not correct");
                 Console.WriteLine(user.Email);
@@ -71,7 +74,33 @@ namespace SEP3BlazorT1Client.Authentication
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
-        public void Logout()
+        public async Task ValidateLoginAsGuest(  string studentNumber,string password)
+        {
+            if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
+            if (string.IsNullOrEmpty(studentNumber)) throw new Exception("Enter student number");
+            
+            Console.WriteLine("Validating log in as a guest.");
+                
+            ClaimsIdentity identity = new();
+            try
+            {
+                Guest user = await _guestService.ValidateGuestAsync( password, studentNumber);
+                if (user == null) throw new Exception("Password or student number are not correct");
+                identity = SetupClaimsForUserAsGuest(user);
+                string serialisedData = JsonSerializer.Serialize(user);
+                await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);
+                cachedHost = user;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
+        }
+
+
+            public void Logout()
         {
             cachedHost = null;
             var user = new ClaimsPrincipal(new ClaimsIdentity());
@@ -96,6 +125,23 @@ namespace SEP3BlazorT1Client.Authentication
             return identity;
         }
 
+        private ClaimsIdentity SetupClaimsForUserAsGuest(Guest guest)
+        {
+           
+            List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, guest.FirstName));
+            claims.Add(new Claim("Lastname", guest.LastName));
+            claims.Add(new Claim("Email", guest.Email));
+            claims.Add(new Claim("Password", guest.Password));
+            claims.Add(new Claim("Id", guest.Id.ToString()));
+            claims.Add(new Claim("PhoneNumber", guest.PhoneNumber));
+            claims.Add(new Claim("Cpr", guest.Cpr));
+            claims.Add(new Claim("ProfileImageUrl", guest.ProfileImageUrl));
+            claims.Add(new Claim("IsApprovedHost", guest.IsApprovedHost.ToString()));
+            claims.Add(new Claim("viaId", guest.ViaId.ToString()));
+            ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
+            return identity;
+        }
     }
 }
 

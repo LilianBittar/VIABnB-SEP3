@@ -29,5 +29,6 @@ public interface GuestDAO {
      * @throws IllegalStateException
      * */
     List<Guest> getAllNotApprovedGuests();
+    Guest getGuestByStudentNumber(int studentNumber);
 
 }
