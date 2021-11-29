@@ -60,7 +60,6 @@ namespace SEP3T2GraphQL.Repositories.Impl
         public async Task<IEnumerable<RentRequest>> GetAllAsync()
         {
             var response = await _client.GetAsync(Url);
-            Console.WriteLine(await response.Content.ReadAsStringAsync());
             await HandleErrorResponse(response);
 
             return JsonSerializer.Deserialize<List<RentRequest>>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions(){PropertyNameCaseInsensitive = true});
