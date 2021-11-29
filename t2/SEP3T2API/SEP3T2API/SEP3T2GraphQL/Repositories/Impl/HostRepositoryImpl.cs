@@ -123,7 +123,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             HttpContent content = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PatchAsync($"{uri}/hosts/{host.Id}/approval", content);
+            var response = await client.PatchAsync($"{uri}/hosts/{host.Id}/approval", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");

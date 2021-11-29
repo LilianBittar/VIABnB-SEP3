@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services.Validation;
@@ -33,26 +34,6 @@ namespace SEP3T2GraphQL.Services.Impl
             return await _rentRequestRepository.CreateAsync(request);
         }
 
-        public async Task<RentRequest> ApproveRentRequestAsync(RentRequest request)
-        {
-            if (request == null)
-            {
-                throw new ArgumentException("Request cannot be null");
-            }
-            await _createRentRequestValidator.ValidateRentRequest(request);
-            return await _rentRequestRepository.UpdateAsync(request);
-        }
-
-        public async Task<RentRequest> RejectRentRequestAsync(RentRequest request)
-        {
-            if (request == null)
-            {
-                throw new ArgumentException("Request cannot be null");
-            }
-            await _createRentRequestValidator.ValidateRentRequest(request);
-            return await _rentRequestRepository.UpdateAsync(request);
-        }
-
         public async Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync()
         {
             var rentRequestListToReturn = await _rentRequestRepository.GetAllAsync();
@@ -78,6 +59,22 @@ namespace SEP3T2GraphQL.Services.Impl
             }
 
             return rentRequestListToReturn;
+        }
+
+        public async Task<RentRequest> UpdateRentRequestStatusAsync(RentRequest request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentException("Rent request can't be null");
+            }
+
+            var updatedRequest = await _rentRequestRepository.UpdateRentRequestStatusAsync(request);
+            if (updatedRequest == null)
+            {
+                throw new ArgumentException("Can't update the rent request status!!!");
+            }
+
+            return updatedRequest;
         }
     }
 }

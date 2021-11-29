@@ -66,6 +66,27 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return JsonSerializer.Deserialize<List<RentRequest>>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions(){PropertyNameCaseInsensitive = true});
         }
 
+        public async Task<RentRequest> UpdateRentRequestStatusAsync(RentRequest request)
+        {
+            var requestAsJson = JsonSerializer.Serialize(request, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            HttpContent content = new StringContent(requestAsJson, Encoding.UTF8, "application/json");
+            var response = await _client.PatchAsync($"{Url}/rentrequests/{request.Guest}/approval", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            var updatedRequest = JsonSerializer.Deserialize<RentRequest>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return updatedRequest;
+        }
+
         private static async Task HandleErrorResponse(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)

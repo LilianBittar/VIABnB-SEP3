@@ -139,13 +139,15 @@ namespace SEP3BlazorT1Client.Data.Impl
         }
 
 
-        public async Task<RentRequest> ApproveRentRequestAsync(RentRequest request)
+        public async Task<RentRequest> UpdateRentRequestAsync(RentRequest request)
         {
-            var approvedRentRequest = new GqlQuery()
+            var updatedRentRequest = new GqlQuery()
             {
-                Query = @"mutation($approveRentRequest: RentRequestInput) {
-                            approveRentRequest(request: $approveRentRequest) {
-                              id
+                Query = @"mutation($updatedRentRequest:RentRequestInput) 
+                          {
+                            updateRentRequestStatus(request:$updatedRentRequest) 
+                             {
+                               id
                               startDate
                               endDate
                               numberOfGuests
@@ -251,138 +253,12 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   isApprovedHost
                                 }
                               }
-                            }
-                          }
-                          ",
-                Variables = new {approveRentRequest = request.Status == RentRequestStatus.APPROVED}
+                        }
+                       }
+                        ",
+                Variables = new {updatedRentRequest = request}
             };
-            var response = await _client.PostQueryAsync<ApprovedRentRequestResponseType>(approvedRentRequest);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
-            }
-
-            return response.Data.RentRequest; 
-        }
-
-        public async Task<RentRequest> RejectRentRequestAsync(RentRequest request)
-        {
-            var rejectRentRequest = new GqlQuery()
-            {
-                Query = @"mutation($rejectRentRequest: RentRequestInput) {
-                            rejectRentRequest(request: $rejectRentRequest) {
-                              id
-                              startDate
-                              endDate
-                              numberOfGuests
-                              status
-                              guest {
-                                viaId
-                                guestReviews {
-                                  id
-                                  rating
-                                  text
-                                  hostId
-                                }
-                                isApprovedGuest
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
-                                  id
-                                  rating
-                                  text
-                                  viaId
-                                }
-                                profileImageUrl
-                                cpr
-                                isApprovedHost
-                              }
-                              residence {
-                                averageRating
-                                id
-                                address {
-                                  id
-                                  streetName
-                                  houseNumber
-                                  streetNumber
-                                  city {
-                                    id
-                                    cityName
-                                    zipCode
-                                  }
-                                }
-                                description
-                                type
-                                isAvailable
-                                pricePerNight
-                                rules {
-                                  description
-                                }
-                                facilities {
-                                  id
-                                  name
-                                }
-                                imageUrl
-                                availableFrom
-                                availableTo
-                                maxNumberOfGuests
-                                residenceReviews {
-                                  rating
-                                  reviewText
-                                  guest {
-                                    viaId
-                                    guestReviews {
-                                      id
-                                      rating
-                                      text
-                                      hostId
-                                    }
-                                    isApprovedGuest
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                  }
-                                }
-                                host {
-                                  id
-                                  firstName
-                                  lastName
-                                  phoneNumber
-                                  email
-                                  password
-                                  hostReviews {
-                                    id
-                                    rating
-                                    text
-                                    viaId
-                                  }
-                                  profileImageUrl
-                                  cpr
-                                  isApprovedHost
-                                }
-                              }
-                            }
-                          }
-                          ",
-                Variables = new {rejectRentRequest = request.Status == RentRequestStatus.NOTAPPROVED}
-            };
-            var response = await _client.PostQueryAsync<RejectedRentRequestResponseType>(rejectRentRequest);
+            var response = await _client.PostQueryAsync<UpdatedRentRequestResponseType>(updatedRentRequest);
             if (response.Errors != null)
             {
                 throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
@@ -395,67 +271,78 @@ namespace SEP3BlazorT1Client.Data.Impl
         {
             var allRents = new GqlQuery()
             {
-                Query = @"query {
-  allRentRequests {
-    totalPrice
-    rentPeriodInDays
-    id
-    startDate
-    endDate
-    numberOfGuests
-    status
-    guest {
-      viaId
-      guestReviews {
-        id
-        rating
-        text
-        hostId
-      }
-      isApprovedGuest
-      id
-      firstName
-      lastName
-      phoneNumber
-      email
-      password
-      hostReviews {
-        id
-        viaId
-        rating
-        text
-      }
-      profileImageUrl
-      cpr
-      isApprovedHost
-    }
-    residence {
-      id
-      address {
-        id
-        streetName
-        houseNumber
-        streetNumber
-        city {
-          id
-          cityName
-          zipCode
-        }
-      }
-      description
-      type
-      averageRating
-      isAvailable
-      pricePerNight
-      rules {
-        description
-      }
-      facilities {
-        name
-      }
-    }
-  }
-}",
+                Query = @"query 
+                          {
+                            allRentRequests 
+                             {
+                               id
+                               startDate
+                               endDate
+                               numberOfGuests
+                               status
+                               guest 
+                                {
+                                  viaId
+                                  guestReviews 
+                                    {
+                                      id
+                                      rating
+                                      text
+                                      hostId
+                                    }
+                                 isApprovedGuest
+                                 id
+                                 firstName
+                                 lastName
+                                 phoneNumber
+                                 email
+                                 password
+                                 hostReviews 
+                                  {
+                                     id
+                                     viaId
+                                     rating
+                                     text
+                                  }
+                                 profileImageUrl
+                                 cpr
+                                 isApprovedHost
+                               }
+                             residence 
+                              {
+                                 id
+                                 address 
+                                  {
+                                    id
+                                    streetName
+                                    houseNumber
+                                    streetNumber
+                                    city 
+                                      {
+                                        id
+                                        cityName
+                                        zipCode
+                                      }
+                                   }
+                            description
+                            type
+                            averageRating
+                            isAvailable
+                            pricePerNight
+                            rules 
+                              {
+                                residenceId
+                                description
+                              }
+                            facilities 
+                              {
+                                id
+                                name
+                              }
+                          }
+                        }
+                       }
+                        ",
             };
             var graphQlResponse =
                 await _client.PostQueryAsync<RentRequestListResponseType>(allRents);
@@ -471,67 +358,78 @@ namespace SEP3BlazorT1Client.Data.Impl
         {
             var getRentRequest = new GqlQuery()
             {
-                Query = @"query {
-  allRentRequests {
-    totalPrice
-    rentPeriodInDays
-    id
-    startDate
-    endDate
-    numberOfGuests
-    status
-    guest {
-      viaId
-      guestReviews {
-        id
-        rating
-        text
-        hostId
-      }
-      isApprovedGuest
-      id
-      firstName
-      lastName
-      phoneNumber
-      email
-      password
-      hostReviews {
-        id
-        viaId
-        rating
-        text
-      }
-      profileImageUrl
-      cpr
-      isApprovedHost
-    }
-    residence {
-      id
-      address {
-        id
-        streetName
-        houseNumber
-        streetNumber
-        city {
-          id
-          cityName
-          zipCode
-        }
-      }
-      description
-      type
-      averageRating
-      isAvailable
-      pricePerNight
-      rules {
-        description
-      }
-      facilities {
-        name
-      }
-    }
-  }
-}",
+                Query = @"query($requestId:int) 
+                          {
+                            allRentRequests(int:requestId) 
+                             {
+                               id
+                               startDate
+                               endDate
+                               numberOfGuests
+                               status
+                               guest 
+                                {
+                                  viaId
+                                  guestReviews 
+                                    {
+                                      id
+                                      rating
+                                      text
+                                      hostId
+                                    }
+                                 isApprovedGuest
+                                 id
+                                 firstName
+                                 lastName
+                                 phoneNumber
+                                 email
+                                 password
+                                 hostReviews 
+                                  {
+                                     id
+                                     viaId
+                                     rating
+                                     text
+                                  }
+                                 profileImageUrl
+                                 cpr
+                                 isApprovedHost
+                               }
+                             residence 
+                              {
+                                 id
+                                 address 
+                                  {
+                                    id
+                                    streetName
+                                    houseNumber
+                                    streetNumber
+                                    city 
+                                      {
+                                        id
+                                        cityName
+                                        zipCode
+                                      }
+                                   }
+                            description
+                            type
+                            averageRating
+                            isAvailable
+                            pricePerNight
+                            rules 
+                              {
+                                residenceId
+                                description
+                              }
+                            facilities 
+                              {
+                                id
+                                name
+                              }
+                          }
+                        }
+                       }
+                        ",
                 Variables = new {requestId = id}
             };
             var response = await _client.PostQueryAsync<RentRequestIdResponseType>(getRentRequest);
