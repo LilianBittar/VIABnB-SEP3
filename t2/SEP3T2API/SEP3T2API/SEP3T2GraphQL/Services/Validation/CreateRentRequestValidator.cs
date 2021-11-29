@@ -154,19 +154,19 @@ namespace SEP3T2GraphQL.Services.Validation
                 return;
             }
             
-            // if (!allRequests.Any(r => r.Residence.Id == request.Residence.Id))
-            // {
-            //     return; 
-            // }
-            // var allRequestsForSameResidence = allRequests.Where(r => r!= null && r.Residence.Id == request.Residence.Id).ToList();
-            //
-            // if (allRequestsForSameResidence.Any(r =>
-            //     (DateTime.Compare(r.StartDate.Date, request.StartDate.Date) == 0 &&
-            //      DateTime.Compare(r.EndDate.Date, request.EndDate.Date) == 0) &&
-            //     (r.Status == RentRequestStatus.Approved)))
-            // {
-            //     throw new ArgumentException("Approved rent request for same rent period already exists");
-            // }
+            if (!allRequests.Any(r => r.Residence.Id == request.Residence.Id))
+            {
+                return; 
+            }
+            var allRequestsForSameResidence = allRequests.Where(r => r!= null && r.Residence.Id == request.Residence.Id).ToList();
+            
+            if (allRequestsForSameResidence.Any(r =>
+                (DateTime.Compare(r.StartDate.Date, request.StartDate.Date) == 0 &&
+                 DateTime.Compare(r.EndDate.Date, request.EndDate.Date) == 0) &&
+                (r.Status == RentRequestStatus.APPROVED)))
+            {
+                throw new ArgumentException("Approved rent request for same rent period already exists");
+            }
         }
     }
 }

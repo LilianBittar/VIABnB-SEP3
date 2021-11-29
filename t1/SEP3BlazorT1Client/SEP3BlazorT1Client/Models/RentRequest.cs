@@ -53,8 +53,8 @@ namespace SEP3BlazorT1Client.Models
     public enum RentRequestStatus
     {
         // Changed the values even though to match graphql enums 
-        NOT_ANSWERED,
-        NotApproved,
-        Approved
+        NOTANSWERED,
+        NOTAPPROVED,
+        APPROVED
     }
 }

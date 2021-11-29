@@ -254,7 +254,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                             }
                           }
                           ",
-                Variables = new {approveRentRequest = request.Status == RentRequestStatus.Approved}
+                Variables = new {approveRentRequest = request.Status == RentRequestStatus.APPROVED}
             };
             var response = await _client.PostQueryAsync<ApprovedRentRequestResponseType>(approvedRentRequest);
             if (response.Errors != null)
@@ -380,7 +380,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                             }
                           }
                           ",
-                Variables = new {rejectRentRequest = request.Status == RentRequestStatus.NotApproved}
+                Variables = new {rejectRentRequest = request.Status == RentRequestStatus.NOTAPPROVED}
             };
             var response = await _client.PostQueryAsync<RejectedRentRequestResponseType>(rejectRentRequest);
             if (response.Errors != null)

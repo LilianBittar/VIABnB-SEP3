@@ -75,7 +75,7 @@ else
     [Parameter]
     public int ResidenceId { get; set; }
 
-    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now, Status = RentRequestStatus.NOT_ANSWERED};
+    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now, Status = RentRequestStatus.NOTANSWERED};
 
     [CascadingParameter]
     public EditContext EditContext { get; private set; }
