@@ -53,6 +53,17 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _hostService.ValidateHostAsync(email, password);
         }
+        
+        public async Task<Host> GetGuestByStudentNumber(int studentNumber)
+        {
+            return await _guestService.GetGuestByStudentNumber(studentNumber); 
+        }
+        
+        public async Task<Host> ValidateGuestLogin(int studentNumber, string password)
+        {
+            return await _guestService.ValidateGuestAsync(studentNumber, password);
+
+        }
 
         public async Task<Administrator> GetAdminByEmail(string email)
         {

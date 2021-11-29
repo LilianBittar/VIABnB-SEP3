@@ -8,7 +8,7 @@ namespace SEP3T2GraphQL.Repositories
     {
         Task<Guest> CreateGuestAsync(Guest guest);
         Task<Guest> GetGuestById(int id);
-        Task<Guest> GetGuestByEmail(string email);
+        Task<Guest> GetGuestByStudentNumber(int studentNumber);
         Task<Guest> UpdateGuest(Guest guest); 
         Task<IEnumerable<Guest>> GetAllGuests(); 
         /// <summary>
@@ -24,5 +24,7 @@ namespace SEP3T2GraphQL.Repositories
         /// <exception cref="Exception">Thrown if the API response is not successful</exception>
         /// <returns>Guest object</returns>
         Task<Guest> UpdateGuestStatus(Guest guest); 
+        
+        
     }
 }

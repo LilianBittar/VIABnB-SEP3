@@ -84,9 +84,10 @@ public class GuestController {
         }
     }
 
-    @GetMapping("/guests") public ResponseEntity<Guest> getGuestByStudentNumber(
-            @RequestParam(required = false) int studentNumber)
+    @GetMapping("/guests/studentNumber={studentNumber}")
+    public ResponseEntity<Guest> getGuestByStudentNumber(@PathVariable("studentNumber") int studentNumber)
     {
+        System.out.println(studentNumber);
         Guest guest;
         guest = guestDAO.getGuestByStudentNumber(studentNumber);
         if (guest == null)

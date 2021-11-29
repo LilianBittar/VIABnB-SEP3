@@ -119,7 +119,7 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
     @Override
     public Guest getGuestByStudentNumber(int studentNumber) {
         try (Connection connection = getConnection()) {
-            PreparedStatement stm = connection.prepareStatement("select * from host h join guest g on h.hostid = g.guestid where g.viaid= ?");
+            PreparedStatement stm = connection.prepareStatement("select * from host h join guest g on h.hostid = g.guestid where viaid = ?");
             stm.setInt(1, studentNumber);
             ResultSet result = stm.executeQuery();
             if (result.next()){

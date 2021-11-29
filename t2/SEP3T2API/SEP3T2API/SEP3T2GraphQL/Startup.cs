@@ -16,6 +16,8 @@ using SEP3T2GraphQL.Services.Administration;
 using SEP3T2GraphQL.Services.Administration.Impl;
 using SEP3T2GraphQL.Services.Impl;
 using SEP3T2GraphQL.Services.Validation;
+using SEP3T2GraphQL.Services.Validation.GuestValidation;
+using SEP3T2GraphQL.Services.Validation.GuestValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.HostValidation;
 using SEP3T2GraphQL.Services.Validation.HostValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
@@ -44,6 +46,7 @@ namespace SEP3T2GraphQL
             services.AddScoped<IHostRepository, HostRepositoryImpl>();
             services.AddScoped<IHostService, HostServiceImpl>();
             services.AddScoped<IHostValidation, HostValidationImpl>();
+            services.AddScoped<IGuestValidation, GuestValidationImpl>();
             services.AddScoped<IGuestService, GuestServiceImpl>();
             services.AddScoped<IGuestRepository, GuestRepository>();
             services.AddScoped<IRentalService, RentalService>();
