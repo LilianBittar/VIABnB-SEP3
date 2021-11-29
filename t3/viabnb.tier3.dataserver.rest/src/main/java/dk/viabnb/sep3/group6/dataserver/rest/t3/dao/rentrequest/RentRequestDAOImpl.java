@@ -25,8 +25,8 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             PreparedStatement stm = connection.prepareStatement(
                     "insert into rentrequest(startdate, enddate, numberofguests, status, hostid, residenceid, guestid) values (?,?,?,?,?,?,?)");
             LOGGER.info("statement set");
-            stm.setDate(1, Date.valueOf(LocalDate.now()));
-            stm.setDate(2, Date.valueOf(LocalDate.now()));
+            stm.setDate(1, Date.valueOf(request.getStartDate()));
+            stm.setDate(2, Date.valueOf(request.getEndDate()));
             stm.setInt(3, request.getNumberOfGuests());
             stm.setString(4, RentRequestStatus.NOTANSWERED.name());
             stm.setInt(5, request.getResidence().getHost().getId());
