@@ -71,7 +71,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement(
-          "SELECT * FROM rentrequest JOIN host h on h.hostid = rentrequest.hostid");
+          "SELECT * FROM rentrequest JOIN host h ON h.hostid = rentrequest.hostid");
       ResultSet result = stm.executeQuery();
       while (result.next())
       {
