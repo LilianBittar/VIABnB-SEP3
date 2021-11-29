@@ -72,6 +72,13 @@ public class GuestController {
         }
     }
 
+    /**
+     * Handles request for getting a guests in the system at endpoint /guests/={id}.
+     * @param id Required field for filtering guests by guest id value.
+     * @return HTTP OK with the Guest in response body.
+     * If the controller manage to find the guest with the provided id,
+     * If Data access fails, then HTTP Internal Server Error is returned.
+     * */
     @GetMapping("/guests/{id}")
     public ResponseEntity<Guest> getGuestByHostId(@PathVariable("id") int id)
     {
@@ -84,6 +91,14 @@ public class GuestController {
         }
     }
 
+
+    /**
+     * Handles request for getting a guests in the system at endpoint /guests/studentNumber={studentNumber}.
+     * @param studentNumber Required field for filtering guests by student number value.
+     * @return HTTP OK with the Guest in response body.
+     * If the controller manage to find the guest with the provided student number,
+     * If Data access fails, then HTTP Internal Server Error is returned.
+     * */
     @GetMapping("/guests/studentNumber={studentNumber}")
     public ResponseEntity<Guest> getGuestByStudentNumber(@PathVariable("studentNumber") int studentNumber)
     {

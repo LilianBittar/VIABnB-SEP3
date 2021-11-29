@@ -33,6 +33,11 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
         }
     }
 
+    /**
+     * Handles querying the database for a list of all guests.
+     * @return a list of guests.
+     * @throws IllegalStateException if it could not connect to the database
+     * */
     @Override
     public List<Guest> getAllGuests() {
         try (Connection connection = getConnection()) {
@@ -57,6 +62,12 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
     }
 
 
+    /**
+     * Handles querying the database for a guest with the provided id.
+     * @param guest id Required field for filtering guests by id value.
+     * @return a guest object or null if it could not find the guest with the provided id.
+     * @throws IllegalStateException if it could not connect to the database
+     * */
     @Override
     public Guest getGuestByHostId(int id) {
         try (Connection connection = getConnection()) {
@@ -78,6 +89,12 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
             throw new IllegalStateException(throwables.getMessage());
         }
     }
+
+    /**
+     * Handles querying the database for a list of all not approved guest.
+     * @return a list of  guest that were not approved.
+     * @throws IllegalStateException if it could not connect to the database
+     * */
 
     @Override public List<Guest> getAllNotApprovedGuests()
     {
@@ -116,6 +133,12 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
         }
     }
 
+    /**
+     * Handles querying the database for a guest with the provided student number.
+     * @param studentNumber Required field for filtering guests by student number value.
+     * @return a guest object or null if it could not find the guest with the provided student number.
+     * @throws IllegalStateException if it could not connect to the database
+     * */
     @Override
     public Guest getGuestByStudentNumber(int studentNumber) {
         try (Connection connection = getConnection()) {
