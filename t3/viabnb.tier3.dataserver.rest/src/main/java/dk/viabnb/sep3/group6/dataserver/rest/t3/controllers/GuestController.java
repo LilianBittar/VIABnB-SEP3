@@ -53,17 +53,21 @@ public class GuestController {
     /**
      * Handles request for getting all guests in the system at endpoint /guests.
      * @param isApproved Optional field for filtering guests by isApproved value.
-     * @return HTTP OK with all Guests in response body. If isApproved is provided,
+     * @param studentNumber Optional field for filtering guest by student number value.
+     * @return HTTP OK with all Guests in response body. If isApproved or student number are provided,
      * then the list is filtered.
      * If Data access fails, then HTTP Internal Server Error is returned.
      * */
     @GetMapping("/guests")
-    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam(required = false) Boolean isApproved) {
+    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam(required = false) Boolean isApproved, @RequestParam(required = false) Integer studentNumber ) {
 
         try {
             List<Guest> allGuests = guestDAO.getAllGuests();
             if (isApproved != null){
                 allGuests.removeIf(g -> g.isApprovedGuest() != isApproved);
+            }
+            if(studentNumber != null){
+                allGuests.removeIf(g -> g.getViaId() != studentNumber);
             }
             LOGGER.info("getAllGuests returned: " + new Gson().toJson(allGuests));
             return ResponseEntity.ok(allGuests);
@@ -92,25 +96,7 @@ public class GuestController {
     }
 
 
-    /**
-     * Handles request for getting a guests in the system at endpoint /guests/studentNumber={studentNumber}.
-     * @param studentNumber Required field for filtering guests by student number value.
-     * @return HTTP OK with the Guest in response body.
-     * If the controller manage to find the guest with the provided student number,
-     * If Data access fails, then HTTP Internal Server Error is returned.
-     * */
-    @GetMapping("/guests/studentNumber={studentNumber}")
-    public ResponseEntity<Guest> getGuestByStudentNumber(@PathVariable("studentNumber") int studentNumber)
-    {
-        System.out.println(studentNumber);
-        Guest guest;
-        guest = guestDAO.getGuestByStudentNumber(studentNumber);
-        if (guest == null)
-        {
-            return ResponseEntity.internalServerError().build();
-        }
-        return new ResponseEntity<>(guest, HttpStatus.OK);
-    }
+
     /**
      * End point of method type GET to get list of Guest objects with isApprovedGuest boolean value false
      * @return List<Guest>

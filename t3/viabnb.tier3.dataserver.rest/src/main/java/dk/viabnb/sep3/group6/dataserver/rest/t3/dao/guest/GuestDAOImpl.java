@@ -133,12 +133,7 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
         }
     }
 
-    /**
-     * Handles querying the database for a guest with the provided student number.
-     * @param studentNumber Required field for filtering guests by student number value.
-     * @return a guest object or null if it could not find the guest with the provided student number.
-     * @throws IllegalStateException if it could not connect to the database
-     * */
+
     @Override
     public Guest getGuestByStudentNumber(int studentNumber) {
         try (Connection connection = getConnection()) {

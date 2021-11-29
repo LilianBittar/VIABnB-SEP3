@@ -19,10 +19,11 @@ namespace SEP3BlazorT1Client.Authentication
         private readonly IGuestService _guestService;
         private Host cachedHost;
 
-        public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IHostService _hostService)
+        public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IHostService _hostService, IGuestService _guestService)
         {
             this.jsRuntime = jsRuntime;
             this._hostService = _hostService;
+            this._guestService = _guestService;
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
@@ -74,7 +75,7 @@ namespace SEP3BlazorT1Client.Authentication
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
-        public async Task ValidateLoginAsGuest(  string studentNumber,string password)
+        public async Task ValidateLoginAsGuest(string studentNumber,string password)
         {
             if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
             if (string.IsNullOrEmpty(studentNumber)) throw new Exception("Enter student number");
@@ -84,12 +85,20 @@ namespace SEP3BlazorT1Client.Authentication
             ClaimsIdentity identity = new();
             try
             {
-                Guest user = await _guestService.ValidateGuestAsync( password, studentNumber);
+                Console.WriteLine("1");
+                Console.WriteLine(studentNumber);
+                Console.WriteLine(password);
+                Guest user = await _guestService.ValidateGuestAsync(studentNumber, password);
+                Console.WriteLine("11");
                 if (user == null) throw new Exception("Password or student number are not correct");
+                Console.WriteLine("1111");
                 identity = SetupClaimsForUserAsGuest(user);
+                Console.WriteLine("111111");
                 string serialisedData = JsonSerializer.Serialize(user);
+                Console.WriteLine("222");
                 await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);
                 cachedHost = user;
+                Console.WriteLine("1o");
             }
             catch (Exception e)
             {

@@ -56,12 +56,12 @@ namespace SEP3BlazorT1Client.Data.Impl
             return response.Data.CreateGuest; 
         }
 
-        public async Task<Guest> ValidateGuestAsync( string studentNumber,string password)
+        public async Task<Guest> ValidateGuestAsync(string studentNumber,string password)
         {
             GqlClient client = new GqlClient(Url);
             var validateGuestQuery = new GqlQuery()
             {
-                Query = @"query($emailGuest: String, $passwordGuest: String, $studentNumberGuest) {
+                Query = @"query($passwordGuest: String, $studentNumberGuest) {
                           validateGuestLogin( password: $passwordGuest, studentNumber: $studentNumber)
                            {id,
                            firstName,

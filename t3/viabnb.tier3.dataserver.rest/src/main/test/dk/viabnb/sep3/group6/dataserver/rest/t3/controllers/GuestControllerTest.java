@@ -31,5 +31,7 @@ class GuestControllerTest {
         ResponseEntity<Guest> response = controller.createGuest(guest);
         Assertions.assertEquals(ResponseEntity.internalServerError().build(), response);
 
+        //todo test if statements in controller
+
     }
 }

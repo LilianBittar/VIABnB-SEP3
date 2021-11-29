@@ -62,7 +62,7 @@
         {
             if (loginAsHost)
             {
-                await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLoginAsGuest( password, studentNumber);
+                await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLoginAsGuest( studentNumber, password);
                 password = "";
                 studentNumber = "";
                 NavigationManager.NavigateTo("/BuildingsOverview");
