@@ -104,16 +104,15 @@ public class RentRequestController {
     @PatchMapping("/rentrequests/{id}/approval")
     public ResponseEntity<RentRequest> updateRentRequestStatus(@RequestBody RentRequest request, @PathVariable("id") int id)
     {
-        LOGGER.info("Recived updated request " + new Gson().toJson(request));
         RentRequest updateRequest;
         try
         {
-            if (request.getStatus().equals("APPROVED"))
+            if (request.getStatus().name().equals("APPROVED"))
             {
                 updateRequest = rentRequestDAO.approveRequest(request);
                 return ResponseEntity.ok(updateRequest);
             }
-            else if (request.getStatus().equals("NOTAPPROVED"))
+            else if (request.getStatus().name().equals("NOTAPPROVED"))
             {
                 updateRequest = rentRequestDAO.rejectRequest(request);
                 return ResponseEntity.ok(updateRequest);

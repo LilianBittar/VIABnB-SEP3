@@ -50,8 +50,8 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
       if (result.next())
       {
         return new RentRequest(result.getInt("rentrequestid"),
-            result.getDate("startdate").toLocalDate().atStartOfDay(),
-            result.getDate("enddate").toLocalDate().atStartOfDay(),
+            result.getDate("startdate"),
+            result.getDate("enddate"),
             result.getInt("numberofguests"),
             RentRequestStatus.valueOf(result.getString("status")),
             getGuestById(result.getInt("hostid")),
@@ -76,8 +76,8 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
       while (result.next())
       {
         RentRequest request = new RentRequest(result.getInt("rentrequestid"),
-            result.getDate("startdate").toLocalDate().atStartOfDay(),
-            result.getDate("enddate").toLocalDate().atStartOfDay(),
+            result.getDate("startdate"),
+            result.getDate("enddate"),
             result.getInt("numberofguests"),
             RentRequestStatus.valueOf(result.getString("status")),
             getGuestById(result.getInt("hostid")),

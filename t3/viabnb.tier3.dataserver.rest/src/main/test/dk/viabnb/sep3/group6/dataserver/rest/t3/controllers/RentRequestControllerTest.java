@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -47,14 +48,14 @@ class RentRequestControllerTest {
 
     @Test
     public void CreateRentRequestRentRepositoryDoesNotCreateRequestReturnsInternalServerError() {
-        RentRequest request = new RentRequest(1, LocalDateTime.now(), LocalDateTime.now(), 1, RentRequestStatus.NOTANSWERED, guest, residence);
+        RentRequest request = new RentRequest(1, new Date(), new Date(), 1, RentRequestStatus.NOTANSWERED, guest, residence);
         when(rentRequestDAO.create(request)).thenReturn(null);
         assertEquals(ResponseEntity.internalServerError().build(), controller.createRentRequest(request));
     }
 
     @Test
     public void CreateRentRequestRentRepositoryThrowsIllegalStateReturnsInternalServerError() {
-        RentRequest request = new RentRequest(1, LocalDateTime.now(), LocalDateTime.now(), 1, RentRequestStatus.NOTANSWERED, guest, residence);
+        RentRequest request = new RentRequest(1,new Date(), new Date(), 1, RentRequestStatus.NOTANSWERED, guest, residence);
         when(rentRequestDAO.create(request)).thenThrow(IllegalStateException.class);
         assertEquals(ResponseEntity.internalServerError().build(), controller.createRentRequest(request));
     }
