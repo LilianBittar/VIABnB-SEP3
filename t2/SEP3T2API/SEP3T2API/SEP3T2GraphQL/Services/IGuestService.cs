@@ -34,6 +34,6 @@ namespace SEP3T2GraphQL.Services
         /// <exception cref="ArgumentException">Thrown if the host is null</exception>
         /// <returns>Guest object</returns>
         Task<Guest> UpdateGuestStatus(Guest guest);
-        Task<Host> ValidateGuestAsync(int studentNumber, string password);
+        Task<Guest> ValidateGuestAsync(int studentNumber, string password);
     }
 }

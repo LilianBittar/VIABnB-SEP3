@@ -51,7 +51,7 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
                     result.getString("password"), new ArrayList<>(),
                     result.getString("personalimage"),
                     result.getString("cprnumber"),
-                    result.getBoolean("isapproved"), result.getInt("viaid"),
+                    result.getBoolean("isapproved"), result.getInt("viaid"), new ArrayList<>(),
                     result.getBoolean("isapprovedguest"));
                 allGuests.add(existingGuest);
             }
@@ -64,7 +64,7 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
 
     /**
      * Handles querying the database for a guest with the provided id.
-     * @param guest id Required field for filtering guests by id value.
+     * @param id id Required field for filtering guests by id value.
      * @return a guest object or null if it could not find the guest with the provided id.
      * @throws IllegalStateException if it could not connect to the database
      * */
@@ -147,7 +147,7 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
                         result.getString("password"), new ArrayList<>(),
                         result.getString("personalimage"),
                         result.getString("cprnumber"),
-                        result.getBoolean("isapproved"), result.getInt("viaid"),
+                        result.getBoolean("isapproved"), result.getInt("viaid"),new ArrayList<>(),
                         result.getBoolean("isapprovedguest"));
             }
             return null;

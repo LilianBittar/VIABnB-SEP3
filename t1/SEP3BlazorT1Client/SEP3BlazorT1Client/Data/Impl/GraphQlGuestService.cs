@@ -61,8 +61,8 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlClient client = new GqlClient(Url);
             var validateGuestQuery = new GqlQuery()
             {
-                Query = @"query($passwordGuest: String, $studentNumberGuest) {
-                          validateGuestLogin( password: $passwordGuest, studentNumber: $studentNumber)
+                Query = @"query($passwordGuest: String, $studentNumberGuest: Int!) {
+                          validateGuestLogin(password: $passwordGuest, studentNumber: $studentNumber)
                            {id,
                            firstName,
                            lastName,

@@ -86,7 +86,7 @@ namespace SEP3T2GraphQL.Services.Impl
             throw new ArgumentException("No user with such student number");
         }
 
-        public async Task<Host> ValidateGuestAsync(int studentNumber, string password)
+        public async Task<Guest> ValidateGuestAsync(int studentNumber, string password)
         {
             var returnedGuest = await GetGuestByStudentNumber(studentNumber);
             if (returnedGuest == null) throw new KeyNotFoundException("user not found");

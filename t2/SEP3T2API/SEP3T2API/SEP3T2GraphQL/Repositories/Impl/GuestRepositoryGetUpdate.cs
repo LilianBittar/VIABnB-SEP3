@@ -26,6 +26,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
         {
             
             HttpResponseMessage response = await _client.GetAsync($"{Uri}?studentNumber={studentNumber}");
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception(await response.Content.ReadAsStringAsync()); 
