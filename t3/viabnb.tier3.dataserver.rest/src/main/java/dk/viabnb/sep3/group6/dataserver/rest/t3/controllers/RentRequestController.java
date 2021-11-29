@@ -56,26 +56,14 @@ public class RentRequestController {
         try
         {
             if (residenceId != null) {
-                requestsToReturn.forEach((request) -> {
-                    if (request.getResidence().getId() != residenceId) {
-                        requestsToReturn.remove(request);
-                    }
-                });
+                requestsToReturn.removeIf(request -> request.getId() != residenceId);
             }
 
             if (hostId != null) {
-                requestsToReturn.forEach((request) -> {
-                    if (request.getResidence().getHost().getId() != hostId) {
-                        requestsToReturn.remove(request);
-                    }
-                });
+                requestsToReturn.removeIf(request -> request.getResidence().getHost().getId() != hostId);
             }
             if (guestId != null) {
-                requestsToReturn.forEach((request) -> {
-                    if (request.getGuest().getId() != guestId) {
-                        requestsToReturn.remove(request);
-                    }
-                });
+                requestsToReturn.removeIf(request -> request.getGuest().getId() != guestId);
             }
         }
         catch (Exception e)
