@@ -19,6 +19,7 @@ namespace SEP3BlazorT1Client.Models
         [DisplayFormat(ConvertEmptyStringToNull =false)]
         [JsonProperty("streetNumber")]
         public string StreetNumber { get; set; }
+        [JsonProperty("city")]
         
         [Required] public City City { get; set; }
         public override string ToString()

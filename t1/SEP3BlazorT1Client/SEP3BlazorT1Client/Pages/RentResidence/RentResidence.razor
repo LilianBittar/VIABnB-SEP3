@@ -2,6 +2,7 @@
 @using SEP3BlazorT1Client.Data
 @using SEP3BlazorT1Client.Models
 @using System.ComponentModel.DataAnnotations
+@using System.Text.Json
 @inject IGuestService GuestService
 @inject IResidenceService ResidenceService
 @inject IRentalService RentalService
@@ -46,8 +47,8 @@
                             <p style="color:red">@_errorMessage</p>
                             <hr>
                             <div class="d-flex flex-row justify-content-between">
-                                <span style="text-decoration: underline">@(GetTotalDays()) days x @_testResidence.PricePerNight DKK.-</span>
-                                <span>@(GetTotalDays() * _testResidence.PricePerNight) DKK.-</span>
+                                <span style="text-decoration: underline">@(GetTotalDays()) days x @_newRentRequest.Residence.PricePerNight DKK.-</span>
+                                <span>@(GetTotalDays() * _newRentRequest.Residence.PricePerNight) DKK.-</span>
                             </div>
                             <div class="d-flex flex-row justify-content-between">
                                 <span style="text-decoration: underline">@_newRentRequest.NumberOfGuests guests</span>
@@ -74,7 +75,7 @@ else
     [Parameter]
     public int ResidenceId { get; set; }
 
-    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now, Status = RentRequestStatus.NotAnswered};
+    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now, Status = RentRequestStatus.NOT_ANSWERED};
 
     [CascadingParameter]
     public EditContext EditContext { get; private set; }
@@ -92,7 +93,12 @@ else
     // {
     //TODO: Get authenticated guest instead of hard-coded guest. 
     // var guest = await GuestService.GetGuestById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
-        var guest = await GuestService.GetGuestById(3);
+        // var guest = await GuestService.GetGuestById(3);
+        var guest = new Guest()
+        {
+            Cpr = "3333333333", Email = "test@test.test", Id = 3, Password = "Test123", FirstName = "test", GuestReviews = new List<GuestReview>(),
+            HostReviews = new List<HostReview>(), LastName = "test", PhoneNumber = "33333333", ViaId = 293886, IsApprovedGuest = false, IsApprovedHost = true, ProfileImageUrl = "test"
+        }; 
         var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
         if (guest != null)
         {
@@ -106,6 +112,8 @@ else
         {
             _newRentRequest.Residence = residence;
         }
+        EditContext = new EditContext(_newRentRequest);
+        Console.WriteLine(JsonSerializer.Serialize(_newRentRequest));
     // }
     // else
     // {
@@ -115,7 +123,7 @@ else
 
     private int GetTotalDays()
     {
-        return (_newRentRequest.EndDate - _newRentRequest.StartDate).Days;
+        return (_newRentRequest.EndDate.Date - _newRentRequest.StartDate.Date).Days;
     }
 
     private async void CreateRequest()
@@ -123,6 +131,8 @@ else
         try
         {
             await RentalService.CreateRentRequest(_newRentRequest);
+            StateHasChanged();
+            //TODO: Navigate to list of rent requests.
         }
         catch (Exception e)
         {
