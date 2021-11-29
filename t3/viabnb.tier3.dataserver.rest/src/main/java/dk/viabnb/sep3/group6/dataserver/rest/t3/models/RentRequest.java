@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 public class RentRequest {
     private int id;
     private LocalDateTime startDate;
-    private LocalDate endDate;
+    private LocalDateTime endDate;
     private int numberOfGuests;
     private RentRequestStatus status;
     private Guest guest;
     private Residence residence;
 
-    public RentRequest(int id, LocalDateTime startDate, LocalDate endDate, int numberOfGuests, RentRequestStatus status, Guest guest, Residence residence) {
+    public RentRequest(int id, LocalDateTime startDate, LocalDateTime endDate, int numberOfGuests, RentRequestStatus status, Guest guest, Residence residence) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -22,6 +22,8 @@ public class RentRequest {
         this.residence = residence;
     }
 
+    public RentRequest() {
+    }
 
     public int getId() {
         return id;
@@ -31,7 +33,7 @@ public class RentRequest {
         return startDate;
     }
 
-    public LocalDate getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
@@ -59,7 +61,7 @@ public class RentRequest {
         this.startDate = startDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

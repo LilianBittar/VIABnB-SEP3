@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
@@ -36,6 +37,16 @@ namespace SEP3T2GraphQL.Services
             throw new Exception("ID must be bigger than 0");
         }
 
+        public async Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
+        {
+            if (_residenceValidation.IsValidAvailabilityPeriod(residence.AvailableFrom, residence.AvailableTo))
+            {
+
+                return await _residenceRepository.UpdateResidenceAvailabilityAsync(residence);
+            }
+            throw new ArgumentException("Publish attempt failed ");
+        }
+
         public async Task<Residence> CreateResidenceAsync(Residence residence)
         {
             if (_residenceValidation.IsValidResidence(residence))
@@ -70,6 +81,12 @@ namespace SEP3T2GraphQL.Services
                 }
             }
             throw new Exception("ID must be bigger than 0");
+        }
+
+        public async Task<IList<Residence>> GetAvailableResidencesAsync()
+        {
+            var allResidences = await _residenceRepository.GetAll();
+            return allResidences.Where(r => r.IsAvailable).ToList(); 
         }
     }
 }

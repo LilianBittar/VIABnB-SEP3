@@ -101,9 +101,10 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<IEnumerable<Host>> GetAllNotApprovedHosts()
         {
-            HttpResponseMessage response = await client.GetAsync(uri + $"/hosts/notApproved");
+            var response = await client.GetAsync(uri + $"/hosts/notApproved");
             if (!response.IsSuccessStatusCode)
             {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
 

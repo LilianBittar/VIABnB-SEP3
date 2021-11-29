@@ -1,0 +1,200 @@
+﻿@page "/HostResidences"
+@using SEP3BlazorT1Client.Models
+@using SEP3BlazorT1Client.Data
+@using System.Reflection.Metadata
+@using System.ComponentModel.DataAnnotations
+@inject IResidenceService ResidenceService
+
+
+<!--<h3>BuildingOverview</h3>-->
+
+<style>
+            .demo-mat-card {
+                max-width: 400px;
+                padding-top: 5px;
+                margin-top: 6px;
+            }
+ 
+            .demo-mat-card-content {
+                padding: 1rem;
+            }
+ 
+            .demo-mat-card-clean-margin {
+                margin: 0px;
+            }
+  </style>
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        @foreach (var residence in Residences)
+        {
+            <div class="mat-layout-grid-cell">
+                <MatCard class="demo-mat-card">
+                    <MatCardContent>
+                        <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
+                        <div class="demo-mat-card-content">
+                            <MatHeadline6 class="demo-mat-card-clean-margin">
+                                Unique stays
+                            </MatHeadline6>
+                            <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                @residence.Address.ToString()
+                            </MatSubtitle2>
+                        </div>
+
+                        <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                            @residence.Description
+                        </MatBody2>
+                    </MatCardContent>
+                    <MatCardActions>
+                        <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
+                    </MatCardActions>
+                </MatCard>
+            </div>
+        }
+
+        <MatDialog @bind-IsOpen="@dialogIsOpen">
+            <MatDialogTitle>Set the period of availability for the residence</MatDialogTitle>
+            <MatDialogContent>
+                <p>
+                    <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@ResidenceForRent.MaxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
+                    </MatNumericUpDownField>
+                </p>
+
+                @* Availablefrom *@
+
+                <p>
+                    <b> Start Date</b>
+                </p>
+                <MatDatePicker @bind-Value="@ResidenceForRent.AvailableFrom"></MatDatePicker>
+
+                <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Now; })">
+                    Now
+                </MatButton>
+                <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = null; })">
+                    Empty
+                </MatButton>
+
+                @* AvailableTo*@
+                <p>
+                    <b> End Date</b>
+                </p>
+                <MatDatePicker @bind-Value="@ResidenceForRent.AvailableTo"></MatDatePicker>
+
+                <MatButton OnClick="@(_ => { ResidenceForRent.AvailableTo = null; })">
+                    Empty
+                </MatButton>
+            </MatDialogContent>
+            <MatDialogActions>
+                <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
+                <MatButton OnClick="@OkClick">Publish</MatButton>
+            </MatDialogActions>
+            @foreach (var errorMessage in validationResults)
+            {
+                <p class="error-label text-danger">@errorMessage</p>
+            }
+             <p class="error-label text-danger">@_errorText</p>
+        </MatDialog>
+    </div>
+</div>
+
+
+@code {
+    bool dialogIsOpen = false;
+    int maxNumberOfGuests;
+    private string _errorText;
+    private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
+
+    Residence ResidenceForRent = new Residence();
+
+    void OpenDialog(Residence residence)
+    {
+        ResidenceForRent = residence;
+        dialogIsOpen = true;
+    }
+
+    private async void OkClick()
+    {
+    //clear error messages
+        validationResults.Clear();
+    // the validator validates in the context of a host object
+        ValidationContext validationContext = new ValidationContext(ResidenceForRent);
+
+    //validates all host properties in context of host model
+        bool rentIsValid = Validator.TryValidateObject(ResidenceForRent, validationContext, validationResults, true);
+
+
+        if (rentIsValid)
+        {
+            ResidenceForRent.IsAvailable = true;
+            try
+            {
+                await ResidenceService.UpdateResidenceAvailabilityAsync(ResidenceForRent);
+            }
+            catch (Exception e)
+            {
+                _errorText = e.Message;
+                StateHasChanged();
+                return;
+            }
+
+            dialogIsOpen = false;
+            Console.WriteLine("succes");
+        }
+    }
+
+    private Residence[] Residences = new[]
+    {
+        new Residence
+        {
+            Id = 1,
+            Address = new Address()
+            {
+                Id = 1,
+                StreetName = "Sally",
+                HouseNumber = "2",
+                StreetNumber = "3b",
+                City = new City()
+                {
+                    HostResidences = "Horsens",
+                    ZipCode = 8700
+                }
+            },
+            Description = "beautiful house full of cats!",
+            Type = "villa",
+            IsAvailable = false,
+            PricePerNight = 1000,
+            Rules = new List<Rule>(),
+            Facilities = new List<Facility>(),
+            ImageUrl = "https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero-852x479.jpg"
+        },
+        new Residence()
+        {
+            Id = 2,
+            Address = new Address()
+            {
+                Id = 2,
+                StreetName = "Reshee",
+                HouseNumber = "B",
+                StreetNumber = "A1",
+                City = new City()
+                {
+                    HostResidences = "Horsens",
+                    ZipCode = 8700
+                }
+            },
+            Description = "amazing house full of flowers and books",
+            Type = "house",
+            IsAvailable = false,
+            PricePerNight = 1000,
+            Rules = new List<Rule>(),
+            Facilities = new List<Facility>(),
+            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyXb58B6PUsT9t0EfH8zKpl_An5h0ssJhZnw&usqp=CAU"
+        },
+    };
+
+    private async Task<Residence> ChangeAvailability(Residence residence)
+    {
+        return await ResidenceService.UpdateResidenceAvailabilityAsync(residence);
+    }
+
+}

@@ -10,13 +10,17 @@ namespace SEP3T2GraphQL.Graphql
         private readonly IResidenceService _residenceService;
         private readonly IHostService _hostService;
         private readonly IGuestService _guestService;
-        private readonly IRentalService _rentalService; 
-        public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService)
+        private readonly IRentalService _rentalService;
+        private readonly IRuleService _ruleService;
+        private readonly IFacilityService _facilityService;
+        public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IFacilityService facilityService, IRuleService ruleService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
             _guestService = guestService;
-            _rentalService = rentalService; 
+            _rentalService = rentalService;
+            _facilityService = facilityService;
+            _ruleService = ruleService;
         }
         public async Task<Residence> CreateResidence(Residence residence)
         {
@@ -46,6 +50,26 @@ namespace SEP3T2GraphQL.Graphql
         public async Task<Host> RegisterHost(Host host)
         {
             return await _hostService.RegisterHostAsync(host);
+        }
+
+        public async Task<Facility> CreateNewFacility(Facility facility)
+        {
+            return await _facilityService.CreateFacility(facility);
+        }
+
+        public async Task<Rule> CreateNewRule(Rule rule)
+        {
+            return await _ruleService.CreateRule(rule);
+        }
+
+        public async Task<RentRequest> ApproveRentRequest(RentRequest request)
+        {
+            return await _rentalService.ApproveRentRequestAsync(request);
+        }
+
+        public async Task<RentRequest> RejectRentRequest(RentRequest request)
+        {
+            return await _rentalService.RejectRentRequestAsync(request);
         }
     }
 }

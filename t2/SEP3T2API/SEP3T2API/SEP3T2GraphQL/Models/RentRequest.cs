@@ -12,6 +12,7 @@ namespace SEP3T2GraphQL.Models
         [Required]
         public DateTime EndDate { get; set; }
         [Required]
+        [Range(1, Int32.MaxValue, ErrorMessage = "Number of guests must be 1 or above")]
         public int NumberOfGuests { get; set; }
         [Required]
         public RentRequestStatus Status { get; set; }
@@ -19,12 +20,22 @@ namespace SEP3T2GraphQL.Models
         public Guest Guest { get; set; }
         [Required]
         public Residence Residence { get; set; }
+
+        public decimal GetTotalPrice()
+        {
+            return (decimal) (GetRentPeriodInDays() * Residence.PricePerNight * NumberOfGuests); 
+        }
+
+        public int GetRentPeriodInDays()
+        {
+            return (EndDate - StartDate).Days;
+        }
     }
 
 
     public enum RentRequestStatus
     {
-        NotAnswered,
+        NOT_ANSWERED,
         NotApproved,
         Approved
     }

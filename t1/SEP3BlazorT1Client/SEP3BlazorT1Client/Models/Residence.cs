@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text.Json;
 using Newtonsoft.Json;
 
@@ -40,6 +41,7 @@ namespace SEP3BlazorT1Client.Models
         [JsonProperty("availableTo")]
         public DateTime? AvailableTo { get; set; }
         [Required, Range(1, int.MaxValue)]
+        [JsonProperty("maxNumberOfGuests")]
         public int MaxNumberOfGuests { get; set; }
         [JsonProperty("host")]
         public Host Host { get; set; }
@@ -50,6 +52,17 @@ namespace SEP3BlazorT1Client.Models
             return JsonConvert.SerializeObject(this); 
         }
 
+        public double GetAverageRating()
+        {
+            if (!ResidenceReviews.Any() || ResidenceReviews == null)
+            {
+                return 0; 
+            }
+
+            double sum = ResidenceReviews.Sum(residenceReview => residenceReview.Rating);
+
+            return sum / ResidenceReviews.Count();
+        }
         
     }
 }

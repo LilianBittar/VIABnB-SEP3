@@ -22,10 +22,20 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return fetchedGuest;
         }
 
-        public Task<Guest> GetGuestByEmail(string email)
+        public async Task<Guest> GetGuestByStudentNumber(int studentNumber)
         {
-            throw new System.NotImplementedException();
+            
+            HttpResponseMessage response = await _client.GetAsync($"{Uri}?studentNumber={studentNumber}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(await response.Content.ReadAsStringAsync()); 
+            }
+
+            var fetchedGuest = JsonSerializer.Deserialize<Guest>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions(){PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+            return fetchedGuest;
         }
+
+       
 
         public async Task<Guest> UpdateGuest(Guest guest)
         {

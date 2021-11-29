@@ -3,6 +3,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,12 @@ public class GuestController {
         this.guestDAO = guestDAO;
     }
 
-
+    /**
+     * Handles requests for creating new guests at endpoint /guests.
+     * @param guest the Guest that is to be created.
+     * @return HTTP OK with the newly created guest in the response body or
+     * HTTP Internal Server Error response if Guest could not be created.
+     * */
     @PostMapping("/guests")
     public ResponseEntity<Guest> createGuest(@RequestBody Guest guest) {
         LOGGER.info("Received createGuest request with params " + new Gson().toJson(guest) );
@@ -44,13 +50,24 @@ public class GuestController {
         return ResponseEntity.ok(createGuest);
     }
 
+    /**
+     * Handles request for getting all guests in the system at endpoint /guests.
+     * @param isApproved Optional field for filtering guests by isApproved value.
+     * @param studentNumber Optional field for filtering guest by student number value.
+     * @return HTTP OK with all Guests in response body. If isApproved or student number are provided,
+     * then the list is filtered.
+     * If Data access fails, then HTTP Internal Server Error is returned.
+     * */
     @GetMapping("/guests")
-    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam(required = false) Boolean isApproved) {
+    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam(required = false) Boolean isApproved, @RequestParam(required = false) Integer studentNumber ) {
 
         try {
             List<Guest> allGuests = guestDAO.getAllGuests();
             if (isApproved != null){
                 allGuests.removeIf(g -> g.isApprovedGuest() != isApproved);
+            }
+            if(studentNumber != null){
+                allGuests.removeIf(g -> g.getViaId() != studentNumber);
             }
             LOGGER.info("getAllGuests returned: " + new Gson().toJson(allGuests));
             return ResponseEntity.ok(allGuests);
@@ -59,6 +76,13 @@ public class GuestController {
         }
     }
 
+    /**
+     * Handles request for getting a guests in the system at endpoint /guests/={id}.
+     * @param id Required field for filtering guests by guest id value.
+     * @return HTTP OK with the Guest in response body.
+     * If the controller manage to find the guest with the provided id,
+     * If Data access fails, then HTTP Internal Server Error is returned.
+     * */
     @GetMapping("/guests/{id}")
     public ResponseEntity<Guest> getGuestByHostId(@PathVariable("id") int id)
     {
@@ -70,6 +94,8 @@ public class GuestController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+
 
     /**
      * End point of method type GET to get list of Guest objects with isApprovedGuest boolean value false

@@ -29,6 +29,7 @@ namespace UnitTests
                 FirstName = "Kasper",
                 LastName = "Bobsen",
                 Email = "email@gmail.com",
+                Cpr = "123456-1234",
                 HostReviews = null,
                 IsApprovedHost = false,
                 Password = "Hejmaeddig123",
@@ -511,6 +512,116 @@ namespace UnitTests
             //act and assert
             Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPhoneNumber(host.PhoneNumber));
         }
+        
+        [Test]
+        public void IsValidCpr_ContainsDashAndLength11_DoesNotThrow()
+        {
+            //arrange
+            host = new Host()
+            {
+                Id = 0,
+                FirstName = "Bob",
+                LastName = "Bobsen",
+                Email = "email@gmail.com",
+                Cpr = "123456-1234",
+                HostReviews = null,
+                IsApprovedHost = false,
+                Password = "HejMedDig12345",
+                PhoneNumber = "12345678",
+                ProfileImageUrl = null
+            };
+            //act and assert
+            Assert.DoesNotThrow(() => _hostValidationImpl.IsValidCprNumber(host.Cpr));
+        }
+        
+        [Test]
+        public void IsValidCpr_DoesNotContainsDashAndLength10_DoesNotThrow()
+        {
+            //arrange
+            host = new Host()
+            {
+                Id = 0,
+                FirstName = "Bob",
+                LastName = "Bobsen",
+                Email = "email@gmail.com",
+                Cpr = "1234561234",
+                HostReviews = null,
+                IsApprovedHost = false,
+                Password = "HejMedDig12345",
+                PhoneNumber = "12345678",
+                ProfileImageUrl = null
+            };
+            //act and assert
+            Assert.DoesNotThrow(() => _hostValidationImpl.IsValidCprNumber(host.Cpr));
+        }
+        
+        [Test]
+        public void IsValidCpr_DoesNotContainsDashAndLength11_Throws()
+        {
+            //arrange
+            host = new Host()
+            {
+                Id = 0,
+                FirstName = "Bob",
+                LastName = "Bobsen",
+                Email = "email@gmail.com",
+                Cpr = "12345612345",
+                HostReviews = null,
+                IsApprovedHost = false,
+                Password = "HejMedDig12345",
+                PhoneNumber = "12345678",
+                ProfileImageUrl = null
+            };
+            //act and assert
+            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidCprNumber(host.Cpr));
+        }
+        
+        [Test]
+        public void IsValidCpr_ContainsDashAndLength10_Throws()
+        {
+            //arrange
+            host = new Host()
+            {
+                Id = 0,
+                FirstName = "Bob",
+                LastName = "Bobsen",
+                Email = "email@gmail.com",
+                Cpr = "123456-123",
+                HostReviews = null,
+                IsApprovedHost = false,
+                Password = "HejMedDig12345",
+                PhoneNumber = "12345678",
+                ProfileImageUrl = null
+            };
+            //act and assert
+            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidCprNumber(host.Cpr));
+        }
+        
+        [Test]
+        public void IsValidCpr_ContainsLetters_Throws()
+        {
+            //arrange
+            host = new Host()
+            {
+                Id = 0,
+                FirstName = "Bob",
+                LastName = "Bobsen",
+                Email = "email@gmail.com",
+                Cpr = "12a456-1234",
+                HostReviews = null,
+                IsApprovedHost = false,
+                Password = "HejMedDig12345",
+                PhoneNumber = "12345678",
+                ProfileImageUrl = null
+            };
+            //act and assert
+            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidCprNumber(host.Cpr));
+        }
+        
+       
+        
+        
+        
 
 
     }

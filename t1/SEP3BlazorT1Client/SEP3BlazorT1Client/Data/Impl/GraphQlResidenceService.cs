@@ -16,42 +16,86 @@ namespace SEP3BlazorT1Client.Data.Impl
 {
     public class GraphQlResidenceService : IResidenceService
     {
-        //connected to t2 
+        // TODO: Refactor methods to use the same GqlClient instance.  
         private const string Url = "https://localhost:5001/graphql";
+        private readonly GqlClient _client = new GqlClient(Url); 
 
         public async Task<Residence> GetResidenceAsync(int id)
         {
             GqlClient client = new GqlClient(Url);
             var residenceQuery = new GqlQuery()
             {
-                Query = @"query($residenceId: int){
-                          residence(id: $residenceId){
-                            id, 
-                            address{
-                              id,
-                              streetName,
-                              houseNumber,
-                              streetNumber,
-                              City
-                                {
-                                    id,
-                                    cityName,
-                                    zipCode
-                                }
-                            }, 
-                            description,
-                            type,
-                            averageRating,
-                            isAvailable,
-                            pricePerNight,
-                            rules{
-                              description
-                            },
-                            facilities{
-                              name
-                            }
-                          }
-                        }
+                Query = @"query ($residenceId:Int!){
+  residence(id:$residenceId) {
+    id
+    address {
+      id
+      streetName
+      streetNumber
+      city {
+        id
+        cityName
+        zipCode
+      }
+    }
+    description
+    type
+    isAvailable
+    pricePerNight
+    rules {
+      description
+      residenceId
+    }
+    facilities {
+      id
+      name
+    }
+    availableFrom
+    availableTo
+    maxNumberOfGuests
+    host {
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residenceReviews {
+      rating
+      reviewText
+      guest {
+        viaId
+        guestReviews {
+          id
+          rating
+          text
+          hostId
+        }
+        isApprovedGuest
+        id
+        firstName
+        lastName
+        phoneNumber
+        email
+        password
+        hostReviews{id,rating,text,viaId}
+        profileImageUrl
+        cpr
+        isApprovedHost
+      }
+    }
+  }
+}
 ",
                 Variables = new {residenceId = id}
             };
@@ -61,7 +105,12 @@ namespace SEP3BlazorT1Client.Data.Impl
             return graphQlResponse.Data.Residence; 
         }
 
-        public async Task<List<Residence>> GetResidenceByHostId(int Id)
+        public Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Residence>> GetResidencesByHostIdAsync(int Id)
         {
             GqlClient client = new GqlClient(Url);
             var residenceQuery = new GqlQuery()
@@ -84,6 +133,88 @@ namespace SEP3BlazorT1Client.Data.Impl
             System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Residences.ToString()}");
             return graphQlResponse.Data.Residences;
         }
+
+        public async Task<IList<Residence>> GetAllAvailableResidencesAsync()
+        {
+            var query = new GqlQuery()
+            {
+                Query = @"query {
+                          availableResidences {
+                            id
+                            address {
+                              id
+                              streetName
+                              streetNumber
+                              city {
+                                id
+                                cityName
+                                zipCode
+                              }
+                            }
+                            description
+                            type
+                            isAvailable
+                            pricePerNight
+                            rules {
+                              description
+                              residenceId
+                            }
+                            facilities {
+                              id
+                              name
+                            }
+                            availableFrom
+                            availableTo
+                            maxNumberOfGuests
+                            host {
+                              id
+                              firstName
+                              lastName
+                              phoneNumber
+                              email
+                              password
+                              hostReviews {
+                                id
+                                rating
+                                text
+                                viaId
+                              }
+                              profileImageUrl
+                              cpr
+                              isApprovedHost
+                            }
+                            residenceReviews {
+                              rating
+                              reviewText
+                              guest {
+                                viaId
+                                guestReviews {
+                                  id
+                                  rating
+                                  text
+                                  hostId
+                                }
+                                isApprovedGuest
+                                id
+                                firstName
+                                lastName
+                                phoneNumber
+                                email
+                                password
+                                hostReviews{id,rating,text,viaId}
+                                profileImageUrl
+                                cpr
+                                isApprovedHost
+                              }
+                            }
+                          }
+                        }
+                        "
+            };
+            var response = await _client.PostQueryAsync<AvailableResidencesQueryResponseType>(query);
+            return response.Data.AvailableResidences; 
+        }
+
         public async Task<Residence>  CreateResidenceAsync(Residence residence)
         {
 

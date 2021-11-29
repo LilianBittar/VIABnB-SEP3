@@ -55,5 +55,33 @@ namespace SEP3BlazorT1Client.Data.Impl
 
             return response.Data.CreateGuest; 
         }
+
+        public async Task<Guest> ValidateGuestAsync(string studentNumber,string password)
+        {
+            GqlClient client = new GqlClient(Url);
+            var validateGuestQuery = new GqlQuery()
+            {
+                Query = @"query($passwordGuest: String, $studentNumberGuest) {
+                          validateGuestLogin( password: $passwordGuest, studentNumber: $studentNumber)
+                           {id,
+                           firstName,
+                           lastName,
+                           phoneNumber,
+                           email,
+                           password,
+                           profileImageUrl,
+                           cpr,
+                           isApprovedHost,
+                           viaId}}",
+                Variables = new { passwordGuest = password, studentNumberGuest = studentNumber}
+            };
+
+            var graphQlResponse = await client.PostQueryAsync<GuestResponseType>(validateGuestQuery);
+            if (graphQlResponse.Data.Guest == null) throw new Exception("Incorrect password  or student number");
+            Console.WriteLine(graphQlResponse.Data.ToString());
+
+            System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Guest.ToString()}");
+            return graphQlResponse.Data.Guest;
+        }
     }
 }

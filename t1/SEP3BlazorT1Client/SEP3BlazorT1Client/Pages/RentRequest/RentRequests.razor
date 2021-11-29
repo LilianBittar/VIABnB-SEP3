@@ -1,0 +1,68 @@
+@page "/RentRequests"
+
+@if (rentRequestList == null)
+{
+    <h3 class="mat-subtitle1">Loading</h3>
+    <MatProgressCircle Indeterminate="true"/>
+}
+else if (!rentRequestList.Any())
+{
+    <p>
+        <em>There are no rent requests at the moment...</em>
+    </p>
+}
+else
+{
+    <MatAccordion Multi="true">
+        @foreach (var item in rentRequestList)
+        {
+            <MatExpansionPanel>
+                <MatExpansionPanelSummary>
+                    <MatExpansionPanelHeader>
+                        <p>@item.Id</p>
+                    </MatExpansionPanelHeader>
+                </MatExpansionPanelSummary>
+                <MatExpansionPanelDetails>
+                    <div class="form-group">
+                        <p>Request ID: @item.Id</p>
+                    </div>
+                    <div class="form-group">
+                        <p>Start Date: @item.StartDate</p>
+                    </div>
+                    <div class="form-group">
+                        <p>End Date: @item.EndDate</p>
+                    </div>
+                    <div class="form-group">
+                        <p>Number of guests: @item.NumberOfGuests</p>
+                    </div>
+                    <div class="form-group">
+                        <p>Status: @item.Status</p>
+                    </div>
+                    <div class="form-group">
+                        <p>Guest VIA ID: @item.Guest.ViaId</p>
+                    </div>
+                    <div class="form-group">
+                        <p>Guest review: @item.Guest.GuestReviews</p>
+                    </div>
+                    <div class="form-group">
+                        <p>Guest review: @item.Guest.FirstName</p>
+                    </div>
+                    <div class="form-group">
+                        <p>Guest review: @item.Guest.LastName</p>
+                    </div>
+                    <div class="form-group">
+                        <p>Guest review: @item.Guest.Email</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-dark" @onclick="(()=> ApproveRequest())">Approve</button>
+                                <button class="btn btn-outline-dark" @onclick="(()=> RejectRequest())">Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                </MatExpansionPanelDetails>
+            </MatExpansionPanel>
+        }
+    </MatAccordion>
+}

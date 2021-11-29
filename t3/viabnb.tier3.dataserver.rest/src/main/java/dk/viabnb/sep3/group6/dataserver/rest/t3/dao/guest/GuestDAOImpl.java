@@ -33,6 +33,11 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
         }
     }
 
+    /**
+     * Handles querying the database for a list of all guests.
+     * @return a list of guests.
+     * @throws IllegalStateException if it could not connect to the database
+     * */
     @Override
     public List<Guest> getAllGuests() {
         try (Connection connection = getConnection()) {
@@ -57,6 +62,12 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
     }
 
 
+    /**
+     * Handles querying the database for a guest with the provided id.
+     * @param guest id Required field for filtering guests by id value.
+     * @return a guest object or null if it could not find the guest with the provided id.
+     * @throws IllegalStateException if it could not connect to the database
+     * */
     @Override
     public Guest getGuestByHostId(int id) {
         try (Connection connection = getConnection()) {
@@ -78,6 +89,12 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
             throw new IllegalStateException(throwables.getMessage());
         }
     }
+
+    /**
+     * Handles querying the database for a list of all not approved guest.
+     * @return a list of  guest that were not approved.
+     * @throws IllegalStateException if it could not connect to the database
+     * */
 
     @Override public List<Guest> getAllNotApprovedGuests()
     {
@@ -112,6 +129,29 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
         }
         catch (SQLException throwables)
         {
+            throw new IllegalStateException(throwables.getMessage());
+        }
+    }
+
+
+    @Override
+    public Guest getGuestByStudentNumber(int studentNumber) {
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement("select * from host h join guest g on h.hostid = g.guestid where viaid = ?");
+            stm.setInt(1, studentNumber);
+            ResultSet result = stm.executeQuery();
+            if (result.next()){
+                return new Guest(result.getInt("hostid"),
+                        result.getString("fname"), result.getString("lname"),
+                        result.getString("phonenumber"), result.getString("email"),
+                        result.getString("password"), new ArrayList<>(),
+                        result.getString("personalimage"),
+                        result.getString("cprnumber"),
+                        result.getBoolean("isapproved"), result.getInt("viaid"),
+                        result.getBoolean("isapprovedguest"));
+            }
+            return null;
+        } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());
         }
     }

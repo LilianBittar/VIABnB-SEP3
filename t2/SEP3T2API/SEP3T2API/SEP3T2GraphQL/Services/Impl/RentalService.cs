@@ -29,23 +29,39 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("Request cannot be null");
             }
-            _createRentRequestValidator.ValidateRentRequest(request);
+            await _createRentRequestValidator.ValidateRentRequest(request);
             return await _rentRequestRepository.CreateAsync(request);
         }
 
-        public Task<RentRequest> ApproveRentRequestAsync(RentRequest request)
+        public async Task<RentRequest> ApproveRentRequestAsync(RentRequest request)
         {
-            throw new System.NotImplementedException();
+            if (request == null)
+            {
+                throw new ArgumentException("Request cannot be null");
+            }
+            await _createRentRequestValidator.ValidateRentRequest(request);
+            return await _rentRequestRepository.UpdateAsync(request);
         }
 
-        public Task<RentRequest> RejectRentRequestAsync(RentRequest request)
+        public async Task<RentRequest> RejectRentRequestAsync(RentRequest request)
         {
-            throw new System.NotImplementedException();
+            if (request == null)
+            {
+                throw new ArgumentException("Request cannot be null");
+            }
+            await _createRentRequestValidator.ValidateRentRequest(request);
+            return await _rentRequestRepository.UpdateAsync(request);
         }
 
-        public Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync()
+        public async Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync()
         {
-            throw new System.NotImplementedException();
+            var rentRequestListToReturn = await _rentRequestRepository.GetAllAsync();
+            if (rentRequestListToReturn == null)
+            {
+                throw new ArgumentException("Rent request list is null");
+            }
+
+            return rentRequestListToReturn;
         }
 
         public Task<IEnumerable<RentRequest>> GetAllRentRequestByResidenceId(int residenceId)
@@ -53,9 +69,15 @@ namespace SEP3T2GraphQL.Services.Impl
             throw new NotImplementedException();
         }
 
-        public Task<RentRequest> GetRentRequestAsync(int id)
+        public async Task<RentRequest> GetRentRequestAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var rentRequestListToReturn = await _rentRequestRepository.GetAsync(id);
+            if (rentRequestListToReturn == null)
+            {
+                throw new ArgumentException("Rent request list is null");
+            }
+
+            return rentRequestListToReturn;
         }
     }
 }

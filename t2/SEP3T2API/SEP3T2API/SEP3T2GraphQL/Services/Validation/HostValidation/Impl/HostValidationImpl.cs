@@ -108,10 +108,34 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             throw new ArgumentException("invalid phone number");
         }
 
+        public bool IsValidCprNumber(string cpr)
+        {
+            if (cpr==null)
+            {
+                throw new ArgumentException("cpr number required");
+            }
+
+            if (cpr.Any(char.IsLetter))
+            {
+                throw new ArgumentException("cpr number can only contain numbers");
+            }
+            if (cpr.Contains('-') && cpr.Length!=11)
+            {
+                throw new ArgumentException("Invalid cpr number Length");
+            }
+
+            if (!cpr.Contains('-') && cpr.Length!=10)
+            {
+                throw new ArgumentException("Invalid cpr number Length");
+            }
+
+            return true;
+        }
+
         public bool IsValidHost(Host host)
         {
             if (IsValidEmail(host.Email) && IsValidFirstname(host.FirstName) && IsValidLastname(host.LastName) &&
-                IsValidPassword(host.Password) && IsValidPhoneNumber(host.PhoneNumber))
+                IsValidPassword(host.Password) && IsValidPhoneNumber(host.PhoneNumber) && IsValidCprNumber(host.Cpr))
             {
                 return true;
             }

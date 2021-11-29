@@ -1,16 +1,24 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
+import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RentRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
+@RestController
 public class RentRequestController {
     private RentRequestDAO rentRequestDAO;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(
+        RentRequestController.class);
+    private Gson gson = new Gson();
     @Autowired
     public RentRequestController(RentRequestDAO rentRequestDAO) {
         this.rentRequestDAO = rentRequestDAO;
@@ -23,6 +31,9 @@ public class RentRequestController {
         }
         try {
             RentRequest createdRentRequest = rentRequestDAO.create(request);
+            if (createdRentRequest == null) {
+                return ResponseEntity.internalServerError().build();
+            }
             return ResponseEntity.ok(createdRentRequest);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
@@ -34,26 +45,38 @@ public class RentRequestController {
     public ResponseEntity<List<RentRequest>> getAllRentRequests(@RequestParam(required = false) Integer residenceId,
                                                                 @RequestParam(required = false) Integer hostId,
                                                                 @RequestParam(required = false) Integer guestId) {
-
+        //TODO: this endpoint works without the RequestParam. When using the RequestParam the result will be null
         List<RentRequest> requestsToReturn = rentRequestDAO.getAll();
-        if (residenceId != null) {
-            requestsToReturn.forEach((request) -> {
-                if (request.getResidence().getId() != residenceId.intValue()) {
-                    requestsToReturn.remove(request);
-                }
-            });
-        }
+        try
+        {
+            if (residenceId != null) {
+                requestsToReturn.forEach((request) -> {
+                    if (request.getResidence().getId() != residenceId) {
+                        requestsToReturn.remove(request);
+                    }
+                });
+            }
 
-        //TODO: iterate requests and remove all where request.getHost().getId() != hostId.
-        if (guestId != null) {
-            requestsToReturn.forEach((request) -> {
-                if (request.getGuest().getId() != guestId.intValue()) {
-                    requestsToReturn.remove(request);
-                }
-            });
+            if (hostId != null) {
+                requestsToReturn.forEach((request) -> {
+                    if (request.getResidence().getHost().getId() != hostId) {
+                        requestsToReturn.remove(request);
+                    }
+                });
+            }
+            if (guestId != null) {
+                requestsToReturn.forEach((request) -> {
+                    if (request.getGuest().getId() != guestId) {
+                        requestsToReturn.remove(request);
+                    }
+                });
+            }
         }
-
-        return ResponseEntity.ok(requestsToReturn);
+        catch (Exception e)
+        {
+            LOGGER.error(e.getMessage());
+        }
+            return ResponseEntity.ok(requestsToReturn);
     }
 
 
@@ -70,14 +93,38 @@ public class RentRequestController {
     @PutMapping("/rentrequests/{id}")
     public ResponseEntity<RentRequest> replaceRentRequest(@PathVariable int id, @RequestBody(required = true) RentRequest request) {
         RentRequest existingRentRequest = rentRequestDAO.getById(id);
-        RentRequest updatedRequest = null;
         if (existingRentRequest == null) {
-            updatedRequest = rentRequestDAO.create(request);
-            return ResponseEntity.ok(updatedRequest);
+            return ResponseEntity.notFound().build();
         }
 
-        updatedRequest = rentRequestDAO.update(request);
+        RentRequest updatedRequest = rentRequestDAO.update(request);
         return ResponseEntity.ok(updatedRequest);
     }
 
+    @PatchMapping("/rentrequests/{id}/approval")
+    public ResponseEntity<RentRequest> updateRentRequestStatus(@RequestBody RentRequest request, @PathVariable("id") int id)
+    {
+        LOGGER.info("Recived updated request " + new Gson().toJson(request));
+        RentRequest updateRequest;
+        try
+        {
+            if (request.getStatus().equals("APPROVED"))
+            {
+                updateRequest = rentRequestDAO.approveRequest(request);
+                return ResponseEntity.ok(updateRequest);
+            }
+            else if (request.getStatus().equals("NOTAPPROVED"))
+            {
+                updateRequest = rentRequestDAO.rejectRequest(request);
+                return ResponseEntity.ok(updateRequest);
+            }
+            return ResponseEntity.badRequest().build();
+        }
+        catch (NoSuchElementException e)
+        {
+            e.printStackTrace();
+            LOGGER.error(e.getMessage());
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

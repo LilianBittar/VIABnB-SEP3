@@ -1,0 +1,57 @@
+.residence-card {
+  max-width: 319px;
+  max-height: 500px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  &__image {
+    position: relative;
+
+    img {
+      height: 319px;
+      width: 319px;
+      border-radius: 10px 10px 10px 10px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        filter: brightness(0.4);
+      }
+
+      &:hover ~ .description {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+
+    .description {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 50%;
+      transform: translateY(50%);
+      right: 50%;
+      transform: translateX(50%);
+      color: white;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &__content {
+    padding: 1rem 1rem;
+    border-radius: 0 0 10px 10px;
+    color: black;
+    .place-and-price{
+      display: flex;
+      justify-content: space-between;
+      .place{
+        font-weight: bold;
+      }
+    }
+    .available-period{
+      display: flex;
+      justify-content: space-between;
+      color:gray;
+    }
+  }
+}
+

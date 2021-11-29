@@ -11,12 +11,47 @@ namespace SEP3T2GraphQL.Services.Administration.Impl
     public class AdministrationServiceImpl : IAdministrationService
     {
         private IAdministrationRepository _administrationRepository;
-        private IAdminValidation _adminValidation;
-
         public AdministrationServiceImpl(IAdministrationRepository administrationRepository)
         {
             _administrationRepository = administrationRepository;
-            _adminValidation = new AdminValidationImpl();
+        }
+
+        public async Task<Administrator> GetAdminByEmail(string email)
+        {
+            var administratorToReturn = await _administrationRepository.GetAdminByEmail(email);
+            if (administratorToReturn == null)
+            {
+                throw new Exception("Admin cant be null");
+            }
+
+            return administratorToReturn;
+        }
+
+        public async Task<IEnumerable<Administrator>> GetAllAdmins()
+        {
+            var administratorsToReturn = await _administrationRepository.GetAllAdmins();
+            if (administratorsToReturn == null)
+            {
+                throw new Exception("Admin list cant be null");
+            }
+
+            return administratorsToReturn;
+        }
+
+        public async Task<Administrator> ValidateAdmin(string email, string password)
+        {
+            var adminToValidate = await GetAdminByEmail(email);
+            if (adminToValidate == null)
+            {
+                throw new ArgumentException("No admin with email matching the given email");
+            }
+
+            if (adminToValidate.Password != password)
+            {
+                throw new ArgumentException("The given password is incorrect");
+            }
+
+            return adminToValidate;
         }
     }
 }

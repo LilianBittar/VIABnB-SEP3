@@ -9,6 +9,9 @@ namespace SEP3BlazorT1Client.Data
         Task<Residence> GetResidenceAsync(int id);
         Task<Residence> CreateResidenceAsync(Residence residence);
 
-        Task<List<Residence>> GetResidenceByHostId(int Id);
+        Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence);
+
+        Task<List<Residence>> GetResidencesByHostIdAsync(int Id);
+        Task<IList<Residence>> GetAllAvailableResidencesAsync(); 
     }
 }

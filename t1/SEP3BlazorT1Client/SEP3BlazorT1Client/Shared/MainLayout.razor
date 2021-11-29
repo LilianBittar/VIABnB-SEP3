@@ -34,14 +34,21 @@
             <MatAppBarSection Align="@MatAppBarSectionAlign.End">
                 <MatButtonLink class="text-white nav-link mat-elevation-z14" Match="NavLinkMatch.All" href="/" Style="margin-right: 1em;">
                     Home
+                </MatButtonLink> 
+                <MatButtonLink class="text-white nav-link mat-elevation-z14" Match="NavLinkMatch.All" href="/residences" Style="margin-right: 1em;">
+                    Browse
                 </MatButtonLink>
+                
                 <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/registerresidence" Style="margin-right: 1em;">
                     About
+                </MatButtonLink>
+                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/RentRequests" Style="margin-right: 1em;">
+                    Rent Requests
                 </MatButtonLink>
                 <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/BecomeGuest" Style="margin-right: 1em;">
                     Become Guest
                 </MatButtonLink>
-                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/Administration" Style="margin-right: 1em;">
+                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/AdminLogin" Style="margin-right: 1em;">
                     Administration
                 </MatButtonLink>
                 <MatButton class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
@@ -53,30 +60,30 @@
     
     <MatAppBarContent>
         @* Navigation modal. Opens the side menu *@
-        <MatDrawerContainer Style="width: 100vw; height: 100vh">
+        <MatDrawerContainer>
             <MatDrawer @bind-Opened="_opened" Mode="MatDrawerMode.Modal">
                 <MatListGroup>
                     <MatListGroupSubHeader Style="margin-top: 1rem">Manage residences</MatListGroupSubHeader>
                     <MatList>
                         <MatListItem Href="/registerresidence" >
-                            Register Residence
+                            Register New Residence
                         </MatListItem>
-                        <MatListItem Href="/buildingsoverview" >
-                            Buildings overview 
+                        <MatListItem Href="/hostresidences" >
+                          My Residences
                         </MatListItem>
                         <MatListItem Href="/registerhost" >
-                            Register 
+                            Register As Host
                         </MatListItem>
                     
                     </MatList>
                 </MatListGroup>
             </MatDrawer>
+        </MatDrawerContainer>
             <MatDrawerContent>
-                <div class="container"> 
+                <div class="content-body"> 
                     @Body 
                 </div> 
             </MatDrawerContent>
-        </MatDrawerContainer>
     </MatAppBarContent>
 </MatAppBarContainer>
 
@@ -88,9 +95,9 @@
     {
         _opened = !_opened;
     }
-    
-    
-    public async Task LogOut()
+
+
+    private async Task LogOut()
     {
     try
         {

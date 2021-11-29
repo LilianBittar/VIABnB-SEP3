@@ -9,7 +9,7 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes
         /// GraphQL response container containing the queried residence. 
         /// </summary>
         /// <value></value>
-        [JsonProperty("Residence")]
+        [JsonProperty("residence")]
         public Residence Residence { get; set; }
         
         

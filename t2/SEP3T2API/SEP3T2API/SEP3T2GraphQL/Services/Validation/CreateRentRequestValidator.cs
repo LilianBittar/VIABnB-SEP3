@@ -32,6 +32,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">if the start date and end date is the same</exception>
         /// <exception cref="ArgumentException">if end date is earlier than start date</exception>
         /// <exception cref="ArgumentException">if start date is earlier than today</exception>
+        /// <exception cref="ArgumentException">if start date of request is same as residence's available to date</exception>
         /// <exception cref="ArgumentException">if end date is earlier than today</exception>
         /// <exception cref="ArgumentException">if rent period of request is outside the available from and available to date of the residence</exception>
         /// <exception cref="ArgumentException">If residence is not available</exception>
@@ -79,38 +80,50 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">if start date is earlier than today</exception>
         /// <exception cref="ArgumentException">if end date is earlier than today</exception>
         /// <exception cref="ArgumentException">if rent period of request is outside the available from and available to date of the residence</exception>
+        /// <exception cref="ArgumentException">if start date of request is same as residence's available to date</exception>
         private void ValidateRentPeriod(RentRequest request)
         {
-            if (DateTime.Compare(request.StartDate, request.EndDate) == 0)
+            //TODO: Refactor the boolean expressions to separate methods with descriptive names for more readability.  
+            if (request.StartDate == null || request.EndDate == null)
+            {
+                throw new ArgumentException("Start date and end date is required");
+            }
+            if (DateTime.Compare(request.StartDate.Date, request.EndDate.Date) == 0)
             {
                 throw new ArgumentException("Start date and end date of the rent period cannot be the same");
             }
 
-            if (DateTime.Compare(request.EndDate, request.StartDate) < 0)
+            if (DateTime.Compare(request.EndDate.Date, request.StartDate.Date) < 0)
             {
                 throw new ArgumentException("End date cannot be earlier than start date");
             }
 
-            if (DateTime.Compare(request.StartDate, DateTime.Now) < 0)
+            if (DateTime.Compare(request.StartDate.Date, DateTime.Now.Date) < 0)
             {
                 throw new ArgumentException("Start date cannot be earlier than today");
             }
 
-            if (DateTime.Compare(request.EndDate, DateTime.Now) < 0)
+            if (DateTime.Compare(request.EndDate.Date, DateTime.Now.Date) < 0)
             {
                 throw new ArgumentException("End date cannot be earlier than today");
             }
 
-            if (DateTime.Compare(request.StartDate, request.Residence.AvailableFrom.Value) < 0)
+            if (DateTime.Compare(request.StartDate.Date, request.Residence.AvailableFrom.Value.Date) < 0)
             {
                 throw new ArgumentException(
                     "Start date of request cannot be earlier than the residence's available from date");
             }
 
-            if (DateTime.Compare(request.EndDate, request.Residence.AvailableTo.Value) > 0)
+            if (DateTime.Compare(request.EndDate.Date, request.Residence.AvailableTo.Value.Date) > 0)
             {
                 throw new ArgumentException(
                     "End date of request cannot be later than the residence's available to date");
+            }
+
+            if (DateTime.Compare(request.StartDate.Date, request.Residence.AvailableTo.Value.Date) == 0)
+            {
+                throw new ArgumentException(
+                    "Start date of request cannot be the same as the residence's available to date"); 
             }
         }
 
@@ -136,13 +149,24 @@ namespace SEP3T2GraphQL.Services.Validation
         private async Task ValidateRentPeriodOverlaps(RentRequest request)
         {
             var allRequests = await _rentRequestRepository.GetAllAsync();
-            var allRequestsForSameResidence = allRequests.Where(r => r.Residence.Id == request.Id);
-            if (allRequestsForSameResidence.Any(r =>
-                (r.StartDate == request.StartDate && r.EndDate == request.EndDate) &&
-                (r.Status == RentRequestStatus.Approved)))
+            if (allRequests == null || allRequests.Count() == 0)
             {
-                throw new ArgumentException("Approved rent request for same rent period already exists");
+                return;
             }
+            //
+            // if (!allRequests.Any(r => r.Residence.Id == request.Residence.Id))
+            // {
+            //     return; 
+            // }
+            // var allRequestsForSameResidence = allRequests.Where(r => r.Residence.Id == request.Residence.Id).ToList();
+            //
+            // if (allRequestsForSameResidence.Any(r =>
+            //     (DateTime.Compare(r.StartDate.Date, request.StartDate.Date) == 0 &&
+            //      DateTime.Compare(r.EndDate.Date, request.EndDate.Date) == 0) &&
+            //     (r.Status == RentRequestStatus.Approved)))
+            // {
+            //     throw new ArgumentException("Approved rent request for same rent period already exists");
+            // }
         }
     }
 }

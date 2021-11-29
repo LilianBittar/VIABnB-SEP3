@@ -1,0 +1,78 @@
+@page "/Residences"
+@using SEP3BlazorT1Client.Data
+@using SEP3BlazorT1Client.Models
+@using SEP3BlazorT1Client.Components.ResidenceCard
+@inject IResidenceService ResidenceService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IGuestService GuestService
+@inject NavigationManager NavigationManager
+@* TODO: Add AuthorizeView *@
+@if (_residencesToShow != null)
+{
+    @if (_residencesToShow.Count > 0)
+    {
+        // FILTERS DO NOT WORK YET, TO BE IMPLEMENTED WHEN WE WORK ON THAT USERSTORY.
+        <div class="page-container">
+            <div class="container-fluid d-flex flex-row residence-filters">
+                <MatTextField @bind-Value="@_cityFilter" Label="filter by city name" Outlined="true"/>
+                <div class="d-flex flex-column">
+                    <MatTextField @bind-Value="@_maxPriceFilter" Outlined="true" Label="Filter by max DKK / night" HelperText="Enter a max price in DKK / night or use the slider"/>
+                    <MatSlider @bind-Value="@_maxPriceFilter" ValueMin="0" ValueMax="10000" Style="max-width: 500px;"/>
+                </div>
+            </div>
+            <div class="container-fluid d-flex flex-wrap residence-directory">
+                @foreach (var r in _residencesToShow)
+                {
+                    <MatRipple>
+                        <ResidenceCard Residence="@r"/>
+                    </MatRipple>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>No available residences.</p>
+    }
+}
+else
+{
+    <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+}
+
+@code {
+
+    private IList<Residence> _availableResidences;
+    private IList<Residence> _residencesToShow;
+    private Guest guest;
+    private string _cityFilter = "";
+    private double _maxPriceFilter = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+    //TODO: Check if user is authenticated guest.
+    // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    // var user = authState.User;
+    //     if (!user.Identity.IsAuthenticated)
+    //     {
+    //         NavigationManager.NavigateTo("/login");
+    //     }
+    //     if (user.Claims.Any(c => c.Type.ToString() == "ENTER_CLAIM_FOR_GUEST"))
+    //     {
+        _availableResidences = await ResidenceService.GetAllAvailableResidencesAsync();
+        _residencesToShow = _availableResidences;
+        // }
+        // else
+        // {
+        //     NavigationManager.NavigateTo("/");
+        // }
+    }
+
+
+    private void OnMaxPriceSliderChange(double val)
+    {
+        _maxPriceFilter = val;
+    }
+
+
+}

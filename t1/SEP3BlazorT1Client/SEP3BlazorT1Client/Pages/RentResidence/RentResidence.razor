@@ -1,0 +1,143 @@
+@page "/RentResidence/{ResidenceId:int}"
+@using SEP3BlazorT1Client.Data
+@using SEP3BlazorT1Client.Models
+@using System.ComponentModel.DataAnnotations
+@using System.Text.Json
+@inject IGuestService GuestService
+@inject IResidenceService ResidenceService
+@inject IRentalService RentalService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@* TODO: Add AuthorizeView *@
+@if (_newRentRequest.Residence != null)
+{
+    <div class="container-fluid d-flex justify-content-center align-items-center">
+        <div class="row">
+            <div class="col">
+                <MatPaper Elevation="11" Rounded="true" Style="border-radius: 10px">
+
+                    <div class="card">
+                        <div class="card__header">
+                            <div class="d-flex justify-content-between">
+                                <h1>@_newRentRequest.Residence.PricePerNight DKK.- / night</h1>
+                                <span>@_newRentRequest.Residence.GetAverageRating() Average rating</span>
+                            </div>
+                            <hr>
+                        </div>
+
+                        <div class="card__content">
+                            <div class="d-flex flex-row">
+                                <MatDatePicker @bind-Value="@_newRentRequest.StartDate" Required="true" Outlined="true" Label="Start date" OnInput="@(StateHasChanged)"/>
+                                <MatDatePicker @bind-Value="@_newRentRequest.EndDate" Required="true" Outlined="true" Label="End date" OnInput="@(StateHasChanged)"/>
+                            </div>
+                            <EditForm EditContext="@EditContext">
+                                <DataAnnotationsValidator/>
+                                <MatTextField @bind-Value="_newRentRequest.NumberOfGuests" Label="Number of guests" Style="width: 100%"/>
+                                <ValidationMessage For="@(() => _newRentRequest.NumberOfGuests)"/>
+                            </EditForm>
+
+                            <MatButton Label="Send Request" OnClick="@CreateRequest" Style="width: 100%" Raised="true"/>
+
+                            <p style="font-weight: lighter; font-style: italic; font-size: 15px; margin-top: 0.5rem">
+                                An request will be sent to the Host. The Host can either choose to approve or reject the rent request.
+                                To check the status of request after sending, navigate to ...
+                            </p>
+
+
+                            <p style="color:red">@_errorMessage</p>
+                            <hr>
+                            <div class="d-flex flex-row justify-content-between">
+                                <span style="text-decoration: underline">@(GetTotalDays()) days x @_newRentRequest.Residence.PricePerNight DKK.-</span>
+                                <span>@(GetTotalDays() * _newRentRequest.Residence.PricePerNight) DKK.-</span>
+                            </div>
+                            <div class="d-flex flex-row justify-content-between">
+                                <span style="text-decoration: underline">@_newRentRequest.NumberOfGuests guests</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex flex-row justify-content-between">
+                                <span style="font-weight: bold">Price in total</span>
+                                <span style="font-weight: bold">@_newRentRequest.GetTotalPrice() DKK.-</span>
+                            </div>
+                        </div>
+                    </div>
+                </MatPaper>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+}
+
+@code {
+
+    [Parameter]
+    public int ResidenceId { get; set; }
+
+    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now, Status = RentRequestStatus.NOT_ANSWERED};
+
+    [CascadingParameter]
+    public EditContext EditContext { get; private set; }
+
+    private Residence _testResidence;
+
+    private string _errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(_newRentRequest);
+    // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    // var user = authState.User;
+    // if (user.Identity.IsAuthenticated)
+    // {
+    //TODO: Get authenticated guest instead of hard-coded guest. 
+    // var guest = await GuestService.GetGuestById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
+        // var guest = await GuestService.GetGuestById(3);
+        var guest = new Guest()
+        {
+            Cpr = "3333333333", Email = "test@test.test", Id = 3, Password = "Test123", FirstName = "test", GuestReviews = new List<GuestReview>(),
+            HostReviews = new List<HostReview>(), LastName = "test", PhoneNumber = "33333333", ViaId = 293886, IsApprovedGuest = false, IsApprovedHost = true, ProfileImageUrl = "test"
+        }; 
+        var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
+        if (guest != null)
+        {
+            _newRentRequest.Guest = guest;
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        if (residence != null)
+        {
+            _newRentRequest.Residence = residence;
+        }
+        EditContext = new EditContext(_newRentRequest);
+        Console.WriteLine(JsonSerializer.Serialize(_newRentRequest));
+    // }
+    // else
+    // {
+    //     NavigationManager.NavigateTo("/login");
+    // }
+    }
+
+    private int GetTotalDays()
+    {
+        return (_newRentRequest.EndDate.Date - _newRentRequest.StartDate.Date).Days;
+    }
+
+    private async void CreateRequest()
+    {
+        try
+        {
+            await RentalService.CreateRentRequest(_newRentRequest);
+            StateHasChanged();
+            //TODO: Navigate to list of rent requests.
+        }
+        catch (Exception e)
+        {
+            _errorMessage = e.Message;
+        }
+    }
+
+}

@@ -1,5 +1,7 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public class Residence
   private Address address;
   private String description;
   private String type;
+  @JsonProperty("isAvailable")
   private boolean isAvailable;
   private double pricePerNight;
   private List<Rule> rules;

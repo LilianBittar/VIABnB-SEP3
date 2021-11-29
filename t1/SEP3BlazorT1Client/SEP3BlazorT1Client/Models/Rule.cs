@@ -9,5 +9,8 @@ namespace SEP3BlazorT1Client.Models
         [Required]
         [JsonProperty("description")]
         public string Description { get; set; }
+        [Required]
+        [JsonProperty("residenceId")]
+        public int ResidenceId { get; set; }
     }
 }

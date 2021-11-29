@@ -10,6 +10,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation
         bool IsValidLastname(string lastname);
         bool IsValidPassword(string passWord);
         bool IsValidPhoneNumber(string phoneNumber);
+        bool IsValidCprNumber(string cpr);
         bool IsValidHost(Host host);
         
     }
