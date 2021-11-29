@@ -86,7 +86,7 @@ public class ResidenceController {
         }
     }
 
-    @RequestMapping(value = "/residences/{id}/approval", produces = "application/json", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/residences/{id}/", produces = "application/json", method = RequestMethod.PATCH)
     public ResponseEntity<Residence> UpdateAvailabilityPeriod(@RequestBody Residence residence, @PathVariable("id") int id) {
         try {
         //TODO not implemented
