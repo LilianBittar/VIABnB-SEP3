@@ -35,7 +35,7 @@ namespace SEP3T2GraphQL.Models
 
     public enum RentRequestStatus
     {
-        NotAnswered,
+        NOT_ANSWERED,
         NotApproved,
         Approved
     }

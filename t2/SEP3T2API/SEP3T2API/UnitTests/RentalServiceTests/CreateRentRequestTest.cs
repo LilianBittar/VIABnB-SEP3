@@ -75,7 +75,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = CreateDate("01/12/2021"),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("31/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = CreateDate("31/12/2021"),
                 NumberOfGuests = 2
             };
             List<RentRequest> emptyRentRequestList = new();
@@ -101,7 +101,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = CreateDate("02/12/2021"),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("30/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = CreateDate("30/12/2021"),
                 NumberOfGuests = numberOfGuests
             };
             TestCreateThrowsArgumentExceptionAsync(request);
@@ -117,7 +117,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = CreateDate("02/12/2021"),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("30/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = CreateDate("30/12/2021"),
                 NumberOfGuests = numberOfGuests
             };
             TestCreateThrowsArgumentExceptionAsync(request);
@@ -129,7 +129,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = CreateDate("02/12/2021"),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("02/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = CreateDate("02/12/2021"),
                 NumberOfGuests = 2
             };
             TestCreateThrowsArgumentExceptionAsync(request);
@@ -145,7 +145,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = CreateDate(startDateString),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("31/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = CreateDate("31/12/2021"),
                 NumberOfGuests = 2
             };
             TestCreateThrowsArgumentExceptionAsync(request);
@@ -160,7 +160,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = CreateDate(startDateString),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("31/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = CreateDate("31/12/2021"),
                 NumberOfGuests = 2
             };
             TestCreateThrowsArgumentExceptionAsync(request);
@@ -172,7 +172,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = DateTime.Now.AddDays(-1),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = DateTime.Now.AddDays(20),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = DateTime.Now.AddDays(20),
                 NumberOfGuests = 2
             };
             TestCreateThrowsArgumentExceptionAsync(request);
@@ -184,7 +184,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = DateTime.Now.AddDays(-30),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = DateTime.Now.AddDays(20),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = DateTime.Now.AddDays(20),
                 NumberOfGuests = 2
             };
             TestCreateThrowsArgumentExceptionAsync(request);
@@ -196,7 +196,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = DateTime.Now.AddDays(1),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = DateTime.Now.AddDays(-1),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = DateTime.Now.AddDays(-1),
                 NumberOfGuests = 2
             };
             TestCreateThrowsArgumentExceptionAsync(request);
@@ -208,7 +208,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = CreateDate("31/12/2021"),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("31/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = CreateDate("31/12/2021"),
                 NumberOfGuests = 2
             };
             TestCreateThrowsArgumentExceptionAsync(request);
@@ -222,7 +222,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = CreateDate("02/12/2021"),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("30/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = CreateDate("30/12/2021"),
                 NumberOfGuests = 2
             };
             TestCreateThrowsArgumentExceptionAsync(request);
@@ -253,7 +253,7 @@ namespace UnitTests.RentalServiceTests
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 3, StartDate = CreateDate("02/12/2021"),
-                Residence = _residence, Status = RentRequestStatus.NotAnswered, EndDate = CreateDate("30/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NOT_ANSWERED, EndDate = CreateDate("30/12/2021"),
                 NumberOfGuests = 2
             };
             

@@ -149,19 +149,24 @@ namespace SEP3T2GraphQL.Services.Validation
         private async Task ValidateRentPeriodOverlaps(RentRequest request)
         {
             var allRequests = await _rentRequestRepository.GetAllAsync();
-            if (allRequests == null)
+            if (allRequests == null || allRequests.Count() == 0)
             {
                 return;
             }
-
-            var allRequestsForSameResidence = allRequests.Where(r => r.Residence.Id == request.Residence.Id);
-            if (allRequestsForSameResidence.Any(r =>
-                (DateTime.Compare(r.StartDate.Date, request.StartDate.Date) == 0 &&
-                 DateTime.Compare(r.EndDate.Date, request.EndDate.Date) == 0) &&
-                (r.Status == RentRequestStatus.Approved)))
-            {
-                throw new ArgumentException("Approved rent request for same rent period already exists");
-            }
+            //
+            // if (!allRequests.Any(r => r.Residence.Id == request.Residence.Id))
+            // {
+            //     return; 
+            // }
+            // var allRequestsForSameResidence = allRequests.Where(r => r.Residence.Id == request.Residence.Id).ToList();
+            //
+            // if (allRequestsForSameResidence.Any(r =>
+            //     (DateTime.Compare(r.StartDate.Date, request.StartDate.Date) == 0 &&
+            //      DateTime.Compare(r.EndDate.Date, request.EndDate.Date) == 0) &&
+            //     (r.Status == RentRequestStatus.Approved)))
+            // {
+            //     throw new ArgumentException("Approved rent request for same rent period already exists");
+            // }
         }
     }
 }

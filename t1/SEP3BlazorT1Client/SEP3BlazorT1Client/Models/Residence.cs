@@ -41,6 +41,7 @@ namespace SEP3BlazorT1Client.Models
         [JsonProperty("availableTo")]
         public DateTime? AvailableTo { get; set; }
         [Required, Range(1, int.MaxValue)]
+        [JsonProperty("maxNumberOfGuests")]
         public int MaxNumberOfGuests { get; set; }
         [JsonProperty("host")]
         public Host Host { get; set; }

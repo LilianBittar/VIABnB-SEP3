@@ -22,6 +22,8 @@ public class RentRequest {
         this.residence = residence;
     }
 
+    public RentRequest() {
+    }
 
     public int getId() {
         return id;

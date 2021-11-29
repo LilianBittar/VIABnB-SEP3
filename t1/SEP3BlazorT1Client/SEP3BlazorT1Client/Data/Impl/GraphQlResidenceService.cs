@@ -25,34 +25,77 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlClient client = new GqlClient(Url);
             var residenceQuery = new GqlQuery()
             {
-                Query = @"query($residenceId: int){
-                          residence(id: $residenceId){
-                            id, 
-                            address{
-                              id,
-                              streetName,
-                              houseNumber,
-                              streetNumber,
-                              City
-                                {
-                                    id,
-                                    cityName,
-                                    zipCode
-                                }
-                            }, 
-                            description,
-                            type,
-                            averageRating,
-                            isAvailable,
-                            pricePerNight,
-                            rules{
-                              description
-                            },
-                            facilities{
-                              name
-                            }
-                          }
-                        }
+                Query = @"query ($residenceId:Int!){
+  residence(id:$residenceId) {
+    id
+    address {
+      id
+      streetName
+      streetNumber
+      city {
+        id
+        cityName
+        zipCode
+      }
+    }
+    description
+    type
+    isAvailable
+    pricePerNight
+    rules {
+      description
+      residenceId
+    }
+    facilities {
+      id
+      name
+    }
+    availableFrom
+    availableTo
+    maxNumberOfGuests
+    host {
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residenceReviews {
+      rating
+      reviewText
+      guest {
+        viaId
+        guestReviews {
+          id
+          rating
+          text
+          hostId
+        }
+        isApprovedGuest
+        id
+        firstName
+        lastName
+        phoneNumber
+        email
+        password
+        hostReviews{id,rating,text,viaId}
+        profileImageUrl
+        cpr
+        isApprovedHost
+      }
+    }
+  }
+}
 ",
                 Variables = new {residenceId = id}
             };
