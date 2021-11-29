@@ -26,16 +26,22 @@ public class RentRequestController {
 
     @PostMapping("/rentrequests")
     public ResponseEntity<RentRequest> createRentRequest(@RequestBody RentRequest request) {
+        LOGGER.info("Request for: createRentRequest received with params: " +gson.toJson(request) );
         if (request == null) {
+            LOGGER.error("Bad request: request was null");
             return ResponseEntity.badRequest().build();
         }
         try {
+            LOGGER.info("Creating rent request...");
             RentRequest createdRentRequest = rentRequestDAO.create(request);
             if (createdRentRequest == null) {
+                LOGGER.error("Rent request could not be created...");
                 return ResponseEntity.internalServerError().build();
             }
+            LOGGER.info("New rent request was created: " + gson.toJson(createdRentRequest));
             return ResponseEntity.ok(createdRentRequest);
         } catch (Exception e) {
+            LOGGER.error("Rent request could no be created: " + e.getMessage());
             return ResponseEntity.internalServerError().build();
         }
     }

@@ -51,8 +51,9 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
                     result.getString("password"), new ArrayList<>(),
                     result.getString("personalimage"),
                     result.getString("cprnumber"),
-                    result.getBoolean("isapproved"), result.getInt("viaid"), new ArrayList<>(),
+                    result.getBoolean("isapproved"), result.getInt("viaid"),
                     result.getBoolean("isapprovedguest"));
+            existingGuest.setGuestReviews(new ArrayList<>());
                 allGuests.add(existingGuest);
             }
             return allGuests;
@@ -141,14 +142,16 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
             stm.setInt(1, studentNumber);
             ResultSet result = stm.executeQuery();
             if (result.next()){
-                return new Guest(result.getInt("hostid"),
+                Guest guest = new Guest(result.getInt("hostid"),
                         result.getString("fname"), result.getString("lname"),
                         result.getString("phonenumber"), result.getString("email"),
                         result.getString("password"), new ArrayList<>(),
                         result.getString("personalimage"),
                         result.getString("cprnumber"),
-                        result.getBoolean("isapproved"), result.getInt("viaid"),new ArrayList<>(),
+                        result.getBoolean("isapproved"), result.getInt("viaid"),
                         result.getBoolean("isapprovedguest"));
+                guest.setGuestReviews(new ArrayList<>());
+                return guest;
             }
             return null;
         } catch (SQLException throwables) {
