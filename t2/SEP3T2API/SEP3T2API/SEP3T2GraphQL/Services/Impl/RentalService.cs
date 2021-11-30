@@ -76,5 +76,16 @@ namespace SEP3T2GraphQL.Services.Impl
 
             return updatedRequest;
         }
+
+        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync()
+        {
+            var rentRequestList = await _rentRequestRepository.GetAllNotAnsweredRentRequestAsync();
+            if (rentRequestList == null)
+            {
+                throw new ArgumentException("Request list is null");
+            }
+
+            return rentRequestList;
+        }
     }
 }

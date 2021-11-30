@@ -86,6 +86,23 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return updatedRequest;
         }
 
+        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync()
+        {
+            var response = await _client.GetAsync($"{Url}?status=NOTANSWERED");
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            var result = await response.Content.ReadAsStringAsync();
+            var requestList = JsonSerializer.Deserialize<List<RentRequest>>(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return requestList;
+        }
+
         private static async Task HandleErrorResponse(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)

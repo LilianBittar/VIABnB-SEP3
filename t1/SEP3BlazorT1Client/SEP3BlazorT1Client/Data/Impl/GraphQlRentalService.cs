@@ -440,6 +440,89 @@ namespace SEP3BlazorT1Client.Data.Impl
 
             return response.Data.RentRequest; 
         }
+
+        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync()
+        {
+          var allNotAnsweredRentRequestQuery = new GqlQuery()
+            {
+                Query = @"query 
+                          {
+                            allNotAnsweredRentRequest 
+                             {
+                               id
+                               startDate
+                               endDate
+                               numberOfGuests
+                               status
+                               guest 
+                                {
+                                  viaId
+                                  guestReviews 
+                                    {
+                                      id
+                                      rating
+                                      text
+                                      hostId
+                                    }
+                                 isApprovedGuest
+                                 id
+                                 firstName
+                                 lastName
+                                 phoneNumber
+                                 email
+                                 password
+                                 hostReviews 
+                                  {
+                                     id
+                                     viaId
+                                     rating
+                                     text
+                                  }
+                                 profileImageUrl
+                                 cpr
+                                 isApprovedHost
+                               }
+                             residence 
+                              {
+                                 id
+                                 address 
+                                  {
+                                    id
+                                    streetName
+                                    houseNumber
+                                    streetNumber
+                                    city 
+                                      {
+                                        id
+                                        cityName
+                                        zipCode
+                                      }
+                                   }
+                            description
+                            type
+                            averageRating
+                            isAvailable
+                            pricePerNight
+                            rules 
+                              {
+                                residenceId
+                                description
+                              }
+                            facilities 
+                              {
+                                id
+                                name
+                              }
+                          }
+                        }
+                       }
+                        ",
+            };
+            var graphQlResponse =
+                await _client.PostQueryAsync<AllNotAnsweredRentRequestResponseType>(allNotAnsweredRentRequestQuery);
+            return graphQlResponse.Data.RentRequests;
+        }
+
         private static void HandleErrorResponse(GqlRequestResponse<RentResidenceMutationResponseType> response)
         {
             if (response.Errors != null)

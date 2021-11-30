@@ -22,7 +22,7 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
 
         protected override async Task OnInitializedAsync()
         {
-            rentRequestList = await RentalService.GetAllRentRequestsAsync();
+            rentRequestList = await RentalService.GetAllNotAnsweredRentRequestAsync();
         }
 
         private async Task ApproveRequest(int requestId)
