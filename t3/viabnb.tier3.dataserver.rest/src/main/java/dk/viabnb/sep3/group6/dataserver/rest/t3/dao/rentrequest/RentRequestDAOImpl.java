@@ -72,7 +72,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
         List<RentRequest> rentRequestListToReturn = new ArrayList<>();
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT * FROM rentrequest JOIN residence r on r.residenceid = rentrequest.residenceid");
+                    "SELECT * FROM rentrequest JOIN residence r on r.residenceid = rentrequest.residenceid JOIN guest g on rentrequest.guestid = g.guestid" );
             ResultSet result = stm.executeQuery();
             while (result.next()) {
                 RentRequest request = new RentRequest(result.getInt("rentrequestid"),
@@ -80,7 +80,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
                         LocalDate.parse(result.getDate("enddate").toString()),
                         result.getInt("numberofguests"),
                         RentRequestStatus.valueOf(result.getString("status")),
-                        getGuestById(result.getInt("hostid")),
+                        getGuestById(result.getInt("guestid")),
                         getResidenceById(result.getInt("hostid")));
                 rentRequestListToReturn.add(request);
             }

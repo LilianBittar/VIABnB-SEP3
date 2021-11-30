@@ -88,5 +88,10 @@ namespace SEP3T2GraphQL.Services.Impl
             Console.WriteLine(JsonSerializer.Serialize(rentRequestList));
             return rentRequestList;
         }
+
+        public async Task<IEnumerable<RentRequest>> GetRentRequestsByGuestId(int guestId)
+        {
+            return await _rentRequestRepository.GetRentRequestsByGuestId(guestId);
+        }
     }
 } 
