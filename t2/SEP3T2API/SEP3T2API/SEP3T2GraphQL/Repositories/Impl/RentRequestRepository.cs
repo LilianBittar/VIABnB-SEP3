@@ -46,7 +46,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 });
         }
 
-        public async Task<RentRequest> GetAsync(int id)
+        public async Task<RentRequest> GetAsync(int  id)
         {
             var response = await _client.GetAsync($"{Url}/{id}");
             await HandleErrorResponse(response);
@@ -101,6 +101,18 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             return requestList;
+        }
+
+        public async Task<IEnumerable<RentRequest>> GetRentRequestsByGuestId(int guestId)
+        {
+            var response = await _client.GetAsync($"{Url}?guestId={guestId}");
+            Console.WriteLine(JsonSerializer.Serialize(await response.Content.ReadAsStringAsync()));
+            if (!response.IsSuccessStatusCode)
+            {
+                await HandleErrorResponse(response); 
+            }
+
+            return JsonSerializer.Deserialize<IEnumerable<RentRequest>>(await response.Content.ReadAsStringAsync());
         }
 
         private static async Task HandleErrorResponse(HttpResponseMessage response)
