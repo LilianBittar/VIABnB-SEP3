@@ -42,6 +42,8 @@
         </div>
     </NotAuthorized>
     <Authorized>
-        <button class="btn btn-outline-dark" @onclick="AdminLogout">Logout Admin</button>
+        <div id="errorBox">
+            <p>You are already logged in the system as an admin <a href="../Index">Go back</a> to main page</p>
+        </div>
     </Authorized>
 </AuthorizeView>
