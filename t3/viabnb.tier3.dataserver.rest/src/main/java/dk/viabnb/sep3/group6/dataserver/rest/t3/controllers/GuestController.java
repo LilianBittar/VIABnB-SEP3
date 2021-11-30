@@ -2,8 +2,11 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
 import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RentRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +21,12 @@ import java.util.NoSuchElementException;
 public class GuestController {
     private static final Logger LOGGER= LoggerFactory.getLogger(GuestController.class);
     private GuestDAO guestDAO;
+    private RentRequestDAO rentRequestDAO;
 
     @Autowired
-    public GuestController(GuestDAO guestDAO) {
+    public GuestController(GuestDAO guestDAO, RentRequestDAO rentRequestDAO) {
         this.guestDAO = guestDAO;
+        this.rentRequestDAO = rentRequestDAO;
     }
 
     /**
@@ -139,6 +144,18 @@ public class GuestController {
         catch (NoSuchElementException e)
         {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    // This might be a better design of API endpoints for querying RentRequests of specific Guest?
+    @GetMapping("/guests/{id}/rentrequests")
+    public ResponseEntity<List<RentRequest>> getRentRequestByGuestId(@PathVariable int id){
+        try {
+            List<RentRequest> rentRequests = rentRequestDAO.getAll();
+            rentRequests.removeIf(request -> request.getGuest().getId() == id);
+            return ResponseEntity.ok(rentRequests);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
         }
     }
 }
