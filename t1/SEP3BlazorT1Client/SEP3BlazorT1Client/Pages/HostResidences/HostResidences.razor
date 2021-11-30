@@ -23,80 +23,88 @@
                 margin: 0px;
             }
   </style>
+@if (_residences == null)
+{
+    <p>
+        <em>Please wait..</em>
+    </p>
+}
+else
+{
 
-<div class="mat-layout-grid">
-    <div class="mat-layout-grid-inner">
-        @foreach (var residence in Residences)
-        {
-            <div class="mat-layout-grid-cell">
-                <MatCard class="demo-mat-card">
-                    <MatCardContent>
-                        <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
-                        <div class="demo-mat-card-content">
-                            <MatHeadline6 class="demo-mat-card-clean-margin">
-                                Unique stays
-                            </MatHeadline6>
-                            <MatSubtitle2 class="demo-mat-card-clean-margin">
-                                @residence.Address.ToString()
-                            </MatSubtitle2>
-                        </div>
-
-                        <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-                            @residence.Description
-                        </MatBody2>
-                    </MatCardContent>
-                    <MatCardActions>
-                        <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
-                    </MatCardActions>
-                </MatCard>
-            </div>
-        }
-
-        <MatDialog @bind-IsOpen="@dialogIsOpen">
-            <MatDialogTitle>Set the period of availability for the residence</MatDialogTitle>
-            <MatDialogContent>
-                <p>
-                    <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@ResidenceForRent.MaxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
-                    </MatNumericUpDownField>
-                </p>
-
-                @* Availablefrom *@
-
-                <p>
-                    <b> Start Date</b>
-                </p>
-                <MatDatePicker @bind-Value="@ResidenceForRent.AvailableFrom"></MatDatePicker>
-
-                <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Now; })">
-                    Now
-                </MatButton>
-                <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = null; })">
-                    Empty
-                </MatButton>
-
-                @* AvailableTo*@
-                <p>
-                    <b> End Date</b>
-                </p>
-                <MatDatePicker @bind-Value="@ResidenceForRent.AvailableTo"></MatDatePicker>
-
-                <MatButton OnClick="@(_ => { ResidenceForRent.AvailableTo = null; })">
-                    Empty
-                </MatButton>
-            </MatDialogContent>
-            <MatDialogActions>
-                <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
-                <MatButton OnClick="@OkClick">Publish</MatButton>
-            </MatDialogActions>
-            @foreach (var errorMessage in validationResults)
+    <div class="mat-layout-grid">
+        <div class="mat-layout-grid-inner">
+            @foreach (var residence in Residences)
             {
-                <p class="error-label text-danger">@errorMessage</p>
-            }
-             <p class="error-label text-danger">@_errorText</p>
-        </MatDialog>
-    </div>
-</div>
+                <div class="mat-layout-grid-cell">
+                    <MatCard class="demo-mat-card">
+                        <MatCardContent>
+                            <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
+                            <div class="demo-mat-card-content">
+                                <MatHeadline6 class="demo-mat-card-clean-margin">
+                                    Unique stays
+                                </MatHeadline6>
+                                <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                    @residence.Address.ToString()
+                                </MatSubtitle2>
+                            </div>
 
+                            <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                                @residence.Description
+                            </MatBody2>
+                        </MatCardContent>
+                        <MatCardActions>
+                            <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
+                        </MatCardActions>
+                    </MatCard>
+                </div>
+            }
+
+            <MatDialog @bind-IsOpen="@dialogIsOpen">
+                <MatDialogTitle>Set the period of availability for the residence</MatDialogTitle>
+                <MatDialogContent>
+                    <p>
+                        <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@ResidenceForRent.MaxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
+                        </MatNumericUpDownField>
+                    </p>
+
+                    @* Availablefrom *@
+
+                    <p>
+                        <b> Start Date</b>
+                    </p>
+                    <MatDatePicker @bind-Value="@ResidenceForRent.AvailableFrom"></MatDatePicker>
+
+                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Now; })">
+                        Now
+                    </MatButton>
+                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = null; })">
+                        Empty
+                    </MatButton>
+
+                    @* AvailableTo*@
+                    <p>
+                        <b> End Date</b>
+                    </p>
+                    <MatDatePicker @bind-Value="@ResidenceForRent.AvailableTo"></MatDatePicker>
+
+                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableTo = null; })">
+                        Empty
+                    </MatButton>
+                </MatDialogContent>
+                <MatDialogActions>
+                    <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
+                    <MatButton OnClick="@OkClick">Publish</MatButton>
+                </MatDialogActions>
+                @foreach (var errorMessage in validationResults)
+                {
+                    <p class="error-label text-danger">@errorMessage</p>
+                }
+                <p class="error-label text-danger">@_errorText</p>
+            </MatDialog>
+        </div>
+    </div>
+}
 
 @code {
     bool dialogIsOpen = false;
@@ -104,7 +112,16 @@
     private string _errorText;
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
 
+    IList<Residence> _residences;
+
     Residence ResidenceForRent = new Residence();
+
+    protected override async Task OnInitializedAsync()
+    {
+        //TODO how to get host id
+        _residences = await ResidenceService.GetResidencesByHostIdAsync(1);
+    }
+
 
     void OpenDialog(Residence residence)
     {
