@@ -32,9 +32,9 @@ namespace SEP3BlazorT1Client.Models
         [JsonProperty("guest")]
 
         public Guest Guest { get; set; }
+
         [Required]
         [JsonProperty("residence")]
-
         public Residence Residence { get; set; }
 
         public decimal GetTotalPrice()
@@ -47,7 +47,6 @@ namespace SEP3BlazorT1Client.Models
             return (EndDate - StartDate).Days;
         }
     }
-
 
     [JsonConverter(typeof(StringEnumConverter))]
     public enum RentRequestStatus
