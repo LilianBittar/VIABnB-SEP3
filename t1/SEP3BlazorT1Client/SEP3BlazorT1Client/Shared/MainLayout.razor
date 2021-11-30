@@ -54,6 +54,13 @@
                 <MatButton class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
                     Log out
                 </MatButton>
+                <AuthorizeView Policy="MustBeAdmin">
+                    <Authorized>
+                        <MatButton class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
+                            Admin Log out
+                        </MatButton>
+                    </Authorized>
+                </AuthorizeView>
             </MatAppBarSection>
         </MatAppBarRow>
     </MatAppBar>
@@ -69,7 +76,7 @@
                             Register New Residence
                         </MatListItem>
                         <MatListItem Href="/hostresidences" >
-                          My Residences
+                            My Residences
                         </MatListItem>
                         <MatListItem Href="/registerhost" >
                             Register As Host
@@ -79,11 +86,11 @@
                 </MatListGroup>
             </MatDrawer>
         </MatDrawerContainer>
-            <MatDrawerContent>
-                <div class="content-body"> 
-                    @Body 
-                </div> 
-            </MatDrawerContent>
+        <MatDrawerContent>
+            <div class="content-body"> 
+                @Body 
+            </div> 
+        </MatDrawerContent>
     </MatAppBarContent>
 </MatAppBarContainer>
 
@@ -99,7 +106,7 @@
 
     private async Task LogOut()
     {
-    try
+        try
         {
             ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
             NavigationManager.NavigateTo("/");

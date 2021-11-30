@@ -33,5 +33,22 @@ namespace SEP3BlazorT1Client.Pages.AdminView
                 errorMessage = e.Message;
             }
         }
+
+        public async Task AdminLogout()
+        {
+            errorMessage = "";
+            email = "";
+            password = "";
+            try
+            {
+                ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+                NavigationManager.NavigateTo("/AdminLogin");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

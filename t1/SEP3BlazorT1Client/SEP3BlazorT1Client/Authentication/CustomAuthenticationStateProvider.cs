@@ -39,12 +39,12 @@ namespace SEP3BlazorT1Client.Authentication
                     await ValidateLoginAsHost(tmp.Email, tmp.Password);
                 }
             }
-            else
+            else if (cachedHost != null)
             {
+                
                 identity = SetupClaimsForUser(cachedHost);
             }
-
-            if (cachedAdmin == null)
+            else if (cachedAdmin == null)
             {
                 var adminAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
                 if (!string.IsNullOrEmpty(adminAsJson))
@@ -53,7 +53,7 @@ namespace SEP3BlazorT1Client.Authentication
                     await ValidateLoginAsAdmin(tmp.Email, tmp.Password);
                 }
             }
-            else
+            else if (cachedAdmin != null)
             {
                 identity = SetupClaimsForAdmin(cachedAdmin);
             }
@@ -176,6 +176,7 @@ namespace SEP3BlazorT1Client.Authentication
             claims.Add(new Claim("Password", administrator.Password));
             claims.Add(new Claim("PhoneNumber", administrator.PhoneNumber));
             claims.Add(new Claim("Id", administrator.Id.ToString()));
+            claims.Add(new Claim("Role", "Admin"));
             var identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }
