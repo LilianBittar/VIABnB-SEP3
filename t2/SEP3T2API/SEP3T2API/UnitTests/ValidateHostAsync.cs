@@ -21,7 +21,7 @@ namespace UnitTests
             public void SetUp()
             {
                 HostValidation = new HostValidationImpl();
-                HostRepository = new HostRepositoryImpl(HostValidation);
+                HostRepository = new HostRepositoryImpl();
                 HostService = new HostServiceImpl(HostRepository);
             }
 

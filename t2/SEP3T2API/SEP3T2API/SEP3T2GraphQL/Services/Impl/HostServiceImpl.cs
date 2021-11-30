@@ -31,20 +31,25 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Host> RegisterHostAsync(Host host)
         {
-            if (_hostValidation.IsValidHost(host))
+            Host hostExists = await GetHostByEmail(host.Email);
+            if (hostExists!=null)
             {
-                try
+                if (_hostValidation.IsValidHost(host))
                 {
-                    Console.WriteLine($"{this} creating new host...");
-                    Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(host)}");
-                    return await _hostRepository.RegisterHostAsync(host);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
+                    try
+                    {
+                        Console.WriteLine($"{this} creating new host...");
+                        Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(host)}");
+                        return await _hostRepository.RegisterHostAsync(host);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+                } 
             }
+           
 
             throw new ArgumentException("Invalid host");
         }
@@ -52,7 +57,7 @@ namespace SEP3T2GraphQL.Services.Impl
         public async Task<Host> GetHostByEmail(string email)
         {
             
-            if (_hostValidation.IsValidEmail(email))
+            if ( await _hostValidation.IsValidEmail(email))
             {
                 try
                 {
