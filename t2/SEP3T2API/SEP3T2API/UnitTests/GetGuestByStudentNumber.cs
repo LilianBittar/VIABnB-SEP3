@@ -32,7 +32,7 @@ namespace UnitTests
             GuestValidation = new GuestValidationImpl();
             GuestRepository = new GuestRepository();
             HostValidation = new HostValidationImpl();
-            HostRepository = new HostRepositoryImpl(HostValidation);
+            HostRepository = new HostRepositoryImpl();
             HostService = new HostServiceImpl(HostRepository);
             guestService = new GuestServiceImpl(_guestRepositoryMock.Object, HostService);
              guest = new Guest()

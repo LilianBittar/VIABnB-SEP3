@@ -21,9 +21,9 @@
                     <div hidden="@loginAsHost">
                         <MatTextField @bind-Value="@email" Label="Email" Outlined="true" ></MatTextField>
                     </div>
-                     <div hidden="@(!loginAsHost)" >
-                         <MatTextField @bind-Value="@studentNumber" Label="Student number" Outlined="true"/>
-                         </div>
+                    <div hidden="@(!loginAsHost)" >
+                        <MatTextField @bind-Value="@studentNumber" Label="Student number" Outlined="true"/>
+                    </div>
                     
                     <MatTextField @bind-Value="@password" Dense="true" Label="Password" Outlined="true"></MatTextField>
 
@@ -69,10 +69,12 @@
                 NavigationManager.NavigateTo("/BuildingsOverview");
             }
             else
-            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLoginAsHost(email, password);
-            email = "";
-            password = "";
-            NavigationManager.NavigateTo("/BecomeGuest");
+            {
+                await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLoginAsHost(email, password);
+                email = "";
+                password = "";
+                NavigationManager.NavigateTo("/BecomeGuest");
+            }
         }
         catch (Exception e)
         {

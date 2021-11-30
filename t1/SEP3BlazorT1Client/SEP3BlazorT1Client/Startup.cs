@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using MatBlazor;
 using Microsoft.AspNetCore.Builder;
@@ -45,6 +46,16 @@ namespace SEP3BlazorT1Client
             services.AddScoped<IRuleService, GraphQlRuleService>();
             services.AddScoped<IAdministrationService, GraphQlAdministrationService>();
             services.AddScoped<IRentalService, GraphQlRentalService>();
+            
+            //TODO add policies here:
+            services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("MustBeAdmin", apb => 
+                        apb.RequireAuthenticatedUser().RequireClaim("Role" ,"Admin"));
+                    options.AddPolicy("MustBeGuest", abp => abp.RequireAuthenticatedUser().RequireClaim("Role", "Guest"));
+                    options.AddPolicy("MustBeHost", abp => abp.RequireAuthenticatedUser().RequireClaim("Role", "Guest", "Host", "Admin"));
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

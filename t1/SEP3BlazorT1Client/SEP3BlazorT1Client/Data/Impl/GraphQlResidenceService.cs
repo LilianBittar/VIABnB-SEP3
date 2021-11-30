@@ -9,16 +9,16 @@ using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Models;
 
-  /*
-    Usage of client can be found at: https://github.com/michaelbui99/CatQL-GraphQL-Client
-  */
+/*
+  Usage of client can be found at: https://github.com/michaelbui99/CatQL-GraphQL-Client
+*/
 namespace SEP3BlazorT1Client.Data.Impl
 {
     public class GraphQlResidenceService : IResidenceService
     {
         // TODO: Refactor methods to use the same GqlClient instance.  
         private const string Url = "https://localhost:5001/graphql";
-        private readonly GqlClient _client = new GqlClient(Url); 
+        private readonly GqlClient _client = new GqlClient(Url);
 
         public async Task<Residence> GetResidenceAsync(int id)
         {
@@ -100,9 +100,14 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Variables = new {residenceId = id}
             };
             var graphQlResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceQuery);
-         
+            if (graphQlResponse.Errors != null)
+            {
+                throw new ArgumentException(
+                    JsonConvert.SerializeObject(graphQlResponse.Errors).Split(",")[4].Split(":")[2]);
+            }
+
             System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Residence.ToString()}");
-            return graphQlResponse.Data.Residence; 
+            return graphQlResponse.Data.Residence;
         }
 
         public Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
@@ -112,24 +117,85 @@ namespace SEP3BlazorT1Client.Data.Impl
 
         public async Task<List<Residence>> GetResidencesByHostIdAsync(int Id)
         {
-            GqlClient client = new GqlClient(Url);
             var residenceQuery = new GqlQuery()
             {
-                Query = @"query($hostId: int){
-                          host(id: $hostId){
-                            id,
-                            firstName,
-                            lastName,
-                            phoneNumber,
-                            email,
-                            password
+                Query = @"query ($hostId: int!)
+                        {residencesByHostId(int:hostId)
+                          {
+                          id
+                        address {
+                           id
+                           streetName
+                             streetNumber
+                            city {
+                                id
+                                cityName
+                                zipCode
+                              }
                             }
-                          }
+                            description
+                            type
+                            isAvailable
+                            pricePerNight
+                            rules {
+                              description
+                              residenceId
+                            }
+                            facilities {
+                              id
+                              name
+                            }
+                            availableFrom
+                            availableTo
+                            maxNumberOfGuests
+                            host {
+                              id
+                              firstName
+                              lastName
+                              phoneNumber
+                              email
+                              password
+                              hostReviews {
+                                id
+                                rating
+                                text
+                                viaId
+                              }
+                              profileImageUrl
+                              cpr
+                              isApprovedHost
+                            }
+                            residenceReviews {
+                              rating
+                              reviewText
+                              guest {
+                                viaId
+                                guestReviews {
+                                  id
+                                  rating
+                                  text
+                                  hostId
+                                }
+                                isApprovedGuest
+                                id
+                                firstName
+                                lastName
+                                phoneNumber
+                                email
+                                password
+                                hostReviews{id,rating,text,viaId}
+                                profileImageUrl
+                                cpr
+                                isApprovedHost
+                              }
+  
+}
+}
 ",
                 Variables = new {hostId = Id}
             };
-            var graphQlResponse = await client.PostQueryAsync<ResidenceListQueryResponseType>(residenceQuery);
-            
+            var graphQlResponse = await _client.PostQueryAsync<ResidenceListQueryResponseType>(residenceQuery);
+
             System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Residences.ToString()}");
             return graphQlResponse.Data.Residences;
         }
@@ -144,7 +210,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                             address {
                               id
                               streetName
-                              streetNumber
+                              streetNumb
                               city {
                                 id
                                 cityName
@@ -212,21 +278,21 @@ namespace SEP3BlazorT1Client.Data.Impl
                         "
             };
             var response = await _client.PostQueryAsync<AvailableResidencesQueryResponseType>(query);
-            return response.Data.AvailableResidences; 
+            return response.Data.AvailableResidences;
         }
 
-        public async Task<Residence>  CreateResidenceAsync(Residence residence)
+        public async Task<Residence> CreateResidenceAsync(Residence residence)
         {
-
-            GqlClient client = new GqlClient(Url){EnableLogging=true};
+            GqlClient client = new GqlClient(Url) {EnableLogging = true};
             GqlQuery residenceMutation = new GqlQuery()
             {
-                Query = @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){id,address{id, zipCode, streetName, houseNumber, streetNumber, City{id, cityName, zipCode}},description,type,isAvailable,pricePerNight,rules{description},facilities{id, name},imageUrl, residenceReviews{rating,reviewText,guest{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}}}",
-                Variables= new {residenceInput = residence}
+                Query =
+                    @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){id,address{id, zipCode, streetName, houseNumber, streetNumber, City{id, cityName, zipCode}},description,type,isAvailable,pricePerNight,rules{description},facilities{id, name},imageUrl, residenceReviews{rating,reviewText,guest{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}}}",
+                Variables = new {residenceInput = residence}
             };
             var mutationResponse = await client.PostQueryAsync<CreateResidenceMutationResponseType>(residenceMutation);
             if (mutationResponse.Errors != null)
-            { 
+            {
                 /* SAMPLE ERROR RESPONSE
                 {"data":{"createResidence":null},
                 "errors":[{"message":"Unexpected Execution Error",
@@ -237,15 +303,13 @@ namespace SEP3BlazorT1Client.Data.Impl
                 */
                 System.Console.WriteLine($"/n {this} Inside error, throwing new Exception.... /n");
                 // String manipulation to seperate the Error message from the sample error response. 
-                throw new ArgumentException(JsonConvert.SerializeObject(mutationResponse.Errors).Split(",")[4].Split(":")[2]); 
+                throw new ArgumentException(JsonConvert.SerializeObject(mutationResponse.Errors).Split(",")[4]
+                    .Split(":")[2]);
             }
-          
+
             System.Console.WriteLine($"{this} received: {mutationResponse.Data.CreateResidence}");
 
             return mutationResponse.Data.CreateResidence;
         }
-
-     
     }
 }
- 

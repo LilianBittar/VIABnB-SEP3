@@ -48,16 +48,31 @@ class RentRequestControllerTest {
 
     @Test
     public void CreateRentRequestRentRepositoryDoesNotCreateRequestReturnsInternalServerError() {
-        RentRequest request = new RentRequest(1, new Date(), new Date(), 1, RentRequestStatus.NOTANSWERED, guest, residence);
+        RentRequest request = new RentRequest(1, LocalDate.now(), LocalDate.now(), 1, RentRequestStatus.NOTANSWERED, guest, residence);
         when(rentRequestDAO.create(request)).thenReturn(null);
         assertEquals(ResponseEntity.internalServerError().build(), controller.createRentRequest(request));
     }
 
     @Test
     public void CreateRentRequestRentRepositoryThrowsIllegalStateReturnsInternalServerError() {
-        RentRequest request = new RentRequest(1,new Date(), new Date(), 1, RentRequestStatus.NOTANSWERED, guest, residence);
+        RentRequest request = new RentRequest(1,LocalDate.now(), LocalDate.now(), 1, RentRequestStatus.NOTANSWERED, guest, residence);
         when(rentRequestDAO.create(request)).thenThrow(IllegalStateException.class);
         assertEquals(ResponseEntity.internalServerError().build(), controller.createRentRequest(request));
     }
 
+    @Test
+    public void updateRentRequestDoesNotUpdateRentRequestReturnsInternalServerErrorTest()
+    {
+        RentRequest request = new RentRequest(1,LocalDate.now(), LocalDate.now(), 1, RentRequestStatus.NOTANSWERED, guest, residence);
+        when(rentRequestDAO.update(request)).thenReturn(null);
+        assertEquals(ResponseEntity.badRequest().build(), controller.updateRentRequestStatus(request, 1));
+    }
+
+    @Test
+    public void updateRentRequestDoesNotUpdateRentRequestThrowsInternalServerErrorTest()
+    {
+        RentRequest request = new RentRequest(1,LocalDate.now(), LocalDate.now(), 1, RentRequestStatus.NOTANSWERED, guest, residence);
+        when(rentRequestDAO.update(request)).thenThrow(IllegalStateException.class);
+        assertEquals(ResponseEntity.badRequest().build(), controller.updateRentRequestStatus(request, 1));
+    }
 }

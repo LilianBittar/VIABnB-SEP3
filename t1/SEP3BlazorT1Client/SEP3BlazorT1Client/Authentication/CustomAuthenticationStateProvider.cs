@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text.Json;
@@ -17,22 +16,16 @@ namespace SEP3BlazorT1Client.Authentication
         private readonly IJSRuntime jsRuntime;
         private readonly IHostService _hostService;
         private readonly IGuestService _guestService;
+        private readonly IAdministrationService _administrationService;
         private Host cachedHost;
+        private Administrator cachedAdmin;
 
-        public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IHostService _hostService, IGuestService guestService)
+        public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IHostService hostService, IGuestService guestService, IAdministrationService administrationService)
         {
             this.jsRuntime = jsRuntime;
-            this._hostService = _hostService;
+            _hostService = hostService;
             _guestService = guestService;
-            if (_guestService != null)
-            {
-                Console.WriteLine(true);
-            }
-            else
-            {
-                Console.WriteLine(false);
-            }
-            
+            _administrationService = administrationService;
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
@@ -46,13 +39,61 @@ namespace SEP3BlazorT1Client.Authentication
                     await ValidateLoginAsHost(tmp.Email, tmp.Password);
                 }
             }
-            else
+            else if (cachedHost != null)
             {
+                
                 identity = SetupClaimsForUser(cachedHost);
+            }
+            else if (cachedAdmin == null)
+            {
+                var adminAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
+                if (!string.IsNullOrEmpty(adminAsJson))
+                {
+                    var tmp = JsonSerializer.Deserialize<Administrator>(adminAsJson);
+                    await ValidateLoginAsAdmin(tmp.Email, tmp.Password);
+                }
+            }
+            else if (cachedAdmin != null)
+            {
+                identity = SetupClaimsForAdmin(cachedAdmin);
             }
 
             ClaimsPrincipal cachedClaimsPrincipal = new ClaimsPrincipal(identity);
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
+        }
+
+        public async Task ValidateLoginAsAdmin(string email, string password)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new ArgumentException("You must enter an email address");
+            }
+
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new ArgumentException("You must enter a password");
+            }
+            Console.WriteLine("Validating Admin Login");
+            ClaimsIdentity identity = new();
+            try
+            {
+                var admin = await _administrationService.ValidateAdmin(email, password);
+                if (admin == null)
+                {
+                    throw new Exception("Email or password are incorrect");
+                }
+
+                identity = SetupClaimsForAdmin(admin);
+                var adminAsJson = JsonSerializer.Serialize(admin);
+                await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", adminAsJson);
+                cachedAdmin = admin;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
         public async Task ValidateLoginAsHost(string email, string password)
@@ -118,12 +159,26 @@ namespace SEP3BlazorT1Client.Authentication
         }
 
 
-            public void Logout()
+        public void Logout()
         {
             cachedHost = null;
             var user = new ClaimsPrincipal(new ClaimsIdentity());
             jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", "");
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
+        }
+
+        private ClaimsIdentity SetupClaimsForAdmin(Administrator administrator)
+        {
+            var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, administrator.FirstName));
+            claims.Add(new Claim("LastName", administrator.FirstName));
+            claims.Add(new Claim("Email", administrator.Email));
+            claims.Add(new Claim("Password", administrator.Password));
+            claims.Add(new Claim("PhoneNumber", administrator.PhoneNumber));
+            claims.Add(new Claim("Id", administrator.Id.ToString()));
+            claims.Add(new Claim("Role", "Admin"));
+            var identity = new ClaimsIdentity(claims, "apiauth_type");
+            return identity;
         }
 
         private ClaimsIdentity SetupClaimsForUser(Host host)
@@ -139,6 +194,7 @@ namespace SEP3BlazorT1Client.Authentication
             claims.Add(new Claim("Cpr", host.Cpr));
             claims.Add(new Claim("ProfileImageUrl", host.ProfileImageUrl));
             claims.Add(new Claim("IsApprovedHost", host.IsApprovedHost.ToString()));
+            claims.Add(new Claim("Role", "Host"));
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }
@@ -157,9 +213,9 @@ namespace SEP3BlazorT1Client.Authentication
             claims.Add(new Claim("ProfileImageUrl", guest.ProfileImageUrl));
             claims.Add(new Claim("IsApprovedHost", guest.IsApprovedHost.ToString()));
             claims.Add(new Claim("viaId", guest.ViaId.ToString()));
+            claims.Add(new Claim("Role", "Guest"));
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }
     }
 }
-

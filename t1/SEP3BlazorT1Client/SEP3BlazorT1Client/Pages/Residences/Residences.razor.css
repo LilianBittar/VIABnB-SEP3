@@ -1,15 +1,29 @@
 .page-container {
   padding-top: 2rem;
-  animation-name: fade-in;
-  animation-duration: 2s;
-  animation-fill-mode: forwards;
+  -webkit-animation-name: fade-in;
+          animation-name: fade-in;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
+
 .page-container .residence-filters {
   margin-bottom: 1rem;
   gap: 1rem;
 }
+
 .page-container .residence-directory {
   gap: 2rem;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes fade-in {
@@ -20,5 +34,4 @@
     opacity: 1;
   }
 }
-
 /*# sourceMappingURL=Residences.razor.css.map */

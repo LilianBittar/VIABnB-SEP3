@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SEP3T2GraphQL.Models
 {
@@ -15,6 +16,7 @@ namespace SEP3T2GraphQL.Models
         [Range(1, Int32.MaxValue, ErrorMessage = "Number of guests must be 1 or above")]
         public int NumberOfGuests { get; set; }
         [Required]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public RentRequestStatus Status { get; set; }
         [Required]
         public Guest Guest { get; set; }
@@ -35,8 +37,8 @@ namespace SEP3T2GraphQL.Models
 
     public enum RentRequestStatus
     {
-        NOT_ANSWERED,
-        NotApproved,
-        Approved
+        NOTANSWERED,
+        NOTAPPROVED,
+        APPROVED
     }
 }

@@ -54,6 +54,13 @@
                 <MatButton class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
                     Log out
                 </MatButton>
+                <AuthorizeView Policy="MustBeAdmin">
+                    <Authorized>
+                        <MatButton class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
+                            Admin Log out
+                        </MatButton>
+                    </Authorized>
+                </AuthorizeView>
             </MatAppBarSection>
         </MatAppBarRow>
     </MatAppBar>
@@ -65,13 +72,13 @@
                 <MatListGroup>
                     <MatListGroupSubHeader Style="margin-top: 1rem">Manage residences</MatListGroupSubHeader>
                     <MatList>
-                        <MatListItem Href="/registerresidence" >
+                        <MatListItem Href="/registerresidence" OnClick="@(()=>_opened= !_opened)" >
                             Register New Residence
                         </MatListItem>
-                        <MatListItem Href="/hostresidences" >
+                        <MatListItem Href="/hostresidences" OnClick="@(()=>_opened= !_opened)">
                           My Residences
                         </MatListItem>
-                        <MatListItem Href="/registerhost" >
+                        <MatListItem Href="/registerhost" OnClick="@(()=>_opened= !_opened)">
                             Register As Host
                         </MatListItem>
                     
@@ -79,11 +86,11 @@
                 </MatListGroup>
             </MatDrawer>
         </MatDrawerContainer>
-            <MatDrawerContent>
-                <div class="content-body"> 
-                    @Body 
-                </div> 
-            </MatDrawerContent>
+        <MatDrawerContent>
+            <div class="content-body"> 
+                @Body 
+            </div> 
+        </MatDrawerContent>
     </MatAppBarContent>
 </MatAppBarContainer>
 
@@ -95,11 +102,11 @@
     {
         _opened = !_opened;
     }
-
+    
 
     private async Task LogOut()
     {
-    try
+        try
         {
             ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
             NavigationManager.NavigateTo("/");

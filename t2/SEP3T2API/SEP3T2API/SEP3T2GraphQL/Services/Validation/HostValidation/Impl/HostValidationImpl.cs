@@ -1,23 +1,34 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
+using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Repositories.Impl;
+using SEP3T2GraphQL.Services.Impl;
 
 namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 {
     public class HostValidationImpl : IHostValidation
     {
-        public bool IsValidEmail(string email)
+        private IHostRepository _repository = new HostRepositoryImpl();
+        public async Task<bool> IsValidEmail(string email)
         {
-            if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
+            
+            Host host = await _repository.GetHostByEmail(email);
+            if (host!=null)
             {
-                //some form of inbuilt mail validation
-                var addr = new System.Net.Mail.MailAddress(email);
-
-                if (addr.Address == email)
+                if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
                 {
-                    return true;
-                }
+                    //some form of inbuilt mail validation
+                    var addr = new System.Net.Mail.MailAddress(email);
+
+                    if (addr.Address == email)
+                    {
+                        return true;
+                    }
+                } 
             }
+           
 
             throw new FormatException("Invalid email");
         }
@@ -85,7 +96,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
                     validConditions++;
                     break;
                 }
-
+                
                 throw new ArgumentException("password must contain at least one number");
             }
 
@@ -104,42 +115,43 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             {
                 return true;
             }
-
+    
             throw new ArgumentException("invalid phone number");
         }
 
         public bool IsValidCprNumber(string cpr)
         {
-            if (cpr==null)
+            if (cpr != null)
             {
-                throw new ArgumentException("cpr number required");
+                
+                if (cpr.Any(char.IsLetter))
+                {
+                    throw new ArgumentException("cpr number can only contain numbers");
+                }
+
+                if (cpr.Contains('-') && cpr.Length != 11)
+                {
+                    throw new ArgumentException("Invalid cpr number Length");
+                }
+
+                if (!cpr.Contains('-') && cpr.Length != 10)
+                {
+                    throw new ArgumentException("Invalid cpr number Length");
+                }
+
+                return true;
             }
 
-            if (cpr.Any(char.IsLetter))
-            {
-                throw new ArgumentException("cpr number can only contain numbers");
-            }
-            if (cpr.Contains('-') && cpr.Length!=11)
-            {
-                throw new ArgumentException("Invalid cpr number Length");
-            }
-
-            if (!cpr.Contains('-') && cpr.Length!=10)
-            {
-                throw new ArgumentException("Invalid cpr number Length");
-            }
-
-            return true;
+            throw new ArgumentNullException(cpr,"cpr cant be null");
         }
 
         public bool IsValidHost(Host host)
         {
-            if (IsValidEmail(host.Email) && IsValidFirstname(host.FirstName) && IsValidLastname(host.LastName) &&
+            if (IsValidEmail(host.Email).Result && IsValidFirstname(host.FirstName) && IsValidLastname(host.LastName) &&
                 IsValidPassword(host.Password) && IsValidPhoneNumber(host.PhoneNumber) && IsValidCprNumber(host.Cpr))
             {
                 return true;
             }
-
             throw new ArgumentException("Invalid host");
         }
 

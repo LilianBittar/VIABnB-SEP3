@@ -79,10 +79,13 @@ CREATE TABLE IF NOT EXISTS RentRequest
     numberOfGuests INT,
     status         VARCHAR,
     hostId         INT,
+    residenceId INT,
+    guestId Int,
     PRIMARY KEY (rentRequestId),
-    FOREIGN KEY (hostId) REFERENCES Host (hostid)
+    FOREIGN KEY (hostId) REFERENCES Host (hostid),
+    FOREIGN KEY (residenceId) REFERENCES Residence(residenceid),
+    foreign key (guestId) references Guest(guestId)
 );
-
 CREATE TABLE IF NOT EXISTS Rule
 (
     ruleDescription VARCHAR,
@@ -161,6 +164,3 @@ INSERT INTO Admin(fName, lName, email, phoneNumber, password)
 VALUES ('Kasper', 'Jensen', '304218@via.dk', '33333333', '1234');
 INSERT INTO Admin(fName, lName, email, phoneNumber, password)
 VALUES ('Lillian', 'Bittar', '293336@via.dk', '44444444', '1234');
-
-
-

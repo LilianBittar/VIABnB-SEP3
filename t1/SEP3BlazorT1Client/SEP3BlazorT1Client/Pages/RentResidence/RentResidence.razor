@@ -2,7 +2,8 @@
 @using SEP3BlazorT1Client.Data
 @using SEP3BlazorT1Client.Models
 @using System.ComponentModel.DataAnnotations
-@using System.Text.Json
+@using Newtonsoft.Json
+@using JsonSerializer = System.Text.Json.JsonSerializer
 @inject IGuestService GuestService
 @inject IResidenceService ResidenceService
 @inject IRentalService RentalService
@@ -75,7 +76,7 @@ else
     [Parameter]
     public int ResidenceId { get; set; }
 
-    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now, Status = RentRequestStatus.NOT_ANSWERED};
+    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now, Status = RentRequestStatus.NOTANSWERED};
 
     [CascadingParameter]
     public EditContext EditContext { get; private set; }
@@ -130,13 +131,22 @@ else
     {
         try
         {
+            /*
+             Bug MatBlazor DatePicker subtracts 1 day from the actual selected date.
+             This is a known issue and has an open issue on github. 
+             */
+            _newRentRequest.StartDate = _newRentRequest.StartDate.AddDays(0).ToLocalTime();
+            _newRentRequest.EndDate = _newRentRequest.EndDate.AddDays(0).ToLocalTime();
+            
             await RentalService.CreateRentRequest(_newRentRequest);
             StateHasChanged();
             //TODO: Navigate to list of rent requests.
+            NavigationManager.NavigateTo("/residences");
         }
         catch (Exception e)
         {
             _errorMessage = e.Message;
+            StateHasChanged();
         }
     }
 
