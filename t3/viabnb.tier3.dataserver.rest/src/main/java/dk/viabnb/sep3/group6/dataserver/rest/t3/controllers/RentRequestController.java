@@ -106,7 +106,7 @@ import java.util.NoSuchElementException;
     return ResponseEntity.ok(updatedRequest);
   }
 
-  @PatchMapping("/rentrequests/{id}/approval") public ResponseEntity<RentRequest> updateRentRequestStatus(
+  @PatchMapping("/rentrequests/{id}") public ResponseEntity<RentRequest> updateRentRequestStatus(
       @RequestBody RentRequest request, @PathVariable("id") int id)
   {
     RentRequest updateRequest;
