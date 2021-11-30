@@ -22,5 +22,6 @@ namespace SEP3BlazorT1Client.Data
         Task<IEnumerable<RentRequest>> GetAllRentRequestByResidenceId(int residenceId);
         Task<RentRequest> GetRentRequestAsync(int id);
         Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync();
+        Task<IEnumerable<RentRequest>> GetRentRequestsByGuestIdAsync(int guestId); 
     }
 }

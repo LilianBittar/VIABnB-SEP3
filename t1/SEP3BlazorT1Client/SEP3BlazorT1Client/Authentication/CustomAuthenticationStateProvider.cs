@@ -194,6 +194,7 @@ namespace SEP3BlazorT1Client.Authentication
             claims.Add(new Claim("Cpr", host.Cpr));
             claims.Add(new Claim("ProfileImageUrl", host.ProfileImageUrl));
             claims.Add(new Claim("IsApprovedHost", host.IsApprovedHost.ToString()));
+            claims.Add(new Claim("Role", "Host"));
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }
@@ -212,6 +213,7 @@ namespace SEP3BlazorT1Client.Authentication
             claims.Add(new Claim("ProfileImageUrl", guest.ProfileImageUrl));
             claims.Add(new Claim("IsApprovedHost", guest.IsApprovedHost.ToString()));
             claims.Add(new Claim("viaId", guest.ViaId.ToString()));
+            claims.Add(new Claim("Role", "Guest"));
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }

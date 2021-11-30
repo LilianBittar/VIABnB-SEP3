@@ -134,11 +134,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                           }
                           ",
                 Variables = new {newRequest = request}
-                
             };
             var response = await _client.PostQueryAsync<RentResidenceMutationResponseType>(rentResidenceMutation);
             HandleErrorResponse(response);
-            return response.Data.RentResidence; 
+            return response.Data.RentResidence;
         }
 
 
@@ -268,7 +267,8 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
             }
-            return response.Data.RentRequest; 
+
+            return response.Data.RentRequest;
         }
 
         public async Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync()
@@ -528,12 +528,12 @@ namespace SEP3BlazorT1Client.Data.Impl
                 throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
             }
 
-            return response.Data.RentRequest; 
+            return response.Data.RentRequest;
         }
 
         public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync()
         {
-          var allNotAnsweredRentRequestQuery = new GqlQuery()
+            var allNotAnsweredRentRequestQuery = new GqlQuery()
             {
                 Query = @"query
                           {
@@ -656,7 +656,131 @@ namespace SEP3BlazorT1Client.Data.Impl
             return graphQlResponse.Data.RentRequests;
         }
 
-        private static void HandleErrorResponse(GqlRequestResponse<RentResidenceMutationResponseType> response)
+        public async Task<IEnumerable<RentRequest>> GetRentRequestsByGuestIdAsync(int guestId)
+        {
+            var query = new GqlQuery()
+            {
+                Query = @"query($id: Int!) {
+  rentRequestsByGuestId(guestId:$id) {
+    id
+    startDate
+    endDate
+    numberOfGuests
+    status
+    guest {
+      viaId
+      guestReviews {
+        id
+        rating
+        text
+        hostId
+      }
+      isApprovedGuest
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residence {
+      averageRating
+      id
+      address {
+        id
+        streetName
+        houseNumber
+        streetNumber
+        city {
+          id
+          cityName
+          zipCode
+        }
+      }
+      description
+      type
+      isAvailable
+      pricePerNight
+      rules {
+        residenceId
+        description
+      }
+      facilities {
+        id
+        name
+      }
+      imageUrl
+      availableFrom
+      availableTo
+      maxNumberOfGuests
+      host {
+        id
+        firstName
+        lastName
+        phoneNumber
+        email
+        password
+        hostReviews {
+          id
+          rating
+          text
+          viaId
+        }
+        profileImageUrl
+        cpr
+        isApprovedHost
+      }
+      residenceReviews {
+        rating
+        reviewText
+        guest {
+          viaId
+          guestReviews {
+            id
+            rating
+            text
+            hostId
+          }
+          isApprovedGuest
+          id
+          firstName
+          lastName
+          phoneNumber
+          email
+          password
+          hostReviews {
+            id
+            rating
+            text
+            viaId
+          }
+          profileImageUrl
+          cpr
+          isApprovedHost
+        }
+      }
+    }
+  }
+}
+",
+                Variables = new {id = guestId}
+            };
+            var response = await _client.PostQueryAsync<RentRequestsByGuestIdQueryResponseType>(query);
+            HandleErrorResponse(response);
+            return response.Data.Requests;
+
+        }
+
+        private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)
         {
             if (response.Errors != null)
             {

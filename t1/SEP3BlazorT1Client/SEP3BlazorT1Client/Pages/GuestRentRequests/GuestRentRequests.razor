@@ -1,10 +1,86 @@
 ﻿@page "/guestrentrequests"
 @using SEP3BlazorT1Client.Data;
 @using SEP3BlazorT1Client.Models;
-@using MatBlazor;
+@using Newtonsoft.Json
 @inject IRentalService RentalService;
 @inject IGuestService GuestService;
-<h3>GuestRentRequests</h3>
+@inject AuthenticationStateProvider AuthenticationStateProvider;  
+@inject NavigationManager NavigationManager;
+@* <AuthorizeView Policy="MustBeGuest"> *@
+    @* <Authorized> *@
+        <h3>GuestRentRequests</h3>
+        @if (_rentRequests != null)
+        {
+            if (_rentRequests.Any())
+            {
+                <MatAccordion Multi="true">
+                    @foreach (var request in _rentRequests)
+                    {
+                        <MatExpansionPanel>
+                            <MatExpansionPanelSummary>
+                                <MatExpansionPanelHeader>
+                                    <p>Request: @request.Id @request.StartDate.ToShortDateString() to @request.EndDate.ToShortDateString()</p>
+                                </MatExpansionPanelHeader>
+                                <MatExpansionPanelSubHeader>
+                                    <p>Residence on address: @request.Residence.Address.City.CityName, @request.Residence.Address.StreetName @request.Residence.Address.StreetNumber</p>
+                                </MatExpansionPanelSubHeader>
+                            </MatExpansionPanelSummary>
+                            <MatExpansionPanelDetails>
+                                <div class="container-fluid d-flex flex-row justify-content-around">
+                                    <div class="left">
+                                        <h3>Request details:</h3>
+                                        <p>Status:</p>
+                                        <p class="request-status">@request.Status</p>
+                                        <p>Rent period: <span>@request.StartDate.ToShortDateString() - @request.EndDate.ToShortDateString()</span></p>
+                                        <p>Number of guests: <span>@request.NumberOfGuests</span></p>
+                                        <p>Total Price: @request.GetTotalPrice() DKK</p>
+                                    </div>
+                                    <div class="right">
+                                        <h3>Residence Details: </h3>
+                                        <h4>Address:</h4>
+                                        <p>@request.Residence.Address.StreetName @request.Residence.Address.StreetNumber @request.Residence.Address.HouseNumber, @request.Residence.Address.City.CityName @request.Residence.Address.City.ZipCode</p>
+                                        <h4>Description:</h4>
+                                        <p>@request.Residence.Description</p>
+                                        <h4>Price per night</h4>
+                                        <p>@request.Residence.PricePerNight DKK / night</p>
+                                        <h4>Rules</h4>
+                                        <ul>
+                                            @foreach (var rule in request.Residence.Rules)
+                                            {
+                                                <li>@rule.Description</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </MatExpansionPanelDetails>
+                        </MatExpansionPanel>
+                    }
+                </MatAccordion>
+            }
+        }
+        else
+        {
+            <div class="container-fluid d-flex justify-content-center mt-2">
+                <div class="row">
+                    <div class="col">
+                        <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    @* </Authorized> *@
+    @* <NotAuthorized> *@
+        @* <div class="container-fluid d-flex justify-content-center mt-2"> *@
+        @*     <div class="row"> *@
+        @*         <div class="col"> *@
+        @*             <h3>Must be guest to view</h3> *@
+        @*         </div> *@
+        @*     </div> *@
+        @* </div> *@
+@*     </NotAuthorized> *@
+@* </AuthorizeView> *@
 
 
 @code {
@@ -12,6 +88,23 @@
 
     protected override async Task OnInitializedAsync()
     {
-
+        // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        // var user = authState.User;
+        // Console.WriteLine(JsonConvert.SerializeObject(user.Claims));
+        // if (user.Identity.IsAuthenticated)
+        // {
+    // If user is authenticated but not guest, e.g. a Host, then redirect to home page /index. 
+            // if (user.Claims.FirstOrDefault(c => c.Type.ToString() == "Role").Value == "Guest")
+            // {
+                // _rentRequests = await RentalService.GetRentRequestsByGuestId(Int32.Parse(user.Claims.First(c => c.Type.ToString() == "Id").Value));
+        _rentRequests = await RentalService.GetRentRequestsByGuestIdAsync(3);
+                StateHasChanged();
+            // }
+            // else
+            // {
+                // NavigationManager.NavigateTo("/");
+            // }
+        }
     }
+
 }
