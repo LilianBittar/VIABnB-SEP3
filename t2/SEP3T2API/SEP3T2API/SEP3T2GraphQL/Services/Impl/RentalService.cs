@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services.Validation;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
@@ -76,5 +77,16 @@ namespace SEP3T2GraphQL.Services.Impl
 
             return updatedRequest;
         }
+
+        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync()
+        {
+            var rentRequestList = await _rentRequestRepository.GetAllNotAnsweredRentRequestAsync();
+            if (rentRequestList == null)
+            {
+                throw new ArgumentException("Request list is null");
+            }
+            Console.WriteLine(JsonSerializer.Serialize(rentRequestList));
+            return rentRequestList;
+        }
     }
-}
+} 

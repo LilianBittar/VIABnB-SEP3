@@ -59,7 +59,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
                         result.getInt("numberofguests"),
                         RentRequestStatus.valueOf(result.getString("status")),
                         getGuestById(result.getInt("hostid")),
-                        getResidenceByHostId(result.getInt("hostid")));
+                        getResidenceById(result.getInt("hostid")));
             }
             throw new IllegalArgumentException("Rent request is null");
         } catch (SQLException throwables) {
@@ -72,7 +72,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
         List<RentRequest> rentRequestListToReturn = new ArrayList<>();
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT * FROM rentrequest JOIN host h ON h.hostid = rentrequest.hostid");
+                    "SELECT * FROM rentrequest JOIN residence r on r.residenceid = rentrequest.residenceid");
             ResultSet result = stm.executeQuery();
             while (result.next()) {
                 RentRequest request = new RentRequest(result.getInt("rentrequestid"),
@@ -81,7 +81,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
                         result.getInt("numberofguests"),
                         RentRequestStatus.valueOf(result.getString("status")),
                         getGuestById(result.getInt("hostid")),
-                        getResidenceByHostId(result.getInt("hostid")));
+                        getResidenceById(result.getInt("hostid")));
                 rentRequestListToReturn.add(request);
             }
             return rentRequestListToReturn;
@@ -138,10 +138,10 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
         }
     }
 
-    private Residence getResidenceByHostId(int id) {
+    private Residence getResidenceById(int id) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT * FROM residence JOIN address a ON a.addressid = residence.addressid JOIN city c ON c.cityid = a.cityid JOIN host h on h.hostid = residence.hostid WHERE h.hostid = ?");
+                    "SELECT * FROM residence JOIN address a ON a.addressid = residence.addressid JOIN city c ON c.cityid = a.cityid JOIN host h on h.hostid = residence.hostid WHERE residenceid = ?");
             stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
             if (result.next()) {

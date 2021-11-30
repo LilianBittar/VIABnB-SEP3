@@ -100,6 +100,11 @@ namespace SEP3T2GraphQL.Graphql
             return await _rentalService.GetAllRentRequestsAsync();
         }
 
+        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequest()
+        {
+            return await _rentalService.GetAllNotAnsweredRentRequestAsync();
+        }
+
         public Task<RentRequest> GetRentRequestById(int id)
         {
             return _rentalService.GetRentRequestAsync(id);

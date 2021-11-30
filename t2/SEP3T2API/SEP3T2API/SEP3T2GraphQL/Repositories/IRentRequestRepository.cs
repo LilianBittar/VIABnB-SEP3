@@ -13,5 +13,6 @@ namespace SEP3T2GraphQL.Repositories
         Task<IEnumerable<RentRequest>> GetAllAsync();
 
         Task<RentRequest> UpdateRentRequestStatusAsync(RentRequest request);
+        Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync();
     }
 }

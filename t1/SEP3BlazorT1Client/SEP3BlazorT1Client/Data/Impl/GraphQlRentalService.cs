@@ -6,6 +6,7 @@ using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Models;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3BlazorT1Client.Data.Impl
 {
@@ -70,6 +71,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 isAvailable
                                 pricePerNight
                                 rules {
+                                  residenceId
                                   description
                                 }
                                 facilities {
@@ -80,6 +82,23 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 availableFrom
                                 availableTo
                                 maxNumberOfGuests
+                                host{
+                                  id
+                                  firstName
+                                  lastName
+                                  phoneNumber
+                                  email
+                                  password
+                                  hostReviews{
+                                    id
+                                    rating
+                                    text
+                                    viaId
+                                  }
+                                  profileImageUrl
+                                  cpr
+                                  isApprovedHost
+                                }
                                 residenceReviews {
                                   rating
                                   reviewText
@@ -109,23 +128,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                     isApprovedHost
                                   }
                                 }
-                                host {
-                                  id
-                                  firstName
-                                  lastName
-                                  phoneNumber
-                                  email
-                                  password
-                                  hostReviews {
-                                    id
-                                    rating
-                                    text
-                                    viaId
-                                  }
-                                  profileImageUrl
-                                  cpr
-                                  isApprovedHost
-                                }
+                                
                               }
                             }
                           }
@@ -196,6 +199,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 isAvailable
                                 pricePerNight
                                 rules {
+                                  residenceId
                                   description
                                 }
                                 facilities {
@@ -206,6 +210,23 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 availableFrom
                                 availableTo
                                 maxNumberOfGuests
+                                host{
+                                  id
+                                  firstName
+                                  lastName
+                                  phoneNumber
+                                  email
+                                  password
+                                  hostReviews{
+                                    id
+                                    rating
+                                    text
+                                    viaId
+                                  }
+                                  profileImageUrl
+                                  cpr
+                                  isApprovedHost
+                                }
                                 residenceReviews {
                                   rating
                                   reviewText
@@ -235,23 +256,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                     isApprovedHost
                                   }
                                 }
-                                host {
-                                  id
-                                  firstName
-                                  lastName
-                                  phoneNumber
-                                  email
-                                  password
-                                  hostReviews {
-                                    id
-                                    rating
-                                    text
-                                    viaId
-                                  }
-                                  profileImageUrl
-                                  cpr
-                                  isApprovedHost
-                                }
+                                
                               }
                         }
                        }
@@ -263,7 +268,6 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
             }
-
             return response.Data.RentRequest; 
         }
 
@@ -276,70 +280,113 @@ namespace SEP3BlazorT1Client.Data.Impl
                             allRentRequests 
                              {
                                id
-                               startDate
-                               endDate
-                               numberOfGuests
-                               status
-                               guest 
-                                {
+                              startDate
+                              endDate
+                              numberOfGuests
+                              status
+                              guest {
+                                viaId
+                                guestReviews {
+                                  id
+                                  rating
+                                  text
+                                  hostId
+                                }
+                                isApprovedGuest
+                                id
+                                firstName
+                                lastName
+                                phoneNumber
+                                email
+                                password
+                                hostReviews {
+                                  id
+                                  rating
+                                  text
                                   viaId
-                                  guestReviews 
-                                    {
+                                }
+                                profileImageUrl
+                                cpr
+                                isApprovedHost
+                              }
+                              residence {
+                                averageRating
+                                id
+                                address {
+                                  id
+                                  streetName
+                                  houseNumber
+                                  streetNumber
+                                  city {
+                                    id
+                                    cityName
+                                    zipCode
+                                  }
+                                }
+                                description
+                                type
+                                isAvailable
+                                pricePerNight
+                                rules {
+                                  residenceId
+                                  description
+                                }
+                                facilities {
+                                  id
+                                  name
+                                }
+                                imageUrl
+                                availableFrom
+                                availableTo
+                                maxNumberOfGuests
+                                host{
+                                  id
+                                  firstName
+                                  lastName
+                                  phoneNumber
+                                  email
+                                  password
+                                  hostReviews{
+                                    id
+                                    rating
+                                    text
+                                    viaId
+                                  }
+                                  profileImageUrl
+                                  cpr
+                                  isApprovedHost
+                                }
+                                residenceReviews {
+                                  rating
+                                  reviewText
+                                  guest {
+                                    viaId
+                                    guestReviews {
                                       id
                                       rating
                                       text
                                       hostId
                                     }
-                                 isApprovedGuest
-                                 id
-                                 firstName
-                                 lastName
-                                 phoneNumber
-                                 email
-                                 password
-                                 hostReviews 
-                                  {
-                                     id
-                                     viaId
-                                     rating
-                                     text
-                                  }
-                                 profileImageUrl
-                                 cpr
-                                 isApprovedHost
-                               }
-                             residence 
-                              {
-                                 id
-                                 address 
-                                  {
+                                    isApprovedGuest
                                     id
-                                    streetName
-                                    houseNumber
-                                    streetNumber
-                                    city 
-                                      {
-                                        id
-                                        cityName
-                                        zipCode
-                                      }
-                                   }
-                            description
-                            type
-                            averageRating
-                            isAvailable
-                            pricePerNight
-                            rules 
-                              {
-                                residenceId
-                                description
+                                    firstName
+                                    lastName
+                                    phoneNumber
+                                    email
+                                    password
+                                    hostReviews {
+                                      id
+                                      rating
+                                      text
+                                      viaId
+                                    }
+                                    profileImageUrl
+                                    cpr
+                                    isApprovedHost
+                                  }
+                                }
+                                
                               }
-                            facilities 
-                              {
-                                id
-                                name
-                              }
-                          }
                         }
                        }
                         ",
@@ -363,70 +410,113 @@ namespace SEP3BlazorT1Client.Data.Impl
                             allRentRequests(int:requestId) 
                              {
                                id
-                               startDate
-                               endDate
-                               numberOfGuests
-                               status
-                               guest 
-                                {
+                              startDate
+                              endDate
+                              numberOfGuests
+                              status
+                              guest {
+                                viaId
+                                guestReviews {
+                                  id
+                                  rating
+                                  text
+                                  hostId
+                                }
+                                isApprovedGuest
+                                id
+                                firstName
+                                lastName
+                                phoneNumber
+                                email
+                                password
+                                hostReviews {
+                                  id
+                                  rating
+                                  text
                                   viaId
-                                  guestReviews 
-                                    {
+                                }
+                                profileImageUrl
+                                cpr
+                                isApprovedHost
+                              }
+                              residence {
+                                averageRating
+                                id
+                                address {
+                                  id
+                                  streetName
+                                  houseNumber
+                                  streetNumber
+                                  city {
+                                    id
+                                    cityName
+                                    zipCode
+                                  }
+                                }
+                                description
+                                type
+                                isAvailable
+                                pricePerNight
+                                rules {
+                                  residenceId
+                                  description
+                                }
+                                facilities {
+                                  id
+                                  name
+                                }
+                                imageUrl
+                                availableFrom
+                                availableTo
+                                maxNumberOfGuests
+                                host{
+                                  id
+                                  firstName
+                                  lastName
+                                  phoneNumber
+                                  email
+                                  password
+                                  hostReviews{
+                                    id
+                                    rating
+                                    text
+                                    viaId
+                                  }
+                                  profileImageUrl
+                                  cpr
+                                  isApprovedHost
+                                }
+                                residenceReviews {
+                                  rating
+                                  reviewText
+                                  guest {
+                                    viaId
+                                    guestReviews {
                                       id
                                       rating
                                       text
                                       hostId
                                     }
-                                 isApprovedGuest
-                                 id
-                                 firstName
-                                 lastName
-                                 phoneNumber
-                                 email
-                                 password
-                                 hostReviews 
-                                  {
-                                     id
-                                     viaId
-                                     rating
-                                     text
-                                  }
-                                 profileImageUrl
-                                 cpr
-                                 isApprovedHost
-                               }
-                             residence 
-                              {
-                                 id
-                                 address 
-                                  {
+                                    isApprovedGuest
                                     id
-                                    streetName
-                                    houseNumber
-                                    streetNumber
-                                    city 
-                                      {
-                                        id
-                                        cityName
-                                        zipCode
-                                      }
-                                   }
-                            description
-                            type
-                            averageRating
-                            isAvailable
-                            pricePerNight
-                            rules 
-                              {
-                                residenceId
-                                description
+                                    firstName
+                                    lastName
+                                    phoneNumber
+                                    email
+                                    password
+                                    hostReviews {
+                                      id
+                                      rating
+                                      text
+                                      viaId
+                                    }
+                                    profileImageUrl
+                                    cpr
+                                    isApprovedHost
+                                  }
+                                }
+                                
                               }
-                            facilities 
-                              {
-                                id
-                                name
-                              }
-                          }
                         }
                        }
                         ",
@@ -440,6 +530,132 @@ namespace SEP3BlazorT1Client.Data.Impl
 
             return response.Data.RentRequest; 
         }
+
+        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync()
+        {
+          var allNotAnsweredRentRequestQuery = new GqlQuery()
+            {
+                Query = @"query
+                          {
+                            allNotAnsweredRentRequest
+                             {
+                               id
+                              startDate
+                              endDate
+                              numberOfGuests
+                              status
+                              guest {
+                                viaId
+                                guestReviews {
+                                  id
+                                  rating
+                                  text
+                                  hostId
+                                }
+                                isApprovedGuest
+                                id
+                                firstName
+                                lastName
+                                phoneNumber
+                                email
+                                password
+                                hostReviews {
+                                  id
+                                  rating
+                                  text
+                                  viaId
+                                }
+                                profileImageUrl
+                                cpr
+                                isApprovedHost
+                              }
+                              residence {
+                                averageRating
+                                id
+                                address {
+                                  id
+                                  streetName
+                                  houseNumber
+                                  streetNumber
+                                  city {
+                                    id
+                                    cityName
+                                    zipCode
+                                  }
+                                }
+                                description
+                                type
+                                isAvailable
+                                pricePerNight
+                                rules {
+                                  residenceId
+                                  description
+                                }
+                                facilities {
+                                  id
+                                  name
+                                }
+                                imageUrl
+                                availableFrom
+                                availableTo
+                                maxNumberOfGuests
+                                host{
+                                  id
+                                  firstName
+                                  lastName
+                                  phoneNumber
+                                  email
+                                  password
+                                  hostReviews{
+                                    id
+                                    rating
+                                    text
+                                    viaId
+                                  }
+                                  profileImageUrl
+                                  cpr
+                                  isApprovedHost
+                                }
+                                residenceReviews {
+                                  rating
+                                  reviewText
+                                  guest {
+                                    viaId
+                                    guestReviews {
+                                      id
+                                      rating
+                                      text
+                                      hostId
+                                    }
+                                    isApprovedGuest
+                                    id
+                                    firstName
+                                    lastName
+                                    phoneNumber
+                                    email
+                                    password
+                                    hostReviews {
+                                      id
+                                      rating
+                                      text
+                                      viaId
+                                    }
+                                    profileImageUrl
+                                    cpr
+                                    isApprovedHost
+                                  }
+                                }
+                                
+                              }
+                        }
+                       }
+                        ",
+            };
+            var graphQlResponse =
+                await _client.PostQueryAsync<AllNotAnsweredRentRequestResponseType>(allNotAnsweredRentRequestQuery);
+            return graphQlResponse.Data.RentRequests;
+        }
+
         private static void HandleErrorResponse(GqlRequestResponse<RentResidenceMutationResponseType> response)
         {
             if (response.Errors != null)
