@@ -32,7 +32,7 @@
 }
 @if (_residences.Count == 0)
 {
-    <p> You have no registered residences. Press to button below to register one.</p>
+    <p> You have no registered residences. Press the button below to register one.</p>
     <MatButton OnClick="@(() =>NavigationManager.NavigateTo("/registerresidences"))" Label="Go to residence registration" ></MatButton>
 }
 else
@@ -121,7 +121,7 @@ else
     private string _errorText;
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
 
-    IList<Residence> _residences;
+    IList<Residence> _residences= new List<Residence>();
 
     Residence ResidenceForRent = new Residence();
 
