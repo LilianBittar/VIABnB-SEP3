@@ -16,9 +16,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
         private readonly HttpClient client;
         private IHostValidation _hostValidation;
 
-        public HostRepositoryImpl(IHostValidation hostValidation)
+        public HostRepositoryImpl()
         {
-            _hostValidation = hostValidation; 
             client = new HttpClient();
         }
         

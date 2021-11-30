@@ -22,7 +22,7 @@ namespace UnitTests
         public void Setup()
         {
             _residenceValidation = new ResidenceValidationImpl();
-            residenceRepository = new ResidenceRepositoryImpl(_residenceValidation);
+            residenceRepository = new ResidenceRepositoryImpl();
             residenceService = new ResidenceServiceImpl(residenceRepository);
         }
 
