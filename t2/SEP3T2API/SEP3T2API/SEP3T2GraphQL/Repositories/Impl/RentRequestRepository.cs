@@ -94,8 +94,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
-
             var result = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(result);
             var requestList = JsonSerializer.Deserialize<List<RentRequest>>(result, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
