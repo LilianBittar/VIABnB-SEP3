@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.GuestReview;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.HostReview;
@@ -19,11 +20,13 @@ class GuestControllerTest {
     private GuestDAO guestDAO;
     private GuestController controller;
     private Guest guest;
+    private RentRequestDAO rentRequestDAO;
 
     @BeforeEach
     void setup() {
         guestDAO = mock(GuestDAO.class);
-        controller = new GuestController(guestDAO);
+        rentRequestDAO = mock(RentRequestDAO.class);
+        controller = new GuestController(guestDAO, rentRequestDAO);
         guest = new Guest
                 (1,
                         "test",
