@@ -17,7 +17,7 @@
                 <MatTextField @bind-Value="@CityFilter" Label="filter by city name" Outlined="true" OnKeyPress="@FilterResidences"/>
                 <div class="d-flex flex-column">
                     <MatTextField @bind-Value="@MaxPriceFilter" Outlined="true" Label="Filter by max DKK / night" HelperText="Enter a max price in DKK / night or use the slider" OnInput="@FilterResidences"/>
-                    <MatSlider @bind-Value="@_maxPriceFilter" ValueMin="0" ValueMax="10000" Style="max-width: 500px;"/>
+                    <MatSlider @bind-Value="@_maxPriceFilter" ValueMin="0" ValueMax="10000" Style="max-width: 500px;" Disabled="true" />
                 </div>
             </div>
             <div class="container-fluid d-flex flex-wrap residence-directory">

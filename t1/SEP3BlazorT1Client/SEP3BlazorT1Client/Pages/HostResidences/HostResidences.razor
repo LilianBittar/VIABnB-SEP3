@@ -6,6 +6,7 @@
 @inject IResidenceService ResidenceService
 @inject IHostService hostService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
 
 
 <!--<h3>BuildingOverview</h3>-->
@@ -29,9 +30,13 @@
 {
     <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
 }
+@if (_residences.Count == 0)
+{
+    <p> You have no registered residences. Press the button below to register one.</p>
+    <MatButton OnClick="@(() =>NavigationManager.NavigateTo("/registerresidences"))" Label="Go to residence registration" ></MatButton>
+}
 else
 {
-
     <div class="mat-layout-grid">
         <div class="mat-layout-grid-inner">
             @foreach (var residence in _residences)
@@ -52,6 +57,10 @@ else
                             <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
                                 @residence.Description
                             </MatBody2>
+                            <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                                @residence.PricePerNight
+                            </MatBody2>
+
                         </MatCardContent>
                         <MatCardActions>
                             <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
@@ -112,15 +121,14 @@ else
     private string _errorText;
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
 
-    IList<Residence> _residences;
+    IList<Residence> _residences= new List<Residence>();
 
     Residence ResidenceForRent = new Residence();
 
     protected override async Task OnInitializedAsync()
     {
-      
-     var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-     var user = authState.User;
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
         try
         {
             var host = await hostService.GetHostById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id")?.Value));
@@ -130,8 +138,6 @@ else
         {
             _errorText = e.Message;
         }
-     
-       
     }
 
 
@@ -170,7 +176,7 @@ else
             Console.WriteLine("succes");
         }
     }
-    
+
 
     private async Task<Residence> ChangeAvailability(Residence residence)
     {

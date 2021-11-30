@@ -1,0 +1,17 @@
+﻿@page "/guestrentrequests"
+@using SEP3BlazorT1Client.Data;
+@using SEP3BlazorT1Client.Models;
+@using MatBlazor;
+@inject IRentalService RentalService;
+@inject IGuestService GuestService;
+<h3>GuestRentRequests</h3>
+
+
+@code {
+    private IEnumerable<RentRequest> _rentRequests;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+}
