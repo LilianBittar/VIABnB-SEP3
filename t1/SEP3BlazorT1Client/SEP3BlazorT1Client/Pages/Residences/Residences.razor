@@ -7,16 +7,16 @@
 @inject IGuestService GuestService
 @inject NavigationManager NavigationManager
 @* TODO: Add AuthorizeView *@
-@if (_residencesToShow != null)
+@if (_availableResidences != null)
 {
     @if (_residencesToShow.Count > 0)
     {
         // FILTERS DO NOT WORK YET, TO BE IMPLEMENTED WHEN WE WORK ON THAT USERSTORY.
         <div class="page-container">
             <div class="container-fluid d-flex flex-row residence-filters">
-                <MatTextField @bind-Value="@_cityFilter" Label="filter by city name" Outlined="true"/>
+                <MatTextField @bind-Value="@CityFilter" Label="filter by city name" Outlined="true" OnKeyPress="@FilterResidences"/>
                 <div class="d-flex flex-column">
-                    <MatTextField @bind-Value="@_maxPriceFilter" Outlined="true" Label="Filter by max DKK / night" HelperText="Enter a max price in DKK / night or use the slider"/>
+                    <MatTextField @bind-Value="@MaxPriceFilter" Outlined="true" Label="Filter by max DKK / night" HelperText="Enter a max price in DKK / night or use the slider" OnInput="@FilterResidences"/>
                     <MatSlider @bind-Value="@_maxPriceFilter" ValueMin="0" ValueMax="10000" Style="max-width: 500px;"/>
                 </div>
             </div>
@@ -32,6 +32,12 @@
     }
     else
     {
+        <div class="container-fluid d-flex flex-row residence-filters">
+            <MatTextField @bind-Value="@CityFilter" Label="filter by city name" Outlined="true"/>
+            <div class="d-flex flex-column">
+                <MatTextField @bind-Value="@MaxPriceFilter" Outlined="true" Label="Filter by max DKK / night" HelperText="Enter a max price in DKK / night or use the slider"/>
+            </div>
+        </div>
         <p>No available residences.</p>
     }
 }
@@ -46,7 +52,30 @@ else
     private IList<Residence> _residencesToShow;
     private Guest guest;
     private string _cityFilter = "";
-    private double _maxPriceFilter = 0;
+    private long? _maxPriceFilter = 0;
+
+    public string CityFilter
+    {
+        get => _cityFilter;
+        set
+        {
+            _cityFilter = value;
+            StateHasChanged();
+            FilterResidences();
+        }
+    }
+
+    public long? MaxPriceFilter
+    {
+        get => _maxPriceFilter;
+        set
+        {
+            _maxPriceFilter = value;
+            StateHasChanged();
+            FilterResidences();
+        }
+    }
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -61,18 +90,32 @@ else
     //     {
         _availableResidences = await ResidenceService.GetAllAvailableResidencesAsync();
         _residencesToShow = _availableResidences;
-        // }
-        // else
-        // {
-        //     NavigationManager.NavigateTo("/");
-        // }
+    // }
+    // else
+    // {
+    //     NavigationManager.NavigateTo("/");
+    // }
     }
 
 
-    private void OnMaxPriceSliderChange(double val)
+    private void FilterResidences()
     {
-        _maxPriceFilter = val;
+        if (MaxPriceFilter is > 0 && string.IsNullOrEmpty(CityFilter))
+        {
+            _residencesToShow = _availableResidences.Where(r => r.PricePerNight <= MaxPriceFilter).ToList();
+        }
+        else if (MaxPriceFilter is not > 0 && string.IsNullOrEmpty(CityFilter))
+        {
+            _residencesToShow = _availableResidences; 
+        }
+        else if (!string.IsNullOrEmpty(CityFilter) && MaxPriceFilter is not > 0)
+        {
+            _residencesToShow = _availableResidences.Where(r => r.Address.City.CityName.ToLower().Contains(CityFilter.ToLower())).ToList();
+        }
+        else if (MaxPriceFilter is > 0 && !string.IsNullOrEmpty(CityFilter))
+        {
+            _residencesToShow = _availableResidences.Where(r => r.Address.City.CityName.ToLower().Contains(CityFilter.ToLower()) && r.PricePerNight <= MaxPriceFilter).ToList();
+        }
     }
-
 
 }

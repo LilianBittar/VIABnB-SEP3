@@ -65,13 +65,13 @@
                 <MatListGroup>
                     <MatListGroupSubHeader Style="margin-top: 1rem">Manage residences</MatListGroupSubHeader>
                     <MatList>
-                        <MatListItem Href="/registerresidence" >
+                        <MatListItem Href="/registerresidence" OnClick="@(()=>_opened= !_opened)" >
                             Register New Residence
                         </MatListItem>
-                        <MatListItem Href="/hostresidences" >
+                        <MatListItem Href="/hostresidences" OnClick="@(()=>_opened= !_opened)">
                           My Residences
                         </MatListItem>
-                        <MatListItem Href="/registerhost" >
+                        <MatListItem Href="/registerhost" OnClick="@(()=>_opened= !_opened)">
                             Register As Host
                         </MatListItem>
                     
@@ -95,7 +95,7 @@
     {
         _opened = !_opened;
     }
-
+    
 
     private async Task LogOut()
     {

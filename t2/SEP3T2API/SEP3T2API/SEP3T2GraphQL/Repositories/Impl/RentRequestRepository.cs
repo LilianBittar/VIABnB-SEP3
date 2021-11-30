@@ -46,7 +46,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 });
         }
 
-        public async Task<RentRequest> GetAsync(int id)
+        public async Task<RentRequest> GetAsync(int  id)
         {
             var response = await _client.GetAsync($"{Url}/{id}");
             await HandleErrorResponse(response);
