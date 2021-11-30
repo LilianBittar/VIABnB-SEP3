@@ -70,11 +70,7 @@ namespace SEP3T2GraphQL.Services.Impl
             }
 
             var updatedRequest = await _rentRequestRepository.UpdateRentRequestStatusAsync(request);
-            if (updatedRequest == null)
-            {
-                throw new ArgumentException("Can't update the rent request status!!!");
-            }
-
+            await _createRentRequestValidator.ValidateRentRequest(request);
             return updatedRequest;
         }
 

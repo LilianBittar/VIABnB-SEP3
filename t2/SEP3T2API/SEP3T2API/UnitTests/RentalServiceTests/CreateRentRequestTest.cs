@@ -79,7 +79,7 @@ namespace UnitTests.RentalServiceTests
                 NumberOfGuests = 2
             };
             List<RentRequest> emptyRentRequestList = new();
-            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetAllAsync().Result)
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetAllNotAnsweredRentRequestAsync().Result)
                 .Returns(emptyRentRequestList);
             Assert.DoesNotThrowAsync(async () => await _rentalService.CreateRentRequest(request));
         }
