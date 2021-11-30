@@ -112,7 +112,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 await HandleErrorResponse(response); 
             }
 
-            return JsonSerializer.Deserialize<IEnumerable<RentRequest>>(await response.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<IEnumerable<RentRequest>>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions(){PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         }
 
         private static async Task HandleErrorResponse(HttpResponseMessage response)

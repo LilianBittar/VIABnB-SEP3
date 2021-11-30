@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "GuestRentRequests.razor.scss"
-    ],
-    "names": [],
-    "file": "GuestRentRequests.razor.css"
-}
+{"version":3,"sourceRoot":"","sources":["GuestRentRequests.razor.scss"],"names":[],"mappings":"AACE;EACE","file":"GuestRentRequests.razor.css"}
