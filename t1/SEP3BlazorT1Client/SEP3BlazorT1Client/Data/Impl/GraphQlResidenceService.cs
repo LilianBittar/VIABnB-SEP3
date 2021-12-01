@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
-using CatQLClient.QueryResponses;
 using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Models;
