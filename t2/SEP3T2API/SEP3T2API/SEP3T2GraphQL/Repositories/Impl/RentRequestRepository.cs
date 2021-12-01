@@ -107,11 +107,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
         {
             var response = await _client.GetAsync($"{Url}?guestId={guestId}");
             Console.WriteLine(JsonSerializer.Serialize(await response.Content.ReadAsStringAsync()));
-            if (!response.IsSuccessStatusCode)
-            {
                 await HandleErrorResponse(response); 
-            }
-
             return JsonSerializer.Deserialize<IEnumerable<RentRequest>>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions(){PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         }
 
