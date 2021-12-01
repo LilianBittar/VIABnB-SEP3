@@ -166,8 +166,8 @@ namespace SEP3T2GraphQL.Services.Validation
                 allRequests.Where(r => r != null && r.Residence.Id == request.Residence.Id).ToList();
 
             if (allRequestsForSameResidence.Any(r =>
-                (r.StartDate.Date >= request.StartDate.Date &&
-                 r.EndDate.Date <= request.EndDate.Date) &&
+                ( request.StartDate.Date>= r.StartDate.Date &&
+                 request.EndDate.Date <= r.EndDate.Date) &&
                 (r.Status == RentRequestStatus.APPROVED)))
             {
                 throw new ArgumentException("Approved rent request for same rent period already exists");
@@ -184,7 +184,7 @@ namespace SEP3T2GraphQL.Services.Validation
             var guestRentRequests = await _rentRequestRepository.GetRentRequestsByGuestId(request.Guest.Id);
             var requestsInSamePeriod = guestRentRequests.Where(r =>
                 r.Id != request.Id && r.Residence.Id == request.Residence.Id &&
-                (r.StartDate >= request.StartDate && r.EndDate <= request.EndDate)).ToList();
+                (request.StartDate.Date>=r.StartDate.Date && request.EndDate.Date <= r.EndDate.Date)).ToList();
             if (requestsInSamePeriod.Any())
             {
                 throw new ArgumentException("Rent request for residence in same rent period already exists"); 

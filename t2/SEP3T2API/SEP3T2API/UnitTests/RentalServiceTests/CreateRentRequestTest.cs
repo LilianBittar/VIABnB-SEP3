@@ -249,15 +249,39 @@ namespace UnitTests.RentalServiceTests
 
             _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetAllAsync().Result)
                 .Returns(new List<RentRequest>() {approvedRequestInSamePeriod});
-            
+
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 3, StartDate = CreateDate("02/12/2021"),
                 Residence = _residence, Status = RentRequestStatus.NOTANSWERED, EndDate = CreateDate("30/12/2021"),
                 NumberOfGuests = 2
             };
-            
+
             TestCreateThrowsArgumentExceptionAsync(request);
+        }
+
+        [Test]
+        public void
+            CreateRentRequest_GuestAlreadyHaveExistingRentRequestForResidenceInSameRentPeriod_ThrowsArgumentException()
+        {
+            // Caught a bug where the startdate of the wrong request was being compared when checking if new request's rent period was between
+            // the existing requests period. 
+            RentRequest existingRequest = new()
+            {
+                Guest = _validGuest, Id = 1, StartDate = CreateDate("02/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NOTANSWERED, EndDate = CreateDate("31/12/2021"),
+                NumberOfGuests = 2
+            };
+            _rentRequestRepository
+                .Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByGuestId(_validGuest.Id).Result)
+                .Returns(new List<RentRequest>() {existingRequest});
+            RentRequest newRequest = new()
+            {
+                Guest = _validGuest, Id = 2, StartDate = CreateDate("03/12/2021"),
+                Residence = _residence, Status = RentRequestStatus.NOTANSWERED, EndDate = CreateDate("20/12/2021"),
+                NumberOfGuests = 2
+            };
+            TestCreateThrowsArgumentExceptionAsync(newRequest);
         }
 
         /// <summary>
@@ -269,6 +293,7 @@ namespace UnitTests.RentalServiceTests
         {
             return DateTime.ParseExact(dateString, "dd/MM/yyyy", CultureInfo.InvariantCulture);
         }
+
 
         /// <summary>
         /// Helper method that tests if the async method CreateRentRequest in IRentalService throws the exception ArgumentException.  
