@@ -184,7 +184,7 @@ namespace SEP3T2GraphQL.Services.Validation
             var guestRentRequests = await _rentRequestRepository.GetRentRequestsByGuestId(request.Guest.Id);
             var requestsInSamePeriod = guestRentRequests.Where(r =>
                 r.Id != request.Id && r.Residence.Id == request.Residence.Id &&
-                (r.StartDate >= request.StartDate && r.EndDate <= request.EndDate)).ToList();
+                (request.StartDate>=r.StartDate && request.EndDate <= r.EndDate)).ToList();
             if (requestsInSamePeriod.Any())
             {
                 throw new ArgumentException("Rent request for residence in same rent period already exists"); 
