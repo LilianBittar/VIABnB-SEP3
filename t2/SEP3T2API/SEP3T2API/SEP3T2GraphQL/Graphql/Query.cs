@@ -59,9 +59,9 @@ namespace SEP3T2GraphQL.Graphql
             return await _guestService.GetGuestByStudentNumber(studentNumber); 
         }
         
-        public async Task<Guest> ValidateGuestLogin(int studentNumber, string password)
+        public async Task<Guest> ValidateGuestLogin(string email, string password)
         {
-            return await _guestService.ValidateGuestAsync(studentNumber, password);
+            return await _guestService.ValidateGuestAsync(email, password);
 
         }
 
@@ -123,6 +123,11 @@ namespace SEP3T2GraphQL.Graphql
         public async Task<IList<Residence>> GetResidencesByHostId(int id)
         {
             return await _residenceService.GetAllRegisteredResidencesByHostIdAsync(id);
+        }
+
+        public async Task<Guest> GetGuestByEmail(string email)
+        {
+            return await _guestService.GetGuestByEmail(email);
         }
     }
 }

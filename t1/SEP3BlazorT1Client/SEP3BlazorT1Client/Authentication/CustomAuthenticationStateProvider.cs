@@ -132,10 +132,10 @@ namespace SEP3BlazorT1Client.Authentication
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
-        public async Task ValidateLoginAsGuest(int studentNumber,string password)
+        public async Task ValidateLoginAsGuest(string email,string password)
         {
             if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
-            if (string.IsNullOrEmpty(studentNumber.ToString())) throw new Exception("Enter student number");
+            if (string.IsNullOrEmpty(email.ToString())) throw new Exception("Enter email");
             
             Console.WriteLine("Validating log in as a guest.");
                 
@@ -143,9 +143,9 @@ namespace SEP3BlazorT1Client.Authentication
             try
             {
                 Console.WriteLine("1");
-                Console.WriteLine(studentNumber);
+                Console.WriteLine(email);
                 Console.WriteLine(password);
-                Guest user = await _guestService.ValidateGuestAsync(studentNumber, password);
+                Guest user = await _guestService.ValidateGuestAsync(email, password);
                 Console.WriteLine("11");
                 if (user == null) throw new Exception("Password or student number are not correct");
                 Console.WriteLine("1111");

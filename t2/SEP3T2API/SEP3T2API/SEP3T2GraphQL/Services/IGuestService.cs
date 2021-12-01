@@ -19,6 +19,7 @@ namespace SEP3T2GraphQL.Services
         Task<Guest> CreateGuestAsync(Guest guest);
         Task<Guest> GetGuestById(int id);
         Task<Guest> GetGuestByStudentNumber(int studentNumber);
+        Task<Guest> GetGuestByEmail(string email);
         Task<Guest> UpdateGuest(Guest guest); 
         Task<IEnumerable<Guest>> GetAllGuests(); 
         /// <summary>
@@ -34,6 +35,6 @@ namespace SEP3T2GraphQL.Services
         /// <exception cref="ArgumentException">Thrown if the host is null</exception>
         /// <returns>Guest object</returns>
         Task<Guest> UpdateGuestStatus(Guest guest);
-        Task<Guest> ValidateGuestAsync(int studentNumber, string password);
+        Task<Guest> ValidateGuestAsync(string email, string password);
     }
 }

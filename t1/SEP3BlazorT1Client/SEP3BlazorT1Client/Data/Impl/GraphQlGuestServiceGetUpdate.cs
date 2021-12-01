@@ -17,9 +17,16 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<Guest> GetGuestByEmail(string email)
+        public async Task<Guest> GetGuestByEmail(string email)
         {
-            throw new System.NotImplementedException();
+            var guestQuery = new GqlQuery()
+            {
+                Query =
+                    @"query($wantedGuestEmail:String) {guestByEmail(email: $wantedGuestEmail){viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
+                Variables = new {wantedGuestEmail = email}
+            };
+            var response = await _client.PostQueryAsync<GuestByEmailResponseType>(guestQuery);
+            return response.Data.Guest; 
         }
 
         public Task<Guest> UpdateGuest(Guest guest)

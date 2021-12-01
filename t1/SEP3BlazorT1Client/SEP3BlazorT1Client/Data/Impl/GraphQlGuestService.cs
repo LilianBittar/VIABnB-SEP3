@@ -56,37 +56,44 @@ namespace SEP3BlazorT1Client.Data.Impl
             return response.Data.CreateGuest; 
         }
 
-        public async Task<Guest> ValidateGuestAsync(int studentNumber,string password)
+        public async Task<Guest> ValidateGuestAsync(string email,string password)
         {
             GqlClient client = new GqlClient(Url);
             var validateGuestQuery = new GqlQuery()
             {
-                Query = @"query($passwordGuest: String, $studentNumberGuest: Int!) {
-                  validateGuestLogin(password: $passwordGuest, studentNumber: $studentNumberGuest) {
-                   id
-                  firstName
-                   lastName
-                    phoneNumber
-                   email
-                   password
-                 profileImageUrl
-                  cpr
-                   isApprovedHost
-                   viaId
-                    hostReviews {
-                              id
-                              rating
-                               text
-                              viaId
-    }
-  }
-}
-",
-                Variables = new { passwordGuest = password, studentNumberGuest = studentNumber}
+                Query = @"query($emailGuest: String, $passwordGuest: String) {
+                  validateGuestLogin(email: $emailGuest, password: $passwordGuest) {
+                                viaId
+                                guestReviews{
+                                  id
+                                  rating
+                                  text
+                                  hostId
+                                }
+                                isApprovedGuest
+                                hostReviews{
+                                  id
+                                  rating
+                                  text
+                                  viaId
+                                }
+                                profileImageUrl
+                                cpr
+                                isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                          }
+                        }
+                        ",
+                Variables = new { emailGuest = email, passwordGuest = email}
             };
 
-            var graphQlResponse = await client.PostQueryAsync<GuestResponseType>(validateGuestQuery);
-            if (graphQlResponse.Data.Guest == null) throw new Exception("Incorrect password  or student number");
+            var graphQlResponse = await client.PostQueryAsync<ValidateGuestResponseType>(validateGuestQuery);
+            if (graphQlResponse.Data.Guest == null) throw new Exception("Incorrect email  or password");
             Console.WriteLine(graphQlResponse.Data.ToString());
 
             System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Guest.ToString()}");
