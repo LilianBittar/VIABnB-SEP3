@@ -129,5 +129,10 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _guestService.GetGuestByEmail(email);
         }
+
+        public async Task<Host> GetHostByEmail(string email)
+        {
+            return await _hostService.GetHostByEmail(email);
+        }
     }
 }

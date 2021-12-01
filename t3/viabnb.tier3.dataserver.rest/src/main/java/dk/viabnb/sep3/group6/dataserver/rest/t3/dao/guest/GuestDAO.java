@@ -37,5 +37,6 @@ public interface GuestDAO {
      * @throws IllegalStateException if it could not connect to the database
      * */
     Guest getGuestByStudentNumber(int studentNumber);
+    Guest getGuestByEmail(String email);
 
 }
