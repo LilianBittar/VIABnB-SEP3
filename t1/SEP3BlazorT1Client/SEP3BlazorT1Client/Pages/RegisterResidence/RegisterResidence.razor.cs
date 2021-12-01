@@ -18,11 +18,8 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
 
         // [Inject]
         // public RegisterResidenceViewModel ViewModel { get; set; }
-        [Inject]
-        public IResidenceService ResidenceService { get; set; }
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
+        [Inject] public IResidenceService ResidenceService { get; set; }
+        [Inject] public NavigationManager NavigationManager { get; set; }
 
 
         public EditContext FormEditContextResidence { get; set; }
@@ -31,19 +28,18 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
         private Residence _newResidence;
 
 
-
         public string Name { get; set; }
         private bool _showFacilityDialog = false;
-        private IList<Facility> _allFacilities = new List<Facility>() { new Facility() { Name = "Wifi" } };
-        private IList<string> _allResidenceTypes = new List<string>() { "House", "Apartment", "Room" };
+        private IList<Facility> _allFacilities = new List<Facility>() {new Facility() {Name = "Wifi"}};
+        private IList<string> _allResidenceTypes = new List<string>() {"House", "Apartment", "Room"};
 
         private Facility _facilityToBeAdded = new Facility();
         private Address _newResidenceAddress = new Address();
 
         private string _registerResidenceErrorMessage = "";
+
         protected override async Task OnInitializedAsync()
         {
-
             // TODO: Fetch residence types on mount
             // TODO: Fetch all available facilities on mount
             _newResidence = new Residence()
@@ -73,8 +69,8 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             {
                 _newResidence.Rules.Add(newRule);
             }
-            StateHasChanged();
 
+            StateHasChanged();
         }
 
         private void OpenAddFacilityDialog()
@@ -91,6 +87,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 _newResidence.Facilities.Add(_facilityToBeAdded);
                 _showFacilityDialog = false;
             }
+
             StateHasChanged();
         }
 
@@ -100,7 +97,8 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             var validationResults = new List<ValidationResult>();
             _newResidence.Address = _newResidenceAddress;
             TriggerValidation();
-            bool residenceIsValid = Validator.TryValidateObject(_newResidenceAddress, validationContext, validationResults, true);
+            bool residenceIsValid =
+                Validator.TryValidateObject(_newResidenceAddress, validationContext, validationResults, true);
             if (residenceIsValid)
             {
                 try
@@ -135,9 +133,10 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 Facilities = new List<Facility>(),
                 AvailableFrom = DateTime.MaxValue,
                 AvailableTo = DateTime.MaxValue,
-                Address = new Address() { City = new City() }
+                Address = new Address() {City = new City()}
             };
         }
+
         private void PrintDebugMessages()
         {
             System.Console.WriteLine($"Residence address: {JsonConvert.SerializeObject(_newResidenceAddress)}");
@@ -146,6 +145,5 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             System.Console.WriteLine($"Address is valid: {FormEditContextAddress.Validate()}");
             System.Console.WriteLine($"Residence is valid: {FormEditContextResidence.Validate()}");
         }
-
     }
 }

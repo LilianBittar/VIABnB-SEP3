@@ -6,65 +6,63 @@
 @inject NavigationManager NavigationManager
 @inject IHostService _hostservice
 
-<AuthorizeView> 
- <NotAuthorized> 
-<div class="mat-layout-grid">
-    <div class="mat-layout-grid-inner">
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="mat-layout-grid">
+            <div class="mat-layout-grid-inner">
 
-        <div class=" mat-layout-grid-cell-span-6">
-            <img src="https://i.imgur.com/KWl6pqT.jpg" alt="Greeting illustration">
+                <div class=" mat-layout-grid-cell-span-6">
+                    <img src="https://i.imgur.com/KWl6pqT.jpg" alt="Greeting illustration">
+                </div>
+
+                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6 ">
+                    <h2>Create an account</h2>
+                    <p>
+                        <MatTextField Label="Firstname*" @bind-Value="_newHost.FirstName"/>
+                    </p>
+
+                    <p>
+                        <MatTextField Label="Lastname*" @bind-Value="_newHost.LastName"/>
+                    </p>
+
+                    <p>
+                        <MatTextField Label="E-mail*" @bind-Value="_newHost.Email"/>
+                    </p>
+
+                    <p>
+                        <MatTextField Label="CPR number*" @bind-Value="_newHost.Cpr"/>
+                    </p>
+
+                    <p>
+                        <MatTextField Label="Phone number*" @bind-Value="_newHost.PhoneNumber"/>
+                    </p>
+
+                    <p>
+                        <MatTextField Label="Password*" @bind-Value="_newHost.Password"/>
+                    </p>
+
+                    <p>
+                        <MatTextField Label="Confirm password*" @bind-Value="_passwordConfirmation"/>
+                    </p>
+
+
+                    @foreach (var errorMessage in validationResults)
+                    {
+                        <p class="error-label text-danger">@errorMessage</p>
+                    }
+                    <p class="error-label text-danger">@_errorText</p>
+
+                    <MatButton OnClick="@CreateHost" Label="Register" Raised="true"></MatButton>
+                    <MatButton OnClick="@(() => NavigationManager.NavigateTo("/"))" Label="Already have an account?"></MatButton>
+                </div>
+            </div>
         </div>
+    </NotAuthorized>
 
-        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6 ">
-            <h2>Create an account</h2>
-            <p>
-                <MatTextField Label="Firstname*" @bind-Value="_newHost.FirstName"/>
-            </p>
-
-            <p>
-                <MatTextField Label="Lastname*" @bind-Value="_newHost.LastName"/>
-            </p>
-
-            <p>
-                <MatTextField Label="E-mail*" @bind-Value="_newHost.Email"/>
-            </p>
-
-            <p>
-                <MatTextField Label="CPR number*" @bind-Value="_newHost.Cpr"/>
-            </p>
-
-            <p>
-                <MatTextField Label="Phone number*" @bind-Value="_newHost.PhoneNumber"/>
-            </p>
-
-            <p>
-                <MatTextField Label="Password*" @bind-Value="_newHost.Password"/>
-            </p>
-
-            <p>
-                <MatTextField Label="Confirm password*" @bind-Value="_passwordConfirmation"/>
-            </p>
-
-
-            @foreach (var errorMessage in validationResults)
-            {
-                <p class="error-label text-danger">@errorMessage</p>
-            }
-            <p class="error-label text-danger">@_errorText</p>
-           
-            <MatButton OnClick="@CreateHost" Label="Register" Raised="true"></MatButton>
-            <MatButton OnClick="@(() =>NavigationManager.NavigateTo("/"))" Label="Already have an account?" ></MatButton>
-        </div>
-    </div>
-</div>
-</NotAuthorized> 
-
-<Authorized>
+    <Authorized>
         <p>Already logged in, redirecting...</p>
     </Authorized>
 </AuthorizeView>
-
-
 
 
 @code {
