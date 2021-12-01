@@ -30,6 +30,8 @@ public class ResidenceController {
         this.residenceDAO = residenceDAO;
     }
 
+
+
     //TODO: Move this to host controller maybe (/hosts/residences)? Or maybe the getAll method with a query param.
     // e.g. /residence/1 SHOULD mean give me the residence with the id of 1.  -mic
     @GetMapping("/residence/{id}")
@@ -86,10 +88,28 @@ public class ResidenceController {
         }
     }
 
-    @RequestMapping(value = "/residences/{id}/", produces = "application/json", method = RequestMethod.PATCH)
-    public ResponseEntity<Residence> UpdateAvailabilityPeriod(@RequestBody Residence residence, @PathVariable("id") int id) {
+    @PutMapping( "/residences")
+    public ResponseEntity<Residence> UpdateAvailabilityPeriod(@RequestBody Residence residence) {
+        List<Residence> residences;
         try {
-        //TODO not implemented
+             residences = residenceDAO.getAllResidences();
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.internalServerError().build();
+        }
+
+        try {
+            for (Residence existingResidence: residences)
+            {
+                if (existingResidence.getId()==residence.getId())
+                {
+                    existingResidence.setAvailableFrom(residence.getAvailableFrom());
+                    existingResidence.setAvailableTo(residence.getAvailableTo());
+                    existingResidence.setAvailable(true);
+                    return ResponseEntity.ok(existingResidence);
+                }
+            }
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }

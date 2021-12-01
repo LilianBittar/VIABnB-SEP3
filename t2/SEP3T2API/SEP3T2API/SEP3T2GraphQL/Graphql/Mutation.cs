@@ -66,5 +66,10 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _rentalService.UpdateRentRequestStatusAsync(request);
         }
+
+        public async Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
+        {
+            return await _residenceService.UpdateResidenceAvailabilityAsync(residence);
+        }
     }
 }

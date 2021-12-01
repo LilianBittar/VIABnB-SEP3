@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Repositories.Impl;
 using SEP3T2GraphQL.Services;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
 
@@ -13,6 +14,7 @@ namespace UnitTests
     {
         
         private IResidenceValidation _residenceValidation;
+      
         
         private Address address;
         private City city;
@@ -23,6 +25,7 @@ namespace UnitTests
         [SetUp]
         public void SetUp()
         {
+           
             _residenceValidation = new ResidenceValidationImpl();
 
             city = new City()

@@ -80,7 +80,7 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
 
         public bool IsValidAvailabilityPeriod(DateTime? startDate, DateTime? EndDate)
         {
-            if (startDate != null && EndDate != null)
+            if (startDate == null || EndDate == null)
             {
                 throw new ArgumentException("Start and end date must be picked");
             }
