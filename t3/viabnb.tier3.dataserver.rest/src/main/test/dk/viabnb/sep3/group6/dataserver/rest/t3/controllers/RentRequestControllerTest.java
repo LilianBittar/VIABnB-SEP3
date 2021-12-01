@@ -44,7 +44,6 @@ class RentRequestControllerTest {
 
         City city = new City(1, "test", 8700);
         Address address = new Address(1, "test", "1t", "1t", city);
-        residence = new Residence();
     }
 
 

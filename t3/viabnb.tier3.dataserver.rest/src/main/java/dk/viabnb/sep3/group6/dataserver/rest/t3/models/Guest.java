@@ -8,7 +8,6 @@ public class Guest extends Host
 {
   private int viaId;
   private List<GuestReview> guestReviews;
-  @JsonProperty("isApprovedGuest")
   private boolean isApprovedGuest;
 
   public Guest(int id, String email, String password, String firstName,
@@ -42,7 +41,7 @@ public class Guest extends Host
   {
     this.guestReviews = guestReviews;
   }
-
+  @JsonProperty("isApprovedGuest")
   public boolean isApprovedGuest()
   {
     return isApprovedGuest;
