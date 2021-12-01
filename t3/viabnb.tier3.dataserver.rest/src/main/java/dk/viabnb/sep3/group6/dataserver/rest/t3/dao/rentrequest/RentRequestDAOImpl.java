@@ -116,7 +116,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
         Residence residence = new Residence(result.getInt("residenceid"), address,
             result.getString("description"), result.getString("type"),
             result.getBoolean("isavailable"), result.getDouble("priceprnight"),
-            new ArrayList<>(), new ArrayList<>(), result.getString("imageurl"),
+            getRulesByResidenceId(result.getInt("residenceid")), getFacilitiesByResidenceId(result.getInt("residenceid")), result.getString("imageurl"),
             result.getDate("availablefrom"), result.getDate("availableto"),
             result.getInt("maxnumberofguests"), host, new ArrayList<>());
 
@@ -237,7 +237,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
         return new Residence(result.getInt("residenceid"), address,
             result.getString("description"), result.getString("type"),
             result.getBoolean("isavailable"), result.getDouble("priceprnight"),
-            new ArrayList<>(), new ArrayList<>(), result.getString("imageurl"),
+                getRulesByResidenceId(result.getInt("residenceid")), getFacilitiesByResidenceId(result.getInt("residenceid")), result.getString("imageurl"),
             result.getDate("availablefrom"), result.getDate("availableto"),
             result.getInt("maxnumberofguests"), host, new ArrayList<>());
       }
@@ -270,6 +270,51 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
     catch (SQLException throwables)
     {
       throw new IllegalArgumentException(throwables.getMessage());
+    }
+  }
+  private List<Rule> getRulesByResidenceId(int residenceId)
+  {
+    List<Rule> ruleListToReturn = new ArrayList<>();
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement(
+              "SELECT * FROM rule WHERE residenceid = ?");
+      stm.setInt(1, residenceId);
+      ResultSet result = stm.executeQuery();
+      while (result.next())
+      {
+        Rule rule = new Rule(result.getString("ruledescription"),
+                result.getInt("residenceid"));
+        ruleListToReturn.add(rule);
+      }
+      return ruleListToReturn;
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalArgumentException(throwables.getMessage());
+    }
+  }
+
+  private List<Facility> getFacilitiesByResidenceId(int residenceId)
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement(
+              "SELECT * FROM residencefacility rf join facility f on f.facilityid = rf.facilityid where residenceid = ?");
+      stm.setInt(1, residenceId);
+      ResultSet results = stm.executeQuery();
+      List<Facility> facilities = new ArrayList<>();
+      while (results.next())
+      {
+        Facility facility = new Facility(results.getInt("facilityid"),
+                results.getString("name"));
+        facilities.add(facility);
+      }
+      return facilities;
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalStateException(throwables.getMessage());
     }
   }
 }
