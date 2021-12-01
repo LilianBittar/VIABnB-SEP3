@@ -19,7 +19,12 @@ namespace SEP3BlazorT1Client.Authentication
         private readonly IAdministrationService _administrationService;
         private Host cachedHost;
         private Administrator cachedAdmin;
+        /*
+         * Use booleans here to keep track of if the user is admin, guest, host
+         */
+        
 
+        // TODO: REWRITE THIS TO A USER. CLAIMS DOESN'T WORK CORRECTLY RIGHT NOW :/
         public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IHostService hostService, IGuestService guestService, IAdministrationService administrationService)
         {
             this.jsRuntime = jsRuntime;
@@ -64,6 +69,7 @@ namespace SEP3BlazorT1Client.Authentication
 
         public async Task ValidateLoginAsAdmin(string email, string password)
         {
+            //When validating the user, try to fetch an guest and user and admin and then set bools. 
             if (string.IsNullOrEmpty(email))
             {
                 throw new ArgumentException("You must enter an email address");
@@ -78,6 +84,7 @@ namespace SEP3BlazorT1Client.Authentication
             try
             {
                 var admin = await _administrationService.ValidateAdmin(email, password);
+                
                 if (admin == null)
                 {
                     throw new Exception("Email or password are incorrect");
@@ -168,7 +175,14 @@ namespace SEP3BlazorT1Client.Authentication
         }
 
         private ClaimsIdentity SetupClaimsForAdmin(Administrator administrator)
-        {
+        {   
+            // Use booleans to check what the claims should be 
+            //if (host!= null)  claims.Add(new Claim("Role", "Admin"));
+            // if (guest != null) claims.Add(new Claim("Role", "Guest"));
+            // if (admin != null)  claims.Add(new Claim("Role", "Admin"));
+            // if (host.isApprovedHost) claims.Add(new Claim("IsApprovedHost", "True"));
+            // etc...
+            
             var claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, administrator.FirstName));
             claims.Add(new Claim("LastName", administrator.FirstName));
