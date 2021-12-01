@@ -82,17 +82,51 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement(
-          "SELECT * FROM rentrequest JOIN residence r ON r.residenceid = rentrequest.residenceid JOIN _user u on u.userid = r.hostid JOIN host h on u.userid = h.hostid JOIN guest g on h.hostid = g.guestid");
+          "SELECT * FROM rentrequest JOIN residence r on r.residenceid = rentrequest.residenceid JOIN address a on a.addressid = r.addressid JOIN city c on c.cityid = a.cityid JOIN _user u on u.userid = r.hostid JOIN host h on h.hostid = rentrequest.hostid JOIN guest g on h.hostid = g.guestid");
       ResultSet result = stm.executeQuery();
       while (result.next())
       {
+        City city = new City
+            (
+                result.getInt("cityid"),
+                result.getString("cityname"),
+                result.getInt("zipcode")
+            );
+        Address address = new Address
+            (
+                result.getInt("addressid"),
+                result.getString("streetname"),
+                result.getString("housenumber"),
+                result.getString("streetnumber"),
+                city
+            );
+        Host host = new Host
+            (
+                result.getInt("userid"),
+                result.getString("email"),
+                result.getString("password"),
+                result.getString("fname"),
+                result.getString("lname"),
+                result.getString("phonenumber"),
+                new ArrayList<>(),
+                result.getString("personalimage"),
+                result.getString("cprnumber"),
+                result.getBoolean("isapproved")
+            );
+        Residence residence = new Residence(result.getInt("residenceid"), address,
+            result.getString("description"), result.getString("type"),
+            result.getBoolean("isavailable"), result.getDouble("priceprnight"),
+            new ArrayList<>(), new ArrayList<>(), result.getString("imageurl"),
+            result.getDate("availablefrom"), result.getDate("availableto"),
+            result.getInt("maxnumberofguests"), host, new ArrayList<>());
+
         RentRequest request = new RentRequest(result.getInt("rentrequestid"),
             LocalDate.parse(result.getDate("startdate").toString()),
             LocalDate.parse(result.getDate("enddate").toString()),
             result.getInt("numberofguests"),
             RentRequestStatus.valueOf(result.getString("status")),
-            getGuestById(result.getInt("userid")),
-            getResidenceById(result.getInt("userid")));
+            getGuestById(result.getInt("hostid")),
+            residence);
         rentRequestListToReturn.add(request);
       }
       return rentRequestListToReturn;
@@ -173,27 +207,65 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
       ResultSet result = stm.executeQuery();
       if (result.next())
       {
-        return new Residence(result.getInt("residenceid"),
-            new Address(result.getInt("addressid"),
-                result.getString("streetname"),
-                result.getString("streetnumber"),
-                result.getString("housenumber"),
-                new City(result.getInt("cityid"), result.getString("cityname"),
-                    result.getInt("zipcode")))
-            , result.getString("description"),
-            result.getString("type"), result.getBoolean("isavailable"),
-            result.getDouble("priceprnight"), new ArrayList<>(),
-            new ArrayList<>(), result.getString("imageurl"),
+        City city = new City
+            (
+                result.getInt("cityid"),
+                result.getString("cityname"),
+                result.getInt("zipcode")
+            );
+        Address address = new Address
+            (
+            result.getInt("addressid"),
+            result.getString("streetname"),
+            result.getString("housenumber"),
+            result.getString("streetnumber"),
+            city
+            );
+        Host host = new Host
+            (
+                result.getInt("userid"),
+                result.getString("email"),
+                result.getString("password"),
+                result.getString("fname"),
+                result.getString("lname"),
+                result.getString("phonenumber"),
+                new ArrayList<>(),
+                result.getString("personalimage"),
+                result.getString("cprnumber"),
+                result.getBoolean("isapproved")
+            );
+        return new Residence(result.getInt("residenceid"), address,
+            result.getString("description"), result.getString("type"),
+            result.getBoolean("isavailable"), result.getDouble("priceprnight"),
+            new ArrayList<>(), new ArrayList<>(), result.getString("imageurl"),
             result.getDate("availablefrom"), result.getDate("availableto"),
-            result.getInt("maxnumberofguests"),
-            new Host(result.getInt("userid"), result.getString("email"),
-                result.getString("password"), result.getString("fname"),
-                result.getString("lname"), result.getString("phonenumber"),
-                new ArrayList<>(), result.getString("personalimage"),
-                result.getString("cprnumber"), result.getBoolean("isapproved")),
-            new ArrayList<>());
+            result.getInt("maxnumberofguests"), host, new ArrayList<>());
       }
       return null;
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalArgumentException(throwables.getMessage());
+    }
+  }
+
+  private Host getHostByUserId(int id)
+  {
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement
+          ("SELECT * FROM host JOIN _user u on u.userid = host.hostid WHERE userid = ?");
+      stm.setInt(1, id);
+      ResultSet result = stm.executeQuery();
+      if (result.next())
+      {
+        return new Host(result.getInt("userid"), result.getString("email"),
+            result.getString("password"), result.getString("fname"),
+            result.getString("lname"), result.getString("phonenumber"),
+            new ArrayList<>(), result.getString("personalimage"),
+            result.getString("cprnumber"), result.getBoolean("isapproved"));
+      }
+    return null;
     }
     catch (SQLException throwables)
     {

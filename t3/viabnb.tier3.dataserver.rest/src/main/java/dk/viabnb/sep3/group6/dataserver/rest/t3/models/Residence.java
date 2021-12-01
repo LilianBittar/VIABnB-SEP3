@@ -23,10 +23,6 @@ public class Residence
   private Host host;
   private List<ResidenceReview> residenceReviews;
 
-  public Residence()
-  {
-  }
-
   public Residence(int id, Address address, String description, String type,
       boolean isAvailable, double pricePerNight, List<Rule> rules,
       List<Facility> facilities, String imageUrl, Date availableFrom,

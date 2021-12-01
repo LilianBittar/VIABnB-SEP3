@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS Residence
     hostId            INT,
     PRIMARY KEY (residenceId),
     FOREIGN KEY (addressId) REFERENCES Address (addressId),
-    FOREIGN KEY (hostId) REFERENCES _user (userid)
+    FOREIGN KEY (hostId) REFERENCES _user (userid) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Facility
