@@ -6,7 +6,17 @@ namespace SEP3BlazorT1Client.Data
 {
     public interface IResidenceService
     {
+        /// <summary>
+        /// method in order to retrieve residence by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> the found residence which matches the id of the parameter </returns>
         Task<Residence> GetResidenceAsync(int id);
+        /// <summary>
+        /// method in order to create a new residence and store it in the system
+        /// </summary>
+        /// <param name="residence"></param>
+        /// <returns> the newly created residence</returns>
         Task<Residence> CreateResidenceAsync(Residence residence);
         /// <summary>
         /// updates availability period of the residence and sests availability to true

@@ -22,7 +22,7 @@ namespace SEP3BlazorT1Client.Authentication
         /*
          * Use booleans here to keep track of if the user is admin, guest, host
          */
-        
+
 
         // TODO: REWRITE THIS TO A USER. CLAIMS DOESN'T WORK CORRECTLY RIGHT NOW :/
         public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IHostService hostService, IGuestService guestService, IAdministrationService administrationService)
@@ -69,7 +69,6 @@ namespace SEP3BlazorT1Client.Authentication
 
         public async Task ValidateLoginAsAdmin(string email, string password)
         {
-            //When validating the user, try to fetch an guest and user and admin and then set bools. 
             if (string.IsNullOrEmpty(email))
             {
                 throw new ArgumentException("You must enter an email address");
@@ -84,7 +83,6 @@ namespace SEP3BlazorT1Client.Authentication
             try
             {
                 var admin = await _administrationService.ValidateAdmin(email, password);
-                
                 if (admin == null)
                 {
                     throw new Exception("Email or password are incorrect");
@@ -132,10 +130,10 @@ namespace SEP3BlazorT1Client.Authentication
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
-        public async Task ValidateLoginAsGuest(string email,string password)
+        public async Task ValidateLoginAsGuest(int studentNumber,string password)
         {
             if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
-            if (string.IsNullOrEmpty(email.ToString())) throw new Exception("Enter email");
+            if (string.IsNullOrEmpty(studentNumber.ToString())) throw new Exception("Enter student number");
             
             Console.WriteLine("Validating log in as a guest.");
                 
@@ -143,9 +141,9 @@ namespace SEP3BlazorT1Client.Authentication
             try
             {
                 Console.WriteLine("1");
-                Console.WriteLine(email);
+                Console.WriteLine(studentNumber);
                 Console.WriteLine(password);
-                Guest user = await _guestService.ValidateGuestAsync(email, password);
+                Guest user = await _guestService.ValidateGuestAsync(studentNumber, password);
                 Console.WriteLine("11");
                 if (user == null) throw new Exception("Password or student number are not correct");
                 Console.WriteLine("1111");
@@ -175,14 +173,7 @@ namespace SEP3BlazorT1Client.Authentication
         }
 
         private ClaimsIdentity SetupClaimsForAdmin(Administrator administrator)
-        {   
-            // Use booleans to check what the claims should be 
-            //if (host!= null)  claims.Add(new Claim("Role", "Admin"));
-            // if (guest != null) claims.Add(new Claim("Role", "Guest"));
-            // if (admin != null)  claims.Add(new Claim("Role", "Admin"));
-            // if (host.isApprovedHost) claims.Add(new Claim("IsApprovedHost", "True"));
-            // etc...
-            
+        {
             var claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, administrator.FirstName));
             claims.Add(new Claim("LastName", administrator.FirstName));
