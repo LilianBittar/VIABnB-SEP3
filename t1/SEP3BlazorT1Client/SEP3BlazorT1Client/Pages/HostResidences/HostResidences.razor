@@ -63,6 +63,7 @@ else
 
                         </MatCardContent>
                         <MatCardActions>
+                            <MatButton OnClick="@(() => OpenResidenceDetailsDialog(residence))">Details</MatButton>
                             <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
                         </MatCardActions>
                     </MatCard>
@@ -70,14 +71,13 @@ else
             }
 
             <MatDialog @bind-IsOpen="@dialogIsOpen">
-                <MatDialogTitle>Set the period of availability for the residence</MatDialogTitle>
+                <MatDialogTitle>Details of the Residence</MatDialogTitle>
                 <MatDialogContent>
+                    
                     <p>
                         <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@ResidenceForRent.MaxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
                         </MatNumericUpDownField>
                     </p>
-
-                    @* Availablefrom *@
 
                     <p>
                         <b> Start Date</b>
@@ -91,7 +91,6 @@ else
                         Empty
                     </MatButton>
 
-                    @* AvailableTo*@
                     <p>
                         <b> End Date</b>
                     </p>
@@ -111,12 +110,50 @@ else
                 }
                 <p class="error-label text-danger">@_errorText</p>
             </MatDialog>
+            
+            
+            <MatDialog @bind-IsOpen="@viewResidenceDetailsDialog">
+                <MatDialogTitle>Residence Details</MatDialogTitle>
+                <MatDialogContent>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex justify-content-center">
+                            <img class="my-4" width="120" height="120" src="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-house-icon-png-image_695369.jpg" alt="">
+                        </div>
+                        
+                        <div class="d-flex justify-content-center">
+                            <img class="my-4" width="120" height="120" src="@ViewedResidence.ImageUrl" alt="">
+                            </div>
+                        
+                        <h4>Residence Description</h4>
+                        <p>@ViewedResidence.Description</p>
+                        
+                        <MatDivider class="my-1"/>
+                        <h4>Residence Facilities</h4>
+                        <ul>
+                            
+                            @foreach (var facility in ViewedResidence.Facilities)
+                            {
+                                <li>@facility.Name</li>
+                            }
+                            
+                        </ul>
+                        
+                        <MatDivider class="my-1"/>
+                        
+                        <MatButton class="my-1" Link="/registerhost">Don't have an account? register here</MatButton>
+                    </div>
+                </MatDialogContent>
+                <MatDialogActions>
+                    <MatButton OnClick="@(e => { viewResidenceDetailsDialog = false; })">Cancel</MatButton>
+                </MatDialogActions>
+            </MatDialog>
         </div>
     </div>
 }
 
 @code {
     bool dialogIsOpen = false;
+    bool viewResidenceDetailsDialog = false;
     int maxNumberOfGuests;
     private string _errorText;
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
@@ -124,6 +161,7 @@ else
     IList<Residence> _residences= new List<Residence>();
 
     Residence ResidenceForRent = new Residence();
+    Residence ViewedResidence = new Residence();
 
     protected override async Task OnInitializedAsync()
     {
@@ -143,8 +181,18 @@ else
 
     void OpenDialog(Residence residence)
     {
+        
         ResidenceForRent = residence;
         dialogIsOpen = true;
+        
+    }
+    
+    void OpenResidenceDetailsDialog(Residence residence)
+    {
+        
+        ViewedResidence = residence;
+        viewResidenceDetailsDialog = true;
+        
     }
 
     private async void OkClick()

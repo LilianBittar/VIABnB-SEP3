@@ -137,6 +137,7 @@ namespace SEP3BlazorT1Client.Data.Impl
     type
     isAvailable
     pricePerNight
+    imageUrl
     rules {
       description
       residenceId
@@ -202,7 +203,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             var graphQlResponse = await _client.PostQueryAsync<ResidenceListQueryResponseType>(residenceQuery);
             Console.WriteLine("hello");
             System.Console.WriteLine(graphQlResponse.Data);
-            Console.WriteLine($"{this} received: {graphQlResponse.Data.Residences.Count}");
+            Console.WriteLine($"{this} received: {graphQlResponse.Data.Residences.ToString()}");
             return graphQlResponse.Data.Residences;
         }
 
