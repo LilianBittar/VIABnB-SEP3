@@ -34,7 +34,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
         private IList<string> _allResidenceTypes = new List<string>() {"House", "Apartment", "Room"};
 
         private Facility _facilityToBeAdded = new Facility();
-        private Address _newResidenceAddress = new Address();
+        private Address _newResidenceAddress = new Address(){City = new City()};
 
         private string _registerResidenceErrorMessage = "";
 

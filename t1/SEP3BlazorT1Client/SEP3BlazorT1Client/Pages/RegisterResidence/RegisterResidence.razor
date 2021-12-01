@@ -33,7 +33,7 @@
                     <div class="mat-layout-grid-cell">
                         @* MIDDLE COLUMN *@
                         <h2>Residence Info:</h2>
-                        <EditForm EditContext=@FormEditContextResidence>
+                        <EditForm EditContext="@FormEditContextResidence">
                             <DataAnnotationsValidator/>
 
                             <MatSelect Label="Residence type" @bind-Value="_newResidence.Type" Style="margin-top:1rem;">
@@ -67,7 +67,7 @@
                             </MatSelect>
                             <MatDialogActions>
                                 <MatButton OnClick="@(() => _showFacilityDialog = false)">Cancel</MatButton>
-                                <MatButton OnClick="@(() => AddFacility())">Add</MatButton>
+                                <MatButton OnClick="@AddFacility">Add</MatButton>
                             </MatDialogActions>
                         </MatDialog>
                     </div>
