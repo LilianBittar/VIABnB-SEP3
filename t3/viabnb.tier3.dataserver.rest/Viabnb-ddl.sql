@@ -2,29 +2,33 @@ DROP SCHEMA IF EXISTS viabnb CASCADE;
 CREATE SCHEMA viabnb;
 SET SCHEMA 'viabnb';
 
-CREATE TABLE IF NOT EXISTS Admin
+CREATE TABLE IF NOT EXISTS _User
 (
-    adminId     serial,
+    userId      serial,
+    email       VARCHAR,
+    password    VARCHAR,
     fName       VARCHAR,
     lName       VARCHAR,
-    email       VARCHAR,
     phoneNumber VARCHAR,
-    password    VARCHAR,
-    PRIMARY KEY (adminId)
+    PRIMARY KEY (userId)
+);
+
+CREATE TABLE IF NOT EXISTS Admin
+(
+    adminId  serial,
+    initials VARCHAR,
+    PRIMARY KEY (adminId),
+    FOREIGN KEY (adminId) REFERENCES _User (userId)
 );
 
 CREATE TABLE IF NOT EXISTS Host
 (
     hostId        serial,
-    fName         VARCHAR,
-    lName         VARCHAR,
-    email         VARCHAR,
-    phoneNumber   VARCHAR,
-    password      VARCHAR,
     cprNumber     VARCHAR,
     isApproved    BOOLEAN,
     personalImage VARCHAR,
-    PRIMARY KEY (hostID)
+    PRIMARY KEY (hostID),
+    FOREIGN KEY (hostId) REFERENCES _User (userId) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS City
@@ -61,7 +65,7 @@ CREATE TABLE IF NOT EXISTS Residence
     hostId            INT,
     PRIMARY KEY (residenceId),
     FOREIGN KEY (addressId) REFERENCES Address (addressId),
-    FOREIGN KEY (hostId) REFERENCES Host (hostid)
+    FOREIGN KEY (hostId) REFERENCES _user (userid)
 );
 
 CREATE TABLE IF NOT EXISTS Facility
@@ -69,29 +73,6 @@ CREATE TABLE IF NOT EXISTS Facility
     facilityId serial,
     name       VARCHAR,
     PRIMARY KEY (facilityId)
-);
-
-CREATE TABLE IF NOT EXISTS RentRequest
-(
-    rentRequestId  serial,
-    startDate      Date,
-    endDate        DATE,
-    numberOfGuests INT,
-    status         VARCHAR,
-    hostId         INT,
-    residenceId INT,
-    guestId Int,
-    PRIMARY KEY (rentRequestId),
-    FOREIGN KEY (hostId) REFERENCES Host (hostid),
-    FOREIGN KEY (residenceId) REFERENCES Residence(residenceid),
-    foreign key (guestId) references Guest(guestId)
-);
-CREATE TABLE IF NOT EXISTS Rule
-(
-    ruleDescription VARCHAR,
-    residenceId     INT,
-    PRIMARY KEY (residenceId, ruleDescription),
-    FOREIGN KEY (residenceId) REFERENCES Residence (residenceId)
 );
 
 CREATE TABLE IF NOT EXISTS Guest
@@ -102,6 +83,30 @@ CREATE TABLE IF NOT EXISTS Guest
     PRIMARY KEY (guestId),
     FOREIGN KEY (guestId) REFERENCES Host (hostid) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS RentRequest
+(
+    rentRequestId  serial,
+    startDate      Date,
+    endDate        DATE,
+    numberOfGuests INT,
+    status         VARCHAR,
+    hostId         INT,
+    residenceId    INT,
+    guestId        Int,
+    PRIMARY KEY (rentRequestId),
+    FOREIGN KEY (hostId) REFERENCES Host (hostid),
+    FOREIGN KEY (residenceId) REFERENCES Residence (residenceid),
+    foreign key (guestId) references Guest (guestId)
+);
+CREATE TABLE IF NOT EXISTS Rule
+(
+    ruleDescription VARCHAR,
+    residenceId     INT,
+    PRIMARY KEY (residenceId, ruleDescription),
+    FOREIGN KEY (residenceId) REFERENCES Residence (residenceId)
+);
+
 
 CREATE TABLE IF NOT EXISTS GuestReview
 (
@@ -156,11 +161,20 @@ CREATE TABLE IF NOT EXISTS Rent
     FOREIGN KEY (residenceId) REFERENCES Residence (residenceId)
 );
 
-INSERT INTO Admin(fName, lName, email, phoneNumber, password)
-VALUES ('Kutaiba', 'Kashmar', '291597@via.dk', '11111111', '1234');
-INSERT INTO Admin(fName, lName, email, phoneNumber, password)
-VALUES ('Michael', 'Bui', '293885@via.dk', '22222222', '1234');
-INSERT INTO Admin(fName, lName, email, phoneNumber, password)
-VALUES ('Kasper', 'Jensen', '304218@via.dk', '33333333', '1234');
-INSERT INTO Admin(fName, lName, email, phoneNumber, password)
-VALUES ('Lillian', 'Bittar', '293336@via.dk', '44444444', '1234');
+INSERT INTO _User(email, password, fName, lName, phoneNumber)
+VALUES ('291597@via.dk', '1234', 'Kutaiba', 'Kashmar', '11111111');
+INSERT INTO _User(email, password, fName, lName, phoneNumber)
+VALUES ('293885@via.dk', '1234', 'Michael', 'Bui', '22222222');
+INSERT INTO _User(email, password, fName, lName, phoneNumber)
+VALUES ('304218@via.dk', '1234', 'Kasper', 'Jensen', '33333333');
+INSERT INTO _User(email, password, fName, lName, phoneNumber)
+VALUES ('293336@via.dk', '1234', 'Lilian', 'Bittar', '44444444');
+
+INSERT INTO Admin(adminId, initials)
+VALUES (1, 'KNK');
+INSERT INTO Admin(adminId, initials)
+VALUES (2, 'MTB');
+INSERT INTO Admin(adminId, initials)
+VALUES (3, 'KSJ');
+INSERT INTO Admin(adminId, initials)
+VALUES (4, 'LBB');

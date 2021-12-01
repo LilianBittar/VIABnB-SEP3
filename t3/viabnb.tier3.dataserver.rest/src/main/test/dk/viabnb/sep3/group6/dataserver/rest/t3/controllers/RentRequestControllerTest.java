@@ -28,11 +28,19 @@ class RentRequestControllerTest {
     public void setUp() {
         rentRequestDAO = mock(RentRequestDAO.class);
         controller = new RentRequestController(rentRequestDAO);
-        guest = new Guest(1, "test", "test",
-                "+4588888888", "test@test.com",
-                "test", new ArrayList<>(), null,
-                "111111-1111", true, 293886,
-                true);
+        guest = new Guest(1,
+            "test@test.com",
+            "test",
+            "test",
+            "test",
+            "+4588888888",
+            new ArrayList<>(),
+            null,
+            "111111-1111",
+            true,
+            293886,
+            new ArrayList<>(),
+            true);
 
         City city = new City(1, "test", 8700);
         Address address = new Address(1, "test", "1t", "1t", city);
