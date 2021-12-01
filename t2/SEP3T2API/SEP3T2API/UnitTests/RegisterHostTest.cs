@@ -1,6 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
+using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Repositories.Impl;
+using SEP3T2GraphQL.Services;
+using SEP3T2GraphQL.Services.Impl;
 using SEP3T2GraphQL.Services.Validation.HostValidation;
 using SEP3T2GraphQL.Services.Validation.HostValidation.Impl;
 
@@ -10,13 +14,14 @@ namespace UnitTests
     public class RegisterHostTest
     {
         private Host host = new Host();
-        private IHostValidation _hostValidationImpl;
+        private IHostService HostService;
+        private IHostRepository HostRepository;
 
         [SetUp]
         public void SetUp()
         {
-            _hostValidationImpl = new HostValidationImpl();
-
+            HostRepository = new HostRepositoryImpl();
+            HostService = new HostServiceImpl(HostRepository);
         }
 
         [Test]
@@ -38,11 +43,14 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.DoesNotThrow(() => _hostValidationImpl.IsValidHost(host));
+            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(host));
         }
         
-        [Test]
-        public void IsValidHost_InvalidEmail_Throws()
+        [TestCase("email@gmailcom")]
+        [TestCase("emailgmailcom")]
+        [TestCase("email@gmail.com.")]
+        [TestCase(null)]
+        public void IsValidHost_InvalidEmail_Throws(string email)
         {
             //arange
             host = new Host()
@@ -50,7 +58,7 @@ namespace UnitTests
                 Id = 0,
                 FirstName = "Kasper",
                 LastName = "Bobsen",
-                Email = "email@gmailcom",
+                Email = email,
                 HostReviews = null,
                 IsApprovedHost = false,
                 Password = "Hejmaeddig123",
@@ -59,17 +67,19 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.Throws<FormatException>(() => _hostValidationImpl.IsValidHost(host));
+            Assert.Throws<FormatException>(() => HostService.RegisterHostAsync(host));
         }
         
-        [Test]
-        public void IsValidHost_InvalidFirstname_Throws()
+        [TestCase("Kasper34")]
+        [TestCase("!%/)(")]
+        [TestCase(null)]
+        public void IsValidHost_InvalidFirstname_Throws(String firstname)
         {
             //arange
             host = new Host()
             {
                 Id = 0,
-                FirstName = "Kasp0+er",
+                FirstName = firstname,
                 LastName = "Bobsen",
                 Email = "email@gmail.com",
                 HostReviews = null,
@@ -80,18 +90,20 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidHost(host));
+            Assert.Throws<ArgumentException>(() => HostService.RegisterHostAsync(host));
         }
         
-        [Test]
-        public void IsValidHost_InvalidLastname_Throws()
+        [TestCase("B00bsen")]
+        [TestCase("!%/)(")]
+        [TestCase(null)]
+        public void IsValidHost_InvalidLastname_Throws(string lastname)
         {
             //arange
             host = new Host()
             {
                 Id = 0,
                 FirstName = "Kasper",
-                LastName = "B00bsen",
+                LastName = lastname,
                 Email = "email@gmail.com",
                 HostReviews = null,
                 IsApprovedHost = false,
@@ -101,11 +113,18 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidHost(host));
+            Assert.Throws<ArgumentException>(() => HostService.RegisterHostAsync(host));
         }
         
-        [Test]
-        public void IsValidHost_InvalidPassword_Throws()
+        [TestCase("121232132131233")]
+        [TestCase("hedsafasdfasdfsdaf")]
+        [TestCase("AKSHASKHGas")]
+        [TestCase("Aa1")]
+        [TestCase(null)]
+        [TestCase("1")]
+        [TestCase("12345")]
+        [TestCase("1234567")]
+        public void IsValidHost_InvalidPassword_Throws(string password)
         {
             //arange
             host = new Host()
@@ -122,11 +141,13 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidHost(host));
+            Assert.Throws<ArgumentException>(() => HostService.RegisterHostAsync(host));
         }
         
-        [Test]
-        public void IsValidHost_InvalidPhoneNumber_Throws()
+        [TestCase("345345a")]
+        [TestCase(null)]
+        [TestCase("23423434!")]
+        public void IsValidHost_InvalidPhoneNumber_Throws(string phoneNumber)
         {
             //arange
             host = new Host()
@@ -138,221 +159,21 @@ namespace UnitTests
                 HostReviews = null,
                 IsApprovedHost = false,
                 Password = "Hejmaeddig123",
-                PhoneNumber = "1234bob5678",
+                PhoneNumber = phoneNumber,
                 ProfileImageUrl = null
             };
 
             //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidHost(host));
+            Assert.Throws<ArgumentException>(() => HostService.RegisterHostAsync(host));
         }
 
-        [Test]
-        public void IsValidFirstname_null_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = null,
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "Hejmeddig123",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidFirstname(host.FirstName));
-        }
-
-        [Test]
-        public void IsValidFirstname_containsNumbers_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "B0b",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "Hejmeddig123",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidFirstname(host.FirstName));
-        }
-
-        [Test]
-        public void IsValidLastname_null_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = null,
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "Hejmeddig123",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidLastname(host.LastName));
-        }
-
-        [Test]
-        public void IsValidLastname_containsNumbers_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "B0b",
-                LastName = "B0bsen",
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "Hejmeddig123",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidLastname(host.LastName));
-        }
-
-        [Test]
-        public void IsValidEmail_ExpectedValues_DoesNotThrow()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "Hejmeddig123",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.DoesNotThrow(() => _hostValidationImpl.IsValidEmail(host.Email));
-
-        }
-
-        [Test]
-        public void IsValidEmail_DoesNotContainDot_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmailcom",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "Hejmeddig123",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<FormatException>(() => _hostValidationImpl.IsValidEmail(host.Email));
-        }
-
-        [Test]
-        public void IsValidEmail_DoesNotContainAtSign_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "emailmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "Hejmeddig123",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<FormatException>(() => _hostValidationImpl.IsValidEmail(host.Email));
-        }
-
-        [Test]
-        public void IsValidEmail_null_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = null,
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "Hejmeddig123",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<FormatException>(() => _hostValidationImpl.IsValidEmail(host.Email));
-        }
-
-        [Test]
-        public void IsValidEmail_endsWithDot_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com.",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "Hejmeddig123",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<FormatException>(() => _hostValidationImpl.IsValidEmail(host.Email));
-        }
-
-        [Test]
-        public void IsValidPassword_null_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = null,
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPassword(host.Password));
-        }
-        
         
 
-        [TestCase("1")]
-        [TestCase("12345")]
-        [TestCase("1234567")]
-        public void IsValidPassword_lengthLessThan8_Throws(string password)
+        [TestCase("hej@dig.dk")]
+        [TestCase("hej123@diggg.dk")]
+        [TestCase("he123!?j@dig.dk")]
+        [TestCase("h23ej@dig.com")]
+        public void IsValidEmail_ExpectedValues_DoesNotThrow(string email)
         {
             //arrange
             host = new Host()
@@ -360,16 +181,18 @@ namespace UnitTests
                 Id = 0,
                 FirstName = "Bob",
                 LastName = "Bobsen",
-                Email = "email@gmail.com",
+                Email = email,
                 HostReviews = null,
                 IsApprovedHost = false,
-                Password = password,
+                Password = "Hejmeddig123",
                 PhoneNumber = "12345678",
                 ProfileImageUrl = null
             };
             //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPassword(host.Password));
+            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(host));
+
         }
+
         
         [TestCase("Aa345678")]
         [TestCase("Aa3456789")]
@@ -390,131 +213,14 @@ namespace UnitTests
                 ProfileImageUrl = null
             };
             //act and assert
-            Assert.DoesNotThrow(() => _hostValidationImpl.IsValidPassword(host.Password));
+            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(host));
         }
 
-        [Test]
-        public void IsValidPassword_lengthLessThan8_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "12345Aa",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPassword(host.Password));
-        }
         
-        [Test]
-        public void IsValidPassword_ContainsNoLowerCaseLetter_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "ABCDEFGH1IJKL",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPassword(host.Password));
-        }
-
-        [Test]
-        public void IsValidPassword_ContainsNoUpperCaseLetter_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "abcdfefeffeff1",
-                PhoneNumber = "123456781",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPassword(host.Password));
-        }
-
-        [Test]
-        public void IsValidPassword_ContainsNoNumber_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "abcdfefeffeffSDSD",
-                PhoneNumber = "123456781",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPassword(host.Password));
-        }
-
-        [Test]
-        public void IsValidPhoneNumber_Null_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "HejMedDig12345",
-                PhoneNumber = null,
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPhoneNumber(host.PhoneNumber));
-        }
-
-        [Test]
-        public void IsValidPhoneNumber_ContainsLetter_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "HejMedDig12345",
-                PhoneNumber = "1234bob567",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidPhoneNumber(host.PhoneNumber));
-        }
         
-        [Test]
-        public void IsValidCpr_ContainsDashAndLength11_DoesNotThrow()
+        [TestCase("123456-1234")]
+        [TestCase("1234561234")]
+        public void IsValidCpr_CorrectLengthWithAndWithoutDash_DoesNotThrow(string cpr)
         {
             //arrange
             host = new Host()
@@ -523,7 +229,7 @@ namespace UnitTests
                 FirstName = "Bob",
                 LastName = "Bobsen",
                 Email = "email@gmail.com",
-                Cpr = "123456-1234",
+                Cpr = cpr,
                 HostReviews = null,
                 IsApprovedHost = false,
                 Password = "HejMedDig12345",
@@ -531,11 +237,15 @@ namespace UnitTests
                 ProfileImageUrl = null
             };
             //act and assert
-            Assert.DoesNotThrow(() => _hostValidationImpl.IsValidCprNumber(host.Cpr));
+            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(host));
         }
         
-        [Test]
-        public void IsValidCpr_DoesNotContainsDashAndLength10_DoesNotThrow()
+        
+        [TestCase("12345612345")]
+        [TestCase("123456-123")]
+        [TestCase("123456-123")]
+        [TestCase("12ab56-1234")]
+        public void IsValidCpr_IncorrectLengthWithAndWithoutDash_Throws(string cpr)
         {
             //arrange
             host = new Host()
@@ -544,7 +254,7 @@ namespace UnitTests
                 FirstName = "Bob",
                 LastName = "Bobsen",
                 Email = "email@gmail.com",
-                Cpr = "1234561234",
+                Cpr = cpr,
                 HostReviews = null,
                 IsApprovedHost = false,
                 Password = "HejMedDig12345",
@@ -552,77 +262,7 @@ namespace UnitTests
                 ProfileImageUrl = null
             };
             //act and assert
-            Assert.DoesNotThrow(() => _hostValidationImpl.IsValidCprNumber(host.Cpr));
+            Assert.Throws<ArgumentException>(() => HostService.RegisterHostAsync(host));
         }
-        
-        [Test]
-        public void IsValidCpr_DoesNotContainsDashAndLength11_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                Cpr = "12345612345",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "HejMedDig12345",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidCprNumber(host.Cpr));
-        }
-        
-        [Test]
-        public void IsValidCpr_ContainsDashAndLength10_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                Cpr = "123456-123",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "HejMedDig12345",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidCprNumber(host.Cpr));
-        }
-        
-        [Test]
-        public void IsValidCpr_ContainsLetters_Throws()
-        {
-            //arrange
-            host = new Host()
-            {
-                Id = 0,
-                FirstName = "Bob",
-                LastName = "Bobsen",
-                Email = "email@gmail.com",
-                Cpr = "12a456-1234",
-                HostReviews = null,
-                IsApprovedHost = false,
-                Password = "HejMedDig12345",
-                PhoneNumber = "12345678",
-                ProfileImageUrl = null
-            };
-            //act and assert
-            Assert.Throws<ArgumentException>(() => _hostValidationImpl.IsValidCprNumber(host.Cpr));
-        }
-        
-       
-        
-        
-        
-
-
     }
 }

@@ -145,9 +145,9 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             throw new ArgumentNullException(cpr,"cpr cant be null");
         }
 
-        public bool IsValidHost(Host host)
+        public async Task<bool> IsValidHost(Host host)
         {
-            if (IsValidEmail(host.Email).Result && IsValidFirstname(host.FirstName) && IsValidLastname(host.LastName) &&
+            if (await IsValidEmail(host.Email) && IsValidFirstname(host.FirstName) && IsValidLastname(host.LastName) &&
                 IsValidPassword(host.Password) && IsValidPhoneNumber(host.PhoneNumber) && IsValidCprNumber(host.Cpr))
             {
                 return true;

@@ -34,7 +34,7 @@ namespace SEP3T2GraphQL.Services.Impl
             Host hostExists = await GetHostByEmail(host.Email);
             if (hostExists!=null)
             {
-                if (_hostValidation.IsValidHost(host))
+                if (await _hostValidation.IsValidHost(host))
                 {
                     try
                     {
