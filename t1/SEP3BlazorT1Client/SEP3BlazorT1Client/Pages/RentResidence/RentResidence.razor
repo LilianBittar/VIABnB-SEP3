@@ -28,8 +28,8 @@
 
                         <div class="card__content">
                             <div class="d-flex flex-row">
-                                <MatDatePicker @bind-Value="@_newRentRequest.StartDate" Required="true" Outlined="true" Label="Start date" OnInput="@(StateHasChanged)"/>
-                                <MatDatePicker @bind-Value="@_newRentRequest.EndDate" Required="true" Outlined="true" Label="End date" OnInput="@(StateHasChanged)"/>
+                                <MatDatePicker @bind-Value="@_startDateInput" Required="true" Outlined="true" Label="Start date" OnInput="@(StateHasChanged)"/>
+                                <MatDatePicker @bind-Value="@_endDateInput" Required="true" Outlined="true" Label="End date" OnInput="@(StateHasChanged)"/>
                             </div>
                             <EditForm EditContext="@EditContext">
                                 <DataAnnotationsValidator/>
@@ -75,8 +75,15 @@ else
 
     [Parameter]
     public int ResidenceId { get; set; }
+    /*
+     * DatePicker times are bound to these value instead of directly to _newRequest.StartDate and _newRequest.EndDate,
+     * because there is a known issue where the DatePicker returns the selected date minus 1 day.
+     * https://github.com/SamProf/MatBlazor/issues/723
+     */
+    private DateTime _startDateInput;
+    private DateTime _endDateInput; 
 
-    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now, Status = RentRequestStatus.NOTANSWERED};
+    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1), Status = RentRequestStatus.NOTANSWERED};
 
     [CascadingParameter]
     public EditContext EditContext { get; private set; }
@@ -135,8 +142,8 @@ else
              Bug MatBlazor DatePicker subtracts 1 day from the actual selected date.
              This is a known issue and has an open issue on github. 
              */
-            _newRentRequest.StartDate = _newRentRequest.StartDate.AddDays(0).ToLocalTime();
-            _newRentRequest.EndDate = _newRentRequest.EndDate.AddDays(0).ToLocalTime();
+            _newRentRequest.StartDate = _startDateInput.AddDays(0).ToLocalTime();
+            _newRentRequest.EndDate = _endDateInput.AddDays(0).ToLocalTime();
             
             await RentalService.CreateRentRequest(_newRentRequest);
             StateHasChanged();
