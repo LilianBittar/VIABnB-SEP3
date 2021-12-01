@@ -51,19 +51,22 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM _user JOIN host h ON _user.userid = h.hostid WHERE email = ?");
             stm.setString(1, email);
             ResultSet result = stm.executeQuery();
-            result.next();
-            return new Host(
-                    result.getInt("userid"),
-                    result.getString("email"),
-                    result.getString("password"),
-                    result.getString("fname"),
-                    result.getString("lname"),
-                    result.getString("phonenumber"),
-                    new ArrayList<>(),
-                    result.getString("personalimage"),
-                    result.getString("cprnumber"),
-                    result.getBoolean("isapproved")
-            );
+            if (result.next())
+            {
+                return new Host(
+                        result.getInt("userid"),
+                        result.getString("email"),
+                        result.getString("password"),
+                        result.getString("fname"),
+                        result.getString("lname"),
+                        result.getString("phonenumber"),
+                        new ArrayList<>(),
+                        result.getString("personalimage"),
+                        result.getString("cprnumber"),
+                        result.getBoolean("isapproved")
+                );
+            }
+            return null;
         } catch (SQLException throwables){
             throw new IllegalStateException(throwables.getMessage());
         }
