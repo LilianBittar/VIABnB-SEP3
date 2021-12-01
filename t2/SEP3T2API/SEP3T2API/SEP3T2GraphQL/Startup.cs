@@ -58,6 +58,7 @@ namespace SEP3T2GraphQL
             services.AddScoped<IRuleRepository, RuleRepository>();
             services.AddScoped<IAdministrationService, AdministrationServiceImpl>();
             services.AddScoped<IAdministrationRepository, AdministrationRepositoryImpl>();
+            services.AddScoped<CreateGuestValidator>();
 
         }
 
