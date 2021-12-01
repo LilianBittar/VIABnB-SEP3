@@ -37,6 +37,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">if rent period of request is outside the available from and available to date of the residence</exception>
         /// <exception cref="ArgumentException">If residence is not available</exception>
         /// <exception cref="ArgumentException">If approved rent request exist for request's residence in same rent period as the request.</exception>
+        /// <exception cref="ArgumentException">if guest has existing RentRequest for residence in same rent period</exception>
         public async Task ValidateRentRequest(RentRequest request)
         {
             if (request == null)
@@ -48,6 +49,7 @@ namespace SEP3T2GraphQL.Services.Validation
             ValidateRentPeriod(request);
             ValidateNumberOfGuests(request);
             await ValidateRentPeriodOverlaps(request);
+            await ValidateGuestHasNoRentRequestsInSamePeriod(request);
         }
 
         /// <summary>
@@ -88,6 +90,7 @@ namespace SEP3T2GraphQL.Services.Validation
             {
                 throw new ArgumentException("Start date and end date is required");
             }
+
             if (request.StartDate.Date == request.EndDate.Date)
             {
                 throw new ArgumentException("Start date and end date of the rent period cannot be the same");
@@ -123,7 +126,7 @@ namespace SEP3T2GraphQL.Services.Validation
             if (request.StartDate.Date == request.Residence.AvailableTo.Value.Date)
             {
                 throw new ArgumentException(
-                    "Start date of request cannot be the same as the residence's available to date"); 
+                    "Start date of request cannot be the same as the residence's available to date");
             }
         }
 
@@ -153,19 +156,38 @@ namespace SEP3T2GraphQL.Services.Validation
             {
                 return;
             }
-            
+
             if (!allRequests.Any(r => r.Residence.Id == request.Residence.Id))
             {
-                return; 
+                return;
             }
-            var allRequestsForSameResidence = allRequests.Where(r => r!= null && r.Residence.Id == request.Residence.Id).ToList();
-            
+
+            var allRequestsForSameResidence =
+                allRequests.Where(r => r != null && r.Residence.Id == request.Residence.Id).ToList();
+
             if (allRequestsForSameResidence.Any(r =>
-                (r.StartDate.Date>= request.StartDate.Date &&
+                (r.StartDate.Date >= request.StartDate.Date &&
                  r.EndDate.Date <= request.EndDate.Date) &&
                 (r.Status == RentRequestStatus.APPROVED)))
             {
                 throw new ArgumentException("Approved rent request for same rent period already exists");
+            }
+        }
+
+        /// <summary>
+        /// Validates if the guest has an existing RentRequest for the residence in same rent period. 
+        /// </summary>
+        /// <param name="request">The request which is being validated</param>
+        /// <exception cref="ArgumentException">if guest has existing RentRequest for residence in same rent period</exception>
+        private async Task ValidateGuestHasNoRentRequestsInSamePeriod(RentRequest request)
+        {
+            var guestRentRequests = await _rentRequestRepository.GetRentRequestsByGuestId(request.Guest.Id);
+            var requestsInSamePeriod = guestRentRequests.Where(r =>
+                r.Id != request.Id && r.Residence.Id == request.Residence.Id &&
+                (r.StartDate >= request.StartDate && r.EndDate <= request.EndDate)).ToList();
+            if (requestsInSamePeriod.Any())
+            {
+                throw new ArgumentException("Rent request for residence in same rent period already exists"); 
             }
         }
     }
