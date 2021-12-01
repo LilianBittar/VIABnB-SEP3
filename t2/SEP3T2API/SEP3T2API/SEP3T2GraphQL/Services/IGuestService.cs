@@ -14,7 +14,7 @@ namespace SEP3T2GraphQL.Services
         /// <param name="guest">the guest to be created</param>
         /// <exception cref="ArgumentException">If guest is null</exception>
         /// <exception cref="KeyNotFoundException">If host does not exist in the system</exception>
-        /// <exception cref="ArgumentException">If guest is invalid <see cref="GuestValidator"/></exception>
+        /// <exception cref="ArgumentException">If guest is invalid <see cref="CreateGuestValidator"/></exception>
         /// <returns>the created guest</returns>
         Task<Guest> CreateGuestAsync(Guest guest);
         Task<Guest> GetGuestById(int id);

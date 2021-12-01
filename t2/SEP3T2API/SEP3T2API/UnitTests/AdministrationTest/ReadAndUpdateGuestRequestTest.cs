@@ -5,8 +5,10 @@ using Moq;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Repositories.Impl;
 using SEP3T2GraphQL.Services;
 using SEP3T2GraphQL.Services.Impl;
+using SEP3T2GraphQL.Services.Validation;
 
 namespace UnitTests.AdministrationTest
 {
@@ -87,7 +89,8 @@ namespace UnitTests.AdministrationTest
             var hostService = new Mock<IHostService>();
             hostService.Setup(ex => ex.GetHostById(1).Result).Returns(host1);
             hostService.Setup(ex => ex.GetHostById(2).Result).Returns(host2);
-            _guestService = new GuestServiceImpl(guestRepository.Object, hostService.Object);
+            _guestService = new GuestServiceImpl(guestRepository.Object, hostService.Object,
+                new CreateGuestValidator(guestRepository.Object, new Mock<IHostRepository>().Object));
         }
         
         [Test]

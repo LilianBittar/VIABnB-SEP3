@@ -7,6 +7,7 @@ using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Repositories.Impl;
 using SEP3T2GraphQL.Services;
 using SEP3T2GraphQL.Services.Impl;
+using SEP3T2GraphQL.Services.Validation;
 using SEP3T2GraphQL.Services.Validation.GuestValidation;
 using SEP3T2GraphQL.Services.Validation.GuestValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.HostValidation;
@@ -34,7 +35,7 @@ namespace UnitTests
             HostValidation = new HostValidationImpl();
             HostRepository = new HostRepositoryImpl();
             HostService = new HostServiceImpl(HostRepository);
-            guestService = new GuestServiceImpl(_guestRepositoryMock.Object, HostService);
+            guestService = new GuestServiceImpl(_guestRepositoryMock.Object, HostService, new Mock<CreateGuestValidator>().Object);
              guest = new Guest()
             {
                 Id = 1,
