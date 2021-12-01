@@ -115,88 +115,94 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new NotImplementedException();
         }
 
-        public async Task<List<Residence>> GetResidencesByHostIdAsync(int Id)
+        public async Task<IList<Residence>> GetResidencesByHostIdAsync(int Id)
         {
             var residenceQuery = new GqlQuery()
             {
-                Query = @"query ($hostId: int!)
-                        {residencesByHostId(int:hostId)
-                          {
-                          id
-                        address {
-                           id
-                           streetName
-                             streetNumber
-                            city {
-                                id
-                                cityName
-                                zipCode
-                              }
-                            }
-                            description
-                            type
-                            isAvailable
-                            pricePerNight
-                            rules {
-                              description
-                              residenceId
-                            }
-                            facilities {
-                              id
-                              name
-                            }
-                            availableFrom
-                            availableTo
-                            maxNumberOfGuests
-                            host {
-                              id
-                              firstName
-                              lastName
-                              phoneNumber
-                              email
-                              password
-                              hostReviews {
-                                id
-                                rating
-                                text
-                                viaId
-                              }
-                              profileImageUrl
-                              cpr
-                              isApprovedHost
-                            }
-                            residenceReviews {
-                              rating
-                              reviewText
-                              guest {
-                                viaId
-                                guestReviews {
-                                  id
-                                  rating
-                                  text
-                                  hostId
-                                }
-                                isApprovedGuest
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews{id,rating,text,viaId}
-                                profileImageUrl
-                                cpr
-                                isApprovedHost
-                              }
-  
-}
-}
-",
+                Query = @"query ($hostId:Int!) {
+                       residencesByHostId(id: $hostId) {
+                      
+    id
+    address {
+      id
+      streetName
+      streetNumber
+      city {
+        id
+        cityName
+        zipCode
+      }
+    }
+    description
+    type
+    isAvailable
+    pricePerNight
+    rules {
+      description
+      residenceId
+    }
+    facilities {
+      id
+      name
+    }
+    availableFrom
+    availableTo
+    maxNumberOfGuests
+    host {
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residenceReviews {
+      rating
+      reviewText
+      guest {
+        viaId
+        guestReviews {
+          id
+          rating
+          text
+          hostId
+        }
+        isApprovedGuest
+        id
+        firstName
+        lastName
+        phoneNumber
+        email
+        password
+        hostReviews {
+          id
+          rating
+          text
+          viaId
+        }
+        profileImageUrl
+        cpr
+        isApprovedHost
+      }
+    }
+                  }
+                }
+              ",
                 Variables = new {hostId = Id}
             };
             var graphQlResponse = await _client.PostQueryAsync<ResidenceListQueryResponseType>(residenceQuery);
-
-            System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Residences.ToString()}");
+            Console.WriteLine("hello");
+            System.Console.WriteLine(graphQlResponse.Data);
+            Console.WriteLine($"{this} received: {graphQlResponse.Data.Residences.Count}");
             return graphQlResponse.Data.Residences;
         }
 
@@ -278,6 +284,8 @@ namespace SEP3BlazorT1Client.Data.Impl
                         "
             };
             var response = await _client.PostQueryAsync<AvailableResidencesQueryResponseType>(query);
+            System.Console.WriteLine(response.Errors.ToString());
+            System.Console.WriteLine($"{this} received: {response.Data.AvailableResidences.ToString()}");
             return response.Data.AvailableResidences;
         }
 

@@ -19,7 +19,7 @@ namespace SEP3BlazorT1Client.Data
         /// </summary>
         /// <param name="Id"></param>
         /// <returns>list of residences</returns>
-        Task<List<Residence>> GetResidencesByHostIdAsync(int Id);
+        Task<IList<Residence>> GetResidencesByHostIdAsync(int Id);
         /// <summary>
         /// gets all residences in the system that are available for rent
         /// </summary>

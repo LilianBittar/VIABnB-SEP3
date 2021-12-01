@@ -57,7 +57,7 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
                             + " join address a on a.addressid = residence.addressid "
                             + "join city c on c.cityid = a.cityid "
                             + " join host h on residence.hostid = h.hostid"
-                            + " WHERE hostid= ?");
+                            + " WHERE h.hostid= ?");
             stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
             List<Residence> residences = new ArrayList<>();

@@ -6,7 +6,11 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes
 {
     public class ResidenceListQueryResponseType
     {
+        /// <summary>
+        /// GraphQL response container containing the queried residence by host id. 
+        /// </summary>
+        /// <value></value>
         [JsonProperty("residencesByHostId")]
-        public List<Residence> Residences { get; set; }
+        public IList<Residence> Residences { get; set; }
     }
 }
