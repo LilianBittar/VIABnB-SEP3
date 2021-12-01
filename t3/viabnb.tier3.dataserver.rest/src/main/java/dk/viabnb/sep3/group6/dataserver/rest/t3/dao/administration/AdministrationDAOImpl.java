@@ -22,15 +22,20 @@ public class AdministrationDAOImpl extends BaseDao implements AdministrationDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement(
-          "SELECT * FROM admin WHERE email = ?");
+          "SELECT * FROM _user JOIN admin a ON _user.userid = a.adminid WHERE email = ?");
       stm.setString(1, email);
       ResultSet result = stm.executeQuery();
       if (result.next())
       {
-        return new Administrator(result.getInt("adminid"),
-            result.getString("fname"), result.getString("lname"),
-            result.getString("email"), result.getString("phonenumber"),
-            result.getString("password"));
+        return new Administrator(
+            result.getInt("userid"),
+            result.getString("email"),
+            result.getString("password"),
+            result.getString("fname"),
+            result.getString("lname"),
+            result.getString("phonenumber"),
+            result.getString("initials")
+        );
       }
       throw new IllegalArgumentException("Admin is null");
     }
@@ -46,18 +51,19 @@ public class AdministrationDAOImpl extends BaseDao implements AdministrationDAO
     try(Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement
-          ("SELECT * FROM admin");
+          ("SELECT * FROM _user JOIN admin a ON _user.userid = a.adminid");
       ResultSet result = stm.executeQuery();
       while (result.next())
       {
         Administrator administrator = new Administrator
             (
-                result.getInt("adminid"),
+                result.getInt("userid"),
+                result.getString("email"),
+                result.getString("password"),
                 result.getString("fname"),
                 result.getString("lname"),
-                result.getString("email"),
                 result.getString("phonenumber"),
-                result.getString("password")
+                result.getString("initials")
             );
         administratorListToReturn.add(administrator);
       }

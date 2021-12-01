@@ -11,13 +11,15 @@ public class Guest extends Host
   @JsonProperty("isApprovedGuest")
   private boolean isApprovedGuest;
 
-  public Guest(int id, String firstName, String lastName, String phoneNumber,
-      String email, String password, List<HostReview> hostReviews,
-      String profileImageUrl, String cpr, boolean isApprovedHost, int viaId, boolean isApprovedGuest)
+  public Guest(int id, String email, String password, String firstName,
+      String lastName, String phoneNumber, List<HostReview> hostReviews,
+      String profileImageUrl, String cpr, boolean isApprovedHost, int viaId,
+      List<GuestReview> guestReviews, boolean isApprovedGuest)
   {
-    super(id, firstName, lastName, phoneNumber, email, password, hostReviews,
+    super(id, email, password, firstName, lastName, phoneNumber, hostReviews,
         profileImageUrl, cpr, isApprovedHost);
     this.viaId = viaId;
+    this.guestReviews = guestReviews;
     this.isApprovedGuest = isApprovedGuest;
   }
 

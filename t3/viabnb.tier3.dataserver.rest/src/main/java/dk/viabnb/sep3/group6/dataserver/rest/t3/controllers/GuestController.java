@@ -3,9 +3,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RentRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,7 +90,7 @@ public class GuestController {
     public ResponseEntity<Guest> getGuestByHostId(@PathVariable("id") int id)
     {
         Guest guest;
-        guest = guestDAO.getGuestByHostId(id);
+        guest = guestDAO.getGuestByUserId(id);
         try {
             return ResponseEntity.ok(guest);
         } catch (Exception e) {

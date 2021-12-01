@@ -2,6 +2,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.administration.AdministrationDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Administrator;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.logging.LoggerFactory;
@@ -18,20 +19,22 @@ class AdministrationControllerTest
   private AdministrationDAO administrationDAO;
   private AdministrationController controller;
   private Administrator administrator;
+  private User user;
 
   @BeforeEach
   public void setUp()
   {
     administrationDAO = mock(AdministrationDAO.class);
     controller = new AdministrationController(administrationDAO);
-    administrator = new Administrator
+    user = new Administrator
         (
             1,
-            "Test",
-            "Test",
             "Test@test.tt",
+            "Aa11",
+            "Test",
+            "Test",
             "11111111",
-            "Aa11"
+            "tt"
         );
   }
 
