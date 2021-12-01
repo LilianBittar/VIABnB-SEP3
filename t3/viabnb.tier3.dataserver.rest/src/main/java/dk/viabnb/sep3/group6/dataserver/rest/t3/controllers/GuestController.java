@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @RestController
 public class GuestController {
@@ -62,7 +63,7 @@ public class GuestController {
      * If Data access fails, then HTTP Internal Server Error is returned.
      * */
     @GetMapping("/guests")
-    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam(required = false) Boolean isApproved, @RequestParam(required = false) Integer studentNumber ) {
+    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam(required = false) Boolean isApproved, @RequestParam(required = false) Integer studentNumber, @RequestParam(required = false) String email) {
 
         try {
             List<Guest> allGuests = guestDAO.getAllGuests();
@@ -71,6 +72,11 @@ public class GuestController {
             }
             if(studentNumber != null){
                 allGuests.removeIf(g -> g.getViaId() != studentNumber);
+            }
+            if (email != null)
+            {
+                allGuests.removeIf(guest -> !Objects.equals(guest.getEmail(),
+                    email));
             }
             LOGGER.info("getAllGuests returned: " + new Gson().toJson(allGuests));
             return ResponseEntity.ok(allGuests);
