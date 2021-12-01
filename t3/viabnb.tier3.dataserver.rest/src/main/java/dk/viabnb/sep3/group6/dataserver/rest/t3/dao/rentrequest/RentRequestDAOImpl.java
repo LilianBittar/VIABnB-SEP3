@@ -65,7 +65,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
             LocalDate.parse(result.getDate("enddate").toString()),
             result.getInt("numberofguests"),
             RentRequestStatus.valueOf(result.getString("status")),
-            getGuestById(result.getInt("hostid")),
+            getGuestById(result.getInt("guestid")),
             getResidenceById(result.getInt("hostid")));
       }
       throw new IllegalArgumentException("Rent request is null");
@@ -125,7 +125,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
             LocalDate.parse(result.getDate("enddate").toString()),
             result.getInt("numberofguests"),
             RentRequestStatus.valueOf(result.getString("status")),
-            getGuestById(result.getInt("hostid")),
+            getGuestById(result.getInt("guestid")),
             residence);
         rentRequestListToReturn.add(request);
       }
