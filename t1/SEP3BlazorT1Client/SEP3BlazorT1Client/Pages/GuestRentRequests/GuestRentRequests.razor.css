@@ -2,4 +2,8 @@
   font-weight: bold;
 }
 
+.detail-container {
+  gap: 10rem;
+}
+
 /*# sourceMappingURL=GuestRentRequests.razor.css.map */

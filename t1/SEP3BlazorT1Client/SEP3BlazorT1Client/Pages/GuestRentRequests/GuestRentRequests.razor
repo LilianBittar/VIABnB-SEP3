@@ -26,7 +26,7 @@
                         </MatExpansionPanelSubHeader>
                     </MatExpansionPanelSummary>
                     <MatExpansionPanelDetails>
-                        <div class="container-fluid d-flex flex-row justify-content-around">
+                        <div class="container-fluid d-flex flex-row justify-content-start detail-container">
                             <div class="left">
                                 <h3>Request details:</h3>
                                 <p>Status:</p>
@@ -56,6 +56,17 @@
                 </MatExpansionPanel>
             }
         </MatAccordion>
+    }
+    else
+    {
+        <div class="container-fluid d-flex justify-content-center mt-2">
+            <div class="row">
+                <div class="col">
+                   <p>You have not made any rent requests</p>
+
+                </div>
+            </div>
+        </div>
     }
 }
 else
@@ -97,7 +108,7 @@ else
     // if (user.Claims.FirstOrDefault(c => c.Type.ToString() == "Role").Value == "Guest")
     // {
     // _rentRequests = await RentalService.GetRentRequestsByGuestId(Int32.Parse(user.Claims.First(c => c.Type.ToString() == "Id").Value));
-        _rentRequests = await RentalService.GetRentRequestsByGuestIdAsync(3);
+        _rentRequests = await RentalService.GetRentRequestsByGuestIdAsync(1);
         StateHasChanged();
     // }
     // else
