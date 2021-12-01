@@ -23,10 +23,10 @@ namespace SEP3BlazorT1Client.Pages.AdminView
             errorMessage = "";
             try
             {
-                await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLoginAsAdmin(email, password);
+                await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email, password);
                 email = "";
                 password = "";
-                NavigationManager.NavigateTo("UserRequests");
+                NavigationManager.NavigateTo("/UserRequests");
             }
             catch (Exception e)
             {
