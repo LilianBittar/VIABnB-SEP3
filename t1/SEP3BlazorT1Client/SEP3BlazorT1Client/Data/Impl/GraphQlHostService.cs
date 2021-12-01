@@ -72,9 +72,38 @@ namespace SEP3BlazorT1Client.Data.Impl
             return graphQlResponse.Data.Host;
         }
 
-        public Task<Host> GetHostByEmail(string email)
+        public async Task<Host> GetHostByEmail(string email)
         {
-            throw new System.NotImplementedException();
+            GqlQuery query = new()
+            {
+                Query = @"query($hostEmail: String) {
+                                hostByEmail(String: $hostEmail) {
+                                     hostReviews{
+                                      id
+                                      rating
+                                      text
+                                      viaId
+                                    }
+                                    profileImageUrl
+                                    cpr
+                                    isApprovedHost
+                                    id
+                                    email
+                                    password
+                                    firstName
+                                    lastName
+                                    phoneNumber
+                                }
+                            }
+                            ",
+                Variables = new {hostEmail = email}
+            };
+            var response = await _client.PostQueryAsync<HostByEmailResponseType>(query);
+            if (response.Errors != null)
+            {
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
+            }
+            return response.Data.Host;
         }
 
         public async Task<Host> GetHostById(int id)
