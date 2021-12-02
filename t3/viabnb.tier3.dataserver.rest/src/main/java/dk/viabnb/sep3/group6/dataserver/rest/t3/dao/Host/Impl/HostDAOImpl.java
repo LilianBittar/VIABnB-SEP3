@@ -21,7 +21,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
     @Override
     public Host RegisterHost(Host host) {
         try (Connection connection = getConnection()) {
-            PreparedStatement stm1 = connection.prepareStatement("insert into _user(fname, lname, email, phonenumber, password) values (?,?,?,?,?)");
+            PreparedStatement stm1 = connection.prepareStatement("insert into _user(fname, lname, email, phonenumber, password) values (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
             PreparedStatement stm2 = connection.prepareStatement("insert into host(hostid, cprnumber, isapproved, personalimage) values (?,?,?,?)");
             //insert into user
             stm1.setString(1, host.getFirstName());
@@ -30,9 +30,10 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             stm1.setString(4, host.getPhoneNumber());
             stm1.setString(5, host.getPassword());
             stm1.executeUpdate();
+            ResultSet resultSet = stm1.getGeneratedKeys();
             connection.commit();
             //insert into host
-            stm2.setInt(1, host.getId());
+            stm2.setInt(1, resultSet.getInt(0));
             stm2.setString(2, host.getCpr());
             stm2.setBoolean(3,host.isApprovedHost());
             stm2.setString(4,host.getProfileImageUrl());
