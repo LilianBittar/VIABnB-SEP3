@@ -14,11 +14,12 @@ namespace SEP3T2GraphQL.Services
         /// <param name="guest">the guest to be created</param>
         /// <exception cref="ArgumentException">If guest is null</exception>
         /// <exception cref="KeyNotFoundException">If host does not exist in the system</exception>
-        /// <exception cref="ArgumentException">If guest is invalid <see cref="GuestValidator"/></exception>
+        /// <exception cref="ArgumentException">If guest is invalid <see cref="CreateGuestValidator"/></exception>
         /// <returns>the created guest</returns>
         Task<Guest> CreateGuestAsync(Guest guest);
         Task<Guest> GetGuestById(int id);
         Task<Guest> GetGuestByStudentNumber(int studentNumber);
+        Task<Guest> GetGuestByEmail(string email);
         Task<Guest> UpdateGuest(Guest guest); 
         Task<IEnumerable<Guest>> GetAllGuests(); 
         /// <summary>
@@ -34,6 +35,6 @@ namespace SEP3T2GraphQL.Services
         /// <exception cref="ArgumentException">Thrown if the host is null</exception>
         /// <returns>Guest object</returns>
         Task<Guest> UpdateGuestStatus(Guest guest);
-        Task<Host> ValidateGuestAsync(int studentNumber, string password);
+        Task<Guest> ValidateGuestAsync(string email, string password);
     }
 }

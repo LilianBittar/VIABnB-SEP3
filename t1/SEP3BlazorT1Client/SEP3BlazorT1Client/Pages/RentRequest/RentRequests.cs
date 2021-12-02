@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using SEP3BlazorT1Client.Data;
+using SEP3BlazorT1Client.Models;
 
 
 namespace SEP3BlazorT1Client.Pages.RentRequest
@@ -20,17 +23,21 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
 
         protected override async Task OnInitializedAsync()
         {
-            rentRequestList = await RentalService.GetAllRentRequestsAsync();
+            rentRequestList = await RentalService.GetAllNotAnsweredRentRequestAsync();
         }
 
-        private void ApproveRequest()
+        private async Task ApproveRequest(int requestId)
         {
-            throw new System.NotImplementedException();
+            var approvedRequest = rentRequestList.First(r => r.Id == requestId);
+            approvedRequest.Status = RentRequestStatus.APPROVED;
+            await RentalService.UpdateRentRequestAsync(approvedRequest);
         }
 
-        private void RejectRequest()
+        private async Task RejectRequest(int requestId)
         {
-            throw new System.NotImplementedException();
+            var rejectedRequest = rentRequestList.First(r => r.Id == requestId);
+            rejectedRequest.Status = RentRequestStatus.NOTAPPROVED;
+            await RentalService.UpdateRentRequestAsync(rejectedRequest);
         }
     }
 }

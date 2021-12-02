@@ -16,9 +16,9 @@ namespace SEP3T2GraphQL.Repositories.Impl
         private readonly HttpClient client;
         private IResidenceValidation _residenceValidation;
 
-        public ResidenceRepositoryImpl(IResidenceValidation residenceValidation)
+        public ResidenceRepositoryImpl()
         {
-            _residenceValidation = residenceValidation; 
+           
             client = new HttpClient();
         }
 

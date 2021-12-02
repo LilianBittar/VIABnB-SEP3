@@ -1,52 +1,74 @@
 .residence-card {
   max-width: 319px;
   max-height: 500px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .residence-card__image {
   position: relative;
 }
+
 .residence-card__image img {
   height: 319px;
   width: 319px;
   border-radius: 10px 10px 10px 10px;
   cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
 .residence-card__image img:hover {
-  filter: brightness(0.4);
+  -webkit-filter: brightness(0.4);
+          filter: brightness(0.4);
 }
+
 .residence-card__image img:hover ~ .description {
   visibility: visible;
   opacity: 1;
 }
+
 .residence-card__image .description {
   opacity: 0;
   visibility: hidden;
   position: absolute;
   top: 50%;
-  transform: translateY(50%);
+  -webkit-transform: translateY(50%);
+          transform: translateY(50%);
   right: 50%;
-  transform: translateX(50%);
+  -webkit-transform: translateX(50%);
+          transform: translateX(50%);
   color: white;
+  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
 .residence-card__content {
   padding: 1rem 1rem;
   border-radius: 0 0 10px 10px;
   color: black;
 }
+
 .residence-card__content .place-and-price {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
+
 .residence-card__content .place-and-price .place {
   font-weight: bold;
 }
+
 .residence-card__content .available-period {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   color: gray;
 }
-
 /*# sourceMappingURL=ResidenceCard.razor.css.map */

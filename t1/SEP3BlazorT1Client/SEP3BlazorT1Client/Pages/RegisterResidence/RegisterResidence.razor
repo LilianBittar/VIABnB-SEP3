@@ -2,78 +2,104 @@
 @using SEP3BlazorT1Client.Models
 @using Microsoft.AspNetCore.Components
 @using System.Linq
-    <div class="mat-layout-grid mat-layout-grid-align-left" style="width: 100%;">
-        <div class="mat-layout-grid-inner">
-            <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
-                <h1>Register your residence</h1>
-                <div class="mat-layout-grid-inner">
-                    <div class="mat-layout-grid-cell">
-                        @* LEFT COLUMN *@
-                        <h2>Address Information</h2>
-                        <EditForm EditContext=@FormEditContextAddress>
-                            <DataAnnotationsValidator/>
+<div class="mat-layout-grid mat-layout-grid-align-left" style="width: 100%;">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
+            <h1>Register your residence</h1>
+            <div class="mat-layout-grid-inner">
+                <div class="mat-layout-grid-cell">
+                    @* LEFT COLUMN *@
+                    <h2>Address Information</h2>
+                    <EditForm EditContext=@FormEditContextAddress>
+                        <DataAnnotationsValidator/>
+                        <p>
                             <MatTextField Label="Street name" @bind-Value="@_newResidenceAddress.StreetName"/>
                             <ValidationMessage For="@(() => _newResidenceAddress.StreetName)"/>
+                        </p>
 
+
+                        <p>
                             <MatTextField Label="Street Number" @bind-Value="@_newResidenceAddress.StreetNumber"/>
                             <ValidationMessage For="@(() => _newResidenceAddress.StreetNumber)"/>
+                        </p>
 
+
+                        <p>
                             <MatTextField Label="House Number" @bind-Value="@_newResidenceAddress.HouseNumber"/>
                             <ValidationMessage For="@(() => _newResidenceAddress.HouseNumber)"/>
+                        </p>
 
 
+                        <p>
                             <MatTextField Label="Zipcode" @bind-Value="@_newResidenceAddress.City.ZipCode"/>
                             <ValidationMessage For="@(() => _newResidenceAddress.City.ZipCode)"/>
-                            <MatTextField Label="City" @bind-Value="@_newResidenceAddress.City.HostResidences"/>
-                            <ValidationMessage For="@(() => _newResidenceAddress.City.HostResidences)"/>
+                        </p>
 
-                                
-                        </EditForm>
-                    </div>
-                    <div class="mat-layout-grid-cell">
-                        @* MIDDLE COLUMN *@
-                        <h2>Residence Info:</h2>
-                        <EditForm EditContext=@FormEditContextResidence>
-                            <DataAnnotationsValidator/>
+                        <p>
+                            <MatTextField Label="City" @bind-Value="@_newResidenceAddress.City.CityName"/>
+                            <ValidationMessage For="@(() => _newResidenceAddress.City.CityName)"/>
+                        </p>
 
+
+                    </EditForm>
+                </div>
+                <div class="mat-layout-grid-cell">
+                    @* MIDDLE COLUMN *@
+                    <h2>Residence Info:</h2>
+                    <EditForm EditContext="@FormEditContextResidence">
+                        <DataAnnotationsValidator/>
+                        <p>
                             <MatSelect Label="Residence type" @bind-Value="_newResidence.Type" Style="margin-top:1rem;">
-                                @foreach(var type in _allResidenceTypes)
+                                @foreach (var type in _allResidenceTypes)
                                 {
                                     <MatOptionString Value="@type">@type</MatOptionString>
                                 }
                             </MatSelect>
-                            <ValidationMessage For="@(()=>_newResidence.Type)" />
+                            <ValidationMessage For="@(() => _newResidence.Type)"/>
+                        </p>
+
+
+                        <p>
                             <MatTextField Label="Residence Description" @bind-Value="_newResidence.Description" TextArea="@true"/>
                             <ValidationMessage For="@(() => _newResidence.Description)"/>
+                        </p>
+
+                        <p>
                             <MatTextField Label="Price / night in DKK" @bind-Value="_newResidence.PricePerNight"/>
                             <ValidationMessage For="@(() => _newResidence.PricePerNight)"/>
+                        </p>
+
+                        <p>
                             <MatButton OnClick="@(() => AddNewRule())">Add new Rule</MatButton>
                             <MatButton OnClick="@(() => OpenAddFacilityDialog())">Add Facility</MatButton>
-                        </EditForm>
-                        <MatDialog @bind-IsOpen="_showFacilityDialog">
-                            <MatDialogTitle>Choose an facility</MatDialogTitle>
-                            <MatSelect Label="Facility" @bind-Value="_facilityToBeAdded.Name">
-                               @if(_allFacilities.Any())
-                               {
+                        </p>
+
+                    </EditForm>
+                    <MatDialog @bind-IsOpen="_showFacilityDialog">
+                        <MatDialogTitle>Choose a facility</MatDialogTitle>
+                        <MatSelect Label="Facility" @bind-Value="_facilityToBeAdded.Name">
+                            @if (_allFacilities.Any())
+                            {
                                 @foreach (Facility facility in _allFacilities)
                                 {
                                     <MatOptionString Value="@facility.Name">@facility.Name</MatOptionString>
                                 }
-                               }
-                               else 
-                               {
-                                   <MatOptionString>No Factilities available</MatOptionString>
-                               }
-                            </MatSelect>
-                            <MatDialogActions>
-                                <MatButton OnClick="@(() => _showFacilityDialog = false)">Cancel</MatButton>
-                                <MatButton OnClick="@(() => AddFacility())">Add</MatButton>
-                            </MatDialogActions>
-                        </MatDialog>
-                    </div>
-                    <div class="mat-layout-grid-cell">
-                        @* RIGHT COLUMN *@
-                        <h2>You have added: </h2>
+                            }
+                            else
+                            {
+                                <MatOptionString>No Factilities available</MatOptionString>
+                            }
+                        </MatSelect>
+                        <MatDialogActions>
+                            <MatButton OnClick="@(() => _showFacilityDialog = false)">Cancel</MatButton>
+                            <MatButton OnClick="@AddFacility">Add</MatButton>
+                        </MatDialogActions>
+                    </MatDialog>
+                </div>
+                <div class="mat-layout-grid-cell">
+                    @* RIGHT COLUMN *@
+                    <h2>You have added: </h2>
+                    <p>
                         <MatListGroup>
                             <MatListGroupSubHeader Style="font-weight: 400">Rules: </MatListGroupSubHeader>
                             @foreach (Rule rule in _newResidence.Rules)
@@ -85,6 +111,9 @@
                                 <MatListItem>No rules have been added.</MatListItem>
                             }
                         </MatListGroup>
+                    </p>
+
+                    <p>
                         <MatListGroup>
                             <MatListGroupSubHeader Style="font-weight: 400">Facilities:</MatListGroupSubHeader>
                             @foreach (Facility facility in _newResidence.Facilities)
@@ -96,11 +125,13 @@
                                 <MatListItem>No Facilities have been added.</MatListItem>
                             }
                         </MatListGroup>
-                        <MatButton OnClick="@RegisterNewResidence" >Register residence</MatButton>
-                        <p style="color: red;">@_registerResidenceErrorMessage</p>
-                    </div>
+                    </p>
+
+                    <MatButton OnClick="@RegisterNewResidence">Register residence</MatButton>
+                    <p style="color: red;">@_registerResidenceErrorMessage</p>
                 </div>
             </div>
-
         </div>
+
     </div>
+</div>

@@ -2,7 +2,8 @@
 @using SEP3BlazorT1Client.Data
 @using SEP3BlazorT1Client.Models
 @using System.ComponentModel.DataAnnotations
-@using System.Text.Json
+@using Newtonsoft.Json
+@using JsonSerializer = System.Text.Json.JsonSerializer
 @inject IGuestService GuestService
 @inject IResidenceService ResidenceService
 @inject IRentalService RentalService
@@ -27,8 +28,8 @@
 
                         <div class="card__content">
                             <div class="d-flex flex-row">
-                                <MatDatePicker @bind-Value="@_newRentRequest.StartDate" Required="true" Outlined="true" Label="Start date" OnInput="@(StateHasChanged)"/>
-                                <MatDatePicker @bind-Value="@_newRentRequest.EndDate" Required="true" Outlined="true" Label="End date" OnInput="@(StateHasChanged)"/>
+                                <MatDatePicker @bind-Value="@_startDateInput" Required="true" Outlined="true" Label="Start date" OnInput="@(StateHasChanged)"/>
+                                <MatDatePicker @bind-Value="@_endDateInput" Required="true" Outlined="true" Label="End date" OnInput="@(StateHasChanged)"/>
                             </div>
                             <EditForm EditContext="@EditContext">
                                 <DataAnnotationsValidator/>
@@ -74,8 +75,15 @@ else
 
     [Parameter]
     public int ResidenceId { get; set; }
+    /*
+     * DatePicker times are bound to these value instead of directly to _newRequest.StartDate and _newRequest.EndDate,
+     * because there is a known issue where the DatePicker returns the selected date minus 1 day.
+     * https://github.com/SamProf/MatBlazor/issues/723
+     */
+    private DateTime _startDateInput;
+    private DateTime _endDateInput; 
 
-    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now, Status = RentRequestStatus.NOT_ANSWERED};
+    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1), Status = RentRequestStatus.NOTANSWERED};
 
     [CascadingParameter]
     public EditContext EditContext { get; private set; }
@@ -96,7 +104,7 @@ else
         // var guest = await GuestService.GetGuestById(3);
         var guest = new Guest()
         {
-            Cpr = "3333333333", Email = "test@test.test", Id = 3, Password = "Test123", FirstName = "test", GuestReviews = new List<GuestReview>(),
+            Cpr = "3333333333", Email = "test@test.test", Id = 2, Password = "Test123", FirstName = "test", GuestReviews = new List<GuestReview>(),
             HostReviews = new List<HostReview>(), LastName = "test", PhoneNumber = "33333333", ViaId = 293886, IsApprovedGuest = false, IsApprovedHost = true, ProfileImageUrl = "test"
         }; 
         var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
@@ -123,20 +131,29 @@ else
 
     private int GetTotalDays()
     {
-        return (_newRentRequest.EndDate.Date - _newRentRequest.StartDate.Date).Days;
+        return (_endDateInput.Date - _startDateInput.Date).Days;
     }
 
     private async void CreateRequest()
     {
         try
         {
+            /*
+             Bug MatBlazor DatePicker subtracts 1 day from the actual selected date.
+             This is a known issue and has an open issue on github. 
+             */
+            _newRentRequest.StartDate = _startDateInput.AddDays(1);
+            _newRentRequest.EndDate = _endDateInput.AddDays(1);
+            
             await RentalService.CreateRentRequest(_newRentRequest);
             StateHasChanged();
             //TODO: Navigate to list of rent requests.
+            NavigationManager.NavigateTo("/residences");
         }
         catch (Exception e)
         {
             _errorMessage = e.Message;
+            StateHasChanged();
         }
     }
 

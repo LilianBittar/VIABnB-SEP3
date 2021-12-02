@@ -6,7 +6,8 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes
 {
     public class ResidenceListQueryResponseType
     {
-        [JsonProperty("Residence")]
-        public List<Residence> Residences { get; set; }
+       
+        [JsonProperty("residencesByHostId")]
+        public IList<Residence> Residences { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace SEP3T2GraphQL.Repositories
         Task<Guest> CreateGuestAsync(Guest guest);
         Task<Guest> GetGuestById(int id);
         Task<Guest> GetGuestByStudentNumber(int studentNumber);
+        Task<Guest> GetGuestByEmail(string email);
         Task<Guest> UpdateGuest(Guest guest); 
         Task<IEnumerable<Guest>> GetAllGuests(); 
         /// <summary>

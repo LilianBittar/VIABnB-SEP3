@@ -11,7 +11,7 @@ namespace SEP3BlazorT1Client.Data.Impl
     public partial class GraphQlGuestService : IGuestService
     {
         private const string Url = "https://localhost:5001/graphql";
-        private readonly GqlClient _client = new GqlClient(Url);
+        private readonly GqlClient _client = new GqlClient(Url){EnableLogging = true};
 
         public async Task<Guest> CreateGuestAsync(Guest guest)
         {
@@ -56,31 +56,43 @@ namespace SEP3BlazorT1Client.Data.Impl
             return response.Data.CreateGuest; 
         }
 
-        public async Task<Guest> ValidateGuestAsync(string studentNumber,string password)
+        public async Task<Guest> ValidateGuestAsync(string email,string password)
         {
             GqlClient client = new GqlClient(Url);
             var validateGuestQuery = new GqlQuery()
             {
-                Query = @"query($passwordGuest: String, $studentNumberGuest) {
-                          validateGuestLogin( password: $passwordGuest, studentNumber: $studentNumber)
-                           {id,
-                           firstName,
-                           lastName,
-                           phoneNumber,
-                           email,
-                           password,
-                           profileImageUrl,
-                           cpr,
-                           isApprovedHost,
-                           viaId}}",
-                Variables = new { passwordGuest = password, studentNumberGuest = studentNumber}
+                Query = @"query($emailGuest: String, $passwordGuest: String) {
+                  validateGuestLogin(email: $emailGuest, password: $passwordGuest) {
+                                viaId
+                                guestReviews{
+                                  id
+                                  rating
+                                  text
+                                  hostId
+                                }
+                                isApprovedGuest
+                                hostReviews{
+                                  id
+                                  rating
+                                  text
+                                  viaId
+                                }
+                                profileImageUrl
+                                cpr
+                                isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                          }
+                        }
+                        ",
+                Variables = new { emailGuest = email, passwordGuest = email}
             };
 
-            var graphQlResponse = await client.PostQueryAsync<GuestResponseType>(validateGuestQuery);
-            if (graphQlResponse.Data.Guest == null) throw new Exception("Incorrect password  or student number");
-            Console.WriteLine(graphQlResponse.Data.ToString());
-
-            System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Guest.ToString()}");
+            var graphQlResponse = await client.PostQueryAsync<ValidateGuestResponseType>(validateGuestQuery);
             return graphQlResponse.Data.Guest;
         }
     }

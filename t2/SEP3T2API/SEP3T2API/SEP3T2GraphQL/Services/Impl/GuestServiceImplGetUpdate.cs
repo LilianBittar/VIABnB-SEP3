@@ -14,9 +14,9 @@ namespace SEP3T2GraphQL.Services.Impl
             return await _guestRepository.GetGuestById(id); 
         }
 
-        public Task<Guest> GetGuestByEmail(string email)
+        public async Task<Guest> GetGuestByEmail(string email)
         {
-            throw new System.NotImplementedException();
+            return await _guestRepository.GetGuestByEmail(email);
         }
 
         public async Task<Guest> UpdateGuest(Guest guest)

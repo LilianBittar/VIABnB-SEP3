@@ -16,9 +16,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
         private readonly HttpClient client;
         private IHostValidation _hostValidation;
 
-        public HostRepositoryImpl(IHostValidation hostValidation)
+        public HostRepositoryImpl()
         {
-            _hostValidation = hostValidation; 
             client = new HttpClient();
         }
         
@@ -36,7 +35,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
             HttpResponseMessage responseMessage = await client.PostAsync(uri + "/host", content);
             if (!responseMessage.IsSuccessStatusCode)
             {
-                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                Console.WriteLine(await responseMessage.Content.ReadAsStringAsync());
+                throw new Exception(await responseMessage.Content.ReadAsStringAsync());
             }
 
             Host h = JsonSerializer.Deserialize<Host>(await responseMessage.Content.ReadAsStringAsync(), new JsonSerializerOptions()
@@ -52,6 +52,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
         {
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host?email={email}");
 
+            Console.WriteLine(await responseMessage.Content.ReadAsStringAsync());
             if (!responseMessage.IsSuccessStatusCode)
             {
                 throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
@@ -61,7 +62,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions(
                 new JsonSerializerOptions
                 {
-                    PropertyNameCaseInsensitive = true
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 }));
             return host;
         }
@@ -123,7 +124,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             HttpContent content = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PatchAsync($"{uri}/hosts/{host.Id}/approval", content);
+            var response = await client.PatchAsync($"{uri}/hosts/{host.Id}/approval", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");

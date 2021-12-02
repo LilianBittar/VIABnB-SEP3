@@ -59,9 +59,9 @@ namespace SEP3T2GraphQL.Graphql
             return await _guestService.GetGuestByStudentNumber(studentNumber); 
         }
         
-        public async Task<Host> ValidateGuestLogin(int studentNumber, string password)
+        public async Task<Guest> ValidateGuestLogin(string email, string password)
         {
-            return await _guestService.ValidateGuestAsync(studentNumber, password);
+            return await _guestService.ValidateGuestAsync(email, password);
 
         }
 
@@ -100,6 +100,11 @@ namespace SEP3T2GraphQL.Graphql
             return await _rentalService.GetAllRentRequestsAsync();
         }
 
+        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequest()
+        {
+            return await _rentalService.GetAllNotAnsweredRentRequestAsync();
+        }
+
         public Task<RentRequest> GetRentRequestById(int id)
         {
             return _rentalService.GetRentRequestAsync(id);
@@ -108,6 +113,26 @@ namespace SEP3T2GraphQL.Graphql
         public async Task<IList<Residence>> GetAvailableResidences()
         {
             return await _residenceService.GetAvailableResidencesAsync(); 
+        }
+
+        public async Task<IEnumerable<RentRequest>> RentRequestsByGuestId(int guestId)
+        {
+            return await _rentalService.GetRentRequestsByGuestId(guestId); 
+        }
+
+        public async Task<IList<Residence>> GetResidencesByHostId(int id)
+        {
+            return await _residenceService.GetAllRegisteredResidencesByHostIdAsync(id);
+        }
+
+        public async Task<Guest> GetGuestByEmail(string email)
+        {
+            return await _guestService.GetGuestByEmail(email);
+        }
+
+        public async Task<Host> GetHostByEmail(string email)
+        {
+            return await _hostService.GetHostByEmail(email);
         }
     }
 }

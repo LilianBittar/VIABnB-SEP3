@@ -62,14 +62,14 @@ namespace SEP3T2GraphQL.Graphql
             return await _ruleService.CreateRule(rule);
         }
 
-        public async Task<RentRequest> ApproveRentRequest(RentRequest request)
+        public async Task<RentRequest> UpdateRentRequestStatus(RentRequest request)
         {
-            return await _rentalService.ApproveRentRequestAsync(request);
+            return await _rentalService.UpdateRentRequestStatusAsync(request);
         }
 
-        public async Task<RentRequest> RejectRentRequest(RentRequest request)
+        public async Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
         {
-            return await _rentalService.RejectRentRequestAsync(request);
+            return await _residenceService.UpdateResidenceAvailabilityAsync(residence);
         }
     }
 }

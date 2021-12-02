@@ -4,7 +4,9 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3T2GraphQL.Repositories.Impl
 {
@@ -26,16 +28,34 @@ namespace SEP3T2GraphQL.Repositories.Impl
         {
             
             HttpResponseMessage response = await _client.GetAsync($"{Uri}?studentNumber={studentNumber}");
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception(await response.Content.ReadAsStringAsync()); 
             }
 
-            var fetchedGuest = JsonSerializer.Deserialize<Guest>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions(){PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+            var fetchedGuests = JsonConvert.DeserializeObject<List<Guest>>(await response.Content.ReadAsStringAsync());
+            var fetchedGuest = fetchedGuests[0];
             return fetchedGuest;
         }
 
-       
+        public async Task<Guest> GetGuestByEmail(string email)
+        {
+            var response = await _client.GetAsync($"{Uri}?={email}");
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            var result = await response.Content.ReadAsStringAsync();
+            var guestToReturn = JsonSerializer.Deserialize<Guest[]>(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return guestToReturn[0];
+        }
+
 
         public async Task<Guest> UpdateGuest(Guest guest)
         {

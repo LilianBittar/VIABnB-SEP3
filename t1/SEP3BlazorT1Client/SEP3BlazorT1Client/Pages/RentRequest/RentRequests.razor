@@ -45,19 +45,19 @@ else
                         <p>Guest review: @item.Guest.GuestReviews</p>
                     </div>
                     <div class="form-group">
-                        <p>Guest review: @item.Guest.FirstName</p>
+                        <p>First Name: @item.Guest.FirstName</p>
                     </div>
                     <div class="form-group">
-                        <p>Guest review: @item.Guest.LastName</p>
+                        <p>Last Name: @item.Guest.LastName</p>
                     </div>
                     <div class="form-group">
-                        <p>Guest review: @item.Guest.Email</p>
+                        <p>Email: @item.Guest.Email</p>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
-                                <button class="btn btn-outline-dark" @onclick="(()=> ApproveRequest())">Approve</button>
-                                <button class="btn btn-outline-dark" @onclick="(()=> RejectRequest())">Reject</button>
+                                <button class="btn btn-outline-dark" @onclick="(()=> ApproveRequest(item.Id))">Approve</button>
+                                <button class="btn btn-outline-dark" @onclick="(()=> RejectRequest(item.Id))">Reject</button>
                             </div>
                         </div>
                     </div>

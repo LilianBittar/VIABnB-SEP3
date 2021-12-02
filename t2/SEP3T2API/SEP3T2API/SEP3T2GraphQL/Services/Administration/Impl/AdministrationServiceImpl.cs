@@ -18,12 +18,11 @@ namespace SEP3T2GraphQL.Services.Administration.Impl
 
         public async Task<Administrator> GetAdminByEmail(string email)
         {
-            var administratorToReturn = await _administrationRepository.GetAdminByEmail(email);
-            if (administratorToReturn == null)
+            if (string.IsNullOrEmpty(email))
             {
-                throw new Exception("Admin cant be null");
+                throw new ArgumentException("Invalid email");
             }
-
+            var administratorToReturn = await _administrationRepository.GetAdminByEmail(email);
             return administratorToReturn;
         }
 

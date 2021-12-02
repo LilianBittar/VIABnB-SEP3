@@ -1,18 +1,18 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.models;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class RentRequest {
     private int id;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private int numberOfGuests;
     private RentRequestStatus status;
     private Guest guest;
     private Residence residence;
 
-    public RentRequest(int id, LocalDateTime startDate, LocalDateTime endDate, int numberOfGuests, RentRequestStatus status, Guest guest, Residence residence) {
+    public RentRequest(int id, LocalDate startDate, LocalDate endDate, int numberOfGuests, RentRequestStatus status, Guest guest, Residence residence) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -29,11 +29,11 @@ public class RentRequest {
         return id;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
@@ -57,11 +57,11 @@ public class RentRequest {
         this.id = id;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

@@ -1,13 +1,25 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
+using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Repositories.Impl;
+using SEP3T2GraphQL.Services.Impl;
 
 namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 {
     public class HostValidationImpl : IHostValidation
     {
-        public bool IsValidEmail(string email)
+        private IHostRepository _repository = new HostRepositoryImpl();
+
+        public async Task<bool> IsValidEmail(string email)
         {
+            Host host = await _repository.GetHostByEmail(email);
+            if (host != null)
+            {
+                throw new ArgumentException("Host already exists");
+            }
+
             if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
             {
                 //some form of inbuilt mail validation
@@ -77,7 +89,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 
                 throw new ArgumentException("password must contain at least one uppercase letter");
             }
-            
+
             foreach (char c in passWord)
             {
                 if (passWord.Any(char.IsDigit))
@@ -110,31 +122,32 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 
         public bool IsValidCprNumber(string cpr)
         {
-            if (cpr==null)
+            if (cpr != null)
             {
-                throw new ArgumentException("cpr number required");
+                if (cpr.Any(char.IsLetter))
+                {
+                    throw new ArgumentException("cpr number can only contain numbers");
+                }
+
+                if (cpr.Contains('-') && cpr.Length != 11)
+                {
+                    throw new ArgumentException("Invalid cpr number Length");
+                }
+
+                if (!cpr.Contains('-') && cpr.Length != 10)
+                {
+                    throw new ArgumentException("Invalid cpr number Length");
+                }
+
+                return true;
             }
 
-            if (cpr.Any(char.IsLetter))
-            {
-                throw new ArgumentException("cpr number can only contain numbers");
-            }
-            if (cpr.Contains('-') && cpr.Length!=11)
-            {
-                throw new ArgumentException("Invalid cpr number Length");
-            }
-
-            if (!cpr.Contains('-') && cpr.Length!=10)
-            {
-                throw new ArgumentException("Invalid cpr number Length");
-            }
-
-            return true;
+            throw new ArgumentNullException(cpr, "cpr cant be null");
         }
 
-        public bool IsValidHost(Host host)
+        public async Task<bool> IsValidHost(Host host)
         {
-            if (IsValidEmail(host.Email) && IsValidFirstname(host.FirstName) && IsValidLastname(host.LastName) &&
+            if (await IsValidEmail(host.Email) && IsValidFirstname(host.FirstName) && IsValidLastname(host.LastName) &&
                 IsValidPassword(host.Password) && IsValidPhoneNumber(host.PhoneNumber) && IsValidCprNumber(host.Cpr))
             {
                 return true;

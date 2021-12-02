@@ -1,30 +1,22 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 //TODO missing List<GuestReview> from constructor refactor later with group
 public class Guest extends Host
 {
   private int viaId;
   private List<GuestReview> guestReviews;
+  @JsonProperty("isApprovedGuest")
   private boolean isApprovedGuest;
 
-  public Guest(int id, String firstName, String lastName, String phoneNumber,
-      String email, String password, List<HostReview> hostReviews,
-      String profileImageUrl, String cpr, boolean isApprovedHost, int viaId, boolean isApprovedGuest)
-  {
-    super(id, firstName, lastName, phoneNumber, email, password, hostReviews,
-        profileImageUrl, cpr, isApprovedHost);
-    this.viaId = viaId;
-    this.isApprovedGuest = isApprovedGuest;
-  }
-
-  //TODO temp constructor
-  public Guest(int id, String firstName, String lastName, String phoneNumber,
-      String email, String password, List<HostReview> hostReviews,
+  public Guest(int id, String email, String password, String firstName,
+      String lastName, String phoneNumber, List<HostReview> hostReviews,
       String profileImageUrl, String cpr, boolean isApprovedHost, int viaId,
       List<GuestReview> guestReviews, boolean isApprovedGuest)
   {
-    super(id, firstName, lastName, phoneNumber, email, password, hostReviews,
+    super(id, email, password, firstName, lastName, phoneNumber, hostReviews,
         profileImageUrl, cpr, isApprovedHost);
     this.viaId = viaId;
     this.guestReviews = guestReviews;
@@ -50,7 +42,6 @@ public class Guest extends Host
   {
     this.guestReviews = guestReviews;
   }
-
   public boolean isApprovedGuest()
   {
     return isApprovedGuest;

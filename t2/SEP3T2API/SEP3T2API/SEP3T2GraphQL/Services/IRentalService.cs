@@ -27,11 +27,11 @@ namespace SEP3T2GraphQL.Services
         /// <exception cref="ArgumentException">If residence is not available</exception>
         /// <exception cref="ArgumentException">If approved rent request exist for request's residence in same rent period as the request.</exception>
         Task<RentRequest> CreateRentRequest(RentRequest request);
-
-        Task<RentRequest> ApproveRentRequestAsync(RentRequest request);
-        Task<RentRequest> RejectRentRequestAsync(RentRequest request);
         Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync();
         Task<IEnumerable<RentRequest>> GetAllRentRequestByResidenceId(int residenceId);
         Task<RentRequest> GetRentRequestAsync(int id);
+        Task<RentRequest> UpdateRentRequestStatusAsync(RentRequest request);
+        Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync();
+        Task<IEnumerable<RentRequest>> GetRentRequestsByGuestId(int guestId); 
     }
 }

@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace SEP3T2GraphQL.Models
 {
-    public class Host
+    public class Host : User
     {
-        [Required]
-        public int Id { get; set; }
-        [Required]
-        public string FirstName { get; set; }
-        [Required]
-        public string LastName { get; set; }
-        [Required]
-        public string PhoneNumber { get; set; }
-        [Required]
-        public string Email { get; set; }
-        [Required]
-        public string Password { get; set; }
+        [JsonProperty("hostReviews", NullValueHandling = NullValueHandling.Ignore)]
         public IList<HostReview>? HostReviews { get; set; } = new List<HostReview>();
+        [JsonProperty("profileImageUrl")]
         public string ProfileImageUrl { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter your CPR number")]
+        [JsonProperty("cpr")]
         public string Cpr { get; set; }
-        public bool IsApprovedHost { get; set; } 
+        [JsonProperty("isApprovedHost")]
+        public bool IsApprovedHost { get; set; } = false;
     }
 }

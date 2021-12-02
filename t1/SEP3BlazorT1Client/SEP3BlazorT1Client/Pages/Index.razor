@@ -6,6 +6,7 @@
 
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
+@inject IGuestService _guestService
 
 <div class="mat-layout-grid">
     <div class="mat-layout-grid-inner">
@@ -18,22 +19,20 @@
                         <img class="my-4" width="120" height="120" src="https://cdn.pixabay.com/photo/2017/03/21/02/00/user-2160923_1280.png" alt="">
                     </div>
                     <div hidden="@loginAsHost">
-                        <MatTextField @bind-Value="@email" Label="Email" Outlined="true" ></MatTextField>
+                        <MatTextField Class="d-flex" @bind-Value="@email" Label="Email" Outlined="true"/>
                     </div>
-                     <div hidden="@(!loginAsHost)" >
-                         <MatTextField @bind-Value="@studentNumber" Label="Student number" Outlined="true"/>
-                         </div>
+                    <div hidden="@(!loginAsHost)" >
+                        <MatTextField Class="d-flex" @bind-Value="@studentNumber" Label="Student number" Outlined="true"/>
+                    </div>
                     
-                    <MatTextField @bind-Value="@password" Dense="true" Label="Password" Outlined="true"></MatTextField>
+                    <MatTextField @bind-Value="@password" Dense="true" Label="Password" Outlined="true"/>
 
                     <MatDivider class="my-2"/>
                     
                     <div class="d-flex justify-content-center">
                         <MatCheckbox @bind-Value="@loginAsHost" Label="@(getLabel(loginAsHost))"/>
                     </div>
-                   
-
-
+                    
                     <p style="color: red">@ErrorMessage</p>
                     <MatButton Raised="true" OnClick="@(PerformLogin)">Log in</MatButton>
                     <MatDivider class="my-1"/>
@@ -52,7 +51,7 @@
     private string password;
     private string ErrorMessage;
     private bool loginAsHost;
-    private string studentNumber;
+    private int studentNumber;
 
     private async Task PerformLogin()
     {
@@ -62,16 +61,18 @@
         {
             if (loginAsHost)
             {
-                await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLoginAsGuest( studentNumber, password);
+                await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin( email, password);
                 password = "";
-                studentNumber = "";
-                NavigationManager.NavigateTo("/BuildingsOverview");
+                studentNumber = 0;
+                NavigationManager.NavigateTo("/HostResidences");
             }
             else
-            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLoginAsHost(email, password);
-            email = "";
-            password = "";
-            NavigationManager.NavigateTo("/BecomeGuest");
+            {
+                await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email, password);
+                email = "";
+                password = "";
+                NavigationManager.NavigateTo("/BecomeGuest");
+            }
         }
         catch (Exception e)
         {
@@ -82,7 +83,7 @@
 
     private string getLabel(bool val)
     {
-        return !val ? "Login as host" : "Login as guest!";
+        return !val ? "Switch to guest login" : "Switch to host login";
     }
 
 

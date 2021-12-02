@@ -32,9 +32,9 @@ namespace SEP3BlazorT1Client.Models
         [JsonProperty("guest")]
 
         public Guest Guest { get; set; }
+
         [Required]
         [JsonProperty("residence")]
-
         public Residence Residence { get; set; }
 
         public decimal GetTotalPrice()
@@ -48,13 +48,12 @@ namespace SEP3BlazorT1Client.Models
         }
     }
 
-
     [JsonConverter(typeof(StringEnumConverter))]
     public enum RentRequestStatus
     {
         // Changed the values even though to match graphql enums 
-        NOT_ANSWERED,
-        NotApproved,
-        Approved
+        NOTANSWERED,
+        NOTAPPROVED,
+        APPROVED
     }
 }

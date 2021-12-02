@@ -2,8 +2,9 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
 import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RentRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +14,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @RestController
 public class GuestController {
     private static final Logger LOGGER= LoggerFactory.getLogger(GuestController.class);
     private GuestDAO guestDAO;
+    private RentRequestDAO rentRequestDAO;
 
     @Autowired
-    public GuestController(GuestDAO guestDAO) {
+    public GuestController(GuestDAO guestDAO, RentRequestDAO rentRequestDAO) {
         this.guestDAO = guestDAO;
+        this.rentRequestDAO = rentRequestDAO;
     }
 
     /**
@@ -59,7 +63,7 @@ public class GuestController {
      * If Data access fails, then HTTP Internal Server Error is returned.
      * */
     @GetMapping("/guests")
-    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam(required = false) Boolean isApproved, @RequestParam(required = false) Integer studentNumber ) {
+    public ResponseEntity<List<Guest>> getAllGuests(@RequestParam(required = false) Boolean isApproved, @RequestParam(required = false) Integer studentNumber, @RequestParam(required = false) String email) {
 
         try {
             List<Guest> allGuests = guestDAO.getAllGuests();
@@ -68,6 +72,10 @@ public class GuestController {
             }
             if(studentNumber != null){
                 allGuests.removeIf(g -> g.getViaId() != studentNumber);
+            }
+            if (email != null)
+            {
+                allGuests.removeIf(guest -> !guest.getEmail().equals(email));
             }
             LOGGER.info("getAllGuests returned: " + new Gson().toJson(allGuests));
             return ResponseEntity.ok(allGuests);
@@ -87,7 +95,7 @@ public class GuestController {
     public ResponseEntity<Guest> getGuestByHostId(@PathVariable("id") int id)
     {
         Guest guest;
-        guest = guestDAO.getGuestByHostId(id);
+        guest = guestDAO.getGuestByUserId(id);
         try {
             return ResponseEntity.ok(guest);
         } catch (Exception e) {
@@ -105,10 +113,7 @@ public class GuestController {
     public ResponseEntity<List<Guest>> getAllNotApprovedGuests()
     {
         List<Guest> guestsToReturn = guestDAO.getAllNotApprovedGuests();
-        if (guestsToReturn == null)
-        {
-            return ResponseEntity.internalServerError().build();
-        }
+
         return new ResponseEntity<>(guestsToReturn, HttpStatus.OK);
     }
 
@@ -139,6 +144,18 @@ public class GuestController {
         catch (NoSuchElementException e)
         {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    // This might be a better design of API endpoints for querying RentRequests of specific Guest?
+    @GetMapping("/guests/{id}/rentrequests")
+    public ResponseEntity<List<RentRequest>> getRentRequestByGuestId(@PathVariable int id){
+        try {
+            List<RentRequest> rentRequests = rentRequestDAO.getAll();
+            rentRequests.removeIf(request -> request.getGuest().getId() == id);
+            return ResponseEntity.ok(rentRequests);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
         }
     }
 }

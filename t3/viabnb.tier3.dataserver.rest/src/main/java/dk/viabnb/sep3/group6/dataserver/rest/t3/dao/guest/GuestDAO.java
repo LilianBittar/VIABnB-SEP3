@@ -2,6 +2,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.User;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface GuestDAO {
      * @throws IllegalStateException invalid guest
      * */
     public Guest rejectGuest(Guest guest);
-    Guest getGuestByHostId(int id);
+    Guest getGuestByUserId(int id);
     /**
      * Query a list of Guest objects that have a false isApprovedGuest boolean value
      * @return List<Guest>
@@ -36,5 +37,6 @@ public interface GuestDAO {
      * @throws IllegalStateException if it could not connect to the database
      * */
     Guest getGuestByStudentNumber(int studentNumber);
+    Guest getGuestByEmail(String email);
 
 }
