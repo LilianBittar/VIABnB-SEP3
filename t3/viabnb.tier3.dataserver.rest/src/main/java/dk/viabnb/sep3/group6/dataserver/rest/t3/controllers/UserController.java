@@ -43,7 +43,7 @@ public class UserController
     return ResponseEntity.ok(users);
   }
 
-  @GetMapping("/user/{id}")
+  @GetMapping("/users/{id}")
   public ResponseEntity<User> getUserById(@PathVariable("id") int id)
   {
     User user = null;
