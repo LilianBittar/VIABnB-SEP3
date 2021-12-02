@@ -116,16 +116,15 @@ namespace SEP3BlazorT1Client.Data.Impl
       {
         Query =
           @"mutation($residenceInput: ResidenceInput)
-{updateAvailabilityStatus
-(residence: $residenceInput)
-{id,address{id, zipCode, streetName, houseNumber, streetNumber, 
-City{id, cityName, zipCode}}
-,description,type,isAvailable,pricePerNight,rules{description}
-,facilities{id, name},imageUrl, 
-residenceReviews{rating,reviewText,
-guest{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, 
-firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},
-profileImageUrl,cpr,isApprovedHost}}}}",
+    {updateAvailabilityStatus(residence: $residenceInput)
+    {id,address{id, zipCode, streetName, houseNumber, streetNumber, 
+    City{id, cityName, zipCode}},
+    description,type,isAvailable,pricePerNight,rules{description},
+    facilities{id, name},imageUrl, 
+    residenceReviews{rating,reviewText,
+    guest{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, 
+    firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},
+    profileImageUrl,cpr,isApprovedHost}}}}",
         Variables = new {residenceInput = residence}
       };
       var mutationResponse = await client.PostQueryAsync<ResidenceUpdateAvailabilityResponsetype>(residenceMutation);
