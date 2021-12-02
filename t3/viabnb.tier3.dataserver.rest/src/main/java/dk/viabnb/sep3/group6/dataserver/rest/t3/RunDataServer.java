@@ -18,6 +18,8 @@ import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rule.RuleDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rule.RuleDAOImpl;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.user.UserDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.user.UserDAOImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -83,5 +85,9 @@ import org.springframework.context.annotation.Scope;
     return new RuleDAOImpl();
   }
 
+  @Bean @Scope("singleton") UserDAO userDAO()
+  {
+    return new UserDAOImpl();
+  }
 }
 

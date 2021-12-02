@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -46,7 +45,7 @@ class ResidenceControllerTest
   public void failureOnCreateResidenceReturnsInternalServerErrorTest()
   {
     Residence residenceTest = new Residence(1, address, "Test", "Test", true, 11, new ArrayList<>(), new ArrayList<>(),
-         "Test", LocalDate.parse("2022-11-11"), LocalDate.parse("12-12-2022"), 3, host, new ArrayList<>());
+         "Test", null, null, 3, host, new ArrayList<>());
     when(residenceDAO.createResidence(residenceTest)).thenReturn(null);
     assertEquals(ResponseEntity.internalServerError().build(), controller.createResidence(residenceTest));
   }
