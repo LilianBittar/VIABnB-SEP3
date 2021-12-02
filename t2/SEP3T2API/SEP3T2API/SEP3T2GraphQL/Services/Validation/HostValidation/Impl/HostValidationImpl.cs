@@ -11,24 +11,25 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
     public class HostValidationImpl : IHostValidation
     {
         private IHostRepository _repository = new HostRepositoryImpl();
+
         public async Task<bool> IsValidEmail(string email)
         {
-            
             Host host = await _repository.GetHostByEmail(email);
-            if (host!=null)
+            if (host != null)
             {
-                if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
-                {
-                    //some form of inbuilt mail validation
-                    var addr = new System.Net.Mail.MailAddress(email);
-
-                    if (addr.Address == email)
-                    {
-                        return true;
-                    }
-                } 
+                throw new ArgumentException("Host already exists");
             }
-           
+
+            if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
+            {
+                //some form of inbuilt mail validation
+                var addr = new System.Net.Mail.MailAddress(email);
+
+                if (addr.Address == email)
+                {
+                    return true;
+                }
+            }
 
             throw new FormatException("Invalid email");
         }
@@ -88,7 +89,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 
                 throw new ArgumentException("password must contain at least one uppercase letter");
             }
-            
+
             foreach (char c in passWord)
             {
                 if (passWord.Any(char.IsDigit))
@@ -96,7 +97,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
                     validConditions++;
                     break;
                 }
-                
+
                 throw new ArgumentException("password must contain at least one number");
             }
 
@@ -115,7 +116,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             {
                 return true;
             }
-    
+
             throw new ArgumentException("invalid phone number");
         }
 
@@ -123,7 +124,6 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
         {
             if (cpr != null)
             {
-                
                 if (cpr.Any(char.IsLetter))
                 {
                     throw new ArgumentException("cpr number can only contain numbers");
@@ -142,7 +142,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
                 return true;
             }
 
-            throw new ArgumentNullException(cpr,"cpr cant be null");
+            throw new ArgumentNullException(cpr, "cpr cant be null");
         }
 
         public async Task<bool> IsValidHost(Host host)
@@ -152,6 +152,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             {
                 return true;
             }
+
             throw new ArgumentException("Invalid host");
         }
 

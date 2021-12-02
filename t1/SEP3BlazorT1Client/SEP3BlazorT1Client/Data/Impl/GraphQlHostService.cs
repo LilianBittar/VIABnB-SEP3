@@ -22,15 +22,21 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"mutation($newHost:HostInput){
                           registerHost(host:$newHost){
-                            id,
-                            firstName,
-                            lastName,
-                            phoneNumber,
-                            email,
-                            password,
-                            profileImageUrl,
-                            cpr,
-                            isApprovedHost
+                            id
+                                    firstName
+                                    lastName
+                                    phoneNumber
+                                    email
+                                    password
+                                    hostReviews {
+                                    id
+                                    rating
+                                    text
+                                    viaId
+                                    }
+                                    profileImageUrl
+                                    cpr
+                                    isApprovedHost
                           }
                         }",
                 Variables = new {newHost = host}
@@ -77,24 +83,24 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery query = new()
             {
                 Query = @"query($hostEmail: String) {
-                                hostByEmail(email: $hostEmail) {
-                                     hostReviews{
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                    id
-                                    email
-                                    password
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                }
-                            }
+  hostByEmail(email: $hostEmail) {
+    hostReviews {
+      id
+      rating
+      text
+      viaId
+    }
+    profileImageUrl
+    cpr
+    isApprovedHost
+    id
+    email
+    password
+    firstName
+    lastName
+    phoneNumber
+  }
+}
                             ",
                 Variables = new {hostEmail = email}
             };
