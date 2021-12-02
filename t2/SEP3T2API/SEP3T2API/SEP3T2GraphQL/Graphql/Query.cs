@@ -137,17 +137,17 @@ namespace SEP3T2GraphQL.Graphql
             return await _hostService.GetHostByEmail(email);
         }
 
-        private async Task<User> GetUserByEmail(string email)
+        public async Task<User> GetUserByEmail(string email)
         {
             return await _userService.GetUserByEmailAsync(email);
         }
 
-        private async Task<User> GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
             return await _userService.GetUserByIdAsync(id);
         }
 
-        private async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
             return await _userService.GetAllUsersAsync();
         }
