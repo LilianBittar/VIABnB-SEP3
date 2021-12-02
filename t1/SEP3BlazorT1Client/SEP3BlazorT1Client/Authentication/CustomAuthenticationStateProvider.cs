@@ -17,12 +17,19 @@ namespace SEP3BlazorT1Client.Authentication
         private readonly IHostService _hostService;
         private readonly IGuestService _guestService;
         private readonly IAdministrationService _administrationService;
+
+        private User cachedUser;
         private Host cachedHost;
+        private Guest cachedGuest;
         private Administrator cachedAdmin;
+
+        private bool isAdmin = false;
+        private bool isHost = false;
+        private bool isGuest = false;
         /*
          * Use booleans here to keep track of if the user is admin, guest, host
          */
-
+        
 
         // TODO: REWRITE THIS TO A USER. CLAIMS DOESN'T WORK CORRECTLY RIGHT NOW :/
         public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IHostService hostService, IGuestService guestService, IAdministrationService administrationService)
@@ -35,40 +42,96 @@ namespace SEP3BlazorT1Client.Authentication
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             var identity = new ClaimsIdentity();
-            if (cachedHost == null)
+            if (cachedUser == null)
             {
-                string userAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
+                var userAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
                 if (!string.IsNullOrEmpty(userAsJson))
                 {
-                    var tmp = JsonSerializer.Deserialize<Host>(userAsJson);
-                    await ValidateLoginAsHost(tmp.Email, tmp.Password);
+                    cachedUser = JsonSerializer.Deserialize<User>(userAsJson);
+                    identity = SetupClaimsForUser(cachedUser);
                 }
             }
-            else if (cachedHost != null)
+            else
             {
-                
-                identity = SetupClaimsForUser(cachedHost);
-            }
-            else if (cachedAdmin == null)
-            {
-                var adminAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
-                if (!string.IsNullOrEmpty(adminAsJson))
-                {
-                    var tmp = JsonSerializer.Deserialize<Administrator>(adminAsJson);
-                    await ValidateLoginAsAdmin(tmp.Email, tmp.Password);
-                }
-            }
-            else if (cachedAdmin != null)
-            {
-                identity = SetupClaimsForAdmin(cachedAdmin);
+                identity = SetupClaimsForUser(cachedUser);
             }
 
-            ClaimsPrincipal cachedClaimsPrincipal = new ClaimsPrincipal(identity);
+            var cachedClaimsPrincipal = new ClaimsPrincipal(identity);
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
         }
 
-        public async Task ValidateLoginAsAdmin(string email, string password)
+        public async Task ValidateLogin(string email, string password)
         {
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new ArgumentException("You must enter an email address");
+            }
+
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new ArgumentException("You must enter a password");
+            }
+            try
+            {
+                var admin = await _administrationService.GetAdminByEmail(email);
+                /*var host = await _hostService.GetHostByEmail(email);
+                var guest = await _guestService.GetGuestByEmail(email);*/
+                if (admin != null)
+                {
+                    cachedAdmin = await _administrationService.ValidateAdmin(email, password);
+                    isAdmin = true;
+                    SetupClaimsForUser(cachedAdmin);
+                }
+                else //(admin == null && host == null && guest == null)
+                {
+                    throw new Exception("Email or password are incorrect");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        
+        private  ClaimsIdentity SetupClaimsForUser(User user)
+        {
+            var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
+            claims.Add(new Claim("LastName", user.FirstName));
+            claims.Add(new Claim("Email", user.Email));
+            claims.Add(new Claim("Password", user.Password));
+            claims.Add(new Claim("PhoneNumber", user.PhoneNumber));
+            claims.Add(new Claim("Id", user.Id.ToString()));
+            if (isAdmin)
+            {
+                claims.Add(new Claim("Role", "Admin"));
+            }
+
+            else if (isHost)
+            {
+                claims.Add(new Claim("Role", "Host"));
+            }
+            
+            else if (isHost && isGuest)
+            {
+                claims.Add(new Claim("Role", "Guest"));
+            }
+            var identity = new ClaimsIdentity(claims, "apiauth_type");
+            return identity;
+        }
+        
+        public void Logout()
+        {
+            cachedHost = null;
+            var user = new ClaimsPrincipal(new ClaimsIdentity());
+            jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", "");
+            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
+        }
+
+        /*public async Task ValidateLoginAsAdmin(string email, string password)
+        {
+            //When validating the user, try to fetch an guest and user and admin and then set bools. 
             if (string.IsNullOrEmpty(email))
             {
                 throw new ArgumentException("You must enter an email address");
@@ -83,6 +146,7 @@ namespace SEP3BlazorT1Client.Authentication
             try
             {
                 var admin = await _administrationService.ValidateAdmin(email, password);
+                
                 if (admin == null)
                 {
                     throw new Exception("Email or password are incorrect");
@@ -130,10 +194,10 @@ namespace SEP3BlazorT1Client.Authentication
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
-        public async Task ValidateLoginAsGuest(int studentNumber,string password)
+        public async Task ValidateLoginAsGuest(string email,string password)
         {
             if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
-            if (string.IsNullOrEmpty(studentNumber.ToString())) throw new Exception("Enter student number");
+            if (string.IsNullOrEmpty(email.ToString())) throw new Exception("Enter email");
             
             Console.WriteLine("Validating log in as a guest.");
                 
@@ -141,9 +205,9 @@ namespace SEP3BlazorT1Client.Authentication
             try
             {
                 Console.WriteLine("1");
-                Console.WriteLine(studentNumber);
+                Console.WriteLine(email);
                 Console.WriteLine(password);
-                Guest user = await _guestService.ValidateGuestAsync(studentNumber, password);
+                Guest user = await _guestService.ValidateGuestAsync(email, password);
                 Console.WriteLine("11");
                 if (user == null) throw new Exception("Password or student number are not correct");
                 Console.WriteLine("1111");
@@ -163,17 +227,27 @@ namespace SEP3BlazorT1Client.Authentication
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
-
-        public void Logout()
+        private static ClaimsIdentity SetUpClaimsForUser(User user)
         {
-            cachedHost = null;
-            var user = new ClaimsPrincipal(new ClaimsIdentity());
-            jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", "");
-            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
+            var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
+            claims.Add(new Claim("LastName", user.FirstName));
+            claims.Add(new Claim("Email", user.Email));
+            claims.Add(new Claim("Password", user.Password));
+            claims.Add(new Claim("PhoneNumber", user.PhoneNumber));
+            claims.Add(new Claim("Id", user.Id.ToString()));
+            var identity = new ClaimsIdentity(claims, "apiauth_type");
         }
 
         private ClaimsIdentity SetupClaimsForAdmin(Administrator administrator)
-        {
+        {   
+            // Use booleans to check what the claims should be 
+            //if (host!= null)  claims.Add(new Claim("Role", "Admin"));
+            // if (guest != null) claims.Add(new Claim("Role", "Guest"));
+            // if (admin != null)  claims.Add(new Claim("Role", "Admin"));
+            // if (host.isApprovedHost) claims.Add(new Claim("IsApprovedHost", "True"));
+            // etc...
+            
             var claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, administrator.FirstName));
             claims.Add(new Claim("LastName", administrator.FirstName));
@@ -221,6 +295,6 @@ namespace SEP3BlazorT1Client.Authentication
             claims.Add(new Claim("Role", "Guest"));
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
-        }
+        }*/
     }
 }
