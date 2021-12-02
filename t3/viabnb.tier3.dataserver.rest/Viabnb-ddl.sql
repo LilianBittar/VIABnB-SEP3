@@ -170,11 +170,11 @@ VALUES ('304218@via.dk', '1234', 'Kasper', 'Jensen', '33333333');
 INSERT INTO _User(email, password, fName, lName, phoneNumber)
 VALUES ('293336@via.dk', '1234', 'Lilian', 'Bittar', '44444444');
 
-INSERT INTO Admin(adminId, initials)
-VALUES (1, 'KNK');
-INSERT INTO Admin(adminId, initials)
-VALUES (2, 'MTB');
-INSERT INTO Admin(adminId, initials)
-VALUES (3, 'KSJ');
-INSERT INTO Admin(adminId, initials)
-VALUES (4, 'LBB');
+INSERT INTO Admin(initials)
+VALUES ('KNK');
+INSERT INTO Admin(initials)
+VALUES ('MTB');
+INSERT INTO Admin( initials)
+VALUES ('KSJ');
+INSERT INTO Admin( initials)
+VALUES ('LBB');

@@ -47,10 +47,6 @@ import java.util.NoSuchElementException;
   {
     Host host;
     host = hostDAO.getHostByEmail(email);
-    if (host == null)
-    {
-      return ResponseEntity.internalServerError().build();
-    }
     return new ResponseEntity<>(host, HttpStatus.OK);
   }
 

@@ -77,7 +77,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery query = new()
             {
                 Query = @"query($hostEmail: String) {
-                                hostByEmail(String: $hostEmail) {
+                                hostByEmail(email: $hostEmail) {
                                      hostReviews{
                                       id
                                       rating
