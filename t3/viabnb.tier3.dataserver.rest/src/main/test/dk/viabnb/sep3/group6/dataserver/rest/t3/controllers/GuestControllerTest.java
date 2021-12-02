@@ -57,15 +57,11 @@ class GuestControllerTest {
     @Test
     public void failureOnCreateGuestReturnsInternalServerErrorTest()
     {
-        //when(guestDAO.createGuest(guest)).thenReturn(null);
+        when(guestDAO.createGuest(guest)).thenReturn(null);
         assertEquals(ResponseEntity.internalServerError().build(), controller.createGuest(guest));
     }
 
-    @Test
-    public void createAGuestWithAnExistingViaIdReturnsAnErrorMessage()
-    {
-        assertEquals(ResponseEntity.internalServerError().build(), controller.createGuest(guest));
-    }
+     // todo test getter fra guest controller
 
 
 

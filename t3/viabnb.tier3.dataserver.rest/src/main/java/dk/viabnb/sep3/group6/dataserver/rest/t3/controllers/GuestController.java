@@ -113,10 +113,7 @@ public class GuestController {
     public ResponseEntity<List<Guest>> getAllNotApprovedGuests()
     {
         List<Guest> guestsToReturn = guestDAO.getAllNotApprovedGuests();
-        if (guestsToReturn == null)
-        {
-            return ResponseEntity.internalServerError().build();
-        }
+
         return new ResponseEntity<>(guestsToReturn, HttpStatus.OK);
     }
 
