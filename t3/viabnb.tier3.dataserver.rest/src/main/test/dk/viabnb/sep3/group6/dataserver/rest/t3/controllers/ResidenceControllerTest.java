@@ -46,7 +46,7 @@ class ResidenceControllerTest
   public void failureOnCreateResidenceReturnsInternalServerErrorTest()
   {
     Residence residenceTest = new Residence(1, address, "Test", "Test", true, 11, new ArrayList<>(), new ArrayList<>(),
-         "Test", new LocalDate("2022-11-11"), new LocalDate("12-12-2022"), 3, host, new ArrayList<>());
+         "Test", LocalDate.parse("2022-11-11"), LocalDate.parse("12-12-2022"), 3, host, new ArrayList<>());
     when(residenceDAO.createResidence(residenceTest)).thenReturn(null);
     assertEquals(ResponseEntity.internalServerError().build(), controller.createResidence(residenceTest));
   }
