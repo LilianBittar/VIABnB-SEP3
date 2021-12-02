@@ -52,6 +52,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
         {
             HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host?email={email}");
 
+            Console.WriteLine(await responseMessage.Content.ReadAsStringAsync());
             if (!responseMessage.IsSuccessStatusCode)
             {
                 throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
