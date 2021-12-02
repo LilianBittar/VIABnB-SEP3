@@ -76,9 +76,25 @@ namespace SEP3BlazorT1Client.Data.Impl
             return response.Data.Users;
         }
 
-        public Task<User> ValidateUserAsync(string email, string password)
+        public async Task<User> ValidateUserAsync(string email, string password)
         {
-            throw new System.NotImplementedException();
+            var query = new GqlQuery()
+            {
+                Query = @"query($userEmail:String,$userPassword:String){
+                              validateUser(email:$userEmail,password:$userPassword){
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                              }
+                            }",
+                Variables = new {userEmail=email, userPassword=password}
+            };
+            var response = await _client.PostQueryAsync<UserValidationResponseType>(query);
+            HandleErrorResponse(response);
+            return response.Data.User;
         }
         
         private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)

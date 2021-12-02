@@ -1,24 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Repositories.Administration;
+using SEP3T2GraphQL.Services.Administration;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
     public class UserService : IUserService
     {
         private IUserRepository _userRepository;
-        private IAdministrationRepository _administrationRepository;
-        private IHostRepository _hostRepository;
-        private IGuestRepository _guestRepository;
+        private IAdministrationService _administrationService;
+        private IHostService _hostService;
+        private IGuestService _guestService;
 
-        public UserService(IUserRepository userRepository, IAdministrationRepository administrationRepository, IHostRepository hostRepository, IGuestRepository guestRepository)
+        public UserService(IUserRepository userRepository, IAdministrationService administrationService, IHostService hostService, IGuestService guestService)
         {
             _userRepository = userRepository;
-            _administrationRepository = administrationRepository;
-            _hostRepository = hostRepository;
-            _guestRepository = guestRepository;
+            _administrationService = administrationService;
+            _hostService = hostService;
+            _guestService = guestService;
         }
 
         public Task<User> GetUserByEmailAsync(string email)
@@ -36,9 +38,27 @@ namespace SEP3T2GraphQL.Services.Impl
             return _userRepository.GetAllUsersAsync();
         }
 
-        public Task<User> ValidateUserAsync(string email, string password)
+        public async Task<User> ValidateUserAsync(string email, string password)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var user = await GetUserByEmailAsync(email);
+                if (user == null)
+                {
+                    throw new ArgumentException("User not found");
+                }
+
+                if (user.Password != password)
+                {
+                    throw new ArgumentException("Incorrect password");
+                }
+
+                return user;
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(e.Message);
+            }
         }
     }
 }

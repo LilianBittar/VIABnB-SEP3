@@ -151,5 +151,10 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _userService.GetAllUsersAsync();
         }
+
+        public async Task<User> ValidateUser(string email, string password)
+        {
+            return await _userService.ValidateUserAsync(email, password);
+        }
     }
 }
