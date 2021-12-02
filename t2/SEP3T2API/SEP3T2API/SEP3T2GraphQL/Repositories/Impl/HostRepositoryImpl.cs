@@ -35,7 +35,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
             HttpResponseMessage responseMessage = await client.PostAsync(uri + "/host", content);
             if (!responseMessage.IsSuccessStatusCode)
             {
-                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                Console.WriteLine(await responseMessage.Content.ReadAsStringAsync());
+                throw new Exception(await responseMessage.Content.ReadAsStringAsync());
             }
 
             Host h = JsonSerializer.Deserialize<Host>(await responseMessage.Content.ReadAsStringAsync(), new JsonSerializerOptions()
