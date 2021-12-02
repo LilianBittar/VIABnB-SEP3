@@ -60,7 +60,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions(
                 new JsonSerializerOptions
                 {
-                    PropertyNameCaseInsensitive = true
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 }));
             return host;
         }

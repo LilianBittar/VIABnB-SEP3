@@ -93,10 +93,6 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
 
             var graphQlResponse = await client.PostQueryAsync<ValidateGuestResponseType>(validateGuestQuery);
-            if (graphQlResponse.Data.Guest == null) throw new Exception("Incorrect email  or password");
-            Console.WriteLine(graphQlResponse.Data.ToString());
-
-            System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Guest.ToString()}");
             return graphQlResponse.Data.Guest;
         }
     }

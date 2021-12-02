@@ -41,18 +41,19 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Guest> GetGuestByEmail(string email)
         {
-            var response = await _client.GetAsync($"{Uri}/guests?={email}");
+            var response = await _client.GetAsync($"{Uri}?={email}");
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
 
             var result = await response.Content.ReadAsStringAsync();
-            var guestToReturn = JsonSerializer.Deserialize<Guest>(result, new JsonSerializerOptions
+            var guestToReturn = JsonSerializer.Deserialize<Guest[]>(result, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            return guestToReturn;
+            return guestToReturn[0];
         }
 
 
