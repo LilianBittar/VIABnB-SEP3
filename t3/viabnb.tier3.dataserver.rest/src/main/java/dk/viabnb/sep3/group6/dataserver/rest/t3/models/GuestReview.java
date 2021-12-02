@@ -5,14 +5,14 @@ public class GuestReview
   private int id;
   private double rating;
   private String text;
-  private int hostId;
+  private Host host;
 
-  public GuestReview(int id, double rating, String text, int hostId)
+  public GuestReview(int id, double rating, String text, Host host)
   {
     this.id = id;
     this.rating = rating;
     this.text = text;
-    this.hostId = hostId;
+    this.host = host;
   }
 
   public int getId()
@@ -45,13 +45,13 @@ public class GuestReview
     this.text = text;
   }
 
-  public int getHostId()
+  public Host getHost()
   {
-    return hostId;
+    return host;
   }
 
-  public void setHostId(int hostId)
+  public void setHost(Host host)
   {
-    this.hostId = hostId;
+    this.host = host;
   }
 }

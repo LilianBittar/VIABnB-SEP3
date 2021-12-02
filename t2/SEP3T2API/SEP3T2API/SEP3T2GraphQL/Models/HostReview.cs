@@ -10,6 +10,6 @@ namespace SEP3T2GraphQL.Models
         public double Rating { get; set; }
         public string Text { get; set; }
         [Required]
-        public int ViaId { get; set; }
+        public Guest Guest { get; set; }
     }
 }
