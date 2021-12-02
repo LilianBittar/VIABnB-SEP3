@@ -2,6 +2,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,17 +18,17 @@ public class Residence
   private List<Rule> rules;
   private List<Facility> facilities;
   private String imageUrl;
-  private Date availableFrom;
-  private Date availableTo;
+  private LocalDate availableFrom;
+  private LocalDate availableTo;
   private int maxNumberOfGuests;
   private Host host;
   private List<ResidenceReview> residenceReviews;
 
   public Residence(int id, Address address, String description, String type,
-      boolean isAvailable, double pricePerNight, List<Rule> rules,
-      List<Facility> facilities, String imageUrl, Date availableFrom,
-      Date availableTo, int maxNumberOfGuests, Host host,
-      List<ResidenceReview> residenceReviews)
+                   boolean isAvailable, double pricePerNight, List<Rule> rules,
+                   List<Facility> facilities, String imageUrl, LocalDate availableFrom,
+                   LocalDate availableTo, int maxNumberOfGuests, Host host,
+                   List<ResidenceReview> residenceReviews)
   {
     this.id = id;
     this.address = address;
@@ -85,6 +86,7 @@ public class Residence
     this.type = type;
   }
 
+  @JsonProperty("isAvailable")
   public boolean isAvailable()
   {
     return isAvailable;
@@ -135,22 +137,22 @@ public class Residence
     this.imageUrl = imageURL;
   }
 
-  public Date getAvailableFrom()
+  public LocalDate getAvailableFrom()
   {
     return availableFrom;
   }
 
-  public void setAvailableFrom(Date availableFrom)
+  public void setAvailableFrom(LocalDate availableFrom)
   {
     this.availableFrom = availableFrom;
   }
 
-  public Date getAvailableTo()
+  public LocalDate getAvailableTo()
   {
     return availableTo;
   }
 
-  public void setAvailableTo(Date availableTo)
+  public void setAvailableTo(LocalDate availableTo)
   {
     this.availableTo = availableTo;
   }

@@ -32,8 +32,7 @@ import java.util.NoSuchElementException;
     this.hostDAO = hostDAO;
   }
 
-  @PostMapping("/host") public ResponseEntity<Host> createHost(
-      @RequestBody Host host)
+  @PostMapping("/host") public ResponseEntity<Host> createHost(@RequestBody Host host)
   {
     Host newHost = hostDAO.RegisterHost(host);
     if (newHost == null)

@@ -88,31 +88,26 @@ public class ResidenceController {
         }
     }
 
-    @PutMapping( "/residences")
-    public ResponseEntity<Residence> UpdateAvailabilityPeriod(@RequestBody Residence residence) {
-        List<Residence> residences;
+    @PutMapping( "/residences/{id}")
+    public ResponseEntity<Residence> UpdateAvailabilityPeriod(@RequestBody Residence residence, @PathVariable int id) {
+
         try {
-             residences = residenceDAO.getAllResidences();
+            Residence existingResidence= residenceDAO.getByResidenceId(id);
+
+            if (existingResidence ==null)
+            {
+                return ResponseEntity.notFound().build();
+            }
+
+            residenceDAO.UpdateAvailabilityPeriod(residence);
+
         }
         catch (Exception e)
         {
+            LOGGER.error(e.getMessage());
             return ResponseEntity.internalServerError().build();
         }
 
-        try {
-            for (Residence existingResidence: residences)
-            {
-                if (existingResidence.getId()==residence.getId())
-                {
-                    existingResidence.setAvailableFrom(residence.getAvailableFrom());
-                    existingResidence.setAvailableTo(residence.getAvailableTo());
-                    existingResidence.setAvailable(true);
-                    return ResponseEntity.ok(existingResidence);
-                }
-            }
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
-        }
         return null;
     }
 }
