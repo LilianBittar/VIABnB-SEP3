@@ -176,13 +176,20 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO
       ResultSet result = stm.executeQuery();
       if (result.next())
       {
-        Guest guest = new Guest(result.getInt("userid"),
-            result.getString("email"), result.getString("password"),
-            result.getString("fname"), result.getString("lname"),
-            result.getString("phonenumber"), new ArrayList<>(),
-            result.getString("personalimage"), result.getString("cprnumber"),
-            result.getBoolean("isapproved"), result.getInt("viaid"),
-            new ArrayList<>(), result.getBoolean("isapprovedguest"));
+        Guest guest = new Guest(
+            result.getInt("userid"),
+            result.getString("email"),
+            result.getString("password"),
+            result.getString("fname"),
+            result.getString("lname"),
+            result.getString("phonenumber"),
+            new ArrayList<>(),
+            result.getString("personalimage"),
+            result.getString("cprnumber"),
+            result.getBoolean("isapproved"),
+            result.getInt("viaid"),
+            new ArrayList<>(),
+            result.getBoolean("isapprovedguest"));
         guest.setGuestReviews(new ArrayList<>());
         return guest;
       }
