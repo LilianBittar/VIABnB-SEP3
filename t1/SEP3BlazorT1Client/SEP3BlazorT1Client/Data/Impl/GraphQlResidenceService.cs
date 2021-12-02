@@ -243,7 +243,7 @@ public async Task<IList<Residence>> GetResidencesByHostIdAsync(int Id)
                             address {
                               id
                               streetName
-                              streetNumb
+                              streetNumber
                               city {
                                 id
                                 cityName
@@ -311,8 +311,7 @@ public async Task<IList<Residence>> GetResidencesByHostIdAsync(int Id)
                         "
             };
             var response = await _client.PostQueryAsync<AvailableResidencesQueryResponseType>(query);
-            System.Console.WriteLine(response.Errors.ToString());
-            System.Console.WriteLine($"{this} received: {response.Data.AvailableResidences.ToString()}");
+            
             return response.Data.AvailableResidences;
         }
 

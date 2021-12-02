@@ -108,7 +108,7 @@ else
     // if (user.Claims.FirstOrDefault(c => c.Type.ToString() == "Role").Value == "Guest")
     // {
     // _rentRequests = await RentalService.GetRentRequestsByGuestId(Int32.Parse(user.Claims.First(c => c.Type.ToString() == "Id").Value));
-        _rentRequests = await RentalService.GetRentRequestsByGuestIdAsync(1);
+        _rentRequests = await RentalService.GetRentRequestsByGuestIdAsync(2);
         StateHasChanged();
     // }
     // else
@@ -116,7 +116,5 @@ else
     // NavigationManager.NavigateTo("/");
     // }
     }
-
-}
 
 }
