@@ -37,7 +37,7 @@ public class AdministrationDAOImpl extends BaseDao implements AdministrationDAO
             result.getString("initials")
         );
       }
-      throw new IllegalArgumentException("Admin is null");
+      return null;
     }
     catch (SQLException throwables)
     {

@@ -75,8 +75,7 @@ public class GuestController {
             }
             if (email != null)
             {
-                allGuests.removeIf(guest -> !Objects.equals(guest.getEmail(),
-                    email));
+                allGuests.removeIf(guest -> !guest.getEmail().equals(email));
             }
             LOGGER.info("getAllGuests returned: " + new Gson().toJson(allGuests));
             return ResponseEntity.ok(allGuests);

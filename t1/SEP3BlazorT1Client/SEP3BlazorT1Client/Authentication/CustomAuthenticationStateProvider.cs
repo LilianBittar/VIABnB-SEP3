@@ -19,9 +19,9 @@ namespace SEP3BlazorT1Client.Authentication
         private readonly IAdministrationService _administrationService;
 
         private User cachedUser;
-        private Host cachedHost;
+        /*private Host cachedHost;
         private Guest cachedGuest;
-        private Administrator cachedAdmin;
+        private Administrator cachedAdmin;*/
 
         private bool isAdmin = false;
         private bool isHost = false;
@@ -44,16 +44,20 @@ namespace SEP3BlazorT1Client.Authentication
             var identity = new ClaimsIdentity();
             if (cachedUser == null)
             {
+                Console.WriteLine("We are here-------------------------------------------------------------");
                 var userAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
                 if (!string.IsNullOrEmpty(userAsJson))
                 {
                     cachedUser = JsonSerializer.Deserialize<User>(userAsJson);
                     identity = SetupClaimsForUser(cachedUser);
+                Console.WriteLine(JsonSerializer.Serialize(identity.Claims));
                 }
             }
             else
             {
+                Console.WriteLine("We are here-------------------------------------------------------------djhsakdhqkwjekqw");
                 identity = SetupClaimsForUser(cachedUser);
+                Console.WriteLine(JsonSerializer.Serialize(identity.Claims));
             }
 
             var cachedClaimsPrincipal = new ClaimsPrincipal(identity);
@@ -74,18 +78,35 @@ namespace SEP3BlazorT1Client.Authentication
             try
             {
                 var admin = await _administrationService.GetAdminByEmail(email);
-                /*var host = await _hostService.GetHostByEmail(email);
-                var guest = await _guestService.GetGuestByEmail(email);*/
+                var host = await _hostService.GetHostByEmail(email);
+                var guest = await _guestService.GetGuestByEmail(email);
                 if (admin != null)
                 {
-                    cachedAdmin = await _administrationService.ValidateAdmin(email, password);
+                    cachedUser = await _administrationService.ValidateAdmin(email, password);
+                    Console.WriteLine("IS ADMIN......................");
                     isAdmin = true;
-                    SetupClaimsForUser(cachedAdmin);
                 }
-                else //(admin == null && host == null && guest == null)
+
+                if (host != null)
+                {
+                    cachedUser = await _hostService.ValidateHostAsync(email, password);
+                    Console.WriteLine("IS HOST......................");
+                    isHost = true;
+                }
+                
+                if (guest != null)
+                {
+                    cachedUser = await _guestService.ValidateGuestAsync(email, password);
+                    Console.WriteLine("IS GUEST......................");
+                    isGuest = true;
+                }
+
+                if (cachedUser == null)
                 {
                     throw new Exception("Email or password are incorrect");
-                }
+                } 
+                
+                SetupClaimsForUser(cachedUser);
             }
             catch (Exception e)
             {
@@ -105,16 +126,19 @@ namespace SEP3BlazorT1Client.Authentication
             claims.Add(new Claim("Id", user.Id.ToString()));
             if (isAdmin)
             {
+                Console.WriteLine("Admin");
                 claims.Add(new Claim("Role", "Admin"));
             }
 
             else if (isHost)
             {
+                Console.WriteLine("Host");
                 claims.Add(new Claim("Role", "Host"));
             }
             
             else if (isHost && isGuest)
             {
+                Console.WriteLine("Guest");
                 claims.Add(new Claim("Role", "Guest"));
             }
             var identity = new ClaimsIdentity(claims, "apiauth_type");
@@ -123,7 +147,7 @@ namespace SEP3BlazorT1Client.Authentication
         
         public void Logout()
         {
-            cachedHost = null;
+            cachedUser = null;
             var user = new ClaimsPrincipal(new ClaimsIdentity());
             jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", "");
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));

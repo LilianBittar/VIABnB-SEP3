@@ -32,8 +32,7 @@ import java.util.NoSuchElementException;
     this.hostDAO = hostDAO;
   }
 
-  @PostMapping("/host") public ResponseEntity<Host> createHost(
-      @RequestBody Host host)
+  @PostMapping("/host") public ResponseEntity<Host> createHost(@RequestBody Host host)
   {
     Host newHost = hostDAO.RegisterHost(host);
     if (newHost == null)
@@ -48,10 +47,6 @@ import java.util.NoSuchElementException;
   {
     Host host;
     host = hostDAO.getHostByEmail(email);
-    if (host == null)
-    {
-      return ResponseEntity.internalServerError().build();
-    }
     return new ResponseEntity<>(host, HttpStatus.OK);
   }
 
