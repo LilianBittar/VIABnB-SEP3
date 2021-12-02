@@ -32,6 +32,7 @@ namespace SEP3T2GraphQL.Services.Impl
         public async Task<Host> RegisterHostAsync(Host host)
         {
             Host hostExists = await GetHostByEmail(host.Email);
+            
             if (hostExists!=null)
             {
                 if (await _hostValidation.IsValidHost(host))
