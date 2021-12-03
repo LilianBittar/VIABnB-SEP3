@@ -97,7 +97,7 @@ namespace SEP3BlazorT1Client.Authentication
                     isHost = true;
                 }
 
-                SetupClaimsForUser(cachedUser);
+                identity = SetupClaimsForUser(cachedUser);
                 var userAsJson = JsonSerializer.Serialize(cachedUser);
                 await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", userAsJson);
             }
@@ -112,6 +112,10 @@ namespace SEP3BlazorT1Client.Authentication
         private  ClaimsIdentity SetupClaimsForUser(User user)
         {
             var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
+            claims.Add(new Claim("lastName", user.LastName));
+            claims.Add(new Claim("email", user.Email));
+            claims.Add(new Claim("phoneNumber", user.PhoneNumber));
             if (isAdmin)
             {
                 Console.WriteLine("Admin");
