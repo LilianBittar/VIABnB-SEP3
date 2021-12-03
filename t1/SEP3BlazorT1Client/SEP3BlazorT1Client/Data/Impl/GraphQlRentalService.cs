@@ -21,8 +21,8 @@ namespace SEP3BlazorT1Client.Data.Impl
             var rentResidenceMutation = new GqlQuery()
             {
                 Query = @"mutation($newRequest: RentRequestInput) {
-  rentResidence(request: $newRequest) {
-   id
+                            rentResidence(request: $newRequest) {
+                              id
                               startDate
                               endDate
                               numberOfGuests
@@ -106,8 +106,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 }
                                 
                               }
-  }
-}
+                            requestCreationDate
+                          }
+                        }
 
                           ",
                 Variables = new {newRequest = request}
@@ -210,6 +211,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 }
                                 
                               }
+                            requestCreationDate
                         }
                        }
                         ",
@@ -230,9 +232,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"query 
                           {
-                            allRentRequests 
-                             {
-                             id
+                            id
                               startDate
                               endDate
                               numberOfGuests
@@ -316,6 +316,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 }
                                 
                               }
+                            requestCreationDate
                         }
                        }
                         ",
@@ -336,9 +337,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"query($requestId:int) 
                           {
-                            rentRequestById(int:requestId) 
-                             {
-                               id
+                            id
                               startDate
                               endDate
                               numberOfGuests
@@ -422,6 +421,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 }
                                 
                               }
+                            requestCreationDate
                         }
                        }
                         ",
@@ -444,7 +444,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                           {
                             allNotAnsweredRentRequest
                              {
-                               id
+                              id
                               startDate
                               endDate
                               numberOfGuests
@@ -528,6 +528,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 }
                                 
                               }
+                            requestCreationDate
                         }
                        }
                         ",
@@ -542,8 +543,8 @@ namespace SEP3BlazorT1Client.Data.Impl
             var query = new GqlQuery()
             {
                 Query = @"query($id: Int!) {
-  rentRequestsByGuestId(guestId:$id) {
-    id
+                            rentRequestsByGuestId(guestId:$id) {
+                              id
                               startDate
                               endDate
                               numberOfGuests
@@ -627,9 +628,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 }
                                 
                               }
-  }
-}
-",
+                            requestCreationDate
+                        }
+                      }
+                      ",
                 Variables = new {id = guestId}
             };
             var response = await _client.PostQueryAsync<RentRequestsByGuestIdQueryResponseType>(query);
