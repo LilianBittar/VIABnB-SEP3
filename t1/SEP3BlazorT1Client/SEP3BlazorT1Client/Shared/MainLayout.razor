@@ -45,6 +45,9 @@
                 <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/RentRequests" Style="margin-right: 1em;">
                     Rent Requests
                 </MatButtonLink>
+                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/RentRequestHistory" Style="margin-right: 1em;">
+                    Rent Requests history
+                </MatButtonLink>
                 <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/BecomeGuest" Style="margin-right: 1em;">
                     Become Guest
                 </MatButtonLink>
@@ -54,13 +57,6 @@
                 <MatButton class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
                     Log out
                 </MatButton>
-                <AuthorizeView Policy="MustBeAdmin">
-                    <Authorized>
-                        <MatButton class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
-                            Admin Log out
-                        </MatButton>
-                    </Authorized>
-                </AuthorizeView>
             </MatAppBarSection>
         </MatAppBarRow>
     </MatAppBar>
