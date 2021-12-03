@@ -9,53 +9,57 @@
 @inject IHostService HostService
 @inject IGuestService GuestService
 @inject AuthenticationStateProvider AuthStateProvider
-
-@if (_newGuest != null && _host != null)
-{
-    <div class="mat-layout-grid">
-        <div class="mat-layout-grid-inner">
-            <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
-                <h1>Are you<br /> a student of <br />VIA University College?</h1>
-                <h2>Need a tempoary place to stay while on e.g. internship?</h2>
-                <p>Make a request to become an approved guest and start renting cheap tempoary residences around all of
-                    Denmark, today.</p>
-                <MatButton Label="Become Guest" Raised="true" OnClick="@OpenDialog" />
-                <MatDialog @bind-IsOpen="@_dialogIsOpen">
-                    <MatDialogTitle>Request to become a Guest</MatDialogTitle>
-                    <MatDialogContent>
-                        <EditForm Model="@_newGuest">
-                            <DataAnnotationsValidator />
-                            <MatTextField @bind-Value="@_newGuest.ViaId" Label="Student Number" HelperText="e.g 293886" />
-                            <ValidationMessage For="@(() => _newGuest.ViaId)" />
-                            <p class="error-label">@_errorLabel</p>
-                        </EditForm>
-                    </MatDialogContent>
-                    <MatDialogActions>
-                        <MatButton OnClick="@CreateGuestRegistrationRequest">Send Request</MatButton>
-                        <MatButton OnClick="@(() => _dialogIsOpen = false)">Cancel</MatButton>
-                    </MatDialogActions>
-                </MatDialog>
+<AuthorizeView Policy="MustBeHost">
+    <Authorized Context="Hello">
+        @if (_newGuest != null && _host != null)
+        {
+            <div class="mat-layout-grid">
+                <div class="mat-layout-grid-inner">
+                    <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
+                        <h1>Are you<br/> a student of <br/>VIA University College?</h1>
+                        <h2>Need a tempoary place to stay while on e.g. internship?</h2>
+                        <p>
+                            Make a request to become an approved guest and start renting cheap tempoary residences around all of
+                            Denmark, today.
+                        </p>
+                        <MatButton Label="Become Guest" Raised="true" OnClick="@OpenDialog"/>
+                        <MatDialog @bind-IsOpen="@_dialogIsOpen">
+                            <MatDialogTitle>Request to become a Guest</MatDialogTitle>
+                            <MatDialogContent>
+                                <EditForm Model="@_newGuest">
+                                    <DataAnnotationsValidator/>
+                                    <MatTextField @bind-Value="@_newGuest.ViaId" Label="Student Number" HelperText="e.g 293886"/>
+                                    <ValidationMessage For="@(() => _newGuest.ViaId)"/>
+                                    <p class="error-label">@_errorLabel</p>
+                                </EditForm>
+                            </MatDialogContent>
+                            <MatDialogActions>
+                                <MatButton OnClick="@CreateGuestRegistrationRequest">Send Request</MatButton>
+                                <MatButton OnClick="@(() => _dialogIsOpen = false)">Cancel</MatButton>
+                            </MatDialogActions>
+                        </MatDialog>
+                    </div>
+                    <div class="mat-layout-grid-cell">
+                        <img src="assets/via_campus_horsens.jpg" alt="campus horsens" style="max-height: 500px; max-width:600px">
+                    </div>
+                </div>
             </div>
-            <div class="mat-layout-grid-cell">
-                <img src="assets/via_campus_horsens.jpg" alt="campus horsens" style="max-height: 500px; max-width:600px">
+        }
+        else
+        {
+            <div class="mat-layout-grid">
+                <div class="mat-layout-grid-inner">
+                    <div class="mat-layout-grid-cell mat-layout-grid-cell-align-middle">
+                        <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-}
-else
-{
-    <div class="mat-layout-grid">
-        <div class="mat-layout-grid-inner">
-            <div class="mat-layout-grid-cell mat-layout-grid-cell-align-middle">
-                <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium" />
-
-            </div>
-        </div>
-
-
-    </div>
-
-}
+        }
+    </Authorized>
+    <NotAuthorized>
+        <p>GO BACK IDIOT</p>
+    </NotAuthorized>
+</AuthorizeView>
 
 @code {
     //TODO: Fetch auth user and set as Host in new Request, wrap components in CascadingAuthenticationState
@@ -64,8 +68,6 @@ else
     private bool _dialogIsOpen = false;
     private string _errorLabel = "";
 
-    [CascadingParameter]
-    private Task<AuthenticationState> AuthStat { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -76,7 +78,7 @@ else
         {
             Console.WriteLine($"{claim.Type.ToString()} {claim.Value}");
         }
-        _host = await HostService.GetHostById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
+        _host = await HostService.GetHostByEmail((user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value));
 
         _newGuest = new Guest
         {

@@ -53,14 +53,12 @@ namespace SEP3BlazorT1Client.Authentication
                 {
                     cachedUser = JsonSerializer.Deserialize<User>(userAsJson);
                     identity = SetupClaimsForUser(cachedUser);
-                    Console.WriteLine(JsonSerializer.Serialize(identity.Claims));
                 }
             }
             else
             {
                 Console.WriteLine("We are here-------------------------------------------------------------djhsakdhqkwjekqw");
                 identity = SetupClaimsForUser(cachedUser);
-                Console.WriteLine(JsonSerializer.Serialize(identity.Claims));
             }
 
             var cachedClaimsPrincipal = new ClaimsPrincipal(identity);
@@ -121,18 +119,16 @@ namespace SEP3BlazorT1Client.Authentication
                 Console.WriteLine("Admin");
                 claims.Add(new Claim("Role", "Admin"));
             }
-
-            else if (isHost && isGuest)
-            {
-                Console.WriteLine("Guest");
-                claims.Add(new Claim("Role", "Guest"));
-            }
             else if (isHost)
             {
                 Console.WriteLine("Host");
                 claims.Add(new Claim("Role", "Host"));
             }
-            
+            else if (isGuest)
+            {
+                Console.WriteLine("Guest");
+                claims.Add(new Claim("Role", "Guest"));
+            }
             var identity = new ClaimsIdentity(claims, "apiauth_type");
             string test = string.Join(",", identity.Claims);
             Console.WriteLine(test);
