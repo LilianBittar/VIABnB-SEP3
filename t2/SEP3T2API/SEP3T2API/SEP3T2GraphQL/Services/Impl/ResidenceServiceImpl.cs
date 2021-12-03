@@ -9,12 +9,12 @@ using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
 
 namespace SEP3T2GraphQL.Services
 {
-    public class ResidenceReviewServiceImpl : IResidenceService
+    public class ResidenceServiceImpl : IResidenceService
     {
         private IResidenceRepository _residenceRepository;
         private IResidenceValidation _residenceValidation;
 
-        public ResidenceReviewServiceImpl(IResidenceRepository residenceRepository)
+        public ResidenceServiceImpl(IResidenceRepository residenceRepository)
         {
             _residenceRepository = residenceRepository;
             _residenceValidation = new ResidenceValidationImpl();

@@ -23,7 +23,7 @@ namespace UnitTests
         {
             _residenceValidation = new ResidenceValidationImpl();
             residenceRepository = new ResidenceRepositoryImpl();
-            _residenceReviewService = new ResidenceReviewServiceImpl(residenceRepository);
+            _residenceReviewService = new ResidenceServiceImpl(residenceRepository);
         }
 
         [Test]

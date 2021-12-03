@@ -25,7 +25,7 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("residence and residenceReview is required"); 
             }
-            _validator.ValidateResidenceReview(residenceReview);
+            await _validator.ValidateResidenceReview(residence, residenceReview);
             return await _residenceReviewRepository.CreateAsync(residence, residenceReview);
         }
     }

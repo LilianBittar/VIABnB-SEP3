@@ -11,7 +11,7 @@ namespace SEP3T2GraphQL.Services
     /// This separation of components are done such that the Database servers communication paradigm can change without
     /// having to rewrite the business logic in another Service implementation. 
     /// </summary>
-    public interface IResidenceReviewService
+    public interface IResidenceService
     {
         Task<Residence> GetResidenceByIdAsync(int id);
         Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence);
