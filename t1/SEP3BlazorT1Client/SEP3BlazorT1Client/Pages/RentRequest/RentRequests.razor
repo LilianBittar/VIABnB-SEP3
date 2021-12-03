@@ -55,6 +55,9 @@
                                 <p>Email: @item.Guest.Email</p>
                             </div>
                             <div class="form-group">
+                                <p>Request sent date: @item.RequestCreationDate</p>
+                            </div>
+                            <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <button class="btn btn-outline-dark" @onclick="(() => ApproveRequest(item.Id))">Approve</button>
@@ -68,7 +71,7 @@
             </MatAccordion>
         }
     </Authorized>
-        <NotAuthorized>
-            <p>Please <a href="/">Login</a>to be able to see the content of this page</p>
-        </NotAuthorized>
+    <NotAuthorized>
+        <p>Please <a href="/">Login</a>to be able to see the content of this page</p>
+    </NotAuthorized>
 </AuthorizeView>

@@ -1,19 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
+using SEP3T2GraphQL.Repositories;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
     public partial class ResidenceReviewService : IResidenceReviewService
     {
+       
+        
         public Task<IEnumerable<ResidenceReview>> GetAllAsync()
         {
             throw new System.NotImplementedException();
         }
-
-        public Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId)
+            
+        public async Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId)
         {
-            throw new System.NotImplementedException();
+            if (residenceId!=0)
+            {
+                return await _residenceReviewRepository.GetAllByResidenceIdAsync(residenceId);
+            }
+
+            throw new ArgumentException("residenceId required");
         }
     }
 }

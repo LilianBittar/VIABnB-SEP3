@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Services.Validation.HostValidation;
 
 namespace SEP3T2GraphQL.Repositories.Impl
 {
@@ -14,7 +13,6 @@ namespace SEP3T2GraphQL.Repositories.Impl
         
         private string uri = "http://localhost:8080";
         private readonly HttpClient client;
-        private IHostValidation _hostValidation;
 
         public HostRepositoryImpl()
         {
