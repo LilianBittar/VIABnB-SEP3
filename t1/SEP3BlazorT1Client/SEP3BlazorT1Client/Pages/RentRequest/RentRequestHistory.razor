@@ -3,10 +3,12 @@
     <Authorized>
         @if (allRentRequests == null)
         {
+            <MatProgressCircle Indeterminate="true" />
             <h3 class="mat-subtitle1">Loading</h3>
         }
         else if (!allRentRequests.Any())
         {
+            <MatProgressCircle Indeterminate="true" />
             <p>
                 <em>There are no rent requests in your history for now</em>
             </p>
@@ -52,6 +54,9 @@
                             </div>
                             <div class="form-group">
                                 <p>Email: @item.Guest.Email</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Request sent date: @item.RequestCreationDate</p>
                             </div>
                         </MatExpansionPanelDetails>
                     </MatExpansionPanel>

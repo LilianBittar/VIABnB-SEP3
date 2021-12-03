@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using HotChocolate;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Services;
@@ -13,7 +14,8 @@ namespace SEP3T2GraphQL.Graphql
         private readonly IRentalService _rentalService;
         private readonly IRuleService _ruleService;
         private readonly IFacilityService _facilityService;
-        public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IFacilityService facilityService, IRuleService ruleService)
+        private readonly IGuestReviewService _guestReviewService;
+        public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IFacilityService facilityService, IRuleService ruleService, IGuestReviewService guestReviewService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
@@ -21,6 +23,7 @@ namespace SEP3T2GraphQL.Graphql
             _rentalService = rentalService;
             _facilityService = facilityService;
             _ruleService = ruleService;
+            _guestReviewService = guestReviewService;
         }
         public async Task<Residence> CreateResidence(Residence residence)
         {
@@ -70,6 +73,16 @@ namespace SEP3T2GraphQL.Graphql
         public async Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
         {
             return await _residenceService.UpdateResidenceAvailabilityAsync(residence);
+        }
+
+        public async Task<GuestReview> CreateGuestReview(GuestReview guestReview)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<GuestReview> UpdaeGuestReview(GuestReview guestReview)
+        {
+            throw new NotImplementedException();
         }
     }
 }
