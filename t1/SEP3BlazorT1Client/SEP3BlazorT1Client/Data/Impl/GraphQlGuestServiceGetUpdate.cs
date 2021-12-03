@@ -58,9 +58,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Query =
                     @"mutation($newGuest:GuestInput)
 {updateGuestStatus(guest:$newGuest)
-{viaId,guestReviews{id,rating,text,hostEmail},isApprovedGuest,id, 
+{viaId,guestReviews{id,rating,text,hostEmail,createdDate},isApprovedGuest,id, 
 firstName,lastName,phoneNumber,email,password,hostReviews
-{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
+{id,rating,text,viaId,createdDate},profileImageUrl,cpr,isApprovedHost}}",
                 Variables = new {newGuest = guest}
             };
             var response = await _client.PostQueryAsync<UpdateGuestMutationResponseType>(updateStatusMutation);

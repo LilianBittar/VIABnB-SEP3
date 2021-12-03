@@ -37,7 +37,8 @@ namespace SEP3BlazorT1Client.Data.Impl
                               id,
                               viaId,
                               rating,
-                              text
+                              text,
+                            createdDate
                             },
                             profileImageUrl,
                             cpr,

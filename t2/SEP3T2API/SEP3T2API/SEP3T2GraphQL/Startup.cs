@@ -41,7 +41,7 @@ namespace SEP3T2GraphQL
                 .AddType<ListType>()
                 .AddMutationType<Mutation>().ModifyRequestOptions(opt => opt.IncludeExceptionDetails =true);
             services.AddScoped<IResidenceRepository, ResidenceRepositoryImpl>();
-            services.AddScoped<IResidenceService, ResidenceServiceImpl>();
+            services.AddScoped<IResidenceService, ResidenceReviewServiceImpl>();
             services.AddScoped<IResidenceValidation, ResidenceValidationImpl>();
             services.AddScoped<IHostRepository, HostRepositoryImpl>();
             services.AddScoped<IHostService, HostServiceImpl>();

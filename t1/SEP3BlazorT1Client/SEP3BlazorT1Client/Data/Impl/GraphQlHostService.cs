@@ -62,7 +62,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                       id
                                       rating
                                       text
-                                      viaId
+                                      viaId,
+                                    createdDate
+
                                     }
                                     profileImageUrl
                                     cpr
@@ -103,6 +105,8 @@ namespace SEP3BlazorT1Client.Data.Impl
                                     rating
                                     text
                                     viaId
+                                    createdDate
+
                                     }
                                     profileImageUrl
                                     cpr
@@ -122,7 +126,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             var hostQuery = new GqlQuery()
             {
                 Query =
-                    @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
+                    @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId,createdDate},profileImageUrl,cpr,isApprovedHost}}",
             };
             GqlRequestResponse<HostListResponseType> graphQlResponse =
                 await client.PostQueryAsync<HostListResponseType>(hostQuery);
@@ -146,7 +150,8 @@ namespace SEP3BlazorT1Client.Data.Impl
                               id,
                               viaId,
                               rating,
-                              text
+                              text,
+                                createdDate
                             },
                             profileImageUrl,
                             cpr,

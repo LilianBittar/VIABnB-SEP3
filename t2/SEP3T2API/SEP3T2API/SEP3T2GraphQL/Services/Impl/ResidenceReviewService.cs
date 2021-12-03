@@ -9,13 +9,13 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public partial class ResidenceReviewService : IResidenceReviewService
     {
-        private readonly IResidenceService _residenceService;
+        private readonly IResidenceService _residenceReviewService;
         private readonly IResidenceReviewRepository _residenceReviewRepository;
         private readonly CreateResidenceReviewValidator _validator; 
 
-        public ResidenceReviewService(IResidenceService residenceService, IResidenceReviewRepository residenceReviewRepository, CreateResidenceReviewValidator validator)
+        public ResidenceReviewService(IResidenceService residenceReviewService, IResidenceReviewRepository residenceReviewRepository, CreateResidenceReviewValidator validator)
         {
-            _residenceService = residenceService;
+            _residenceReviewService = residenceReviewService;
             _residenceReviewRepository = residenceReviewRepository;
             _validator = validator; 
         }

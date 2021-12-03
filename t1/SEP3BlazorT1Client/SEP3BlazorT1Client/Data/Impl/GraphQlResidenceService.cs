@@ -64,6 +64,7 @@ namespace SEP3BlazorT1Client.Data.Impl
         rating
         text
         viaId
+        createdDate
       }
       profileImageUrl
       cpr
@@ -73,6 +74,8 @@ namespace SEP3BlazorT1Client.Data.Impl
       rating
       reviewText
       guestViaId
+       createdDate
+
     }
   }
 }
@@ -136,6 +139,8 @@ namespace SEP3BlazorT1Client.Data.Impl
         rating
         text
         viaId
+        createdDate
+
       }
       profileImageUrl
       cpr
@@ -145,6 +150,8 @@ namespace SEP3BlazorT1Client.Data.Impl
       rating
       reviewText
       guestViaId
+        createdDate
+
     }}}",
                 Variables = new {residenceInput = residence}
             };
@@ -207,6 +214,8 @@ namespace SEP3BlazorT1Client.Data.Impl
         rating
         text
         viaId
+        createdDate
+
       }
       profileImageUrl
       cpr
@@ -216,6 +225,8 @@ namespace SEP3BlazorT1Client.Data.Impl
       rating
       reviewText
       guestViaId
+        createdDate
+
     }
                   }
                 }
@@ -273,6 +284,8 @@ namespace SEP3BlazorT1Client.Data.Impl
         rating
         text
         viaId
+        createdDate
+
       }
       profileImageUrl
       cpr
@@ -282,6 +295,8 @@ namespace SEP3BlazorT1Client.Data.Impl
       rating
       reviewText
       guestViaId
+        createdDate
+
     }
                           }
                         }
@@ -336,6 +351,8 @@ namespace SEP3BlazorT1Client.Data.Impl
         rating
         text
         viaId
+        createdDate
+
       }
       profileImageUrl
       cpr
@@ -345,6 +362,8 @@ namespace SEP3BlazorT1Client.Data.Impl
       rating
       reviewText
       guestViaId
+        createdDate
+
     }
   }
 }",

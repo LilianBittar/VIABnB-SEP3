@@ -556,6 +556,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   rating
                                   text
                                   hostEmail
+                                  createdDate
                                 }
                                 isApprovedGuest
                                 id
@@ -569,6 +570,8 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   rating
                                   text
                                   viaId
+                                  createdDate
+
                                 }
                                 profileImageUrl
                                 cpr
@@ -616,6 +619,8 @@ namespace SEP3BlazorT1Client.Data.Impl
                                     rating
                                     text
                                     viaId
+                                  createdDate
+
                                   }
                                   profileImageUrl
                                   cpr
@@ -625,6 +630,8 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   rating
                                   reviewText
                                   guestViaId
+                                  createdDate
+
                                 }
                                 
                               }

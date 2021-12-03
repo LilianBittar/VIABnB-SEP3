@@ -12,7 +12,7 @@ namespace SEP3T2GraphQL.Graphql
 {
     public class Query
     {
-        private readonly IResidenceService _residenceService;
+        private readonly IResidenceService _residenceReviewService;
         private readonly IHostService _hostService;
         private readonly IGuestService _guestService;
         private readonly IRentalService _rentalService;
@@ -20,9 +20,9 @@ namespace SEP3T2GraphQL.Graphql
         private IFacilityService _facilityService;
         private IRuleService _ruleService;
         private IUserService _userService;
-        public Query(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IAdministrationService administrationService, IFacilityService facilityService, IRuleService ruleService, IUserService userService)
+        public Query(IResidenceService residenceReviewService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IAdministrationService administrationService, IFacilityService facilityService, IRuleService ruleService, IUserService userService)
         {
-            _residenceService = residenceService;
+            _residenceReviewService = residenceReviewService;
             _hostService = hostService;
             _guestService = guestService;
             _rentalService = rentalService;
@@ -33,7 +33,7 @@ namespace SEP3T2GraphQL.Graphql
         }
         public async Task<Residence> GetResidence(int id)
         {
-            return await _residenceService.GetResidenceByIdAsync(id); 
+            return await _residenceReviewService.GetResidenceByIdAsync(id); 
         }
 
         public async Task<IEnumerable<Host>> GetAllNotApprovedHost()
@@ -114,7 +114,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<IList<Residence>> GetAvailableResidences()
         {
-            return await _residenceService.GetAvailableResidencesAsync(); 
+            return await _residenceReviewService.GetAvailableResidencesAsync(); 
         }
 
         public async Task<IEnumerable<RentRequest>> RentRequestsByGuestId(int guestId)
@@ -124,7 +124,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<IList<Residence>> GetResidencesByHostId(int id)
         {
-            return await _residenceService.GetAllRegisteredResidencesByHostIdAsync(id);
+            return await _residenceReviewService.GetAllRegisteredResidencesByHostIdAsync(id);
         }
 
         public async Task<Guest> GetGuestByEmail(string email)
