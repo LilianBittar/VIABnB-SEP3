@@ -19,11 +19,11 @@ public interface ResidenceReviewDAO {
      * Updates an existing {@code ResidenceReview} by updating the reviews fields to match the fields of {@code updatedResidenceReview}
      * and stores the new state in DB.
      *
-     * @param residenceReviewId      id of the review that is to be updated.
+     * @param residenceId      id of the residence that the review is intended for.
      * @param updatedResidenceReview ResidenceReview object with the desired state that the review should have after update.
      * @throws IllegalStateException if connection to data source fails or executing the update fails.
      */
-    ResidenceReview update(int residenceReviewId, ResidenceReview updatedResidenceReview) throws IllegalStateException;
+    ResidenceReview update(int residenceId, ResidenceReview updatedResidenceReview) throws IllegalStateException;
 
     List<ResidenceReview> getAllByResidenceId(int id);
 }

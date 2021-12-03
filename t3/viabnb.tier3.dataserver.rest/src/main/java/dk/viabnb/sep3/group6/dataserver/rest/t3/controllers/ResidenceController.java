@@ -124,4 +124,20 @@ public class ResidenceController {
         }
     }
 
+    // Might have to add /{viaid} after /residencereviews, but might be too long endpoint / bad design? (PK of a review is a composite key)
+    @PutMapping("/residences/{residenceId}/residencereviews")
+    public ResponseEntity<ResidenceReview> update(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
+        if (residenceReview != null || residenceId <= 0) {
+            return ResponseEntity.badRequest().build();
+        }
+        try {
+            ResidenceReview updatedReview = residenceReviewDAO.update(residenceId, residenceReview);
+            return ResponseEntity.ok(updatedReview);
+        } catch (IllegalStateException e) {
+            LOGGER.error(e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
+
+    }
+
 }
