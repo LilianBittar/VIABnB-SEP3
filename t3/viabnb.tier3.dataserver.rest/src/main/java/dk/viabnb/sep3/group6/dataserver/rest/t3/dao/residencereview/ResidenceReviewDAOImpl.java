@@ -36,14 +36,25 @@ public class ResidenceReviewDAOImpl extends BaseDao implements ResidenceReviewDA
         return null;
     }
 
-
+    /**
+     * <p>
+     *     Helper method for getting the {@code guestId} of a guest with a specific viaId.
+     *     Works since viaId are unique in the system, so only 1 guest with a given viaId exists.
+     * </p>
+     * @return guestId as int, if none found then -1 is returned.
+     * @throws IllegalStateException if connection to data source fails or query fails.
+     * */
     private int getGuestIdByViaId(int viaId){
         try (Connection connection = getConnection()){
             PreparedStatement stm = connection.prepareStatement("select guestid from guest where viaid = ?");
             stm.setInt(1, viaId);
             ResultSet result = stm.executeQuery();
-            result.next();
-            return result.getInt(1);
+
+            if (result.next()) {
+                return result.getInt(1);
+            }
+
+            return -1;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             throw new IllegalStateException(throwables.getMessage());
