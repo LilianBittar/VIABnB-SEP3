@@ -21,17 +21,17 @@ namespace SEP3T2GraphQL.Services.Validation
 
         public async Task ValidateResidenceReview(Residence residence, ResidenceReview residenceReview)
         {
-            await ValidateRentRequestExistAndApproved(residence, residenceReview); 
+            await ValidateRentRequestExistAndIsApproved(residence, residenceReview); 
         }
 
         /// <summary>
-        /// Validates if the guest have a rent request for the chosen residence and if the rent request has status of APPROVED. 
+        /// Validates if the guest have a rent request for the chosen residence and if the rent request has status of <c>APPROVED</c>. 
         /// </summary>
         /// <param name="residence">residence that the review is for</param>
         /// <param name="residenceReview">the review that is being validated</param>
         /// <exception cref="ArgumentException">if guest have never rented the residence before</exception>
         /// 
-        private async Task ValidateRentRequestExistAndApproved(Residence residence, ResidenceReview residenceReview)
+        private async Task ValidateRentRequestExistAndIsApproved(Residence residence, ResidenceReview residenceReview)
         {
             var rentRequests = (await _rentRequestRepository.GetRentRequestsByGuestId(residenceReview.GuestViaId))
                 .Where(r => r.Residence.Id == residence.Id).ToList();
@@ -45,5 +45,7 @@ namespace SEP3T2GraphQL.Services.Validation
                 throw new ArgumentException("Guest has never rented the residence before"); 
             }
         }
+        
+        
     }
 }
