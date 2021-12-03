@@ -1,21 +1,20 @@
-@page "/RentRequests"
+@page "/RentRequestHistory"
 <AuthorizeView Policy="MustBeHost">
     <Authorized>
-        @if (rentRequestList == null)
+        @if (allRentRequests == null)
         {
             <h3 class="mat-subtitle1">Loading</h3>
-            <MatProgressCircle Indeterminate="true"/>
         }
-        else if (!rentRequestList.Any())
+        else if (!allRentRequests.Any())
         {
             <p>
-                <em>There are no rent requests at the moment...</em>
+                <em>There are no rent requests in your history for now</em>
             </p>
         }
         else
         {
             <MatAccordion Multi="true">
-                @foreach (var item in rentRequestList)
+                @foreach (var item in allRentRequests)
                 {
                     <MatExpansionPanel>
                         <MatExpansionPanelSummary>
@@ -54,21 +53,13 @@
                             <div class="form-group">
                                 <p>Email: @item.Guest.Email</p>
                             </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <button class="btn btn-outline-dark" @onclick="(() => ApproveRequest(item.Id))">Approve</button>
-                                        <button class="btn btn-outline-dark" @onclick="(() => RejectRequest(item.Id))">Reject</button>
-                                    </div>
-                                </div>
-                            </div>
                         </MatExpansionPanelDetails>
                     </MatExpansionPanel>
                 }
             </MatAccordion>
         }
     </Authorized>
-        <NotAuthorized>
-            <p>Please <a href="/">Login</a>to be able to see the content of this page</p>
-        </NotAuthorized>
+    <NotAuthorized>
+        <p>Please <a href="/">Login</a>to be able to see the content of this page</p>
+    </NotAuthorized>
 </AuthorizeView>
