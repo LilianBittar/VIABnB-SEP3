@@ -24,7 +24,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             // BUG: SQL Cannot parse Util.Date, but can parse LocalDate form the time / JodaTime library.
 
             PreparedStatement stm = connection.prepareStatement(
-                    "insert into rentrequest(startdate, enddate, numberofguests, status, hostid, residenceid, guestid) values (?,?,?,?,?,?,?)");
+                    "insert into rentrequest(startdate, enddate, numberofguests, status, hostid, residenceid, guestid, createdate) values (?,?,?,?,?,?,?,?)");
             LOGGER.info("statement set");
             stm.setDate(1, Date.valueOf(request.getStartDate()));
             stm.setDate(2, Date.valueOf(request.getEndDate()));
@@ -33,6 +33,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             stm.setInt(5, request.getResidence().getHost().getId());
             stm.setInt(6, request.getResidence().getId());
             stm.setInt(7, request.getGuest().getId());
+            stm.setDate(8, Date.valueOf(request.getRequestCreationDate()));
             stm.executeUpdate();
             connection.commit();
             return request;
@@ -60,7 +61,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
                         result.getInt("numberofguests"),
                         RentRequestStatus.valueOf(result.getString("status")),
                         getGuestById(result.getInt("guestid")),
-                        getResidenceById(result.getInt("hostid")));
+                        getResidenceById(result.getInt("hostid")), LocalDate.parse(result.getDate("createdate").toString()));
             }
             throw new IllegalArgumentException("Rent request is null");
         } catch (SQLException throwables) {
@@ -116,7 +117,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
                         result.getInt("numberofguests"),
                         RentRequestStatus.valueOf(result.getString("status")),
                         getGuestById(result.getInt("guestid")),
-                        residence);
+                        residence, LocalDate.parse(result.getDate("createdate").toString()));
                 rentRequestListToReturn.add(request);
             }
             return rentRequestListToReturn;

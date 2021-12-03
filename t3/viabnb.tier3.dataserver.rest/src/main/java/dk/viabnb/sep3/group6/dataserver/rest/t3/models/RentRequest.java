@@ -11,8 +11,9 @@ public class RentRequest {
     private RentRequestStatus status;
     private Guest guest;
     private Residence residence;
+    private LocalDate requestCreationDate;
 
-    public RentRequest(int id, LocalDate startDate, LocalDate endDate, int numberOfGuests, RentRequestStatus status, Guest guest, Residence residence) {
+    public RentRequest(int id, LocalDate startDate, LocalDate endDate, int numberOfGuests, RentRequestStatus status, Guest guest, Residence residence, LocalDate requestCreationDate) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -20,6 +21,7 @@ public class RentRequest {
         this.status = status;
         this.guest = guest;
         this.residence = residence;
+        this.requestCreationDate = requestCreationDate;
     }
 
     public RentRequest() {
@@ -79,6 +81,16 @@ public class RentRequest {
 
     public void setResidence(Residence residence) {
         this.residence = residence;
+    }
+
+    public LocalDate getRequestCreationDate()
+    {
+        return requestCreationDate;
+    }
+
+    public void setRequestCreationDate(LocalDate requestCreationDate)
+    {
+        this.requestCreationDate = requestCreationDate;
     }
 }
 

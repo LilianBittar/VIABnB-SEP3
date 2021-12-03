@@ -94,6 +94,7 @@ CREATE TABLE IF NOT EXISTS RentRequest
     hostId         INT,
     residenceId    INT,
     guestId        Int,
+    createDate     DATE,
     PRIMARY KEY (rentRequestId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid),
     FOREIGN KEY (residenceId) REFERENCES Residence (residenceid),
@@ -174,7 +175,7 @@ INSERT INTO Admin(initials)
 VALUES ('KNK');
 INSERT INTO Admin(initials)
 VALUES ('MTB');
-INSERT INTO Admin( initials)
+INSERT INTO Admin(initials)
 VALUES ('KSJ');
-INSERT INTO Admin( initials)
+INSERT INTO Admin(initials)
 VALUES ('LBB');
