@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using SEP3T2GraphQL.Models;
+using SEP3BlazorT1Client.Models;
 
-namespace SEP3T2GraphQL.Services
+namespace SEP3BlazorT1Client.Data
 {
     public interface IUserService
     {

@@ -24,9 +24,9 @@ namespace SEP3BlazorT1Client.Pages.AdminView
 
         protected override async Task OnInitializedAsync()
         {
-            hostRequestList = await HostService.GetAllNotApprovedHostsAsync();
+            /*hostRequestList = await HostService.GetAllNotApprovedHostsAsync();
             guestRequestList = await GuestService.GetAllNotApprovedGuests();
-            StateHasChanged();
+            StateHasChanged();*/
         }
         
         private async Task ApproveHost(int hostId)

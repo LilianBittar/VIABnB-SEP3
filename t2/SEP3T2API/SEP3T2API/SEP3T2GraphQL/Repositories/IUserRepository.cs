@@ -2,13 +2,12 @@
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 
-namespace SEP3T2GraphQL.Services
+namespace SEP3T2GraphQL.Repositories
 {
-    public interface IUserService
+    public interface IUserRepository
     {
         Task<User> GetUserByEmailAsync(string email);
         Task<User> GetUserByIdAsync(int id);
         Task<IEnumerable<User>> GetAllUsersAsync();
-        Task<User> ValidateUserAsync(string email, string password);
     }
 }
