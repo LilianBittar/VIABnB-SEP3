@@ -50,33 +50,7 @@ namespace SEP3BlazorT1Client.Data.Impl
 
             return response.Data.RegisterHost;
         }
-
-        public async Task<Host> ValidateHostAsync(string email, string password)
-        {
-            GqlClient client = new GqlClient(Url);
-            var validateHostQuery = new GqlQuery()
-            {
-                Query = @"query($emailHost: String, $passwordHost: String) {
-                          validatehostLogin(email: $emailHost, password: $passwordHost)
-                           {id,
-                           firstName,
-                           lastName,
-                           phoneNumber,
-                           email,
-                           password,
-                           profileImageUrl,
-                           cpr,
-                           isApprovedHost}}",
-                Variables = new {emailHost = email, passwordHost = password}
-            };
-
-            var graphQlResponse = await client.PostQueryAsync<HostResponseType>(validateHostQuery);
-            if (graphQlResponse.Data.Host == null) throw new Exception("Incorrect password or email");
-            Console.WriteLine(graphQlResponse.Data.ToString());
-
-            System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Host.ToString()}");
-            return graphQlResponse.Data.Host;
-        }
+        
 
         public async Task<Host> GetHostByEmail(string email)
         {

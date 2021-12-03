@@ -21,647 +21,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             var rentResidenceMutation = new GqlQuery()
             {
                 Query = @"mutation($newRequest: RentRequestInput) {
-                            rentResidence(request: $newRequest) {
-                              id
-                              startDate
-                              endDate
-                              numberOfGuests
-                              status
-                              guest {
-                                viaId
-                                guestReviews {
-                                  id
-                                  rating
-                                  text
-                                  hostId
-                                }
-                                isApprovedGuest
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
-                                  id
-                                  rating
-                                  text
-                                  viaId
-                                }
-                                profileImageUrl
-                                cpr
-                                isApprovedHost
-                              }
-                              residence {
-                                averageRating
-                                id
-                                address {
-                                  id
-                                  streetName
-                                  houseNumber
-                                  streetNumber
-                                  city {
-                                    id
-                                    cityName
-                                    zipCode
-                                  }
-                                }
-                                description
-                                type
-                                isAvailable
-                                pricePerNight
-                                rules {
-                                  residenceId
-                                  description
-                                }
-                                facilities {
-                                  id
-                                  name
-                                }
-                                imageUrl
-                                availableFrom
-                                availableTo
-                                maxNumberOfGuests
-                                host{
-                                  id
-                                  firstName
-                                  lastName
-                                  phoneNumber
-                                  email
-                                  password
-                                  hostReviews{
-                                    id
-                                    rating
-                                    text
-                                    viaId
-                                  }
-                                  profileImageUrl
-                                  cpr
-                                  isApprovedHost
-                                }
-                                residenceReviews {
-                                  rating
-                                  reviewText
-                                  guest {
-                                    viaId
-                                    guestReviews {
-                                      id
-                                      rating
-                                      text
-                                      hostId
-                                    }
-                                    isApprovedGuest
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                  }
-                                }
-                                
-                              }
-                            }
-                          }
-                          ",
-                Variables = new {newRequest = request}
-            };
-            var response = await _client.PostQueryAsync<RentResidenceMutationResponseType>(rentResidenceMutation);
-            HandleErrorResponse(response);
-            return response.Data.RentResidence;
-        }
-
-
-        public async Task<RentRequest> UpdateRentRequestAsync(RentRequest request)
-        {
-            var updatedRentRequest = new GqlQuery()
-            {
-                Query = @"mutation($updatedRentRequest:RentRequestInput) 
-                          {
-                            updateRentRequestStatus(request:$updatedRentRequest) 
-                             {
-                               id
-                              startDate
-                              endDate
-                              numberOfGuests
-                              status
-                              guest {
-                                viaId
-                                guestReviews {
-                                  id
-                                  rating
-                                  text
-                                  hostId
-                                }
-                                isApprovedGuest
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
-                                  id
-                                  rating
-                                  text
-                                  viaId
-                                }
-                                profileImageUrl
-                                cpr
-                                isApprovedHost
-                              }
-                              residence {
-                                averageRating
-                                id
-                                address {
-                                  id
-                                  streetName
-                                  houseNumber
-                                  streetNumber
-                                  city {
-                                    id
-                                    cityName
-                                    zipCode
-                                  }
-                                }
-                                description
-                                type
-                                isAvailable
-                                pricePerNight
-                                rules {
-                                  residenceId
-                                  description
-                                }
-                                facilities {
-                                  id
-                                  name
-                                }
-                                imageUrl
-                                availableFrom
-                                availableTo
-                                maxNumberOfGuests
-                                host{
-                                  id
-                                  firstName
-                                  lastName
-                                  phoneNumber
-                                  email
-                                  password
-                                  hostReviews{
-                                    id
-                                    rating
-                                    text
-                                    viaId
-                                  }
-                                  profileImageUrl
-                                  cpr
-                                  isApprovedHost
-                                }
-                                residenceReviews {
-                                  rating
-                                  reviewText
-                                  guest {
-                                    viaId
-                                    guestReviews {
-                                      id
-                                      rating
-                                      text
-                                      hostId
-                                    }
-                                    isApprovedGuest
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                  }
-                                }
-                                
-                              }
-                        }
-                       }
-                        ",
-                Variables = new {updatedRentRequest = request}
-            };
-            var response = await _client.PostQueryAsync<UpdatedRentRequestResponseType>(updatedRentRequest);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
-            }
-
-            return response.Data.RentRequest;
-        }
-
-        public async Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync()
-        {
-            var allRents = new GqlQuery()
-            {
-                Query = @"query 
-                          {
-                            allRentRequests 
-                             {
-                               id
-                              startDate
-                              endDate
-                              numberOfGuests
-                              status
-                              guest {
-                                viaId
-                                guestReviews {
-                                  id
-                                  rating
-                                  text
-                                  hostId
-                                }
-                                isApprovedGuest
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
-                                  id
-                                  rating
-                                  text
-                                  viaId
-                                }
-                                profileImageUrl
-                                cpr
-                                isApprovedHost
-                              }
-                              residence {
-                                averageRating
-                                id
-                                address {
-                                  id
-                                  streetName
-                                  houseNumber
-                                  streetNumber
-                                  city {
-                                    id
-                                    cityName
-                                    zipCode
-                                  }
-                                }
-                                description
-                                type
-                                isAvailable
-                                pricePerNight
-                                rules {
-                                  residenceId
-                                  description
-                                }
-                                facilities {
-                                  id
-                                  name
-                                }
-                                imageUrl
-                                availableFrom
-                                availableTo
-                                maxNumberOfGuests
-                                host{
-                                  id
-                                  firstName
-                                  lastName
-                                  phoneNumber
-                                  email
-                                  password
-                                  hostReviews{
-                                    id
-                                    rating
-                                    text
-                                    viaId
-                                  }
-                                  profileImageUrl
-                                  cpr
-                                  isApprovedHost
-                                }
-                                residenceReviews {
-                                  rating
-                                  reviewText
-                                  guest {
-                                    viaId
-                                    guestReviews {
-                                      id
-                                      rating
-                                      text
-                                      hostId
-                                    }
-                                    isApprovedGuest
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                  }
-                                }
-                                
-                              }
-                        }
-                       }
-                        ",
-            };
-            var graphQlResponse =
-                await _client.PostQueryAsync<RentRequestListResponseType>(allRents);
-            return graphQlResponse.Data.RentRequests;
-        }
-
-        public Task<IEnumerable<RentRequest>> GetAllRentRequestByResidenceId(int residenceId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<RentRequest> GetRentRequestAsync(int id)
-        {
-            var getRentRequest = new GqlQuery()
-            {
-                Query = @"query($requestId:int) 
-                          {
-                            allRentRequests(int:requestId) 
-                             {
-                               id
-                              startDate
-                              endDate
-                              numberOfGuests
-                              status
-                              guest {
-                                viaId
-                                guestReviews {
-                                  id
-                                  rating
-                                  text
-                                  hostId
-                                }
-                                isApprovedGuest
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
-                                  id
-                                  rating
-                                  text
-                                  viaId
-                                }
-                                profileImageUrl
-                                cpr
-                                isApprovedHost
-                              }
-                              residence {
-                                averageRating
-                                id
-                                address {
-                                  id
-                                  streetName
-                                  houseNumber
-                                  streetNumber
-                                  city {
-                                    id
-                                    cityName
-                                    zipCode
-                                  }
-                                }
-                                description
-                                type
-                                isAvailable
-                                pricePerNight
-                                rules {
-                                  residenceId
-                                  description
-                                }
-                                facilities {
-                                  id
-                                  name
-                                }
-                                imageUrl
-                                availableFrom
-                                availableTo
-                                maxNumberOfGuests
-                                host{
-                                  id
-                                  firstName
-                                  lastName
-                                  phoneNumber
-                                  email
-                                  password
-                                  hostReviews{
-                                    id
-                                    rating
-                                    text
-                                    viaId
-                                  }
-                                  profileImageUrl
-                                  cpr
-                                  isApprovedHost
-                                }
-                                residenceReviews {
-                                  rating
-                                  reviewText
-                                  guest {
-                                    viaId
-                                    guestReviews {
-                                      id
-                                      rating
-                                      text
-                                      hostId
-                                    }
-                                    isApprovedGuest
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                  }
-                                }
-                                
-                              }
-                        }
-                       }
-                        ",
-                Variables = new {requestId = id}
-            };
-            var response = await _client.PostQueryAsync<RentRequestIdResponseType>(getRentRequest);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
-            }
-
-            return response.Data.RentRequest;
-        }
-
-        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync()
-        {
-            var allNotAnsweredRentRequestQuery = new GqlQuery()
-            {
-                Query = @"query
-                          {
-                            allNotAnsweredRentRequest
-                             {
-                               id
-                              startDate
-                              endDate
-                              numberOfGuests
-                              status
-                              guest {
-                                viaId
-                                guestReviews {
-                                  id
-                                  rating
-                                  text
-                                  hostId
-                                }
-                                isApprovedGuest
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
-                                  id
-                                  rating
-                                  text
-                                  viaId
-                                }
-                                profileImageUrl
-                                cpr
-                                isApprovedHost
-                              }
-                              residence {
-                                averageRating
-                                id
-                                address {
-                                  id
-                                  streetName
-                                  houseNumber
-                                  streetNumber
-                                  city {
-                                    id
-                                    cityName
-                                    zipCode
-                                  }
-                                }
-                                description
-                                type
-                                isAvailable
-                                pricePerNight
-                                rules {
-                                  residenceId
-                                  description
-                                }
-                                facilities {
-                                  id
-                                  name
-                                }
-                                imageUrl
-                                availableFrom
-                                availableTo
-                                maxNumberOfGuests
-                                host{
-                                  id
-                                  firstName
-                                  lastName
-                                  phoneNumber
-                                  email
-                                  password
-                                  hostReviews{
-                                    id
-                                    rating
-                                    text
-                                    viaId
-                                  }
-                                  profileImageUrl
-                                  cpr
-                                  isApprovedHost
-                                }
-                                residenceReviews {
-                                  rating
-                                  reviewText
-                                  guest {
-                                    viaId
-                                    guestReviews {
-                                      id
-                                      rating
-                                      text
-                                      hostId
-                                    }
-                                    isApprovedGuest
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                  }
-                                }
-                                
-                              }
-                        }
-                       }
-                        ",
-            };
-            var graphQlResponse =
-                await _client.PostQueryAsync<AllNotAnsweredRentRequestResponseType>(allNotAnsweredRentRequestQuery);
-            return graphQlResponse.Data.RentRequests;
-        }
-
-        public async Task<IEnumerable<RentRequest>> GetRentRequestsByGuestIdAsync(int guestId)
-        {
-            var query = new GqlQuery()
-            {
-                Query = @"query($id: Int!) {
-  rentRequestsByGuestId(guestId:$id) {
+  rentResidence(request: $newRequest) {
     id
     startDate
     endDate
@@ -673,7 +33,7 @@ namespace SEP3BlazorT1Client.Data.Impl
         id
         rating
         text
-        hostId
+        hostEmail
       }
       isApprovedGuest
       id
@@ -742,31 +102,523 @@ namespace SEP3BlazorT1Client.Data.Impl
       residenceReviews {
         rating
         reviewText
-        guest {
-          viaId
-          guestReviews {
-            id
-            rating
-            text
-            hostId
-          }
-          isApprovedGuest
-          id
-          firstName
-          lastName
-          phoneNumber
-          email
-          password
-          hostReviews {
-            id
-            rating
-            text
-            viaId
-          }
-          profileImageUrl
-          cpr
-          isApprovedHost
+        guestViaId
+      }
+    }
+  }
+}
+
+                          ",
+                Variables = new {newRequest = request}
+            };
+            var response = await _client.PostQueryAsync<RentResidenceMutationResponseType>(rentResidenceMutation);
+            HandleErrorResponse(response);
+            return response.Data.RentResidence;
         }
+
+
+        public async Task<RentRequest> UpdateRentRequestAsync(RentRequest request)
+        {
+            var updatedRentRequest = new GqlQuery()
+            {
+                Query = @"mutation($updatedRentRequest:RentRequestInput) 
+                          {
+                            updateRentRequestStatus(request:$updatedRentRequest) 
+                             {
+                               id
+    startDate
+    endDate
+    numberOfGuests
+    status
+    guest {
+      viaId
+      guestReviews {
+        id
+        rating
+        text
+        hostEmail
+      }
+      isApprovedGuest
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residence {
+      averageRating
+      id
+      address {
+        id
+        streetName
+        houseNumber
+        streetNumber
+        city {
+          id
+          cityName
+          zipCode
+        }
+      }
+      description
+      type
+      isAvailable
+      pricePerNight
+      rules {
+        residenceId
+        description
+      }
+      facilities {
+        id
+        name
+      }
+      imageUrl
+      availableFrom
+      availableTo
+      maxNumberOfGuests
+      host {
+        id
+        firstName
+        lastName
+        phoneNumber
+        email
+        password
+        hostReviews {
+          id
+          rating
+          text
+          viaId
+        }
+        profileImageUrl
+        cpr
+        isApprovedHost
+      }
+      residenceReviews {
+        rating
+        reviewText
+        guestViaId
+      }
+    }
+                        }
+                       }
+                        ",
+                Variables = new {updatedRentRequest = request}
+            };
+            var response = await _client.PostQueryAsync<UpdatedRentRequestResponseType>(updatedRentRequest);
+            if (response.Errors != null)
+            {
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
+            }
+
+            return response.Data.RentRequest;
+        }
+
+        public async Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync()
+        {
+            var allRents = new GqlQuery()
+            {
+                Query = @"query 
+                          {
+                            allRentRequests 
+                             {
+                              id
+    startDate
+    endDate
+    numberOfGuests
+    status
+    guest {
+      viaId
+      guestReviews {
+        id
+        rating
+        text
+        hostEmail
+      }
+      isApprovedGuest
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residence {
+      averageRating
+      id
+      address {
+        id
+        streetName
+        houseNumber
+        streetNumber
+        city {
+          id
+          cityName
+          zipCode
+        }
+      }
+      description
+      type
+      isAvailable
+      pricePerNight
+      rules {
+        residenceId
+        description
+      }
+      facilities {
+        id
+        name
+      }
+      imageUrl
+      availableFrom
+      availableTo
+      maxNumberOfGuests
+      host {
+        id
+        firstName
+        lastName
+        phoneNumber
+        email
+        password
+        hostReviews {
+          id
+          rating
+          text
+          viaId
+        }
+        profileImageUrl
+        cpr
+        isApprovedHost
+      }
+      residenceReviews {
+        rating
+        reviewText
+        guestViaId
+      }
+    }
+                        }
+                       }
+                        ",
+            };
+            var graphQlResponse =
+                await _client.PostQueryAsync<RentRequestListResponseType>(allRents);
+            return graphQlResponse.Data.RentRequests;
+        }
+
+        public Task<IEnumerable<RentRequest>> GetAllRentRequestByResidenceId(int residenceId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RentRequest> GetRentRequestAsync(int id)
+        {
+            var getRentRequest = new GqlQuery()
+            {
+                Query = @"query($requestId:int) 
+                          {
+                            rentRequestById(int:requestId) 
+                             {
+                               id
+    startDate
+    endDate
+    numberOfGuests
+    status
+    guest {
+      viaId
+      guestReviews {
+        id
+        rating
+        text
+        hostEmail
+      }
+      isApprovedGuest
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residence {
+      averageRating
+      id
+      address {
+        id
+        streetName
+        houseNumber
+        streetNumber
+        city {
+          id
+          cityName
+          zipCode
+        }
+      }
+      description
+      type
+      isAvailable
+      pricePerNight
+      rules {
+        residenceId
+        description
+      }
+      facilities {
+        id
+        name
+      }
+      imageUrl
+      availableFrom
+      availableTo
+      maxNumberOfGuests
+      host {
+        id
+        firstName
+        lastName
+        phoneNumber
+        email
+        password
+        hostReviews {
+          id
+          rating
+          text
+          viaId
+        }
+        profileImageUrl
+        cpr
+        isApprovedHost
+      }
+      residenceReviews {
+        rating
+        reviewText
+        guestViaId
+      }
+    }
+                        }
+                       }
+                        ",
+                Variables = new {requestId = id}
+            };
+            var response = await _client.PostQueryAsync<RentRequestIdResponseType>(getRentRequest);
+            if (response.Errors != null)
+            {
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
+            }
+
+            return response.Data.RentRequest;
+        }
+
+        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync()
+        {
+            var allNotAnsweredRentRequestQuery = new GqlQuery()
+            {
+                Query = @"query
+                          {
+                            allNotAnsweredRentRequest
+                             {
+                               id
+    startDate
+    endDate
+    numberOfGuests
+    status
+    guest {
+      viaId
+      guestReviews {
+        id
+        rating
+        text
+        hostEmail
+      }
+      isApprovedGuest
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residence {
+      averageRating
+      id
+      address {
+        id
+        streetName
+        houseNumber
+        streetNumber
+        city {
+          id
+          cityName
+          zipCode
+        }
+      }
+      description
+      type
+      isAvailable
+      pricePerNight
+      rules {
+        residenceId
+        description
+      }
+      facilities {
+        id
+        name
+      }
+      imageUrl
+      availableFrom
+      availableTo
+      maxNumberOfGuests
+      host {
+        id
+        firstName
+        lastName
+        phoneNumber
+        email
+        password
+        hostReviews {
+          id
+          rating
+          text
+          viaId
+        }
+        profileImageUrl
+        cpr
+        isApprovedHost
+      }
+      residenceReviews {
+        rating
+        reviewText
+        guestViaId
+      }
+    }
+                        }
+                       }
+                        ",
+            };
+            var graphQlResponse =
+                await _client.PostQueryAsync<AllNotAnsweredRentRequestResponseType>(allNotAnsweredRentRequestQuery);
+            return graphQlResponse.Data.RentRequests;
+        }
+
+        public async Task<IEnumerable<RentRequest>> GetRentRequestsByGuestIdAsync(int guestId)
+        {
+            var query = new GqlQuery()
+            {
+                Query = @"query($id: Int!) {
+  rentRequestsByGuestId(guestId:$id) {
+    id
+    startDate
+    endDate
+    numberOfGuests
+    status
+    guest {
+      viaId
+      guestReviews {
+        id
+        rating
+        text
+        hostEmail
+      }
+      isApprovedGuest
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residence {
+      averageRating
+      id
+      address {
+        id
+        streetName
+        houseNumber
+        streetNumber
+        city {
+          id
+          cityName
+          zipCode
+        }
+      }
+      description
+      type
+      isAvailable
+      pricePerNight
+      rules {
+        residenceId
+        description
+      }
+      facilities {
+        id
+        name
+      }
+      imageUrl
+      availableFrom
+      availableTo
+      maxNumberOfGuests
+      host {
+        id
+        firstName
+        lastName
+        phoneNumber
+        email
+        password
+        hostReviews {
+          id
+          rating
+          text
+          viaId
+        }
+        profileImageUrl
+        cpr
+        isApprovedHost
+      }
+      residenceReviews {
+        rating
+        reviewText
+        guestViaId
       }
     }
   }

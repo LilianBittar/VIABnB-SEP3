@@ -10,8 +10,8 @@ namespace SEP3BlazorT1Client.Models
         public double Rating { get; set; }
         [JsonProperty("reviewText")]
         public string ReviewText { get; set; }
-        [JsonProperty("guest")]
+        [JsonProperty("guestViaId")]
         [Required]
-        public Guest Guest { get; set; }
+        public int GuestViaId { get; set; }
     }
 }

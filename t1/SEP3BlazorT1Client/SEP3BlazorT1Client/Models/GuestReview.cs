@@ -14,8 +14,8 @@ namespace SEP3BlazorT1Client.Models
         [JsonProperty("text")]
         public string Text { get; set; }
         [Required]
-        [JsonProperty("host")]
-        public Host Host { get; set; }
+        [JsonProperty("hostEmail")]
+        public string HostEmail { get; set; }
         
     }
 }

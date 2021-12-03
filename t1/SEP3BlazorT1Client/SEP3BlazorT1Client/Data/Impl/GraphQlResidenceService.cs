@@ -13,18 +13,18 @@ using SEP3BlazorT1Client.Models;
 */
 namespace SEP3BlazorT1Client.Data.Impl
 {
-  public class GraphQlResidenceService : IResidenceService
-  {
-    // TODO: Refactor methods to use the same GqlClient instance.  
-    private const string Url = "https://localhost:5001/graphql";
-    private readonly GqlClient _client = new GqlClient(Url);
-
-    public async Task<Residence> GetResidenceAsync(int id)
+    public class GraphQlResidenceService : IResidenceService
     {
-      GqlClient client = new GqlClient(Url);
-      var residenceQuery = new GqlQuery()
-      {
-        Query = @"query ($residenceId:Int!){
+        // TODO: Refactor methods to use the same GqlClient instance.  
+        private const string Url = "https://localhost:5001/graphql";
+        private readonly GqlClient _client = new GqlClient(Url);
+
+        public async Task<Residence> GetResidenceAsync(int id)
+        {
+            GqlClient client = new GqlClient(Url);
+            var residenceQuery = new GqlQuery()
+            {
+                Query = @"query ($residenceId:Int!){
   residence(id:$residenceId) {
     id
     address {
@@ -72,83 +72,33 @@ namespace SEP3BlazorT1Client.Data.Impl
     residenceReviews {
       rating
       reviewText
-      guest {
-        viaId
-        guestReviews {
-          id
-          rating
-          text
-          hostId
-        }
-        isApprovedGuest
-        id
-        firstName
-        lastName
-        phoneNumber
-        email
-        password
-        hostReviews{id,rating,text,viaId}
-        profileImageUrl
-        cpr
-        isApprovedHost
-      }
+      guestViaId
     }
   }
 }
 ",
-        Variables = new {residenceId = id}
-      };
-      var graphQlResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceQuery);
-      if (graphQlResponse.Errors != null)
-      {
-        throw new ArgumentException(
-          JsonConvert.SerializeObject(graphQlResponse.Errors).Split(",")[4].Split(":")[2]);
-      }
-
-      System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Residence.ToString()}");
-      return graphQlResponse.Data.Residence;
-    }
-
-    public async Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
-    {
-      GqlClient client = new GqlClient(Url) {EnableLogging = true};
-      GqlQuery residenceMutation = new GqlQuery()
-      {
-        Query =
-          @"mutation($residenceInput: ResidenceInput)
-    {updateAvailabilityStatus(residence: $residenceInput)
-    {id,address{id, zipCode, streetName, houseNumber, streetNumber, 
-    City{id, cityName, zipCode}},
-    description,type,isAvailable,pricePerNight,rules{description},
-    facilities{id, name},imageUrl, 
-    residenceReviews{rating,reviewText,
-    guest{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, 
-    firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},
-    profileImageUrl,cpr,isApprovedHost}}}}",
-        Variables = new {residenceInput = residence}
-      };
-      var mutationResponse = await client.PostQueryAsync<ResidenceUpdateAvailabilityResponsetype>(residenceMutation);
-      if (mutationResponse.Errors != null)
-      {
-        throw new ArgumentException(JsonConvert.SerializeObject(mutationResponse.Errors).Split(",")[4]
-          .Split(":")[2]);
-      }
-
-      System.Console.WriteLine($"{this} received: {mutationResponse.Data.UpdateResidenceAvailability}");
-
-      return mutationResponse.Data.UpdateResidenceAvailability;
-    }
-  
-
-
-public async Task<IList<Residence>> GetResidencesByHostIdAsync(int Id)
-        {
-            var residenceQuery = new GqlQuery()
+                Variables = new {residenceId = id}
+            };
+            var graphQlResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceQuery);
+            if (graphQlResponse.Errors != null)
             {
-                Query = @"query ($hostId:Int!) {
-                       residencesByHostId(id: $hostId) {
-                      
-    id
+                throw new ArgumentException(
+                    JsonConvert.SerializeObject(graphQlResponse.Errors).Split(",")[4].Split(":")[2]);
+            }
+
+            System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Residence.ToString()}");
+            return graphQlResponse.Data.Residence;
+        }
+
+        public async Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
+        {
+            GqlClient client = new GqlClient(Url) {EnableLogging = true};
+            GqlQuery residenceMutation = new GqlQuery()
+            {
+                Query =
+                    @"mutation($residenceInput: ResidenceInput)
+    {updateAvailabilityStatus(residence: $residenceInput)
+    {id
     address {
       id
       streetName
@@ -163,7 +113,6 @@ public async Task<IList<Residence>> GetResidencesByHostIdAsync(int Id)
     type
     isAvailable
     pricePerNight
-    imageUrl
     rules {
       description
       residenceId
@@ -195,31 +144,78 @@ public async Task<IList<Residence>> GetResidencesByHostIdAsync(int Id)
     residenceReviews {
       rating
       reviewText
-      guest {
-        viaId
-        guestReviews {
-          id
-          rating
-          text
-          hostId
+      guestViaId
+    }}}",
+                Variables = new {residenceInput = residence}
+            };
+            var mutationResponse =
+                await client.PostQueryAsync<ResidenceUpdateAvailabilityResponsetype>(residenceMutation);
+            if (mutationResponse.Errors != null)
+            {
+                throw new ArgumentException(JsonConvert.SerializeObject(mutationResponse.Errors).Split(",")[4]
+                    .Split(":")[2]);
+            }
+
+            System.Console.WriteLine($"{this} received: {mutationResponse.Data.UpdateResidenceAvailability}");
+
+            return mutationResponse.Data.UpdateResidenceAvailability;
         }
-        isApprovedGuest
+
+
+        public async Task<IList<Residence>> GetResidencesByHostIdAsync(int Id)
+        {
+            var residenceQuery = new GqlQuery()
+            {
+                Query = @"query ($hostId:Int!) {
+                       residencesByHostId(id: $hostId) {
+                      
+  id
+    address {
+      id
+      streetName
+      streetNumber
+      city {
         id
-        firstName
-        lastName
-        phoneNumber
-        email
-        password
-        hostReviews {
-          id
-          rating
-          text
-          viaId
-        }
-        profileImageUrl
-        cpr
-        isApprovedHost
+        cityName
+        zipCode
       }
+    }
+    description
+    type
+    isAvailable
+    pricePerNight
+    rules {
+      description
+      residenceId
+    }
+    facilities {
+      id
+      name
+    }
+    availableFrom
+    availableTo
+    maxNumberOfGuests
+    host {
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residenceReviews {
+      rating
+      reviewText
+      guestViaId
     }
                   }
                 }
@@ -239,79 +235,60 @@ public async Task<IList<Residence>> GetResidencesByHostIdAsync(int Id)
             {
                 Query = @"query {
                           availableResidences {
-                            id
-                            address {
-                              id
-                              streetName
-                              streetNumber
-                              city {
-                                id
-                                cityName
-                                zipCode
-                              }
-                            }
-                            description
-                            type
-                            isAvailable
-                            pricePerNight
-                            rules {
-                              description
-                              residenceId
-                            }
-                            facilities {
-                              id
-                              name
-                            }
-                            availableFrom
-                            availableTo
-                            maxNumberOfGuests
-                            host {
-                              id
-                              firstName
-                              lastName
-                              phoneNumber
-                              email
-                              password
-                              hostReviews {
-                                id
-                                rating
-                                text
-                                viaId
-                              }
-                              profileImageUrl
-                              cpr
-                              isApprovedHost
-                            }
-                            residenceReviews {
-                              rating
-                              reviewText
-                              guest {
-                                viaId
-                                guestReviews {
-                                  id
-                                  rating
-                                  text
-                                  hostId
-                                }
-                                isApprovedGuest
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews{id,rating,text,viaId}
-                                profileImageUrl
-                                cpr
-                                isApprovedHost
-                              }
-                            }
+                           id
+    address {
+      id
+      streetName
+      streetNumber
+      city {
+        id
+        cityName
+        zipCode
+      }
+    }
+    description
+    type
+    isAvailable
+    pricePerNight
+    rules {
+      description
+      residenceId
+    }
+    facilities {
+      id
+      name
+    }
+    availableFrom
+    availableTo
+    maxNumberOfGuests
+    host {
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residenceReviews {
+      rating
+      reviewText
+      guestViaId
+    }
                           }
                         }
                         "
             };
             var response = await _client.PostQueryAsync<AvailableResidencesQueryResponseType>(query);
-            
+
             return response.Data.AvailableResidences;
         }
 
@@ -321,7 +298,56 @@ public async Task<IList<Residence>> GetResidencesByHostIdAsync(int Id)
             GqlQuery residenceMutation = new GqlQuery()
             {
                 Query =
-                    @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){id,address{id, zipCode, streetName, houseNumber, streetNumber, City{id, cityName, zipCode}},description,type,isAvailable,pricePerNight,rules{description},facilities{id, name},imageUrl, residenceReviews{rating,reviewText,guest{viaId,guestReviews{id,rating,text,hostId},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}}}",
+                    @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){id
+    address {
+      id
+      streetName
+      streetNumber
+      city {
+        id
+        cityName
+        zipCode
+      }
+    }
+    description
+    type
+    isAvailable
+    pricePerNight
+    rules {
+      description
+      residenceId
+    }
+    facilities {
+      id
+      name
+    }
+    availableFrom
+    availableTo
+    maxNumberOfGuests
+    host {
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
+      password
+      hostReviews {
+        id
+        rating
+        text
+        viaId
+      }
+      profileImageUrl
+      cpr
+      isApprovedHost
+    }
+    residenceReviews {
+      rating
+      reviewText
+      guestViaId
+    }
+  }
+}",
                 Variables = new {residenceInput = residence}
             };
             var mutationResponse = await client.PostQueryAsync<CreateResidenceMutationResponseType>(residenceMutation);

@@ -4,14 +4,14 @@ public class ResidenceReview
 {
   private double rating;
   private String reviewText;
-  private Guest guest;
+  private int guestViaId;
 
   public ResidenceReview(double rating, String reviewText,
-      Guest guest)
+                         int guestViaId)
   {
     this.rating = rating;
     this.reviewText = reviewText;
-    this.guest = guest;
+    this.guestViaId = guestViaId;
   }
 
   public double getRating()
@@ -34,13 +34,13 @@ public class ResidenceReview
     this.reviewText = reviewText;
   }
 
-  public Guest getGuest()
+  public int getGuestViaId()
   {
-    return guest;
+    return guestViaId;
   }
 
-  public void setGuest(Guest guest)
+  public void setGuestViaId(int guestViaId)
   {
-    this.guest = guest;
+    this.guestViaId = guestViaId;
   }
 }

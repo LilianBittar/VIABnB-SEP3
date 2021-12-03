@@ -4,6 +4,6 @@
     {
         public double Rating { get; set; }
         public string ReviewText { get; set; }
-        public Guest Guest { get; set; }
+        public int GuestViaId { get; set; }
     }
 }

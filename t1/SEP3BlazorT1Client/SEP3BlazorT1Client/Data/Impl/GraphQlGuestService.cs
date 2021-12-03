@@ -11,7 +11,7 @@ namespace SEP3BlazorT1Client.Data.Impl
     public partial class GraphQlGuestService : IGuestService
     {
         private const string Url = "https://localhost:5001/graphql";
-        private readonly GqlClient _client = new GqlClient(Url){EnableLogging = true};
+        private readonly GqlClient _client = new GqlClient(Url) {EnableLogging = true};
 
         public async Task<Guest> CreateGuestAsync(Guest guest)
         {
@@ -24,7 +24,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                               id,
                               rating,
                               text,
-                              hostId
+                              hostEmail
                             },
                             isApprovedGuest,
                             id,
@@ -50,50 +50,10 @@ namespace SEP3BlazorT1Client.Data.Impl
             var response = await _client.PostQueryAsync<CreateGuestMutationResponseType>(createGuestMutation);
             if (response.Errors != null)
             {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4].Split(":")[2]); 
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4].Split(":")[2]);
             }
 
-            return response.Data.CreateGuest; 
-        }
-
-        public async Task<Guest> ValidateGuestAsync(string email,string password)
-        {
-            GqlClient client = new GqlClient(Url);
-            var validateGuestQuery = new GqlQuery()
-            {
-                Query = @"query($emailGuest: String, $passwordGuest: String) {
-                  validateGuestLogin(email: $emailGuest, password: $passwordGuest) {
-                                viaId
-                                guestReviews{
-                                  id
-                                  rating
-                                  text
-                                  hostId
-                                }
-                                isApprovedGuest
-                                hostReviews{
-                                  id
-                                  rating
-                                  text
-                                  viaId
-                                }
-                                profileImageUrl
-                                cpr
-                                isApprovedHost
-                                id
-                                email
-                                password
-                                firstName
-                                lastName
-                                phoneNumber
-                          }
-                        }
-                        ",
-                Variables = new { emailGuest = email, passwordGuest = email}
-            };
-
-            var graphQlResponse = await client.PostQueryAsync<ValidateGuestResponseType>(validateGuestQuery);
-            return graphQlResponse.Data.Guest;
+            return response.Data.CreateGuest;
         }
     }
 }
