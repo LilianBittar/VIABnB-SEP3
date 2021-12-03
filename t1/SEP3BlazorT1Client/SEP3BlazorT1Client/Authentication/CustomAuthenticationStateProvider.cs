@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -81,25 +82,24 @@ namespace SEP3BlazorT1Client.Authentication
             var identity = new ClaimsIdentity();
             try
             {
-                var user = await _userService.ValidateUserAsync(email, password);
-                if (_administrationService.GetAdminByEmail(email) != null)
+                cachedUser = await _userService.ValidateUserAsync(email, password);
+                if (await _administrationService.GetAdminByEmail(email) != null)
                 {
                     isAdmin = true;
                 }
 
-                if (_hostService.GetHostByEmail(email) != null)
+                else if (await _guestService.GetGuestByEmail(email) != null)
+                {
+                    isGuest = true;
+                }
+                else if (await _hostService.GetHostByEmail(email) != null)
                 {
                     isHost = true;
                 }
 
-                if (_hostService.GetHostByEmail(email) != null && _guestService.GetGuestByEmail(email) != null)
-                {
-                    isGuest = true;
-                }
                 SetupClaimsForUser(cachedUser);
-                var userAsJson = JsonSerializer.Serialize(user);
+                var userAsJson = JsonSerializer.Serialize(cachedUser);
                 await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", userAsJson);
-                cachedUser = user;
             }
             catch (Exception e)
             {
@@ -118,18 +118,20 @@ namespace SEP3BlazorT1Client.Authentication
                 claims.Add(new Claim("Role", "Admin"));
             }
 
+            else if (isHost && isGuest)
+            {
+                Console.WriteLine("Guest");
+                claims.Add(new Claim("Role", "Guest"));
+            }
             else if (isHost)
             {
                 Console.WriteLine("Host");
                 claims.Add(new Claim("Role", "Host"));
             }
             
-            else if (isHost && isGuest)
-            {
-                Console.WriteLine("Guest");
-                claims.Add(new Claim("Role", "Guest"));
-            }
             var identity = new ClaimsIdentity(claims, "apiauth_type");
+            string test = string.Join(",", identity.Claims);
+            Console.WriteLine(test);
             return identity;
         }
         
