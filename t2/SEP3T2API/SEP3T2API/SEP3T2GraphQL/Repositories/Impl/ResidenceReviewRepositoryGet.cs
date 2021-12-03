@@ -11,7 +11,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync()
+        public Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId)
         {
             throw new System.NotImplementedException();
         }
