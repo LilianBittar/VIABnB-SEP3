@@ -20,7 +20,8 @@ namespace SEP3T2GraphQL.Graphql
         private IFacilityService _facilityService;
         private IRuleService _ruleService;
         private IUserService _userService;
-        public Query(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IAdministrationService administrationService, IFacilityService facilityService, IRuleService ruleService, IUserService userService)
+        private IGuestReviewService _guestReviewService;
+        public Query(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IAdministrationService administrationService, IFacilityService facilityService, IRuleService ruleService, IUserService userService, IGuestReviewService guestReviewService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
@@ -30,6 +31,7 @@ namespace SEP3T2GraphQL.Graphql
             _facilityService = facilityService;
             _ruleService = ruleService;
             _userService = userService;
+            _guestReviewService = guestReviewService;
         }
         public async Task<Residence> GetResidence(int id)
         {
@@ -155,6 +157,11 @@ namespace SEP3T2GraphQL.Graphql
         public async Task<User> ValidateUser(string email, string password)
         {
             return await _userService.ValidateUserAsync(email, password);
+        }
+
+        public async Task<IEnumerable<Guest>> GetAllGuestReviewsByGuestId(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
