@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using HotChocolate;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Services;
@@ -7,24 +8,26 @@ namespace SEP3T2GraphQL.Graphql
 {
     public class Mutation
     {
-        private readonly IResidenceService _residenceReviewService;
+        private readonly IResidenceService _residenceService;
         private readonly IHostService _hostService;
         private readonly IGuestService _guestService;
         private readonly IRentalService _rentalService;
         private readonly IRuleService _ruleService;
         private readonly IFacilityService _facilityService;
-        public Mutation(IResidenceService residenceReviewService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IFacilityService facilityService, IRuleService ruleService)
+        private readonly IGuestReviewService _guestReviewService;
+        public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IFacilityService facilityService, IRuleService ruleService, IGuestReviewService guestReviewService)
         {
-            _residenceReviewService = residenceReviewService;
+            _residenceService = residenceService;
             _hostService = hostService;
             _guestService = guestService;
             _rentalService = rentalService;
             _facilityService = facilityService;
             _ruleService = ruleService;
+            _guestReviewService = guestReviewService;
         }
         public async Task<Residence> CreateResidence(Residence residence)
         {
-            return await _residenceReviewService.CreateResidenceAsync(residence); 
+            return await _residenceService.CreateResidenceAsync(residence); 
         }
 
         public async Task<Host> UpdateHostStatus(Host host)
@@ -69,7 +72,17 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
         {
-            return await _residenceReviewService.UpdateResidenceAvailabilityAsync(residence);
+            return await _residenceService.UpdateResidenceAvailabilityAsync(residence);
+        }
+
+        public async Task<GuestReview> CreateGuestReview(GuestReview guestReview)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<GuestReview> UpdaeGuestReview(GuestReview guestReview)
+        {
+            throw new NotImplementedException();
         }
     }
 }
