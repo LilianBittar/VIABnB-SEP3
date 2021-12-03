@@ -7,7 +7,7 @@ namespace SEP3T2GraphQL.Services
     public interface IResidenceReviewService
     {
         public Task<ResidenceReview> CreateAsync(Residence residence, ResidenceReview residenceReview);
-        public Task<IEnumerable<ResidenceReview>> GetAll(); 
-        public Task<IEnumerable<ResidenceReview>> GetAllByResidenceId(int residenceId); 
+        public Task<IEnumerable<ResidenceReview>> GetAllAsync(); 
+        public Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId); 
     }
 }

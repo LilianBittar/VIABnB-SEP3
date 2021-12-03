@@ -6,7 +6,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
     public partial class ResidenceReviewRepository : IResidenceReviewRepository
     {
         
-        public Task<ResidenceReview> CreateResidenceReview(Residence residence, ResidenceReview residenceReview)
+        public Task<ResidenceReview> CreateAsync(Residence residence, ResidenceReview residenceReview)
         {
             throw new System.NotImplementedException();
         }

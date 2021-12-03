@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
@@ -18,10 +19,14 @@ namespace SEP3T2GraphQL.Services.Impl
             _residenceReviewRepository = residenceReviewRepository;
             _validator = validator; 
         }
-        public Task<ResidenceReview> CreateAsync(Residence residence, ResidenceReview residenceReview)
+        public async Task<ResidenceReview> CreateAsync(Residence residence, ResidenceReview residenceReview)
         {
+            if (residence == null || residenceReview == null)
+            {
+                throw new ArgumentException("residence and residenceReview is required"); 
+            }
             _validator.ValidateResidenceReview(residenceReview);
-            
+            return await _residenceReviewRepository.CreateAsync(residence, residenceReview);
         }
     }
 }

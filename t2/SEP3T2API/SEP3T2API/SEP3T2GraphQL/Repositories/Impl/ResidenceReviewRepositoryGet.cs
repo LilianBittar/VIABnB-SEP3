@@ -6,12 +6,12 @@ namespace SEP3T2GraphQL.Repositories.Impl
 {
     public partial class ResidenceReviewRepository : IResidenceReviewRepository
     {
-        public Task<IEnumerable<ResidenceReview>> GetAll()
+        public Task<IEnumerable<ResidenceReview>> GetAllAsync()
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<ResidenceReview>> GetAllByResidenceId()
+        public Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync()
         {
             throw new System.NotImplementedException();
         }
