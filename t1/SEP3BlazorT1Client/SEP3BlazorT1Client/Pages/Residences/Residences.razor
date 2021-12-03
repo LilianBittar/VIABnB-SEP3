@@ -152,22 +152,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-    //TODO: Check if user is authenticated guest.
-    // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-    // var user = authState.User;
-    //     if (!user.Identity.IsAuthenticated)
-    //     {
-    //         NavigationManager.NavigateTo("/login");
-    //     }
-    //     if (user.Claims.Any(c => c.Type.ToString() == "ENTER_CLAIM_FOR_GUEST"))
-    //     {
         _availableResidences = await ResidenceService.GetAllAvailableResidencesAsync();
         _residencesToShow = _availableResidences;
-    // }
-    // else
-    // {
-    //     NavigationManager.NavigateTo("/");
-    // }
     }
 
 
