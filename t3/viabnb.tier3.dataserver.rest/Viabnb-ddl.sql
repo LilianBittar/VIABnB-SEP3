@@ -115,6 +115,7 @@ CREATE TABLE IF NOT EXISTS GuestReview
     guestReviewText VARCHAR,
     hostId          INT,
     guestId         INT,
+    createdDate DATE,
     PRIMARY KEY (hostId, guestId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid),
     FOREIGN KEY (guestId) REFERENCES Guest (guestId)
@@ -126,6 +127,7 @@ CREATE TABLE IF NOT EXISTS HostReview
     hostReviewText VARCHAR,
     hostId         INT,
     guestId        INT,
+    createdDate DATE,
     PRIMARY KEY (hostId, guestId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid),
     FOREIGN KEY (guestId) REFERENCES Guest (guestId)
@@ -137,6 +139,7 @@ CREATE TABLE IF NOT EXISTS ResidenceReview
     residenceReviewText VARCHAR,
     residenceId         INT,
     guestId             INT,
+    createdDate DATE,
     PRIMARY KEY (residenceId, guestId),
     FOREIGN KEY (residenceId) REFERENCES Residence (residenceId),
     FOREIGN KEY (guestId) REFERENCES Guest (guestId)
@@ -179,3 +182,5 @@ INSERT INTO Admin(initials)
 VALUES ('KSJ');
 INSERT INTO Admin(initials)
 VALUES ('LBB');
+
+
