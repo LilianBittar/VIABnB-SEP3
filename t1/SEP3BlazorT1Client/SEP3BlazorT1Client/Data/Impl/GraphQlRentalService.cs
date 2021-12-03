@@ -232,7 +232,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"query 
                           {
-                            id
+                           allRentRequests{ id
                               startDate
                               endDate
                               numberOfGuests
