@@ -3,7 +3,9 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residencereview.ResidenceReviewDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Residence;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.ResidenceReview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +23,16 @@ import java.util.NoSuchElementException;
 @RestController
 public class ResidenceController {
     private ResidenceDAO residenceDAO;
+    private ResidenceReviewDAO residenceReviewDAO;
     private Gson gson = new GsonBuilder().serializeNulls().create();
     private static final Logger LOGGER = LoggerFactory.getLogger(ResidenceController.class);
 
 
     @Autowired
-    public ResidenceController(ResidenceDAO residenceDAO) {
+    public ResidenceController(ResidenceDAO residenceDAO, ResidenceReviewDAO residenceReviewDAO) {
         this.residenceDAO = residenceDAO;
+        this.residenceReviewDAO = residenceReviewDAO;
     }
-
 
 
     //TODO: Move this to host controller maybe (/hosts/residences)? Or maybe the getAll method with a query param.
@@ -46,7 +49,7 @@ public class ResidenceController {
 
 
     @GetMapping("/residences/{id}")
-    public ResponseEntity<Residence> getById(@PathVariable int id){
+    public ResponseEntity<Residence> getById(@PathVariable int id) {
         try {
             Residence residence = residenceDAO.getByResidenceId(id);
             return ResponseEntity.ok(residence);
@@ -56,16 +59,14 @@ public class ResidenceController {
 
     }
 
-  @PostMapping("/residences")
-  public ResponseEntity<Residence> createResidence(@RequestBody Residence residence)
-  {
-    Residence newResidence = residenceDAO.createResidence(residence);
-    if (newResidence == null)
-    {
-      return ResponseEntity.badRequest().build();
+    @PostMapping("/residences")
+    public ResponseEntity<Residence> createResidence(@RequestBody Residence residence) {
+        Residence newResidence = residenceDAO.createResidence(residence);
+        if (newResidence == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return new ResponseEntity<>(newResidence, HttpStatus.OK);
     }
-    return new ResponseEntity<>(newResidence, HttpStatus.OK);
-  }
 
     /**
      * Handles requests for getting all residences in the system
@@ -88,26 +89,35 @@ public class ResidenceController {
         }
     }
 
-    @PutMapping( "/residences/{id}")
+    @PutMapping("/residences/{id}")
     public ResponseEntity<Residence> UpdateAvailabilityPeriod(@RequestBody Residence residence, @PathVariable int id) {
 
         try {
-            Residence existingResidence= residenceDAO.getByResidenceId(id);
+            Residence existingResidence = residenceDAO.getByResidenceId(id);
 
-            if (existingResidence ==null)
-            {
+            if (existingResidence == null) {
                 return ResponseEntity.notFound().build();
             }
 
             residenceDAO.UpdateAvailabilityPeriod(residence);
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             LOGGER.error(e.getMessage());
             return ResponseEntity.internalServerError().build();
         }
 
         return null;
+    }
+
+    @PostMapping("/residences/{id}/residencereviews")
+    public ResponseEntity<ResidenceReview> create(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
+        try {
+            Residence residence = residenceDAO.getByResidenceId(residenceId);
+            ResidenceReview createdReview = residenceReviewDAO.create(residence, residenceReview);
+            return ResponseEntity.ok(createdReview);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }
