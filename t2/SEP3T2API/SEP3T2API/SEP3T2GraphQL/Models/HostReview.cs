@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SEP3T2GraphQL.Models
 {
@@ -11,5 +12,6 @@ namespace SEP3T2GraphQL.Models
         public string Text { get; set; }
         [Required]
         public int ViaId { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }
