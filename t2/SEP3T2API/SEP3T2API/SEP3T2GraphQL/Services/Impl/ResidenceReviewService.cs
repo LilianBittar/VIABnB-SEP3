@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
@@ -11,22 +12,35 @@ namespace SEP3T2GraphQL.Services.Impl
     {
         private readonly IResidenceService _residenceReviewService;
         private readonly IResidenceReviewRepository _residenceReviewRepository;
-        private readonly CreateResidenceReviewValidator _validator; 
+        private readonly CreateResidenceReviewValidator _validator;
 
-        public ResidenceReviewService(IResidenceService residenceReviewService, IResidenceReviewRepository residenceReviewRepository, CreateResidenceReviewValidator validator)
+        public ResidenceReviewService(IResidenceService residenceReviewService,
+            IResidenceReviewRepository residenceReviewRepository, CreateResidenceReviewValidator validator)
         {
             _residenceReviewService = residenceReviewService;
             _residenceReviewRepository = residenceReviewRepository;
-            _validator = validator; 
+            _validator = validator;
         }
+
         public async Task<ResidenceReview> CreateAsync(Residence residence, ResidenceReview residenceReview)
         {
             if (residence == null || residenceReview == null)
             {
-                throw new ArgumentException("residence and residenceReview is required"); 
+                throw new ArgumentException("residence and residenceReview is required");
             }
+
             await _validator.ValidateResidenceReview(residence, residenceReview);
-            return await _residenceReviewRepository.CreateAsync(residence, residenceReview);
+            var residenceReviews = await _residenceReviewRepository.GetAllByResidenceIdAsync(residence.Id);
+            // Updates review if guest already have an ResidenceReview for the residence. 
+            if (residenceReviews.Where(r => r.GuestViaId == residenceReview.GuestViaId).ToList().Any())
+            {
+                var updatedReview = await _residenceReviewRepository.UpdateAsync(residence.Id, residenceReview);
+                return updatedReview;
+            }
+            else
+            {
+                return await _residenceReviewRepository.CreateAsync(residence, residenceReview);
+            }
         }
     }
 }

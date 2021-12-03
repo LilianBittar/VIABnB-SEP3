@@ -11,7 +11,6 @@ namespace SEP3T2GraphQL.Services.Validation
     {
         private readonly IResidenceReviewRepository _residenceReviewRepository;
         private readonly IRentRequestRepository _rentRequestRepository;
-
         public CreateResidenceReviewValidator(IResidenceReviewRepository residenceReviewRepository,
             IRentRequestRepository rentRequestRepository)
         {
@@ -19,9 +18,22 @@ namespace SEP3T2GraphQL.Services.Validation
             _rentRequestRepository = rentRequestRepository;
         }
 
+        /// <summary>
+        /// Checks if an <c>ResidenceReview</c> is valod
+        /// </summary>
+        /// <remarks>
+        /// This method will not return any booleans. Instead void will be returned if review is valid.
+        /// If review is not valid, then an exception will be thrown. 
+        /// </remarks>
+        /// <param name="residence">residence that the review is intended for</param>
+        /// <param name="residenceReview">the review that is being validated</param>
+        /// <exception cref="ArgumentException">if guest have never rented the residence before</exception>
+        /// <exception cref="ArgumentException">If rating is not between 0 and 5</exception>
         public async Task ValidateResidenceReview(Residence residence, ResidenceReview residenceReview)
         {
-            await ValidateRentRequestExistAndIsApproved(residence, residenceReview); 
+            await ValidateGuestHasRentedResidence(residence, residenceReview); 
+            ValidateRating(residenceReview);
+            
         }
 
         /// <summary>
@@ -31,7 +43,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <param name="residenceReview">the review that is being validated</param>
         /// <exception cref="ArgumentException">if guest have never rented the residence before</exception>
         /// 
-        private async Task ValidateRentRequestExistAndIsApproved(Residence residence, ResidenceReview residenceReview)
+        private async Task ValidateGuestHasRentedResidence(Residence residence, ResidenceReview residenceReview)
         {
             var rentRequests = (await _rentRequestRepository.GetRentRequestsByGuestId(residenceReview.GuestViaId))
                 .Where(r => r.Residence.Id == residence.Id).ToList();
@@ -45,7 +57,19 @@ namespace SEP3T2GraphQL.Services.Validation
                 throw new ArgumentException("Guest has never rented the residence before"); 
             }
         }
-        
-        
+
+        /// <summary>
+        /// Validates if an rating is between 0 or 5
+        /// </summary>
+        /// <param name="residenceReview">review that is being validated</param>
+        /// <exception cref="ArgumentException">If rating is not between 0 and 5</exception>
+        private void ValidateRating(ResidenceReview residenceReview)
+        {
+            if (residenceReview.Rating is < 0 or > 5)
+            {
+                throw new ArgumentException("Invalid rating, must be between 0 and 5"); 
+            }
+        }
+
     }
 }

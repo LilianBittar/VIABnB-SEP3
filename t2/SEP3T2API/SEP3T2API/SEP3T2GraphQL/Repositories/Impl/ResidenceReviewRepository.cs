@@ -11,7 +11,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<ResidenceReview> UpdateAsync(int reviewId, ResidenceReview updatedReview)
+        public Task<ResidenceReview> UpdateAsync(int residenceId, ResidenceReview updatedReview)
         {
             throw new System.NotImplementedException();
         }
