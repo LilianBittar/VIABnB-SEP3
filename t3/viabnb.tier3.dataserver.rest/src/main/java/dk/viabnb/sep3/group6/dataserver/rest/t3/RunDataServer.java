@@ -12,6 +12,8 @@ import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.facility.FacilityDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.facility.FacilityDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAOImpl;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guestreview.GuestReviewDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guestreview.GuestReviewDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAO;
@@ -88,6 +90,11 @@ import org.springframework.context.annotation.Scope;
   @Bean @Scope("singleton") UserDAO userDAO()
   {
     return new UserDAOImpl();
+  }
+
+  @Bean @Scope("singleton") GuestReviewDAO guestReviewDAO()
+  {
+    return new GuestReviewDAOImpl();
   }
 }
 
