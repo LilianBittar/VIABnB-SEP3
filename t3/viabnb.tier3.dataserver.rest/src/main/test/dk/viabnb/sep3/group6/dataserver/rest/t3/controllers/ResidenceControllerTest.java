@@ -1,10 +1,8 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAO;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Address;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.City;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Residence;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residencereview.ResidenceReviewDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +21,14 @@ class ResidenceControllerTest
   private Host host;
   private City city;
   private Address address;
+  private ResidenceReviewDAO residenceReviewDAO;
 
   @BeforeEach
   public void setUp()
   {
     residenceDAO = mock(ResidenceDAO.class);
-    controller = new ResidenceController(residenceDAO);
+    residenceReviewDAO = mock(ResidenceReviewDAO.class);
+    controller = new ResidenceController(residenceDAO, residenceReviewDAO);
     host = new Host(1, "Test", "Test", "11111111", "Test@Test.ss", "Aa11", new ArrayList<>(), "Test", "1111111111", true);
     city = new City(1, "Test", 1111);
     address = new Address(1, "Test", "Test", "Test", city);

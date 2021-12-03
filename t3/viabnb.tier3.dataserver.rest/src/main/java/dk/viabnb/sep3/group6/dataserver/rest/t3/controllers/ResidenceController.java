@@ -109,8 +109,11 @@ public class ResidenceController {
         return null;
     }
 
-    @PostMapping("/residences/{id}/residencereviews")
+    @PostMapping("/residences/{residenceId}/residencereviews")
     public ResponseEntity<ResidenceReview> create(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
+        if (residenceReview == null || residenceId <= 0) {
+            return ResponseEntity.badRequest().build();
+        }
         try {
             Residence residence = residenceDAO.getByResidenceId(residenceId);
             ResidenceReview createdReview = residenceReviewDAO.create(residence, residenceReview);
@@ -120,4 +123,5 @@ public class ResidenceController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
 }
