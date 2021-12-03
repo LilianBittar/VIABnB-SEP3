@@ -26,7 +26,6 @@
                     <MatRipple>
                         <ResidenceCard Residence="@r"/>
                         <MatButton OnClick="@(() => OpenResidenceDetailsDialog(r))">Details</MatButton>
-                        
                     </MatRipple>
                 }
             </div>
@@ -53,7 +52,6 @@ else
     <MatDialogTitle>Residence Details</MatDialogTitle>
     <MatDialogContent>
         <div class="d-flex flex-column">
-
             <div class="d-flex justify-content-center">
                 <img class="my-4" width="480" height="240" src="@ViewedResidence.ImageUrl" alt="">
             </div>
@@ -63,7 +61,7 @@ else
                     <LabelContent>
                         Description <MatIcon Icon="@MatIconNames.Info"></MatIcon>
                     </LabelContent>
-                    <ChildContent >
+                    <ChildContent>
                         <h4 class="mat-h4">Residence Description</h4>
                         <p>@ViewedResidence.Description</p>
                     </ChildContent>
@@ -99,11 +97,33 @@ else
                         </ul>
                     </ChildContent>
                 </MatTab>
+
+                <MatTab class="my-4">
+                    <LabelContent>
+                        Reviews <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon>
+                    </LabelContent>
+                    <ChildContent>
+                        <ul class="list-group">
+                            @foreach (var review in @ViewedResidence.ResidenceReviews)
+                            {
+                                var guestID = review.GuestViaId;
+                                Guest guest = await GuestService.GetGuestById(guestID);
+                                <li class="list-group-item">
+                                    <p>
+                                        <b> @guest.FirstName</b>
+                                    </p>
+                                </li>
+                                <li style="color:grey" class="list-group-item">@review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</li>
+                                <li class="list-group-item">@review.Rating</li>
+                                <li class="list-group-item">@review.ReviewText</li>
+                            }
+                        </ul>
+                    </ChildContent>
+                </MatTab>
             </MatTabGroup>
-
             <MatDivider class="my-1"/>
-
         </div>
+
     </MatDialogContent>
     <MatDialogActions>
         <MatButton OnClick="@(e => { viewResidenceDetailsDialog = false; })">Cancel</MatButton>
