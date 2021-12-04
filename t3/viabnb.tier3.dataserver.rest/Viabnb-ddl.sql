@@ -186,17 +186,17 @@ VALUES ('LBB');
 
 --Other users
 INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('John@gmail.com', 'Aa11', 'John', 'Johnson', '+4555555555');
+VALUES ('john@gmail.com', 'Aa11', 'John', 'Johnson', '+4555555555');
 INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('Bob@gmail.com', 'Aa11', 'Bob', 'Bobsen', '+4566666666');
+VALUES ('bob@gmail.com', 'Aa11', 'Bob', 'Bobsen', '+4566666666');
 INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('Sara@hotmail.com', 'Aa11', 'Sara', 'Sarsen', '+4577777777');
+VALUES ('sara@hotmail.com', 'Aa11', 'Sara', 'Sarsen', '+4577777777');
 INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('Alice@outlook.com', 'Aa11', 'Alice', 'Aliceson', '+458888888');
+VALUES ('alice@outlook.com', 'Aa11', 'Alice', 'Aliceson', '+458888888');
 INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('Shrek@ogre.org', 'Aa11', 'Shrek', 'Shrekson', '+4599999999');
+VALUES ('shrek@ogre.org', 'Aa11', 'Shrek', 'Shrekson', '+4599999999');
 INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('Mario@nintendo.org', 'Aa11', 'Mario', 'Mario', '+4510000000');
+VALUES ('mario@nintendo.org', 'Aa11', 'Mario', 'Mario', '+4510000000');
 
 --Host
 INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
@@ -261,25 +261,25 @@ VALUES ('Horsensvej', '5', '1F', 2);
 --Residence
 
 INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
-VALUES (1, 'House', '3 bedroom house', true, 1500, null, null, 'Image', 10, 6);
+VALUES (1, 'House', '3 bedroom house', true, 1500, '2022-12-04', '2023-12-01', 'Image', 10, 6);
 INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
-VALUES (2, 'Apartment', '1 bedroom apartment', true, 200, null, null, 'Image', 1, 6);
+VALUES (2, 'Apartment', '1 bedroom apartment', true, 200, '2022-12-04', '2023-12-01', 'Image', 1, 6);
 INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
-VALUES (3, 'Sofa', 'Comfy sofa', true, 50, null, null, 'Image', 1, 5);
+VALUES (3, 'Sofa', 'Comfy sofa', true, 50, '2022-12-04', '2023-12-01', 'Image', 1, 5);
 INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
-VALUES (4, 'House', '10 bedroom house', true, 500, null, null, 'Image', 15, 8);
+VALUES (4, 'House', '10 bedroom house', true, 500, '2022-12-04', '2023-12-01', 'Image', 15, 8);
 INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
-VALUES (5, 'House', '1 bedroom house', true, 500, null, null, 'Image', 2, 8);
+VALUES (5, 'House', '1 bedroom house', true, 500, '2022-12-04', '2023-12-01', 'Image', 2, 8);
 INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
-VALUES (6, 'Bed', 'Double bed', true, 500, null, null, 'Image', 2, 9);
+VALUES (6, 'Bed', 'Double bed', true, 500, '2022-12-04', '2023-12-01', 'Image', 2, 9);
 INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
-VALUES (7, 'Matres', 'Air matres', true, 500, null, null, 'Image', 1, 10);
+VALUES (7, 'Matres', 'Air matres', true, 500, '2022-12-04', '2023-12-01', 'Image', 1, 10);
 INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
-VALUES (8, 'Apartment', '5 bedroom apartment', true, 500, null, null, 'Image', 6, 7);
+VALUES (8, 'Apartment', '5 bedroom apartment', true, 500, '2022-12-04', '2023-12-01', 'Image', 6, 7);
 INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
-VALUES (2, 'Room', 'Guest room', true, 500, null, null, 'Image', 3, 7);
+VALUES (2, 'Room', 'Guest room', true, 500, '2022-12-04', '2023-12-01', 'Image', 3, 7);
 INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
-VALUES (5, 'Summer house', '2 bedroom summer house', true, 500, null, null, 'Image', 4, 9);
+VALUES (5, 'Summer house', '2 bedroom summer house', true, 500, '2022-12-04', '2023-12-01', 'Image', 4, 9);
 
 
 --Facility
