@@ -14,11 +14,16 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
-        private IEnumerable<Models.RentRequest> allRentRequests = new List<Models.RentRequest>();
+        private IEnumerable<Models.RentRequest> _allRentRequests = new List<Models.RentRequest>();
         
         protected override async Task OnInitializedAsync()
         {
-            allRentRequests = await RentalService.GetAllRentRequestsAsync();
+            _allRentRequests = await RentalService.GetAllRentRequestsAsync();
+        }
+        
+        private void ViewGuestReviews(int id)
+        {
+            NavigationManager.NavigateTo($"GuestReviews/{id}");
         }
     }
 }

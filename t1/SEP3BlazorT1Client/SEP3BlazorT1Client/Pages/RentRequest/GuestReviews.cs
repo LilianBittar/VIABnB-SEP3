@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
@@ -15,20 +17,15 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [Inject] public IGuestReviewService GuestReviewService { get; set; }
         
-        private IEnumerable<GuestReview> guestReviews = new List<GuestReview>();
-        private bool panelOpenState;
+        private IEnumerable<GuestReview> _guestReviews = new List<GuestReview>();
         
         [Parameter]
         public int Id { get; set; }
         
         protected override async Task OnInitializedAsync()
         {
-            guestReviews = await GuestReviewService.GetAllGuestReviewsByGuestIdAsync(Id);
-        }
-
-        private void BackToRentRequest()
-        {
-            NavigationManager.NavigateTo("RentRequests");
+            Console.WriteLine(JsonSerializer.Serialize(await GuestReviewService.GetAllGuestReviewsByGuestIdAsync(Id)));
+            _guestReviews = await GuestReviewService.GetAllGuestReviewsByGuestIdAsync(Id);
         }
     }
 }

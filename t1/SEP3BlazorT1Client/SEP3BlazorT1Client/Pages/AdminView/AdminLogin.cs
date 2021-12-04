@@ -14,31 +14,31 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         [Inject] public IAdministrationService AdministrationService { get; set; }
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
-        private string email;
-        private string password;
-        private string errorMessage;
+        private string _email;
+        private string _password;
+        private string _errorMessage;
 
-        public async Task LoginAsAdmin()
+        private async Task LoginAsAdmin()
         {
-            errorMessage = "";
+            _errorMessage = "";
             try
             {
-                await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email, password);
-                email = "";
-                password = "";
+                await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_email, _password);
+                _email = "";
+                _password = "";
                 NavigationManager.NavigateTo("/UserRequests");
             }
             catch (Exception e)
             {
-                errorMessage = e.Message;
+                _errorMessage = e.Message;
             }
         }
 
         public async Task AdminLogout()
         {
-            errorMessage = "";
-            email = "";
-            password = "";
+            _errorMessage = "";
+            _email = "";
+            _password = "";
             try
             {
                 ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();

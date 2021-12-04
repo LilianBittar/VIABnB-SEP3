@@ -13,17 +13,17 @@
                         </tr>
                         <tr>
                             <td>
-                                <MatTextField @bind-Value="email" class="adminInputFields" Label="Email" Icon="mail_outline" FullWidth="true" Required="true"></MatTextField>
+                                <MatTextField @bind-Value="_email" class="adminInputFields" Label="Email" Icon="mail_outline" FullWidth="true" Required="true"></MatTextField>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <MatTextField @bind-Value="password" Class="adminInputFields" Label="Password" Icon="lock_outline" FullWidth="true" Required="true" Type="password"></MatTextField>
+                                <MatTextField @bind-Value="_password" Class="adminInputFields" Label="Password" Icon="lock_outline" FullWidth="true" Required="true" Type="password"></MatTextField>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p id="errorMessage">@errorMessage</p>
+                                <p id="errorMessage">@_errorMessage</p>
                             </td>
                         </tr>
                         <tr>

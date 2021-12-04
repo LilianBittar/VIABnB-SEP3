@@ -1,12 +1,12 @@
 @page "/GuestReviews/{Id:int}"
 <AuthorizeView Policy="MustBeHost">
     <Authorized>
-        @if (guestReviews == null)
+        @if (_guestReviews == null)
         {
             <h3 class="mat-subtitle1">Loading</h3>
             <MatProgressCircle Indeterminate="true"/>
         }
-        else if (!guestReviews.Any())
+        else if (!_guestReviews.Any())
         {
             <MatProgressCircle Indeterminate="true" />
             <p>
@@ -16,7 +16,7 @@
         else
         {
             <MatAccordion Multi="true">
-                @foreach (var item in guestReviews)
+                @foreach (var item in _guestReviews)
                 {
                     <MatExpansionPanel>
                         <MatExpansionPanelSummary>
@@ -40,7 +40,6 @@
                         </MatExpansionPanelDetails>
                     </MatExpansionPanel>
                 }
-                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/RentRequests" Style="margin-right: 1em;">Back</MatButtonLink>
             </MatAccordion>
         }
     </Authorized>
