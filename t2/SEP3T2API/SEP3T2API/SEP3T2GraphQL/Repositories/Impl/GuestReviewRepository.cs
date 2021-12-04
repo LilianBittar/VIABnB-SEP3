@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 
@@ -25,9 +27,21 @@ namespace SEP3T2GraphQL.Repositories.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestIdAsync(int id)
+        public async Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var response = await client.GetAsync($"{uri}/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            var result = await response.Content.ReadAsStringAsync();
+            var responseList = JsonSerializer.Deserialize<List<GuestReview>>(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return responseList;
         }
     }
 }

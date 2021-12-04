@@ -107,7 +107,7 @@ else
                             @foreach (var review in @ViewedResidence.ResidenceReviews)
                             {
                                 var guestID = review.GuestViaId;
-                                Guest guest = await GuestService.GetGuestById(guestID);
+                                //Guest guest = await GuestService.GetGuestById(guestID);
                                 <li class="list-group-item">
                                     <p>
                                         <b> @guest.FirstName</b>
