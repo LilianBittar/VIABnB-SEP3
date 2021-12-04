@@ -9,6 +9,7 @@ namespace SEP3T2GraphQL.Models
         [Required]
         [JsonProperty("rating")]
         public double Rating { get; set; }
+        [JsonProperty("text")]
         public string Text { get; set; }
         [Required]
         [JsonProperty("hostEmail")]

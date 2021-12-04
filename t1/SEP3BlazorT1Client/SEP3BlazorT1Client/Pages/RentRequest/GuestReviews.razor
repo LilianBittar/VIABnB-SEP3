@@ -1,0 +1,50 @@
+@page "/GuestReviews/{Id:int}"
+<AuthorizeView Policy="MustBeHost">
+    <Authorized>
+        @if (guestReviews == null)
+        {
+            <h3 class="mat-subtitle1">Loading</h3>
+            <MatProgressCircle Indeterminate="true"/>
+        }
+        else if (!guestReviews.Any())
+        {
+            <MatProgressCircle Indeterminate="true" />
+            <p>
+                <em>There are no Reviews for theis guest</em>
+            </p>
+        }
+        else
+        {
+            <MatAccordion Multi="true">
+                @foreach (var item in guestReviews)
+                {
+                    <MatExpansionPanel>
+                        <MatExpansionPanelSummary>
+                            <MatExpansionPanelHeader>
+                                <p>@item.Rating</p>
+                            </MatExpansionPanelHeader>
+                        </MatExpansionPanelSummary>
+                        <MatExpansionPanelDetails>
+                            <div class="form-group">
+                                <p>Rating: @item.Rating</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Description: @item.Text</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Date: @item.CreatedDate</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Rated by: @item.HostEmail</p>
+                            </div>
+                        </MatExpansionPanelDetails>
+                    </MatExpansionPanel>
+                }
+                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/RentRequests" Style="margin-right: 1em;">Back</MatButtonLink>
+            </MatAccordion>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <p>Please <a href="/">Login</a>to be able to see the content of this page</p>
+    </NotAuthorized>
+</AuthorizeView>

@@ -59,7 +59,6 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Query = @"query($hostEmail:String) {
                                   hostByEmail(email:$hostEmail) {
                                     hostReviews {
-                                      id
                                       rating
                                       text
                                       viaId,
@@ -101,7 +100,6 @@ namespace SEP3BlazorT1Client.Data.Impl
                                     email
                                     password
                                     hostReviews {
-                                    id
                                     rating
                                     text
                                     viaId
@@ -126,7 +124,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             var hostQuery = new GqlQuery()
             {
                 Query =
-                    @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId,createdDate},profileImageUrl,cpr,isApprovedHost}}",
+                    @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{rating,text,viaId,createdDate},profileImageUrl,cpr,isApprovedHost}}",
             };
             GqlRequestResponse<HostListResponseType> graphQlResponse =
                 await client.PostQueryAsync<HostListResponseType>(hostQuery);
@@ -147,7 +145,6 @@ namespace SEP3BlazorT1Client.Data.Impl
                             email,
                             password,
                             hostReviews{
-                              id,
                               viaId,
                               rating,
                               text,

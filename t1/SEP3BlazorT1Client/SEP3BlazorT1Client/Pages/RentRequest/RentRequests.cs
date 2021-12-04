@@ -26,6 +26,11 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
             rentRequestList = await RentalService.GetAllNotAnsweredRentRequestAsync();
         }
 
+        private void ViewGuestReviews(int id)
+        {
+            NavigationManager.NavigateTo($"GuestReviews/{id}");
+        }
+
         private async Task ApproveRequest(int requestId)
         {
             var approvedRequest = rentRequestList.First(r => r.Id == requestId);

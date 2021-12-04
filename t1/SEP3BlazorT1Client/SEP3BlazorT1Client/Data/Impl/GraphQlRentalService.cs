@@ -30,10 +30,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  id
                                   rating
                                   text
                                   hostEmail
+                                  createdDate
                                 }
                                 isApprovedGuest
                                 id
@@ -43,10 +43,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 email
                                 password
                                 hostReviews {
-                                  id
                                   rating
                                   text
                                   viaId
+                                  createdDate
                                 }
                                 profileImageUrl
                                 cpr
@@ -90,10 +90,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   email
                                   password
                                   hostReviews{
-                                    id
                                     rating
                                     text
                                     viaId
+                                    createdDate
                                   }
                                   profileImageUrl
                                   cpr
@@ -103,6 +103,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   rating
                                   reviewText
                                   guestViaId
+                                  createdDate
                                 }
                                 
                               }
@@ -135,10 +136,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  id
                                   rating
                                   text
                                   hostEmail
+                                  createdDate
                                 }
                                 isApprovedGuest
                                 id
@@ -148,10 +149,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 email
                                 password
                                 hostReviews {
-                                  id
                                   rating
                                   text
                                   viaId
+                                  createdDate
                                 }
                                 profileImageUrl
                                 cpr
@@ -195,10 +196,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   email
                                   password
                                   hostReviews{
-                                    id
                                     rating
                                     text
                                     viaId
+                                    createdDate
                                   }
                                   profileImageUrl
                                   cpr
@@ -208,6 +209,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   rating
                                   reviewText
                                   guestViaId
+                                  createdDate
                                 }
                                 
                               }
@@ -240,10 +242,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  id
                                   rating
                                   text
                                   hostEmail
+                                  createdDate
                                 }
                                 isApprovedGuest
                                 id
@@ -253,10 +255,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 email
                                 password
                                 hostReviews {
-                                  id
                                   rating
                                   text
                                   viaId
+                                  createdDate
                                 }
                                 profileImageUrl
                                 cpr
@@ -300,10 +302,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   email
                                   password
                                   hostReviews{
-                                    id
                                     rating
                                     text
                                     viaId
+                                    createdDate
                                   }
                                   profileImageUrl
                                   cpr
@@ -313,6 +315,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   rating
                                   reviewText
                                   guestViaId
+                                  createdDate
                                 }
                                 
                               }
@@ -345,10 +348,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  id
                                   rating
                                   text
                                   hostEmail
+                                  createdDate
                                 }
                                 isApprovedGuest
                                 id
@@ -358,10 +361,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 email
                                 password
                                 hostReviews {
-                                  id
                                   rating
                                   text
                                   viaId
+                                  createdDate
                                 }
                                 profileImageUrl
                                 cpr
@@ -405,10 +408,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   email
                                   password
                                   hostReviews{
-                                    id
                                     rating
                                     text
                                     viaId
+                                    createdDate
                                   }
                                   profileImageUrl
                                   cpr
@@ -418,6 +421,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   rating
                                   reviewText
                                   guestViaId
+                                  createdDate
                                 }
                                 
                               }
@@ -452,10 +456,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  id
                                   rating
                                   text
                                   hostEmail
+                                  createdDate
                                 }
                                 isApprovedGuest
                                 id
@@ -465,10 +469,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 email
                                 password
                                 hostReviews {
-                                  id
                                   rating
                                   text
                                   viaId
+                                  createdDate
                                 }
                                 profileImageUrl
                                 cpr
@@ -512,10 +516,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   email
                                   password
                                   hostReviews{
-                                    id
                                     rating
                                     text
                                     viaId
+                                    createdDate
                                   }
                                   profileImageUrl
                                   cpr
@@ -525,6 +529,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   rating
                                   reviewText
                                   guestViaId
+                                  createdDate
                                 }
                                 
                               }
@@ -552,7 +557,6 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  id
                                   rating
                                   text
                                   hostEmail
@@ -566,7 +570,6 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 email
                                 password
                                 hostReviews {
-                                  id
                                   rating
                                   text
                                   viaId
@@ -615,7 +618,6 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   email
                                   password
                                   hostReviews{
-                                    id
                                     rating
                                     text
                                     viaId
