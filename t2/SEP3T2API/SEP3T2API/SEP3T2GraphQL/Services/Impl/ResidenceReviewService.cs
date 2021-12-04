@@ -38,5 +38,6 @@ namespace SEP3T2GraphQL.Services.Impl
 
             return await _residenceReviewRepository.CreateAsync(residence, residenceReview);
         }
+        
     }
 }

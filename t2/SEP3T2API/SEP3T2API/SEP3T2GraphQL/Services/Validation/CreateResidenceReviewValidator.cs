@@ -49,8 +49,6 @@ namespace SEP3T2GraphQL.Services.Validation
             var rentRequests =
                 (await _rentRequestRepository.GetRentRequestsByViaId(residenceReview.GuestViaId)).Where(r =>
                     r.Residence.Id == residence.Id);
-            Console.WriteLine(residence.Id);
-            Console.WriteLine($"Received: {JsonSerializer.Serialize(rentRequests)}");
             if (rentRequests == null || !rentRequests.Any())
             {
                 throw new ArgumentException("Guest have never rented the residence before");

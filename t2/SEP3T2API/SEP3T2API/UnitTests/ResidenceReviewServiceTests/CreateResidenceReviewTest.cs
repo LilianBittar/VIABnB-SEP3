@@ -53,7 +53,7 @@ namespace UnitTests.ResidenceReviewServiceTests
             };
             _residenceReviewRepository = new Mock<IResidenceReviewRepository>();
             _rentRequestRepository = new Mock<IRentRequestRepository>();
-           
+
             _validator =
                 new CreateResidenceReviewValidator(_residenceReviewRepository.Object, _rentRequestRepository.Object);
             _residenceReviewService = new ResidenceReviewService(_residenceReviewRepository.Object, _validator);
@@ -75,16 +75,16 @@ namespace UnitTests.ResidenceReviewServiceTests
                 RequestCreationDate = DateTime.Now
             };
             _rentRequestRepository.Setup(x => x.GetRentRequestsByGuestId(_guest.Id).Result)
-                .Returns(new List<RentRequest>(){existingRentRequest});
+                .Returns(new List<RentRequest>() {existingRentRequest});
             ResidenceReview review = new()
             {
                 Rating = rating, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
             };
-            Assert.ThrowsAsync<ArgumentException>(async () => await _residenceReviewService.CreateAsync(_residence, review));
+            Assert.ThrowsAsync<ArgumentException>(async () =>
+                await _residenceReviewService.CreateAsync(_residence, review));
         }
-        
-        
-        
+
+
         [Test]
         [TestCase(0)]
         [TestCase(1)]
@@ -92,7 +92,6 @@ namespace UnitTests.ResidenceReviewServiceTests
         [TestCase(5)]
         public void CreateResidenceReview_ValidRating_DoesNotThrow(int rating)
         {
-
             RentRequest existingRentRequest = new()
             {
                 Guest = _guest, Id = 1, Residence = _residence, Status = RentRequestStatus.APPROVED,
@@ -100,7 +99,7 @@ namespace UnitTests.ResidenceReviewServiceTests
                 RequestCreationDate = DateTime.Now
             };
             _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaId(_guest.ViaId).Result)
-                .Returns(new List<RentRequest>(){existingRentRequest});
+                .Returns(new List<RentRequest>() {existingRentRequest});
             ResidenceReview review = new()
             {
                 Rating = rating, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
@@ -108,5 +107,66 @@ namespace UnitTests.ResidenceReviewServiceTests
             Assert.DoesNotThrowAsync(async () => await _residenceReviewService.CreateAsync(_residence, review));
         }
 
+        [Test]
+        [TestCase(RentRequestStatus.NOTANSWERED)]
+        [TestCase(RentRequestStatus.NOTAPPROVED)]
+        public void CreateResidenceReview_GuestHasNoneApprovedRentRequestsForResidence_ThrowsArgumentException(
+            RentRequestStatus status)
+        {
+            RentRequest existingRentRequest = new()
+            {
+                Guest = _guest, Id = 1, Residence = _residence, Status = status,
+                StartDate = DateTime.Now, EndDate = DateTime.Today.AddDays(2), NumberOfGuests = 1,
+                RequestCreationDate = DateTime.Now
+            };
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaId(_guest.ViaId).Result)
+                .Returns(new List<RentRequest>() {existingRentRequest});
+            ResidenceReview review = new()
+            {
+                Rating = 1, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
+            };
+            Assert.ThrowsAsync<ArgumentException>(async () =>
+                await _residenceReviewService.CreateAsync(_residence, review));
+        }
+
+        [Test]
+        public void CreateResidenceReview_GuestHasNoRentRequestsForResidence_ThrowsArgumentException()
+        {
+            City city = new()
+            {
+                Id = 1, CityName = "Test", ZipCode = 8700
+            };
+            Address address = new()
+            {
+                City = city, Id = 1, HouseNumber = "1t", StreetName = "test", StreetNumber = "1t"
+            };
+            Host host = new()
+            {
+                Cpr = "11111111", Email = "test@test.test", Id = 1, Password = "Test123", FirstName = "Test",
+                HostReviews = new List<HostReview>(), LastName = "Test", PhoneNumber = "+4588888888",
+                IsApprovedHost = true, ProfileImageUrl = "test"
+            };
+            Residence otherResidence = new()
+            {
+                Address = address, Description = "test2", Facilities = new List<Facility>(), Host = host, Id = 2,
+                Rules = new List<Rule>(), Type = "test2", AvailableFrom = DateTime.Now,
+                AvailableTo = DateTime.Now.AddDays(7), ImageUrl = "test", IsAvailable = true,
+                ResidenceReviews = new List<ResidenceReview>(), PricePerNight = 2000, MaxNumberOfGuests = 2
+            };
+            RentRequest existingRentRequest = new()
+            {
+                Guest = _guest, Id = 1, Residence = otherResidence, Status = RentRequestStatus.APPROVED,
+                StartDate = DateTime.Now, EndDate = DateTime.Today.AddDays(2), NumberOfGuests = 1,
+                RequestCreationDate = DateTime.Now
+            };
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaId(_guest.ViaId).Result)
+                .Returns(new List<RentRequest>() {existingRentRequest});
+            ResidenceReview review = new()
+            {
+                Rating = 1, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
+            };
+            Assert.ThrowsAsync<ArgumentException>(async () =>
+                await _residenceReviewService.CreateAsync(_residence, review));
+        }
     }
 }
