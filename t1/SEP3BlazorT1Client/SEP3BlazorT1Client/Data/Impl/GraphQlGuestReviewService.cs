@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Data.Impl
@@ -20,9 +21,23 @@ namespace SEP3BlazorT1Client.Data.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestIdAsync(int id)
+        public async Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var query = new GqlQuery()
+            {
+                Query = @"query($guestId:Int!){
+                              allGuestReviewsByGuestId(id:$guestId){
+                                rating
+                                text
+                                hostEmail
+                                createdDate
+                              }
+                            }",
+                Variables = new {guestId = id}
+            };
+            var graphQlResponse =
+                await _client.PostQueryAsync<AllGuestReviewsByGuestIdResponseType>(query);
+            return graphQlResponse.Data.GuestReviews;
         }
     }
 }
