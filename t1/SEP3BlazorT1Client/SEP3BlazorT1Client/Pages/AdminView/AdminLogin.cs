@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using SEP3BlazorT1Client.Authentication;
 using SEP3BlazorT1Client.Data;
-using SEP3BlazorT1Client.Models;
-//Todo Validation works by getting data from t3. Find a way to use the AuthenticationStateProvider. Consider making admin a child of host. Ask group first  
 namespace SEP3BlazorT1Client.Pages.AdminView
 {
     public partial class AdminLogin
