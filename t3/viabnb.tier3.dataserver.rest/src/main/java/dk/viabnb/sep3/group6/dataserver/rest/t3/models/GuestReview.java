@@ -4,29 +4,18 @@ import java.time.LocalDate;
 
 public class GuestReview
 {
-  private int id;
+
   private double rating;
   private String text;
   private String hostEmail;
   private LocalDate createdDate;
 
-  public GuestReview(int id, double rating, String text, String hostEmail, LocalDate createdDate)
+  public GuestReview(double rating, String text, String hostEmail, LocalDate createdDate)
   {
-    this.id = id;
     this.rating = rating;
     this.text = text;
     this.hostEmail = hostEmail;
     this.createdDate = createdDate;
-  }
-
-  public int getId()
-  {
-    return id;
-  }
-
-  public void setId(int id)
-  {
-    this.id = id;
   }
 
   public double getRating()
