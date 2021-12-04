@@ -110,13 +110,17 @@ public class ResidenceController {
     }
 
     @PostMapping("/residences/{residenceId}/residencereviews")
-    public ResponseEntity<ResidenceReview> create(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
+    public ResponseEntity<ResidenceReview> createReview(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
         if (residenceReview == null || residenceId <= 0) {
             return ResponseEntity.badRequest().build();
         }
         try {
             Residence residence = residenceDAO.getByResidenceId(residenceId);
             ResidenceReview createdReview = residenceReviewDAO.create(residence, residenceReview);
+            if (createdReview == null){
+                LOGGER.error("Could not create new ResidenceReview");
+                return ResponseEntity.internalServerError().build();
+            }
             return ResponseEntity.ok(createdReview);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
@@ -126,7 +130,7 @@ public class ResidenceController {
 
     // Might have to add /{viaid} after /residencereviews, but might be too long endpoint / bad design? (PK of a review is a composite key)
     @PutMapping("/residences/{residenceId}/residencereviews")
-    public ResponseEntity<ResidenceReview> update(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
+    public ResponseEntity<ResidenceReview> updateReview(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
         if (residenceReview != null || residenceId <= 0) {
             return ResponseEntity.badRequest().build();
         }
