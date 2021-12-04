@@ -24,9 +24,9 @@ namespace SEP3T2GraphQL.Services.Impl
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestIdAsync(int id)
+        public async Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await _guestReviewRepository.GetAllGuestReviewsByGuestIdAsync(id);
         }
     }
 }

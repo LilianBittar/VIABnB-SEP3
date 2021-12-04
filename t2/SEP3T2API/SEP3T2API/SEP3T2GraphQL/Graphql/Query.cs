@@ -158,5 +158,10 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _userService.ValidateUserAsync(email, password);
         }
+
+        public async Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestId(int id)
+        {
+            return await _guestReviewService.GetAllGuestReviewsByGuestIdAsync(id);
+        }
     }
 }
