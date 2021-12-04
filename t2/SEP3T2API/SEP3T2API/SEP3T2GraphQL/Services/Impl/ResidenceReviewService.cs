@@ -10,14 +10,12 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public partial class ResidenceReviewService : IResidenceReviewService
     {
-        private readonly IResidenceService _residenceReviewService;
         private readonly IResidenceReviewRepository _residenceReviewRepository;
         private readonly CreateResidenceReviewValidator _validator;
 
-        public ResidenceReviewService(IResidenceService residenceReviewService,
-            IResidenceReviewRepository residenceReviewRepository, CreateResidenceReviewValidator validator)
+        public ResidenceReviewService(IResidenceReviewRepository residenceReviewRepository,
+            CreateResidenceReviewValidator validator)
         {
-            _residenceReviewService = residenceReviewService;
             _residenceReviewRepository = residenceReviewRepository;
             _validator = validator;
         }
@@ -37,10 +35,8 @@ namespace SEP3T2GraphQL.Services.Impl
                 var updatedReview = await _residenceReviewRepository.UpdateAsync(residence.Id, residenceReview);
                 return updatedReview;
             }
-            else
-            {
-                return await _residenceReviewRepository.CreateAsync(residence, residenceReview);
-            }
+
+            return await _residenceReviewRepository.CreateAsync(residence, residenceReview);
         }
     }
 }

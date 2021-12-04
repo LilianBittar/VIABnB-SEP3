@@ -25,7 +25,7 @@
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f5d980e4_002D74b0_002D41ac_002D8862_002De27b20e2af35/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateResidenceTest #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f5d980e4_002D74b0_002D41ac_002D8862_002De27b20e2af35/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreateResidenceTest #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.CreateResidenceTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GetResidencesByHostTests&lt;/TestId&gt;&#xD;
@@ -49,6 +49,7 @@
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.RegisterHostTest.IsValidCpr_ContainsDashAndLength11_DoesNotThrow&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.RentalServiceTests.GetRentRequestTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestServiceTests.CreateGuestTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.RegisterHostTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.ResidenceReviewServiceTests.CreateResidenceReviewTest.CreateResidenceReview_InvalidRating_ThrowsArgumentException&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.ResidenceReviewServiceTests.CreateResidenceReviewTest.CreateResidenceReview_ValidRating_DoesNotThrow&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
@@ -11,6 +12,7 @@ namespace SEP3T2GraphQL.Services.Validation
     {
         private readonly IResidenceReviewRepository _residenceReviewRepository;
         private readonly IRentRequestRepository _rentRequestRepository;
+
         public CreateResidenceReviewValidator(IResidenceReviewRepository residenceReviewRepository,
             IRentRequestRepository rentRequestRepository)
         {
@@ -31,9 +33,8 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">If rating is not between 0 and 5</exception>
         public async Task ValidateResidenceReview(Residence residence, ResidenceReview residenceReview)
         {
-            await ValidateGuestHasRentedResidence(residence, residenceReview); 
+            await ValidateGuestHasRentedResidence(residence, residenceReview);
             ValidateRating(residenceReview);
-            
         }
 
         /// <summary>
@@ -45,16 +46,19 @@ namespace SEP3T2GraphQL.Services.Validation
         /// 
         private async Task ValidateGuestHasRentedResidence(Residence residence, ResidenceReview residenceReview)
         {
-            var rentRequests = (await _rentRequestRepository.GetRentRequestsByGuestId(residenceReview.GuestViaId))
-                .Where(r => r.Residence.Id == residence.Id).ToList();
+            var rentRequests =
+                (await _rentRequestRepository.GetRentRequestsByViaId(residenceReview.GuestViaId)).Where(r =>
+                    r.Residence.Id == residence.Id);
+            Console.WriteLine(residence.Id);
+            Console.WriteLine($"Received: {JsonSerializer.Serialize(rentRequests)}");
             if (rentRequests == null || !rentRequests.Any())
             {
-                throw new ArgumentException("Guest have never rented the residence before"); 
+                throw new ArgumentException("Guest have never rented the residence before");
             }
 
             if (!rentRequests.Where(r => r.Status == RentRequestStatus.APPROVED).ToList().Any())
             {
-                throw new ArgumentException("Guest has never rented the residence before"); 
+                throw new ArgumentException("Guest has never rented the residence before");
             }
         }
 
@@ -67,9 +71,8 @@ namespace SEP3T2GraphQL.Services.Validation
         {
             if (residenceReview.Rating is < 0 or > 5)
             {
-                throw new ArgumentException("Invalid rating, must be between 0 and 5"); 
+                throw new ArgumentException("Invalid rating, must be between 0 and 5");
             }
         }
-
     }
 }
