@@ -7,9 +7,9 @@ namespace SEP3BlazorT1Client.Data
     public interface IHostReviewService
     {
         
-        Task<HostReview> CreateGuestReviewAsync(HostReview hostReview);
+        Task<HostReview> CreateHostReviewAsync(HostReview hostReview);
         
-        Task<HostReview> UpdateGuestReviewAsync(HostReview hostReview);
+        Task<HostReview> UpdateHostReviewAsync(HostReview hostReview);
         
         Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id);
     }

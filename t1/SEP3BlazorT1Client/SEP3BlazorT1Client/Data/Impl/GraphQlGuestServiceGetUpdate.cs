@@ -44,7 +44,11 @@ namespace SEP3BlazorT1Client.Data.Impl
             var guestQuery = new GqlQuery()
             {
                 Query =
-                    @"query {allNotApprovedGuest{viaId,guestReviews{rating,text,hostEmail,createdDate},isApprovedGuest,id, firstName,lastName,phoneNumber,email,password,hostReviews{rating,text,viaId,createdDate},profileImageUrl,cpr,isApprovedHost}}"
+                    @"query {allNotApprovedGuest{viaId,guestReviews
+{rating,text,hostEmail,createdDate},isApprovedGuest,id,
+ firstName,lastName,phoneNumber,email,password,hostReviews
+{rating,text,viaId,createdDate},
+profileImageUrl,cpr,isApprovedHost}}"
             };
             GqlRequestResponse<GuestListResponse> graphQlResponse =
                 await _client.PostQueryAsync<GuestListResponse>(guestQuery);
