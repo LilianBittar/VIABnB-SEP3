@@ -39,6 +39,8 @@
                     <MatButton class="my-1" Link="/registerhost">Don't have an account? register here</MatButton>
                 </div>
             </MatPaper>
+            <p hidden="@IsShow"> <MatProgressBar  Indeterminate="true" Reversed="true"></MatProgressBar></p>
+             
         </div>
         <div class="mat-layout-grid-cell"></div>
     </div>
@@ -52,15 +54,21 @@
     private string ErrorMessage;
     private bool loginAsHost;
     private int studentNumber;
+    private bool IsShow {get;set;} = true;
+    private void ShowLoadingBar()
+    {
+        IsShow =   !IsShow;
+    }  
 
     private async Task PerformLogin()
     {
-       
+      
         ErrorMessage = "";
         try
         {
             if (loginAsHost)
             {
+                ShowLoadingBar();
                 await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin( email, password);
                 password = "";
                 studentNumber = 0;
@@ -68,6 +76,7 @@
             }
             else
             {
+                ShowLoadingBar();
                 await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email, password);
                 email = "";
                 password = "";
@@ -76,6 +85,7 @@
         }
         catch (Exception e)
         {
+            ShowLoadingBar();
             ErrorMessage = e.Message;
             Console.WriteLine(e.Message);
         }

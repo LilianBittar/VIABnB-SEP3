@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services.Validation;

@@ -1,10 +1,14 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residencereview;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.GuestReview;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Residence;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.ResidenceReview;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResidenceReviewDAOImpl extends BaseDao implements ResidenceReviewDAO {
@@ -29,6 +33,7 @@ public class ResidenceReviewDAOImpl extends BaseDao implements ResidenceReviewDA
     @Override
     public ResidenceReview updateResidenceReview(int residenceId, ResidenceReview updatedResidenceReview) {
         try (Connection connection = getConnection()) {
+            int guestId = getGuestIdByViaId(updatedResidenceReview.getGuestViaId());
             PreparedStatement stm = connection.prepareStatement("UPDATE residencereview " +
                     "SET residencerating = ?, residencereviewtext = ?, createddate = ? " +
                     "where residenceid = ? and guestid = ?");
@@ -36,7 +41,7 @@ public class ResidenceReviewDAOImpl extends BaseDao implements ResidenceReviewDA
             stm.setString(2, updatedResidenceReview.getReviewText());
             stm.setDate(3, Date.valueOf(updatedResidenceReview.getCreatedDate()));
             stm.setInt(4, residenceId);
-            stm.setInt(5, updatedResidenceReview.getGuestViaId());
+            stm.setInt(5, guestId);
             stm.executeUpdate();
             connection.commit();
             return updatedResidenceReview;
@@ -47,8 +52,29 @@ public class ResidenceReviewDAOImpl extends BaseDao implements ResidenceReviewDA
     }
 
     @Override
-    public List<ResidenceReview> getAllResidenceReviewsByResidenceId(int id) {
-        return null;
+    public List<ResidenceReview> getAllResidenceReviewsByResidenceId(int residenceId) {
+        List<ResidenceReview> residenceReviews = new ArrayList<>();
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT * FROM residencereview join guest g on g.guestid = residencereview.guestid WHERE residenceid = ?");
+            stm.setInt(1, residenceId);
+            ResultSet result = stm.executeQuery();
+            while (result.next())
+            {
+                ResidenceReview residenceReview = new ResidenceReview(
+                        result.getDouble("residencerating"),
+                        result.getString("residencereviewtext"),
+                        result.getInt("viaid"),
+                        LocalDate.parse(result.getDate("createddate").toString()));
+                residenceReviews.add(residenceReview);
+            }
+            return residenceReviews;
+        }
+        catch (SQLException throwables)
+        {
+            throw new IllegalStateException(throwables.getMessage());
+        }
     }
 
     /**

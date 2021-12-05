@@ -107,6 +107,7 @@ public class ResidenceController {
 
     @PostMapping("/residences/{residenceId}/residencereviews")
     public ResponseEntity<ResidenceReview> createReview(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
+        LOGGER.info("Request for createReview received");
         if (residenceReview == null || residenceId <= 0) {
             return ResponseEntity.badRequest().build();
         }
@@ -127,7 +128,7 @@ public class ResidenceController {
     // Might have to add /{viaid} after /residencereviews, but might be too long endpoint / bad design? (PK of a review is a composite key)
     @PutMapping("/residences/{residenceId}/residencereviews")
     public ResponseEntity<ResidenceReview> updateReview(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
-        if (residenceReview != null || residenceId <= 0) {
+        if (residenceReview == null || residenceId <= 0) {
             return ResponseEntity.badRequest().build();
         }
         try {
@@ -138,6 +139,19 @@ public class ResidenceController {
             return ResponseEntity.internalServerError().build();
         }
 
+    }
+
+    @GetMapping("/residences/{residenceId}/residencereviews")
+    public ResponseEntity<List<ResidenceReview>> getAllResidenceReviewsByResidenceId(@PathVariable int residenceId) {
+        try {
+            LOGGER.info("Request for all residencereviews received");
+            List<ResidenceReview> residencereviews = residenceReviewDAO.getAllResidenceReviewsByResidenceId(residenceId);
+            LOGGER.info("Returning: " + gson.toJson(residencereviews));
+            return ResponseEntity.ok(residencereviews);
+        } catch (Exception e) {
+            LOGGER.error("Connection failed " + e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
 }

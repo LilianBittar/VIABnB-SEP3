@@ -3,6 +3,7 @@
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Components.ResidenceCard
 @inject IResidenceService ResidenceService
+@inject IResidenceReviewService residenceReviewService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IGuestService GuestService
 @inject NavigationManager NavigationManager
@@ -53,7 +54,7 @@ else
     <MatDialogContent>
         <div class="d-flex flex-column">
             <div class="d-flex justify-content-center">
-                <img class="my-4" width="480" height="240" src="@ViewedResidence.ImageUrl" alt="">
+                <img class="my-4" width="600" height="240" src="@ViewedResidence.ImageUrl" alt="">
             </div>
 
             <MatTabGroup>
@@ -63,7 +64,14 @@ else
                     </LabelContent>
                     <ChildContent>
                         <h4 class="mat-h4">Residence Description</h4>
-                        <p>@ViewedResidence.Description</p>
+                        @if (ViewedResidence.Description != null)
+                        {
+                            <p>@ViewedResidence.Description</p>
+                        }
+                        else
+                        {
+                            <p>This residence has no description</p>
+                        }
                     </ChildContent>
                 </MatTab>
                 <MatTab class="my-4">
@@ -73,9 +81,16 @@ else
                     <ChildContent>
                         <h4 class="mat-h4">Residence Facilities</h4>
                         <ul class="list-group">
-                            @foreach (var facility in @ViewedResidence.Facilities)
+                            @if (ViewedResidence.Facilities.Count() != 0)
                             {
-                                <li class="list-group-item">@facility.Name</li>
+                                @foreach (var facility in @ViewedResidence.Facilities)
+                                {
+                                    <li class="list-group-item">@facility.Name</li>
+                                }
+                            }
+                            else
+                            {
+                                <p>The residence has no facilities</p>
                             }
 
                         </ul>
@@ -89,9 +104,16 @@ else
                     <ChildContent>
                         <h4 class="mat-h4">Rules</h4>
                         <ul class="list-group">
-                            @foreach (var rule in @ViewedResidence.Rules)
+                            @if (ViewedResidence.Rules.Count() != 0)
                             {
-                                <li class="list-group-item">@rule.Description</li>
+                                foreach (var rule in @ViewedResidence.Rules)
+                                {
+                                    <li class="list-group-item">@rule.Description</li>
+                                }
+                            }
+                            else
+                            {
+                                <p>The residence has no rules</p>
                             }
 
                         </ul>
@@ -104,19 +126,30 @@ else
                     </LabelContent>
                     <ChildContent>
                         <ul class="list-group">
-                            @foreach (var review in @ViewedResidence.ResidenceReviews)
+                            @if (ResidenceReviews.Count() != 0)
                             {
-                                var guestID = review.GuestViaId;
-                                //Guest guest = await GuestService.GetGuestById(guestID);
-                                <li class="list-group-item">
-                                    <p>
-                                        <b> @guest.FirstName</b>
-                                    </p>
-                                </li>
-                                <li style="color:grey" class="list-group-item">@review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</li>
-                                <li class="list-group-item">@review.Rating</li>
-                                <li class="list-group-item">@review.ReviewText</li>
+                                foreach (var review in ResidenceReviews)
+                                {
+                                    var guestID = review.GuestViaId;
+                                    //Guest guest = await GuestService.GetGuestById(guestID);
+                                    <li class="list-group-item">
+                                        <p>
+                                            <b> @guest.FirstName</b>
+                                        </p>
+                                    </li>
+                                    <li  class="list-group-item"> <p style="color:grey">@review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</p></li>
+                                    <li class="list-group-item">@review.Rating</li>
+                                    <li class="list-group-item">@review.ReviewText</li>
+                                }
                             }
+                            else
+                            {
+                                <p>
+                                    The residence has
+                                    no reviews
+                                </p>
+                            }
+
                         </ul>
                     </ChildContent>
                 </MatTab>
@@ -137,6 +170,7 @@ else
     private IList<Residence> _availableResidences;
     private IList<Residence> _residencesToShow;
     Residence ViewedResidence = new Residence();
+    IEnumerable<ResidenceReview> ResidenceReviews = new List<ResidenceReview>();
     private Guest guest;
     private string _cityFilter = "";
     private long? _maxPriceFilter = 0;
@@ -163,9 +197,11 @@ else
         }
     }
 
-    void OpenResidenceDetailsDialog(Residence residence)
+    async void OpenResidenceDetailsDialog(Residence residence)
     {
         ViewedResidence = residence;
+        ResidenceReviews = await residenceReviewService.GetAllByResidenceIdAsync(residence.Id);
+
         viewResidenceDetailsDialog = true;
     }
 

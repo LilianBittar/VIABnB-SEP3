@@ -1,0 +1,52 @@
+﻿@page "/CreateResidenceReview/{ResidenceId:int}"
+@using SEP3BlazorT1Client.Data
+@using SEP3BlazorT1Client.Models
+@using SEP3BlazorT1Client.Components.ResidenceReviewForm
+@using System.Text.Json
+@inject IResidenceService ResidenceService
+@inject NavigationManager NavigationManager
+@inject IGuestService GuestService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@* @inject IResidenceReviewService ResidenceReviewService *@
+
+<div class="container-fluid d-flex justify-content-center mt-3">
+    <div class="row">
+        <div class="col">
+            @if (_residence != null && _guest != null)
+            {
+            <ResidenceReviewForm Residence="@_residence" Guest="@_guest"/>
+            }
+            else if (_residence == null || _guest == null)
+            {
+                <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+            }
+            else
+            {
+                <p>Could not find residence or guest</p>
+            }
+            
+        </div>
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public int ResidenceId { get; set; }
+
+    private Residence _residence;
+    private Guest _guest;
+
+    protected async override Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        _guest = await GuestService.GetGuestByEmail(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value);
+        _residence = await ResidenceService.GetResidenceAsync(ResidenceId);
+        Console.WriteLine(JsonSerializer.Serialize(_guest));
+        Console.WriteLine(JsonSerializer.Serialize(_residence));
+        StateHasChanged();
+    }
+
+}
