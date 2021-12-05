@@ -23,7 +23,6 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<ResidenceReview> CreateAsync(Residence residence, ResidenceReview residenceReview)
         {
-            Console.WriteLine($"{this} received request for {nameof(CreateAsync)} with params: {JsonConvert.SerializeObject(residence)} \n {JsonConvert.SerializeObject(residenceReview)}");
             if (residence == null || residenceReview == null)
             {
                 throw new ArgumentException("residence and residenceReview is required");
