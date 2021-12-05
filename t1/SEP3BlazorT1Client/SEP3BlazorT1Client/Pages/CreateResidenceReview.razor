@@ -2,12 +2,10 @@
 @using SEP3BlazorT1Client.Data
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Components.ResidenceReviewForm
-@using System.Text.Json
 @inject IResidenceService ResidenceService
 @inject NavigationManager NavigationManager
 @inject IGuestService GuestService
 @inject AuthenticationStateProvider AuthenticationStateProvider
-@* @inject IResidenceReviewService ResidenceReviewService *@
 
 <div class="container-fluid d-flex justify-content-center mt-3">
     <div class="row">
@@ -44,8 +42,6 @@
         var user = authState.User;
         _guest = await GuestService.GetGuestByEmail(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value);
         _residence = await ResidenceService.GetResidenceAsync(ResidenceId);
-        Console.WriteLine(JsonSerializer.Serialize(_guest));
-        Console.WriteLine(JsonSerializer.Serialize(_residence));
         StateHasChanged();
     }
 

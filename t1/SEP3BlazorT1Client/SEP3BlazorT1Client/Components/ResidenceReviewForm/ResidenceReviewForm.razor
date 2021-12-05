@@ -80,11 +80,12 @@
         {
             Console.WriteLine(JsonSerializer.Serialize(_newReview));
             await ResidenceReviewService.CreateAsync(Residence, _newReview);
+            _errorMessage = "";
             NavigationManager.NavigateTo("/");
         }
         catch (Exception e)
         {
-            _errorMessage = e.Message;
+            _errorMessage = "Something went wrong, try again later..."; 
             StateHasChanged();
         }
     }
