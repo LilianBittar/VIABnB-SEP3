@@ -1,4 +1,4 @@
-package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address;
+package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.citry;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.City;
@@ -35,4 +35,23 @@ public class CityDAOImpl extends BaseDao implements CityDAO
       throw new IllegalStateException(throwables.getMessage());
     }
   }
+
+  @Override public City createNewCity(City city)
+  {
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement
+          ("INSERT INTO city(cityname, zipcode) VALUES (?,?)");
+      stm.setString(1, city.getCityName());
+      stm.setInt(2, city.getZipCode());
+      stm.executeUpdate();
+      connection.commit();
+      return city;
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalStateException(throwables.getMessage());
+    }
+  }
+
 }

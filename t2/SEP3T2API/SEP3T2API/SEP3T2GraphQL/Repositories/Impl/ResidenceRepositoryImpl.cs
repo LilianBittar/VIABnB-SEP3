@@ -99,7 +99,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return residences;
         }
 
-        public async Task<IList<Residence>> GetAll()
+        public async Task<IList<Residence>> GetAllAsync()
         {
             HttpResponseMessage response = await client.GetAsync($"{uri}/residences");
              await HandleErrorResponse(response);

@@ -25,58 +25,60 @@ namespace SEP3BlazorT1Client.Data.Impl
             var residenceQuery = new GqlQuery()
             {
                 Query = @"query ($residenceId:Int!){
-  residence(id:$residenceId) {
-    id
-    address {
-      id
-      streetName
-      streetNumber
-      city {
-        id
-        cityName
-        zipCode
-      }
-    }
-    description
-    type
-    isAvailable
-    pricePerNight
-    rules {
-      description
-      residenceId
-    }
-    facilities {
-      id
-      name
-    }
-    availableFrom
-    availableTo
-    maxNumberOfGuests
-    host {
-      id
-      firstName
-      lastName
-      phoneNumber
-      email
-      password
-      hostReviews {
-        id
-        rating
-        text
-        viaId
-      }
-      profileImageUrl
-      cpr
-      isApprovedHost
-    }
-    residenceReviews {
-      rating
-      reviewText
-      guestViaId
-    }
-  }
-}
-",
+                            residence(id:$residenceId) {
+                              id
+                              address {
+                                id
+                                streetName
+                                streetNumber
+                                city {
+                                  id
+                                  cityName
+                                  zipCode
+                                }
+                              }
+                              description
+                              type
+                              isAvailable
+                              pricePerNight
+                              rules {
+                                description
+                                residenceId
+                              }
+                              facilities {
+                                id
+                                name
+                              }
+                              availableFrom
+                              availableTo
+                              maxNumberOfGuests
+                              host {
+                                id
+                                firstName
+                                lastName
+                                phoneNumber
+                                email
+                                password
+                                hostReviews {
+                                  rating
+                                  text
+                                  viaId
+                                  createdDate
+                                }
+                                profileImageUrl
+                                cpr
+                                isApprovedHost
+                              }
+                              residenceReviews {
+                                rating
+                                reviewText
+                                guestViaId
+                                 createdDate
+
+                              }
+                            }
+                          }
+                          ",
                 Variables = new {residenceId = id}
             };
             var graphQlResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceQuery);
@@ -97,55 +99,60 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query =
                     @"mutation($residenceInput: ResidenceInput)
-    {updateAvailabilityStatus(residence: $residenceInput)
-    {id
-    address {
-      id
-      streetName
-      streetNumber
-      city {
-        id
-        cityName
-        zipCode
-      }
-    }
-    description
-    type
-    isAvailable
-    pricePerNight
-    rules {
-      description
-      residenceId
-    }
-    facilities {
-      id
-      name
-    }
-    availableFrom
-    availableTo
-    maxNumberOfGuests
-    host {
-      id
-      firstName
-      lastName
-      phoneNumber
-      email
-      password
-      hostReviews {
-        id
-        rating
-        text
-        viaId
-      }
-      profileImageUrl
-      cpr
-      isApprovedHost
-    }
-    residenceReviews {
-      rating
-      reviewText
-      guestViaId
-    }}}",
+                      {
+                        updateAvailabilityStatus(residence: $residenceInput)
+                            {
+                            id
+                            address {
+                              id
+                              streetName
+                              streetNumber
+                              city {
+                                id
+                                cityName
+                                zipCode
+                              }
+                            }
+                            description
+                            type
+                            isAvailable
+                            pricePerNight
+                            rules {
+                              description
+                              residenceId
+                            }
+                            facilities {
+                              id
+                              name
+                            }
+                            availableFrom
+                            availableTo
+                            maxNumberOfGuests
+                            host {
+                              id
+                              firstName
+                              lastName
+                              phoneNumber
+                              email
+                              password
+                              hostReviews {
+                                rating
+                                text
+                                viaId
+                                createdDate
+
+                              }
+                              profileImageUrl
+                              cpr
+                              isApprovedHost
+                            }
+                            residenceReviews {
+                              rating
+                              reviewText
+                              guestViaId
+                                createdDate
+
+                            }}}",
                 Variables = new {residenceInput = residence}
             };
             var mutationResponse =
@@ -167,56 +174,58 @@ namespace SEP3BlazorT1Client.Data.Impl
             var residenceQuery = new GqlQuery()
             {
                 Query = @"query ($hostId:Int!) {
-                       residencesByHostId(id: $hostId) {
-                      
-  id
-    address {
-      id
-      streetName
-      streetNumber
-      city {
-        id
-        cityName
-        zipCode
-      }
-    }
-    description
-    type
-    isAvailable
-    pricePerNight
-    rules {
-      description
-      residenceId
-    }
-    facilities {
-      id
-      name
-    }
-    availableFrom
-    availableTo
-    maxNumberOfGuests
-    host {
-      id
-      firstName
-      lastName
-      phoneNumber
-      email
-      password
-      hostReviews {
-        id
-        rating
-        text
-        viaId
-      }
-      profileImageUrl
-      cpr
-      isApprovedHost
-    }
-    residenceReviews {
-      rating
-      reviewText
-      guestViaId
-    }
+                       residencesByHostId(id: $hostId) {                   
+                        id
+                          address {
+                            id
+                            streetName
+                            streetNumber
+                            city {
+                              id
+                              cityName
+                              zipCode
+                            }
+                          }
+                          description
+                          type
+                          isAvailable
+                          pricePerNight
+                          rules {
+                            description
+                            residenceId
+                          }
+                          facilities {
+                            id
+                            name
+                          }
+                          availableFrom
+                          availableTo
+                          maxNumberOfGuests
+                          host {
+                            id
+                            firstName
+                            lastName
+                            phoneNumber
+                            email
+                            password
+                            hostReviews {
+                              rating
+                              text
+                              viaId
+                              createdDate
+
+                            }
+                            profileImageUrl
+                            cpr
+                            isApprovedHost
+                          }
+                          residenceReviews {
+                            rating
+                            reviewText
+                            guestViaId
+                              createdDate
+
+                          }
                   }
                 }
               ",
@@ -236,53 +245,56 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Query = @"query {
                           availableResidences {
                            id
-    address {
-      id
-      streetName
-      streetNumber
-      city {
-        id
-        cityName
-        zipCode
-      }
-    }
-    description
-    type
-    isAvailable
-    pricePerNight
-    rules {
-      description
-      residenceId
-    }
-    facilities {
-      id
-      name
-    }
-    availableFrom
-    availableTo
-    maxNumberOfGuests
-    host {
-      id
-      firstName
-      lastName
-      phoneNumber
-      email
-      password
-      hostReviews {
-        id
-        rating
-        text
-        viaId
-      }
-      profileImageUrl
-      cpr
-      isApprovedHost
-    }
-    residenceReviews {
-      rating
-      reviewText
-      guestViaId
-    }
+                          address {
+                            id
+                            streetName
+                            streetNumber
+                            city {
+                              id
+                              cityName
+                              zipCode
+                            }
+                          }
+                          description
+                          type
+                          isAvailable
+                          pricePerNight
+                          rules {
+                            description
+                            residenceId
+                          }
+                          facilities {
+                            id
+                            name
+                          }
+                          availableFrom
+                          availableTo
+                          maxNumberOfGuests
+                          host {
+                            id
+                            firstName
+                            lastName
+                            phoneNumber
+                            email
+                            password
+                            hostReviews {
+                              rating
+                              text
+                              viaId
+                              createdDate
+
+                            }
+                            profileImageUrl
+                            cpr
+                            isApprovedHost
+                          }
+                          residenceReviews {
+                            rating
+                            reviewText
+                            guestViaId
+                              createdDate
+
+                          }
                           }
                         }
                         "
@@ -298,56 +310,60 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery residenceMutation = new GqlQuery()
             {
                 Query =
-                    @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){id
-    address {
-      id
-      streetName
-      streetNumber
-      city {
-        id
-        cityName
-        zipCode
-      }
-    }
-    description
-    type
-    isAvailable
-    pricePerNight
-    rules {
-      description
-      residenceId
-    }
-    facilities {
-      id
-      name
-    }
-    availableFrom
-    availableTo
-    maxNumberOfGuests
-    host {
-      id
-      firstName
-      lastName
-      phoneNumber
-      email
-      password
-      hostReviews {
-        id
-        rating
-        text
-        viaId
-      }
-      profileImageUrl
-      cpr
-      isApprovedHost
-    }
-    residenceReviews {
-      rating
-      reviewText
-      guestViaId
-    }
-  }
-}",
+                    @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){
+                                    id
+                                    address {
+                                      id
+                                      streetName
+                                      streetNumber
+                                      city {
+                                        id
+                                        cityName
+                                        zipCode
+                                      }
+                                    }
+                                    description
+                                    type
+                                    isAvailable
+                                    pricePerNight
+                                    rules {
+                                      description
+                                      residenceId
+                                    }
+                                    facilities {
+                                      id
+                                      name
+                                    }
+                                    availableFrom
+                                    availableTo
+                                    maxNumberOfGuests
+                                    host {
+                                      id
+                                      firstName
+                                      lastName
+                                      phoneNumber
+                                      email
+                                      password
+                                      hostReviews {
+                                        rating
+                                        text
+                                        viaId
+                                        createdDate
+
+                                      }
+                                      profileImageUrl
+                                      cpr
+                                      isApprovedHost
+                                    }
+                                    residenceReviews {
+                                      rating
+                                      reviewText
+                                      guestViaId
+                                        createdDate
+
+                                    }
+                                  }
+                                }",
                 Variables = new {residenceInput = residence}
             };
             var mutationResponse = await client.PostQueryAsync<CreateResidenceMutationResponseType>(residenceMutation);

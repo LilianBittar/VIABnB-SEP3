@@ -1,17 +1,19 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.models;
 
+import java.time.LocalDate;
+
 public class ResidenceReview
 {
   private double rating;
   private String reviewText;
   private int guestViaId;
+  private LocalDate createdDate;
 
-  public ResidenceReview(double rating, String reviewText,
-                         int guestViaId)
-  {
+  public ResidenceReview(double rating, String reviewText, int guestViaId, LocalDate createdDate) {
     this.rating = rating;
     this.reviewText = reviewText;
     this.guestViaId = guestViaId;
+    this.createdDate = createdDate;
   }
 
   public double getRating()
@@ -42,5 +44,13 @@ public class ResidenceReview
   public void setGuestViaId(int guestViaId)
   {
     this.guestViaId = guestViaId;
+  }
+
+  public LocalDate getCreatedDate() {
+    return createdDate;
+  }
+
+  public void setCreatedDate(LocalDate createdDate) {
+    this.createdDate = createdDate;
   }
 }

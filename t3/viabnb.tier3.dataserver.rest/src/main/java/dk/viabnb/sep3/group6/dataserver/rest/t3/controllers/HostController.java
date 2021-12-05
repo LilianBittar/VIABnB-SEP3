@@ -2,15 +2,11 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.RunDataServer;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Residence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +30,7 @@ import java.util.NoSuchElementException;
 
   @PostMapping("/host") public ResponseEntity<Host> createHost(@RequestBody Host host)
   {
-    Host newHost = hostDAO.RegisterHost(host);
+    Host newHost = hostDAO.registerHost(host);
     if (newHost == null)
     {
       return ResponseEntity.internalServerError().build();

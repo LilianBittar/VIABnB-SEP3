@@ -41,7 +41,7 @@ public class UserDAOImpl extends BaseDao implements UserDAO
     }
     catch (SQLException throwables)
     {
-      throw new IllegalArgumentException(throwables.getMessage());
+      throw new IllegalStateException(throwables.getMessage());
     }
   }
 
@@ -69,7 +69,7 @@ public class UserDAOImpl extends BaseDao implements UserDAO
     }
     catch (SQLException throwables)
     {
-      throw new IllegalArgumentException(throwables.getMessage());
+      throw new IllegalStateException(throwables.getMessage());
     }
   }
 
@@ -98,7 +98,7 @@ public class UserDAOImpl extends BaseDao implements UserDAO
     }
     catch (SQLException throwables)
     {
-      throw new IllegalArgumentException(throwables.getMessage());
+      throw new IllegalStateException(throwables.getMessage());
     }
   }
 }

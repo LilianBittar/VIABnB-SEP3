@@ -5,13 +5,14 @@
         <MatTabGroup>
             <MatTab Label="Hosts Requests">
                 <ChildContent>
-                    @if (hostRequestList == null)
+                    @if (_hostRequestList == null)
                     {
                         <h3 class="mat-subtitle1">Loading</h3>
                         <MatProgressCircle Indeterminate="true" />
                     }
-                    else if (!hostRequestList.Any())
+                    else if (!_hostRequestList.Any())
                     {
+                        <MatProgressCircle Indeterminate="true" />
                         <p>
                             <em>There are no host requests at the moment....</em>
                         </p>
@@ -19,7 +20,7 @@
                     else
                     {
                         <MatAccordion Multi="true">
-                            @foreach (var h in hostRequestList)
+                            @foreach (var h in _hostRequestList)
                             {
                                 <MatExpansionPanel>
                                     <MatExpansionPanelSummary>
@@ -56,12 +57,12 @@
             </MatTab>
             <MatTab Label="Guests Requests">
                 <ChildContent>
-                    @if (guestRequestList == null)
+                    @if (_guestRequestList == null)
                     {
                         <h3 class="mat-subtitle1">Loading</h3>
                         <MatProgressCircle Indeterminate="true" />
                     }
-                    else if (!guestRequestList.Any())
+                    else if (!_guestRequestList.Any())
                     {
                         <p>
                             <em>There are no guest requests at the moment....</em>
@@ -70,7 +71,7 @@
                     else
                     {
                         <MatAccordion Multi="true">
-                            @foreach (var g in guestRequestList)
+                            @foreach (var g in _guestRequestList)
                             {
                                 <MatExpansionPanel>
                                     <MatExpansionPanelSummary>

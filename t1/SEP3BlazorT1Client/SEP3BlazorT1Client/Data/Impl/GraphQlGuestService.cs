@@ -21,10 +21,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                           createGuest(guest:$newGuest){
                             viaId,
                             guestReviews{
-                              id,
                               rating,
                               text,
-                              hostEmail
+                              hostEmail,
+                              createdDate
                             },
                             isApprovedGuest,
                             id,
@@ -34,10 +34,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                             email,
                             password,
                             hostReviews{
-                              id,
                               viaId,
                               rating,
-                              text
+                              text,
+                            createdDate
                             },
                             profileImageUrl,
                             cpr,

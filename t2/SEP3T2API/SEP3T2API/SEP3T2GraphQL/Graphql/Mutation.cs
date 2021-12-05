@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using HotChocolate;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Services;
@@ -13,7 +14,12 @@ namespace SEP3T2GraphQL.Graphql
         private readonly IRentalService _rentalService;
         private readonly IRuleService _ruleService;
         private readonly IFacilityService _facilityService;
-        public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IFacilityService facilityService, IRuleService ruleService)
+        private readonly IGuestReviewService _guestReviewService;
+        private readonly IResidenceReviewService _residenceReviewService; 
+
+        public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService,
+            IRentalService rentalService, IFacilityService facilityService, IRuleService ruleService,
+            IGuestReviewService guestReviewService, IResidenceReviewService residenceReviewService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
@@ -21,10 +27,13 @@ namespace SEP3T2GraphQL.Graphql
             _rentalService = rentalService;
             _facilityService = facilityService;
             _ruleService = ruleService;
+            _guestReviewService = guestReviewService;
+            _residenceReviewService = residenceReviewService; 
         }
+
         public async Task<Residence> CreateResidence(Residence residence)
         {
-            return await _residenceService.CreateResidenceAsync(residence); 
+            return await _residenceService.CreateResidenceAsync(residence);
         }
 
         public async Task<Host> UpdateHostStatus(Host host)
@@ -34,7 +43,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<Guest> CreateGuest(Guest guest)
         {
-            return await _guestService.CreateGuestAsync(guest); 
+            return await _guestService.CreateGuestAsync(guest);
         }
 
         public async Task<Guest> UpdateGuestStatus(Guest guest)
@@ -46,7 +55,7 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _rentalService.CreateRentRequest(request);
         }
-        
+
         public async Task<Host> RegisterHost(Host host)
         {
             return await _hostService.RegisterHostAsync(host);
@@ -70,6 +79,21 @@ namespace SEP3T2GraphQL.Graphql
         public async Task<Residence> UpdateResidenceAvailabilityAsync(Residence residence)
         {
             return await _residenceService.UpdateResidenceAvailabilityAsync(residence);
+        }
+
+        public async Task<GuestReview> CreateGuestReview(GuestReview guestReview)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<GuestReview> UpdaeGuestReview(GuestReview guestReview)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ResidenceReview> CreateResidenceReview(Residence residence, ResidenceReview residenceReview)
+        {
+            return await _residenceReviewService.CreateAsync(residence, residenceReview); 
         }
     }
 }

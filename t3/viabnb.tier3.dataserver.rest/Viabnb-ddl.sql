@@ -94,6 +94,7 @@ CREATE TABLE IF NOT EXISTS RentRequest
     hostId         INT,
     residenceId    INT,
     guestId        Int,
+    createDate     DATE,
     PRIMARY KEY (rentRequestId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid),
     FOREIGN KEY (residenceId) REFERENCES Residence (residenceid),
@@ -114,6 +115,7 @@ CREATE TABLE IF NOT EXISTS GuestReview
     guestReviewText VARCHAR,
     hostId          INT,
     guestId         INT,
+    createdDate DATE,
     PRIMARY KEY (hostId, guestId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid),
     FOREIGN KEY (guestId) REFERENCES Guest (guestId)
@@ -125,6 +127,7 @@ CREATE TABLE IF NOT EXISTS HostReview
     hostReviewText VARCHAR,
     hostId         INT,
     guestId        INT,
+    createdDate DATE,
     PRIMARY KEY (hostId, guestId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid),
     FOREIGN KEY (guestId) REFERENCES Guest (guestId)
@@ -136,6 +139,7 @@ CREATE TABLE IF NOT EXISTS ResidenceReview
     residenceReviewText VARCHAR,
     residenceId         INT,
     guestId             INT,
+    createdDate DATE,
     PRIMARY KEY (residenceId, guestId),
     FOREIGN KEY (residenceId) REFERENCES Residence (residenceId),
     FOREIGN KEY (guestId) REFERENCES Guest (guestId)
@@ -161,20 +165,160 @@ CREATE TABLE IF NOT EXISTS Rent
     FOREIGN KEY (residenceId) REFERENCES Residence (residenceId)
 );
 
+--The system's admins
 INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('291597@via.dk', '1234', 'Kutaiba', 'Kashmar', '11111111');
+VALUES ('291597@via.dk', '1234', 'Kutaiba', 'Kashmar', '+4511111111');
 INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('293885@via.dk', '1234', 'Michael', 'Bui', '22222222');
+VALUES ('293885@via.dk', '1234', 'Michael', 'Bui', '+4522222222');
 INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('304218@via.dk', '1234', 'Kasper', 'Jensen', '33333333');
+VALUES ('304218@via.dk', '1234', 'Kasper', 'Jensen', '+4533333333');
 INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('293336@via.dk', '1234', 'Lilian', 'Bittar', '44444444');
+VALUES ('293336@via.dk', '1234', 'Lilian', 'Bittar', '+4544444444');
 
 INSERT INTO Admin(initials)
 VALUES ('KNK');
 INSERT INTO Admin(initials)
 VALUES ('MTB');
-INSERT INTO Admin( initials)
+INSERT INTO Admin(initials)
 VALUES ('KSJ');
-INSERT INTO Admin( initials)
+INSERT INTO Admin(initials)
 VALUES ('LBB');
+
+--Other users
+INSERT INTO _User(email, password, fName, lName, phoneNumber)
+VALUES ('john@gmail.com', 'Aa11', 'John', 'Johnson', '+4555555555');
+INSERT INTO _User(email, password, fName, lName, phoneNumber)
+VALUES ('bob@gmail.com', 'Aa11', 'Bob', 'Bobsen', '+4566666666');
+INSERT INTO _User(email, password, fName, lName, phoneNumber)
+VALUES ('sara@hotmail.com', 'Aa11', 'Sara', 'Sarsen', '+4577777777');
+INSERT INTO _User(email, password, fName, lName, phoneNumber)
+VALUES ('alice@outlook.com', 'Aa11', 'Alice', 'Aliceson', '+458888888');
+INSERT INTO _User(email, password, fName, lName, phoneNumber)
+VALUES ('shrek@ogre.org', 'Aa11', 'Shrek', 'Shrekson', '+4599999999');
+INSERT INTO _User(email, password, fName, lName, phoneNumber)
+VALUES ('mario@nintendo.org', 'Aa11', 'Mario', 'Mario', '+4510000000');
+
+--Host
+INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
+VALUES (5 , '1111111111', false, 'image');
+INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
+VALUES (6, '2222222222', false, 'image');
+INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
+VALUES (7, '3333333333', false, 'image');
+INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
+VALUES (8, '444444444', false, 'image');
+INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
+VALUES (9, '5555555555', false, 'image');
+INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
+VALUES (10, '6666666666', false, 'image');
+
+--Guest
+
+INSERT INTO Guest(guestid, viaId, isApprovedGuest)
+VALUES (5, 111111, false);
+INSERT INTO Guest(guestid, viaId, isApprovedGuest)
+VALUES (6, 222222, false);
+INSERT INTO Guest(guestid, viaId, isApprovedGuest)
+VALUES (7, 333333, false);
+INSERT INTO Guest(guestid, viaId, isApprovedGuest)
+VALUES (8, 444444, false);
+INSERT INTO Guest(guestid, viaId, isApprovedGuest)
+VALUES (9, 555555, false);
+INSERT INTO Guest(guestid, viaId, isApprovedGuest)
+VALUES (10, 666666, false);
+
+--City
+
+INSERT INTO City(cityName, zipcode)
+VALUES ('Horsens', 8700);
+INSERT INTO City(cityName, zipcode)
+VALUES ('Århus Ø', 8000);
+INSERT INTO City(cityName, zipcode)
+VALUES ('København N', 2200);
+INSERT INTO City(cityName, zipcode)
+VALUES ('Odense S', 5000);
+
+--Address
+
+INSERT INTO Address(streetName, streetNumber, houseNumber, cityId)
+VALUES ('Strandvejen', '1', '1, st', 1);
+INSERT INTO Address(streetName, streetNumber, houseNumber, cityId)
+VALUES ('Åboulevarden', '5', '5, 3 sal th', 1);
+INSERT INTO Address(streetName, streetNumber, houseNumber, cityId)
+VALUES ('Åboulevarden', '8', '6, st', 2);
+INSERT INTO Address(streetName, streetNumber, houseNumber, cityId)
+VALUES ('Kollegievænget', '3', '2, sal tv', 1);
+INSERT INTO Address(streetName, streetNumber, houseNumber, cityId)
+VALUES ('Odensevej', '10', '16D', 3);
+INSERT INTO Address(streetName, streetNumber, houseNumber, cityId)
+VALUES ('Århusvej', '2', '1A', 4);
+INSERT INTO Address(streetName, streetNumber, houseNumber, cityId)
+VALUES ('Københavnsvej', '6', '1, st', 3);
+INSERT INTO Address(streetName, streetNumber, houseNumber, cityId)
+VALUES ('Horsensvej', '5', '1F', 2);
+
+
+--Residence
+
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+VALUES (1, 'House', '3 bedroom house', true, 1500, '2022-12-04', '2023-12-01', 'Image', 10, 6);
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+VALUES (2, 'Apartment', '1 bedroom apartment', true, 200, '2022-12-04', '2023-12-01', 'Image', 1, 6);
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+VALUES (3, 'Sofa', 'Comfy sofa', true, 50, '2022-12-04', '2023-12-01', 'Image', 1, 5);
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+VALUES (4, 'House', '10 bedroom house', true, 500, '2022-12-04', '2023-12-01', 'Image', 15, 8);
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+VALUES (5, 'House', '1 bedroom house', true, 500, '2022-12-04', '2023-12-01', 'Image', 2, 8);
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+VALUES (6, 'Bed', 'Double bed', true, 500, '2022-12-04', '2023-12-01', 'Image', 2, 9);
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+VALUES (7, 'Matres', 'Air matres', true, 500, '2022-12-04', '2023-12-01', 'Image', 1, 10);
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+VALUES (8, 'Apartment', '5 bedroom apartment', true, 500, '2022-12-04', '2023-12-01', 'Image', 6, 7);
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+VALUES (2, 'Room', 'Guest room', true, 500, '2022-12-04', '2023-12-01', 'Image', 3, 7);
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+VALUES (5, 'Summer house', '2 bedroom summer house', true, 500, '2022-12-04', '2023-12-01', 'Image', 4, 9);
+
+
+--Facility
+
+INSERT INTO Facility(name)
+VALUES('Wifi');
+INSERT INTO Facility(name)
+VALUES('Free parking');
+INSERT INTO Facility(name)
+VALUES('Refrigerator');
+INSERT INTO Facility(name)
+VALUES('Kitchen');
+INSERT INTO Facility(name)
+VALUES('Backyard');
+INSERT INTO Facility(name)
+VALUES('Microwave');
+INSERT INTO Facility(name)
+VALUES('Bed linens');
+INSERT INTO Facility(name)
+VALUES('Extra pillows and blankets');
+INSERT INTO Facility(name)
+VALUES('Heating');
+INSERT INTO Facility(name)
+VALUES('Smoke alarm');
+INSERT INTO Facility(name)
+VALUES('Fire extinguisher');
+INSERT INTO Facility(name)
+VALUES('First aid kit');
+INSERT INTO Facility(name)
+VALUES('Dishes and silverware');
+INSERT INTO Facility(name)
+VALUES('Oven');
+INSERT INTO Facility(name)
+VALUES('TV');
+INSERT INTO Facility(name)
+VALUES('WasherWasher');
+INSERT INTO Facility(name)
+VALUES('Air conditioning');
+INSERT INTO Facility(name)
+VALUES('Hair dryer');
+INSERT INTO Facility(name)
+VALUES('ShampooShampoo');

@@ -36,6 +36,9 @@ namespace SEP3BlazorT1Client.Models
         [Required]
         [JsonProperty("residence")]
         public Residence Residence { get; set; }
+        [Required]
+        [JsonProperty("requestCreationDate")]
+        public DateTime RequestCreationDate { get; set; }
 
         public decimal GetTotalPrice()
         {

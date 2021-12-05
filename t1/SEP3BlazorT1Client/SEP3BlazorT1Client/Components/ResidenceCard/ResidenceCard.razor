@@ -21,13 +21,16 @@
             </div>
 
             <div class="residence-card__content">
+                <div class="rating">
+                    <span>@Residence.GetAverageRating()</span>
+                </div>
                 <div class="place-and-price">
                     <span class="place">@Residence.Address.City.CityName, @Residence.Address.StreetName</span>
                     <span class="price">@Residence.PricePerNight DKK.- / night</span>
                 </div>
                 <div class="available-period">
                     <span>@Residence.AvailableFrom.Value.ToShortDateString()</span>
-                    
+
                     <span>@Residence.AvailableTo.Value.ToShortDateString()</span>
                 </div>
             </div>

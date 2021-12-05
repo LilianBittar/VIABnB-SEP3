@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -21,19 +20,11 @@ namespace SEP3BlazorT1Client.Authentication
         private readonly IAdministrationService _administrationService;
 
         private User cachedUser;
-        /*private Host cachedHost;
-        private Guest cachedGuest;
-        private Administrator cachedAdmin;*/
 
         private bool isAdmin = false;
         private bool isHost = false;
         private bool isGuest = false;
-        /*
-         * Use booleans here to keep track of if the user is admin, guest, host
-         */
         
-
-        // TODO: REWRITE THIS TO A USER. CLAIMS DOESN'T WORK CORRECTLY RIGHT NOW :/
         public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IUserService userService, IHostService hostService, IGuestService guestService, IAdministrationService administrationService)
         {
             this.jsRuntime = jsRuntime;
@@ -47,7 +38,6 @@ namespace SEP3BlazorT1Client.Authentication
             var identity = new ClaimsIdentity();
             if (cachedUser == null)
             {
-                Console.WriteLine("We are here-------------------------------------------------------------");
                 var userAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
                 if (!string.IsNullOrEmpty(userAsJson))
                 {
@@ -57,7 +47,6 @@ namespace SEP3BlazorT1Client.Authentication
             }
             else
             {
-                Console.WriteLine("We are here-------------------------------------------------------------djhsakdhqkwjekqw");
                 identity = SetupClaimsForUser(cachedUser);
             }
 
