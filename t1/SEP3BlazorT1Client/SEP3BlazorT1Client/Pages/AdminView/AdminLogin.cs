@@ -15,12 +15,18 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         private string _email;
         private string _password;
         private string _errorMessage;
+        private bool IsShow {get;set;} = true;
+        private void ShowLoadingBar()
+        {
+            IsShow =   !IsShow;
+        }  
 
         private async Task LoginAsAdmin()
         {
             _errorMessage = "";
             try
             {
+                ShowLoadingBar();
                 await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_email, _password);
                 _email = "";
                 _password = "";
@@ -28,6 +34,7 @@ namespace SEP3BlazorT1Client.Pages.AdminView
             }
             catch (Exception e)
             {
+                ShowLoadingBar();
                 _errorMessage = e.Message;
             }
         }
