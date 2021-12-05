@@ -32,5 +32,5 @@ public interface ResidenceReviewDAO {
      *
      * @throws IllegalStateException if can't connect to database
      * */
-    List<ResidenceReview> getAllResidenceReviewsByResidenceId(int id);
+    List<ResidenceReview> getAllResidenceReviewsByResidenceId(int residenceId);
 }

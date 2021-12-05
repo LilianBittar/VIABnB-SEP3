@@ -140,4 +140,17 @@ public class ResidenceController {
 
     }
 
+    @GetMapping("/residences/{residenceId}/residencereviews")
+    public ResponseEntity<List<ResidenceReview>> getAllResidenceReviewsByResidenceId(@PathVariable int residenceId) {
+        try {
+            LOGGER.info("Request for all residencereviews received");
+            List<ResidenceReview> residencereviews = residenceReviewDAO.getAllResidenceReviewsByResidenceId(residenceId);
+            LOGGER.info("Returning: " + gson.toJson(residencereviews));
+            return ResponseEntity.ok(residencereviews);
+        } catch (Exception e) {
+            LOGGER.error("Connection failed " + e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
 }

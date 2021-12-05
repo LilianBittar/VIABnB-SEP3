@@ -1,10 +1,13 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residencereview;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.GuestReview;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Residence;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.ResidenceReview;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResidenceReviewDAOImpl extends BaseDao implements ResidenceReviewDAO {
@@ -47,8 +50,29 @@ public class ResidenceReviewDAOImpl extends BaseDao implements ResidenceReviewDA
     }
 
     @Override
-    public List<ResidenceReview> getAllResidenceReviewsByResidenceId(int id) {
-        return null;
+    public List<ResidenceReview> getAllResidenceReviewsByResidenceId(int residenceId) {
+        List<ResidenceReview> residenceReviews = new ArrayList<>();
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT * FROM residencereview WHERE residenceid = ?");
+            stm.setInt(1, residenceId);
+            ResultSet result = stm.executeQuery();
+            while (result.next())
+            {
+                ResidenceReview residenceReview = new ResidenceReview(
+                        result.getDouble("residencerating"),
+                        result.getString("residencereviewtext"),
+                        result.getInt("guestid"),
+                        LocalDate.parse(result.getDate("createddate").toString()));
+                residenceReviews.add(residenceReview);
+            }
+            return residenceReviews;
+        }
+        catch (SQLException throwables)
+        {
+            throw new IllegalStateException(throwables.getMessage());
+        }
     }
 
     /**
