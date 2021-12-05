@@ -16,5 +16,8 @@ namespace SEP3T2GraphQL.Models
         public int ViaId { get; set; }
         [JsonProperty("createdDate")]
         public DateTime CreatedDate { get; set; }
+        [Required]
+        [JsonProperty("hostId")]
+        public int hostId { get; set; }
     }
 }

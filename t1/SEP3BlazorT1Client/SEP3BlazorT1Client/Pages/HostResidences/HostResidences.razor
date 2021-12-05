@@ -28,7 +28,7 @@
   </style>
 @if (_residences == null)
 {
-    <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+    <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium" />
 }
 @if (_residences.Count == 0)
 {
@@ -196,8 +196,9 @@ else
         var user = authState.User;
         try
         {
-            var host = await hostService.GetHostById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id")?.Value));
+            var host = await hostService.GetHostByEmail(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email")?.Value);
             _residences = await ResidenceService.GetResidencesByHostIdAsync(host.Id);
+            StateHasChanged();
         }
         catch (Exception e)
         {
