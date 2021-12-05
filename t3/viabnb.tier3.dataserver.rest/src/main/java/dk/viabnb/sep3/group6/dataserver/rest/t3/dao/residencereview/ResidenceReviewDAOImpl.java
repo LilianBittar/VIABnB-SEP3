@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ResidenceReviewDAOImpl extends BaseDao implements ResidenceReviewDAO {
     @Override
-    public ResidenceReview create(Residence residence, ResidenceReview residenceReview) {
+    public ResidenceReview createResidenceReview(Residence residence, ResidenceReview residenceReview) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement("INSERT INTO residencereview(residencerating, residencereviewtext, residenceid, guestid, createddate) values (?,?,?,?,?)");
             stm.setDouble(1, residenceReview.getRating());
@@ -27,7 +27,7 @@ public class ResidenceReviewDAOImpl extends BaseDao implements ResidenceReviewDA
     }
 
     @Override
-    public ResidenceReview update(int residenceId, ResidenceReview updatedResidenceReview) {
+    public ResidenceReview updateResidenceReview(int residenceId, ResidenceReview updatedResidenceReview) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement("UPDATE residencereview " +
                     "SET residencerating = ?, residencereviewtext = ?, createddate = ? " +
@@ -47,7 +47,7 @@ public class ResidenceReviewDAOImpl extends BaseDao implements ResidenceReviewDA
     }
 
     @Override
-    public List<ResidenceReview> getAllByResidenceId(int id) {
+    public List<ResidenceReview> getAllResidenceReviewsByResidenceId(int id) {
         return null;
     }
 

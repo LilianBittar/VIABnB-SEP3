@@ -37,7 +37,7 @@ public class RentRequestController {
         }
         try {
             LOGGER.info("Creating rent request...");
-            RentRequest createdRentRequest = rentRequestDAO.create(request);
+            RentRequest createdRentRequest = rentRequestDAO.createNewRentRequest(request);
             if (createdRentRequest == null) {
                 LOGGER.error("Rent request could not be created...");
                 return ResponseEntity.internalServerError().build();
@@ -59,7 +59,7 @@ public class RentRequestController {
             @RequestParam(required = false) String status,
             @RequestParam(required = false) Integer viaId) {
         //TODO: this endpoint works without the RequestParam. When using the RequestParam the result will be null
-        List<RentRequest> requestsToReturn = rentRequestDAO.getAll();
+        List<RentRequest> requestsToReturn = rentRequestDAO.getAllRentRequests();
         try {
             if (residenceId != null) {
                 requestsToReturn.removeIf(request -> request.getId() != residenceId);
@@ -89,12 +89,12 @@ public class RentRequestController {
     @PutMapping("/rentrequests/{id}")
     public ResponseEntity<RentRequest> replaceRentRequest(
             @PathVariable int id, @RequestBody(required = true) RentRequest request) {
-        RentRequest existingRentRequest = rentRequestDAO.getById(id);
+        RentRequest existingRentRequest = rentRequestDAO.getRentRequestById(id);
         if (existingRentRequest == null) {
             return ResponseEntity.notFound().build();
         }
 
-        RentRequest updatedRequest = rentRequestDAO.update(request);
+        RentRequest updatedRequest = rentRequestDAO.updateRentRequest(request);
         return ResponseEntity.ok(updatedRequest);
     }
 
@@ -104,10 +104,10 @@ public class RentRequestController {
         RentRequest updateRequest;
         try {
             if (request.getStatus().name().equals("APPROVED")) {
-                updateRequest = rentRequestDAO.approveRequest(request);
+                updateRequest = rentRequestDAO.approveRentRequest(request);
                 return ResponseEntity.ok(updateRequest);
             } else if (request.getStatus().name().equals("NOTAPPROVED")) {
-                updateRequest = rentRequestDAO.rejectRequest(request);
+                updateRequest = rentRequestDAO.rejectRentRequest(request);
                 return ResponseEntity.ok(updateRequest);
             }
             return ResponseEntity.badRequest().build();

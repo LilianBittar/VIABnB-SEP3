@@ -12,7 +12,7 @@ public interface GuestReviewDAO
    * @param guestReview The new object
    * @return newly created GuestReview object
    *
-   * @throws IllegalArgumentException On an invalid Parameter
+   * @throws IllegalArgumentException if can't connect to database
    * */
   GuestReview createGuestReview(GuestReview guestReview);
   /**
@@ -21,7 +21,7 @@ public interface GuestReviewDAO
    * @param guestReview The new updated object
    * @return newly updated GuestReview object
    *
-   * @throws IllegalArgumentException On an invalid Parameter
+   * @throws IllegalArgumentException if can't connect to database
    * */
   GuestReview updateGuestReview(GuestReview guestReview);
   /**
@@ -29,7 +29,7 @@ public interface GuestReviewDAO
    * @param id The id of the guest whom the reviews belongs to
    * @return A list of GuestReview objects with a guest id that matches the given parameter
    *
-   * @throws IllegalArgumentException if the given parameter is invalid
+   * @throws IllegalArgumentException if can't connect to database
    * */
   List<GuestReview> getAllGuestReviewsByGuestId(int id);
 }

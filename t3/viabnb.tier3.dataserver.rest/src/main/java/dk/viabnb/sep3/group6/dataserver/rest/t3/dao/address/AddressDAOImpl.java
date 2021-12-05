@@ -1,6 +1,8 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.citry.CityDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.citry.CityDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Address;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.City;
 
@@ -31,6 +33,26 @@ public class AddressDAOImpl extends BaseDao implements AddressDAO
                 cityDAO.getCityById(result.getInt("cityid")).getZipCode()));
       }
       return null;
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalStateException(throwables.getMessage());
+    }
+  }
+
+  @Override public Address creteNewAddress(Address address)
+  {
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement
+          ("INSERT INTO address(streetname, streetnumber, housenumber, cityid) VALUES (?,?,?,?)");
+      stm.setString(1, address.getStreetName());
+      stm.setString(2, address.getStreetNumber());
+      stm.setString(3, address.getHouseNumber());
+      stm.setInt(4, address.getCity().getCityId());
+      stm.executeUpdate();
+      connection.commit();
+      return address;
     }
     catch (SQLException throwables)
     {

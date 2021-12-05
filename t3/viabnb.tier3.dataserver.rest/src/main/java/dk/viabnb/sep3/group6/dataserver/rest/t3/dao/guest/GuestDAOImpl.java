@@ -109,13 +109,6 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO
     }
   }
 
-  /**
-   * Handles querying the database for a list of all not approved guest.
-   *
-   * @return a list of  guest that were not approved.
-   * @throws IllegalStateException if it could not connect to the database
-   */
-
   @Override public List<Guest> getAllNotApprovedGuests()
   {
     List<Guest> guestsToReturn = new ArrayList<>();

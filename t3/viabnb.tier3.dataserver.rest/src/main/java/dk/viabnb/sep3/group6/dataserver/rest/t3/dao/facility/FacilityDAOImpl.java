@@ -25,7 +25,7 @@ public class FacilityDAOImpl extends BaseDao implements FacilityDAO
     }
     catch (SQLException throwables)
     {
-      throw new IllegalArgumentException(throwables.getMessage());
+      throw new IllegalStateException(throwables.getMessage());
     }
   }
 
@@ -71,7 +71,7 @@ public class FacilityDAOImpl extends BaseDao implements FacilityDAO
     }
     catch (SQLException throwables)
     {
-      throw new IllegalArgumentException(throwables.getMessage());
+      throw new IllegalStateException(throwables.getMessage());
     }
   }
 }

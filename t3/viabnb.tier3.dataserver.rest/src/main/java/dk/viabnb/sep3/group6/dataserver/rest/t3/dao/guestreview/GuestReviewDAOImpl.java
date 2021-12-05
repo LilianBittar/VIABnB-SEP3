@@ -52,7 +52,7 @@ public class GuestReviewDAOImpl extends BaseDao implements GuestReviewDAO
     }
     catch (SQLException throwables)
     {
-      throw new IllegalArgumentException(throwables.getMessage());
+      throw new IllegalStateException(throwables.getMessage());
     }
   }
 
