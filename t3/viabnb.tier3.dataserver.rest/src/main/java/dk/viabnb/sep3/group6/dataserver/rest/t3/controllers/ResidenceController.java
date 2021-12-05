@@ -128,7 +128,7 @@ public class ResidenceController {
     // Might have to add /{viaid} after /residencereviews, but might be too long endpoint / bad design? (PK of a review is a composite key)
     @PutMapping("/residences/{residenceId}/residencereviews")
     public ResponseEntity<ResidenceReview> updateReview(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
-        if (residenceReview != null || residenceId <= 0) {
+        if (residenceReview == null || residenceId <= 0) {
             return ResponseEntity.badRequest().build();
         }
         try {
