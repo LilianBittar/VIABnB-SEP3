@@ -107,6 +107,7 @@ public class ResidenceController {
 
     @PostMapping("/residences/{residenceId}/residencereviews")
     public ResponseEntity<ResidenceReview> createReview(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
+        LOGGER.info("Request for createReview received");
         if (residenceReview == null || residenceId <= 0) {
             return ResponseEntity.badRequest().build();
         }

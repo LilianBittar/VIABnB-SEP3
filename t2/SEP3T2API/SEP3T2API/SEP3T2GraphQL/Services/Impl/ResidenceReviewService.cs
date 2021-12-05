@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services.Validation;
@@ -22,6 +23,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<ResidenceReview> CreateAsync(Residence residence, ResidenceReview residenceReview)
         {
+            Console.WriteLine($"{this} received request for {nameof(CreateAsync)} with params: {JsonConvert.SerializeObject(residence)} \n {JsonConvert.SerializeObject(residenceReview)}");
             if (residence == null || residenceReview == null)
             {
                 throw new ArgumentException("residence and residenceReview is required");
