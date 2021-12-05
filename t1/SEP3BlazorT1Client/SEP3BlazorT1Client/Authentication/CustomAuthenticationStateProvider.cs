@@ -103,6 +103,7 @@ namespace SEP3BlazorT1Client.Authentication
             claims.Add(new Claim("lastName", user.LastName));
             claims.Add(new Claim("email", user.Email));
             claims.Add(new Claim("phoneNumber", user.PhoneNumber));
+            claims.Add(new Claim("Id", user.Id.ToString()));
             if (isAdmin)
             {
                 Console.WriteLine("Admin");
@@ -119,8 +120,6 @@ namespace SEP3BlazorT1Client.Authentication
                 claims.Add(new Claim("Role", "Guest"));
             }
             var identity = new ClaimsIdentity(claims, "apiauth_type");
-            string test = string.Join(",", identity.Claims);
-            Console.WriteLine(test);
             return identity;
         }
         
