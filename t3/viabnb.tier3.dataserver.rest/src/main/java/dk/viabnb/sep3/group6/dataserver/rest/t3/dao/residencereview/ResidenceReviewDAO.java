@@ -13,7 +13,7 @@ public interface ResidenceReviewDAO {
      * @param residenceReview the review that is to be created.
      * @throws IllegalStateException if connection to data source fails or executing the update fails.
      */
-    ResidenceReview create(Residence residence, ResidenceReview residenceReview) throws IllegalStateException;
+    ResidenceReview createResidenceReview(Residence residence, ResidenceReview residenceReview) throws IllegalStateException;
 
     /**
      * Updates an existing {@code ResidenceReview} by updating the reviews fields to match the fields of {@code updatedResidenceReview}
@@ -23,7 +23,14 @@ public interface ResidenceReviewDAO {
      * @param updatedResidenceReview ResidenceReview object with the desired state that the review should have after update.
      * @throws IllegalStateException if connection to data source fails or executing the update fails.
      */
-    ResidenceReview update(int residenceId, ResidenceReview updatedResidenceReview) throws IllegalStateException;
+    ResidenceReview updateResidenceReview(int residenceId, ResidenceReview updatedResidenceReview) throws IllegalStateException;
 
-    List<ResidenceReview> getAllByResidenceId(int id);
+    /**
+     * Handle a query that returns a list of residence reviews based on the given parameter
+     * @param id The targeted residence parameter
+     * @return a list of residence objects
+     *
+     * @throws IllegalStateException if can't connect to database
+     * */
+    List<ResidenceReview> getAllResidenceReviewsByResidenceId(int residenceId);
 }

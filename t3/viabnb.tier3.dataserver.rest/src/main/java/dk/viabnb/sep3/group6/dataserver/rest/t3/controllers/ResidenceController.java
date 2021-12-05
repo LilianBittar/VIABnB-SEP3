@@ -9,15 +9,11 @@ import dk.viabnb.sep3.group6.dataserver.rest.t3.models.ResidenceReview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 //TODO: Change routes to /residences as that is the standard for RESTful collections -mic
 @RestController
@@ -116,7 +112,7 @@ public class ResidenceController {
         }
         try {
             Residence residence = residenceDAO.getByResidenceId(residenceId);
-            ResidenceReview createdReview = residenceReviewDAO.create(residence, residenceReview);
+            ResidenceReview createdReview = residenceReviewDAO.createResidenceReview(residence, residenceReview);
             if (createdReview == null){
                 LOGGER.error("Could not create new ResidenceReview");
                 return ResponseEntity.internalServerError().build();
@@ -135,13 +131,26 @@ public class ResidenceController {
             return ResponseEntity.badRequest().build();
         }
         try {
-            ResidenceReview updatedReview = residenceReviewDAO.update(residenceId, residenceReview);
+            ResidenceReview updatedReview = residenceReviewDAO.updateResidenceReview(residenceId, residenceReview);
             return ResponseEntity.ok(updatedReview);
         } catch (IllegalStateException e) {
             LOGGER.error(e.getMessage());
             return ResponseEntity.internalServerError().build();
         }
 
+    }
+
+    @GetMapping("/residences/{residenceId}/residencereviews")
+    public ResponseEntity<List<ResidenceReview>> getAllResidenceReviewsByResidenceId(@PathVariable int residenceId) {
+        try {
+            LOGGER.info("Request for all residencereviews received");
+            List<ResidenceReview> residencereviews = residenceReviewDAO.getAllResidenceReviewsByResidenceId(residenceId);
+            LOGGER.info("Returning: " + gson.toJson(residencereviews));
+            return ResponseEntity.ok(residencereviews);
+        } catch (Exception e) {
+            LOGGER.error("Connection failed " + e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
 }

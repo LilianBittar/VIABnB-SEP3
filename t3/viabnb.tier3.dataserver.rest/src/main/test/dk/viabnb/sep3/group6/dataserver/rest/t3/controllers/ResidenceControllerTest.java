@@ -77,7 +77,7 @@ class ResidenceControllerTest {
                 new ArrayList<>(),
                 "Test", null, null, 3, host, new ArrayList<>());
         ResidenceReview residenceReview = new ResidenceReview(1, "test", 293886, LocalDate.now());
-        when(residenceReviewDAO.create(residence, residenceReview)).thenThrow(IllegalStateException.class);
+        when(residenceReviewDAO.createResidenceReview(residence, residenceReview)).thenThrow(IllegalStateException.class);
         assertEquals(ResponseEntity.internalServerError().build(), controller.createReview(residence.getId(), residenceReview));
     } @Test
     public void createReviewReturnsInternalServerErrorWhenCreatedReviewIsNull(){
@@ -85,7 +85,7 @@ class ResidenceControllerTest {
                 new ArrayList<>(),
                 "Test", null, null, 3, host, new ArrayList<>());
         ResidenceReview residenceReview = new ResidenceReview(1, "test", 293886, LocalDate.now());
-        when(residenceReviewDAO.create(residence, residenceReview)).thenReturn(null);
+        when(residenceReviewDAO.createResidenceReview(residence, residenceReview)).thenReturn(null);
         assertEquals(ResponseEntity.internalServerError().build(), controller.createReview(residence.getId(), residenceReview));
     }
 

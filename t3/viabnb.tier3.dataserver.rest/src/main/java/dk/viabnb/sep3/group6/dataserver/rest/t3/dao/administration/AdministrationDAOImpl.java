@@ -64,7 +64,7 @@ public class AdministrationDAOImpl extends BaseDao implements AdministrationDAO 
             }
             return administratorListToReturn;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 }

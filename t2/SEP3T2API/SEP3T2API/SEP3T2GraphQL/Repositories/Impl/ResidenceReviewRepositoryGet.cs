@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 
@@ -6,14 +8,27 @@ namespace SEP3T2GraphQL.Repositories.Impl
 {
     public partial class ResidenceReviewRepository : IResidenceReviewRepository
     {
+        
+        
         public Task<IEnumerable<ResidenceReview>> GetAllAsync()
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId)
+        public async Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId)
         {
-            throw new System.NotImplementedException();
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residence/{residenceId}/residencereviews");
+
+            await HandleErrorResponse(responseMessage);
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+
+            List<ResidenceReview> residenceReviews = JsonSerializer.Deserialize<List<ResidenceReview>>(result,
+                new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+
+            return residenceReviews;
         }
+        
+       
     }
 }
