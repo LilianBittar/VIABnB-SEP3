@@ -29,7 +29,6 @@ namespace SEP3BlazorT1Client.Data.Impl
                                     email
                                     password
                                     hostReviews {
-                                    id
                                     rating
                                     text
                                     viaId
