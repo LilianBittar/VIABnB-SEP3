@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using HotChocolate;
 using SEP3T2GraphQL.Models;
+using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services;
 
 namespace SEP3T2GraphQL.Graphql
@@ -15,11 +16,12 @@ namespace SEP3T2GraphQL.Graphql
         private readonly IRuleService _ruleService;
         private readonly IFacilityService _facilityService;
         private readonly IGuestReviewService _guestReviewService;
+        private readonly IHostReviewService _hostReview;
         private readonly IResidenceReviewService _residenceReviewService; 
 
         public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService,
             IRentalService rentalService, IFacilityService facilityService, IRuleService ruleService,
-            IGuestReviewService guestReviewService, IResidenceReviewService residenceReviewService)
+            IGuestReviewService guestReviewService, IHostReviewService hostReviewService, IResidenceReviewService residenceReviewService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
@@ -28,6 +30,7 @@ namespace SEP3T2GraphQL.Graphql
             _facilityService = facilityService;
             _ruleService = ruleService;
             _guestReviewService = guestReviewService;
+            _hostReview = hostReviewService;
             _residenceReviewService = residenceReviewService; 
         }
 
@@ -95,5 +98,16 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _residenceReviewService.CreateAsync(residence, residenceReview); 
         }
+        
+        public async Task<HostReview> CreateHostReview(HostReview hostReview)
+        {
+           return await _hostReview.CreateHostReviewAsync(hostReview);
+        }
+
+        public async Task<HostReview> UpdateHostReview(HostReview hostReview)
+        {
+            return await _hostReview.UpdateHostReviewAsync(hostReview);
+        }
+
     }
 }

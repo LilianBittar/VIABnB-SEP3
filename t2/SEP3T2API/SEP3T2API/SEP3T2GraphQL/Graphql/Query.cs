@@ -21,8 +21,14 @@ namespace SEP3T2GraphQL.Graphql
         private readonly IRuleService _ruleService;
         private readonly IUserService _userService;
         private readonly IGuestReviewService _guestReviewService;
+        private readonly IHostReviewService _hostReview;
         private readonly IResidenceReviewService _residenceReviewService;
-        public Query(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IAdministrationService administrationService, IFacilityService facilityService, IRuleService ruleService, IUserService userService, IGuestReviewService guestReviewService)
+        public Query(IResidenceService residenceService, IHostService hostService, 
+            IGuestService guestService, IRentalService rentalService, 
+            IAdministrationService administrationService, 
+            IFacilityService facilityService, IRuleService ruleService, 
+            IUserService userService, IHostReviewService hostReview,
+            IGuestReviewService guestReviewService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
@@ -32,6 +38,7 @@ namespace SEP3T2GraphQL.Graphql
             _facilityService = facilityService;
             _ruleService = ruleService;
             _userService = userService;
+            _hostReview = hostReview;
             _guestReviewService = guestReviewService;
         }
         public async Task<Residence> GetResidence(int id)
@@ -165,6 +172,10 @@ namespace SEP3T2GraphQL.Graphql
             return await _guestReviewService.GetAllGuestReviewsByGuestIdAsync(id);
         }
 
+        public async Task<IEnumerable<HostReview>> GetAllHostReviewsByHostId(int id)
+        {
+            return await _hostReview.GetAllHostReviewsByHostIdAsync(id);
+        }
         private async Task<IEnumerable<ResidenceReview>> GetAllResidenceReviewsByResidenceId(int residenceId)
         {
             return await _residenceReviewService.GetAllByResidenceIdAsync(residenceId);
