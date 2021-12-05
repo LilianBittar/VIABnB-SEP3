@@ -34,7 +34,7 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.DoesNotThrowAsync(() => ResidenceService.UpdateResidenceAvailabilityAsync());
+            Assert.DoesNotThrowAsync(() => ResidenceService.UpdateResidenceAvailabilityAsync(residence));
         }
     }
 }
