@@ -3,6 +3,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RentRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,5 +39,10 @@ class HostControllerTest
     Assertions.assertEquals(ResponseEntity.internalServerError().build(), response);
   }
 
+  @Test
+  public void RegisterHostNullRequestReturnsBadRequest() {
+    Host host = null;
+    assertEquals(ResponseEntity.internalServerError().build(), controller.createHost(host));
+  }
 
 }
