@@ -17,7 +17,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residencereview/{residenceId}");
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residence/{residenceId}/residencereviews");
 
             await HandleErrorResponse(responseMessage);
 
