@@ -6,27 +6,38 @@
 @inject NavigationManager NavigationManager
 @inject IGuestService GuestService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+<AuthorizeView Policy="MustBeGuest">
+    <Authorized>
+        <div class="container-fluid d-flex justify-content-center mt-3">
+            <div class="row">
+                <div class="col">
+                    @if (_residence != null && _guest != null)
+                    {
+                        <ResidenceReviewForm Residence="@_residence" Guest="@_guest"/>
+                    }
+                    else if (_residence == null || _guest == null)
+                    {
+                        <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+                    }
+                    else
+                    {
+                        <p>Could not find residence or guest</p>
+                    }
 
-<div class="container-fluid d-flex justify-content-center mt-3">
-    <div class="row">
-        <div class="col">
-            @if (_residence != null && _guest != null)
-            {
-                <ResidenceReviewForm Residence="@_residence" Guest="@_guest"/>
-            }
-            else if (_residence == null || _guest == null)
-            {
-                <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
-            }
-            else
-            {
-                <p>Could not find residence or guest</p>
-            }
-
+                </div>
+            </div>
         </div>
-    </div>
-
-</div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="container-fluid d-flex justify-content-center">
+            <div class="row">
+                <div class="col">
+                    <p>You must be logged in as guest uwu</p>
+                </div>
+            </div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
 
 @code {
 
