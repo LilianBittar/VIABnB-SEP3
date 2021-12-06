@@ -7,6 +7,6 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes
     public class FacilityListResponseType
     {
         [JsonProperty("allFacilities")]
-        public IEnumerable<Facility> Type { get; set; }
+        public IEnumerable<Facility> Facilities { get; set; }
     }
 }
