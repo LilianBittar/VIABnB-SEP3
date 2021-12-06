@@ -22,18 +22,18 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"mutation($newHost:HostInput){
                           registerHost(host:$newHost){
-                            id
+                                    id
                                     firstName
                                     lastName
                                     phoneNumber
                                     email
                                     password
                                     hostReviews {
-                                    rating
-                                    text
-                                    viaId
-                                    hostId
-                                    createdDate
+                                        rating
+                                        text
+                                        viaId
+                                        hostId
+                                        createdDate
                                     }
                                     profileImageUrl
                                     cpr
