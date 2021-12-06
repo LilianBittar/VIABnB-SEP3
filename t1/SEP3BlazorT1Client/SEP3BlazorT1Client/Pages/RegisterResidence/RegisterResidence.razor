@@ -51,12 +51,7 @@
                         <EditForm EditContext="@FormEditContextResidence">
                             <DataAnnotationsValidator/>
                             <p>
-                                <MatSelect Label="Residence type" @bind-Value="_newResidence.Type" Style="margin-top:1rem;">
-                                    @foreach (var type in _allResidenceTypes)
-                                    {
-                                        <MatOptionString Value="@type">@type</MatOptionString>
-                                    }
-                                </MatSelect>
+                                <MatTextField Label="Residence type" @bind-Value="_newResidence.Type" Style="margin-top:1rem" />
                                 <ValidationMessage For="@(() => _newResidence.Type)"/>
                             </p>
 

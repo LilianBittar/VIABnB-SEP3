@@ -15,11 +15,10 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
     public partial class RegisterResidence
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
-
-        // [Inject]
-        // public RegisterResidenceViewModel ViewModel { get; set; }
+        
         [Inject] public IResidenceService ResidenceService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
+        [Inject] public IFacilityService FacilityService { get; set; }
 
 
         public EditContext FormEditContextResidence { get; set; }
@@ -30,17 +29,15 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
 
         public string Name { get; set; }
         private bool _showFacilityDialog = false;
-        private IList<Facility> _allFacilities = new List<Facility>() {new Facility() {Name = "Wifi"}};
-        private IList<string> _allResidenceTypes = new List<string>() {"House", "Apartment", "Room"};
+        private IEnumerable<Facility> _allFacilities = new List<Facility>();
 
         private Facility _facilityToBeAdded = new Facility();
-        private Address _newResidenceAddress = new Address(){City = new City()};
+        private Address _newResidenceAddress = new Address() {City = new City()};
 
         private string _registerResidenceErrorMessage = "";
 
         protected override async Task OnInitializedAsync()
         {
-            // TODO: Fetch residence types on mount
             // TODO: Fetch all available facilities on mount
             _newResidence = new Residence()
             {
@@ -55,7 +52,8 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             };
             FormEditContextResidence = new EditContext(_newResidence);
             FormEditContextAddress = new EditContext(_newResidenceAddress);
-            await base.OnInitializedAsync();
+            _allFacilities = await FacilityService.GetAllFacilities(); 
+            StateHasChanged();
         }
 
         private async void AddNewRule()

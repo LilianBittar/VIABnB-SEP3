@@ -21,8 +21,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
         
         public async Task<Host> RegisterHostAsync(Host host)
         {
-            System.Console.WriteLine($"{this} was passed args: {JsonSerializer.Serialize(host)}");
-            
+
             string newHost = JsonSerializer.Serialize(host, new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
@@ -31,8 +30,10 @@ namespace SEP3T2GraphQL.Repositories.Impl
             Console.WriteLine(newHost);
             StringContent content = new StringContent(newHost, Encoding.UTF8, "application/json");
             HttpResponseMessage responseMessage = await client.PostAsync(uri + "/host", content);
+            Console.WriteLine("before if in rep");
             if (!responseMessage.IsSuccessStatusCode)
             {
+                Console.WriteLine("inside if in rep");
                 Console.WriteLine(await responseMessage.Content.ReadAsStringAsync());
                 throw new Exception(await responseMessage.Content.ReadAsStringAsync());
             }
