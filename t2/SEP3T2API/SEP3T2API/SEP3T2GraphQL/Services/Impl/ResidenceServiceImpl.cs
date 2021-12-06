@@ -63,17 +63,28 @@ namespace SEP3T2GraphQL.Services
                     var allCities = await _cityService.GetAllAsync();
                     var allAddresses = await _addressService.GetAllAsync(); 
                     // Creates new city if none exists. 
-                    if (!allCities.Any(c => c.Equals(residence.Address.City)))
+                    var existingCity = allCities.FirstOrDefault(c => c.Equals(residence.Address.City)); 
+                    if (existingCity == null)
                     {
+                        Console.WriteLine("Creating new city...");
                         await _cityService.CreateAsync(residence.Address.City); 
                     }
+                    else
+                    {
+                        residence.Address.City = existingCity;
+                    }
 
-                    if (!allAddresses.Any(a => a.Equals(residence.Address)))
+                    var existingAddress = allAddresses.FirstOrDefault(a => a.Equals(residence.Address)); 
+                    if (existingAddress == null)
                     {
                         await _addressService.CreateAsync(residence.Address);
                     }
-                    
-                    return await _residenceRepository.CreateResidenceAsync(residence);
+                    else
+                    {
+                        residence.Address = existingAddress; 
+                    }
+
+                        return await _residenceRepository.CreateResidenceAsync(residence);
                 }
                 catch (Exception e)
                 {

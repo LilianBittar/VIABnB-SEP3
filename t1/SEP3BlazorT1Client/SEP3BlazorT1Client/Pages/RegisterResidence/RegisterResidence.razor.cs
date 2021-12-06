@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data;
@@ -15,10 +17,12 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
     public partial class RegisterResidence
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
-        
+
         [Inject] public IResidenceService ResidenceService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public IFacilityService FacilityService { get; set; }
+        [Inject] public IHostService HostService { get; set; }
+        [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
 
         public EditContext FormEditContextResidence { get; set; }
@@ -38,7 +42,6 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
 
         protected override async Task OnInitializedAsync()
         {
-            // TODO: Fetch all available facilities on mount
             _newResidence = new Residence()
             {
                 Rules = new List<Rule>(),
@@ -48,12 +51,26 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 Address = new Address()
                 {
                     City = new City()
-                }
+                },
             };
             FormEditContextResidence = new EditContext(_newResidence);
             FormEditContextAddress = new EditContext(_newResidenceAddress);
-            _allFacilities = await FacilityService.GetAllFacilities(); 
+            _allFacilities = await FacilityService.GetAllFacilities();
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
             StateHasChanged();
+            if (user.Identity.IsAuthenticated)
+            {
+                var host = await HostService.GetHostByEmail(user.Claims
+                    .FirstOrDefault(c => c.Type.ToString() == "email")
+                    .Value);
+                _newResidence.Host = host;
+                StateHasChanged();
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/");
+            }
         }
 
         private async void AddNewRule()
@@ -82,8 +99,8 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             Console.WriteLine(_facilityToBeAdded.Name);
             if (!string.IsNullOrEmpty(_facilityToBeAdded.Name))
             {
-            
-                _newResidence.Facilities.Add(new Facility(){Id = _facilityToBeAdded.Id, Name = _facilityToBeAdded.Name});
+                _newResidence.Facilities.Add(
+                    new Facility() {Id = _facilityToBeAdded.Id, Name = _facilityToBeAdded.Name});
                 _showFacilityDialog = false;
             }
 
