@@ -30,8 +30,9 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
 
         private Residence _newResidence;
 
-
+        
         public string Name { get; set; }
+        private bool _isLoading = false; 
         private bool _showFacilityDialog = false;
         private IEnumerable<Facility> _allFacilities = new List<Facility>();
 
@@ -122,9 +123,9 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             {
                 try
                 {
+                    _isLoading = true;
                     await ResidenceService.CreateResidenceAsync(_newResidence);
-                    // ResetModels();
-
+                    _isLoading = false;
                     NavigationManager.NavigateTo("/hostresidences");
                 }
                 catch (ArgumentException e)
@@ -141,19 +142,6 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             FormEditContextAddress.Validate();
             PrintDebugMessages();
             StateHasChanged();
-        }
-
-        private void ResetModels()
-        {
-            _newResidenceAddress = new Address();
-            _newResidence = new Residence()
-            {
-                Rules = new List<Rule>(),
-                Facilities = new List<Facility>(),
-                AvailableFrom = DateTime.MaxValue,
-                AvailableTo = DateTime.MaxValue,
-                Address = new Address() {City = new City()}
-            };
         }
 
         private void PrintDebugMessages()
