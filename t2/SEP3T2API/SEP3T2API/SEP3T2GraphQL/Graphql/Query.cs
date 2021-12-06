@@ -17,9 +17,18 @@ namespace SEP3T2GraphQL.Graphql
         private readonly IGuestService _guestService;
         private readonly IRentalService _rentalService;
         private readonly IAdministrationService _administrationService;
-        private IFacilityService _facilityService;
-        private IRuleService _ruleService;
-        public Query(IResidenceService residenceService, IHostService hostService, IGuestService guestService, IRentalService rentalService, IAdministrationService administrationService, IFacilityService facilityService, IRuleService ruleService)
+        private readonly IFacilityService _facilityService;
+        private readonly IRuleService _ruleService;
+        private readonly IUserService _userService;
+        private readonly IGuestReviewService _guestReviewService;
+        private readonly IHostReviewService _hostReview;
+        private readonly IResidenceReviewService _residenceReviewService;
+        public Query(IResidenceService residenceService, IHostService hostService, 
+            IGuestService guestService, IRentalService rentalService, 
+            IAdministrationService administrationService, 
+            IFacilityService facilityService, IRuleService ruleService, 
+            IUserService userService, IHostReviewService hostReview,
+            IGuestReviewService guestReviewService, IResidenceReviewService residenceReviewService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
@@ -28,6 +37,10 @@ namespace SEP3T2GraphQL.Graphql
             _administrationService = administrationService;
             _facilityService = facilityService;
             _ruleService = ruleService;
+            _userService = userService;
+            _hostReview = hostReview;
+            _guestReviewService = guestReviewService;
+            _residenceReviewService = residenceReviewService;
         }
         public async Task<Residence> GetResidence(int id)
         {
@@ -134,5 +147,40 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _hostService.GetHostByEmail(email);
         }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _userService.GetUserByEmailAsync(email);
+        }
+
+        public async Task<User> GetUserById(int id)
+        {
+            return await _userService.GetUserByIdAsync(id);
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsers()
+        {
+            return await _userService.GetAllUsersAsync();
+        }
+
+        public async Task<User> ValidateUser(string email, string password)
+        {
+            return await _userService.ValidateUserAsync(email, password);
+        }
+
+        public async Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestId(int id)
+        {
+            return await _guestReviewService.GetAllGuestReviewsByGuestIdAsync(id);
+        }
+
+        public async Task<IEnumerable<HostReview>> GetAllHostReviewsByHostId(int id)
+        {
+            return await _hostReview.GetAllHostReviewsByHostIdAsync(id);
+        }
+        public async Task<IEnumerable<ResidenceReview>> GetAllResidenceReviewsByResidenceId(int residenceId)
+        {
+            return await _residenceReviewService.GetAllByResidenceIdAsync(residenceId);
+        }
+        
     }
 }

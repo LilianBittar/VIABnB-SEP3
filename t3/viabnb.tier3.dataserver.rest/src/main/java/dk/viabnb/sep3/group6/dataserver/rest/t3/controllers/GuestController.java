@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 @RestController
 public class GuestController {
@@ -151,7 +150,7 @@ public class GuestController {
     @GetMapping("/guests/{id}/rentrequests")
     public ResponseEntity<List<RentRequest>> getRentRequestByGuestId(@PathVariable int id){
         try {
-            List<RentRequest> rentRequests = rentRequestDAO.getAll();
+            List<RentRequest> rentRequests = rentRequestDAO.getAllRentRequests();
             rentRequests.removeIf(request -> request.getGuest().getId() == id);
             return ResponseEntity.ok(rentRequests);
         } catch (Exception e) {

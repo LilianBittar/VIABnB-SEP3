@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using SEP3BlazorT1Client.Authentication;
 using SEP3BlazorT1Client.Data;
 using SEP3BlazorT1Client.Data.Impl;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Pages.RegisterResidence;
 using SEP3BlazorT1Client.ViewModels;
 
@@ -46,14 +47,17 @@ namespace SEP3BlazorT1Client
             services.AddScoped<IRuleService, GraphQlRuleService>();
             services.AddScoped<IAdministrationService, GraphQlAdministrationService>();
             services.AddScoped<IRentalService, GraphQlRentalService>();
+            services.AddScoped<IUserService, GraphQlUserService>();
+            services.AddScoped<IGuestReviewService, GraphQlGuestReviewService>();
+            services.AddScoped<IResidenceReviewService, GraphQlResidenceReviewService>();
             
             //TODO add policies here:
             services.AddAuthorization(options =>
                 {
                     options.AddPolicy("MustBeAdmin", apb => 
                         apb.RequireAuthenticatedUser().RequireClaim("Role" ,"Admin"));
-                    options.AddPolicy("MustBeGuest", abp => abp.RequireAuthenticatedUser().RequireClaim("Role", "Guest"));
-                    options.AddPolicy("MustBeHost", abp => abp.RequireAuthenticatedUser().RequireClaim("Role", "Host"));
+                    options.AddPolicy("MustBeGuest", abp => abp.RequireAuthenticatedUser().RequireClaim("Role", "Guest", "Admin"));
+                    options.AddPolicy("MustBeHost", abp => abp.RequireAuthenticatedUser().RequireClaim("Role", "Host", "Guest", "Admin"));
                 }
             );
         }

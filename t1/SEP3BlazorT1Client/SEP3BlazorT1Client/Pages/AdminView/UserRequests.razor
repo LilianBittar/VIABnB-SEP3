@@ -2,111 +2,110 @@
 @using SEP3BlazorT1Client.Models
 <AuthorizeView Policy="MustBeAdmin">
     <Authorized>
-        <MatTabGroup>
-            <MatTab Label="Hosts Requests">
-                <ChildContent>
-                    @if (hostRequestList == null)
-                    {
-                        <h3 class="mat-subtitle1">Loading</h3>
-                        <MatProgressCircle Indeterminate="true" />
-                    }
-                    else if (!hostRequestList.Any())
-                    {
-                        <p>
-                            <em>There are no host requests at the moment....</em>
-                        </p>
-                    }
-                    else
-                    {
-                        <MatAccordion Multi="true">
-                            @foreach (var h in hostRequestList)
-                            {
-                                <MatExpansionPanel>
-                                    <MatExpansionPanelSummary>
-                                        <MatExpansionPanelHeader>
-                                            <p>@h.Id</p></MatExpansionPanelHeader>
-                                    </MatExpansionPanelSummary>
-                                    <MatExpansionPanelDetails>
-                                        <div class="form-group">
-                                            <p>Host ID: @h.Id</p></div>
-                                        <div class="form-group">
-                                            <p>First Nmae: @h.FirstName</p></div>
-                                        <div class="form-group">
-                                            <p>Last Name: @h.LastName</p></div>
-                                        <div class="form-group">
-                                            <p>Phone Number: @h.PhoneNumber</p></div>
-                                        <div class="form-group">
-                                            <p>E-mail Address: @h.Email</p></div>
-                                        <div class="form-group">
-                                            <p>CPR-Number: @h.Cpr</p></div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <button class="btn btn-outline-dark" @onclick="(()=> ApproveHost(h.Id))">Approve</button>
-                                                    <button class="btn btn-outline-dark" @onclick="(()=> RejectHost(h.Id))">Reject</button>
-                                                </div>
-                                            </div>
+<MatTabGroup>
+    <MatTab Label="Hosts Requests">
+        <ChildContent>
+            @if (_hostRequestList == null)
+            {
+                <h3 class="mat-subtitle1">Loading</h3>
+                <MatProgressCircle Indeterminate="true" />
+            }
+            else if (!_hostRequestList.Any())
+            {
+                <MatProgressCircle Indeterminate="true" />
+                <p>
+                    <em>There are no host requests at the moment....</em>
+                </p>
+            }
+            else
+            {
+                <div class="mat-layout-grid mat-layout-grid-align-left" style="max-width: 2000px;">
+                    <div class="mat-layout-grid-inner">
+                        @foreach (var item in _hostRequestList)
+                        {
+                            <div class="mat-layout-grid-cell">
+                                <MatCard Class="demo-mat-card">
+                                    <MatCardContent>
+                                        <MatCardMedia Wide="true" ImageUrl="@item.ProfileImageUrl"></MatCardMedia>
+                                        <div class="demo-mat-card-content">
+                                            <MatHeadline6 class="demo-mat-card-clean-margin">
+                                                @item.FirstName @item.LastName
+                                            </MatHeadline6>
+                                            <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                                @item.Email
+                                            </MatSubtitle2>
                                         </div>
-                                    </MatExpansionPanelDetails>
-                                </MatExpansionPanel>
-                            }
-                        </MatAccordion>
-                    }
-                </ChildContent>
-            </MatTab>
-            <MatTab Label="Guests Requests">
-                <ChildContent>
-                    @if (guestRequestList == null)
-                    {
-                        <h3 class="mat-subtitle1">Loading</h3>
-                        <MatProgressCircle Indeterminate="true" />
-                    }
-                    else if (!guestRequestList.Any())
-                    {
-                        <p>
-                            <em>There are no guest requests at the moment....</em>
-                        </p>
-                    }
-                    else
-                    {
-                        <MatAccordion Multi="true">
-                            @foreach (var g in guestRequestList)
-                            {
-                                <MatExpansionPanel>
-                                    <MatExpansionPanelSummary>
-                                        <MatExpansionPanelHeader>
-                                            <p>@g.Id</p></MatExpansionPanelHeader>
-                                    </MatExpansionPanelSummary>
-                                    <MatExpansionPanelDetails>
-                                        <div class="form-group">
-                                            <p>Guest ID: @g.Id</p></div>
-                                        <div class="form-group">
-                                            <p>First Nmae: @g.FirstName</p></div>
-                                        <div class="form-group">
-                                            <p>Last Name: @g.LastName</p></div>
-                                        <div class="form-group">
-                                            <p>Phone Number: @g.PhoneNumber</p></div>
-                                        <div class="form-group">
-                                            <p>E-mail Address: @g.Email</p></div>
-                                        <div class="form-group">
-                                            <p>VIA-ID: @g.ViaId</p></div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <button class="btn btn-outline-dark" @onclick="(()=> ApproveGuest(g.Id))">Approve</button>
-                                                    <button class="btn btn-outline-dark" @onclick="(()=> RejectGuest(g.Id))">Reject</button>
-                                                </div>
-                                            </div>
+                                        <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                                            @item.PhoneNumber
+                                        </MatBody2>
+                                        <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                                            @item.Cpr
+                                        </MatBody2>
+                                    </MatCardContent>
+                                    <MatCardActions>
+                                        <MatButton @onclick="(() => ApproveHost(item.Id))">Approve</MatButton>
+                                        <MatButton @onclick="(() => RejectHost(item.Id))">Reject</MatButton>
+                                    </MatCardActions>
+                                </MatCard>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </ChildContent>
+    </MatTab>
+    <MatTab Label="Guests Requests">
+        <ChildContent>
+            @if (_guestRequestList == null)
+            {
+                <h3 class="mat-subtitle1">Loading</h3>
+                <MatProgressCircle Indeterminate="true" />
+            }
+            else if (!_guestRequestList.Any())
+            {
+                <p>
+                    <em>There are no guest requests at the moment....</em>
+                </p>
+            }
+            else
+            {
+                <div class="mat-layout-grid mat-layout-grid-align-left" style="max-width: 2000px;">
+                    <div class="mat-layout-grid-inner">
+                        @foreach (var item in _guestRequestList)
+                        {
+                            <div class="mat-layout-grid-cell">
+                                <MatCard Class="demo-mat-card">
+                                    <MatCardContent>
+                                        <MatCardMedia Wide="true" ImageUrl="@item.ProfileImageUrl"></MatCardMedia>
+                                        <div class="demo-mat-card-content">
+                                            <MatHeadline6 class="demo-mat-card-clean-margin">
+                                                @item.FirstName @item.LastName
+                                            </MatHeadline6>
+                                            <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                                <MatIcon Icon="@MatIconNames.Email"></MatIcon> @item.Email
+                                            </MatSubtitle2>
                                         </div>
-                                    </MatExpansionPanelDetails>
-                                </MatExpansionPanel>
-                            }
-                        </MatAccordion>
-                    }
-                </ChildContent>
-            </MatTab>
-        </MatTabGroup>
-    </Authorized>
+                                        <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                                            @item.PhoneNumber
+                                        </MatBody2>
+                                        <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                                            @item.ViaId
+                                        </MatBody2>
+                                    </MatCardContent>
+                                    <MatCardActions>
+                                        <MatButton @onclick="(() => ApproveGuest(item.Id))">Approve</MatButton>
+                                        <MatButton @onclick="(() => RejectGuest(item.Id))">Reject</MatButton>
+                                    </MatCardActions>
+                                </MatCard>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </ChildContent>
+    </MatTab>
+</MatTabGroup>
+</Authorized>
     <NotAuthorized>
         <div id="errorBox">
             <p>You must <a href="AdminLogin">login as an admin</a> to be able to see the content of this page</p>

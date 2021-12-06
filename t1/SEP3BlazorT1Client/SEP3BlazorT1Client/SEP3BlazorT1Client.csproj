@@ -12,25 +12,31 @@
     <PackageReference Include="StrawberryShake.Transport.Http" Version="12.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Pages\AdminView\UserRequests.cs">
-      <DependentUpon>UserRequests.razor</DependentUpon>
-    </Compile>
     <Compile Update="Pages\AdminView\AdminLogin.cs">
       <DependentUpon>AdminLogin.razor</DependentUpon>
     </Compile>
     <Compile Update="Pages\RentRequest\RentRequests.cs">
       <DependentUpon>RentRequests.razor</DependentUpon>
     </Compile>
+    <Compile Update="Pages\RentRequest\RentRequestHistory.cs">
+      <DependentUpon>RentRequestHistory.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\RentRequest\GuestReviews.cs">
+      <DependentUpon>GuestReviews.razor</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Pages\AdminView\UserRequests.css">
-      <DependentUpon>UserRequests.razor</DependentUpon>
-    </None>
     <None Update="Pages\AdminView\AdminLogin.css">
       <DependentUpon>AdminLogin.razor</DependentUpon>
     </None>
     <None Update="Pages\RentRequest\RentRequests.css">
       <DependentUpon>RentRequests.razor</DependentUpon>
+    </None>
+    <None Update="Pages\RentRequest\RentRequestHistory.css">
+      <DependentUpon>RentRequestHistory.razor</DependentUpon>
+    </None>
+    <None Update="Pages\RentRequest\GuestReviews.css">
+      <DependentUpon>GuestReviews.razor</DependentUpon>
     </None>
   </ItemGroup>
 </Project>

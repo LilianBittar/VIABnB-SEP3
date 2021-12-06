@@ -3,6 +3,7 @@
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Components.ResidenceCard
 @inject IResidenceService ResidenceService
+@inject IResidenceReviewService residenceReviewService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IGuestService GuestService
 @inject NavigationManager NavigationManager
@@ -17,7 +18,7 @@
                 <MatTextField @bind-Value="@CityFilter" Label="filter by city name" Outlined="true" OnKeyPress="@FilterResidences"/>
                 <div class="d-flex flex-column">
                     <MatTextField @bind-Value="@MaxPriceFilter" Outlined="true" Label="Filter by max DKK / night" HelperText="Enter a max price in DKK / night or use the slider" OnInput="@FilterResidences"/>
-                    <MatSlider @bind-Value="@_maxPriceFilter" ValueMin="0" ValueMax="10000" Style="max-width: 500px;" Disabled="true" />
+                    <MatSlider @bind-Value="@_maxPriceFilter" ValueMin="0" ValueMax="10000" Style="max-width: 500px;" Disabled="true"/>
                 </div>
             </div>
             <div class="container-fluid d-flex flex-wrap residence-directory">
@@ -25,6 +26,7 @@
                 {
                     <MatRipple>
                         <ResidenceCard Residence="@r"/>
+                        <MatButton OnClick="@(() => OpenResidenceDetailsDialog(r))">Details</MatButton>
                     </MatRipple>
                 }
             </div>
@@ -46,10 +48,126 @@ else
     <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
 }
 
+
+<MatDialog @bind-IsOpen="@viewResidenceDetailsDialog" >
+    <MatDialogTitle>Residence Details</MatDialogTitle>
+    <MatDialogContent>
+        <div class="d-flex flex-column container-fluid" >
+            <div class="d-flex justify-content-center">
+                <img class="my-4" width="600" height="240" src="@ViewedResidence.ImageUrl" alt="">
+            </div>
+
+            <MatTabGroup>
+                <MatTab class="my-4">
+                    <LabelContent>
+                        Description <MatIcon Icon="@MatIconNames.Info"></MatIcon>
+                    </LabelContent>
+                    <ChildContent>
+                        <h4 class="mat-h4">Residence Description</h4>
+                        @if (ViewedResidence.Description != null)
+                        {
+                            <p>@ViewedResidence.Description</p>
+                        }
+                        else
+                        {
+                            <p>This residence has no description</p>
+                        }
+                    </ChildContent>
+                </MatTab>
+                <MatTab class="my-4">
+                    <LabelContent>
+                        Facilities <MatIcon Icon="@MatIconNames.List"></MatIcon>
+                    </LabelContent>
+                    <ChildContent>
+                        <h4 class="mat-h4">Residence Facilities</h4>
+                        <ul class="list-group">
+                            @if (ViewedResidence.Facilities.Count() != 0)
+                            {
+                                @foreach (var facility in @ViewedResidence.Facilities)
+                                {
+                                    <li class="list-group-item">@facility.Name</li>
+                                }
+                            }
+                            else
+                            {
+                                <p>The residence has no facilities</p>
+                            }
+
+                        </ul>
+                    </ChildContent>
+                </MatTab>
+
+                <MatTab class="my-4">
+                    <LabelContent>
+                        Rules <MatIcon Icon="@MatIconNames.Done_outline"></MatIcon>
+                    </LabelContent>
+                    <ChildContent>
+                        <h4 class="mat-h4">Rules</h4>
+                        <ul class="list-group">
+                            @if (ViewedResidence.Rules.Count() != 0)
+                            {
+                                foreach (var rule in @ViewedResidence.Rules)
+                                {
+                                    <li class="list-group-item">@rule.Description</li>
+                                }
+                            }
+                            else
+                            {
+                                <p>The residence has no rules</p>
+                            }
+
+                        </ul>
+                    </ChildContent>
+                </MatTab>
+
+                <MatTab class="my-4">
+                    <LabelContent>
+                        Reviews <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon>
+                    </LabelContent>
+                    <ChildContent>
+                        <ul class="list-group">
+                            @if (ResidenceReviews.Count() != 0)
+                            {
+                                foreach (var review in ResidenceReviews)
+                                {
+                                    <p>
+                                        <b> @review.GuestViaId</b>
+                                    </p>
+
+                                    <p style="color:grey">@review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</p>
+                                    <p>@review.Rating</p>
+                                    <li class="list-group-item">@review.ReviewText</li>
+                                }
+                            }
+                            else
+                            {
+                                <p>
+                                    The residence has
+                                    no reviews
+                                </p>
+                            }
+
+                        </ul>
+                    </ChildContent>
+                </MatTab>
+            </MatTabGroup>
+            <MatDivider class="my-1"/>
+        </div>
+
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@(e => { viewResidenceDetailsDialog = false; })">Cancel</MatButton>
+    </MatDialogActions>
+</MatDialog>
+
+
 @code {
 
+    bool viewResidenceDetailsDialog = false;
     private IList<Residence> _availableResidences;
     private IList<Residence> _residencesToShow;
+    Residence ViewedResidence = new Residence();
+    IEnumerable<ResidenceReview> ResidenceReviews = new List<ResidenceReview>();
     private Guest guest;
     private string _cityFilter = "";
     private long? _maxPriceFilter = 0;
@@ -76,25 +194,19 @@ else
         }
     }
 
+    async void OpenResidenceDetailsDialog(Residence residence)
+    {
+        ViewedResidence = residence;
+        ResidenceReviews = await residenceReviewService.GetAllByResidenceIdAsync(residence.Id);
+
+        viewResidenceDetailsDialog = true;
+    }
+
 
     protected override async Task OnInitializedAsync()
     {
-    //TODO: Check if user is authenticated guest.
-    // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-    // var user = authState.User;
-    //     if (!user.Identity.IsAuthenticated)
-    //     {
-    //         NavigationManager.NavigateTo("/login");
-    //     }
-    //     if (user.Claims.Any(c => c.Type.ToString() == "ENTER_CLAIM_FOR_GUEST"))
-    //     {
         _availableResidences = await ResidenceService.GetAllAvailableResidencesAsync();
         _residencesToShow = _availableResidences;
-    // }
-    // else
-    // {
-    //     NavigationManager.NavigateTo("/");
-    // }
     }
 
 
@@ -106,7 +218,7 @@ else
         }
         else if (MaxPriceFilter is not > 0 && string.IsNullOrEmpty(CityFilter))
         {
-            _residencesToShow = _availableResidences; 
+            _residencesToShow = _availableResidences;
         }
         else if (!string.IsNullOrEmpty(CityFilter) && MaxPriceFilter is not > 0)
         {

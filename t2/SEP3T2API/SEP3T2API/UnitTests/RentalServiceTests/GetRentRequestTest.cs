@@ -11,6 +11,7 @@ using SEP3T2GraphQL.Services.Validation;
 
 namespace UnitTests.RentalServiceTests
 {
+    [TestFixture]
     public class GetRentRequestTest
     {
         private Host _host;

@@ -126,7 +126,7 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
             connection.commit();
             return residence;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 
@@ -194,7 +194,7 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
             connection.commit();
             return residence;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 
@@ -222,7 +222,7 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
             }
             return ruleListToReturn;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 
@@ -254,9 +254,9 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
                 return new Facility(result.getInt("facilityid"),
                         result.getString("name"));
             }
-            throw new IllegalArgumentException("Facility cant be null");
+            return null;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 

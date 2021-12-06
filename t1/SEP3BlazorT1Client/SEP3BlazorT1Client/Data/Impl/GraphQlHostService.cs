@@ -29,10 +29,11 @@ namespace SEP3BlazorT1Client.Data.Impl
                                     email
                                     password
                                     hostReviews {
-                                    id
                                     rating
                                     text
                                     viaId
+                                    hostId
+                                    createdDate
                                     }
                                     profileImageUrl
                                     cpr
@@ -50,57 +51,32 @@ namespace SEP3BlazorT1Client.Data.Impl
 
             return response.Data.RegisterHost;
         }
-
-        public async Task<Host> ValidateHostAsync(string email, string password)
-        {
-            GqlClient client = new GqlClient(Url);
-            var validateHostQuery = new GqlQuery()
-            {
-                Query = @"query($emailHost: String, $passwordHost: String) {
-                          validatehostLogin(email: $emailHost, password: $passwordHost)
-                           {id,
-                           firstName,
-                           lastName,
-                           phoneNumber,
-                           email,
-                           password,
-                           profileImageUrl,
-                           cpr,
-                           isApprovedHost}}",
-                Variables = new {emailHost = email, passwordHost = password}
-            };
-
-            var graphQlResponse = await client.PostQueryAsync<HostResponseType>(validateHostQuery);
-            if (graphQlResponse.Data.Host == null) throw new Exception("Incorrect password or email");
-            Console.WriteLine(graphQlResponse.Data.ToString());
-
-            System.Console.WriteLine($"{this} received: {graphQlResponse.Data.Host.ToString()}");
-            return graphQlResponse.Data.Host;
-        }
+        
 
         public async Task<Host> GetHostByEmail(string email)
         {
             GqlQuery query = new()
             {
-                Query = @"query($hostEmail: String) {
-  hostByEmail(email: $hostEmail) {
-    hostReviews {
-      id
-      rating
-      text
-      viaId
-    }
-    profileImageUrl
-    cpr
-    isApprovedHost
-    id
-    email
-    password
-    firstName
-    lastName
-    phoneNumber
-  }
-}
+                Query = @"query($hostEmail:String) {
+                                  hostByEmail(email:$hostEmail) {
+                                    hostReviews {
+                                      rating
+                                      text
+                                      viaId,
+                                    createdDate
+
+                                    }
+                                    profileImageUrl
+                                    cpr
+                                    isApprovedHost
+                                    id
+                                    email
+                                    password
+                                    firstName
+                                    lastName
+                                    phoneNumber
+                                  }
+                                }
                             ",
                 Variables = new {hostEmail = email}
             };
@@ -125,10 +101,11 @@ namespace SEP3BlazorT1Client.Data.Impl
                                     email
                                     password
                                     hostReviews {
-                                    id
                                     rating
                                     text
                                     viaId
+                                    createdDate
+
                                     }
                                     profileImageUrl
                                     cpr
@@ -148,7 +125,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             var hostQuery = new GqlQuery()
             {
                 Query =
-                    @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{id,rating,text,viaId},profileImageUrl,cpr,isApprovedHost}}",
+                    @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{rating,text,viaId,createdDate},profileImageUrl,cpr,isApprovedHost}}",
             };
             GqlRequestResponse<HostListResponseType> graphQlResponse =
                 await client.PostQueryAsync<HostListResponseType>(hostQuery);
@@ -169,10 +146,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                             email,
                             password,
                             hostReviews{
-                              id,
                               viaId,
                               rating,
-                              text
+                              text,
+                                createdDate
                             },
                             profileImageUrl,
                             cpr,

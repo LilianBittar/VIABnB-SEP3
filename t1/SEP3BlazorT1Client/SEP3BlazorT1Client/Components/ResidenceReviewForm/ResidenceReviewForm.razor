@@ -1,0 +1,95 @@
+﻿@using SEP3BlazorT1Client.Models
+@using SEP3BlazorT1Client.Data
+@using System.Text.Json
+@inject IResidenceReviewService ResidenceReviewService
+@inject NavigationManager NavigationManager
+<AuthorizeView Policy="MustBeGuest">
+    <Authorized>
+        <div class="review-container">
+            <div class="container-fluid d-flex">
+                <div class="row">
+                    <div class="col">
+                        <div class="review-form">
+                            <div class="review-form__header">
+                                <h3>Write a public review</h3>
+                                <p>Tell the next guests what you loved and everything else they should know about @(@Residence.Host.FirstName)'s place</p>
+                                <hr/>
+                            </div>
+                            <div class="review-form__rating">
+                                <h4>Rating</h4>
+                                <p>Provide a rating between 0-5 where 5 is the best</p>
+                                <MatSlider @bind-Value="@_newReview.Rating" Step="1" EnableStep="true" ValueMin="0" ValueMax="5" Markers="true" Pin="true" Discrete="true" TValue="double"/>
+                            </div>
+
+                            <div class="review-form__text">
+                                <h4>Review</h4>
+                                <p>Write about your experiences during your stay and why you gave your rating</p>
+                                <MatTextField @bind-Value="@_newReview.ReviewText" TextArea="true" FullWidth="true" Outlined="true" InputStyle="font-size:14px; min-height:120px" Style="    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);"/>
+                            </div>
+                            <p class="error-label">@_errorMessage</p>
+                            <div class="review-form__submit d-flex justify-content-between mt-4">
+                                <MatButton Label="Cancel" OnClick="@CancelReview" />
+                                <MatButton Label="Submit" Raised="true" OnClick="@CreateResidenceReview" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="container-fluid d-flex justify-content-center">
+            <div class="row">
+                <div class="col">
+                    <p>Only guests can leave reviews on residences</p>
+                </div>
+            </div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+    [Parameter]
+    public Residence Residence { get; set; }
+
+    [Parameter]
+    public Guest Guest { get; set; }
+
+    private ResidenceReview _newReview;
+
+    private string _errorMessage = "";
+
+    protected async override Task OnInitializedAsync()
+    {
+        _newReview = new ResidenceReview()
+        {
+            GuestViaId = Guest.ViaId,
+            CreatedDate = DateTime.Now,
+            Rating = 0,
+            ReviewText = ""
+        };
+    }
+
+    private async void CreateResidenceReview()
+    {
+        try
+        {
+            Console.WriteLine(JsonSerializer.Serialize(_newReview));
+            await ResidenceReviewService.CreateAsync(Residence, _newReview);
+            _errorMessage = "";
+            NavigationManager.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            _errorMessage = "Something went wrong, try again later..."; 
+            StateHasChanged();
+        }
+    }
+
+    private void CancelReview()
+    {
+        NavigationManager.NavigateTo("/guestrentrequests");
+    }
+
+}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace SEP3T2GraphQL.Models
 {
@@ -16,12 +17,16 @@ namespace SEP3T2GraphQL.Models
         [Range(1, Int32.MaxValue, ErrorMessage = "Number of guests must be 1 or above")]
         public int NumberOfGuests { get; set; }
         [Required]
-        [JsonConverter(typeof(JsonStringEnumConverter))]
+        [System.Text.Json.Serialization.JsonConverter(typeof(JsonStringEnumConverter))]
         public RentRequestStatus Status { get; set; }
         [Required]
         public Guest Guest { get; set; }
         [Required]
         public Residence Residence { get; set; }
+
+        [Required]
+        [JsonProperty("requestCreationDate")]
+        public DateTime RequestCreationDate { get; set; }
 
         public decimal GetTotalPrice()
         {

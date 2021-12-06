@@ -1,4 +1,5 @@
 ﻿using System;
+using Moq;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
@@ -15,13 +16,13 @@ namespace UnitTests
     {
         private Host host = new Host();
         private IHostService HostService;
-        private IHostRepository HostRepository;
+        private Mock<IHostRepository> HostRepository;
 
         [SetUp]
         public void SetUp()
         {
-            HostRepository = new HostRepositoryImpl();
-            HostService = new HostServiceImpl(HostRepository);
+            HostRepository = new Mock<IHostRepository>();
+            HostService = new HostServiceImpl(HostRepository.Object);
         }
 
         [Test]
@@ -67,7 +68,7 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.Throws<FormatException>(() => HostService.RegisterHostAsync(host));
+            TestCreateThrowsArgumentExceptionAsync(host);
         }
         
         [TestCase("Kasper34")]
@@ -90,7 +91,7 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.Throws<ArgumentException>(() => HostService.RegisterHostAsync(host));
+            TestCreateThrowsArgumentExceptionAsync(host);
         }
         
         [TestCase("B00bsen")]
@@ -113,7 +114,7 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.Throws<ArgumentException>(() => HostService.RegisterHostAsync(host));
+            TestCreateThrowsArgumentExceptionAsync(host);
         }
         
         [TestCase("121232132131233")]
@@ -141,7 +142,7 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.Throws<ArgumentException>(() => HostService.RegisterHostAsync(host));
+            TestCreateThrowsArgumentExceptionAsync(host);
         }
         
         [TestCase("345345a")]
@@ -164,10 +165,11 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.Throws<ArgumentException>(() => HostService.RegisterHostAsync(host));
+            TestCreateThrowsArgumentExceptionAsync(host);
         }
 
-        
+      
+
 
         [TestCase("hej@dig.dk")]
         [TestCase("hej123@diggg.dk")]
@@ -262,7 +264,11 @@ namespace UnitTests
                 ProfileImageUrl = null
             };
             //act and assert
-            Assert.Throws<ArgumentException>(() => HostService.RegisterHostAsync(host));
+            TestCreateThrowsArgumentExceptionAsync(host);
+        }
+        private void TestCreateThrowsArgumentExceptionAsync(Host host)
+        {
+            Assert.ThrowsAsync<ArgumentException>(() => HostService.RegisterHostAsync(host));
         }
     }
 }

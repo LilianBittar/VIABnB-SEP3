@@ -18,13 +18,13 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             RentRequestDAOImpl.class);
 
     @Override
-    public RentRequest create(RentRequest request) {
+    public RentRequest createNewRentRequest(RentRequest request) {
         try (Connection connection = getConnection()) {
             // TODO: Change DDL to have guestId instead of hostid and residenceid as foreign key to residence
             // BUG: SQL Cannot parse Util.Date, but can parse LocalDate form the time / JodaTime library.
 
             PreparedStatement stm = connection.prepareStatement(
-                    "insert into rentrequest(startdate, enddate, numberofguests, status, hostid, residenceid, guestid) values (?,?,?,?,?,?,?)");
+                    "insert into rentrequest(startdate, enddate, numberofguests, status, hostid, residenceid, guestid, createdate) values (?,?,?,?,?,?,?,?)");
             LOGGER.info("statement set");
             stm.setDate(1, Date.valueOf(request.getStartDate()));
             stm.setDate(2, Date.valueOf(request.getEndDate()));
@@ -33,6 +33,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             stm.setInt(5, request.getResidence().getHost().getId());
             stm.setInt(6, request.getResidence().getId());
             stm.setInt(7, request.getGuest().getId());
+            stm.setDate(8, Date.valueOf(request.getRequestCreationDate()));
             stm.executeUpdate();
             connection.commit();
             return request;
@@ -42,12 +43,12 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
     }
 
     @Override
-    public RentRequest update(RentRequest request) {
+    public RentRequest updateRentRequest(RentRequest request) {
         return null;
     }
 
     @Override
-    public RentRequest getById(int id) {
+    public RentRequest getRentRequestById(int id) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
                     "SELECT * FROM rentrequest JOIN host h on h.hostid = rentrequest.hostid JOIN _user u ON u.userid = h.hostid WHERE rentrequestid = ?");
@@ -60,16 +61,16 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
                         result.getInt("numberofguests"),
                         RentRequestStatus.valueOf(result.getString("status")),
                         getGuestById(result.getInt("guestid")),
-                        getResidenceById(result.getInt("hostid")));
+                        getResidenceById(result.getInt("hostid")), LocalDate.parse(result.getDate("createdate").toString()));
             }
-            throw new IllegalArgumentException("Rent request is null");
+            return null;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 
     @Override
-    public List<RentRequest> getAll() {
+    public List<RentRequest> getAllRentRequests() {
         List<RentRequest> rentRequestListToReturn = new ArrayList<>();
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
@@ -116,17 +117,17 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
                         result.getInt("numberofguests"),
                         RentRequestStatus.valueOf(result.getString("status")),
                         getGuestById(result.getInt("guestid")),
-                        residence);
+                        residence, LocalDate.parse(result.getDate("createdate").toString()));
                 rentRequestListToReturn.add(request);
             }
             return rentRequestListToReturn;
         } catch (SQLException throwables) {
-            throw new NotFoundException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 
     @Override
-    public RentRequest approveRequest(RentRequest request) {
+    public RentRequest approveRentRequest(RentRequest request) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
                     "UPDATE rentrequest SET status = 'APPROVED' WHERE rentrequestid = ?");
@@ -135,12 +136,12 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             connection.commit();
             return request;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 
     @Override
-    public RentRequest rejectRequest(RentRequest request) {
+    public RentRequest rejectRentRequest(RentRequest request) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
                     "UPDATE rentrequest SET status = 'NOTAPPROVED' WHERE rentrequestid = ?");
@@ -149,7 +150,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             connection.commit();
             return request;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 
@@ -218,7 +219,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             }
             return null;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 
@@ -237,7 +238,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             }
             return null;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 
@@ -255,7 +256,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             }
             return ruleListToReturn;
         } catch (SQLException throwables) {
-            throw new IllegalArgumentException(throwables.getMessage());
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 

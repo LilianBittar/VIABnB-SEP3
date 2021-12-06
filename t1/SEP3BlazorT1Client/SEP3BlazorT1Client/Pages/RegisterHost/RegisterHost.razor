@@ -69,7 +69,11 @@
 @code {
     private string _errorText;
     private string _passwordConfirmation;
-    private Host _newHost = new Host();
+    private Host _newHost = new Host()
+    {
+        ProfileImageUrl = "",
+        HostReviews = new List<HostReview>()
+    };
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
 
     private async void CreateHost()
@@ -94,6 +98,7 @@
         {
             try
             {
+            
     //Throws exception if user already exists.
                 await _hostservice.RegisterHostAsync(_newHost);
             }

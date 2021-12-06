@@ -30,10 +30,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  id
                                   rating
                                   text
-                                  hostId
+                                  hostEmail
+                                  createdDate
                                 }
                                 isApprovedGuest
                                 id
@@ -43,10 +43,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 email
                                 password
                                 hostReviews {
-                                  id
                                   rating
                                   text
                                   viaId
+                                  createdDate
                                 }
                                 profileImageUrl
                                 cpr
@@ -90,10 +90,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   email
                                   password
                                   hostReviews{
-                                    id
                                     rating
                                     text
                                     viaId
+                                    createdDate
                                   }
                                   profileImageUrl
                                   cpr
@@ -102,36 +102,15 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 residenceReviews {
                                   rating
                                   reviewText
-                                  guest {
-                                    viaId
-                                    guestReviews {
-                                      id
-                                      rating
-                                      text
-                                      hostId
-                                    }
-                                    isApprovedGuest
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                  }
+                                  guestViaId
+                                  createdDate
                                 }
                                 
                               }
-                            }
+                            requestCreationDate
                           }
+                        }
+
                           ",
                 Variables = new {newRequest = request}
             };
@@ -157,10 +136,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  id
                                   rating
                                   text
-                                  hostId
+                                  hostEmail
+                                  createdDate
                                 }
                                 isApprovedGuest
                                 id
@@ -170,10 +149,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 email
                                 password
                                 hostReviews {
-                                  id
                                   rating
                                   text
                                   viaId
+                                  createdDate
                                 }
                                 profileImageUrl
                                 cpr
@@ -217,10 +196,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   email
                                   password
                                   hostReviews{
-                                    id
                                     rating
                                     text
                                     viaId
+                                    createdDate
                                   }
                                   profileImageUrl
                                   cpr
@@ -229,34 +208,12 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 residenceReviews {
                                   rating
                                   reviewText
-                                  guest {
-                                    viaId
-                                    guestReviews {
-                                      id
-                                      rating
-                                      text
-                                      hostId
-                                    }
-                                    isApprovedGuest
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                  }
+                                  guestViaId
+                                  createdDate
                                 }
                                 
                               }
+                            requestCreationDate
                         }
                        }
                         ",
@@ -277,9 +234,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"query 
                           {
-                            allRentRequests 
-                             {
-                               id
+                           allRentRequests{ id
                               startDate
                               endDate
                               numberOfGuests
@@ -287,10 +242,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  id
                                   rating
                                   text
-                                  hostId
+                                  hostEmail
+                                  createdDate
                                 }
                                 isApprovedGuest
                                 id
@@ -300,10 +255,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 email
                                 password
                                 hostReviews {
-                                  id
                                   rating
                                   text
                                   viaId
+                                  createdDate
                                 }
                                 profileImageUrl
                                 cpr
@@ -347,10 +302,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   email
                                   password
                                   hostReviews{
-                                    id
                                     rating
                                     text
                                     viaId
+                                    createdDate
                                   }
                                   profileImageUrl
                                   cpr
@@ -359,34 +314,12 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 residenceReviews {
                                   rating
                                   reviewText
-                                  guest {
-                                    viaId
-                                    guestReviews {
-                                      id
-                                      rating
-                                      text
-                                      hostId
-                                    }
-                                    isApprovedGuest
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                  }
+                                  guestViaId
+                                  createdDate
                                 }
                                 
                               }
+                            requestCreationDate
                         }
                        }
                         ",
@@ -407,9 +340,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"query($requestId:int) 
                           {
-                            allRentRequests(int:requestId) 
-                             {
-                               id
+                            id
                               startDate
                               endDate
                               numberOfGuests
@@ -417,10 +348,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  id
                                   rating
                                   text
-                                  hostId
+                                  hostEmail
+                                  createdDate
                                 }
                                 isApprovedGuest
                                 id
@@ -430,10 +361,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 email
                                 password
                                 hostReviews {
-                                  id
                                   rating
                                   text
                                   viaId
+                                  createdDate
                                 }
                                 profileImageUrl
                                 cpr
@@ -477,10 +408,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   email
                                   password
                                   hostReviews{
-                                    id
                                     rating
                                     text
                                     viaId
+                                    createdDate
                                   }
                                   profileImageUrl
                                   cpr
@@ -489,34 +420,12 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 residenceReviews {
                                   rating
                                   reviewText
-                                  guest {
-                                    viaId
-                                    guestReviews {
-                                      id
-                                      rating
-                                      text
-                                      hostId
-                                    }
-                                    isApprovedGuest
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                  }
+                                  guestViaId
+                                  createdDate
                                 }
                                 
                               }
+                            requestCreationDate
                         }
                        }
                         ",
@@ -539,7 +448,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                           {
                             allNotAnsweredRentRequest
                              {
-                               id
+                              id
                               startDate
                               endDate
                               numberOfGuests
@@ -547,10 +456,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  id
                                   rating
                                   text
-                                  hostId
+                                  hostEmail
+                                  createdDate
                                 }
                                 isApprovedGuest
                                 id
@@ -560,10 +469,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 email
                                 password
                                 hostReviews {
-                                  id
                                   rating
                                   text
                                   viaId
+                                  createdDate
                                 }
                                 profileImageUrl
                                 cpr
@@ -607,10 +516,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   email
                                   password
                                   hostReviews{
-                                    id
                                     rating
                                     text
                                     viaId
+                                    createdDate
                                   }
                                   profileImageUrl
                                   cpr
@@ -619,34 +528,12 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 residenceReviews {
                                   rating
                                   reviewText
-                                  guest {
-                                    viaId
-                                    guestReviews {
-                                      id
-                                      rating
-                                      text
-                                      hostId
-                                    }
-                                    isApprovedGuest
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                      id
-                                      rating
-                                      text
-                                      viaId
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                  }
+                                  guestViaId
+                                  createdDate
                                 }
                                 
                               }
+                            requestCreationDate
                         }
                        }
                         ",
@@ -661,117 +548,99 @@ namespace SEP3BlazorT1Client.Data.Impl
             var query = new GqlQuery()
             {
                 Query = @"query($id: Int!) {
-  rentRequestsByGuestId(guestId:$id) {
-    id
-    startDate
-    endDate
-    numberOfGuests
-    status
-    guest {
-      viaId
-      guestReviews {
-        id
-        rating
-        text
-        hostId
-      }
-      isApprovedGuest
-      id
-      firstName
-      lastName
-      phoneNumber
-      email
-      password
-      hostReviews {
-        id
-        rating
-        text
-        viaId
-      }
-      profileImageUrl
-      cpr
-      isApprovedHost
-    }
-    residence {
-      averageRating
-      id
-      address {
-        id
-        streetName
-        houseNumber
-        streetNumber
-        city {
-          id
-          cityName
-          zipCode
-        }
-      }
-      description
-      type
-      isAvailable
-      pricePerNight
-      rules {
-        residenceId
-        description
-      }
-      facilities {
-        id
-        name
-      }
-      imageUrl
-      availableFrom
-      availableTo
-      maxNumberOfGuests
-      host {
-        id
-        firstName
-        lastName
-        phoneNumber
-        email
-        password
-        hostReviews {
-          id
-          rating
-          text
-          viaId
-        }
-        profileImageUrl
-        cpr
-        isApprovedHost
-      }
-      residenceReviews {
-        rating
-        reviewText
-        guest {
-          viaId
-          guestReviews {
-            id
-            rating
-            text
-            hostId
-          }
-          isApprovedGuest
-          id
-          firstName
-          lastName
-          phoneNumber
-          email
-          password
-          hostReviews {
-            id
-            rating
-            text
-            viaId
-          }
-          profileImageUrl
-          cpr
-          isApprovedHost
-        }
-      }
-    }
-  }
-}
-",
+                            rentRequestsByGuestId(guestId:$id) {
+                              id
+                              startDate
+                              endDate
+                              numberOfGuests
+                              status
+                              guest {
+                                viaId
+                                guestReviews {
+                                  rating
+                                  text
+                                  hostEmail
+                                  createdDate
+                                }
+                                isApprovedGuest
+                                id
+                                firstName
+                                lastName
+                                phoneNumber
+                                email
+                                password
+                                hostReviews {
+                                  rating
+                                  text
+                                  viaId
+                                  createdDate
+
+                                }
+                                profileImageUrl
+                                cpr
+                                isApprovedHost
+                              }
+                              residence {
+                                averageRating
+                                id
+                                address {
+                                  id
+                                  streetName
+                                  houseNumber
+                                  streetNumber
+                                  city {
+                                    id
+                                    cityName
+                                    zipCode
+                                  }
+                                }
+                                description
+                                type
+                                isAvailable
+                                pricePerNight
+                                rules {
+                                  residenceId
+                                  description
+                                }
+                                facilities {
+                                  id
+                                  name
+                                }
+                                imageUrl
+                                availableFrom
+                                availableTo
+                                maxNumberOfGuests
+                                host{
+                                  id
+                                  firstName
+                                  lastName
+                                  phoneNumber
+                                  email
+                                  password
+                                  hostReviews{
+                                    rating
+                                    text
+                                    viaId
+                                  createdDate
+
+                                  }
+                                  profileImageUrl
+                                  cpr
+                                  isApprovedHost
+                                }
+                                residenceReviews {
+                                  rating
+                                  reviewText
+                                  guestViaId
+                                  createdDate
+
+                                }
+                                
+                              }
+                            requestCreationDate
+                        }
+                      }
+                      ",
                 Variables = new {id = guestId}
             };
             var response = await _client.PostQueryAsync<RentRequestsByGuestIdQueryResponseType>(query);

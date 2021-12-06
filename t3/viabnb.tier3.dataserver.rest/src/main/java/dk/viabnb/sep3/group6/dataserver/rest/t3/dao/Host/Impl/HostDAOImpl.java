@@ -3,6 +3,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.Impl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.models.HostReview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
     private static final Logger LOGGER= LoggerFactory.getLogger(HostDAO.class);
 
     @Override
-    public Host RegisterHost(Host host) {
+    public Host registerHost(Host host) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm1 = connection.prepareStatement("insert into _user(fname, lname, email, phonenumber, password) values (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
             PreparedStatement stm2 = connection.prepareStatement("insert into host(hostid, cprnumber, isapproved, personalimage) values (?,?,?,?)");
@@ -54,6 +55,8 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             ResultSet result = stm.executeQuery();
             if (result.next())
             {
+
+                List<HostReview> hostReviews = new ArrayList<>();
                 return new Host(
                         result.getInt("userid"),
                         result.getString("email"),
@@ -61,7 +64,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                         result.getString("fname"),
                         result.getString("lname"),
                         result.getString("phonenumber"),
-                        new ArrayList<>(),
+                        hostReviews,
                         result.getString("personalimage"),
                         result.getString("cprnumber"),
                         result.getBoolean("isapproved")
@@ -74,12 +77,13 @@ public class HostDAOImpl extends BaseDao implements HostDAO
     }
 
     @Override
-    public Host getHostById(int Id) {
+    public Host getHostById(int id) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM _user JOIN host h ON _user.userid = h.hostid where userid = ?");
-            stm.setInt(1, Id);
+            stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
             result.next();
+            List<HostReview> hostReviews = new ArrayList<>();
             return new Host
                     (
                         result.getInt("userid"),
@@ -88,7 +92,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                         result.getString("fname"),
                         result.getString("lname"),
                         result.getString("phonenumber"),
-                        new ArrayList<>(),
+                        hostReviews,
                         result.getString("personalimage"),
                         result.getString("cprnumber"),
                         result.getBoolean("isapproved")
@@ -109,6 +113,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             );
             ResultSet result = stm.executeQuery();
             while (result.next()) {
+                List<HostReview> hostReviews = new ArrayList<>();
                 Host hostToAdd = new Host
                         (
                             result.getInt("userid"),
@@ -117,7 +122,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                             result.getString("fname"),
                             result.getString("lname"),
                             result.getString("phonenumber"),
-                            new ArrayList<>(),
+                            hostReviews,
                             result.getString("personalimage"),
                             result.getString("cprnumber"),
                             result.getBoolean("isapproved")
@@ -139,6 +144,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             stm.setBoolean(1, false);
             ResultSet result = stm.executeQuery();
             while (result.next()) {
+                List<HostReview> hostReviews = new ArrayList<>();
                 Host hostToAdd = new Host
                         (
                             result.getInt("userid"),
@@ -147,7 +153,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                             result.getString("fname"),
                             result.getString("lname"),
                             result.getString("phonenumber"),
-                            new ArrayList<>(),
+                            hostReviews,
                             result.getString("personalimage"),
                             result.getString("cprnumber"),
                             result.getBoolean("isapproved")

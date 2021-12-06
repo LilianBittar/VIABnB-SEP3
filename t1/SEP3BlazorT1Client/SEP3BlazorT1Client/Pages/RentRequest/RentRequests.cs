@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,24 +17,27 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
-        private IEnumerable<Models.RentRequest> rentRequestList = new List<Models.RentRequest>();
-        private bool panelOpenState;
-
+        private IEnumerable<Models.RentRequest> _rentRequestList = new List<Models.RentRequest>();
         protected override async Task OnInitializedAsync()
         {
-            rentRequestList = await RentalService.GetAllNotAnsweredRentRequestAsync();
+            _rentRequestList = await RentalService.GetAllNotAnsweredRentRequestAsync();
+        }
+
+        private void ViewGuestReviews(int id)
+        {
+            NavigationManager.NavigateTo($"GuestReviews/{id}");
         }
 
         private async Task ApproveRequest(int requestId)
         {
-            var approvedRequest = rentRequestList.First(r => r.Id == requestId);
+            var approvedRequest = _rentRequestList.First(r => r.Id == requestId);
             approvedRequest.Status = RentRequestStatus.APPROVED;
             await RentalService.UpdateRentRequestAsync(approvedRequest);
         }
 
         private async Task RejectRequest(int requestId)
         {
-            var rejectedRequest = rentRequestList.First(r => r.Id == requestId);
+            var rejectedRequest = _rentRequestList.First(r => r.Id == requestId);
             rejectedRequest.Status = RentRequestStatus.NOTAPPROVED;
             await RentalService.UpdateRentRequestAsync(rejectedRequest);
         }

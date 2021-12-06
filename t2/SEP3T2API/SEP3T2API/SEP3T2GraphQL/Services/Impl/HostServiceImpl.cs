@@ -57,23 +57,15 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Host> GetHostByEmail(string email)
         {
-            
-            if ( await _hostValidation.IsValidEmail(email))
+            try
             {
-                try
-                {
-                    Console.WriteLine($"{this} logging in...");
-                    Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(email)}");
-                    return await _hostRepository.GetHostByEmail(email);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
+                return await _hostRepository.GetHostByEmail(email);
             }
-
-            throw new ArgumentException("No user with such email");
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public async Task<Host> ValidateHostAsync(string email, string password)

@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Services.Validation.HostValidation;
 
 namespace SEP3T2GraphQL.Repositories.Impl
 {
@@ -14,7 +13,6 @@ namespace SEP3T2GraphQL.Repositories.Impl
         
         private string uri = "http://localhost:8080";
         private readonly HttpClient client;
-        private IHostValidation _hostValidation;
 
         public HostRepositoryImpl()
         {
@@ -50,16 +48,17 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Host> GetHostByEmail(string email)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/host?email={email}");
+            var response = await client.GetAsync(uri + $"/host?email={email}");
 
-            Console.WriteLine(await responseMessage.Content.ReadAsStringAsync());
-            if (!responseMessage.IsSuccessStatusCode)
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
+            if (!response.IsSuccessStatusCode)
             {
-                throw new Exception($"$Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
             }
             
-            string result = await responseMessage.Content.ReadAsStringAsync();
-            Host host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions(
+            var result = await response.Content.ReadAsStringAsync();
+            var host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions(
                 new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase

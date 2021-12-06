@@ -39,12 +39,15 @@ namespace SEP3T2GraphQL
             services.AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddType<ListType>()
-                .AddMutationType<Mutation>().ModifyRequestOptions(opt => opt.IncludeExceptionDetails =true);
+                .AddMutationType<Mutation>().ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true);
             services.AddScoped<IResidenceRepository, ResidenceRepositoryImpl>();
             services.AddScoped<IResidenceService, ResidenceServiceImpl>();
             services.AddScoped<IResidenceValidation, ResidenceValidationImpl>();
             services.AddScoped<IHostRepository, HostRepositoryImpl>();
             services.AddScoped<IHostService, HostServiceImpl>();
+            services.AddScoped<IHostReviewService, HostReviewServiceImpl>();
+            services.AddScoped<CreateGuestReviewValidation>();
+            services.AddScoped<IHostReviewGuestRepository, HostReviewGuest>();
             services.AddScoped<IHostValidation, HostValidationImpl>();
             services.AddScoped<IGuestValidation, GuestValidationImpl>();
             services.AddScoped<IGuestService, GuestServiceImpl>();
@@ -58,8 +61,14 @@ namespace SEP3T2GraphQL
             services.AddScoped<IRuleRepository, RuleRepository>();
             services.AddScoped<IAdministrationService, AdministrationServiceImpl>();
             services.AddScoped<IAdministrationRepository, AdministrationRepositoryImpl>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGuestReviewRepository, GuestReviewRepository>();
+            services.AddScoped<IGuestReviewService, GuestReviewService>();
             services.AddScoped<CreateGuestValidator>();
-
+            services.AddScoped<IResidenceReviewRepository, ResidenceReviewRepository>();
+            services.AddScoped<CreateResidenceReviewValidator>();
+            services.AddScoped<IResidenceReviewService, ResidenceReviewService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,10 +81,7 @@ namespace SEP3T2GraphQL
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGraphQL();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapGraphQL(); });
 
             // app.UseGraphQLGraphiQL(new GraphiQLOptions()
             // {
@@ -85,7 +91,7 @@ namespace SEP3T2GraphQL
             app.UseGraphQLPlayground(new PlaygroundOptions()
             {
                 GraphQLEndPoint = "/graphql"
-            },"/graphql-ui" );
+            }, "/graphql-ui");
         }
     }
 }

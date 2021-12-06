@@ -13,7 +13,7 @@ namespace UnitTests
     {
         // Todo Do over, take repository out of the test + add [Test] + boundary test (+1, 0, -1)
 
-        private IResidenceService residenceService;
+        private IResidenceService _residenceReviewService;
         private IResidenceRepository residenceRepository;
         private IResidenceValidation _residenceValidation;
        
@@ -23,7 +23,7 @@ namespace UnitTests
         {
             _residenceValidation = new ResidenceValidationImpl();
             residenceRepository = new ResidenceRepositoryImpl();
-            residenceService = new ResidenceServiceImpl(residenceRepository);
+            _residenceReviewService = new ResidenceServiceImpl(residenceRepository);
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace UnitTests
            
             
             //act and assert
-            Assert.DoesNotThrowAsync(()=>residenceService.GetAllRegisteredResidencesByHostIdAsync(hostId));
+            Assert.DoesNotThrowAsync(()=>_residenceReviewService.GetAllRegisteredResidencesByHostIdAsync(hostId));
         }
         
         [Test]
@@ -45,7 +45,7 @@ namespace UnitTests
             //TODO need to add residence to list
             
             //
-            Task<IList<Residence>> residences =  residenceService.GetAllRegisteredResidencesByHostIdAsync(1);
+            Task<IList<Residence>> residences =  _residenceReviewService.GetAllRegisteredResidencesByHostIdAsync(1);
 
             //assert
             Assert.Equals(1,residences.Result.Count);
@@ -59,7 +59,7 @@ namespace UnitTests
             //TODO need empty list
             
             //
-            Task<IList<Residence>> residences = residenceService.GetAllRegisteredResidencesByHostIdAsync(1);
+            Task<IList<Residence>> residences = _residenceReviewService.GetAllRegisteredResidencesByHostIdAsync(1);
 
             //assert
             Assert.Equals(0,residences.Result.Count);
@@ -73,7 +73,7 @@ namespace UnitTests
             //TODO need to add a couple residences to list
             
             //
-            Task<IList<Residence>> residences = residenceService.GetAllRegisteredResidencesByHostIdAsync(1);
+            Task<IList<Residence>> residences = _residenceReviewService.GetAllRegisteredResidencesByHostIdAsync(1);
 
             //assert
             Assert.Equals(0,residences.Result.Count);

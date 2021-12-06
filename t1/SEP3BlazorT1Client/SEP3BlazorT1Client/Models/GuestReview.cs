@@ -1,15 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace SEP3BlazorT1Client.Models
 {
     public class GuestReview
     {
         [Required]
-        public int Id { get; set; }
-        [Required]
+        [JsonProperty("rating")]
         public double Rating { get; set; }
+        [JsonProperty("text")]
         public string Text { get; set; }
         [Required]
-        public int HostId { get; set; }
+        [JsonProperty("hostEmail")]
+        public string HostEmail { get; set; }
+        [JsonProperty("createdDate")]
+        public DateTime CreatedDate { get; set; }
     }
 }

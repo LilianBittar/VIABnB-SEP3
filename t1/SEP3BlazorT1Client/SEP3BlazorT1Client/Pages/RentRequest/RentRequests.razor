@@ -1,68 +1,78 @@
 @page "/RentRequests"
-
-@if (rentRequestList == null)
-{
-    <h3 class="mat-subtitle1">Loading</h3>
-    <MatProgressCircle Indeterminate="true"/>
-}
-else if (!rentRequestList.Any())
-{
-    <p>
-        <em>There are no rent requests at the moment...</em>
-    </p>
-}
-else
-{
-    <MatAccordion Multi="true">
-        @foreach (var item in rentRequestList)
+<AuthorizeView Policy="MustBeHost">
+    <Authorized>
+        @if (_rentRequestList == null)
         {
-            <MatExpansionPanel>
-                <MatExpansionPanelSummary>
-                    <MatExpansionPanelHeader>
-                        <p>@item.Id</p>
-                    </MatExpansionPanelHeader>
-                </MatExpansionPanelSummary>
-                <MatExpansionPanelDetails>
-                    <div class="form-group">
-                        <p>Request ID: @item.Id</p>
-                    </div>
-                    <div class="form-group">
-                        <p>Start Date: @item.StartDate</p>
-                    </div>
-                    <div class="form-group">
-                        <p>End Date: @item.EndDate</p>
-                    </div>
-                    <div class="form-group">
-                        <p>Number of guests: @item.NumberOfGuests</p>
-                    </div>
-                    <div class="form-group">
-                        <p>Status: @item.Status</p>
-                    </div>
-                    <div class="form-group">
-                        <p>Guest VIA ID: @item.Guest.ViaId</p>
-                    </div>
-                    <div class="form-group">
-                        <p>Guest review: @item.Guest.GuestReviews</p>
-                    </div>
-                    <div class="form-group">
-                        <p>First Name: @item.Guest.FirstName</p>
-                    </div>
-                    <div class="form-group">
-                        <p>Last Name: @item.Guest.LastName</p>
-                    </div>
-                    <div class="form-group">
-                        <p>Email: @item.Guest.Email</p>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button class="btn btn-outline-dark" @onclick="(()=> ApproveRequest(item.Id))">Approve</button>
-                                <button class="btn btn-outline-dark" @onclick="(()=> RejectRequest(item.Id))">Reject</button>
-                            </div>
-                        </div>
-                    </div>
-                </MatExpansionPanelDetails>
-            </MatExpansionPanel>
+            <h3 class="mat-subtitle1">Loading</h3>
+            <MatProgressCircle Indeterminate="true"/>
         }
-    </MatAccordion>
-}
+        else if (!_rentRequestList.Any())
+        {
+            <MatProgressCircle Indeterminate="true" />
+            <p>
+                <em>There are no rent requests at the moment...</em>
+            </p>
+        }
+        else
+        {
+            <MatAccordion Multi="true">
+                @foreach (var item in _rentRequestList)
+                {
+                    <MatExpansionPanel>
+                        <MatExpansionPanelSummary>
+                            <MatExpansionPanelHeader>
+                                <p>@item.Id</p>
+                            </MatExpansionPanelHeader>
+                        </MatExpansionPanelSummary>
+                        <MatExpansionPanelDetails>
+                            <div class="form-group">
+                                <p>Request ID: @item.Id</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Start Date: @item.StartDate</p>
+                            </div>
+                            <div class="form-group">
+                                <p>End Date: @item.EndDate</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Number of guests: @item.NumberOfGuests</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Status: @item.Status</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Guest VIA ID: @item.Guest.ViaId</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Guest reviews: @item.Guest.GuestReviews.Count <button class="btn btn-outline-dark" @onclick="(() => ViewGuestReviews(item.Guest.Id))">See details</button></p>
+                            </div>
+                            <div class="form-group">
+                                <p>First Name: @item.Guest.FirstName</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Last Name: @item.Guest.LastName</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Email: @item.Guest.Email</p>
+                            </div>
+                            <div class="form-group">
+                                <p>Request sent date: @item.RequestCreationDate</p>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-outline-dark" @onclick="(() => ApproveRequest(item.Id))">Approve</button>
+                                        <button class="btn btn-outline-dark" @onclick="(() => RejectRequest(item.Id))">Reject</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </MatExpansionPanelDetails>
+                    </MatExpansionPanel>
+                }
+            </MatAccordion>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <p>Please <a href="/">Login</a>to be able to see the content of this page</p>
+    </NotAuthorized>
+</AuthorizeView>
