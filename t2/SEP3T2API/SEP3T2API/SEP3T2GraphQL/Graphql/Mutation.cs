@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using HotChocolate;
 using SEP3T2GraphQL.Models;
@@ -61,6 +62,8 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<Host> RegisterHost(Host host)
         {
+            Console.WriteLine("in mutation");
+            Console.WriteLine(JsonSerializer.Serialize(host));
             return await _hostService.RegisterHostAsync(host);
         }
 

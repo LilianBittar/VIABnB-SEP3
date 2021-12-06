@@ -31,16 +31,15 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Host> RegisterHostAsync(Host host)
         {
-            Host hostExists = await GetHostByEmail(host.Email);
+            Console.WriteLine("inside registerhost servie");
+          //  Host hostExists = await GetHostByEmail(host.Email);
             
-            if (hostExists!=null)
+           // if (hostExists!=null)
             {
-                if (await _hostValidation.IsValidHost(host))
+              //  if (await _hostValidation.IsValidHost(host))
                 {
                     try
                     {
-                        Console.WriteLine($"{this} creating new host...");
-                        Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(host)}");
                         return await _hostRepository.RegisterHostAsync(host);
                     }
                     catch (Exception e)
