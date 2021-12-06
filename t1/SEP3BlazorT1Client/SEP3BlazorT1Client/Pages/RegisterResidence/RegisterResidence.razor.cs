@@ -82,7 +82,8 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             Console.WriteLine(_facilityToBeAdded.Name);
             if (!string.IsNullOrEmpty(_facilityToBeAdded.Name))
             {
-                _newResidence.Facilities.Add(_facilityToBeAdded);
+            
+                _newResidence.Facilities.Add(new Facility(){Id = _facilityToBeAdded.Id, Name = _facilityToBeAdded.Name});
                 _showFacilityDialog = false;
             }
 
