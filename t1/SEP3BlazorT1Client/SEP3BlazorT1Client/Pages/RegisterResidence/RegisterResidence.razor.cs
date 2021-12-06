@@ -81,7 +81,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 Description = await MatDialogService.PromptAsync("Enter rule", "")
             };
 
-            if (!string.IsNullOrEmpty(newRule.Description))
+            if (!string.IsNullOrEmpty(newRule.Description) && _newResidence.Rules.All(r=>r.Description != newRule.Description))
             {
                 _newResidence.Rules.Add(newRule);
             }
@@ -99,7 +99,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
         {
             Console.WriteLine(_facilityToBeAdded.Name);
             var newFacility = _allFacilities.FirstOrDefault(f => f.Name == _facilityToBeAdded.Name);
-            if (newFacility != null && !string.IsNullOrEmpty(_facilityToBeAdded.Name))
+            if (newFacility != null && !string.IsNullOrEmpty(_facilityToBeAdded.Name) && _newResidence.Facilities.All(f => f.Name != newFacility.Name))
             {
                 _newResidence.Facilities.Add(
                     new Facility() {Id = newFacility.Id, Name = newFacility.Name});
