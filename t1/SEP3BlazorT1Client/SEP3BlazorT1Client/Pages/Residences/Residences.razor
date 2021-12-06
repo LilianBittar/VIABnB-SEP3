@@ -8,6 +8,9 @@
 @inject IGuestService GuestService
 @inject NavigationManager NavigationManager
 @* TODO: Add AuthorizeView *@
+
+<p>@Errormessage</p>
+
 @if (_availableResidences != null)
 {
     @if (_residencesToShow.Count > 0)
@@ -45,7 +48,7 @@
 }
 else
 {
-    <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+     <MatProgressBar  Indeterminate="true" Reversed="true"></MatProgressBar>
 }
 
 
@@ -131,11 +134,11 @@ else
                                 foreach (var review in ResidenceReviews)
                                 {
                                     <p>
-                                        <b> @review.GuestViaId</b>
+                                        <b>Guest ID: @review.GuestViaId</b>
                                     </p>
 
-                                    <p style="color:grey">@review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</p>
-                                    <p>@review.Rating</p>
+                                    <p style="color:grey">Reviewdate: @review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</p>
+                                    <p>Rating @review.Rating <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon></p>
                                     <li class="list-group-item">@review.ReviewText</li>
                                 }
                             }
@@ -171,6 +174,7 @@ else
     private Guest guest;
     private string _cityFilter = "";
     private long? _maxPriceFilter = 0;
+    string Errormessage = "";
 
     public string CityFilter
     {
@@ -200,13 +204,23 @@ else
         ResidenceReviews = await residenceReviewService.GetAllByResidenceIdAsync(residence.Id);
 
         viewResidenceDetailsDialog = true;
+        StateHasChanged();
     }
 
 
     protected override async Task OnInitializedAsync()
     {
-        _availableResidences = await ResidenceService.GetAllAvailableResidencesAsync();
-        _residencesToShow = _availableResidences;
+        try
+        {
+            _availableResidences = await ResidenceService.GetAllAvailableResidencesAsync();
+            _residencesToShow = _availableResidences;
+        }
+        catch (Exception e)
+        {
+            Errormessage = "";
+            Errormessage = "Something went wrong.. try refreshing the page";
+        }
+       
     }
 
 
