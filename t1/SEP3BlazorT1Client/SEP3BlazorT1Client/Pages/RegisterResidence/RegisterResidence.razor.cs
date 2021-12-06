@@ -122,7 +122,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                     await ResidenceService.CreateResidenceAsync(_newResidence);
                     // ResetModels();
 
-                    NavigationManager.NavigateTo("/buildingsoverview");
+                    NavigationManager.NavigateTo("/hostresidences");
                 }
                 catch (ArgumentException e)
                 {

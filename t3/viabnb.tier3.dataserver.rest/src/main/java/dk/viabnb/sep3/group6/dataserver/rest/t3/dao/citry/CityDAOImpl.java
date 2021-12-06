@@ -3,10 +3,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.citry;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.City;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,11 +34,14 @@ public class CityDAOImpl extends BaseDao implements CityDAO {
     public City createNewCity(City city) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement
-                    ("INSERT INTO city(cityname, zipcode) VALUES (?,?)");
+                    ("INSERT INTO city(cityname, zipcode) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, city.getCityName());
             stm.setInt(2, city.getZipCode());
             stm.executeUpdate();
+            ResultSet keys = stm.getGeneratedKeys();
+            keys.next();
             connection.commit();
+            city.setCityId(keys.getInt(1));
             return city;
         } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());

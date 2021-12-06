@@ -81,8 +81,9 @@ namespace SEP3T2GraphQL.Services
                     if (existingAddress == null)
                     {
                         Console.WriteLine("Creating new address...");
-                        residence.Address = await _addressService.CreateAsync(residence.Address);
-                        Console.WriteLine(residence.Address.Id);
+                        var newAddress= await _addressService.CreateAsync(residence.Address);
+                        Console.WriteLine(newAddress.Id);
+                        residence.Address.Id = newAddress.Id;
                     }
                     else
                     {
