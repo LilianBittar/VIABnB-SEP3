@@ -56,6 +56,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             FormEditContextResidence = new EditContext(_newResidence);
             FormEditContextAddress = new EditContext(_newResidenceAddress);
             _allFacilities = await FacilityService.GetAllFacilities();
+            Console.WriteLine(JsonConvert.SerializeObject(_allFacilities));
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
             StateHasChanged();
@@ -97,10 +98,12 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
         private void AddFacility()
         {
             Console.WriteLine(_facilityToBeAdded.Name);
-            if (!string.IsNullOrEmpty(_facilityToBeAdded.Name))
+            var newFacility = _allFacilities.FirstOrDefault(f => f.Name == _facilityToBeAdded.Name);
+            if (newFacility != null && !string.IsNullOrEmpty(_facilityToBeAdded.Name))
             {
                 _newResidence.Facilities.Add(
-                    new Facility() {Id = _facilityToBeAdded.Id, Name = _facilityToBeAdded.Name});
+                    new Facility() {Id = newFacility.Id, Name = newFacility.Name});
+                Console.WriteLine(newFacility.Id);
                 _showFacilityDialog = false;
             }
 

@@ -57,6 +57,7 @@ public class ResidenceController {
 
     @PostMapping("/residences")
     public ResponseEntity<Residence> createResidence(@RequestBody Residence residence) {
+        LOGGER.info("POST request received for /residences with params: " + gson.toJson(residence));
         Residence newResidence = residenceDAO.createResidence(residence);
         if (newResidence == null) {
             return ResponseEntity.badRequest().build();

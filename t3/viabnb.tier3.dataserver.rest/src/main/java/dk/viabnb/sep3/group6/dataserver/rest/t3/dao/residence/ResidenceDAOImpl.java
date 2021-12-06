@@ -20,7 +20,9 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
     public Residence getByResidenceId(int id) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT * FROM residence JOIN address a on a.addressid = residence.addressid JOIN city c on c.cityid = a.cityid JOIN _user u on u.userid = residence.hostid JOIN host h on u.userid = h.hostid WHERE residenceid = ?");
+                    "SELECT * FROM residence JOIN address a on a.addressid = residence.addressid JOIN city c on c" +
+                            ".cityid = a.cityid JOIN _user u on u.userid = residence.hostid JOIN host h on u.userid =" +
+                            " h.hostid WHERE residenceid = ?");
             stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
             result.next();
@@ -64,7 +66,9 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
             throws IllegalStateException {
 
         try (Connection connection = getConnection()) {
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM residence JOIN address a on a.addressid = residence.addressid JOIN city c on c.cityid = a.cityid JOIN _user u on u.userid = residence.hostid JOIN host h on u.userid = h.hostid WHERE userid = ?");
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM residence JOIN address a on a" +
+                    ".addressid = residence.addressid JOIN city c on c.cityid = a.cityid JOIN _user u on u.userid = " +
+                    "residence.hostid JOIN host h on u.userid = h.hostid WHERE userid = ?");
             stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
             List<Residence> residences = new ArrayList<>();
@@ -112,18 +116,25 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
     public Residence createResidence(Residence residence) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
-                    "INSERT INTO residence(addressid, type, description, isavailable, priceprnight, availablefrom, availableto, imageurl, hostid) VALUES(?,?,?,?,?,?,?,?,?)");
+                    "INSERT INTO residence(addressid, type, description, isavailable, priceprnight, availablefrom, " +
+                            "availableto, imageurl, hostid) VALUES(?,?,?,?,?,?,?,?,?)",
+                    Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, residence.getAddress().getId());
             stm.setString(2, residence.getType());
             stm.setString(3, residence.getDescription());
             stm.setBoolean(4, residence.isAvailable());
             stm.setDouble(5, residence.getPricePerNight());
-            stm.setDate(6, (Date.valueOf( residence.getAvailableFrom())));
-            stm.setDate(7, (Date.valueOf( residence.getAvailableTo())));
+            stm.setDate(6, (Date.valueOf(residence.getAvailableFrom())));
+            stm.setDate(7, (Date.valueOf(residence.getAvailableTo())));
             stm.setString(8, residence.getImageURL());
             stm.setInt(9, residence.getHost().getId());
             stm.executeUpdate();
             connection.commit();
+            ResultSet keys = stm.getGeneratedKeys();
+            keys.next();
+            residence.setId(keys.getInt(1));
+            createRuleEntries(residence, residence.getRules());
+            createResidenceFacilityEntries(residence, residence.getFacilities());
             return residence;
         } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());
@@ -135,7 +146,9 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
             throws IllegalStateException {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT * FROM residence JOIN address a on a.addressid = residence.addressid JOIN city c on c.cityid = a.cityid JOIN _user u on u.userid = residence.hostid JOIN host h on u.userid = h.hostid");
+                    "SELECT * FROM residence JOIN address a on a.addressid = residence.addressid JOIN city c on c" +
+                            ".cityid = a.cityid JOIN _user u on u.userid = residence.hostid JOIN host h on u.userid =" +
+                            " h.hostid");
             ResultSet result = stm.executeQuery();
             List<Residence> residences = new ArrayList<>();
             while (result.next()) {
@@ -187,8 +200,8 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
                             + "where residenceid = ?;");
 
             stm.setBoolean(1, residence.isAvailable());
-            stm.setDate(2, (Date.valueOf( residence.getAvailableFrom())));
-            stm.setDate(3, (Date.valueOf( residence.getAvailableTo())));
+            stm.setDate(2, (Date.valueOf(residence.getAvailableFrom())));
+            stm.setDate(3, (Date.valueOf(residence.getAvailableTo())));
             stm.setInt(4, residence.getId());
             stm.executeUpdate();
             connection.commit();
@@ -229,7 +242,8 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
     private List<Facility> getFacilitiesByResidenceId(int residenceId) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT * FROM residencefacility rf join facility f on f.facilityid = rf.facilityid where residenceid = ?");
+                    "SELECT * FROM residencefacility rf join facility f on f.facilityid = rf.facilityid where " +
+                            "residenceid = ?");
             stm.setInt(1, residenceId);
             ResultSet results = stm.executeQuery();
             List<Facility> facilities = new ArrayList<>();
@@ -274,6 +288,52 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO {
             return facilityListToReturn;
         } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());
+        }
+    }
+
+    /**
+     * Helper method for inserting all {@code Facility} instances belonging to a {@code Residence} into the
+     * ResidenceFacility Join Table.
+     *
+     * @param residence  the residence that the facilities should be associated with.
+     * @param facilities the facilities that should be associated with {@code residence}
+     */
+    private void createResidenceFacilityEntries(Residence residence, List<Facility> facilities) {
+        try (Connection connection = getConnection()) {
+            for (Facility facility : facilities) {
+                PreparedStatement stm = connection.prepareStatement("INSERT INTO residencefacility(residenceid, " +
+                        "facilityid) values (?,?)");
+                stm.setInt(1, residence.getId());
+                stm.setInt(2, facility.getId());
+                stm.executeUpdate();
+            }
+            connection.commit();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new IllegalArgumentException(throwables.getMessage());
+        }
+    }
+
+    /**
+     * Helper method for inserting all {@code Rule} instances belonging to a {@code Residence} into the Rule table.
+     *
+     * @param residence the residence that the rules should be associated with.
+     * @param rules     the rules that should be associated with {@code residence}
+     */
+    private void createRuleEntries(Residence residence, List<Rule> rules) {
+        try (Connection connection = getConnection()) {
+            for (Rule rule : rules) {
+                PreparedStatement stm = connection.prepareStatement("INSERT INTO rule(residenceid, ruledescription) " +
+                        "values (?,?)");
+                stm.setInt(1, residence.getId());
+                stm.setString(2, rule.getDescription());
+                stm.executeUpdate();
+            }
+            connection.commit();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new IllegalArgumentException(throwables.getMessage());
         }
     }
 }
