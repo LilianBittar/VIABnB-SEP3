@@ -6,7 +6,7 @@ namespace SEP3T2GraphQL.Models
 {
     public class Host : User
     {
-        [JsonProperty("hostReviews", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("hostReviews")]
         public IList<HostReview>? HostReviews { get; set; } = new List<HostReview>();
         [JsonProperty("profileImageUrl")]
         public string ProfileImageUrl { get; set; }
