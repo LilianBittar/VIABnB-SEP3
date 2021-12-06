@@ -10,5 +10,16 @@ namespace SEP3T2GraphQL.Models
         public string CityName { get; set; }
         [Required]
         public int ZipCode { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj==null || !(obj.GetType() == typeof(City)))
+            {
+                return false; 
+            }
+
+            var other = (City) obj;
+            return other.CityName == this.CityName && other.ZipCode == this.ZipCode; 
+        }
     }
 }
