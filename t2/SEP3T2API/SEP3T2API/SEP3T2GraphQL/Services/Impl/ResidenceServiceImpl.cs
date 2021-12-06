@@ -5,24 +5,30 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Services.Impl;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
 
 namespace SEP3T2GraphQL.Services
 {
     public class ResidenceServiceImpl : IResidenceService
     {
-        private IResidenceRepository _residenceRepository;
-        private IResidenceValidation _residenceValidation;
+        private readonly IResidenceRepository _residenceRepository;
+        private readonly IResidenceValidation _residenceValidation;
+        private readonly ICityService _cityService;
+        private readonly IAddressService _addressService;
 
-        public ResidenceServiceImpl(IResidenceRepository residenceRepository)
+        public ResidenceServiceImpl(IResidenceRepository residenceRepository, ICityService cityService,
+            IAddressService addressService)
         {
             _residenceRepository = residenceRepository;
             _residenceValidation = new ResidenceValidationImpl();
+            _cityService = cityService;
+            _addressService = addressService;
         }
 
         public async Task<Residence> GetResidenceByIdAsync(int id)
         {
-            if (id is > 0 and < int.MaxValue && id !=null)
+            if (id is > 0 and < int.MaxValue && id != null)
             {
                 try
                 {
@@ -34,6 +40,7 @@ namespace SEP3T2GraphQL.Services
                     throw;
                 }
             }
+
             throw new Exception("ID must be bigger than 0");
         }
 
@@ -41,9 +48,9 @@ namespace SEP3T2GraphQL.Services
         {
             if (_residenceValidation.IsValidAvailabilityPeriod(residence.AvailableFrom, residence.AvailableTo))
             {
-
                 return await _residenceRepository.UpdateResidenceAvailabilityAsync(residence);
             }
+
             throw new ArgumentException("Publish attempt failed ");
         }
 
@@ -53,8 +60,19 @@ namespace SEP3T2GraphQL.Services
             {
                 try
                 {
-                    Console.WriteLine($"{this} creating new residence...");
-                    Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(residence)}");
+                    var allCities = await _cityService.GetAllAsync();
+                    var allAddresses = await _addressService.GetAllAsync(); 
+                    // Creates new city if none exists. 
+                    if (!allCities.Any(c => c.Equals(residence.Address.City)))
+                    {
+                        await _cityService.CreateAsync(residence.Address.City); 
+                    }
+
+                    if (!allAddresses.Any(a => a.Equals(residence.Address)))
+                    {
+                        await _addressService.CreateAsync(residence.Address);
+                    }
+                    
                     return await _residenceRepository.CreateResidenceAsync(residence);
                 }
                 catch (Exception e)
@@ -63,12 +81,13 @@ namespace SEP3T2GraphQL.Services
                     throw;
                 }
             }
+
             throw new ArgumentException("Invalid residence");
         }
 
         public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
         {
-            if (id is > 0 and < int.MaxValue  && id !=null)
+            if (id is > 0 and < int.MaxValue && id != null)
             {
                 try
                 {
@@ -80,13 +99,14 @@ namespace SEP3T2GraphQL.Services
                     throw;
                 }
             }
+
             throw new Exception("ID must be bigger than 0");
         }
 
         public async Task<IList<Residence>> GetAvailableResidencesAsync()
         {
             var allResidences = await _residenceRepository.GetAllAsync();
-            return allResidences.Where(r => r.IsAvailable).ToList(); 
+            return allResidences.Where(r => r.IsAvailable).ToList();
         }
     }
 }
