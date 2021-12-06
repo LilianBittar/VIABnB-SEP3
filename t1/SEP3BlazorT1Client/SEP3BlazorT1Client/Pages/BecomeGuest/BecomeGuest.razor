@@ -10,7 +10,7 @@
 @inject IGuestService GuestService
 @inject AuthenticationStateProvider AuthStateProvider
 <AuthorizeView Policy="MustBeHost">
-    <Authorized Context="Hello">
+    <Authorized Context="Auth">
         @if (_newGuest != null && _host != null)
         {
             <div class="mat-layout-grid">

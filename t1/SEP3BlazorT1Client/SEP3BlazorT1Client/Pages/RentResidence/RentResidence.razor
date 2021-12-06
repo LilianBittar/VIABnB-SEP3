@@ -10,7 +10,7 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @* TODO: Add AuthorizeView *@
-<AuthorizeView Policy="MustBeGuest">
+<AuthorizeView Context="Auth" Policy="MustBeGuest">
     <Authorized>
         @if (_newRentRequest.Residence != null)
         {
