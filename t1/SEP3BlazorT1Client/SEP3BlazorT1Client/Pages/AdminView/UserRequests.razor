@@ -1,7 +1,7 @@
 ﻿@page "/UserRequests"
 @using SEP3BlazorT1Client.Models
-@*<AuthorizeView Policy="MustBeAdmin">
-    <Authorized>*@
+<AuthorizeView Policy="MustBeAdmin">
+    <Authorized>
 <MatTabGroup>
     <MatTab Label="Hosts Requests">
         <ChildContent>
@@ -105,10 +105,10 @@
         </ChildContent>
     </MatTab>
 </MatTabGroup>
-@*</Authorized>
+</Authorized>
     <NotAuthorized>
         <div id="errorBox">
             <p>You must <a href="AdminLogin">login as an admin</a> to be able to see the content of this page</p>
         </div>
     </NotAuthorized>
-</AuthorizeView>*@
+</AuthorizeView>
