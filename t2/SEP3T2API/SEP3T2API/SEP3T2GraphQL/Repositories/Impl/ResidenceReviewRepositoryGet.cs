@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -18,7 +19,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
         public async Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId)
         {
             HttpResponseMessage responseMessage = await _client.GetAsync($"{Uri}/residences/{residenceId}/residencereviews");
-
+            Console.WriteLine(await responseMessage.Content.ReadAsStringAsync());
+            
             await HandleErrorResponse(responseMessage);
 
             string result = await responseMessage.Content.ReadAsStringAsync();

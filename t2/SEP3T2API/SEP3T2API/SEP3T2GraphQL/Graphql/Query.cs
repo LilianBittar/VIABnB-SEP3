@@ -28,7 +28,7 @@ namespace SEP3T2GraphQL.Graphql
             IAdministrationService administrationService, 
             IFacilityService facilityService, IRuleService ruleService, 
             IUserService userService, IHostReviewService hostReview,
-            IGuestReviewService guestReviewService)
+            IGuestReviewService guestReviewService, IResidenceReviewService residenceReviewService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
@@ -40,6 +40,7 @@ namespace SEP3T2GraphQL.Graphql
             _userService = userService;
             _hostReview = hostReview;
             _guestReviewService = guestReviewService;
+            _residenceReviewService = residenceReviewService;
         }
         public async Task<Residence> GetResidence(int id)
         {
@@ -176,7 +177,7 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _hostReview.GetAllHostReviewsByHostIdAsync(id);
         }
-        private async Task<IEnumerable<ResidenceReview>> GetAllResidenceReviewsByResidenceId(int residenceId)
+        public async Task<IEnumerable<ResidenceReview>> GetAllResidenceReviewsByResidenceId(int residenceId)
         {
             return await _residenceReviewService.GetAllByResidenceIdAsync(residenceId);
         }

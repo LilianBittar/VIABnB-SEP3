@@ -12,7 +12,7 @@
         <div class="col">
             @if (_residence != null && _guest != null)
             {
-            <ResidenceReviewForm Residence="@_residence" Guest="@_guest"/>
+                <ResidenceReviewForm Residence="@_residence" Guest="@_guest"/>
             }
             else if (_residence == null || _guest == null)
             {
@@ -22,7 +22,7 @@
             {
                 <p>Could not find residence or guest</p>
             }
-            
+
         </div>
     </div>
 

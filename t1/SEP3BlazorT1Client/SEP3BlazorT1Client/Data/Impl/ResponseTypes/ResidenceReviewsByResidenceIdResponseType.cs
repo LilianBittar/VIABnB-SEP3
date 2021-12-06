@@ -6,7 +6,7 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes
 {
     public class ResidenceReviewsByResidenceIdResponseType
     {
-        [JsonProperty("GetAllResidenceReviewsByResidenceId")]
+        [JsonProperty("allResidenceReviewsByResidenceId")]
         public IEnumerable<ResidenceReview> ResidenceReviews { get; set; }
     }
 }

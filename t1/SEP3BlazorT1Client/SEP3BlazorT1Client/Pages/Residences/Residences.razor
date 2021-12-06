@@ -130,11 +130,9 @@ else
                             {
                                 foreach (var review in ResidenceReviews)
                                 {
-                                    var guestID = review.GuestViaId;
-                                    //Guest guest = await GuestService.GetGuestById(guestID);
                                     <li class="list-group-item">
                                         <p>
-                                            <b> @guest.FirstName</b>
+                                            <b> @review.GuestViaId</b>
                                         </p>
                                     </li>
                                     <li  class="list-group-item"> <p style="color:grey">@review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</p></li>

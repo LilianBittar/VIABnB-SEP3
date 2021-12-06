@@ -23,8 +23,8 @@ namespace SEP3BlazorT1Client.Data.Impl
         {
             var query = new GqlQuery()
             {
-                Query = @"query(residenceId:Int!){
-                              GetAllResidenceReviewsByResidenceId(id:residenceId){
+                Query = @"query($residenceId:Int!){
+                              allResidenceReviewsByResidenceId(residenceId:$residenceId){
                                 rating
                                 reviewText
                                 guestViaId
