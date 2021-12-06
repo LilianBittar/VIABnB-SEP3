@@ -130,13 +130,12 @@ else
                             {
                                 foreach (var review in ResidenceReviews)
                                 {
-                                    <li class="list-group-item">
-                                        <p>
-                                            <b> @review.GuestViaId</b>
-                                        </p>
-                                    </li>
-                                    <li  class="list-group-item"> <p style="color:grey">@review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</p></li>
-                                    <li class="list-group-item">@review.Rating</li>
+                                    <p>
+                                        <b> @review.GuestViaId</b>
+                                    </p>
+
+                                    <p style="color:grey">@review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</p>
+                                    <p>@review.Rating</p>
                                     <li class="list-group-item">@review.ReviewText</li>
                                 }
                             }
