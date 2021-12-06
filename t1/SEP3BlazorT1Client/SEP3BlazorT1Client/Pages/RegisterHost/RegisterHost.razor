@@ -55,6 +55,7 @@
 
                     <MatButton OnClick="@CreateHost" Label="Register" Raised="true"></MatButton>
                     <MatButton OnClick="@(() => NavigationManager.NavigateTo("/"))" Label="Already have an account?"></MatButton>
+                     <p hidden="@IsShow"> <MatProgressBar  Indeterminate="true" Reversed="true"></MatProgressBar></p>
                 </div>
             </div>
         </div>
@@ -75,9 +76,16 @@
         HostReviews = new List<HostReview>()
     };
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
-
+    private bool IsShow {get;set;} = true;
+    private void ShowLoadingBar()
+    {
+        IsShow =   !IsShow;
+    }  
+    
+    
     private async void CreateHost()
     {
+       
     //clear error messages
         validationResults.Clear();
     // the validator validates in the context of a host object
@@ -90,6 +98,7 @@
     //checks if passwords match
         if (!PasswordConfirmationMatches())
         {
+           
             _errorText = "Passwords does not match";
             return;
         }
@@ -98,12 +107,13 @@
         {
             try
             {
-            
+                ShowLoadingBar();
     //Throws exception if user already exists.
                 await _hostservice.RegisterHostAsync(_newHost);
             }
             catch (Exception e)
             {
+                ShowLoadingBar();
                 _errorText = e.Message;
                 StateHasChanged();
                 return;
