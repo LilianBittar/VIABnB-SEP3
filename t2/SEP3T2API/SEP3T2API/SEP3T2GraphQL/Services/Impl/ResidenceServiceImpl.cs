@@ -61,30 +61,36 @@ namespace SEP3T2GraphQL.Services
                 try
                 {
                     var allCities = await _cityService.GetAllAsync();
-                    var allAddresses = await _addressService.GetAllAsync(); 
+                    var allAddresses = await _addressService.GetAllAsync();
                     // Creates new city if none exists. 
-                    var existingCity = allCities.FirstOrDefault(c => c.Equals(residence.Address.City)); 
+                    var existingCity = allCities.FirstOrDefault(c => c.Equals(residence.Address.City));
                     if (existingCity == null)
                     {
                         Console.WriteLine("Creating new city...");
-                        await _cityService.CreateAsync(residence.Address.City); 
+                        residence.Address.City = await _cityService.CreateAsync(residence.Address.City);
                     }
                     else
                     {
+                        Console.WriteLine("Existing city found...");
+                        Console.WriteLine(existingCity.Id);
+                        Console.WriteLine(existingCity.CityName);
                         residence.Address.City = existingCity;
                     }
 
-                    var existingAddress = allAddresses.FirstOrDefault(a => a.Equals(residence.Address)); 
+                    var existingAddress = allAddresses.FirstOrDefault(a => a.Equals(residence.Address));
                     if (existingAddress == null)
                     {
-                        await _addressService.CreateAsync(residence.Address);
+                        Console.WriteLine("Creating new address...");
+                        residence.Address = await _addressService.CreateAsync(residence.Address);
+                        Console.WriteLine(residence.Address.Id);
                     }
                     else
                     {
-                        residence.Address = existingAddress; 
+                        Console.WriteLine("Existing address found...");
+                        residence.Address = existingAddress;
                     }
 
-                        return await _residenceRepository.CreateResidenceAsync(residence);
+                    return await _residenceRepository.CreateResidenceAsync(residence);
                 }
                 catch (Exception e)
                 {

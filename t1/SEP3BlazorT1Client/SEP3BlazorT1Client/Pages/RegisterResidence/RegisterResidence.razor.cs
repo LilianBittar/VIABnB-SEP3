@@ -120,7 +120,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 try
                 {
                     await ResidenceService.CreateResidenceAsync(_newResidence);
-                    ResetModels();
+                    // ResetModels();
 
                     NavigationManager.NavigateTo("/buildingsoverview");
                 }
