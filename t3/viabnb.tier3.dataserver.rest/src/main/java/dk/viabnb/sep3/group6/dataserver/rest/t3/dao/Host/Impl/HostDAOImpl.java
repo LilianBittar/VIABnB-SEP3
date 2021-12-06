@@ -32,9 +32,10 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             stm1.setString(5, host.getPassword());
             stm1.executeUpdate();
             ResultSet resultSet = stm1.getGeneratedKeys();
+            resultSet.next();
             connection.commit();
             //insert into host
-            stm2.setInt(1, resultSet.getInt(0));
+            stm2.setInt(1, resultSet.getInt(1));
             stm2.setString(2, host.getCpr());
             stm2.setBoolean(3,host.isApprovedHost());
             stm2.setString(4,host.getProfileImageUrl());
