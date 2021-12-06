@@ -13,7 +13,7 @@ namespace SEP3T2GraphQL.Services.Validation
             _addressRepository = addressRepository;
         }
 
-        public void ValidateAddress(Address address)
+        public void Validate(Address address)
         {
             if (address == null)
             {

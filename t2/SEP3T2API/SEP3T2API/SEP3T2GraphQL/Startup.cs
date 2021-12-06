@@ -73,6 +73,8 @@ namespace SEP3T2GraphQL
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<CreateAddressValidator>();
             services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<CreateCityValidator>();
+            services.AddScoped<ICityService, CityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
