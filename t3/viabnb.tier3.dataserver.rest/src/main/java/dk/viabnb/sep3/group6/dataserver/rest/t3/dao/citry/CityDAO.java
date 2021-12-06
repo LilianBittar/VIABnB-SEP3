@@ -2,6 +2,8 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.citry;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.City;
 
+import java.util.List;
+
 public interface CityDAO
 {
   /**
@@ -20,4 +22,11 @@ public interface CityDAO
    * @throws IllegalStateException id can't connect to database
    * */
   City createNewCity(City city);
+  /**
+   * Returns all cities as a list.
+   * @return {@code List<City>} with all cities.
+   *
+   * @throws IllegalStateException if connection to data source fails.
+   * */
+  List<City> getAll();
 }
