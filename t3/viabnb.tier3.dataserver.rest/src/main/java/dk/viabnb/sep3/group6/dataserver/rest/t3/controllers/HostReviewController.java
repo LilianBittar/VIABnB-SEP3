@@ -1,5 +1,4 @@
-﻿package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
-
+package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.hostreview.HostReviewDAO;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
 @RestController
 public class HostReviewController {
     private HostReviewDAO hostReviewDAO;
