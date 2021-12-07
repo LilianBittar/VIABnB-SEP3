@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes.GuestResponseTypes;
 using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Data.Impl

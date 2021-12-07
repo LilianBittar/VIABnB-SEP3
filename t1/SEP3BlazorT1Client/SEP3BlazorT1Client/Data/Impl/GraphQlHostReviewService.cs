@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
-using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes.HostReviewsResponseTypes;
 using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Data.Impl

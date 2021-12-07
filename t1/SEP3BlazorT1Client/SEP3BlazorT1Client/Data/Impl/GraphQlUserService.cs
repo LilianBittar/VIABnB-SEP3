@@ -5,6 +5,7 @@ using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes.UserResponseTypes;
 using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Data.Impl
@@ -96,7 +97,17 @@ namespace SEP3BlazorT1Client.Data.Impl
             HandleErrorResponse(response);
             return response.Data.User;
         }
-        
+
+        public Task<User> UpdateUserAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteUserAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)
         {
             if (response.Errors != null)

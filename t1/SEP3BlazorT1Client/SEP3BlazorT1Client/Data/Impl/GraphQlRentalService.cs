@@ -5,6 +5,7 @@ using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes.RentRequestResponseTypes;
 using SEP3BlazorT1Client.Models;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
