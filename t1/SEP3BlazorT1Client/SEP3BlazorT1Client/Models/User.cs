@@ -24,5 +24,7 @@ namespace SEP3BlazorT1Client.Models
         [Required] 
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
+        [JsonProperty("profileImageUrl")]
+        public string ProfileImageUrl { get; set; }
     }
 }

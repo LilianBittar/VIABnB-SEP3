@@ -8,8 +8,6 @@ namespace SEP3BlazorT1Client.Models
     {
         [JsonProperty("hostReviews")]
         public IList<HostReview>? HostReviews { get; set; } = new List<HostReview>();
-        [JsonProperty("profileImageUrl")]
-        public string ProfileImageUrl { get; set; }
         [Required(ErrorMessage = "Please enter your CPR number")]
         [JsonProperty("cpr")]
         public string Cpr { get; set; }
