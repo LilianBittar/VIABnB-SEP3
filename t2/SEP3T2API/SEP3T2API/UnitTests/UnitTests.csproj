@@ -21,4 +21,8 @@
       <ProjectReference Include="..\SEP3T2GraphQL\SEP3T2GraphQL.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="GuestReviewTest" />
+    </ItemGroup>
+
 </Project>

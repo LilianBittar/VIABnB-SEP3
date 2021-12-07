@@ -17,10 +17,10 @@ namespace SEP3T2GraphQL.Services.Impl
         private IHostRepository _hostRepository;
         private IHostValidation _hostValidation;
 
-        public HostServiceImpl(IHostRepository hostRepository)
+        public HostServiceImpl(IHostRepository hostRepository, IHostValidation hostValidation)
         {
             _hostRepository = hostRepository;
-            _hostValidation = new HostValidationImpl();
+            _hostValidation = hostValidation;
         }
 
 

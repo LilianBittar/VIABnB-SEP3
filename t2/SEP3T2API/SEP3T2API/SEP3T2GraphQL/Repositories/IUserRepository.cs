@@ -9,5 +9,7 @@ namespace SEP3T2GraphQL.Repositories
         Task<User> GetUserByEmailAsync(string email);
         Task<User> GetUserByIdAsync(int id);
         Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<User> UpdateUserAsync(User user);
+        Task DeleteUserAsync(int userId);
     }
 }

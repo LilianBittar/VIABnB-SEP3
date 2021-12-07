@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
@@ -46,7 +47,39 @@ namespace SEP3T2GraphQL.Repositories.Impl
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
         }
-        
+
+        public async Task<User> UpdateUserAsync(User user)
+        {
+            var newUser = JsonSerializer.Serialize(user, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            
+            var content = new StringContent(newUser, Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync($"{Uri}/{user.Id}", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            var userToReturn = JsonSerializer.Deserialize<User>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return userToReturn;
+        }
+
+        public async Task DeleteUserAsync(int userId)
+        {
+            var response = await _client.DeleteAsync($"{Uri}/{userId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+        }
+
         private static async Task HandleErrorResponse(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)

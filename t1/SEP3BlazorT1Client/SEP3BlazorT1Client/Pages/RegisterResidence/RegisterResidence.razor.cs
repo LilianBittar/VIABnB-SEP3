@@ -131,6 +131,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 catch (ArgumentException e)
                 {
                     System.Console.WriteLine($"{this} ArgumentException Caught");
+                    _isLoading = false; 
                     _registerResidenceErrorMessage = e.Message;
                 }
             }
