@@ -11,6 +11,7 @@
 
 <!--<h3>BuildingOverview</h3>-->
 
+
 <style>
             .demo-mat-card {
                 max-width: 400px;
@@ -30,7 +31,7 @@
 <Authorized> 
     @if (_residences == null)
     {
-        <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium" />
+        <MatProgressBar  Indeterminate="true" Reversed="true"></MatProgressBar>
     }
     @if (_residences.Count == 0)
     {
