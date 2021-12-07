@@ -12,26 +12,31 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
     {
         private IHostRepository _repository = new HostRepositoryImpl();
 
+
         public async Task<bool> IsValidEmail(string email)
         {
             Host host = await _repository.GetHostByEmail(email);
-            if (host != null)
+            if (host == null)
             {
-                throw new ArgumentException("Host already exists");
-            }
-
-            if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
-            {
-                //some form of inbuilt mail validation
-                var addr = new System.Net.Mail.MailAddress(email);
-
-                if (addr.Address == email)
+                if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
                 {
-                    return true;
+                    //some form of inbuilt mail validation
+                       var addr = new System.Net.Mail.MailAddress(email);
+
+                       if (addr.Address != email)
+                    {
+                        throw new FormatException("Invalid email");
+                       
+                    }
+                       return true;
                 }
+
+                throw new Exception("email ot formatted corerctly");
             }
 
-            throw new FormatException("Invalid email");
+            throw new ArgumentException("Host already exists");
+
+           
         }
 
         public bool IsValidFirstname(string firstname)
@@ -152,7 +157,6 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             {
                 return true;
             }
-
             throw new ArgumentException("Invalid host");
         }
 
@@ -162,8 +166,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             {
                 return true;
             }
-
-            throw new ArgumentException($"Invalid string: {arg}");
+            return false;
         }
     }
 }
