@@ -60,7 +60,7 @@ class RentRequestControllerTest {
     @Test
     public void createRentRequestRentRepositoryThrowsIllegalStateReturnsInternalServerError() {
         RentRequest request = new RentRequest(1,LocalDate.now(), LocalDate.now(), 1, RentRequestStatus.NOTANSWERED, guest, residence, LocalDate.now());
-        when(rentRequestDAO.createNewRentRequest(request)).thenThrow(IllegalStateException.class);
+        when(rentRequestDAO.createNewRentRequest(request)).thenThrow(Exception.class);
         assertEquals(ResponseEntity.internalServerError().build(), controller.createRentRequest(request));
     }
 
