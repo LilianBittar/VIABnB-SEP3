@@ -56,13 +56,20 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO
       {
         List<GuestReview> guestReview = new ArrayList<>();
         List<HostReview> hostReviews = new ArrayList<>();
-        Guest existingGuest = new Guest(result.getInt("userid"),
-            result.getString("email"), result.getString("password"),
-            result.getString("fname"), result.getString("lname"),
-            result.getString("phonenumber"), hostReviews,
-            result.getString("personalimage"), result.getString("cprnumber"),
-            result.getBoolean("isapproved"), result.getInt("viaid"),
-            guestReview, result.getBoolean("isapprovedguest"));
+        Guest existingGuest = new Guest(
+            result.getInt("userid"),
+            result.getString("email"),
+            result.getString("password"),
+            result.getString("fname"),
+            result.getString("lname"),
+            result.getString("phonenumber"),
+            result.getString("personalimage"),
+            hostReviews,
+            result.getString("cprnumber"),
+            result.getBoolean("isapproved"),
+            result.getInt("viaid"),
+            guestReview,
+            result.getBoolean("isapprovedguest"));
         existingGuest.setGuestReviews(new ArrayList<>());
         allGuests.add(existingGuest);
       }
@@ -93,12 +100,18 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO
       {
         List<GuestReview> guestReview = new ArrayList<>();
         List<HostReview> hostReviews = new ArrayList<>();
-        return new Guest(result.getInt("userid"), result.getString("email"),
-            result.getString("password"), result.getString("fname"),
-            result.getString("lname"), result.getString("phonenumber"),
-            hostReviews, result.getString("personalimage"),
-            result.getString("cprnumber"), result.getBoolean("isapproved"),
-            result.getInt("viaid"), guestReview,
+        return new Guest(result.getInt("userid"),
+            result.getString("email"),
+            result.getString("password"),
+            result.getString("fname"),
+            result.getString("lname"),
+            result.getString("phonenumber"),
+            result.getString("personalimage"),
+            hostReviews,
+            result.getString("cprnumber"),
+            result.getBoolean("isapproved"),
+            result.getInt("viaid"),
+            guestReview,
             result.getBoolean("isapprovedguest"));
       }
       return null;
@@ -123,12 +136,18 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO
         List<GuestReview> guestReview = new ArrayList<>();
         List<HostReview> hostReviews = new ArrayList<>();
          Guest guestToAdd = new Guest(result.getInt("userid"),
-            result.getString("email"), result.getString("password"),
-            result.getString("fname"), result.getString("lname"),
-            result.getString("phonenumber"), hostReviews,
-            result.getString("personalimage"), result.getString("cprnumber"),
-            result.getBoolean("isapproved"), result.getInt("viaid"),
-            guestReview, result.getBoolean("isapprovedguest"));
+             result.getString("email"),
+             result.getString("password"),
+             result.getString("fname"),
+             result.getString("lname"),
+             result.getString("phonenumber"),
+             result.getString("personalimage"),
+             hostReviews,
+             result.getString("cprnumber"),
+             result.getBoolean("isapproved"),
+             result.getInt("viaid"),
+             guestReview,
+             result.getBoolean("isapprovedguest"));
         guestsToReturn.add(guestToAdd);
       }
       return guestsToReturn;
@@ -152,12 +171,18 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO
         List<GuestReview> guestReview = new ArrayList<>();
         List<HostReview> hostReviews = new ArrayList<>();
         Guest guest = new Guest(result.getInt("userid"),
-            result.getString("email"), result.getString("password"),
-            result.getString("fname"), result.getString("lname"),
-            result.getString("phonenumber"), hostReviews,
-            result.getString("personalimage"), result.getString("cprnumber"),
-            result.getBoolean("isapproved"), result.getInt("viaid"),
-            guestReview, result.getBoolean("isapprovedguest"));
+            result.getString("email"),
+            result.getString("password"),
+            result.getString("fname"),
+            result.getString("lname"),
+            result.getString("phonenumber"),
+            result.getString("personalimage"),
+            hostReviews,
+            result.getString("cprnumber"),
+            result.getBoolean("isapproved"),
+            result.getInt("viaid"),
+            guestReview,
+            result.getBoolean("isapprovedguest"));
         guest.setGuestReviews(new ArrayList<>());
         return guest;
       }
@@ -188,8 +213,8 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO
             result.getString("fname"),
             result.getString("lname"),
             result.getString("phonenumber"),
-            hostReviews,
             result.getString("personalimage"),
+            hostReviews,
             result.getString("cprnumber"),
             result.getBoolean("isapproved"),
             result.getInt("viaid"),

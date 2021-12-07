@@ -41,8 +41,8 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO
       Host residenceHost = new Host(result.getInt("userid"),
           result.getString("email"), result.getString("password"),
           result.getString("fname"), result.getString("lname"),
-          result.getString("phonenumber"), new ArrayList<>(),
-          result.getString("personalimage"), result.getString("cprnumber"),
+          result.getString("phonenumber"), result.getString("personalimage"), new ArrayList<>(),
+           result.getString("cprnumber"),
           result.getBoolean("isapproved"));
       return new Residence(result.getInt("residenceid"), address,
           result.getString("description"), result.getString("type"),
@@ -89,8 +89,8 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO
         Host residenceHost = new Host(result.getInt("hostid"),
             result.getString("email"), result.getString("password"),
             result.getString("fname"), result.getString("lname"),
-            result.getString("phonenumber"), new ArrayList<>(),
-            result.getString("personalimage"), result.getString("cprnumber"),
+            result.getString("phonenumber"), result.getString("personalimage"), new ArrayList<>(),
+             result.getString("cprnumber"),
             result.getBoolean("isapproved"));
         Residence residence = new Residence(result.getInt("residenceid"),
             address, result.getString("description"), result.getString("type"),
@@ -171,8 +171,8 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO
         Host residenceHost = new Host(result.getInt("hostid"),
             result.getString("email"), result.getString("password"),
             result.getString("fname"), result.getString("lname"),
-            result.getString("phonenumber"), new ArrayList<>(),
-            result.getString("personalimage"), result.getString("cprnumber"),
+            result.getString("phonenumber"), result.getString("personalimage"), new ArrayList<>(),
+             result.getString("cprnumber"),
             result.getBoolean("isapproved"));
         Residence residence = new Residence(result.getInt("residenceid"),
             address, result.getString("description"), result.getString("type"),

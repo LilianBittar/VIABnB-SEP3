@@ -12,12 +12,12 @@ public class Guest extends Host
   private boolean isApprovedGuest;
 
   public Guest(int id, String email, String password, String firstName,
-      String lastName, String phoneNumber, List<HostReview> hostReviews,
-      String profileImageUrl, String cpr, boolean isApprovedHost, int viaId,
-      List<GuestReview> guestReviews, boolean isApprovedGuest)
+      String lastName, String phoneNumber, String profileImageUrl,
+      List<HostReview> hostReviews, String cpr, boolean isApprovedHost,
+      int viaId, List<GuestReview> guestReviews, boolean isApprovedGuest)
   {
-    super(id, email, password, firstName, lastName, phoneNumber, hostReviews,
-        profileImageUrl, cpr, isApprovedHost);
+    super(id, email, password, firstName, lastName, phoneNumber,
+        profileImageUrl, hostReviews, cpr, isApprovedHost);
     this.viaId = viaId;
     this.guestReviews = guestReviews;
     this.isApprovedGuest = isApprovedGuest;

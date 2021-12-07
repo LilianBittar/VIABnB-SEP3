@@ -65,8 +65,8 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                         result.getString("fname"),
                         result.getString("lname"),
                         result.getString("phonenumber"),
-                        hostReviews,
                         result.getString("personalimage"),
+                        hostReviews,
                         result.getString("cprnumber"),
                         result.getBoolean("isapproved")
                 );
@@ -93,8 +93,8 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                         result.getString("fname"),
                         result.getString("lname"),
                         result.getString("phonenumber"),
-                        hostReviews,
                         result.getString("personalimage"),
+                        hostReviews,
                         result.getString("cprnumber"),
                         result.getBoolean("isapproved")
                     );
@@ -123,8 +123,8 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                             result.getString("fname"),
                             result.getString("lname"),
                             result.getString("phonenumber"),
-                            hostReviews,
                             result.getString("personalimage"),
+                            hostReviews,
                             result.getString("cprnumber"),
                             result.getBoolean("isapproved")
                         );
@@ -154,8 +154,8 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                             result.getString("fname"),
                             result.getString("lname"),
                             result.getString("phonenumber"),
-                            hostReviews,
                             result.getString("personalimage"),
+                            hostReviews,
                             result.getString("cprnumber"),
                             result.getBoolean("isapproved")
                         );

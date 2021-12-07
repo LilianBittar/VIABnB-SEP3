@@ -5,9 +5,11 @@ public class Administrator extends User
   private String initials;
 
   public Administrator(int id, String email, String password, String firstName,
-      String lastName, String phoneNumber, String initials)
+      String lastName, String phoneNumber, String profileImageUrl,
+      String initials)
   {
-    super(id, email, password, firstName, lastName, phoneNumber);
+    super(id, email, password, firstName, lastName, phoneNumber,
+        profileImageUrl);
     this.initials = initials;
   }
 

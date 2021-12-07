@@ -33,8 +33,9 @@ class AdministrationControllerTest
             "Aa11",
             "Test",
             "Test",
-            "11111111",
-            "tt"
+            "11111",
+            "Test",
+            "TT"
         );
   }
 

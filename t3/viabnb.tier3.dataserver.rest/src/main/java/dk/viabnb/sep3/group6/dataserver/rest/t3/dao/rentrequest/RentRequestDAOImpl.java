@@ -99,8 +99,8 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
                                 result.getString("fname"),
                                 result.getString("lname"),
                                 result.getString("phonenumber"),
-                                new ArrayList<>(),
                                 result.getString("personalimage"),
+                                new ArrayList<>(),
                                 result.getString("cprnumber"),
                                 result.getBoolean("isapproved")
                         );
@@ -161,13 +161,19 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
             stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
             if (result.next()) {
-                return new Guest(result.getInt("userid"), result.getString("email"),
-                        result.getString("password"), result.getString("fname"),
-                        result.getString("lname"), result.getString("phonenumber"),
-                        new ArrayList<>(), result.getString("personalimage"),
-                        result.getString("cprnumber"), result.getBoolean("isapproved"),
-                        result.getInt("viaid"), new ArrayList<>(),
-                        result.getBoolean("isapprovedguest"));
+                return new Guest(result.getInt("userid"),
+                    result.getString("email"),
+                    result.getString("password"),
+                    result.getString("fname"),
+                    result.getString("lname"),
+                    result.getString("phonenumber"),
+                    result.getString("personalimage"),
+                    new ArrayList<>(),
+                    result.getString("cprnumber"),
+                    result.getBoolean("isapproved"),
+                    result.getInt("viaid"),
+                    new ArrayList<>(),
+                    result.getBoolean("isapprovedguest"));
             }
             return null;
         } catch (SQLException throwables) {
@@ -204,8 +210,8 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
                                 result.getString("fname"),
                                 result.getString("lname"),
                                 result.getString("phonenumber"),
-                                new ArrayList<>(),
                                 result.getString("personalimage"),
+                                new ArrayList<>(),
                                 result.getString("cprnumber"),
                                 result.getBoolean("isapproved")
                         );
@@ -233,7 +239,7 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
                 return new Host(result.getInt("userid"), result.getString("email"),
                         result.getString("password"), result.getString("fname"),
                         result.getString("lname"), result.getString("phonenumber"),
-                        new ArrayList<>(), result.getString("personalimage"),
+                    result.getString("personalimage"), new ArrayList<>(),
                         result.getString("cprnumber"), result.getBoolean("isapproved"));
             }
             return null;
