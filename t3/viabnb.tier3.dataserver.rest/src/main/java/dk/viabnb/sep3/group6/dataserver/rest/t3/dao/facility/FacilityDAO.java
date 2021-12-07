@@ -28,4 +28,11 @@ public interface FacilityDAO
    * @throws IllegalStateException if can't connect to database
    * */
   Facility getFacilityById(int id);
+  /**
+   * Delete a facility from the system
+   * @param residenceId The targeted facility to delete
+   *
+   * @throws IllegalStateException if can't connect to database
+   * */
+  void deleteResidenceFacility(int facilityId, int residenceId);
 }

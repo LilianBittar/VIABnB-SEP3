@@ -67,7 +67,24 @@ public class FacilityDAOImpl extends BaseDao implements FacilityDAO
         return new Facility(result.getInt("facilityid"),
             result.getString("name"));
       }
-      throw new IllegalArgumentException("Facility cant be null");
+      return null;
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalStateException(throwables.getMessage());
+    }
+  }
+
+  @Override public void deleteResidenceFacility(int facilityId, int residenceId)
+  {
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement
+          ("DELETE FROM residencefacility WHERE facilityid = ? AND residenceid = ?");
+      stm.setInt(1, facilityId);
+      stm.setInt(2, residenceId);
+      stm.executeUpdate();
+      connection.commit();
     }
     catch (SQLException throwables)
     {

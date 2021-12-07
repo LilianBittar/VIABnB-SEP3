@@ -54,4 +54,39 @@ public class RuleDAOImpl extends BaseDao implements RuleDAO
       throw new IllegalStateException(throwables.getMessage());
     }
   }
+
+  @Override public Rule updateRule(Rule rule)
+  {
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement
+          ("UPDATE rule SET ruledescription = ? WHERE residenceid = ?");
+      stm.setString(1, rule.getDescription());
+      stm.setInt(2, rule.getResidenceId());
+      stm.executeUpdate();
+      connection.commit();
+      return rule;
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalStateException(throwables.getMessage());
+    }
+  }
+
+  @Override public void deleteRule(String description, int residenceId)
+  {
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement
+          ("DELETE FROM rule WHERE ruledescription = ? AND residenceid = ?");
+      stm.setString(1, description);
+      stm.setInt(2, residenceId);
+      stm.executeUpdate();
+      connection.commit();
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalStateException(throwables.getMessage());
+    }
+  }
 }
