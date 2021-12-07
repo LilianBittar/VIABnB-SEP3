@@ -1,19 +1,15 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RentRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -43,22 +39,22 @@ class HostControllerTest
   void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNull()
   {
     //arrange
-    Host host = new Host(1, "test", "test", "12345678", "email@test.tt", "Test123", new ArrayList<>(), "test", "1234567891", false);
+    Host host = new Host(1, "test", "test", "12345678", "email@test.tt", "Test123","test", new ArrayList<>(),  "1234567891", false);
     when(hostDAO.registerHost(host)).thenReturn(null);
 
     //act and assert
-    Assertions.assertEquals(ResponseEntity.internalServerError().build(), response);
+    Assertions.assertEquals(ResponseEntity.internalServerError().build(), controller.createHost(host));
   }
 
   @Test
-  void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNull()
+  void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNullTest()
   {
     //aarange
-    Host host = new Host(1, "test", "test", "12345678", "email@test.tt", "Test123", new ArrayList<>(), "test", "1234567891", false);
-    when(hostDAO.registerHost(host)).thenThrow(Exception.class);
+    Host host = new Host(1, "test", "test", "12345678", "email@test.tt", "Test123","test", new ArrayList<>(), "1234567891", false);
+    when(hostDAO.registerHost(host)).thenThrow(IllegalStateException.class);
 
     //act and assert
-    Assertions.assertEquals(ResponseEntity.internalServerError().build(), response);
+    Assertions.assertEquals(ResponseEntity.internalServerError().build(), controller.createHost(host));
   }
 
 }

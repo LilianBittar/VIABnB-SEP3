@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS _User
     fName       VARCHAR,
     lName       VARCHAR,
     phoneNumber VARCHAR,
+    personalImage VARCHAR,
     PRIMARY KEY (userId)
 );
 
@@ -26,7 +27,6 @@ CREATE TABLE IF NOT EXISTS Host
     hostId        serial,
     cprNumber     VARCHAR,
     isApproved    BOOLEAN,
-    personalImage VARCHAR,
     PRIMARY KEY (hostID),
     FOREIGN KEY (hostId) REFERENCES _User (userId) ON DELETE CASCADE
 );
@@ -166,14 +166,14 @@ CREATE TABLE IF NOT EXISTS Rent
 );
 
 --The system's admins
-INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('291597@via.dk', '1234', 'Kutaiba', 'Kashmar', '+4511111111');
-INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('293885@via.dk', '1234', 'Michael', 'Bui', '+4522222222');
-INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('304218@via.dk', '1234', 'Kasper', 'Jensen', '+4533333333');
-INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('293336@via.dk', '1234', 'Lilian', 'Bittar', '+4544444444');
+INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
+VALUES ('291597@via.dk', '1234', 'Kutaiba', 'Kashmar', '+4511111111', 'image');
+INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
+VALUES ('293885@via.dk', '1234', 'Michael', 'Bui', '+4522222222', 'image');
+INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
+VALUES ('304218@via.dk', '1234', 'Kasper', 'Jensen', '+4533333333', 'image');
+INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
+VALUES ('293336@via.dk', '1234', 'Lilian', 'Bittar', '+4544444444', 'image');
 
 INSERT INTO Admin(initials)
 VALUES ('KNK');
@@ -185,32 +185,32 @@ INSERT INTO Admin(initials)
 VALUES ('LBB');
 
 --Other users
-INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('john@gmail.com', 'Aa11', 'John', 'Johnson', '+4555555555');
-INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('bob@gmail.com', 'Aa11', 'Bob', 'Bobsen', '+4566666666');
-INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('sara@hotmail.com', 'Aa11', 'Sara', 'Sarsen', '+4577777777');
-INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('alice@outlook.com', 'Aa11', 'Alice', 'Aliceson', '+458888888');
-INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('shrek@ogre.org', 'Aa11', 'Shrek', 'Shrekson', '+4599999999');
-INSERT INTO _User(email, password, fName, lName, phoneNumber)
-VALUES ('mario@nintendo.org', 'Aa11', 'Mario', 'Mario', '+4510000000');
+INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
+VALUES ('john@gmail.com', 'Aa11', 'John', 'Johnson', '+4555555555', 'image');
+INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
+VALUES ('bob@gmail.com', 'Aa11', 'Bob', 'Bobsen', '+4566666666', 'image');
+INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
+VALUES ('sara@hotmail.com', 'Aa11', 'Sara', 'Sarsen', '+4577777777', 'image');
+INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
+VALUES ('alice@outlook.com', 'Aa11', 'Alice', 'Aliceson', '+458888888', 'image');
+INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
+VALUES ('shrek@ogre.org', 'Aa11', 'Shrek', 'Shrekson', '+4599999999', 'image');
+INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
+VALUES ('mario@nintendo.org', 'Aa11', 'Mario', 'Mario', '+4510000000', 'image');
 
 --Host
-INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
-VALUES (5 , '1111111111', false, 'image');
-INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
-VALUES (6, '2222222222', false, 'image');
-INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
-VALUES (7, '3333333333', false, 'image');
-INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
-VALUES (8, '444444444', false, 'image');
-INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
-VALUES (9, '5555555555', false, 'image');
-INSERT INTO Host(hostid, cprNumber, isApproved, personalImage)
-VALUES (10, '6666666666', false, 'image');
+INSERT INTO Host(hostid, cprNumber, isApproved)
+VALUES (5 , '1111111111', false);
+INSERT INTO Host(hostid, cprNumber, isApproved)
+VALUES (6, '2222222222', false);
+INSERT INTO Host(hostid, cprNumber, isApproved)
+VALUES (7, '3333333333', false);
+INSERT INTO Host(hostid, cprNumber, isApproved)
+VALUES (8, '444444444', false);
+INSERT INTO Host(hostid, cprNumber, isApproved)
+VALUES (9, '5555555555', false);
+INSERT INTO Host(hostid, cprNumber, isApproved)
+VALUES (10, '6666666666', false);
 
 --Guest
 

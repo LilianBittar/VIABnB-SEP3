@@ -8,8 +8,6 @@ namespace SEP3T2GraphQL.Models
     {
         [JsonProperty("hostReviews", NullValueHandling = NullValueHandling.Ignore)]
         public IList<HostReview>? HostReviews { get; set; } = new List<HostReview>();
-        [JsonProperty("profileImageUrl")]
-        public string ProfileImageUrl { get; set; }
         [Required(ErrorMessage = "Please enter your CPR number")]
         [JsonProperty("cpr")]
         public string Cpr { get; set; }

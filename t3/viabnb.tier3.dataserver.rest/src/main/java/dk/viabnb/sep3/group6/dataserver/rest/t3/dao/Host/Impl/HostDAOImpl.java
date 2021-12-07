@@ -22,14 +22,15 @@ public class HostDAOImpl extends BaseDao implements HostDAO
     @Override
     public Host registerHost(Host host) {
         try (Connection connection = getConnection()) {
-            PreparedStatement stm1 = connection.prepareStatement("insert into _user(fname, lname, email, phonenumber, password) values (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
-            PreparedStatement stm2 = connection.prepareStatement("insert into host(hostid, cprnumber, isapproved, personalimage) values (?,?,?,?)");
+            PreparedStatement stm1 = connection.prepareStatement("insert into _user(fname, lname, email, phonenumber, password, personalimage) values (?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement stm2 = connection.prepareStatement("insert into host(hostid, cprnumber, isapproved ) values (?,?,?)");
             //insert into user
             stm1.setString(1, host.getFirstName());
             stm1.setString(2, host.getLastName());
             stm1.setString(3, host.getEmail());
             stm1.setString(4, host.getPhoneNumber());
             stm1.setString(5, host.getPassword());
+            stm1.setString(6,host.getProfileImageUrl());
             stm1.executeUpdate();
             ResultSet resultSet = stm1.getGeneratedKeys();
             resultSet.next();
@@ -38,7 +39,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             stm2.setInt(1, resultSet.getInt(1));
             stm2.setString(2, host.getCpr());
             stm2.setBoolean(3,host.isApprovedHost());
-            stm2.setString(4,host.getProfileImageUrl());
+
             stm2.executeUpdate();
             connection.commit();
             return host;
@@ -65,8 +66,8 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                         result.getString("fname"),
                         result.getString("lname"),
                         result.getString("phonenumber"),
-                        hostReviews,
                         result.getString("personalimage"),
+                        hostReviews,
                         result.getString("cprnumber"),
                         result.getBoolean("isapproved")
                 );
@@ -93,8 +94,8 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                         result.getString("fname"),
                         result.getString("lname"),
                         result.getString("phonenumber"),
-                        hostReviews,
                         result.getString("personalimage"),
+                        hostReviews,
                         result.getString("cprnumber"),
                         result.getBoolean("isapproved")
                     );
@@ -123,8 +124,8 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                             result.getString("fname"),
                             result.getString("lname"),
                             result.getString("phonenumber"),
-                            hostReviews,
                             result.getString("personalimage"),
+                            hostReviews,
                             result.getString("cprnumber"),
                             result.getBoolean("isapproved")
                         );
@@ -154,8 +155,8 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                             result.getString("fname"),
                             result.getString("lname"),
                             result.getString("phonenumber"),
-                            hostReviews,
                             result.getString("personalimage"),
+                            hostReviews,
                             result.getString("cprnumber"),
                             result.getBoolean("isapproved")
                         );

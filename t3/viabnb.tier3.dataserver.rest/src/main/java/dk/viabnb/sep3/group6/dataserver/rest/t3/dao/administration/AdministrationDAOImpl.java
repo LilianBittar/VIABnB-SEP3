@@ -32,6 +32,7 @@ public class AdministrationDAOImpl extends BaseDao implements AdministrationDAO 
                         result.getString("fname"),
                         result.getString("lname"),
                         result.getString("phonenumber"),
+                        result.getString("personalimage"),
                         result.getString("initials")
                 );
             }
@@ -52,13 +53,14 @@ public class AdministrationDAOImpl extends BaseDao implements AdministrationDAO 
             while (result.next()) {
                 Administrator administrator = new Administrator
                         (
-                                result.getInt("userid"),
-                                result.getString("email"),
-                                result.getString("password"),
-                                result.getString("fname"),
-                                result.getString("lname"),
-                                result.getString("phonenumber"),
-                                result.getString("initials")
+                            result.getInt("userid"),
+                            result.getString("email"),
+                            result.getString("password"),
+                            result.getString("fname"),
+                            result.getString("lname"),
+                            result.getString("phonenumber"),
+                            result.getString("personalimage"),
+                            result.getString("initials")
                         );
                 administratorListToReturn.add(administrator);
             }

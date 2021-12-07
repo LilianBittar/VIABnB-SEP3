@@ -29,7 +29,7 @@ class ResidenceControllerTest
     residenceReviewDAO = mock(ResidenceReviewDAO.class);
     controller = new ResidenceController(residenceDAO, residenceReviewDAO);
     host = new Host(1, "Test", "Test", "11111111", "Test@Test.ss", "Aa11",
-        new ArrayList<>(), "Test", "1111111111", true);
+        "Test", new ArrayList<>(), "1111111111", true);
     city = new City(1, "Test", 1111);
     address = new Address(1, "Test", "Test", "Test", city);
   }

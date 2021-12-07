@@ -34,7 +34,8 @@ public class UserDAOImpl extends BaseDao implements UserDAO
                 result.getString("password"),
                 result.getString("fname"),
                 result.getString("lname"),
-                result.getString("phonenumber")
+                result.getString("phonenumber"),
+                result.getString("personalimage")
             );
       }
       return null;
@@ -62,7 +63,8 @@ public class UserDAOImpl extends BaseDao implements UserDAO
                 result.getString("password"),
                 result.getString("fname"),
                 result.getString("lname"),
-                result.getString("phonenumber")
+                result.getString("phonenumber"),
+                result.getString("personalimage")
             );
       }
       return null;
@@ -90,7 +92,8 @@ public class UserDAOImpl extends BaseDao implements UserDAO
                 result.getString("password"),
                 result.getString("fname"),
                 result.getString("lname"),
-                result.getString("phonenumber")
+                result.getString("phonenumber"),
+                result.getString("personalimage")
             );
         users.add(user);
       }
