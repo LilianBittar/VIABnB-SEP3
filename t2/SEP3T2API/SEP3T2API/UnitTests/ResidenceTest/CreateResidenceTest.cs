@@ -204,11 +204,9 @@ namespace UnitTests
             Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
 
-        [TestCase(null, 1)]
-        [TestCase(1, null)]
-        [TestCase(-1, 1)]
-        [TestCase(1, -1)]
-        public void CreateResidenceWithAnInvalidPricePerNightAndAverageRatingTest(double avgRating, int ppn)
+        [TestCase(-1)]
+        [TestCase(-100)]
+        public void CreateResidenceWithAnInvalidPricePerNightAndAverageRatingTest( int ppn)
         {
             Residence r = new Residence()
             {
@@ -226,26 +224,7 @@ namespace UnitTests
             };
             Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
-
-        [TestCase(null)]
-        public void CreateResidenceWithANullIsAvailableTest(bool isAvp)
-        {
-            Residence r = new Residence()
-            {
-                Id = 2,
-                Address = address,
-                Description = "Test",
-                Type = "Test",
-                IsAvailable = isAvp,
-                PricePerNight = 1,
-                Rules = rules,
-                Facilities = facilities,
-                ImageUrl = "Test",
-                AvailableFrom = DateTime.Now,
-                AvailableTo = DateTime.Now
-            };
-            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
-        }
+        
 
         [TestCase(null, "Test")]
         [TestCase("Test", null)]
@@ -304,25 +283,5 @@ namespace UnitTests
             Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
         
-        [TestCase( 2000, 11, 11)]
-        [TestCase(2050, 11, 11)]
-        public void CreateResidenceWithInvalidToDateTest(int year, int month, int day)
-        {
-            Residence r = new Residence()
-            {
-                Id = 2,
-                Address = address,
-                Description = "Test",
-                Type = "Test",
-                IsAvailable = false,
-                PricePerNight = 1,
-                Rules = rules,
-                Facilities = facilities,
-                ImageUrl = "Test",
-                AvailableFrom = DateTime.Now,
-                AvailableTo = new DateTime(year, month, day)
-            };
-            Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
-        }
     }
 }
