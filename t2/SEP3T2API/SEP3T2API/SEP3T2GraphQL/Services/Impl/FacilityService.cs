@@ -49,11 +49,11 @@ namespace SEP3T2GraphQL.Services.Impl
             return facilityToReturn;
         }
 
-        public async Task DeleteResidenceFacilityAsync(int facilityId, int residenceId)
+        public async Task<Facility> DeleteResidenceFacilityAsync(Facility facility, int residenceId)
         {
             try
             {
-                await _facilityRepository.DeleteResidenceFacility(facilityId, residenceId);
+               return await _facilityRepository.DeleteResidenceFacility(facility, residenceId);
             }
             catch (Exception e)
             {

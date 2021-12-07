@@ -73,14 +73,24 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return newRule;
         }
 
-        public async Task DeleteRule(Rule rule)
+        public async Task<Rule> DeleteRule(Rule rule)
         {
+            var ruleAsJson = JsonSerializer.Serialize(rule, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
             var response = await client.DeleteAsync($"{uri}/rule/{rule.Description}/{rule.ResidenceId}");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
+            var newRule = JsonSerializer.Deserialize<Rule>(await response.Content.ReadAsStringAsync(),
+                new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+            return newRule;
         }
     }
 }

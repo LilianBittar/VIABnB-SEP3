@@ -9,6 +9,6 @@ namespace SEP3T2GraphQL.Repositories
         Task<Facility> CreateFacility(Facility facility);
         Task<IEnumerable<Facility>> GetAllFacilities();
         Task<Facility> GetFacilityById(int id);
-        Task DeleteResidenceFacility(int facilityId, int residenceId);
+        Task<Facility> DeleteResidenceFacility(Facility facility, int residenceId);
     }
 }

@@ -50,11 +50,11 @@ namespace SEP3T2GraphQL.Services.Impl
             }
         }
 
-        public async Task DeleteRule(Rule rule)
+        public async Task<Rule> DeleteRule(Rule rule)
         {
             try
             {
-                await _ruleRepository.DeleteRule(rule);
+               return await _ruleRepository.DeleteRule(rule);
             }
             catch (Exception e)
             {

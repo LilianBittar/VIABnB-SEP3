@@ -69,14 +69,25 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return facilityToReturn;
         }
 
-        public async Task DeleteResidenceFacility(int facilityId, int residenceId)
+        public async Task<Facility> DeleteResidenceFacility(Facility facility, int residenceId)
         {
-            var response = await client.DeleteAsync($"{uri}/residencefacilities/{facilityId}/{residenceId}");
+            var facilityAsJson = JsonSerializer.Serialize(facility, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            var response = await client.DeleteAsync($"{uri}/residencefacilities/{facility.Id}/{residenceId}");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
+
+            var newFacility = JsonSerializer.Deserialize<Facility>(await response.Content.ReadAsStringAsync(),
+                new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+            return newFacility;
         }
     }
 }
