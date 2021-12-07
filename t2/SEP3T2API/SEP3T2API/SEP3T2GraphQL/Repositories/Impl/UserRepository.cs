@@ -70,14 +70,24 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return userToReturn;
         }
 
-        public async Task DeleteUserAsync(int userId)
+        public async Task<User> DeleteUserAsync(User user)
         {
-            var response = await _client.DeleteAsync($"{Uri}/{userId}");
+            var deleteUser = JsonSerializer.Serialize(user, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            var response = await _client.DeleteAsync($"{Uri}/{user.Id}");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
+            var userToReturn = JsonSerializer.Deserialize<User>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+
+            return userToReturn;
         }
 
         private static async Task HandleErrorResponse(HttpResponseMessage response)

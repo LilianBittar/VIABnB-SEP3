@@ -98,14 +98,48 @@ namespace SEP3BlazorT1Client.Data.Impl
             return response.Data.User;
         }
 
-        public Task<User> UpdateUserAsync(User user)
+        public async Task<User> UpdateUserAsync(User user)
         {
-            throw new NotImplementedException();
+            var mutation = new GqlQuery()
+            {
+                Query = @"mutation($newUser: UserInput){
+                          updateUser(user:$newUser){
+                            id
+                            email
+                            password
+                            firstName
+                            lastName
+                            phoneNumber
+                            profileImageUrl
+                          }
+                        }",
+                Variables = new {newUser = user}
+            };
+            var response = await _client.PostQueryAsync<UpdateUserResponseType>(mutation);
+            HandleErrorResponse(response);
+            return response.Data.User;
         }
 
-        public Task DeleteUserAsync(int id)
+        public async Task<User> DeleteUserAsync(User user)
         {
-            throw new NotImplementedException();
+            var mutation = new GqlQuery()
+            {
+                Query = @"mutation($dUser: UserInput){
+                          updateUser(user:$dUser){
+                            id
+                            email
+                            password
+                            firstName
+                            lastName
+                            phoneNumber
+                            profileImageUrl
+                          }
+                        }",
+                Variables = new {dUser = user}
+            };
+            var response = await _client.PostQueryAsync<DeleteUserResponseType>(mutation);
+            HandleErrorResponse(response);
+            return response.Data.User;
         }
 
         private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)

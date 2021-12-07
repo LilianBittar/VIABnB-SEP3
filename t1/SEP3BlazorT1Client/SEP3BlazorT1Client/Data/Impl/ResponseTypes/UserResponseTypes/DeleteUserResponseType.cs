@@ -3,8 +3,8 @@ using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes.UserResponseTypes
 {
-    public class UpdateUserResponseType
+    public class DeleteUserResponseType
     {
-        [JsonProperty("updateUser")] public User User { get; set; }
+        [JsonProperty("deleteUser")] public User User { get; set; }
     }
 }

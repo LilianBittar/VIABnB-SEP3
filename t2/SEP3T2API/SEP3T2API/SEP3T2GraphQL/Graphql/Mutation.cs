@@ -144,9 +144,9 @@ namespace SEP3T2GraphQL.Graphql
            return await _userService.UpdateUserAsync(user);
         }
 
-        public async Task DeleteUser(int userId)
+        public async Task<User> DeleteUser(User user)
         {
-            await _userService.DeleteUserSync(userId);
+            return await _userService.DeleteUserSync(user);
         }
     }
 }

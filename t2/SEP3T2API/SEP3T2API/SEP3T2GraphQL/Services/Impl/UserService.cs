@@ -74,15 +74,15 @@ namespace SEP3T2GraphQL.Services.Impl
             throw new ArgumentException("Invalid user");
         }
 
-        public async Task DeleteUserSync(int userId)
+        public async Task<User> DeleteUserSync(User user)
         {
-            if (userId <= 0)
+            if (user.Id <= 0)
             {
                 throw new ArgumentException("User id must be a positive number larger than 0");
             }
             try
             {
-                await _userRepository.DeleteUserAsync(userId);
+               return await _userRepository.DeleteUserAsync(user);
             }
             catch (Exception e)
             {

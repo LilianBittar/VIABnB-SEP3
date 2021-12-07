@@ -37,7 +37,7 @@ namespace UnitTests.UserTest
                 ProfileImageUrl = "Test"
             };
             
-            Assert.DoesNotThrowAsync(()=> _userService.DeleteUserSync(_user.Id));
+            Assert.DoesNotThrowAsync(()=> _userService.DeleteUserSync(_user));
         }
 
         [TestCase(-100)]
@@ -57,7 +57,7 @@ namespace UnitTests.UserTest
                 ProfileImageUrl = "Test"
             };
             
-            Assert.ThrowsAsync<ArgumentException>(()=> _userService.DeleteUserSync(_user.Id));
+            Assert.ThrowsAsync<ArgumentException>(()=> _userService.DeleteUserSync(_user));
         }
     }
 }

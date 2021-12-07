@@ -11,6 +11,6 @@ namespace SEP3BlazorT1Client.Data
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> ValidateUserAsync(string email, string password);
         Task<User> UpdateUserAsync(User user);
-        Task DeleteUserAsync(int id);
+        Task<User> DeleteUserAsync(User user);
     }
 }
