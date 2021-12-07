@@ -12,6 +12,6 @@ namespace SEP3T2GraphQL.Repositories
         Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id);
         Task<IList<Residence>> GetAllAsync();
         Task<Residence> UpdateResidenceAsync(Residence residence);
-        Task DeleteResidenceAsync(int residenceId);
+        Task<Residence> DeleteResidenceAsync(Residence residence);
     }
 }

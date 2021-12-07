@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
+using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes.ResidenceResponseTypes;
@@ -305,6 +306,142 @@ namespace SEP3BlazorT1Client.Data.Impl
             return response.Data.AvailableResidences;
         }
 
+        public async Task<Residence> UpdateResidenceAsync(Residence residence)
+        {
+          var mutation = new GqlQuery()
+          {
+            Query = @"mutation($newResidence:ResidenceInput){
+                        updateResidence(residence:$newResidence){
+                          averageRating
+                          id
+                          address{
+                            id
+                            streetName
+                            houseNumber
+                            streetNumber
+                            city{
+                              id
+                              cityName
+                              zipCode
+                            }
+                          }
+                          description
+                          type
+                          isAvailable
+                          pricePerNight
+                          rules{
+                            description
+                            residenceId
+                          }
+                          facilities{
+                            id
+                            name
+                          }
+                          imageUrl
+                          availableFrom
+                          availableTo
+                          maxNumberOfGuests
+                          host{
+                            hostReviews{
+                              rating
+                              text
+                              viaId
+                              createdDate
+                              hostId
+                            }
+                            cpr
+                            isApprovedHost
+                            id
+                            email
+                            password
+                            firstName
+                            lastName
+                            phoneNumber
+                            profileImageUrl
+                          }
+                          residenceReviews{
+                            rating
+                            reviewText
+                            guestViaId
+                            createdDate
+                          }
+                        }
+                      }",
+            Variables = new {newResidence = residence}
+          };
+          var response = await _client.PostQueryAsync<UpdateResidenceResponseType>(mutation);
+          HandleErrorResponse(response);
+          return response.Data.Residence;
+        }
+
+        public async Task<Residence> DeleteResidenceAsync(Residence residence)
+        {
+          var mutation = new GqlQuery()
+          {
+            Query = @"mutation($dResidence:ResidenceInput){
+                        updateResidence(residence:$dResidence){
+                          averageRating
+                          id
+                          address{
+                            id
+                            streetName
+                            houseNumber
+                            streetNumber
+                            city{
+                              id
+                              cityName
+                              zipCode
+                            }
+                          }
+                          description
+                          type
+                          isAvailable
+                          pricePerNight
+                          rules{
+                            description
+                            residenceId
+                          }
+                          facilities{
+                            id
+                            name
+                          }
+                          imageUrl
+                          availableFrom
+                          availableTo
+                          maxNumberOfGuests
+                          host{
+                            hostReviews{
+                              rating
+                              text
+                              viaId
+                              createdDate
+                              hostId
+                            }
+                            cpr
+                            isApprovedHost
+                            id
+                            email
+                            password
+                            firstName
+                            lastName
+                            phoneNumber
+                            profileImageUrl
+                          }
+                          residenceReviews{
+                            rating
+                            reviewText
+                            guestViaId
+                            createdDate
+                          }
+                        }
+                      }",
+            Variables = new {dResidence = residence}
+          };
+          var response = await _client.PostQueryAsync<DeleteResidenceResponseType>(mutation);
+          HandleErrorResponse(response);
+          return response.Data.Residence;
+        }
+
         public async Task<Residence> CreateResidenceAsync(Residence residence)
         {
             GqlClient client = new GqlClient(Url) {EnableLogging = true};
@@ -387,6 +524,17 @@ namespace SEP3BlazorT1Client.Data.Impl
             System.Console.WriteLine($"{this} received: {mutationResponse.Data.CreateResidence}");
 
             return mutationResponse.Data.CreateResidence;
+        }
+        
+        private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)
+        {
+          if (response.Errors != null)
+          {
+            // String manipulation to seperate the Error message from the sample error response. 
+            Console.WriteLine(JsonConvert.SerializeObject(response.Errors));
+            throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4]
+              .Split(":")[2]);
+          }
         }
     }
 }

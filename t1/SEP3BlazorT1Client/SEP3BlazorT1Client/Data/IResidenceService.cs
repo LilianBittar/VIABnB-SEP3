@@ -34,6 +34,9 @@ namespace SEP3BlazorT1Client.Data
         /// gets all residences in the system that are available for rent
         /// </summary>
         /// <returns>list of available residences</returns>
-        Task<IList<Residence>> GetAllAvailableResidencesAsync(); 
+        Task<IList<Residence>> GetAllAvailableResidencesAsync();
+
+        Task<Residence> UpdateResidenceAsync(Residence residence);
+        Task<Residence> DeleteResidenceAsync(Residence residence);
     }
 }

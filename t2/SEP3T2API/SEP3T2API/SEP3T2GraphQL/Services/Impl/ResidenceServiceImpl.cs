@@ -142,11 +142,15 @@ namespace SEP3T2GraphQL.Services
             
         }
 
-        public async Task DeleteResidenceAsync(int residenceId)
+        public async Task<Residence> DeleteResidenceAsync(Residence residence)
         {
+            if (residence.Id <= 0)
+            {
+                throw new ArgumentException("Invalid residence ID");
+            }
             try
             {
-                await _residenceRepository.DeleteResidenceAsync(residenceId);
+                return await _residenceRepository.DeleteResidenceAsync(residence);
             }
             catch (Exception e)
             {

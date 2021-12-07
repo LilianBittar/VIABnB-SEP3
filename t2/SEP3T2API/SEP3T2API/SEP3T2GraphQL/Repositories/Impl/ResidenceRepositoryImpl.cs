@@ -129,10 +129,19 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return updatedResidence;
         }
 
-        public async Task DeleteResidenceAsync(int residenceId)
+        public async Task<Residence> DeleteResidenceAsync(Residence residence)
         {
-            var response = await client.DeleteAsync($"{uri}/residences/{residenceId}");
+            var deleteResidence = JsonSerializer.Serialize(residence, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            var response = await client.DeleteAsync($"{uri}/residences/{residence}");
             await HandleErrorResponse(response);
+            var residenceToReturn = JsonSerializer.Deserialize<Residence>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return residenceToReturn;
         }
 
         private static async Task HandleErrorResponse(HttpResponseMessage response)

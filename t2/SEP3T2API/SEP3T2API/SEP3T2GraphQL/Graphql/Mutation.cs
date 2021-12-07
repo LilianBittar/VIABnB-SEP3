@@ -134,9 +134,9 @@ namespace SEP3T2GraphQL.Graphql
             await _facilityService.DeleteResidenceFacilityAsync(facilityId, residenceId);
         }
 
-        public async Task DeleteResidence(int residenceId)
+        public async Task<Residence> DeleteResidence(Residence residence)
         {
-            await _residenceService.DeleteResidenceAsync(residenceId);
+            return await _residenceService.DeleteResidenceAsync(residence);
         }
 
         public async Task<User> UpdateUser(User user)
