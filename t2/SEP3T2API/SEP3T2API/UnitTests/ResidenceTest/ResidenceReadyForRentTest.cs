@@ -4,6 +4,7 @@ using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services;
+using SEP3T2GraphQL.Services.Validation;
 
 namespace UnitTests
 {
@@ -20,7 +21,7 @@ namespace UnitTests
         public void SetUp()
         {
             ResidenceRepository = new Mock<IResidenceRepository>();
-            ResidenceService = new ResidenceServiceImpl(ResidenceRepository.Object);
+            ResidenceService = new ResidenceServiceImpl(ResidenceRepository.Object, new CreateCityValidator());
         }
         
         [Test]

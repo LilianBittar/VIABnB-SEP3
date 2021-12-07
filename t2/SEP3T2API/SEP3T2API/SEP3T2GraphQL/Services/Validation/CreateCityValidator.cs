@@ -8,11 +8,9 @@ namespace SEP3T2GraphQL.Services.Validation
 {
     public class CreateCityValidator
     {
-        private readonly ICityRepository _cityRepository;
 
-        public CreateCityValidator(ICityRepository cityRepository)
+        public CreateCityValidator()
         {
-            _cityRepository = cityRepository;
         }
 
         /// <summary>
@@ -22,6 +20,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <remarks>
         /// This method will return void if validation succeeds. If validation fails, then an <c>ArgumentException</c> will be thrown. 
         /// </remarks>
+        /// <exception cref="ArgumentException"> if <c>city</c> is null</exception>
         /// <exception cref="ArgumentException"> if the <c>CityName</c> of <c>city</c> is null or empty</exception>
         /// <exception cref="ArgumentException"> if the <c>CityName</c> of <c>city</c> is not 4 digits or if zipcode is negative</exception>
         public void Validate(City city)
