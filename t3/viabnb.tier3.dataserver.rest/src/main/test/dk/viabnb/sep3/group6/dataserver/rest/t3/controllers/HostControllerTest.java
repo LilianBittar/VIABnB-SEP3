@@ -31,18 +31,34 @@ class HostControllerTest
   }
 
   @Test
+  public void RegisterHostNullRequestReturnsBadRequest() {
+    //arrange
+    Host host = null;
+
+    //act and assert
+    assertEquals(ResponseEntity.badRequest().build(), controller.createHost(host));
+  }
+
+  @Test
   void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNull()
   {
-    //Host host = new Host(1, "test", "test", "12345678", "email@test.tt", "Test123", new ArrayList<>(), "test", "1234567891", false);
-    when(hostDAO.getAllNotApprovedHosts()).thenReturn(null);
-    ResponseEntity<List<Host>> response = controller.getAllNotApprovedHosts();
+    //arrange
+    Host host = new Host(1, "test", "test", "12345678", "email@test.tt", "Test123", new ArrayList<>(), "test", "1234567891", false);
+    when(hostDAO.registerHost(host)).thenReturn(null);
+
+    //act and assert
     Assertions.assertEquals(ResponseEntity.internalServerError().build(), response);
   }
 
   @Test
-  public void RegisterHostNullRequestReturnsBadRequest() {
-    Host host = null;
-    assertEquals(ResponseEntity.internalServerError().build(), controller.createHost(host));
+  void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNull()
+  {
+    //aarange
+    Host host = new Host(1, "test", "test", "12345678", "email@test.tt", "Test123", new ArrayList<>(), "test", "1234567891", false);
+    when(hostDAO.registerHost(host)).thenThrow(Exception.class);
+
+    //act and assert
+    Assertions.assertEquals(ResponseEntity.internalServerError().build(), response);
   }
 
 }

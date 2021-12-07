@@ -53,4 +53,18 @@ import java.util.List;
     }
     return new ResponseEntity<>(facilityToReturn, HttpStatus.OK);
   }
+
+  @DeleteMapping("/residencefacilities/{facilityId}/{residenceId}")
+  public ResponseEntity<Void> deleteResidenceFacility(@PathVariable("facilityId") int facilityId, @PathVariable("residenceId") int residenceId)
+  {
+    try
+    {
+      facilityDAO.deleteResidenceFacility(facilityId, residenceId);
+      return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+    catch (Exception e)
+    {
+      return ResponseEntity.internalServerError().build();
+    }
+  }
 }
