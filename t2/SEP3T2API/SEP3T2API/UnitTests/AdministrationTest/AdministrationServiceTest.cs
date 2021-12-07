@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories.Administration;
 using SEP3T2GraphQL.Services.Administration;
 using SEP3T2GraphQL.Services.Administration.Impl;
-using SEP3T2GraphQL.Services.Validation.AdministrationValidation;
-using SEP3T2GraphQL.Services.Validation.AdministrationValidation.Impl;
 
 namespace UnitTests.AdministrationTest
 {
@@ -50,7 +49,7 @@ namespace UnitTests.AdministrationTest
             var adminList = new List<Administrator>() {_administrator};
             _administrationRepository.Setup<IEnumerable<Administrator>>(x => x.GetAllAdmins().Result)
                 .Returns(adminList);
-            Assert.DoesNotThrowAsync(async () => await _administrationService.GetAdminByEmail(email));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _administrationService.GetAdminByEmail(email));
  
         }
     }
