@@ -110,6 +110,31 @@ namespace SEP3T2GraphQL.Repositories.Impl
              return residences;
         }
 
+        public async Task<Residence> UpdateResidenceAsync(Residence residence)
+        {
+            var residenceAsJson = JsonSerializer.Serialize(residence, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            var content = new StringContent(residenceAsJson, Encoding.UTF8, "application/json");
+            var response = await client.PatchAsync($"{uri}/residences/{residence.Id}", content);
+            await HandleErrorResponse(response);
+
+            var updatedResidence = JsonSerializer.Deserialize<Residence>(await response.Content.ReadAsStringAsync(),
+                new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+
+            return updatedResidence;
+        }
+
+        public async Task DeleteResidenceAsync(int residenceId)
+        {
+            var response = await client.DeleteAsync($"{uri}/residences/{residenceId}");
+            await HandleErrorResponse(response);
+        }
+
         private static async Task HandleErrorResponse(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)
