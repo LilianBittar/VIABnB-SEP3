@@ -68,5 +68,15 @@ namespace SEP3T2GraphQL.Repositories.Impl
             });
             return facilityToReturn;
         }
+
+        public async Task DeleteResidenceFacility(int facilityId, int residenceId)
+        {
+            var response = await client.DeleteAsync($"{uri}/residencefacilities/{facilityId}/{residenceId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+        }
     }
 }
