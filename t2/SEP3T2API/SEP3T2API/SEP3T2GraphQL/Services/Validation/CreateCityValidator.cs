@@ -8,7 +8,6 @@ namespace SEP3T2GraphQL.Services.Validation
 {
     public class CreateCityValidator
     {
-
         public CreateCityValidator()
         {
         }
@@ -32,6 +31,7 @@ namespace SEP3T2GraphQL.Services.Validation
 
             ValidateCityNameNotNullOrEmpty(city);
             ValidateCityNameLettersOnly(city);
+            ValidateZipCode(city);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException"> if the <c>CityName</c> of <c>city</c> is not letters only</exception>
         private void ValidateCityNameLettersOnly(City city)
         {
-            if (city.CityName.All(char.IsLetter))
+            if (city.CityName.Any(c => !char.IsLetter(c)))
             {
                 throw new ArgumentException("City Name must only contain letters");
             }

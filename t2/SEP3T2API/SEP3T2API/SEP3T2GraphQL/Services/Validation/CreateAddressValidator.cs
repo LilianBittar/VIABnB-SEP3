@@ -78,7 +78,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">If <c>StreetName</c> of <c>address</c> contains any chars that is not letter</exception>
         private void ValidateStreetNameIsLettersOnly(Address address)
         {
-            if (!address.StreetName.All(char.IsLetter))
+            if (address.StreetName.Any(c => !char.IsLetter(c)))
             {
                 throw new ArgumentException("StreetName must only contain letters");
             }
