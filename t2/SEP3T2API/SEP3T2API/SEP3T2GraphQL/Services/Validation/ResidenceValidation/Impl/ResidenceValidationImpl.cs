@@ -85,7 +85,7 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
                 throw new ArgumentException("Start and end date must be picked");
             }
 
-            if (startDate.Value.Date < DateTime.Now.Date && EndDate.Value.Date < DateTime.Now.Date)
+            if (startDate.Value.Date < DateTime.Now.Date || EndDate.Value.Date < DateTime.Now.Date)
             {
                 throw new ArgumentException("Rent period cannot be in the past");
             }

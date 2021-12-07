@@ -51,5 +51,36 @@ namespace SEP3T2GraphQL.Repositories.Impl
             });
             return rulesToReturn;
         }
+
+        public async Task<Rule> UpdateRule(Rule rule)
+        {
+            var ruleAsJson = JsonSerializer.Serialize(rule, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            HttpContent content = new StringContent(ruleAsJson, Encoding.UTF8, "application/json");
+            var response = await client.PatchAsync($"{uri}/rule/{rule.Description}/{rule.ResidenceId}", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+            var newRule = JsonSerializer.Deserialize<Rule>(await response.Content.ReadAsStringAsync(),
+                new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+            return newRule;
+        }
+
+        public async Task DeleteRule(Rule rule)
+        {
+            var response = await client.DeleteAsync($"{uri}/rule/{rule.Description}/{rule.ResidenceId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+        }
     }
 }

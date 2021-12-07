@@ -26,8 +26,7 @@ public class RentRequestController {
     }
 
     @PostMapping("/rentrequests")
-    public ResponseEntity<RentRequest> createRentRequest(
-            @RequestBody RentRequest request) {
+    public ResponseEntity<RentRequest> createRentRequest(@RequestBody RentRequest request) {
         LOGGER.info(
                 "Request for: createRentRequest received with params: " + gson.toJson(
                         request));
@@ -58,7 +57,7 @@ public class RentRequestController {
             @RequestParam(required = false) Integer guestId,
             @RequestParam(required = false) String status,
             @RequestParam(required = false) Integer viaId) {
-        //TODO: this endpoint works without the RequestParam. When using the RequestParam the result will be null
+
         List<RentRequest> requestsToReturn = rentRequestDAO.getAllRentRequests();
         try {
             if (residenceId != null) {

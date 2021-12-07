@@ -266,9 +266,9 @@ namespace UnitTests
             //act and assert
             TestCreateThrowsArgumentExceptionAsync(host);
         }
-        private void TestCreateThrowsArgumentExceptionAsync(Host host)
+        private void TestCreateThrowsArgumentExceptionAsync(Host _host)
         {
-            Assert.ThrowsAsync<ArgumentException>(() => HostService.RegisterHostAsync(host));
+            Assert.ThrowsAsync<ArgumentException>(() => HostService.RegisterHostAsync(_host));
         }
     }
 }
