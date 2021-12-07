@@ -10,11 +10,8 @@ namespace SEP3T2GraphQL.Services.Validation
     /// </summary>
     public class CreateAddressValidator
     {
-        private readonly IAddressRepository _addressRepository;
-
-        public CreateAddressValidator(IAddressRepository addressRepository)
+        public CreateAddressValidator()
         {
-            _addressRepository = addressRepository;
         }
 
         /// <summary>
@@ -44,7 +41,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// This method will return void if validation succeeds. If validation fails, then an <c>ArgumentException</c> will be thrown. 
         /// </remarks>
         /// <param name="address">The address that is being validated</param>
-        /// <exception cref="ArgumentException">If  <c>StreetName</c>, <c>StreetNumber</c>, <c>HouseNumber</c> or <c>City</c>, of <c>address</c> is null or empty </exception>
+        /// <exception cref="ArgumentException">If  <c>StreetName</c>, <c>StreetNumber</c> or <c>City</c>, of <c>address</c> is null or empty </exception>
         private void ValidateFieldsNotEmptyOrNull(Address address)
         {
             if (string.IsNullOrEmpty(address.StreetName) || string.IsNullOrWhiteSpace(address.StreetName))
@@ -56,11 +53,7 @@ namespace SEP3T2GraphQL.Services.Validation
             {
                 throw new ArgumentException("StreetNumber cannot be null or empty");
             }
-
-            if (string.IsNullOrEmpty(address.HouseNumber) || string.IsNullOrWhiteSpace(address.HouseNumber))
-            {
-                throw new ArgumentException("HouseNumber cannot be null or empty");
-            }
+            
 
             if (address.City == null)
             {

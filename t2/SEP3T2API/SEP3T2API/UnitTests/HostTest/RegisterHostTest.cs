@@ -22,7 +22,8 @@ namespace UnitTests
         public void SetUp()
         {
             HostRepository = new Mock<IHostRepository>();
-            HostService = new HostServiceImpl(HostRepository.Object);
+            
+            HostService = new HostServiceImpl(HostRepository.Object,new HostValidationImpl(HostRepository.Object));
         }
 
         [Test]
@@ -68,7 +69,7 @@ namespace UnitTests
             };
 
             //act and assert
-            TestCreateThrowsArgumentExceptionAsync(host);
+            Assert.ThrowsAsync<FormatException>(() => HostService.RegisterHostAsync(host));
         }
         
         [TestCase("Kasper34")]
@@ -147,7 +148,7 @@ namespace UnitTests
         
         [TestCase("345345a")]
         [TestCase(null)]
-        [TestCase("23423434!")]
+        [TestCase("23423434#")]
         public void IsValidHost_InvalidPhoneNumber_Throws(string phoneNumber)
         {
             //arange
@@ -157,6 +158,7 @@ namespace UnitTests
                 FirstName = "Kasper",
                 LastName = "Bobsen",
                 Email = "email@gmail.com",
+                Cpr = "123456-1243",
                 HostReviews = null,
                 IsApprovedHost = false,
                 Password = "Hejmaeddig123",
