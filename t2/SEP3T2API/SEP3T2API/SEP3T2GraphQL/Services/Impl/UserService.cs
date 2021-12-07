@@ -60,5 +60,31 @@ namespace SEP3T2GraphQL.Services.Impl
                 throw new ArgumentException(e.Message);
             }
         }
+
+        public async Task<User> UpdateUserAsync(User user)
+        {
+            try
+            {
+                return await _userRepository.UpdateUserAsync(user);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task DeleteUserSync(int userId)
+        {
+            try
+            {
+                await _userRepository.DeleteUserAsync(userId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
