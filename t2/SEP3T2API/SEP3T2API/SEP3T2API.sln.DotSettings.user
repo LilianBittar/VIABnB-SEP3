@@ -1,5 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1ba1f8d0_002Df6b7_002D4a1b_002D83f5_002D5e049d78434f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateGuest_HostDoesNotExist_ThrowsKeyNotFoundException" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1ba1f8d0_002Df6b7_002D4a1b_002D83f5_002D5e049d78434f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreateGuest_HostDoesNotExist_ThrowsKeyNotFoundException" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestServiceTests.CreateGuestTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestValidatorTest.ValidateGuest_InvalidEmailNoAtSign_ThrowsArgumentException&lt;/TestId&gt;&#xD;
@@ -14,6 +14,9 @@
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.AdministrationTest.AdministrationServiceTest.GetAdminByEmailDoesNotThrowExceptionsTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.AdministrationTest.AdministrationServiceTest.GetAdminByInvalidEmailThrowsArgumentExceptionTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.RentalServiceTests.CreateRentRequestTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestReviewTest.GetGuestReview&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.UserTest.UpdateUserTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.UserTest.DeleteUser&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1bb994af_002Dc479_002D455e_002Da423_002D650ce3ac345a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetGuestByStudentNumber" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;

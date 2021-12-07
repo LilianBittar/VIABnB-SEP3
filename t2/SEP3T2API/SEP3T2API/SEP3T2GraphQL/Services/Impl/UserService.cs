@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
-using SEP3T2GraphQL.Repositories.Administration;
-using SEP3T2GraphQL.Services.Administration;
 using SEP3T2GraphQL.Services.Validation.UserValidation;
 
 namespace SEP3T2GraphQL.Services.Impl
@@ -12,18 +10,11 @@ namespace SEP3T2GraphQL.Services.Impl
     public class UserService : IUserService
     {
         private IUserRepository _userRepository;
-        private IAdministrationService _administrationService;
-        private IHostService _hostService;
-        private IGuestService _guestService;
         private UserValidation _userValidation;
 
-        public UserService(IUserRepository userRepository, IAdministrationService administrationService,
-            IHostService hostService, IGuestService guestService, UserValidation userValidation)
+        public UserService(IUserRepository userRepository, UserValidation userValidation)
         {
             _userRepository = userRepository;
-            _administrationService = administrationService;
-            _hostService = hostService;
-            _guestService = guestService;
             _userValidation = userValidation;
         }
 
@@ -85,6 +76,10 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task DeleteUserSync(int userId)
         {
+            if (userId <= 0)
+            {
+                throw new ArgumentException("User id must be a positive number larger than 0");
+            }
             try
             {
                 await _userRepository.DeleteUserAsync(userId);
