@@ -80,7 +80,7 @@
                 await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email, password);
                 email = "";
                 password = "";
-                NavigationManager.NavigateTo("/BecomeGuest");
+                NavigationManager.NavigateTo("/User");
             }
         }
         catch (Exception e)

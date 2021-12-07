@@ -24,6 +24,9 @@
     <Compile Update="Pages\RentRequest\GuestReviews.cs">
       <DependentUpon>GuestReviews.razor</DependentUpon>
     </Compile>
+    <Compile Update="Pages\UserProfile\UserView.cs">
+      <DependentUpon>MyProfile.razor</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Update="Pages\AdminView\AdminLogin.css">
