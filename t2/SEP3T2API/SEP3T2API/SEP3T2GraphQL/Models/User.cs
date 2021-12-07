@@ -25,5 +25,7 @@ namespace SEP3T2GraphQL.Models
         [Required] 
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
+        [JsonProperty("profileImageUrl")]
+        public string ProfileImageUrl { get; set; }
     }
 }
