@@ -30,19 +30,24 @@ public class HostController {
 
     @PostMapping("/host")
     public ResponseEntity<Host> createHost(@RequestBody Host host) {
-
+        LOGGER.info("Request for: " + gson.toJson(host));
 
         if (host == null) {
+            LOGGER.error("host was null");
             return ResponseEntity.badRequest().build();
+
         }
         try {
             Host newHost = hostDAO.registerHost(host);
             if (newHost == null) {
+                LOGGER.error("DB error");
                 return ResponseEntity.internalServerError().build();
             }
+            LOGGER.info("Request for: " + gson.toJson(newHost));
             return new ResponseEntity<>(newHost, HttpStatus.OK);
 
         } catch (Exception e) {
+            LOGGER.error("DB error" + e.getMessage());
             return ResponseEntity.internalServerError().build();
         }
 
@@ -50,11 +55,20 @@ public class HostController {
     }
 
     @GetMapping("/host")
-    public ResponseEntity<Host> getHostByEmail(
-            @RequestParam(required = false) String email) {
-        Host host;
-        host = hostDAO.getHostByEmail(email);
-        return new ResponseEntity<>(host, HttpStatus.OK);
+    public ResponseEntity<Host> getHostByEmail(@RequestParam(required = false) String email) {
+
+        try {
+            Host host;
+            System.out.println(email);
+            host = hostDAO.getHostByEmail(email);
+            LOGGER.info("Request for: " + gson.toJson(host));
+            return ResponseEntity.ok(host);
+        }
+        catch (Exception e)
+        {
+            LOGGER.error(e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @GetMapping("/host/{id}")

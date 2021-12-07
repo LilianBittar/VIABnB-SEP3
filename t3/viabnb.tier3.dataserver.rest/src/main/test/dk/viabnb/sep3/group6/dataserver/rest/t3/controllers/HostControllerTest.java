@@ -51,7 +51,7 @@ class HostControllerTest
   {
     //aarange
     Host host = new Host(1, "test", "test", "12345678", "email@test.tt", "Test123","test", new ArrayList<>(), "1234567891", false);
-    when(hostDAO.registerHost(host)).thenThrow(Exception.class);
+    when(hostDAO.registerHost(host)).thenThrow(IllegalStateException.class);
 
     //act and assert
     Assertions.assertEquals(ResponseEntity.internalServerError().build(), controller.createHost(host));
