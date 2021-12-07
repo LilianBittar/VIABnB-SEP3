@@ -59,7 +59,7 @@ public class UserController
     return ResponseEntity.ok(user);
   }
 
-  @PatchMapping("/user/{id}")
+  @PatchMapping("/users/{id}")
   public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("id") int id)
   {
     try
@@ -74,7 +74,7 @@ public class UserController
     }
   }
 
-  @DeleteMapping("/user/{id}")
+  @DeleteMapping("/users/{id}")
   public ResponseEntity<Void> deleteUser(@PathVariable("id") int id)
   {
     try
