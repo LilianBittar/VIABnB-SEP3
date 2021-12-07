@@ -10,8 +10,12 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 {
     public class HostValidationImpl : IHostValidation
     {
-        private IHostRepository _repository = new HostRepositoryImpl();
+        private IHostRepository _repository;
 
+        public HostValidationImpl(IHostRepository repository)
+        {
+            _repository = repository;
+        }
 
         public async Task<bool> IsValidEmail(string email)
         {
@@ -31,12 +35,9 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
                        return true;
                 }
 
-                throw new Exception("email ot formatted corerctly");
+                throw new FormatException("email not formatted correctly");
             }
-
             throw new ArgumentException("Host already exists");
-
-           
         }
 
         public bool IsValidFirstname(string firstname)
@@ -117,7 +118,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 
         public bool IsValidPhoneNumber(string phoneNumber)
         {
-            if (phoneNumber != null && !phoneNumber.Any(char.IsLetter) && !phoneNumber.Any(char.IsSymbol))
+            if (phoneNumber != null && phoneNumber.All(char.IsDigit))
             {
                 return true;
             }

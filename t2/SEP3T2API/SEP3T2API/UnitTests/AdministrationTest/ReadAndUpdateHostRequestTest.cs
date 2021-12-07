@@ -7,12 +7,15 @@ using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services;
 using SEP3T2GraphQL.Services.Impl;
+using SEP3T2GraphQL.Services.Validation.HostValidation.Impl;
 
 namespace UnitTests.AdministrationTest
 {
     [TestFixture]
     public class ReadAndUpdateHostRequestTest
     {
+        
+        //TODO go over tests. Check for gets
         private IHostService _hostService;
         private IEnumerable<Host> _hostList;
         [SetUp]
@@ -51,7 +54,7 @@ namespace UnitTests.AdministrationTest
             hostRepository.Setup(ex => ex.GetAllNotApprovedHosts().Result).Returns(_hostList);
             hostRepository.Setup(ex => ex.UpdateHostStatus(host1).Result).Returns(host1);
 
-            _hostService = new HostServiceImpl(hostRepository.Object);
+            _hostService = new HostServiceImpl(hostRepository.Object, new HostValidationImpl(hostRepository.Object));
         }
 
         [Test]

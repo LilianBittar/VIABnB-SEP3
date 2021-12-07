@@ -49,7 +49,9 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Host> GetHostByEmail(string email)
         {
+            Console.WriteLine("before get host by email");
             var response = await client.GetAsync(uri + $"/host?email={email}");
+            Console.WriteLine("after get host by email");
 
             Console.WriteLine(await response.Content.ReadAsStringAsync());
             if (!response.IsSuccessStatusCode)
@@ -59,6 +61,10 @@ namespace SEP3T2GraphQL.Repositories.Impl
             }
             
             var result = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrEmpty(result))
+            {
+                return null;
+            }
             var host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions(
                 new JsonSerializerOptions
                 {
