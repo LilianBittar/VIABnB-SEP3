@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS Rule
     ruleDescription VARCHAR,
     residenceId     INT,
     PRIMARY KEY (residenceId, ruleDescription),
-    FOREIGN KEY (residenceId) REFERENCES Residence (residenceId)
+    FOREIGN KEY (residenceId) REFERENCES Residence (residenceId) ON DELETE CASCADE
 );
 
 
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS GuestReview
     createdDate DATE,
     PRIMARY KEY (hostId, guestId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid),
-    FOREIGN KEY (guestId) REFERENCES Guest (guestId)
+    FOREIGN KEY (guestId) REFERENCES Guest (guestId) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS HostReview
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS HostReview
     createdDate DATE,
     PRIMARY KEY (hostId, guestId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid),
-    FOREIGN KEY (guestId) REFERENCES Guest (guestId)
+    FOREIGN KEY (guestId) REFERENCES Guest (guestId) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS ResidenceReview
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS ResidenceReview
     createdDate DATE,
     PRIMARY KEY (residenceId, guestId),
     FOREIGN KEY (residenceId) REFERENCES Residence (residenceId),
-    FOREIGN KEY (guestId) REFERENCES Guest (guestId)
+    FOREIGN KEY (guestId) REFERENCES Guest (guestId) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS ResidenceFacility
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS ResidenceFacility
     residenceId INT,
     PRIMARY KEY (facilityId, residenceId),
     FOREIGN KEY (facilityId) REFERENCES Facility (facilityId),
-    FOREIGN KEY (residenceId) REFERENCES Residence (residenceId)
+    FOREIGN KEY (residenceId) REFERENCES Residence (residenceId) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Rent

@@ -50,4 +50,11 @@ public interface ResidenceDAO
    * @throws IllegalStateException if can't connect to database
    * */
   Residence updateResidence(Residence residence);
+  /**
+   * Delete a residence from the system
+   * @param residenceId The targeted residence's id
+   *
+   * @throws IllegalStateException if can't connect to database
+   * */
+  void deleteResidence(int residenceId);
 }

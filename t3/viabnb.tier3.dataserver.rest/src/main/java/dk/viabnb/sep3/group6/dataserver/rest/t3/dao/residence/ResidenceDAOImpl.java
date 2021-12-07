@@ -241,6 +241,22 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO
     }
   }
 
+  @Override public void deleteResidence(int residenceId)
+  {
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement
+          ("DELETE FROM residence WHERE residenceid = ?");
+      stm.setInt(1, residenceId);
+      stm.executeUpdate();
+      connection.commit();
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalStateException(throwables.getMessage());
+    }
+  }
+
   private List<ResidenceReview> getResidenceReviewsByResidenceId(
       int residenceId)
   {

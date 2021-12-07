@@ -16,143 +16,207 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 //TODO: Change routes to /residences as that is the standard for RESTful collections -mic
-@RestController
-public class ResidenceController {
-    private ResidenceDAO residenceDAO;
-    private ResidenceReviewDAO residenceReviewDAO;
-    private Gson gson = new GsonBuilder().serializeNulls().create();
-    private static final Logger LOGGER = LoggerFactory.getLogger(ResidenceController.class);
+@RestController public class ResidenceController
+{
+  private ResidenceDAO residenceDAO;
+  private ResidenceReviewDAO residenceReviewDAO;
+  private Gson gson = new GsonBuilder().serializeNulls().create();
+  private static final Logger LOGGER = LoggerFactory.getLogger(
+      ResidenceController.class);
 
+  @Autowired public ResidenceController(ResidenceDAO residenceDAO,
+      ResidenceReviewDAO residenceReviewDAO)
+  {
+    this.residenceDAO = residenceDAO;
+    this.residenceReviewDAO = residenceReviewDAO;
+  }
 
-    @Autowired
-    public ResidenceController(ResidenceDAO residenceDAO, ResidenceReviewDAO residenceReviewDAO) {
-        this.residenceDAO = residenceDAO;
-        this.residenceReviewDAO = residenceReviewDAO;
+  //TODO: Move this to host controller maybe (/hosts/residences)? Or maybe the getAll method with a query param.
+  // e.g. /residence/1 SHOULD mean give me the residence with the id of 1.  -mic
+  @GetMapping("/residence/{id}") public ResponseEntity<List<Residence>> getAllResidencesByHostId(
+      @PathVariable int id)
+  {
+    List<Residence> residences;
+    residences = residenceDAO.getAllResidenceByHostId(id);
+    if (residences == null)
+    {
+      return ResponseEntity.internalServerError().build();
+    }
+    return new ResponseEntity<>(residences, HttpStatus.OK);
+  }
+
+  @GetMapping("/residences/{id}") public ResponseEntity<Residence> getById(
+      @PathVariable int id)
+  {
+    try
+    {
+      Residence residence = residenceDAO.getByResidenceId(id);
+      return ResponseEntity.ok(residence);
+    }
+    catch (IllegalStateException e)
+    {
+      return ResponseEntity.internalServerError().build();
     }
 
+  }
 
-    //TODO: Move this to host controller maybe (/hosts/residences)? Or maybe the getAll method with a query param.
-    // e.g. /residence/1 SHOULD mean give me the residence with the id of 1.  -mic
-    @GetMapping("/residence/{id}")
-    public ResponseEntity<List<Residence>> getAllResidencesByHostId(@PathVariable int id) {
-        List<Residence> residences;
-        residences = residenceDAO.getAllResidenceByHostId(id);
-        if (residences == null) {
-            return ResponseEntity.internalServerError().build();
-        }
-        return new ResponseEntity<>(residences, HttpStatus.OK);
+  @PostMapping("/residences") public ResponseEntity<Residence> createResidence(
+      @RequestBody Residence residence)
+  {
+    LOGGER.info(
+        "POST request received for /residences with params: " + gson.toJson(
+            residence));
+    Residence newResidence = residenceDAO.createResidence(residence);
+    if (newResidence == null)
+    {
+      return ResponseEntity.badRequest().build();
     }
+    return new ResponseEntity<>(newResidence, HttpStatus.OK);
+  }
 
-
-    @GetMapping("/residences/{id}")
-    public ResponseEntity<Residence> getById(@PathVariable int id) {
-        try {
-            Residence residence = residenceDAO.getByResidenceId(id);
-            return ResponseEntity.ok(residence);
-        } catch (IllegalStateException e) {
-            return ResponseEntity.internalServerError().build();
-        }
-
+  /**
+   * Handles requests for getting all residences in the system
+   *
+   * @return HTTP OK with list of all residences if connection to Data source
+   * could be established.
+   * HTTP Internal server error if connection to Data source could not
+   * be established.
+   */
+  @GetMapping("/residences") public ResponseEntity<List<Residence>> getAll()
+  {
+    try
+    {
+      LOGGER.info("Request for all residences received");
+      List<Residence> residences = residenceDAO.getAllResidences();
+      LOGGER.info("Returning: " + gson.toJson(residences));
+      return ResponseEntity.ok(residences);
     }
-
-    @PostMapping("/residences")
-    public ResponseEntity<Residence> createResidence(@RequestBody Residence residence) {
-        LOGGER.info("POST request received for /residences with params: " + gson.toJson(residence));
-        Residence newResidence = residenceDAO.createResidence(residence);
-        if (newResidence == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        return new ResponseEntity<>(newResidence, HttpStatus.OK);
+    catch (Exception e)
+    {
+      LOGGER.error("Connection failed " + e.getMessage());
+      return ResponseEntity.internalServerError().build();
     }
+  }
 
-    /**
-     * Handles requests for getting all residences in the system
-     *
-     * @return HTTP OK with list of all residences if connection to Data source
-     * could be established.
-     * HTTP Internal server error if connection to Data source could not
-     * be established.
-     */
-    @GetMapping("/residences")
-    public ResponseEntity<List<Residence>> getAll() {
-        try {
-            LOGGER.info("Request for all residences received");
-            List<Residence> residences = residenceDAO.getAllResidences();
-            LOGGER.info("Returning: " + gson.toJson(residences));
-            return ResponseEntity.ok(residences);
-        } catch (Exception e) {
-            LOGGER.error("Connection failed " + e.getMessage());
-            return ResponseEntity.internalServerError().build();
-        }
-    }
+  @PutMapping("/residences/{id}") public ResponseEntity<Residence> UpdateAvailabilityPeriod(
+      @RequestBody Residence residence, @PathVariable int id)
+  {
 
-    @PutMapping("/residences/{id}")
-    public ResponseEntity<Residence> UpdateAvailabilityPeriod(@RequestBody Residence residence, @PathVariable int id) {
+    try
+    {
+      Residence existingResidence = residenceDAO.getByResidenceId(id);
 
-        try {
-            Residence existingResidence = residenceDAO.getByResidenceId(id);
+      if (existingResidence == null)
+      {
+        return ResponseEntity.notFound().build();
+      }
 
-            if (existingResidence == null) {
-                return ResponseEntity.notFound().build();
-            }
-
-            residenceDAO.UpdateAvailabilityPeriod(residence);
-
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage());
-            return ResponseEntity.internalServerError().build();
-        }
-
-        return null;
-    }
-
-    @PostMapping("/residences/{residenceId}/residencereviews")
-    public ResponseEntity<ResidenceReview> createReview(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
-        LOGGER.info("Request for createReview received");
-        if (residenceReview == null || residenceId <= 0) {
-            return ResponseEntity.badRequest().build();
-        }
-        try {
-            Residence residence = residenceDAO.getByResidenceId(residenceId);
-            ResidenceReview createdReview = residenceReviewDAO.createResidenceReview(residence, residenceReview);
-            if (createdReview == null){
-                LOGGER.error("Could not create new ResidenceReview");
-                return ResponseEntity.internalServerError().build();
-            }
-            return ResponseEntity.ok(createdReview);
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage());
-            return ResponseEntity.internalServerError().build();
-        }
-    }
-
-    // Might have to add /{viaid} after /residencereviews, but might be too long endpoint / bad design? (PK of a review is a composite key)
-    @PutMapping("/residences/{residenceId}/residencereviews")
-    public ResponseEntity<ResidenceReview> updateReview(@PathVariable int residenceId, @RequestBody ResidenceReview residenceReview) {
-        if (residenceReview == null || residenceId <= 0) {
-            return ResponseEntity.badRequest().build();
-        }
-        try {
-            ResidenceReview updatedReview = residenceReviewDAO.updateResidenceReview(residenceId, residenceReview);
-            return ResponseEntity.ok(updatedReview);
-        } catch (IllegalStateException e) {
-            LOGGER.error(e.getMessage());
-            return ResponseEntity.internalServerError().build();
-        }
+      residenceDAO.UpdateAvailabilityPeriod(residence);
 
     }
-
-    @GetMapping("/residences/{residenceId}/residencereviews")
-    public ResponseEntity<List<ResidenceReview>> getAllResidenceReviewsByResidenceId(@PathVariable int residenceId) {
-        try {
-            LOGGER.info("Request for all residencereviews received");
-            List<ResidenceReview> residencereviews = residenceReviewDAO.getAllResidenceReviewsByResidenceId(residenceId);
-            LOGGER.info("Returning: " + gson.toJson(residencereviews));
-            return ResponseEntity.ok(residencereviews);
-        } catch (Exception e) {
-            LOGGER.error("Connection failed " + e.getMessage());
-            return ResponseEntity.internalServerError().build();
-        }
+    catch (Exception e)
+    {
+      LOGGER.error(e.getMessage());
+      return ResponseEntity.internalServerError().build();
     }
 
+    return null;
+  }
+
+  @PostMapping("/residences/{residenceId}/residencereviews") public ResponseEntity<ResidenceReview> createReview(
+      @PathVariable int residenceId,
+      @RequestBody ResidenceReview residenceReview)
+  {
+    LOGGER.info("Request for createReview received");
+    if (residenceReview == null || residenceId <= 0)
+    {
+      return ResponseEntity.badRequest().build();
+    }
+    try
+    {
+      Residence residence = residenceDAO.getByResidenceId(residenceId);
+      ResidenceReview createdReview = residenceReviewDAO.createResidenceReview(
+          residence, residenceReview);
+      if (createdReview == null)
+      {
+        LOGGER.error("Could not create new ResidenceReview");
+        return ResponseEntity.internalServerError().build();
+      }
+      return ResponseEntity.ok(createdReview);
+    }
+    catch (Exception e)
+    {
+      LOGGER.error(e.getMessage());
+      return ResponseEntity.internalServerError().build();
+    }
+  }
+
+  // Might have to add /{viaid} after /residencereviews, but might be too long endpoint / bad design? (PK of a review is a composite key)
+  @PutMapping("/residences/{residenceId}/residencereviews") public ResponseEntity<ResidenceReview> updateReview(
+      @PathVariable int residenceId,
+      @RequestBody ResidenceReview residenceReview)
+  {
+    if (residenceReview == null || residenceId <= 0)
+    {
+      return ResponseEntity.badRequest().build();
+    }
+    try
+    {
+      ResidenceReview updatedReview = residenceReviewDAO.updateResidenceReview(
+          residenceId, residenceReview);
+      return ResponseEntity.ok(updatedReview);
+    }
+    catch (IllegalStateException e)
+    {
+      LOGGER.error(e.getMessage());
+      return ResponseEntity.internalServerError().build();
+    }
+
+  }
+
+  @GetMapping("/residences/{residenceId}/residencereviews") public ResponseEntity<List<ResidenceReview>> getAllResidenceReviewsByResidenceId(
+      @PathVariable int residenceId)
+  {
+    try
+    {
+      LOGGER.info("Request for all residencereviews received");
+      List<ResidenceReview> residencereviews = residenceReviewDAO.getAllResidenceReviewsByResidenceId(
+          residenceId);
+      LOGGER.info("Returning: " + gson.toJson(residencereviews));
+      return ResponseEntity.ok(residencereviews);
+    }
+    catch (Exception e)
+    {
+      LOGGER.error("Connection failed " + e.getMessage());
+      return ResponseEntity.internalServerError().build();
+    }
+  }
+
+  @PatchMapping("/residences/{residenceId}")
+  public ResponseEntity<Residence> updateResidence(@RequestBody Residence residence, @PathVariable("residenceId") int residenceId)
+  {
+    try
+    {
+      residence = residenceDAO.updateResidence(residence);
+      return ResponseEntity.ok(residence);
+    }
+    catch (Exception e)
+    {
+      return ResponseEntity.internalServerError().build();
+    }
+  }
+
+  @DeleteMapping("/residences/{residenceId}")
+  public ResponseEntity<Void> deleteResidence(@PathVariable("residenceId") int residenceId)
+  {
+    try
+    {
+      residenceDAO.deleteResidence(residenceId);
+      return new ResponseEntity<>(HttpStatus.OK);
+    }
+    catch (Exception e)
+    {
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }
