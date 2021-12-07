@@ -8,9 +8,10 @@ public class User
   private String firstName;
   private String lastName;
   private String phoneNumber;
+  private String profileImageUrl;
 
   public User(int id, String email, String password, String firstName,
-      String lastName, String phoneNumber)
+      String lastName, String phoneNumber, String profileImageUrl)
   {
     this.id = id;
     this.email = email;
@@ -18,6 +19,17 @@ public class User
     this.firstName = firstName;
     this.lastName = lastName;
     this.phoneNumber = phoneNumber;
+    this.profileImageUrl = profileImageUrl;
+  }
+
+  public String getProfileImageUrl()
+  {
+    return profileImageUrl;
+  }
+
+  public void setProfileImageUrl(String profileImageUrl)
+  {
+    this.profileImageUrl = profileImageUrl;
   }
 
   public String getFirstName()

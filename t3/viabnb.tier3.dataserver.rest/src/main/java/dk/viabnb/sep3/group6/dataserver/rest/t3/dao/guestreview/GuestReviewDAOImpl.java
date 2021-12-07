@@ -69,7 +69,7 @@ public class GuestReviewDAOImpl extends BaseDao implements GuestReviewDAO
       return new Host(result.getInt("userid"), result.getString("email"),
           result.getString("password"), result.getString("fname"),
           result.getString("lname"), result.getString("phonenumber"),
-          hostReviews, result.getString("personalimage"),
+          result.getString("personalimage"), hostReviews,
           result.getString("cprnumber"), result.getBoolean("isapproved"));
 
     }
