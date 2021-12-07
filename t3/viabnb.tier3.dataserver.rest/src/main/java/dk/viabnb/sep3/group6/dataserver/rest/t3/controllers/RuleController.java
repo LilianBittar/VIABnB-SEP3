@@ -20,27 +20,6 @@ import java.util.List;
     this.ruleDAO = ruleDAO;
   }
 
-  @GetMapping("/rules") public ResponseEntity<List<Rule>> getAllRules()
-  {
-    List<Rule> ruleListToReturn = ruleDAO.getAllRules();
-    if (ruleListToReturn == null)
-    {
-      return ResponseEntity.internalServerError().build();
-    }
-    return new ResponseEntity<>(ruleListToReturn, HttpStatus.OK);
-  }
-
-  @PostMapping("/rule") public ResponseEntity<Rule> createRule(
-      @RequestBody Rule rule)
-  {
-    Rule newRule = ruleDAO.createRule(rule);
-    if (newRule == null)
-    {
-      return ResponseEntity.internalServerError().build();
-    }
-    return new ResponseEntity<>(newRule, HttpStatus.OK);
-  }
-
   @PatchMapping("/rule/{description}/{residenceId}")
   public ResponseEntity<Rule> updateRule(@RequestBody Rule rule, @PathVariable("description") String description, @PathVariable("residenceId") int residenceId)
   {
