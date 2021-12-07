@@ -20,7 +20,7 @@ namespace UnitTests
         public void SetUp()
         {
             ResidenceRepository = new Mock<IResidenceRepository>();
-            ResidenceService = new ResidenceServiceImpl(ResidenceRepository.Object);
+            //ResidenceService = new ResidenceServiceImpl(ResidenceRepository.Object);
         }
         
         [Test]
