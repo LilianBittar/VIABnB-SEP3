@@ -21,6 +21,7 @@ using SEP3T2GraphQL.Services.Validation.GuestValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.HostValidation;
 using SEP3T2GraphQL.Services.Validation.HostValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
+using SEP3T2GraphQL.Services.Validation.UserValidation;
 
 namespace SEP3T2GraphQL
 {
@@ -75,6 +76,7 @@ namespace SEP3T2GraphQL
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<CreateCityValidator>();
             services.AddScoped<ICityService, CityService>();
+            services.AddScoped<UserValidation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

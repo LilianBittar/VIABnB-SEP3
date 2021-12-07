@@ -5,6 +5,7 @@ using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Repositories.Administration;
 using SEP3T2GraphQL.Services.Administration;
+using SEP3T2GraphQL.Services.Validation.UserValidation;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
@@ -14,13 +15,16 @@ namespace SEP3T2GraphQL.Services.Impl
         private IAdministrationService _administrationService;
         private IHostService _hostService;
         private IGuestService _guestService;
+        private UserValidation _userValidation;
 
-        public UserService(IUserRepository userRepository, IAdministrationService administrationService, IHostService hostService, IGuestService guestService)
+        public UserService(IUserRepository userRepository, IAdministrationService administrationService,
+            IHostService hostService, IGuestService guestService, UserValidation userValidation)
         {
             _userRepository = userRepository;
             _administrationService = administrationService;
             _hostService = hostService;
             _guestService = guestService;
+            _userValidation = userValidation;
         }
 
         public Task<User> GetUserByEmailAsync(string email)
@@ -58,6 +62,37 @@ namespace SEP3T2GraphQL.Services.Impl
             catch (Exception e)
             {
                 throw new ArgumentException(e.Message);
+            }
+        }
+
+        public async Task<User> UpdateUserAsync(User user)
+        {
+            if (await _userValidation.IsValidUser(user))
+            {
+                try
+                {
+                    return await _userRepository.UpdateUserAsync(user);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
+
+            throw new ArgumentException("Invalid user");
+        }
+
+        public async Task DeleteUserSync(int userId)
+        {
+            try
+            {
+                await _userRepository.DeleteUserAsync(userId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
     }

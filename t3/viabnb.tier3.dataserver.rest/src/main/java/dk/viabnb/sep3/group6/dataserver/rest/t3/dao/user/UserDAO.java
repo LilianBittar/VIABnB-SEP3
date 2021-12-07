@@ -29,4 +29,19 @@ public interface UserDAO
    * @throws IllegalStateException if can't connect to database
    * */
   List<User> getAllUsers();
+  /**
+   * Update an existing user
+   * @param user The new user who has the new arguments
+   * @return the newly updated user
+   *
+   * @throws IllegalStateException if can't connect to database
+   * */
+  User updateUser(User user);
+  /**
+   * Delete a user from th system
+   * @param userid The targeted user's id
+   *
+   * @throws IllegalStateException if cant connect to database
+   * */
+  void deleteUser(int userid);
 }

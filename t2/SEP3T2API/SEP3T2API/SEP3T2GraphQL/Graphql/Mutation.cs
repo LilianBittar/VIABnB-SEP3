@@ -18,11 +18,12 @@ namespace SEP3T2GraphQL.Graphql
         private readonly IFacilityService _facilityService;
         private readonly IGuestReviewService _guestReviewService;
         private readonly IHostReviewService _hostReview;
-        private readonly IResidenceReviewService _residenceReviewService; 
+        private readonly IResidenceReviewService _residenceReviewService;
+        private readonly IUserService _userService;
 
         public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService,
             IRentalService rentalService, IFacilityService facilityService, IRuleService ruleService,
-            IGuestReviewService guestReviewService, IHostReviewService hostReviewService, IResidenceReviewService residenceReviewService)
+            IGuestReviewService guestReviewService, IHostReviewService hostReviewService, IResidenceReviewService residenceReviewService, IUserService userService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
@@ -32,7 +33,8 @@ namespace SEP3T2GraphQL.Graphql
             _ruleService = ruleService;
             _guestReviewService = guestReviewService;
             _hostReview = hostReviewService;
-            _residenceReviewService = residenceReviewService; 
+            _residenceReviewService = residenceReviewService;
+            _userService = userService;
         }
 
         public async Task<Residence> CreateResidence(Residence residence)
@@ -135,6 +137,16 @@ namespace SEP3T2GraphQL.Graphql
         public async Task DeleteResidence(int residenceId)
         {
             await _residenceService.DeleteResidenceAsync(residenceId);
+        }
+
+        public async Task<User> UpdateUser(User user)
+        {
+           return await _userService.UpdateUserAsync(user);
+        }
+
+        public async Task DeleteUser(int userId)
+        {
+            await _userService.DeleteUserSync(userId);
         }
     }
 }
