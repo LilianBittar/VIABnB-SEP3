@@ -60,7 +60,7 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
                  IsValidRules(residence.Rules) &&
                  (IsValidFacilities(residence.Facilities)) &&
                  IsValidAvailabilityPeriod(residence.AvailableFrom, residence.AvailableTo)
-                ))
+                ) && residence.MaxNumberOfGuests > 0)
             {
                 return true;
             }
