@@ -39,8 +39,7 @@ namespace SEP3T2GraphQL.Services.Impl
                 {
                     try
                     {
-                        Console.WriteLine($"{this} creating new host...");
-                        Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(host)}");
+                      
                         return await _hostRepository.RegisterHostAsync(host);
                     }
                     catch (Exception e)

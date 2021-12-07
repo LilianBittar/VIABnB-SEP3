@@ -35,7 +35,7 @@
                                         <p>Total Price: @request.GetTotalPrice() DKK</p>
                                         @if (request.Status == RentRequestStatus.APPROVED)
                                         {
-                                        <MatButton Label="Review Residence" Link=@($"/createresidencereview/{request.Residence.Id}") Raised="true" />
+                                            <MatButton Label="Review Residence" Link=@($"/createresidencereview/{request.Residence.Id}") Raised="true"/>
                                         }
                                     </div>
                                     <div class="right">
@@ -106,15 +106,8 @@
         if (user.Identity.IsAuthenticated)
         {
     // If user is authenticated but not guest, e.g. a Host, then redirect to home page /index. 
-            if (user.Claims.FirstOrDefault(c => c.Type.ToString() == "Role").Value == "Guest")
-            {
-                _rentRequests = await RentalService.GetRentRequestsByGuestIdAsync(Int32.Parse(user.Claims.First(c => c.Type.ToString() == "Id").Value));
-                StateHasChanged();
-            }
-            else
-            {
-                NavigationManager.NavigateTo("/");
-            }
+            _rentRequests = await RentalService.GetRentRequestsByGuestIdAsync(Int32.Parse(user.Claims.First(c => c.Type.ToString() == "Id").Value));
+            StateHasChanged();
         }
         else
         {
