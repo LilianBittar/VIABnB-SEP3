@@ -32,24 +32,18 @@ namespace SEP3T2GraphQL.Services.Impl
         public async Task<Host> RegisterHostAsync(Host host)
         {
             Console.WriteLine("inside registerhost servie");
-          //  Host hostExists = await GetHostByEmail(host.Email);
-            
-           // if (hostExists!=null)
+            if (await _hostValidation.IsValidHost(host))
             {
-              //  if (await _hostValidation.IsValidHost(host))
+                try
                 {
-                    try
-                    {
-                        return await _hostRepository.RegisterHostAsync(host);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        throw;
-                    }
-                } 
+                    return await _hostRepository.RegisterHostAsync(host);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
-           
 
             throw new ArgumentException("Invalid host");
         }
@@ -78,7 +72,6 @@ namespace SEP3T2GraphQL.Services.Impl
             else return returnedHost;
         }
 
-      
 
         public async Task<Host> GetHostById(int id)
         {
@@ -110,8 +103,9 @@ namespace SEP3T2GraphQL.Services.Impl
         }
 
         public async Task<Host> UpdateHostStatusAsync(Host host)
-        { 
-            Console.WriteLine($"{this} {nameof(UpdateHostStatusAsync)} received params: {JsonSerializer.Serialize(host)}");
+        {
+            Console.WriteLine(
+                $"{this} {nameof(UpdateHostStatusAsync)} received params: {JsonSerializer.Serialize(host)}");
             if (host == null)
             {
                 throw new ArgumentException("Host can't be null");
