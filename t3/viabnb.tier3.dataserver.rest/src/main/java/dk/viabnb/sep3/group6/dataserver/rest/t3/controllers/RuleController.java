@@ -6,10 +6,7 @@ import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rule.RuleDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Rule;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,24 +20,31 @@ import java.util.List;
     this.ruleDAO = ruleDAO;
   }
 
-  @GetMapping("/rules") public ResponseEntity<List<Rule>> getAllRules()
+  @PatchMapping("/rule/{description}/{residenceId}")
+  public ResponseEntity<Rule> updateRule(@RequestBody Rule rule, @PathVariable("description") String description, @PathVariable("residenceId") int residenceId)
   {
-    List<Rule> ruleListToReturn = ruleDAO.getAllRules();
-    if (ruleListToReturn == null)
+    try
     {
-      return ResponseEntity.internalServerError().build();
+      rule = ruleDAO.updateRule(rule);
+      return ResponseEntity.ok(rule);
     }
-    return new ResponseEntity<>(ruleListToReturn, HttpStatus.OK);
+    catch (Exception e)
+    {
+      return ResponseEntity.badRequest().build();
+    }
   }
 
-  @PostMapping("/rule") public ResponseEntity<Rule> createRule(
-      @RequestBody Rule rule)
+  @DeleteMapping("/rule/{description}/{residenceId}")
+  public ResponseEntity<Void> deleteRule(@PathVariable("description") String description, @PathVariable("residenceId") int residenceId)
   {
-    Rule newRule = ruleDAO.createRule(rule);
-    if (newRule == null)
+    try
     {
-      return ResponseEntity.internalServerError().build();
+      ruleDAO.deleteRule(description, residenceId);
+      return new ResponseEntity<>(HttpStatus.OK);
     }
-    return new ResponseEntity<>(newRule, HttpStatus.OK);
+    catch (Exception e)
+    {
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }

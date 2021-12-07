@@ -42,4 +42,19 @@ public interface ResidenceDAO
    * @throws IllegalStateException
    */
   Residence UpdateAvailabilityPeriod(Residence residence);
+  /**
+   * Update an existing residence in the system by identifying it and replacing its info
+   * @param residence The new residence witch have the new arguments
+   * @return the newly updated residence
+   *
+   * @throws IllegalStateException if can't connect to database
+   * */
+  Residence updateResidence(Residence residence);
+  /**
+   * Delete a residence from the system
+   * @param residenceId The targeted residence's id
+   *
+   * @throws IllegalStateException if can't connect to database
+   * */
+  void deleteResidence(int residenceId);
 }
