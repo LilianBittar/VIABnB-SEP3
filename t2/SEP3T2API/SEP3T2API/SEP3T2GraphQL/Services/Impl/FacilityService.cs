@@ -48,5 +48,18 @@ namespace SEP3T2GraphQL.Services.Impl
 
             return facilityToReturn;
         }
+
+        public async Task DeleteResidenceFacilityAsync(int facilityId, int residenceId)
+        {
+            try
+            {
+                await _facilityRepository.DeleteResidenceFacility(facilityId, residenceId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

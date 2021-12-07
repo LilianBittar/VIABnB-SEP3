@@ -126,5 +126,33 @@ namespace SEP3T2GraphQL.Services
             var allResidences = await _residenceRepository.GetAllAsync();
             return allResidences.Where(r => r.IsAvailable).ToList();
         }
+
+        public async Task<Residence> UpdateResidenceAsync(Residence residence)
+        {
+            if (!_residenceValidation.IsValidResidence(residence)) throw new ArgumentException("Invalid residence");
+            try
+            {
+                return await _residenceRepository.UpdateResidenceAsync(residence);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
+        }
+
+        public async Task DeleteResidenceAsync(int residenceId)
+        {
+            try
+            {
+                await _residenceRepository.DeleteResidenceAsync(residenceId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

@@ -112,5 +112,29 @@ namespace SEP3T2GraphQL.Graphql
             return await _hostReview.UpdateHostReviewAsync(hostReview);
         }
 
+        public async Task<Rule> UpdateResidenceRule(Rule rule)
+        {
+            return await _ruleService.UpdateRuleAsync(rule);
+        }
+
+        public async Task<Residence> UpdateResidence(Residence residence)
+        {
+            return await _residenceService.UpdateResidenceAsync(residence);
+        }
+
+        public async Task DeleteRule(Rule rule)
+        {
+            await _ruleService.DeleteRule(rule);
+        }
+
+        public async Task DeleteResidenceFacility(int facilityId, int residenceId)
+        {
+            await _facilityService.DeleteResidenceFacilityAsync(facilityId, residenceId);
+        }
+
+        public async Task DeleteResidence(int residenceId)
+        {
+            await _residenceService.DeleteResidenceAsync(residenceId);
+        }
     }
 }
