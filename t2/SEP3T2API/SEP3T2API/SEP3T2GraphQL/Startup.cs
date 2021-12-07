@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using GraphQL.Server.Ui.GraphiQL;
 using GraphQL.Server.Ui.Playground;
 using HotChocolate.Types;
+using Microsoft.AspNetCore.ResponseCompression;
 using SEP3T2GraphQL.Graphql;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Repositories.Administration;
@@ -22,6 +24,7 @@ using SEP3T2GraphQL.Services.Validation.HostValidation;
 using SEP3T2GraphQL.Services.Validation.HostValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
 using SEP3T2GraphQL.Services.Validation.UserValidation;
+using SEP3T2GraphQL.SignalR;
 
 namespace SEP3T2GraphQL
 {
@@ -77,6 +80,7 @@ namespace SEP3T2GraphQL
             services.AddScoped<CreateCityValidator>();
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<UserValidation>();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,13 +92,11 @@ namespace SEP3T2GraphQL
             }
 
             app.UseRouting();
-
-            app.UseEndpoints(endpoints => { endpoints.MapGraphQL(); });
-
-            // app.UseGraphQLGraphiQL(new GraphiQLOptions()
-            // {
-            //     GraphQLEndPoint = "/graphql"
-            // }, "/graphql-ui");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<MessagingHub>("/chat");
+                endpoints.MapGraphQL();
+            });
 
             app.UseGraphQLPlayground(new PlaygroundOptions()
             {
