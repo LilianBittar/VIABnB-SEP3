@@ -105,7 +105,7 @@
 
             if (!user.Identity.IsAuthenticated)
             {
-                NavigationManager.NavigateTo("/");
+                NavigationManager.NavigateTo("Login");
             }
         }
         catch (Exception e)
@@ -130,7 +130,7 @@
             _dialogIsOpen = false;
             ResetModel();
             StateHasChanged();
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("Login");
         }
         catch (Exception e)
         {

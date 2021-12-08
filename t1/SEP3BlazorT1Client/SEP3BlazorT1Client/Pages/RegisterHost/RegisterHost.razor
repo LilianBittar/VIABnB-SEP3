@@ -54,7 +54,7 @@
                     <p class="error-label text-danger">@_errorText</p>
 
                     <MatButton OnClick="@CreateHost" Label="Register" Raised="true"></MatButton>
-                    <MatButton OnClick="@(() => NavigationManager.NavigateTo("/"))" Label="Already have an account?"></MatButton>
+                    <MatButton OnClick="@(() => NavigationManager.NavigateTo("Login"))" Label="Already have an account?"></MatButton>
                      <p hidden="@IsShow"> <MatProgressBar  Indeterminate="true" Reversed="true"></MatProgressBar></p>
                 </div>
             </div>
@@ -120,7 +120,7 @@
             }
     //User is logged on upon successful account creation
     //   await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_newUser.Username, _newUser.Password);
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("Login");
         }
     }
 

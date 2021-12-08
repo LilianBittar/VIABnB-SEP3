@@ -26,7 +26,7 @@
       <DependentUpon>GuestReviews.razor</DependentUpon>
     </Compile>
     <Compile Update="Pages\UserProfile\UserView.cs">
-      <DependentUpon>MyProfile.razor</DependentUpon>
+      <DependentUpon>UserView.razor</DependentUpon>
     </Compile>
     <Compile Update="Pages\UserProfile\MyProfile.cs">
       <DependentUpon>MyProfile.razor</DependentUpon>
