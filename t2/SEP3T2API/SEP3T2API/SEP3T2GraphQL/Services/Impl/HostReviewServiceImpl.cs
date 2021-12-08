@@ -11,13 +11,13 @@ namespace SEP3T2GraphQL.Services.Impl
     public class HostReviewServiceImpl : IHostReviewService
     {
         private readonly IHostReviewGuestRepository _hostReviewGuestRepository;
-        private readonly CreateGuestReviewValidation _createGuestReviewValidation;
+        private readonly CreateHostReviewValidation _createHostReviewValidation;
 
         public HostReviewServiceImpl(IHostReviewGuestRepository hostReviewGuestRepository,
-            CreateGuestReviewValidation createGuestReviewValidation)
+            CreateHostReviewValidation createHostReviewValidation)
         {
             _hostReviewGuestRepository = hostReviewGuestRepository;
-            _createGuestReviewValidation = createGuestReviewValidation;
+            _createHostReviewValidation = createHostReviewValidation;
         }
         
         public async Task<HostReview> CreateHostReviewAsync(HostReview hostReview)
@@ -26,29 +26,29 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("hostReview is required");
             }
-            _createGuestReviewValidation.ValidateHostReview(hostReview);
-            var hostReviews = await _hostReviewGuestRepository.GetAllHostReviewsByHostIdAsync(hostReview.hostId);
+            _createHostReviewValidation.ValidateHostReview(hostReview);
+            var hostReviews = await _hostReviewGuestRepository.GetAllHostReviewsByGuestIdAsync(hostReview.GuestId);
             
             // Updates review if host already have an HostReview for the guest. 
-            if (hostReviews.Where(h => h.ViaId == hostReview.ViaId).ToList().Any())
+            if (hostReviews.Where(h => h.hostId == hostReview.hostId && h.GuestId == hostReview.GuestId).ToList().Any())
             {
-                var updatedReview = await _hostReviewGuestRepository.UpdateGuestReviewAsync(hostReview);
+                var updatedReview = await _hostReviewGuestRepository.UpdateHostReviewAsync(hostReview);
                 return updatedReview;
             }
 
-            return await _hostReviewGuestRepository.CreateGuestReviewAsync(hostReview);
+            return await _hostReviewGuestRepository.CreateHostReviewAsync(hostReview);
         }
 
         public async Task<HostReview> UpdateHostReviewAsync(HostReview hostReview)
         {
 
-            return await _hostReviewGuestRepository.UpdateGuestReviewAsync(hostReview);
+            return await _hostReviewGuestRepository.UpdateHostReviewAsync(hostReview);
 
         }
 
-        public async Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id)
+        public async Task<IEnumerable<HostReview>> GetAllHostReviewsByGuestIdAsync(int id)
         {
-            return await _hostReviewGuestRepository.GetAllHostReviewsByHostIdAsync(id);
+            return await _hostReviewGuestRepository.GetAllHostReviewsByGuestIdAsync(id);
         }
     }
 }
