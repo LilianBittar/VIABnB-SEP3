@@ -1,68 +1,72 @@
 ﻿@page "/About"
-<h3>About</h3>
 
-<style>
-            .demo-mat-card {
-                max-width: 400px;
-            }
- 
-            .demo-mat-card-content {
-                padding: 1rem;
-            }
- 
-            .demo-mat-card-clean-margin {
-                margin: 0px;
-            }
-        </style>
 
 <div class="container">
 
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row mb-3 ">
+        <div class="col-md-12 d-flex justify-content-center ">
             <h1>Our founding Fathers</h1>
-            <img src="media/ProfilePics/all.png" alt="The founders">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-12 d-flex justify-content-center border border-warning ">
+            <img src="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/ProfilePics/all.png" alt="The founders">
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-md-4">
-            <h2>headline</h2>
-            <p>Lorem ipsum dolor sit amet, 
-                consectetur adipiscing elit. Vivamus imperdiet ultrices enim. 
-                Mauris maximus mattis lectus ut bibendum. Donec eget convallis tortor, ut luctus sem. 
-                Proin sapien odio, tempus vitae mollis vitae, porttitor vel nibh. 
-                Mauris venenatis venenatis ornare. Phasellus ac diam non lacus efficitur maximus. 
-                Suspendisse bibendum tristique porttitor. Quisque euismod felis vel sapien egestas tincidunt.</p>
+            <h2>Why we created VIABnB</h2>
+            <p>
+                Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit. Vivamus imperdiet ultrices enim.
+                Mauris maximus mattis lectus ut bibendum. Donec eget convallis tortor, ut luctus sem.
+                Proin sapien odio, tempus vitae mollis vitae, porttitor vel nibh.
+                Mauris venenatis venenatis ornare. Phasellus ac diam non lacus efficitur maximus.
+                Suspendisse bibendum tristique porttitor. Quisque euismod felis vel sapien egestas tincidunt.
+            </p>
         </div>
-        
+
         <div class="col-md-4">
-            <h2>headline</h2>
-            <p>Lorem ipsum dolor sit amet, 
-                consectetur adipiscing elit. Vivamus imperdiet ultrices enim. 
-                Mauris maximus mattis lectus ut bibendum. Donec eget convallis tortor, ut luctus sem. 
-                Proin sapien odio, tempus vitae mollis vitae, porttitor vel nibh. 
-                Mauris venenatis venenatis ornare. Phasellus ac diam non lacus efficitur maximus. 
-                Suspendisse bibendum tristique porttitor. Quisque euismod felis vel sapien egestas tincidunt.</p>
+            <h2>Our vision</h2>
+            <p>
+                Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit. Vivamus imperdiet ultrices enim.
+                Mauris maximus mattis lectus ut bibendum. Donec eget convallis tortor, ut luctus sem.
+                Proin sapien odio, tempus vitae mollis vitae, porttitor vel nibh.
+                Mauris venenatis venenatis ornare. Phasellus ac diam non lacus efficitur maximus.
+                Suspendisse bibendum tristique porttitor. Quisque euismod felis vel sapien egestas tincidunt.
+            </p>
         </div>
-         <div class="col-md-4">
-                    <h2>headline</h2>
-                    <p>Lorem ipsum dolor sit amet, 
-                        consectetur adipiscing elit. Vivamus imperdiet ultrices enim. 
-                        Mauris maximus mattis lectus ut bibendum. Donec eget convallis tortor, ut luctus sem. 
-                        Proin sapien odio, tempus vitae mollis vitae, porttitor vel nibh. 
-                        Mauris venenatis venenatis ornare. Phasellus ac diam non lacus efficitur maximus. 
-                        Suspendisse bibendum tristique porttitor. Quisque euismod felis vel sapien egestas tincidunt.</p>
-                </div>
+        <div class="col-md-4">
+            <h2>Join our team</h2>
+            <p>
+                Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit. Vivamus imperdiet ultrices enim.
+                Mauris maximus mattis lectus ut bibendum. Donec eget convallis tortor, ut luctus sem.
+                Proin sapien odio, tempus vitae mollis vitae, porttitor vel nibh.
+                Mauris venenatis venenatis ornare. Phasellus ac diam non lacus efficitur maximus.
+                Suspendisse bibendum tristique porttitor. Quisque euismod felis vel sapien egestas tincidunt.
+            </p>
+        </div>
     </div>
 
+    <div class="row d-flex justify-content-center mb-1">
 
-    <div class="row">
+        <h2> Individual Team Members</h2>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+
         <div class="col-md-3">
 
             @* Michael *@
-            <MatCard class="demo-mat-card">
+            <MatCard class="demo-mat-card p-1">
                 <MatCardContent>
-                    <MatCardMedia Wide="true" ImageUrl=""> ></MatCardMedia>
+                    <div class="d-flex justify-content-center">
+                        <img class="profilePics border border-warning" src="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/ProfilePics/mic.jpg" alt="micpic">
+
+                    </div>
                     <div class="demo-mat-card-content">
                         <MatHeadline6 class="demo-mat-card-clean-margin">
                             Michael
@@ -86,9 +90,12 @@
 
         <div class="col-md-3">
             @* Kasper *@
-            <MatCard class="demo-mat-card">
+            <MatCard class="demo-mat-card p-1">
                 <MatCardContent>
-                    <MatCardMedia Wide="true" ImageUrl="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg"></MatCardMedia>
+                    <div class="d-flex justify-content-center">
+                        <img class="profilePics border border-warning" src="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/ProfilePics/babymic.jpg" alt="kasperpic">
+
+                    </div>
                     <div class="demo-mat-card-content">
                         <MatHeadline6 class="demo-mat-card-clean-margin">
                             Kasper
@@ -111,9 +118,11 @@
         </div>
         <div class="col-md-3">
             @* Lilian *@
-            <MatCard class="demo-mat-card">
+            <MatCard class="demo-mat-card p-1">
                 <MatCardContent>
-                    <MatCardMedia Wide="true" ImageUrl="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg"></MatCardMedia>
+                    <div class="d-flex justify-content-center">
+                        <img class="profilePics border border-warning" src="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/ProfilePics/lila.jpg" alt="lilianpic">
+                    </div>
                     <div class="demo-mat-card-content">
                         <MatHeadline6 class="demo-mat-card-clean-margin">
                             Lilian
@@ -137,9 +146,12 @@
         </div>
         <div class="col-md-3">
             @* Kutaiba *@
-            <MatCard class="demo-mat-card">
+            <MatCard class="demo-mat-card p-1">
                 <MatCardContent>
-                    <MatCardMedia Wide="true" ImageUrl="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg"></MatCardMedia>
+                    <div class="d-flex justify-content-center">
+                        <img class="profilePics border border-warning" src="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/ProfilePics/kut.jpg" alt="kutaibapic">
+
+                    </div>
                     <div class="demo-mat-card-content">
                         <MatHeadline6 class="demo-mat-card-clean-margin">
                             Kutaiba
