@@ -22,10 +22,10 @@
                     </div>
                     @foreach (var conversation in _usersInConversation.Keys)
                     {
-                        <MatButton OnClick="@(()=>{SetReceiver(_usersInConversation[conversation]);})" Style="min-height: 80px !important;">
+                        <MatButton OnClick="@(() => { SetReceiver(_usersInConversation[conversation]); })" Style="min-height: 80px !important;">
                             <ChatConversationEntry User="@_usersInConversation[conversation]"/>
                         </MatButton>
-                            <hr/>
+                        <hr/>
                     }
                 </div>
                 <div class="mat-layout-grid-cell mat-layout-grid-cell-span-9 chat-window">
@@ -41,10 +41,20 @@
                             <hr/>
                         }
                     </div>
-                    @foreach (var message in _messages)
-                    {
-                        <p>@message.Content</p>
-                    }
+
+                    <div class="chat-window__messages">
+                        @foreach (var message in _messages)
+                        {
+                            <p>@message.Content</p>
+                        }
+                    </div>
+                    
+                    <div class="chat-window__input">
+                        <div class="container-fluid d-flex flex-row">
+                        <MatTextField @bind-Value="@_messageContent" Outlined="true" FullWidth="true" Style="background-color: #ddd;"/>
+                        <MatButton Label="Send" Raised="true"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,7 +88,8 @@ else
     private User _receiver;
     private IDictionary<string, User> _usersInConversation = new Dictionary<string, User>();
     private bool _connectionFailed = false;
-    private string _filterConversations = ""; 
+    private string _filterConversations = "";
+    private string _messageContent = ""; 
 
     protected override async Task OnInitializedAsync()
     {
@@ -119,6 +130,12 @@ else
     {
         var messageReceived = JsonSerializer.Deserialize<Message>(messageAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         _messages.Enqueue(messageReceived);
+    // Adding user to window of conversations if the user have never chatted with the sender before. 
+        if (!_usersInConversation.ContainsKey(messageReceived.Sender.Email))
+        {
+            _usersInConversation.TryAdd(messageReceived.Sender.Email, messageReceived.Sender);
+        }
+        StateHasChanged();
     }
 
     private void PopulateUsersInConversation()
@@ -129,7 +146,7 @@ else
             {
                 _usersInConversation.TryAdd(message.Receiver.Email, message.Receiver);
             }
-            if (message.Sender.Email != _sender.Email &&!_usersInConversation.ContainsKey(message.Sender.Email))
+            if (message.Sender.Email != _sender.Email && !_usersInConversation.ContainsKey(message.Sender.Email))
             {
                 _usersInConversation.TryAdd(message.Sender.Email, message.Sender);
             }
@@ -147,7 +164,8 @@ else
 
     private void SetReceiver(User user)
     {
-        _receiver = user; 
+        _receiver = user;
         StateHasChanged();
     }
+
 }
