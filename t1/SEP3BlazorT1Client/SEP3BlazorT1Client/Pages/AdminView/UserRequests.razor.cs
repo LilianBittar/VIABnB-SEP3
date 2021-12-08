@@ -34,7 +34,6 @@ namespace SEP3BlazorT1Client.Pages.AdminView
                 ErrorMessage = "";
                 ErrorMessage = "Something went wrong.. try refreshing the page";
             }
-           
         }
         
         private async Task ApproveHost(int hostId)
