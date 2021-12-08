@@ -1,9 +1,9 @@
 .chat-conversations {
-  padding: 0 0.5rem;
   border-right-style: solid;
   border-right-width: 0.5px;
-  border-right-color: #8b8b8b;
+  border-right-color: #ccc;
   height: 85vh;
+  overflow-y: scroll;
 }
 .chat-conversations h4 {
   font-size: 16px;
@@ -13,6 +13,7 @@
 
 .chat-window {
   height: 85vh;
+  overflow-y: scroll;
 }
 
 /*# sourceMappingURL=Messages.razor.css.map */
