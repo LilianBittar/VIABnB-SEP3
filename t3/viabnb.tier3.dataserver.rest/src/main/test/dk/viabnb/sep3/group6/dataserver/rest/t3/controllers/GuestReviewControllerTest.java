@@ -25,7 +25,8 @@ class GuestReviewControllerTest
           "Test",
           LocalDate.now(),
                 1,
-                1
+                1,
+                "test@test.test"
         );
   }
 

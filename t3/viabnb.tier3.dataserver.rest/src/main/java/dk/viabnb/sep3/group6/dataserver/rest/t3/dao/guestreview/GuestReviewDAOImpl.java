@@ -21,7 +21,7 @@ import java.util.List;
 public class GuestReviewDAOImpl extends BaseDao implements GuestReviewDAO
 {
   private static final Logger LOGGER = LoggerFactory.getLogger(GuestReviewDAO.class);
-
+  private HostDAO hostDAO = new HostDAOImpl();
   @Override public GuestReview createGuestReview(GuestReview guestReview)
   {
     try (Connection connection = getConnection()) {
@@ -73,7 +73,8 @@ public class GuestReviewDAOImpl extends BaseDao implements GuestReviewDAO
                 result.getString("guestreviewtext"),
                 LocalDate.parse(result.getDate("createddate").toString()),
                 result.getInt("guestid"),
-                result.getInt("hostid"));
+                result.getInt("hostid"),
+                hostDAO.getHostById(result.getInt("hostid")).getEmail());
         guestReviews.add(guestReview);
       }
       return guestReviews;
