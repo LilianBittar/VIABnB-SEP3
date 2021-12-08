@@ -1,5 +1,5 @@
 @page "/MyProfile/{Id:int}"
-<AuthorizeView Policy="MustBeHost">
+<AuthorizeView Policy="MustBeApprovedHost">
     <Authorized>
         @if (isLoading)
         {

@@ -1,5 +1,5 @@
 @page "/RentRequestHistory"
-<AuthorizeView Policy="MustBeHost">
+<AuthorizeView Policy="MustBeApprovedHost">
     <Authorized>
         <p>@ErrorMessage</p>
         @if (_allRentRequests == null)

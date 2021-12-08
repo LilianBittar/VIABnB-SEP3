@@ -10,7 +10,7 @@
 @inject IHostService HostService
 @inject IGuestService GuestService
 @inject AuthenticationStateProvider AuthStateProvider
-<AuthorizeView Policy="MustBeHost">
+<AuthorizeView Policy="MustBeApprovedHost">
     <Authorized Context="Auth">
         <p>@ErrorMessage</p>
         @if (_newGuest != null && _host != null)
