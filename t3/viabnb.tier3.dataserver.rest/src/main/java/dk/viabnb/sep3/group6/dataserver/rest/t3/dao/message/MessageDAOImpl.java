@@ -32,7 +32,7 @@ public class MessageDAOImpl extends BaseDao implements MessageDAO {
     @Override
     public List<Message> getAll() {
         try (Connection connection = getConnection()) {
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM message");
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM message order by timesent asc");
             ResultSet result = stm.executeQuery();
             List<Message> messages = new ArrayList<>();
             while (result.next()) {

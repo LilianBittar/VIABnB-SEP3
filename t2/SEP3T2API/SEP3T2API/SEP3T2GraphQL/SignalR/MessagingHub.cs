@@ -41,11 +41,28 @@ namespace SEP3T2GraphQL.SignalR
                 if (_clients[key] == Context.ConnectionId)
                 {
                     Disconnect(key);
+                    break;
                 }
             }
         }
 
-        public async Task SendMessageAsync(string messageAsJson)
+        public async Task GetMessages()
+        {
+            foreach (var key in _clients.Keys)
+            {
+                if (_clients[key] == Context.ConnectionId)
+                {
+                    var messages = await _messagingService.GetMessagesByUserIdAsync(key);
+                    var messagesAsJson = JsonSerializer.Serialize(messages,
+                        new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                    await Clients.Client(_clients[key])
+                        .SendCoreAsync("ReceiveUserMessages", new object[] {messagesAsJson});
+                    break;
+                }
+            }
+        }
+
+        public async Task SendMessage(string messageAsJson)
         {
             var message = JsonSerializer.Deserialize<Message>(messageAsJson);
             try

@@ -80,6 +80,8 @@ namespace SEP3T2GraphQL
             services.AddScoped<CreateCityValidator>();
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<UserValidation>();
+            services.AddScoped<IMessagingService, MessagingService>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddSignalR();
         }
 
