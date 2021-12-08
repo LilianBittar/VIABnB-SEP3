@@ -82,12 +82,26 @@
                         <MatCardContent>
                             <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/RentRequest.png"></MatCardMedia>
                             <div class="demo-mat-card-content" style="margin-left: 35%">
-                                <MatHeadline6 class="demo-mat-card-clean-margin">Rent Requests</MatHeadline6>
+                                <MatHeadline6 class="demo-mat-card-clean-margin">Recived Requests</MatHeadline6>
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
                             <MatButton @onclick="ToRentRequest">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Lock"></MatIcon>
+                        </MatCardActions>
+                    </MatCard>
+                </div>
+                <div class="mat-layout-grid-cell">
+                    <MatCard Class="demo-mat-card">
+                        <MatCardContent>
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/RequestStatus.jpg"></MatCardMedia>
+                            <div class="demo-mat-card-content" style="margin-left: 30%">
+                                <MatHeadline6 class="demo-mat-card-clean-margin">My Request Status</MatHeadline6>
+                            </div>
+                        </MatCardContent>
+                        <MatCardActions Class="justify-content-between">
+                            <MatButton @onclick="ToRegisterResidence">More</MatButton>
+                            <MatIcon Icon="@MatIconNames.Lock_open"></MatIcon>
                         </MatCardActions>
                     </MatCard>
                 </div>
@@ -106,4 +120,40 @@
             </div>
         </div>
     </NotAuthorized>
+</AuthorizeView>
+<AuthorizeView Policy="MustBeApprovedGuest">
+    <Authorized>
+        <div class="mat-layout-grid mat-layout-grid-align-left" style="max-width: 2000px;">
+            <div class="mat-layout-grid-inner">
+                <div class="mat-layout-grid-cell">
+                    <MatCard Class="demo-mat-card">
+                        <MatCardContent>
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/RentResidence.jpg"></MatCardMedia>
+                            <div class="demo-mat-card-content" style="margin-left: 40%">
+                                <MatHeadline6 class="demo-mat-card-clean-margin">Rent A Residence</MatHeadline6>
+                            </div>
+                        </MatCardContent>
+                        <MatCardActions Class="justify-content-between">
+                            <MatButton OnClick="ToMyMail">More</MatButton>
+                            <MatIcon Icon="@MatIconNames.Vpn_key"></MatIcon>
+                        </MatCardActions>
+                    </MatCard>
+                </div>
+                <div class="mat-layout-grid-cell">
+                    <MatCard Class="demo-mat-card">
+                        <MatCardContent>
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/RentRequestStatus.jpg"></MatCardMedia>
+                            <div class="demo-mat-card-content" style="margin-left: 30%">
+                                <MatHeadline6 class="demo-mat-card-clean-margin">My Rent Requests</MatHeadline6>
+                            </div>
+                        </MatCardContent>
+                        <MatCardActions Class="justify-content-between">
+                            <MatButton @onclick="ToRegisterResidence">More</MatButton>
+                            <MatIcon Icon="@MatIconNames.Free_breakfast"></MatIcon>
+                        </MatCardActions>
+                    </MatCard>
+                </div>
+            </div>
+        </div>
+    </Authorized>
 </AuthorizeView>
