@@ -15,29 +15,6 @@ namespace SEP3T2GraphQL.Services.Validation.UserValidation
             _repository = repository;
         }
 
-        private async Task<bool> IsValidEmail(string email)
-        {
-            var user = await _repository.GetUserByEmailAsync(email);
-            if (user == null)
-            {
-                if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
-                {
-                    //some form of inbuilt mail validation
-                    var addr = new System.Net.Mail.MailAddress(email);
-
-                    if (addr.Address != email)
-                    {
-                        throw new FormatException("Invalid email");
-                       
-                    }
-                    return true;
-                }
-
-                throw new FormatException("email not formatted correctly");
-            }
-            throw new ArgumentException("User already exists");
-        }
-
         private static bool IsValidFirstname(string firstname)
         {
             if (firstname != null && IsLettersOnly(firstname))
@@ -126,7 +103,7 @@ namespace SEP3T2GraphQL.Services.Validation.UserValidation
 
         public async Task<bool> IsValidUser(User user)
         {
-            if (await IsValidEmail(user.Email) && IsValidFirstname(user.FirstName) && IsValidLastname(user.LastName) &&
+            if (IsValidFirstname(user.FirstName) && IsValidLastname(user.LastName) &&
                 IsValidPassword(user.Password) && IsValidPhoneNumber(user.PhoneNumber))
             {
                 return true;

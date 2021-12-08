@@ -92,12 +92,14 @@ public class UserDAOImpl extends BaseDao implements UserDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement(
-          "UPDATE _user SET email = ? , password = ?, phonenumber = ?, personalimage = ? WHERE userid = ?");
-      stm.setString(1, user.getEmail());
-      stm.setString(2, user.getPassword());
-      stm.setString(3, user.getPhoneNumber());
-      stm.setString(4, user.getProfileImageUrl());
-      stm.setInt(5, user.getId());
+          "UPDATE _user SET fname = ?, lname = ?, email = ? , password = ?, phonenumber = ?, personalimage = ? WHERE userid = ?");
+      stm.setString(1, user.getFirstName());
+      stm.setString(2, user.getLastName());
+      stm.setString(3, user.getEmail());
+      stm.setString(4, user.getPassword());
+      stm.setString(5, user.getPhoneNumber());
+      stm.setString(6, user.getProfileImageUrl());
+      stm.setInt(7, user.getId());
       stm.executeUpdate();
       connection.commit();
       return user;
