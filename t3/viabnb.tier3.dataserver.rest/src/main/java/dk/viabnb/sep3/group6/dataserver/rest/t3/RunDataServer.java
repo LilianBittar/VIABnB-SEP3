@@ -16,6 +16,8 @@ import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guestreview.GuestReviewDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guestreview.GuestReviewDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.hostreview.HostReviewDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.hostreview.HostReviewDAOImpl;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.message.MessageDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.message.MessageDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAO;
@@ -119,6 +121,12 @@ public class RunDataServer {
     @Scope("singleton")
     HostReviewDAO hostReviewDAO() {
         return new HostReviewDAOImpl();
+    }
+
+    @Bean
+    @Scope("singleton")
+    MessageDAO messageDAO() {
+        return new MessageDAOImpl();
     }
 }
 

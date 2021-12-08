@@ -42,6 +42,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
             try
             {
+                message.TimeSent = DateTime.Now;
                 var newMessage = await _messageRepository.CreateMessageAsync(message);
                 // Adding sender / receiver to map with a new message queue in case they have never sent / received a message before. 
                 if (!_messageMap.ContainsKey(message.Receiver.Id))
@@ -53,7 +54,8 @@ namespace SEP3T2GraphQL.Services.Impl
                 {
                     _messageMap.TryAdd(message.Sender.Id, new ConcurrentQueue<Message>());
                 }
-
+                _messageMap[message.Receiver.Id].Enqueue(newMessage);
+                _messageMap[message.Sender.Id].Enqueue(newMessage);
                 return newMessage;
             }
             catch (Exception e)
