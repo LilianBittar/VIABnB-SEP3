@@ -8,6 +8,7 @@
 @inject NavigationManager NavigationManager;
 <AuthorizeView Policy="MustBeGuest">
     <Authorized>
+    <p>@ErrorMessage</p>
         @if (_rentRequests != null)
         {
             if (_rentRequests.Any())
@@ -98,21 +99,31 @@
 
 @code {
     private IEnumerable<RentRequest> _rentRequests;
+    private string ErrorMessage = "";
 
     protected override async Task OnInitializedAsync()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        if (user.Identity.IsAuthenticated)
+        try
         {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            if (user.Identity.IsAuthenticated)
+            {
     // If user is authenticated but not guest, e.g. a Host, then redirect to home page /index. 
-            _rentRequests = await RentalService.GetRentRequestsByGuestIdAsync(Int32.Parse(user.Claims.First(c => c.Type.ToString() == "Id").Value));
-            StateHasChanged();
+                _rentRequests = await RentalService.GetRentRequestsByGuestIdAsync(Int32.Parse(user.Claims.First(c => c.Type.ToString() == "Id").Value));
+                StateHasChanged();
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/");
+            }
         }
-        else
+        catch (Exception e)
         {
-            NavigationManager.NavigateTo("/");
+            ErrorMessage = "";
+            ErrorMessage = "Something went wrong.. try refreshing the page";
         }
+       
     }
 
 }

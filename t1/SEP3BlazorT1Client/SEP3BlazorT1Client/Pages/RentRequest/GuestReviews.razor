@@ -1,6 +1,8 @@
 @page "/GuestReviews/{Id:int}"
 <AuthorizeView Policy="MustBeHost">
     <Authorized>
+    
+    <p>@ErrorMessage</p>
         @if (_guestReviews == null)
         {
             <h3 class="mat-subtitle1">Loading</h3>

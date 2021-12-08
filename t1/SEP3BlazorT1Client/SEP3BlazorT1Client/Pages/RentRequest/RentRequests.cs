@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,11 +17,21 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         [Inject] public IRentalService RentalService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        private string ErrorMessage="";
 
         private IEnumerable<Models.RentRequest> _rentRequestList = new List<Models.RentRequest>();
         protected override async Task OnInitializedAsync()
         {
-            _rentRequestList = await RentalService.GetAllNotAnsweredRentRequestAsync();
+            try
+            {
+                _rentRequestList = await RentalService.GetAllNotAnsweredRentRequestAsync();
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = "";
+                ErrorMessage = "Something went wrong.. try refreshing the page";
+            }
+           
         }
 
         private void ViewGuestReviews(int id)

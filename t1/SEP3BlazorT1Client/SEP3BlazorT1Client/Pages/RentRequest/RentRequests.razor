@@ -1,6 +1,7 @@
 @page "/RentRequests"
 <AuthorizeView Policy="MustBeHost">
     <Authorized>
+    <p>@ErrorMessage</p>
         @if (_rentRequestList == null)
         {
             <h3 class="mat-subtitle1">Loading</h3>
