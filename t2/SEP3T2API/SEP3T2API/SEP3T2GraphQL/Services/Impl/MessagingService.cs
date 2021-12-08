@@ -94,7 +94,7 @@ namespace SEP3T2GraphQL.Services.Impl
                 {
                     _messageMap.TryAdd(message.Sender.Id, new ConcurrentQueue<Message>());
                 }
-
+                _messageMap[message.Sender.Id].Enqueue(message);
                 _messageMap[message.Receiver.Id].Enqueue(message);
             }
         }
