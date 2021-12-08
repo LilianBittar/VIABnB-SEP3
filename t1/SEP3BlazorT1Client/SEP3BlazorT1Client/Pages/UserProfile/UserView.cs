@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MatBlazor;
@@ -44,9 +43,9 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
             NavigationManager.NavigateTo("HostResidences");
         }
 
-        private void ToMyProfile()
+        private void ToMyProfile(int id)
         {
-            NavigationManager.NavigateTo("MyProfile");
+            NavigationManager.NavigateTo($"MyProfile/{id}");
         }
 
         private void ToMyReviews()
