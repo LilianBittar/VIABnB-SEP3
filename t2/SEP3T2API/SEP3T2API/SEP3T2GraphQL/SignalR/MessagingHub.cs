@@ -30,7 +30,8 @@ namespace SEP3T2GraphQL.SignalR
             if (existingUser != null)
             {
                 Join(existingUser.Id);
-                Console.WriteLine($"User with email {existingUser.Email} joined.");
+                Console.WriteLine(
+                    $"User with email {existingUser.Email} joined with connection {Context.ConnectionId}.");
             }
         }
 
@@ -52,6 +53,7 @@ namespace SEP3T2GraphQL.SignalR
             {
                 if (_clients[key] == Context.ConnectionId)
                 {
+                    Console.WriteLine($"{this} received request for {nameof(GetMessages)} from {Context.ConnectionId}");
                     var messages = await _messagingService.GetMessagesByUserIdAsync(key);
                     var messagesAsJson = JsonSerializer.Serialize(messages,
                         new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
@@ -80,15 +82,18 @@ namespace SEP3T2GraphQL.SignalR
             }
         }
 
-        private void Join(int userId)
+        private async void Join(int userId)
         {
             _clients.TryAdd(userId, Context.ConnectionId);
+            await Clients.Client(_clients[userId])
+                .SendCoreAsync("ReceiveUserMessages", new object[] {await _messagingService.GetMessagesByUserIdAsync(userId)});
         }
 
         public void Disconnect(int userId)
         {
             if (_clients.ContainsKey(userId))
             {
+                Console.WriteLine($"User with id {userId} disconnected");
                 var connectionString = _clients[userId];
                 _clients.TryRemove(userId, out _);
             }
