@@ -30,6 +30,18 @@ namespace SEP3T2GraphQL.SignalR
             if (existingUser != null)
             {
                 Join(existingUser.Id);
+                Console.WriteLine($"User with email {existingUser.Email} joined.");
+            }
+        }
+
+        public async override Task OnDisconnectedAsync(Exception? exception)
+        {
+            foreach (var key in _clients.Keys)
+            {
+                if (_clients[key] == Context.ConnectionId)
+                {
+                    Disconnect(key);
+                }
             }
         }
 

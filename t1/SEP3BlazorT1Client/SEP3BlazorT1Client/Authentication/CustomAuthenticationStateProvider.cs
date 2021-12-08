@@ -99,7 +99,7 @@ namespace SEP3BlazorT1Client.Authentication
         private  ClaimsIdentity SetupClaimsForUser(User user)
         {
             var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Name, user.Id.ToString()));
+            claims.Add(new Claim(ClaimTypes.Name, user.Email));
             claims.Add(new Claim("lastName", user.LastName));
             claims.Add(new Claim("email", user.Email));
             claims.Add(new Claim("phoneNumber", user.PhoneNumber));
