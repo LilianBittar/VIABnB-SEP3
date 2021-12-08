@@ -17,62 +17,64 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
     public partial class RegisterResidence
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
-
         [Inject] public IResidenceService ResidenceService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public IFacilityService FacilityService { get; set; }
         [Inject] public IHostService HostService { get; set; }
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-
-
         public EditContext FormEditContextResidence { get; set; }
         public EditContext FormEditContextAddress { get; set; }
-
         private Residence _newResidence;
-
-        
         public string Name { get; set; }
         private bool _isLoading = false; 
         private bool _showFacilityDialog = false;
         private IEnumerable<Facility> _allFacilities = new List<Facility>();
-
         private Facility _facilityToBeAdded = new Facility();
         private Address _newResidenceAddress = new Address() {City = new City()};
-
+        private string ErrorMessage="";
         private string _registerResidenceErrorMessage = "";
 
         protected override async Task OnInitializedAsync()
         {
-            _newResidence = new Residence()
+            try
             {
-                Rules = new List<Rule>(),
-                Facilities = new List<Facility>(),
-                AvailableFrom = DateTime.MaxValue,
-                AvailableTo = DateTime.MaxValue,
-                Address = new Address()
+                _newResidence = new Residence()
                 {
-                    City = new City()
-                },
-            };
-            FormEditContextResidence = new EditContext(_newResidence);
-            FormEditContextAddress = new EditContext(_newResidenceAddress);
-            _allFacilities = await FacilityService.GetAllFacilities();
-            Console.WriteLine(JsonConvert.SerializeObject(_allFacilities));
-            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            var user = authState.User;
-            StateHasChanged();
-            if (user.Identity.IsAuthenticated)
-            {
-                var host = await HostService.GetHostByEmail(user.Claims
-                    .FirstOrDefault(c => c.Type.ToString() == "email")
-                    .Value);
-                _newResidence.Host = host;
+                    Rules = new List<Rule>(),
+                    Facilities = new List<Facility>(),
+                    AvailableFrom = DateTime.MaxValue,
+                    AvailableTo = DateTime.MaxValue,
+                    Address = new Address()
+                    {
+                        City = new City()
+                    },
+                };
+                FormEditContextResidence = new EditContext(_newResidence);
+                FormEditContextAddress = new EditContext(_newResidenceAddress);
+                _allFacilities = await FacilityService.GetAllFacilities();
+                Console.WriteLine(JsonConvert.SerializeObject(_allFacilities));
+                var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+                var user = authState.User;
                 StateHasChanged();
+                if (user.Identity.IsAuthenticated)
+                {
+                    var host = await HostService.GetHostByEmail(user.Claims
+                        .FirstOrDefault(c => c.Type.ToString() == "email")
+                        .Value);
+                    _newResidence.Host = host;
+                    StateHasChanged();
+                }
+                else
+                {
+                    NavigationManager.NavigateTo("/");
+                }
             }
-            else
+            catch (Exception e)
             {
-                NavigationManager.NavigateTo("/");
+                ErrorMessage = "";
+                ErrorMessage = "Something went wrong.. try refreshing the page";
             }
+         
         }
 
         private async void AddNewRule()
