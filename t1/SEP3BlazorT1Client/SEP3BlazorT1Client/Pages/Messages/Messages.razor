@@ -39,6 +39,7 @@
 
     private void ReceiveUserMessages(string messagesAsJson)
     {
+        Console.WriteLine($"Received messages: {messagesAsJson}");
         var receivedMessages = JsonSerializer.Deserialize<IEnumerable<Message>>(messagesAsJson);
         _messages = receivedMessages;
         StateHasChanged(); 
