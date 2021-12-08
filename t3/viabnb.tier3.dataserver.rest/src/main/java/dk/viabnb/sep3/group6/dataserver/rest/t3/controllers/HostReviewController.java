@@ -24,7 +24,7 @@ public class HostReviewController {
     @GetMapping("/hostreviews/{id}")
     public ResponseEntity<List<HostReview>> getAllHostReviews(@PathVariable("id") int id)
     {
-        List<HostReview> hostReviews = hostReviewDAO.getAllHostReviewsByHostId(id);
+        List<HostReview> hostReviews = hostReviewDAO.getAllHostReviewsByGuestId(id);
         LOGGER.info("Request for: " + gson.toJson(hostReviews));
         return ResponseEntity.ok(hostReviews);
     }
@@ -51,7 +51,7 @@ public class HostReviewController {
     @PutMapping("/hostreviews/{id}")
     public ResponseEntity<HostReview> UpdateHostReview(@RequestBody HostReview hostReview, @PathVariable int id) {
         try {
-            List<HostReview> existingHostReviews = hostReviewDAO.getAllHostReviewsByHostId(id);
+            List<HostReview> existingHostReviews = hostReviewDAO.getAllHostReviewsByGuestId(id);
 
             if (existingHostReviews == null) {
                 return ResponseEntity.notFound().build();
@@ -59,7 +59,7 @@ public class HostReviewController {
 
             boolean found = false;
             for (HostReview review : existingHostReviews) {
-                if (review.getViaId() == hostReview.getViaId()) {
+                if (review.getGuestId() == hostReview.getGuestId()) {
                     found = true;
                     break;
                 }
