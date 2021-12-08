@@ -1,5 +1,5 @@
 @page "/RentRequests"
-<AuthorizeView Policy="MustBeHost">
+<AuthorizeView Policy="MustBeApprovedHost">
     <Authorized>
     <p>@ErrorMessage</p>
         @if (_rentRequestList == null)

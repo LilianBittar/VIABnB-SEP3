@@ -6,7 +6,13 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @using SEP3BlazorT1Client.Data
 @using System.Text.Json
-<h3>Messages</h3>
+@if (_messages != null)
+{
+    @foreach (var message in _messages)
+    {
+        <p>@message.Content</p>
+    }
+}
 
 @code {
     private IEnumerable<Message> _messages = new List<Message>();
@@ -21,13 +27,22 @@
         _sender = await UserService.GetUserByEmailAsync(user.Identity.Name);
         _connection = new HubConnectionBuilder().WithUrl($"https://localhost:5001/chat?email={_sender.Email}").WithAutomaticReconnect().Build();
         _connection.On<string>("ReceiveMessage", ReceiveMessage);
-
+        _connection.On<string>("ReceiveUserMessages", ReceiveUserMessages);
+        await _connection.StartAsync();
+        await _connection.InvokeAsync("GetMessages");
     }
 
-    private void ReceiveMessage(string message)
+    private void ReceiveMessage(string messageAsJson)
     {
-        var messageReceived = JsonSerializer.Deserialize<Message>(message); 
-        
+        var messageReceived = JsonSerializer.Deserialize<Message>(messageAsJson);
+    }
+
+    private void ReceiveUserMessages(string messagesAsJson)
+    {
+        Console.WriteLine($"Received messages: {messagesAsJson}");
+        var receivedMessages = JsonSerializer.Deserialize<IEnumerable<Message>>(messagesAsJson);
+        _messages = receivedMessages;
+        StateHasChanged(); 
     }
 
 }
