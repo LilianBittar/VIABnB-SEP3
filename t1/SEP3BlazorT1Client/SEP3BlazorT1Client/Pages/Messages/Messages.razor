@@ -6,10 +6,16 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @using SEP3BlazorT1Client.Data
 @using System.Text.Json
-
-@foreach (var message in _messages)
+@if (!_connectionFailed)
 {
-    <p>@message.Content</p>
+    @foreach (var message in _messages)
+    {
+        <p>@message.Content</p>
+    }
+}
+else
+{
+    <p>Something went wrong, try again later...</p>
 }
 
 @code {
@@ -17,29 +23,36 @@
     private HubConnection _connection;
     private User _sender;
     private User _receiver;
-    private IDictionary<string, User> _contactedUsers = new Dictionary<string, User>(); 
+    private IDictionary<string, User> _contactedUsers = new Dictionary<string, User>();
+    private bool _connectionFailed = false;
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        _sender = await UserService.GetUserByEmailAsync(user.Identity.Name);
-        _connection = new HubConnectionBuilder().WithUrl($"https://localhost:5001/chat?email={_sender.Email}").WithAutomaticReconnect().Build();
-        _connection.On<string>("ReceiveMessage", ReceiveMessage);
-        _connection.On<string>("ReceiveUserMessages", ReceiveUserMessages);
-        await _connection.StartAsync();
-        await _connection.InvokeAsync("GetMessages");
-        foreach (var message in _messages)
+        try
         {
-            
+            _sender = await UserService.GetUserByEmailAsync(user.Identity.Name);
+            _connection = new HubConnectionBuilder().WithUrl($"https://localhost:5001/chat?email={_sender.Email}").WithAutomaticReconnect().Build();
+            _connection.On<string>("ReceiveMessage", ReceiveMessage);
+            _connection.On<string>("ReceiveUserMessages", ReceiveUserMessages);
+            await _connection.StartAsync();
+            await _connection.InvokeAsync("GetMessages");
+            foreach (var message in _messages)
+            {
+            }
+            StateHasChanged();
         }
-        StateHasChanged();
+        catch (Exception e)
+        {
+            _connectionFailed = true;
+        }
     }
 
     private void ReceiveMessage(string messageAsJson)
     {
-        var messageReceived = JsonSerializer.Deserialize<Message>(messageAsJson, new JsonSerializerOptions(){PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-         _messages.Enqueue(messageReceived);
+        var messageReceived = JsonSerializer.Deserialize<Message>(messageAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+        _messages.Enqueue(messageReceived);
     }
 
     private void ReceiveUserMessages(string messagesAsJson)
