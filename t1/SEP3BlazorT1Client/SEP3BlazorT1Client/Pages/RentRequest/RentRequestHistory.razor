@@ -1,14 +1,15 @@
 @page "/RentRequestHistory"
 <AuthorizeView Policy="MustBeHost">
     <Authorized>
+        <p>@ErrorMessage</p>
         @if (_allRentRequests == null)
         {
-            <MatProgressCircle Indeterminate="true" />
+            <MatProgressCircle Indeterminate="true"/>
             <h3 class="mat-subtitle1">Loading</h3>
         }
         else if (!_allRentRequests.Any())
         {
-            <MatProgressCircle Indeterminate="true" />
+            <MatProgressCircle Indeterminate="true"/>
             <p>
                 <em>There are no rent requests in your history for now</em>
             </p>

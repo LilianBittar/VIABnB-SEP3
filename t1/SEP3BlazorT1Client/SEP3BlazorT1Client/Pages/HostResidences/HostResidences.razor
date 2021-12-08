@@ -28,161 +28,162 @@
             }
   </style>
 <AuthorizeView Policy="MustBeHost">
-<Authorized> 
-    @if (_residences == null)
-    {
-        <MatProgressBar  Indeterminate="true" Reversed="true"></MatProgressBar>
-    }
-    @if (_residences.Count == 0)
-    {
-        <p> You have no registered residences. Press the button below to register one.</p>
-        <MatButton OnClick="@(() => NavigationManager.NavigateTo("/registerresidence"))" Label="Go to residence registration"></MatButton>
-    }
-    else
-    {
-        <div class="mat-layout-grid">
-            <div class="mat-layout-grid-inner">
-                @foreach (var residence in _residences)
-                {
-                    <div class="mat-layout-grid-cell">
-                        <MatCard class="demo-mat-card">
-                            <MatCardContent>
-                                <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
-                                <div class="demo-mat-card-content">
-                                    <MatHeadline6 class="demo-mat-card-clean-margin">
-                                        Unique stays
-                                    </MatHeadline6>
-                                    <MatSubtitle2 class="demo-mat-card-clean-margin">
-                                        @residence.Address.ToString()
-                                    </MatSubtitle2>
+    <Authorized>
+        <p>@ErrorMessage</p>
+        @if (_residences == null)
+        {
+            <MatProgressBar Indeterminate="true" Reversed="true"></MatProgressBar>
+        }
+        @if (_residences.Count == 0)
+        {
+            <p> You have no registered residences. Press the button below to register one.</p>
+            <MatButton OnClick="@(() => NavigationManager.NavigateTo("/registerresidence"))" Label="Go to residence registration"></MatButton>
+        }
+        else
+        {
+            <div class="mat-layout-grid">
+                <div class="mat-layout-grid-inner">
+                    @foreach (var residence in _residences)
+                    {
+                        <div class="mat-layout-grid-cell">
+                            <MatCard class="demo-mat-card">
+                                <MatCardContent>
+                                    <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
+                                    <div class="demo-mat-card-content">
+                                        <MatHeadline6 class="demo-mat-card-clean-margin">
+                                            Unique stays
+                                        </MatHeadline6>
+                                        <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                            @residence.Address.ToString()
+                                        </MatSubtitle2>
+                                    </div>
+
+                                    <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                                        @residence.Description
+                                    </MatBody2>
+                                    <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                                        @residence.PricePerNight
+                                    </MatBody2>
+
+                                </MatCardContent>
+                                <MatCardActions>
+                                    <MatButton OnClick="@(() => OpenResidenceDetailsDialog(residence))">Details</MatButton>
+                                    <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
+                                </MatCardActions>
+                            </MatCard>
+                        </div>
+                    }
+
+                    <MatDialog @bind-IsOpen="@dialogIsOpen">
+                        <MatDialogTitle>Details of the Residence</MatDialogTitle>
+                        <MatDialogContent>
+
+                            <p>
+                                <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@ResidenceForRent.MaxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
+                                </MatNumericUpDownField>
+                            </p>
+
+                            <p>
+                                <b> Start Date</b>
+                            </p>
+                            <MatDatePicker @bind-Value="@ResidenceForRent.AvailableFrom"></MatDatePicker>
+
+                            <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Now; })">
+                                Now
+                            </MatButton>
+                            <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = null; })">
+                                Empty
+                            </MatButton>
+
+                            <p>
+                                <b> End Date</b>
+                            </p>
+                            <MatDatePicker @bind-Value="@ResidenceForRent.AvailableTo"></MatDatePicker>
+
+                            <MatButton OnClick="@(_ => { ResidenceForRent.AvailableTo = null; })">
+                                Empty
+                            </MatButton>
+                        </MatDialogContent>
+                        <MatDialogActions>
+                            <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
+                            <MatButton OnClick="@OkClick">Publish</MatButton>
+                        </MatDialogActions>
+                        @foreach (var errorMessage in validationResults)
+                        {
+                            <p class="error-label text-danger">@errorMessage</p>
+                        }
+                        <p class="error-label text-danger">@_errorText</p>
+                    </MatDialog>
+
+
+                    <MatDialog @bind-IsOpen="@viewResidenceDetailsDialog">
+                        <MatDialogTitle>Residence Details</MatDialogTitle>
+                        <MatDialogContent>
+                            <div class="d-flex flex-column">
+
+                                <div class="d-flex justify-content-center">
+                                    <img class="my-4" width="480" height="240" src="@ViewedResidence.ImageUrl" alt="">
                                 </div>
 
-                                <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-                                    @residence.Description
-                                </MatBody2>
-                                <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-                                    @residence.PricePerNight
-                                </MatBody2>
+                                <MatTabGroup>
+                                    <MatTab class="my-4">
+                                        <LabelContent>
+                                            Description <MatIcon Icon="@MatIconNames.Info"></MatIcon>
+                                        </LabelContent>
+                                        <ChildContent >
+                                            <h4 class="mat-h4">Residence Description</h4>
+                                            <p>@ViewedResidence.Description</p>
+                                        </ChildContent>
+                                    </MatTab>
+                                    <MatTab class="my-4">
+                                        <LabelContent>
+                                            Facilities <MatIcon Icon="@MatIconNames.List"></MatIcon>
+                                        </LabelContent>
+                                        <ChildContent>
+                                            <h4 class="mat-h4">Residence Facilities</h4>
+                                            <ul class="list-group">
+                                                @foreach (var facility in @ViewedResidence.Facilities)
+                                                {
+                                                    <li class="list-group-item">@facility.Name</li>
+                                                }
 
-                            </MatCardContent>
-                            <MatCardActions>
-                                <MatButton OnClick="@(() => OpenResidenceDetailsDialog(residence))">Details</MatButton>
-                                <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
-                            </MatCardActions>
-                        </MatCard>
-                    </div>
-                }
+                                            </ul>
+                                        </ChildContent>
+                                    </MatTab>
 
-                <MatDialog @bind-IsOpen="@dialogIsOpen">
-                    <MatDialogTitle>Details of the Residence</MatDialogTitle>
-                    <MatDialogContent>
+                                    <MatTab class="my-4">
+                                        <LabelContent>
+                                            Rules <MatIcon Icon="@MatIconNames.Done_outline"></MatIcon>
+                                        </LabelContent>
+                                        <ChildContent>
+                                            <h4 class="mat-h4">Rules</h4>
+                                            <ul class="list-group">
+                                                @foreach (var rule in @ViewedResidence.Rules)
+                                                {
+                                                    <li class="list-group-item">@rule.Description</li>
+                                                }
 
-                        <p>
-                            <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@ResidenceForRent.MaxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
-                            </MatNumericUpDownField>
-                        </p>
+                                            </ul>
+                                        </ChildContent>
+                                    </MatTab>
+                                </MatTabGroup>
 
-                        <p>
-                            <b> Start Date</b>
-                        </p>
-                        <MatDatePicker @bind-Value="@ResidenceForRent.AvailableFrom"></MatDatePicker>
+                                <MatDivider class="my-1"/>
 
-                        <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Now; })">
-                            Now
-                        </MatButton>
-                        <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = null; })">
-                            Empty
-                        </MatButton>
-
-                        <p>
-                            <b> End Date</b>
-                        </p>
-                        <MatDatePicker @bind-Value="@ResidenceForRent.AvailableTo"></MatDatePicker>
-
-                        <MatButton OnClick="@(_ => { ResidenceForRent.AvailableTo = null; })">
-                            Empty
-                        </MatButton>
-                    </MatDialogContent>
-                    <MatDialogActions>
-                        <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
-                        <MatButton OnClick="@OkClick">Publish</MatButton>
-                    </MatDialogActions>
-                    @foreach (var errorMessage in validationResults)
-                    {
-                        <p class="error-label text-danger">@errorMessage</p>
-                    }
-                    <p class="error-label text-danger">@_errorText</p>
-                </MatDialog>
-
-
-                <MatDialog @bind-IsOpen="@viewResidenceDetailsDialog">
-                    <MatDialogTitle>Residence Details</MatDialogTitle>
-                    <MatDialogContent>
-                        <div class="d-flex flex-column">
-
-                            <div class="d-flex justify-content-center">
-                                <img class="my-4" width="480" height="240" src="@ViewedResidence.ImageUrl" alt="">
                             </div>
-
-                            <MatTabGroup>
-                                <MatTab class="my-4">
-                                    <LabelContent>
-                                        Description <MatIcon Icon="@MatIconNames.Info"></MatIcon>
-                                    </LabelContent>
-                                    <ChildContent >
-                                        <h4 class="mat-h4">Residence Description</h4>
-                                        <p>@ViewedResidence.Description</p>
-                                    </ChildContent>
-                                </MatTab>
-                                <MatTab class="my-4">
-                                    <LabelContent>
-                                        Facilities <MatIcon Icon="@MatIconNames.List"></MatIcon>
-                                    </LabelContent>
-                                    <ChildContent>
-                                        <h4 class="mat-h4">Residence Facilities</h4>
-                                        <ul class="list-group">
-                                            @foreach (var facility in @ViewedResidence.Facilities)
-                                            {
-                                                <li class="list-group-item">@facility.Name</li>
-                                            }
-
-                                        </ul>
-                                    </ChildContent>
-                                </MatTab>
-
-                                <MatTab class="my-4">
-                                    <LabelContent>
-                                        Rules <MatIcon Icon="@MatIconNames.Done_outline"></MatIcon>
-                                    </LabelContent>
-                                    <ChildContent>
-                                        <h4 class="mat-h4">Rules</h4>
-                                        <ul class="list-group">
-                                            @foreach (var rule in @ViewedResidence.Rules)
-                                            {
-                                                <li class="list-group-item">@rule.Description</li>
-                                            }
-
-                                        </ul>
-                                    </ChildContent>
-                                </MatTab>
-                            </MatTabGroup>
-
-                            <MatDivider class="my-1"/>
-
-                        </div>
-                    </MatDialogContent>
-                    <MatDialogActions>
-                        <MatButton OnClick="@(e => { viewResidenceDetailsDialog = false; })">Cancel</MatButton>
-                    </MatDialogActions>
-                </MatDialog>
+                        </MatDialogContent>
+                        <MatDialogActions>
+                            <MatButton OnClick="@(e => { viewResidenceDetailsDialog = false; })">Cancel</MatButton>
+                        </MatDialogActions>
+                    </MatDialog>
+                </div>
             </div>
-        </div>
-    
-    }
+        }
     </Authorized>
-    <NotAuthorized> <p>You need to be logged in. UwU</p></NotAuthorized>
+    <NotAuthorized>
+        <p>You need to be logged in. UwU</p>
+    </NotAuthorized>
 </AuthorizeView>
-
 
 
 @code {
@@ -192,6 +193,7 @@
     bool viewResidenceDetailsDialog = false;
     int maxNumberOfGuests;
     private string _errorText;
+    private string ErrorMessage = "";
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
 
     IList<Residence> _residences = new List<Residence>();
@@ -211,7 +213,8 @@
         }
         catch (Exception e)
         {
-            _errorText = e.Message;
+            ErrorMessage = "";
+            ErrorMessage = "Something went wrong.. try refreshing the page";
         }
     }
 

@@ -19,12 +19,22 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         
         private IEnumerable<Guest> _guestRequestList = new List<Guest>();
         private IEnumerable<Host> _hostRequestList = new List<Host>();
+        private string ErrorMessage="";
         
         protected override async Task OnInitializedAsync()
         {
-            _hostRequestList = await HostService.GetAllNotApprovedHostsAsync();
-            _guestRequestList = await GuestService.GetAllNotApprovedGuests();
-            StateHasChanged();
+            try
+            {
+                _hostRequestList = await HostService.GetAllNotApprovedHostsAsync();
+                _guestRequestList = await GuestService.GetAllNotApprovedGuests();
+                StateHasChanged();
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = "";
+                ErrorMessage = "Something went wrong.. try refreshing the page";
+            }
+           
         }
         
         private async Task ApproveHost(int hostId)

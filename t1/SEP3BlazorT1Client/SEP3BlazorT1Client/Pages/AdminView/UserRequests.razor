@@ -2,6 +2,7 @@
 @using SEP3BlazorT1Client.Models
 <AuthorizeView Policy="MustBeAdmin">
     <Authorized>
+    <p>@ErrorMessage</p>
 <MatTabGroup>
     <MatTab Label="Hosts Requests">
         <ChildContent>
