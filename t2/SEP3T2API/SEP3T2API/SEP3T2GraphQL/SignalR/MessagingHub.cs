@@ -70,10 +70,13 @@ namespace SEP3T2GraphQL.SignalR
             try
             {
                 var sentMessage = await _messagingService.SendMessageAsync(message);
-                var sentMessageAsJson = JsonSerializer.Serialize(sentMessage,
-                    new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-                await Clients.Client(_clients[sentMessage.Receiver.Id])
-                    .SendCoreAsync("ReceiveMessage", new object[] {sentMessageAsJson});
+                if (_clients.ContainsKey(sentMessage.Receiver.Id))
+                {
+                    var sentMessageAsJson = JsonSerializer.Serialize(sentMessage,
+                        new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                    await Clients.Client(_clients[sentMessage.Receiver.Id])
+                        .SendCoreAsync("ReceiveMessage", new object[] {sentMessageAsJson});
+                }
             }
             catch (Exception e)
             {
@@ -86,7 +89,8 @@ namespace SEP3T2GraphQL.SignalR
         {
             _clients.TryAdd(userId, Context.ConnectionId);
             await Clients.Client(_clients[userId])
-                .SendCoreAsync("ReceiveUserMessages", new object[] {await _messagingService.GetMessagesByUserIdAsync(userId)});
+                .SendCoreAsync("ReceiveUserMessages",
+                    new object[] {await _messagingService.GetMessagesByUserIdAsync(userId)});
         }
 
         public void Disconnect(int userId)
