@@ -1,0 +1,29 @@
+.chat-conversations {
+  border-right-style: solid;
+  border-right-width: 0.5px;
+  border-right-color: #ccc;
+  position: relative;
+  height: 85vh;
+  overflow-y: scroll;
+}
+.chat-conversations h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.chat-window {
+  height: 85vh;
+  overflow-y: scroll;
+}
+.chat-window__messages {
+  width: 100%;
+  padding: 0 3rem;
+}
+.chat-window__input {
+  position: absolute;
+  bottom: 1rem;
+  width: 60%;
+}
+
+/*# sourceMappingURL=Messages.razor.css.map */

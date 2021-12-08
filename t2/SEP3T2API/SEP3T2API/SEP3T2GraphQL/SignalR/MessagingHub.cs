@@ -29,6 +29,14 @@ namespace SEP3T2GraphQL.SignalR
             var existingUser = await _userService.GetUserByEmailAsync(userEmail);
             if (existingUser != null)
             {
+                // Each time a client joins, they get a new connection string
+                // If user has already been connected before without disconnecting, then we update the string. 
+                if (_clients.ContainsKey(existingUser.Id))
+                {
+                    Console.WriteLine($"{this} updating user {existingUser.Id} with new connection string {Context.ConnectionId}");
+                    _clients[existingUser.Id] = Context.ConnectionId;
+                }
+
                 Join(existingUser.Id);
                 Console.WriteLine(
                     $"User with email {existingUser.Email} joined with connection {Context.ConnectionId}.");
