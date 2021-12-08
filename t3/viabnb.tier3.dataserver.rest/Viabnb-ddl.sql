@@ -4,12 +4,12 @@ SET SCHEMA 'viabnb';
 
 CREATE TABLE IF NOT EXISTS _User
 (
-    userId      serial,
-    email       VARCHAR,
-    password    VARCHAR,
-    fName       VARCHAR,
-    lName       VARCHAR,
-    phoneNumber VARCHAR,
+    userId        serial,
+    email         VARCHAR,
+    password      VARCHAR,
+    fName         VARCHAR,
+    lName         VARCHAR,
+    phoneNumber   VARCHAR,
     personalImage VARCHAR,
     PRIMARY KEY (userId)
 );
@@ -24,9 +24,9 @@ CREATE TABLE IF NOT EXISTS Admin
 
 CREATE TABLE IF NOT EXISTS Host
 (
-    hostId        serial,
-    cprNumber     VARCHAR,
-    isApproved    BOOLEAN,
+    hostId     serial,
+    cprNumber  VARCHAR,
+    isApproved BOOLEAN,
     PRIMARY KEY (hostID),
     FOREIGN KEY (hostId) REFERENCES _User (userId) ON DELETE CASCADE
 );
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS GuestReview
     guestReviewText VARCHAR,
     hostId          INT,
     guestId         INT,
-    createdDate DATE,
+    createdDate     DATE,
     PRIMARY KEY (hostId, guestId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid),
     FOREIGN KEY (guestId) REFERENCES Guest (guestId) ON DELETE CASCADE
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS HostReview
     hostReviewText VARCHAR,
     hostId         INT,
     guestId        INT,
-    createdDate DATE,
+    createdDate    DATE,
     PRIMARY KEY (hostId, guestId),
     FOREIGN KEY (hostId) REFERENCES Host (hostid),
     FOREIGN KEY (guestId) REFERENCES Guest (guestId) ON DELETE CASCADE
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS ResidenceReview
     residenceReviewText VARCHAR,
     residenceId         INT,
     guestId             INT,
-    createdDate DATE,
+    createdDate         DATE,
     PRIMARY KEY (residenceId, guestId),
     FOREIGN KEY (residenceId) REFERENCES Residence (residenceId),
     FOREIGN KEY (guestId) REFERENCES Guest (guestId) ON DELETE CASCADE
@@ -163,6 +163,18 @@ CREATE TABLE IF NOT EXISTS Rent
     FOREIGN KEY (guestId) REFERENCES Guest (guestId),
     FOREIGN KEY (RentRequestId) REFERENCES RentRequest (rentRequestId),
     FOREIGN KEY (residenceId) REFERENCES Residence (residenceId)
+);
+
+CREATE TABLE IF NOT EXISTS message
+(
+    senderId       INT,
+    receiverId     INT,
+    messageContent varchar,
+    timeSent       timestamp,
+
+    PRIMARY KEY (senderId, receiverId, timeSent),
+    FOREIGN KEY (senderId) references _user (userid),
+    FOREIGN KEY (receiverId) references _user(userid)
 );
 
 --The system's admins
@@ -200,7 +212,7 @@ VALUES ('mario@nintendo.org', 'Aa11', 'Mario', 'Mario', '+4510000000', 'image');
 
 --Host
 INSERT INTO Host(hostid, cprNumber, isApproved)
-VALUES (5 , '1111111111', false);
+VALUES (5, '1111111111', false);
 INSERT INTO Host(hostid, cprNumber, isApproved)
 VALUES (6, '2222222222', false);
 INSERT INTO Host(hostid, cprNumber, isApproved)
@@ -260,65 +272,75 @@ VALUES ('Horsensvej', '5', '1F', 2);
 
 --Residence
 
-INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl,
+                      maxNumberOfGuests, hostId)
 VALUES (1, 'House', '3 bedroom house', true, 1500, '2022-12-04', '2023-12-01', 'Image', 10, 6);
-INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl,
+                      maxNumberOfGuests, hostId)
 VALUES (2, 'Apartment', '1 bedroom apartment', true, 200, '2022-12-04', '2023-12-01', 'Image', 1, 6);
-INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl,
+                      maxNumberOfGuests, hostId)
 VALUES (3, 'Sofa', 'Comfy sofa', true, 50, '2022-12-04', '2023-12-01', 'Image', 1, 5);
-INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl,
+                      maxNumberOfGuests, hostId)
 VALUES (4, 'House', '10 bedroom house', true, 500, '2022-12-04', '2023-12-01', 'Image', 15, 8);
-INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl,
+                      maxNumberOfGuests, hostId)
 VALUES (5, 'House', '1 bedroom house', true, 500, '2022-12-04', '2023-12-01', 'Image', 2, 8);
-INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl,
+                      maxNumberOfGuests, hostId)
 VALUES (6, 'Bed', 'Double bed', true, 500, '2022-12-04', '2023-12-01', 'Image', 2, 9);
-INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl,
+                      maxNumberOfGuests, hostId)
 VALUES (7, 'Matres', 'Air matres', true, 500, '2022-12-04', '2023-12-01', 'Image', 1, 10);
-INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl,
+                      maxNumberOfGuests, hostId)
 VALUES (8, 'Apartment', '5 bedroom apartment', true, 500, '2022-12-04', '2023-12-01', 'Image', 6, 7);
-INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl,
+                      maxNumberOfGuests, hostId)
 VALUES (2, 'Room', 'Guest room', true, 500, '2022-12-04', '2023-12-01', 'Image', 3, 7);
-INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl, maxNumberOfGuests, hostId)
+INSERT INTO Residence(addressId, type, description, isAvailable, pricePrNight, availableFrom, availableTo, imageUrl,
+                      maxNumberOfGuests, hostId)
 VALUES (5, 'Summer house', '2 bedroom summer house', true, 500, '2022-12-04', '2023-12-01', 'Image', 4, 9);
 
 
 --Facility
 
 INSERT INTO Facility(name)
-VALUES('Wifi');
+VALUES ('Wifi');
 INSERT INTO Facility(name)
-VALUES('Free parking');
+VALUES ('Free parking');
 INSERT INTO Facility(name)
-VALUES('Refrigerator');
+VALUES ('Refrigerator');
 INSERT INTO Facility(name)
-VALUES('Kitchen');
+VALUES ('Kitchen');
 INSERT INTO Facility(name)
-VALUES('Backyard');
+VALUES ('Backyard');
 INSERT INTO Facility(name)
-VALUES('Microwave');
+VALUES ('Microwave');
 INSERT INTO Facility(name)
-VALUES('Bed linens');
+VALUES ('Bed linens');
 INSERT INTO Facility(name)
-VALUES('Extra pillows and blankets');
+VALUES ('Extra pillows and blankets');
 INSERT INTO Facility(name)
-VALUES('Heating');
+VALUES ('Heating');
 INSERT INTO Facility(name)
-VALUES('Smoke alarm');
+VALUES ('Smoke alarm');
 INSERT INTO Facility(name)
-VALUES('Fire extinguisher');
+VALUES ('Fire extinguisher');
 INSERT INTO Facility(name)
-VALUES('First aid kit');
+VALUES ('First aid kit');
 INSERT INTO Facility(name)
-VALUES('Dishes and silverware');
+VALUES ('Dishes and silverware');
 INSERT INTO Facility(name)
-VALUES('Oven');
+VALUES ('Oven');
 INSERT INTO Facility(name)
-VALUES('TV');
+VALUES ('TV');
 INSERT INTO Facility(name)
-VALUES('WasherWasher');
+VALUES ('WasherWasher');
 INSERT INTO Facility(name)
-VALUES('Air conditioning');
+VALUES ('Air conditioning');
 INSERT INTO Facility(name)
-VALUES('Hair dryer');
+VALUES ('Hair dryer');
 INSERT INTO Facility(name)
-VALUES('ShampooShampoo');
+VALUES ('ShampooShampoo');

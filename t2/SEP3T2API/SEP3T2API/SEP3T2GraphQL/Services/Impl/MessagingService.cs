@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using SEP3T2GraphQL.Models;
@@ -13,7 +15,7 @@ namespace SEP3T2GraphQL.Services.Impl
         /// HashMap that contains all messages. The key is a userId and value is an Queue
         /// containing all messages for the user;
         /// </summary>
-        private readonly Dictionary<int, Queue<Message>> _messageMap = new();
+        private readonly ConcurrentDictionary<int, ConcurrentQueue<Message>> _messageMap = new();
 
         private readonly IMessageRepository _messageRepository;
         private readonly IUserRepository _userRepository;
@@ -22,22 +24,7 @@ namespace SEP3T2GraphQL.Services.Impl
         {
             _messageRepository = messageRepository;
             _userRepository = userRepository;
-            var allMessages = _messageRepository.GetAllMessagesAsync().Result;
-            // Initializing the messageMap with a new queue
-            // Initializing is a bit slow, since we loop through the messages twice. 
-            foreach (var message in allMessages)
-            {
-                // Adds all users that has ever sent or received an message to the map. 
-                if (!_messageMap.ContainsKey(message.Receiver.Id))
-                {
-                    _messageMap.TryAdd(message.Receiver.Id, new Queue<Message>()); 
-                }
-
-                if (!_messageMap.ContainsKey(message.Sender.Id))
-                {
-                    _messageMap.TryAdd(message.Sender.Id, new Queue<Message>()); 
-                }
-            }
+            InitializeMessageMap();
         }
 
         public async Task<Message> SendMessageAsync(Message message)
@@ -55,8 +42,20 @@ namespace SEP3T2GraphQL.Services.Impl
 
             try
             {
+                message.TimeSent = DateTime.Now;
                 var newMessage = await _messageRepository.CreateMessageAsync(message);
-                
+                // Adding sender / receiver to map with a new message queue in case they have never sent / received a message before. 
+                if (!_messageMap.ContainsKey(message.Receiver.Id))
+                {
+                    _messageMap.TryAdd(message.Receiver.Id, new ConcurrentQueue<Message>());
+                }
+
+                if (!_messageMap.ContainsKey(message.Sender.Id))
+                {
+                    _messageMap.TryAdd(message.Sender.Id, new ConcurrentQueue<Message>());
+                }
+                _messageMap[message.Receiver.Id].Enqueue(newMessage);
+                _messageMap[message.Sender.Id].Enqueue(newMessage);
                 return newMessage;
             }
             catch (Exception e)
@@ -65,9 +64,39 @@ namespace SEP3T2GraphQL.Services.Impl
             }
         }
 
-        public Task<IEnumerable<Message>> GetMessagesByUserIdAsync(int userId)
+        public async Task<IEnumerable<Message>> GetMessagesByUserIdAsync(int userId)
         {
-            throw new System.NotImplementedException();
+            return _messageMap.ContainsKey(userId) ? _messageMap[userId] : new List<Message>().AsEnumerable();
+        }
+
+        public void ConnectUser(int userId)
+        {
+            if (!_messageMap.ContainsKey(userId))
+            {
+                _messageMap.TryAdd(userId, new ConcurrentQueue<Message>());
+            }
+        }
+
+
+        private void InitializeMessageMap()
+        {
+            var allMessages = _messageRepository.GetAllMessagesAsync().Result;
+            // Initializing the messageMap with a new queue
+            foreach (var message in allMessages)
+            {
+                // Adds all users that has ever sent or received an message to the map. 
+                if (!_messageMap.ContainsKey(message.Receiver.Id))
+                {
+                    _messageMap.TryAdd(message.Receiver.Id, new ConcurrentQueue<Message>());
+                }
+
+                if (!_messageMap.ContainsKey(message.Sender.Id))
+                {
+                    _messageMap.TryAdd(message.Sender.Id, new ConcurrentQueue<Message>());
+                }
+
+                _messageMap[message.Receiver.Id].Enqueue(message);
+            }
         }
     }
 }
