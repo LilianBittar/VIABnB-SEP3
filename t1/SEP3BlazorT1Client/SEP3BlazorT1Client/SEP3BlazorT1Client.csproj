@@ -8,6 +8,7 @@
     <PackageReference Include="GraphQL.Client" Version="4.0.1" />
     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="4.0.1" />
     <PackageReference Include="MatBlazor" Version="2.8.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.12" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="StrawberryShake.Transport.Http" Version="12.0.1" />
   </ItemGroup>
