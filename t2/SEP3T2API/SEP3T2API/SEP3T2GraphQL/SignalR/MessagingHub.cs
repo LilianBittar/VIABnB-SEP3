@@ -33,7 +33,8 @@ namespace SEP3T2GraphQL.SignalR
                 // If user has already been connected before without disconnecting, then we update the string. 
                 if (_clients.ContainsKey(existingUser.Id))
                 {
-                    Console.WriteLine($"{this} updating user {existingUser.Id} with new connection string {Context.ConnectionId}");
+                    Console.WriteLine(
+                        $"{this} updating user {existingUser.Id} with new connection string {Context.ConnectionId}");
                     _clients[existingUser.Id] = Context.ConnectionId;
                 }
 
@@ -78,15 +79,23 @@ namespace SEP3T2GraphQL.SignalR
 
         public async Task SendMessage(string messageAsJson)
         {
-            var message = JsonSerializer.Deserialize<Message>(messageAsJson);
+            Console.WriteLine($"{this} received request for {nameof(SendMessage)} with param {messageAsJson}");
+            var message = JsonSerializer.Deserialize<Message>(messageAsJson,
+                new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             try
             {
                 var sentMessage = await _messagingService.SendMessageAsync(message);
+                var sentMessageAsJson = JsonSerializer.Serialize(sentMessage,
+                    new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
                 if (_clients.ContainsKey(sentMessage.Receiver.Id))
                 {
-                    var sentMessageAsJson = JsonSerializer.Serialize(sentMessage,
-                        new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
                     await Clients.Client(_clients[sentMessage.Receiver.Id])
+                        .SendCoreAsync("ReceiveMessage", new object[] {sentMessageAsJson});
+                }
+
+                if (_clients.ContainsKey(sentMessage.Sender.Id))
+                {
+                    await Clients.Client(_clients[sentMessage.Sender.Id])
                         .SendCoreAsync("ReceiveMessage", new object[] {sentMessageAsJson});
                 }
             }

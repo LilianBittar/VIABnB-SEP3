@@ -1,3 +1,22 @@
+// Custom scroll bar styling
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+// Styling of the left side of page containing all conversations
 .chat-conversations{
   border-right-style:solid;
   border-right-width: 0.5px;
@@ -11,9 +30,12 @@
   }
   overflow-y: scroll;
 }
+
+// Styling of the window containing all chat messages for a conversation
 .chat-window{
   height:85vh;
   overflow-y: scroll;
+  
   
   &__header{
   }
@@ -28,4 +50,8 @@
     bottom: 1rem;
     width: 60%;
   }
+}
+
+.error-label{
+  color:red;
 }

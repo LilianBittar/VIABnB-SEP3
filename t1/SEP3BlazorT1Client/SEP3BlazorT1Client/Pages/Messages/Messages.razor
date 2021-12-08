@@ -1,10 +1,12 @@
 @page "/Messages"
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Components.ChatConversationEntry
+@using SEP3BlazorT1Client.Components.ChatMessage
 @using Microsoft.AspNetCore.SignalR.Client
 @using SEP3BlazorT1Client.Data
 @using System.Text.Json
 @inject NavigationManager NavigationManager; 
+@inject IMatDialogService MatDialogService;
 @inject AuthenticationStateProvider AuthenticationStateProvider; 
 @inject IUserService UserService
 @if (!_connectionFailed)
@@ -17,7 +19,7 @@
                     <div class="chat-conversations__search">
                         <h4>All messages </h4>
                         <MatTextField Label="Search" @bind-Value="@_filterConversations" Outlined="true"/>
-                        <MatButton Label="Start new conversation"/>
+                        <MatButton OnClick="@StartNewConversation" Label="Start new conversation"/>
                         <hr/>
                     </div>
                     @foreach (var conversation in _usersInConversation.Keys)
@@ -45,23 +47,42 @@
                     <div class="chat-window__messages">
                         @foreach (var message in _messages)
                         {
-                            <p>@message.Content</p>
+                            if (_receiver != null)
+                            {
+                                @if (message.Receiver.Id == _receiver.Id || message.Sender.Id == _receiver.Id)
+                                {
+                                    <div class="mb-3">
+                                        <ChatMessage Message="message"/>
+                                    </div>
+                                }
+                            }
                         }
                     </div>
-                    
+
                     <div class="chat-window__input">
                         <div class="container-fluid d-flex flex-row">
-                        <MatTextField @bind-Value="@_messageContent" Outlined="true" FullWidth="true" Style="background-color: #ddd;"/>
-                        <MatButton Label="Send" Raised="true"/>
+                            @if (_receiver != null)
+                            {
+                                <MatTextField @bind-Value="@_messageContent" Outlined="true" FullWidth="true" Style="background-color: #ddd;"/>
+                                <MatButton Label="Send" Raised="true" OnClick="@(async () => await SendMessage())"/>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        if (!_messages.Any())
-        {
-            <p>No messages</p>
-        }
+        <MatDialog @bind-IsOpen="@_addingNewConversation">
+            <MatDialogTitle>Starting a new conversation</MatDialogTitle>
+            <MatDialogContent>
+                <p>Enter email of the user you want to chat with</p>
+                <MatTextField @bind-Value="@_newConversationEmail" FullWidth="true" Label="Email"/>
+                <p class="error-label">@_errorMessage</p>
+            </MatDialogContent>
+            <MatDialogActions>
+                <MatButton OnClick="@(e => { _addingNewConversation = !_addingNewConversation; })">Cancel</MatButton>'
+                <MatButton OnClick="@CreateConversation">Start</MatButton>
+            </MatDialogActions>
+        </MatDialog>
     }
     else
     {
@@ -84,12 +105,15 @@ else
 @code {
     private Queue<Message> _messages;
     private HubConnection _connection;
+    private bool _addingNewConversation = false;
     private User _sender;
     private User _receiver;
     private IDictionary<string, User> _usersInConversation = new Dictionary<string, User>();
     private bool _connectionFailed = false;
     private string _filterConversations = "";
-    private string _messageContent = ""; 
+    private string _messageContent = "";
+    private string _newConversationEmail = "";
+    private string _errorMessage = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -130,8 +154,9 @@ else
     {
         var messageReceived = JsonSerializer.Deserialize<Message>(messageAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         _messages.Enqueue(messageReceived);
+        Console.WriteLine("Received new message");
     // Adding user to window of conversations if the user have never chatted with the sender before. 
-        if (!_usersInConversation.ContainsKey(messageReceived.Sender.Email))
+        if (messageReceived.Sender.Email != _sender.Email && !_usersInConversation.ContainsKey(messageReceived.Sender.Email))
         {
             _usersInConversation.TryAdd(messageReceived.Sender.Email, messageReceived.Sender);
         }
@@ -166,6 +191,50 @@ else
     {
         _receiver = user;
         StateHasChanged();
+    }
+
+    private void StartNewConversation()
+    {
+        _newConversationEmail = "";
+        _errorMessage = "";
+        _addingNewConversation = true;
+    }
+
+    private async void CreateConversation()
+    {
+        try
+        {
+            var user = await UserService.GetUserByEmailAsync(_newConversationEmail);
+            if (user == null)
+            {
+                _errorMessage = "Not found";
+                StateHasChanged();
+            }
+            _usersInConversation.TryAdd(user.Email, user);
+            _errorMessage = "";
+            _addingNewConversation = false;
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            _errorMessage = "Not found";
+            StateHasChanged();
+        }
+    }
+
+    private async Task SendMessage()
+    {
+        if (_receiver != null)
+        {
+            Message newMessage = new()
+            {
+                Sender = _sender,
+                Content = _messageContent, Receiver = _receiver, TimeSent = DateTime.Now
+            };
+            var newMessageAsJson = JsonSerializer.Serialize(newMessage, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+            await _connection.InvokeAsync("SendMessage", newMessageAsJson);
+            _messageContent = "";
+        }
     }
 
 }
