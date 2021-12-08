@@ -56,7 +56,7 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         private async Task DeleteProfile()
         {
             await UserService.DeleteUserAsync(_user);
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("Login");
         }
         
         private async Task<User> UpdateUser()

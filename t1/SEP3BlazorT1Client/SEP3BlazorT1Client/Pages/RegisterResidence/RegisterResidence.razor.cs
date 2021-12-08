@@ -66,7 +66,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 }
                 else
                 {
-                    NavigationManager.NavigateTo("/");
+                    NavigationManager.NavigateTo("Login");
                 }
             }
             catch (Exception e)

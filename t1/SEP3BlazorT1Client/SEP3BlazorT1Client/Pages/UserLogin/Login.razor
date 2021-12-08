@@ -1,0 +1,37 @@
+@page "/Login"
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell"></div>
+        <div class="mat-layout-grid-cell">
+            <MatPaper Elevation="8" Rounded="true" class="d-flex justify-content-center">
+
+                <div class="d-flex flex-column">
+                    <div class="d-flex justify-content-center">
+                        <img class="my-4" width="120" height="120" src="https://cdn.pixabay.com/photo/2017/03/21/02/00/user-2160923_1280.png" alt="">
+                    </div>
+                    <div hidden="@loginAsHost">
+                        <MatTextField Class="d-flex" @bind-Value="@email" Label="Email" Outlined="true"/>
+                    </div>
+                    <div hidden="@(!loginAsHost)" >
+                        <MatTextField Class="d-flex" @bind-Value="@studentNumber" Label="Student number" Outlined="true"/>
+                    </div>
+                    
+                    <MatTextField @bind-Value="@password" Dense="true" Label="Password" Outlined="true"/>
+
+                    <MatDivider class="my-2"/>
+                    
+                    <div class="d-flex justify-content-center">
+                        <MatCheckbox @bind-Value="@loginAsHost" Label="@(getLabel(loginAsHost))"/>
+                    </div>
+                    
+                    <p style="color: red">@ErrorMessage</p>
+                    <MatButton Raised="true" OnClick="@(PerformLogin)">Log in</MatButton>
+                    <MatDivider class="my-1"/>
+                    <MatButton class="my-1" Link="/registerhost">Don't have an account? register here</MatButton>
+                </div>
+            </MatPaper>
+            <p hidden="@IsShow"> <MatProgressBar  Indeterminate="true" Reversed="true"></MatProgressBar></p>
+        </div>
+        <div class="mat-layout-grid-cell"></div>
+    </div>
+</div>
