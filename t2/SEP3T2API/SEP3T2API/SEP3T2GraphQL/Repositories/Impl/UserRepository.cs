@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -23,6 +24,10 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
+            if (!user.Any() || user == null)
+            {
+                return null;
+            }
             return user[0];
         }
 
@@ -56,7 +61,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             });
             
             var content = new StringContent(newUser, Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync($"{Uri}/{user.Id}", content);
+            var response = await _client.PatchAsync($"{Uri}/{user.Id}", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
