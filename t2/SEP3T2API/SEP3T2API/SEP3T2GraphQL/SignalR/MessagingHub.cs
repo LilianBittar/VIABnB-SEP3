@@ -37,6 +37,8 @@ namespace SEP3T2GraphQL.SignalR
 
         public async override Task OnDisconnectedAsync(Exception? exception)
         {
+            // This method is a bit slow, since we might have to loop through every key in the map.
+            // Might have to switch the key / value such that connectionId is the key instead. 
             foreach (var key in _clients.Keys)
             {
                 if (_clients[key] == Context.ConnectionId)
@@ -49,6 +51,8 @@ namespace SEP3T2GraphQL.SignalR
 
         public async Task GetMessages()
         {
+            // This method is a bit slow, since we might have to loop through every key in the map.
+            // Might have to switch the key / value such that connectionId is the key instead. 
             foreach (var key in _clients.Keys)
             {
                 if (_clients[key] == Context.ConnectionId)
