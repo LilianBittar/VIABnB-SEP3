@@ -1,56 +1,102 @@
 @page "/MyProfile/{Id:int}"
-@if (isLoading)
-{
-    <p>askdjsuydgqwl</p>
-}
-else
-{
-    <div class="row">
-        <div class="col-md-4 left-bar">
-            <br/>
-            <div class="form-group">
-                <img id="img" src="media/User.png" alt="user"/>
-            </div>
-            <div class="form-group">
-                <MatHeadline6> First and last name</MatHeadline6>
-            </div>
-            <div class="form-group" id="file-uploader">
-                <MatFileUpload OnChange="@FilesReady" Label="" Style="height: 1em"></MatFileUpload>
-            </div>
-            <br/>
-            <div class="form-group">
-                <MatButton TrailingIcon="edit" Unelevated="true" Style="width: 200px">Edit profile info</MatButton>
-            </div>
-            <br/>
-            <div class="form-group">
-                <MatButton TrailingIcon="save" Unelevated="true" Style="width: 200px; background-color: green">Save changes</MatButton>
-            </div>
-            <br/>
-            <div class="form-group">
-                <MatButton TrailingIcon="cancel" Unelevated="true" Style="width: 200px; background-color: red">Cancel</MatButton>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <br/>
+<AuthorizeView Policy="MustBeHost">
+    <Authorized>
+        @if (isLoading)
+        {
+            <h3 class="mat-subtitle1">Loading</h3>
+            <MatProgressCircle Indeterminate="true" />
+        }
+        else
+        {
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4 left-bar">
+                    <br/>
                     <div class="form-group">
-                        <p>
-                            <MatTextField @bind-Value="_host.FirstName" Label="First Name" FullWidth="true"></MatTextField>
-                        </p>
+                        <img id="img" src="media/User.png" alt="user"/>
                     </div>
                     <div class="form-group">
-                        <MatSubtitle1></MatSubtitle1>
+                        <MatHeadline6> First and last name</MatHeadline6>
+                    </div>
+                    <div class="form-group" id="file-uploader">
+                        <MatFileUpload OnChange="@FilesReady" Label="" Style="height: 1em"></MatFileUpload>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <MatButton @onclick="EditContent" TrailingIcon="edit" Unelevated="true" Style="width: 200px">Edit profile info</MatButton>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <MatButton OnClick="@(_ => OpenConfirmFromService())" TrailingIcon="save" Unelevated="true" Style="width: 200px; background-color: green">Save changes</MatButton>
+                    </div>
+                    <MatSnackbar  @bind-IsOpen="@snackBarIsOpen">
+                        <MatSnackbarContent>Your acount has been successfully updated!!</MatSnackbarContent>
+                    </MatSnackbar>
+                    <br/>
+                    <div class="form-group">
+                        <MatButton @onclick="DeleteProfile" TrailingIcon="cancel" Unelevated="true" Style="width: 200px; background-color: red">Delete Profile</MatButton>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <MatButton @onclick="ToUserView" TrailingIcon="account_box" Unelevated="true" Style="width: 200px;">Back To Main</MatButton>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
+                    <br/>
                     <div class="form-group">
                         <p>
-                            <MatTextField @bind-Value="_host.LastName" Label="Last Name" FullWidth="true"></MatTextField>
+                            <MatTextField @bind-Value="_user.FirstName" Label="First Name" Icon="person" IconTrailing="true" FullWidth="true" Disabled="isEditable"></MatTextField>
+                        </p>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <p>
+                            <MatTextField @bind-Value="_user.LastName" Label="Last Name" Icon="person" IconTrailing="true" FullWidth="true" Disabled="isEditable"></MatTextField>
+                        </p>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <p>
+                            <MatTextField @bind-Value="_user.Email" Label="E-mail" Icon="email" IconTrailing="true" FullWidth="true" Disabled="true"></MatTextField>
+                        </p>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <p>
+                            <MatTextField @bind-Value="_host.Cpr" Label="CPR-Number" Icon="confirmation_number" IconTrailing="true" FullWidth="true" Disabled="true"></MatTextField>
+                        </p>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <p>
+                            <MatTextField @bind-Value="_user.PhoneNumber" Label="Phone Number" Icon="phone" IconTrailing="true" FullWidth="true" Disabled="isEditable"></MatTextField>
+                        </p>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <p>
+                            <MatTextField @bind-Value="_user.Password" Label="New Password" Type="password" Icon="lock" IconTrailing="true" FullWidth="true" Disabled="isEditable"></MatTextField>
+                        </p>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <p>
+                            <MatTextField @bind-Value="newPassword" Label="Confirm Password" Type="password" Icon="lock" IconTrailing="true" FullWidth="true" Disabled="isEditable"></MatTextField>
                         </p>
                     </div>
                 </div>
             </div>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <br/>
+        <div id="warning-box">
+            <div class="form-group">
+                <p>You must be logged in to view the content of this page.<a id="redirect-link" href="/">Go to login</a></p>
+            </div>
+            <br/>
+            <div class="form-group">
+                <img src="media/Stop.jpg" alt="Warning image" id="warning"/>
+            </div>
         </div>
-    </div>
-}
+    </NotAuthorized>
+</AuthorizeView>
