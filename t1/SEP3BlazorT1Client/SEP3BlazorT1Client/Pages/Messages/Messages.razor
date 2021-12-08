@@ -17,7 +17,7 @@
     private HubConnection _connection;
     private User _sender;
     private User _receiver;
-    private IEnumerable<User> _contactedUsers;  
+    private IDictionary<string, User> _contactedUsers = new Dictionary<string, User>(); 
 
     protected override async Task OnInitializedAsync()
     {
@@ -29,6 +29,10 @@
         _connection.On<string>("ReceiveUserMessages", ReceiveUserMessages);
         await _connection.StartAsync();
         await _connection.InvokeAsync("GetMessages");
+        foreach (var message in _messages)
+        {
+            
+        }
         StateHasChanged();
     }
 
