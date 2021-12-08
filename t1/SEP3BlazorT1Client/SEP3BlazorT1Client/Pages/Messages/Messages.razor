@@ -1,16 +1,66 @@
 @page "/Messages"
-@inject NavigationManager NavigationManager; 
-@inject AuthenticationStateProvider AuthenticationStateProvider; 
-@inject IUserService UserService
 @using SEP3BlazorT1Client.Models
+@using SEP3BlazorT1Client.Components.ChatConversationEntry
 @using Microsoft.AspNetCore.SignalR.Client
 @using SEP3BlazorT1Client.Data
 @using System.Text.Json
+@inject NavigationManager NavigationManager; 
+@inject AuthenticationStateProvider AuthenticationStateProvider; 
+@inject IUserService UserService
 @if (!_connectionFailed)
 {
-    @foreach (var message in _messages)
+    if (_messages != null)
     {
-        <p>@message.Content</p>
+        <div class="mat-layout-grid">
+            <div class="mat-layout-grid-inner">
+                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-3 chat-conversations">
+                    <div class="chat-conversations__search">
+                        <h4>All messages</h4>
+                        <MatTextField Label="Search" @bind-Value="@_filterConversations" Outlined="true"/>
+                    </div>
+                    @foreach (var conversation in _usersInConversation.Keys)
+                    {
+                        <MatButton OnClick="@(()=>{SetReceiver(_usersInConversation[conversation]);})">
+                        <ChatConversationEntry User="@_usersInConversation[conversation]"/>
+                        </MatButton>
+                    }
+                </div>
+                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-9 chat-window">
+                    <div class="chat-window__header">
+                        @if (_receiver != null)
+                        {
+                            <h3>@_receiver.FirstName</h3>
+                            <hr/>
+                        }
+                        else
+                        {
+                            <h3>No conversation chosen yet</h3>
+                            <hr/>
+                        }
+                    </div>
+                    @foreach (var message in _messages)
+                    {
+                        <p>@message.Content</p>
+                    }
+                </div>
+            </div>
+        </div>
+        if (!_messages.Any())
+        {
+            <p>No messages</p>
+        }
+    }
+    else
+    {
+        <div class="container-fluid d-flex justify-content-center">
+            <div class="row">
+                <div class="col">
+                    <p>
+                        <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+                    </p>
+                </div>
+            </div>
+        </div>
     }
 }
 else
@@ -19,18 +69,21 @@ else
 }
 
 @code {
-    private Queue<Message> _messages = new();
+    private Queue<Message> _messages;
     private HubConnection _connection;
     private User _sender;
     private User _receiver;
-    private IDictionary<string, User> _contactedUsers = new Dictionary<string, User>();
+    private IDictionary<string, User> _usersInConversation = new Dictionary<string, User>();
     private bool _connectionFailed = false;
+    private string _filterConversations = ""; 
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
             await ConnectToServer();
+            PopulateUsersInConversation();
+            StateHasChanged();
         }
         catch (Exception e)
         {
@@ -43,15 +96,20 @@ else
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        _sender = await UserService.GetUserByEmailAsync(user.Identity.Name);
-        _connection = new HubConnectionBuilder().WithUrl($"https://localhost:5001/chat?email={_sender.Email}").WithAutomaticReconnect().Build();
-        _connection.On<string>("ReceiveMessage", ReceiveMessage);
-        _connection.On<string>("ReceiveUserMessages", ReceiveUserMessages);
-        await _connection.StartAsync();
-        await _connection.InvokeAsync("GetMessages");
-        _connectionFailed = false;
-        PopulateContactedUsers();
-        StateHasChanged();
+        if (user.Identity.IsAuthenticated)
+        {
+            _sender = await UserService.GetUserByEmailAsync(user.Identity.Name);
+            _connection = new HubConnectionBuilder().WithUrl($"https://localhost:5001/chat?email={_sender.Email}").WithAutomaticReconnect().Build();
+            _connection.On<string>("ReceiveMessage", ReceiveMessage);
+            _connection.On<string>("ReceiveUserMessages", ReceiveUserMessages);
+            await _connection.StartAsync();
+            await _connection.InvokeAsync("GetMessages");
+            _connectionFailed = false;
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/login");
+        }
     }
 
     private void ReceiveMessage(string messageAsJson)
@@ -60,17 +118,17 @@ else
         _messages.Enqueue(messageReceived);
     }
 
-    private void PopulateContactedUsers()
+    private void PopulateUsersInConversation()
     {
         foreach (var message in _messages)
         {
-            if (!_contactedUsers.ContainsKey(message.Receiver.Email))
+            if (message.Receiver.Email != _sender.Email && !_usersInConversation.ContainsKey(message.Receiver.Email))
             {
-                _contactedUsers.TryAdd(message.Receiver.Email, message.Receiver);
+                _usersInConversation.TryAdd(message.Receiver.Email, message.Receiver);
             }
-            if (!_contactedUsers.ContainsKey(message.Sender.Email))
+            if (message.Sender.Email != _sender.Email &&!_usersInConversation.ContainsKey(message.Sender.Email))
             {
-                _contactedUsers.TryAdd(message.Sender.Email, message.Sender);
+                _usersInConversation.TryAdd(message.Sender.Email, message.Sender);
             }
         }
     }
@@ -84,4 +142,9 @@ else
         StateHasChanged();
     }
 
+    private void SetReceiver(User user)
+    {
+        _receiver = user; 
+        StateHasChanged();
+    }
 }
