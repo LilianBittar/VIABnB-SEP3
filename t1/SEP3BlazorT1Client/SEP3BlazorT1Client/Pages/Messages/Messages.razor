@@ -28,20 +28,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
         try
         {
-            _sender = await UserService.GetUserByEmailAsync(user.Identity.Name);
-            _connection = new HubConnectionBuilder().WithUrl($"https://localhost:5001/chat?email={_sender.Email}").WithAutomaticReconnect().Build();
-            _connection.On<string>("ReceiveMessage", ReceiveMessage);
-            _connection.On<string>("ReceiveUserMessages", ReceiveUserMessages);
-            await _connection.StartAsync();
-            await _connection.InvokeAsync("GetMessages");
-            foreach (var message in _messages)
-            {
-            }
-            StateHasChanged();
+            await ConnectToServer();
         }
         catch (Exception e)
         {
@@ -49,11 +38,43 @@ else
         }
     }
 
+
+    private async Task ConnectToServer()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        _sender = await UserService.GetUserByEmailAsync(user.Identity.Name);
+        _connection = new HubConnectionBuilder().WithUrl($"https://localhost:5001/chat?email={_sender.Email}").WithAutomaticReconnect().Build();
+        _connection.On<string>("ReceiveMessage", ReceiveMessage);
+        _connection.On<string>("ReceiveUserMessages", ReceiveUserMessages);
+        await _connection.StartAsync();
+        await _connection.InvokeAsync("GetMessages");
+        _connectionFailed = false;
+        PopulateContactedUsers();
+        StateHasChanged();
+    }
+
     private void ReceiveMessage(string messageAsJson)
     {
         var messageReceived = JsonSerializer.Deserialize<Message>(messageAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         _messages.Enqueue(messageReceived);
     }
+
+    private void PopulateContactedUsers()
+    {
+        foreach (var message in _messages)
+        {
+            if (!_contactedUsers.ContainsKey(message.Receiver.Email))
+            {
+                _contactedUsers.TryAdd(message.Receiver.Email, message.Receiver);
+            }
+            if (!_contactedUsers.ContainsKey(message.Sender.Email))
+            {
+                _contactedUsers.TryAdd(message.Sender.Email, message.Sender);
+            }
+        }
+    }
+
 
     private void ReceiveUserMessages(string messagesAsJson)
     {
