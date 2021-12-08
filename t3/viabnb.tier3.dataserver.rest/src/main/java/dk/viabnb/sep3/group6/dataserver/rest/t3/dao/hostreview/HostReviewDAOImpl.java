@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+// the guest is reviewing the host and creates a host review
 public class HostReviewDAOImpl extends BaseDao implements HostReviewDAO {
 
     private GuestDAO guestDAO = new GuestDAOImpl();
@@ -20,7 +21,7 @@ public class HostReviewDAOImpl extends BaseDao implements HostReviewDAO {
                     "INSERT INTO hostreview(hostrating, hostreviewtext, guestid, createddate, hostid) VALUES(?,?,?,?,?)");
             stm.setDouble(1, hostReview.getRating());
             stm.setString(2, hostReview.getText());
-            stm.setInt(3, guestDAO.getGuestByStudentNumber(hostReview.getViaId()).getId());
+            stm.setInt(3, hostReview.getGuestId());
             stm.setDate(4, (Date.valueOf(hostReview.getCreatedDate())));
             stm.setInt(5, hostReview.getHostId());
             stm.executeUpdate();
@@ -41,7 +42,7 @@ public class HostReviewDAOImpl extends BaseDao implements HostReviewDAO {
             stm.setString(2, hostReview.getText());
             stm.setDate(3, (Date.valueOf(hostReview.getCreatedDate())));
             stm.setInt(4, hostReview.getHostId());
-            stm.setInt(5, guestDAO.getGuestByStudentNumber(hostReview.getViaId()).getId());
+            stm.setInt(5, hostReview.getGuestId());
             stm.executeUpdate();
             connection.commit();
             return hostReview;
@@ -52,9 +53,9 @@ public class HostReviewDAOImpl extends BaseDao implements HostReviewDAO {
     }
 
     @Override
-    public List<HostReview> getAllHostReviewsByHostId(int id) {
+    public List<HostReview> getAllHostReviewsByGuestId(int id) {
         try (Connection connection = getConnection()) {
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM hostreview WHERE hostid = ?");
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM hostreview WHERE guestid = ?");
             stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
             List<HostReview> hostReviews = new ArrayList<>();
@@ -62,7 +63,7 @@ public class HostReviewDAOImpl extends BaseDao implements HostReviewDAO {
                 HostReview hostReview = new HostReview(
                         result.getDouble("hostrating"),
                         result.getString("hostreviewtext"),
-                        guestDAO.getGuestByUserId(result.getInt("guestid")).getViaId(),
+                        result.getInt("guestid"),
                         LocalDate.parse(result.getDate("createddate").toString()),
                         result.getInt("hostid"));
                 hostReviews.add(hostReview);

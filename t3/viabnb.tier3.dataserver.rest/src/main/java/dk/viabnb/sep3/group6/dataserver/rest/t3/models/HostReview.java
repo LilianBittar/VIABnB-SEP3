@@ -6,15 +6,15 @@ public class HostReview
 {
   private double rating;
   private String text;
-  private int viaId;
+  private int guestId;
   private LocalDate createdDate;
   private int hostId;
 
-  public HostReview(double rating, String text, int guestViaId, LocalDate createdDate, int hostId)
+  public HostReview(double rating, String text, int guestId, LocalDate createdDate, int hostId)
   {
     this.rating = rating;
     this.text = text;
-    this.viaId = guestViaId;
+    this.guestId = guestId;
     this.createdDate = createdDate;
     this.hostId = hostId;
   }
@@ -39,14 +39,12 @@ public class HostReview
     this.text = text;
   }
 
-  public int getViaId()
-  {
-    return viaId;
+  public int getGuestId() {
+    return guestId;
   }
 
-  public void setViaId(int viaId)
-  {
-    this.viaId = viaId;
+  public void setGuestId(int guestId) {
+    this.guestId = guestId;
   }
 
   public LocalDate getCreatedDate() {
