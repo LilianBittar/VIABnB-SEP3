@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Components
 @using System.Linq
 @using SEP3BlazorT1Client.Data
-<AuthorizeView Policy="MustBeHost">
+<AuthorizeView Policy="MustBeApprovedHost">
     <Authorized Context="Auth">
         <p>@ErrorMessage</p>
         <div class="mat-layout-grid mat-layout-grid-align-left" style="width: 100%;">

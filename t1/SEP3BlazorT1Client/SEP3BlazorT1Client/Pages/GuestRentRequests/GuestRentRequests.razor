@@ -6,7 +6,7 @@
 @inject IGuestService GuestService;
 @inject AuthenticationStateProvider AuthenticationStateProvider;  
 @inject NavigationManager NavigationManager;
-<AuthorizeView Policy="MustBeGuest">
+<AuthorizeView Policy="MustBeApprovedGuest">
     <Authorized>
     <p>@ErrorMessage</p>
         @if (_rentRequests != null)

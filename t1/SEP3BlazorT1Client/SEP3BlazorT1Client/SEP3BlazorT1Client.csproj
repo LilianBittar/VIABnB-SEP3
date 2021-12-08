@@ -31,6 +31,9 @@
     <Compile Update="Pages\UserProfile\MyProfile.cs">
       <DependentUpon>MyProfile.razor</DependentUpon>
     </Compile>
+    <Compile Update="Pages\UserLogin\Login.cs">
+      <DependentUpon>Login.razor</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Update="Pages\AdminView\AdminLogin.css">
