@@ -170,13 +170,14 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestId(int id)
         {
-            return await _guestReviewService.GetAllGuestReviewsByGuestIdAsync(id);
+            return await _guestReviewService.GetAllGuestReviewsByHostIdAsync(id);
         }
 
         public async Task<IEnumerable<HostReview>> GetAllHostReviewsByHostId(int id)
         {
-            return await _hostReview.GetAllHostReviewsByHostIdAsync(id);
+            return await _hostReview.GetAllHostReviewsByGuestIdAsync(id);
         }
+        
         public async Task<IEnumerable<ResidenceReview>> GetAllResidenceReviewsByResidenceId(int residenceId)
         {
             return await _residenceReviewService.GetAllByResidenceIdAsync(residenceId);

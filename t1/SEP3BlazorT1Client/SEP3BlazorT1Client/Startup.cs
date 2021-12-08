@@ -49,6 +49,7 @@ namespace SEP3BlazorT1Client
             services.AddScoped<IRentalService, GraphQlRentalService>();
             services.AddScoped<IUserService, GraphQlUserService>();
             services.AddScoped<IGuestReviewService, GraphQlGuestReviewService>();
+            services.AddScoped<IHostReviewService, GraphQlHostReviewService>();
             services.AddScoped<IResidenceReviewService, GraphQlResidenceReviewService>();
             
             //TODO add policies here:

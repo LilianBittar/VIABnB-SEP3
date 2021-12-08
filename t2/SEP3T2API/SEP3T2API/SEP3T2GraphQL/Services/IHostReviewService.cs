@@ -34,7 +34,7 @@ namespace SEP3T2GraphQL.Services
         /// </summary>
         /// <param name="id">id of the host</param>
         /// <returns>All reviews of guests made by that host with id of <c>id</c></returns>
-        Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id);
+        Task<IEnumerable<HostReview>> GetAllHostReviewsByGuestIdAsync(int id);
     
     }
 }

@@ -91,12 +91,12 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<GuestReview> CreateGuestReview(GuestReview guestReview)
         {
-            throw new NotImplementedException();
+            return await _guestReviewService.CreateGuestReviewAsync(guestReview);
         }
 
-        public async Task<GuestReview> UpdaeGuestReview(GuestReview guestReview)
+        public async Task<GuestReview> UpdateGuestReview(GuestReview guestReview)
         {
-            throw new NotImplementedException();
+            return await _guestReviewService.UpdateGuestReviewAsync(guestReview);
         }
 
         public async Task<ResidenceReview> CreateResidenceReview(Residence residence, ResidenceReview residenceReview)
