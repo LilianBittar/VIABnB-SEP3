@@ -30,5 +30,5 @@ public interface HostReviewDAO {
      *
      * @throws IllegalArgumentException if can't connect to database
      * */
-    List<HostReview> getAllHostReviewsByHostId(int id);
+    List<HostReview> getAllHostReviewsByGuestId(int id);
 }
