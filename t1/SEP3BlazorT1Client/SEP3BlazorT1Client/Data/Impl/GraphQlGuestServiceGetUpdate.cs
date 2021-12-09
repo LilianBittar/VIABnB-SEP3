@@ -23,7 +23,8 @@ namespace SEP3BlazorT1Client.Data.Impl
             var guestQuery = new GqlQuery()
             {
                 Query =
-                    @"query {
+                    @"query($wantedGuestEmail:String){
+                            guestByEmail(email:$wantedGuestEmail) {
                           viaId
                             guestReviews{
                               rating
