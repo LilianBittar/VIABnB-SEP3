@@ -22,7 +22,7 @@
                         <div class="mat-layout-grid-cell mat-layout-grid-cell-span-3 chat-conversations">
                             <div class="chat-conversations__search">
                                 <h4>All messages </h4>
-                                <MatTextField Label="Search" @bind-Value="@ConversationFilter" Outlined="true" OnKeyPress="@FilterConversations"/>
+                                <MatTextField Label="Filter by email" @bind-Value="@ConversationFilter" Outlined="true" OnKeyPress="@FilterConversations"/>
                                 <MatButton OnClick="@StartNewConversation" Label="Start new conversation"/>
                                 <hr/>
                             </div>
