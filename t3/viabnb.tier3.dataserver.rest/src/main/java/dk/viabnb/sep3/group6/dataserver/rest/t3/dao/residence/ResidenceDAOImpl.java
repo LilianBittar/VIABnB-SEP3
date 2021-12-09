@@ -227,11 +227,13 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO
               + "WHERE residenceid = ?");
       stm.setString(1, residence.getType());
       stm.setString(2, residence.getDescription());
-      stm.setDate(3, Date.valueOf(residence.getAvailableFrom()));
-      stm.setDate(4, Date.valueOf(residence.getAvailableTo()));
-      stm.setString(5, residence.getImageUrl());
-      stm.setDouble(6, residence.getPricePerNight());
-      stm.setInt(7, residence.getId());
+      stm.setBoolean(3,residence.isAvailable());
+      stm.setDouble(4, residence.getPricePerNight());
+      stm.setDate(5, Date.valueOf(residence.getAvailableFrom()));
+      stm.setDate(6, Date.valueOf(residence.getAvailableTo()));
+      stm.setString(7, residence.getImageUrl());
+      stm.setInt(8,residence.getMaxNumberOfGuests());
+      stm.setInt(9, residence.getId());
       stm.executeUpdate();
       connection.commit();
       return residence;

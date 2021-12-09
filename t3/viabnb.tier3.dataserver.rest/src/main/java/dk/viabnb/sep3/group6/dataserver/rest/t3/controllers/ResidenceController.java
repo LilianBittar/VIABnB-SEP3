@@ -198,6 +198,9 @@ import java.util.List;
     try
     {
       residence = residenceDAO.updateResidence(residence);
+      LOGGER.info(gson.toJson(
+              residence
+      ));
       return ResponseEntity.ok(residence);
     }
     catch (Exception e)
