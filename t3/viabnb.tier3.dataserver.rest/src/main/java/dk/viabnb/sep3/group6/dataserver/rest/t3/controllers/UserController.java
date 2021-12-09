@@ -79,6 +79,7 @@ public class UserController
   {
     try
     {
+      LOGGER.info("deleted");
       userDAO.deleteUser(id);
       return new ResponseEntity<>(HttpStatus.OK);
     }
