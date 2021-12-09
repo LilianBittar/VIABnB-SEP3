@@ -5,6 +5,7 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @using SEP3BlazorT1Client.Data
 @using System.Text.Json
+@using AngleSharp.Common
 @inject NavigationManager NavigationManager; 
 @inject IMatDialogService MatDialogService;
 @inject AuthenticationStateProvider AuthenticationStateProvider; 
@@ -21,11 +22,11 @@
                         <div class="mat-layout-grid-cell mat-layout-grid-cell-span-3 chat-conversations">
                             <div class="chat-conversations__search">
                                 <h4>All messages </h4>
-                                <MatTextField Label="Search" @bind-Value="@_filterConversations" Outlined="true"/>
+                                <MatTextField Label="Search" @bind-Value="@ConversationFilter" Outlined="true" OnKeyPress="@FilterConversations"/>
                                 <MatButton OnClick="@StartNewConversation" Label="Start new conversation"/>
                                 <hr/>
                             </div>
-                            @foreach (var conversation in _usersInConversation.Keys)
+                            @foreach (var conversation in _usersInConversationToShow.Keys)
                             {
                                 <MatButton OnClick="@(() => { SetReceiver(_usersInConversation[conversation]); })" Style="min-height: 80px !important;">
                                     <ChatConversationEntry User="@_usersInConversation[conversation]"/>
@@ -70,6 +71,9 @@
                                         <MatButton Label="Send" Raised="true" OnClick="@(async () => await SendMessage())"/>
                                     }
                                 </div>
+                                <p hidden="@(!_isSendingMessage)">
+                                    <MatProgressBar Indeterminate="true" Reversed="true"></MatProgressBar>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -121,11 +125,25 @@
     private Queue<Message> _messages;
     private HubConnection _connection;
     private bool _addingNewConversation = false;
+    private bool _isSendingMessage = false;
+    private string _conversationFilter = "";
     private User _sender;
     private User _receiver;
     private IDictionary<string, User> _usersInConversation = new Dictionary<string, User>();
+    private IDictionary<string, User> _usersInConversationToShow = new Dictionary<string, User>();
     private bool _connectionFailed = false;
-    private string _filterConversations = "";
+
+    public string ConversationFilter
+    {
+        get => _conversationFilter; 
+        set
+        {
+            _conversationFilter = value;
+            StateHasChanged();
+            FilterConversations();
+        }
+    }
+
     private string _messageContent = "";
     private string _newConversationEmail = "";
     private string _errorMessage = "";
@@ -149,6 +167,10 @@
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
+        foreach (var userClaim in user.Claims)
+        {
+            Console.WriteLine(userClaim.Value.ToString());
+        }
         if (user.Identity.IsAuthenticated)
         {
             _sender = await UserService.GetUserByEmailAsync(user.Identity.Name);
@@ -175,6 +197,7 @@
         {
             _usersInConversation.TryAdd(messageReceived.Sender.Email, messageReceived.Sender);
         }
+        _isSendingMessage = false;
         StateHasChanged();
     }
 
@@ -191,8 +214,25 @@
                 _usersInConversation.TryAdd(message.Sender.Email, message.Sender);
             }
         }
+        _usersInConversationToShow = _usersInConversation;
     }
 
+    private void FilterConversations()
+    {
+        if (!string.IsNullOrEmpty(ConversationFilter))
+        {
+            _usersInConversationToShow = _usersInConversation.Where(mapEntry => mapEntry.Key.ToLower().Contains(ConversationFilter.ToString())).ToDictionary(k => k.Key, v => v.Value);
+            Console.WriteLine("Filtering conversation");
+            StateHasChanged();
+        }
+        else
+        {
+            _usersInConversationToShow = _usersInConversation;
+            Console.WriteLine("Unfiltering conversation");
+
+            StateHasChanged();
+        }
+    }
 
     private void ReceiveUserMessages(string messagesAsJson)
     {
@@ -249,6 +289,7 @@
             var newMessageAsJson = JsonSerializer.Serialize(newMessage, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             await _connection.InvokeAsync("SendMessage", newMessageAsJson);
             _messageContent = "";
+            _isSendingMessage = true;
         }
     }
 

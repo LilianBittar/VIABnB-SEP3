@@ -37,6 +37,7 @@ namespace SEP3BlazorT1Client.Authentication
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
+            Console.WriteLine($"{this} {isAdmin} {isGuest} {isHost}");
             var identity = new ClaimsIdentity();
             if (cachedUser == null)
             {
@@ -44,6 +45,7 @@ namespace SEP3BlazorT1Client.Authentication
                 if (!string.IsNullOrEmpty(userAsJson))
                 {
                     cachedUser = JsonSerializer.Deserialize<User>(userAsJson);
+                    await ValidateLogin(cachedUser.Email, cachedUser.Password);
                     identity = SetupClaimsForUser(cachedUser);
                 }
             }
