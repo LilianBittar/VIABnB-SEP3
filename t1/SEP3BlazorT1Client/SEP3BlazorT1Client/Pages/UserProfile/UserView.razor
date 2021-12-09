@@ -36,7 +36,7 @@
                         <MatCardContent>
                             <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MyReviews.jpg"></MatCardMedia>
                             <div class="demo-mat-card-content" style="margin-left: 35%">
-                                <MatHeadline6 class="demo-mat-card-clean-margin">My reviews</MatHeadline6>
+                                <MatHeadline6 class="demo-mat-card-clean-margin">Reviews As A Host</MatHeadline6>
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
@@ -150,6 +150,20 @@
                         <MatCardActions Class="justify-content-between">
                             <MatButton @onclick="ToRegisterResidence">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Free_breakfast"></MatIcon>
+                        </MatCardActions>
+                    </MatCard>
+                </div>
+                <div class="mat-layout-grid-cell">
+                    <MatCard Class="demo-mat-card">
+                        <MatCardContent>
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MyReviews.jpg"></MatCardMedia>
+                            <div class="demo-mat-card-content" style="margin-left: 35%">
+                                <MatHeadline6 class="demo-mat-card-clean-margin">Reviews As A Guest</MatHeadline6>
+                            </div>
+                        </MatCardContent>
+                        <MatCardActions Class="justify-content-between">
+                            <MatButton @onclick="ToMyReviews">More</MatButton>
+                            <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon>
                         </MatCardActions>
                     </MatCard>
                 </div>

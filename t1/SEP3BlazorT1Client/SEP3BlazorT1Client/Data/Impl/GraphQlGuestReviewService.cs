@@ -21,15 +21,16 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery createGuestReviewMutation = new GqlQuery()
             {
                 Query =
-                    @"mutation($newGuestReview:guestReview){
-    createGuestReview(guestReview:$newGuestReview) {
-                                rating
-                                reviewText
-                                guestId
-                                hostId
-                                createdDate
-                              }
-                             }",
+                    @"mutation($newGuestReview: GuestReviewInput) {
+                          createGuestReview(guestReview: $newGuestReview) {
+                            rating
+                            text
+                            hostEmail
+                            createdDate
+                            guestId
+                            hostId
+                          }
+                        }",
 
                 Variables = new {newGuestReview = guestReview}
             };
@@ -47,13 +48,14 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery updateGuestReviewMutation = new GqlQuery()
             {
                 Query =
-                    @"mutation($newGuestReview:guestReview){
+                    @"mutation($newGuestReview:GuestReviewInput){
     updateGuestReview(hostReview:$newHostReview) {
                                 rating
-                                reviewText
-                                viaId
-                                hostId
-                                createdDate
+                            text
+                            hostEmail
+                            createdDate
+                            guestId
+                            hostId
                               }
                              }",
 
@@ -75,11 +77,11 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Query = @"query($guestId:Int!){
                               allGuestReviewsByHostId(id:$guestId){
                                 rating
-                                text
-                                hostEmail
-                                createdDate
-                                guestId
-                                hostId
+                            text
+                            hostEmail
+                            createdDate
+                            guestId
+                            hostId
                               }
                             }",
                 Variables = new {guestId = id}
