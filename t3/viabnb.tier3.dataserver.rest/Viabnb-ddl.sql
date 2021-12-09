@@ -173,8 +173,8 @@ CREATE TABLE IF NOT EXISTS message
     timeSent       timestamp,
 
     PRIMARY KEY (senderId, receiverId, timeSent),
-    FOREIGN KEY (senderId) references _user (userid),
-    FOREIGN KEY (receiverId) references _user(userid)
+    FOREIGN KEY (senderId) references _user (userid) ON DELETE CASCADE ,
+    FOREIGN KEY (receiverId) references _user(userid) ON DELETE CASCADE
 );
 
 --The system's admins
