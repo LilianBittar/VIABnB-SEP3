@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data;
@@ -15,47 +17,62 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
     public partial class RegisterResidence
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
-
-        // [Inject]
-        // public RegisterResidenceViewModel ViewModel { get; set; }
         [Inject] public IResidenceService ResidenceService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
-
-
+        [Inject] public IFacilityService FacilityService { get; set; }
+        [Inject] public IHostService HostService { get; set; }
+        [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         public EditContext FormEditContextResidence { get; set; }
         public EditContext FormEditContextAddress { get; set; }
-
         private Residence _newResidence;
-
-
         public string Name { get; set; }
+        private bool _isLoading = false; 
         private bool _showFacilityDialog = false;
-        private IList<Facility> _allFacilities = new List<Facility>() {new Facility() {Name = "Wifi"}};
-        private IList<string> _allResidenceTypes = new List<string>() {"House", "Apartment", "Room"};
-
+        private IEnumerable<Facility> _allFacilities = new List<Facility>();
         private Facility _facilityToBeAdded = new Facility();
-        private Address _newResidenceAddress = new Address(){City = new City()};
-
+        private Address _newResidenceAddress = new Address() {City = new City()};
+        private string ErrorMessage="";
         private string _registerResidenceErrorMessage = "";
 
         protected override async Task OnInitializedAsync()
         {
-            // TODO: Fetch residence types on mount
-            // TODO: Fetch all available facilities on mount
-            _newResidence = new Residence()
+            try
             {
-                Rules = new List<Rule>(),
-                Facilities = new List<Facility>(),
-                AvailableFrom = DateTime.MaxValue,
-                AvailableTo = DateTime.MaxValue,
-                Address = new Address()
+                _newResidence = new Residence()
                 {
-                    City = new City()
+                    Rules = new List<Rule>(),
+                    Facilities = new List<Facility>(),
+                    AvailableFrom = DateTime.MaxValue,
+                    AvailableTo = DateTime.MaxValue,
+                    Address = new Address()
+                    {
+                        City = new City()
+                    },
+                };
+                FormEditContextResidence = new EditContext(_newResidence);
+                FormEditContextAddress = new EditContext(_newResidenceAddress);
+                _allFacilities = await FacilityService.GetAllFacilities();
+                Console.WriteLine(JsonConvert.SerializeObject(_allFacilities));
+                var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+                var user = authState.User;
+                StateHasChanged();
+                if (user.Identity.IsAuthenticated)
+                {
+                    var host = await HostService.GetHostByEmail(user.Identity.Name);
+                    _newResidence.Host = host;
+                    StateHasChanged();
                 }
-            };
-            FormEditContextResidence = new EditContext(_newResidence);
-            FormEditContextAddress = new EditContext(_newResidenceAddress);
-            await base.OnInitializedAsync();
+                else
+                {
+                    NavigationManager.NavigateTo("Login");
+                }
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = "";
+                ErrorMessage = "Something went wrong.. try refreshing the page";
+            }
+         
         }
 
         private async void AddNewRule()
@@ -65,7 +82,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 Description = await MatDialogService.PromptAsync("Enter rule", "")
             };
 
-            if (!string.IsNullOrEmpty(newRule.Description))
+            if (!string.IsNullOrEmpty(newRule.Description) && _newResidence.Rules.All(r=>r.Description != newRule.Description))
             {
                 _newResidence.Rules.Add(newRule);
             }
@@ -82,9 +99,12 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
         private void AddFacility()
         {
             Console.WriteLine(_facilityToBeAdded.Name);
-            if (!string.IsNullOrEmpty(_facilityToBeAdded.Name))
+            var newFacility = _allFacilities.FirstOrDefault(f => f.Name == _facilityToBeAdded.Name);
+            if (newFacility != null && !string.IsNullOrEmpty(_facilityToBeAdded.Name) && _newResidence.Facilities.All(f => f.Name != newFacility.Name))
             {
-                _newResidence.Facilities.Add(_facilityToBeAdded);
+                _newResidence.Facilities.Add(
+                    new Facility() {Id = newFacility.Id, Name = newFacility.Name});
+                Console.WriteLine(newFacility.Id);
                 _showFacilityDialog = false;
             }
 
@@ -103,14 +123,15 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             {
                 try
                 {
+                    _isLoading = true;
                     await ResidenceService.CreateResidenceAsync(_newResidence);
-                    ResetModels();
-
-                    NavigationManager.NavigateTo("/buildingsoverview");
+                    _isLoading = false;
+                    NavigationManager.NavigateTo("/hostresidences");
                 }
                 catch (ArgumentException e)
                 {
                     System.Console.WriteLine($"{this} ArgumentException Caught");
+                    _isLoading = false; 
                     _registerResidenceErrorMessage = e.Message;
                 }
             }
@@ -122,19 +143,6 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             FormEditContextAddress.Validate();
             PrintDebugMessages();
             StateHasChanged();
-        }
-
-        private void ResetModels()
-        {
-            _newResidenceAddress = new Address();
-            _newResidence = new Residence()
-            {
-                Rules = new List<Rule>(),
-                Facilities = new List<Facility>(),
-                AvailableFrom = DateTime.MaxValue,
-                AvailableTo = DateTime.MaxValue,
-                Address = new Address() {City = new City()}
-            };
         }
 
         private void PrintDebugMessages()

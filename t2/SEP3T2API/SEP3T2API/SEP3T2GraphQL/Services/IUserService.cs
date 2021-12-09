@@ -10,5 +10,7 @@ namespace SEP3T2GraphQL.Services
         Task<User> GetUserByIdAsync(int id);
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> ValidateUserAsync(string email, string password);
+        Task<User> UpdateUserAsync(User user);
+        Task<User> DeleteUserSync(User user);
     }
 }

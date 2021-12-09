@@ -1,0 +1,49 @@
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.chat-conversations {
+  border-right-style: solid;
+  border-right-width: 0.5px;
+  border-right-color: #ccc;
+  position: relative;
+  height: 85vh;
+  overflow-y: scroll;
+}
+.chat-conversations h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.chat-window {
+  height: 85vh;
+  overflow-y: scroll;
+}
+.chat-window__messages {
+  width: 100%;
+  padding: 0 3rem;
+}
+.chat-window__input {
+  position: absolute;
+  bottom: 0;
+  width: 60%;
+}
+
+.error-label {
+  color: red;
+}
+
+/*# sourceMappingURL=Messages.razor.css.map */

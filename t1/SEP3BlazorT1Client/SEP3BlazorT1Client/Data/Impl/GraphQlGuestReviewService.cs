@@ -1,7 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
+using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes.GuestResponseTypes;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes.GuestReviewResponseType;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes.HostReviewsResponseTypes;
 using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Data.Impl
@@ -11,14 +16,58 @@ namespace SEP3BlazorT1Client.Data.Impl
         private const string Url = "https://localhost:5001/graphql";
         private readonly GqlClient _client = new GqlClient(Url) {EnableLogging = true};
         
-        public Task<GuestReview> CreateGuestReviewAsync(GuestReview guestReview)
+        public async Task<GuestReview> CreateGuestReviewAsync(GuestReview guestReview)
         {
-            throw new System.NotImplementedException();
+            GqlQuery createGuestReviewMutation = new GqlQuery()
+            {
+                Query =
+                    @"mutation($newGuestReview: GuestReviewInput) {
+                          createGuestReview(guestReview: $newGuestReview) {
+                            rating
+                            text
+                            hostEmail
+                            createdDate
+                            guestId
+                            hostId
+                          }
+                        }",
+
+                Variables = new {newGuestReview = guestReview}
+            };
+            var response = await _client.PostQueryAsync<CreateGuestReviewResponseType>(createGuestReviewMutation);
+            if (response.Errors != null)
+            {
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
+            }
+
+            return response.Data.GuestReview;
         }
 
-        public Task<GuestReview> UpdateGuestReviewAsync(GuestReview guestReview)
+        public async Task<GuestReview> UpdateGuestReviewAsync(GuestReview guestReview)
         {
-            throw new System.NotImplementedException();
+            GqlQuery updateGuestReviewMutation = new GqlQuery()
+            {
+                Query =
+                    @"mutation($newGuestReview:GuestReviewInput){
+    updateGuestReview(hostReview:$newHostReview) {
+                                rating
+                            text
+                            hostEmail
+                            createdDate
+                            guestId
+                            hostId
+                              }
+                             }",
+
+                Variables = new {newHostReview = guestReview}
+            };
+            var response = await _client.PostQueryAsync<UpdateGuestReviewResponseType>(updateGuestReviewMutation);
+            if (response.Errors != null)
+            {
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
+            }
+
+            return response.Data.GuestReview;
         }
 
         public async Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestIdAsync(int id)
@@ -26,11 +75,13 @@ namespace SEP3BlazorT1Client.Data.Impl
             var query = new GqlQuery()
             {
                 Query = @"query($guestId:Int!){
-                              allGuestReviewsByGuestId(id:$guestId){
+                              allGuestReviewsByHostId(id:$guestId){
                                 rating
-                                text
-                                hostEmail
-                                createdDate
+                            text
+                            hostEmail
+                            createdDate
+                            guestId
+                            hostId
                               }
                             }",
                 Variables = new {guestId = id}

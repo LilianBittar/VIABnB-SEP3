@@ -9,29 +9,35 @@ using SEP3T2GraphQL.Services.Impl;
 namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 {
     public class HostValidationImpl : IHostValidation
-    {
-        private IHostRepository _repository = new HostRepositoryImpl();
+    {private IHostRepository _repository;
+        private IUserService _userService;
+
+        public HostValidationImpl( IUserService userService)
+        {
+            _userService = userService;
+        }
 
         public async Task<bool> IsValidEmail(string email)
         {
-            Host host = await _repository.GetHostByEmail(email);
-            if (host != null)
+            User user = await _userService.GetUserByEmailAsync(email);
+            if (user == null)
             {
-                throw new ArgumentException("Host already exists");
-            }
-
-            if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
-            {
-                //some form of inbuilt mail validation
-                var addr = new System.Net.Mail.MailAddress(email);
-
-                if (addr.Address == email)
+                if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
                 {
+                    //some form of inbuilt mail validation
+                    var addr = new System.Net.Mail.MailAddress(email);
+
+                    if (addr.Address != email)
+                    {
+                        throw new FormatException("Invalid email");
+                       
+                    }
                     return true;
                 }
-            }
 
-            throw new FormatException("Invalid email");
+                throw new FormatException("email not formatted correctly");
+            }
+            throw new ArgumentException("Email already in use");
         }
 
         public bool IsValidFirstname(string firstname)
@@ -112,7 +118,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 
         public bool IsValidPhoneNumber(string phoneNumber)
         {
-            if (phoneNumber != null && !phoneNumber.Any(char.IsLetter) && !phoneNumber.Any(char.IsSymbol))
+            if (phoneNumber != null && phoneNumber.All(char.IsDigit))
             {
                 return true;
             }
@@ -152,7 +158,6 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             {
                 return true;
             }
-
             throw new ArgumentException("Invalid host");
         }
 
@@ -162,8 +167,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             {
                 return true;
             }
-
-            throw new ArgumentException($"Invalid string: {arg}");
+            return false;
         }
     }
 }

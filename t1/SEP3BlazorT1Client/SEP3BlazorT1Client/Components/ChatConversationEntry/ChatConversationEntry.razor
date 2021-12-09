@@ -1,0 +1,26 @@
+@using SEP3BlazorT1Client.Models
+<div class="conversation-entry-container">
+    <div class="container-fluid d-flex flex-column">
+        <row>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <p>@User.Email</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">@User.FirstName @User.LastName</div>
+                </div>
+            </div>
+        </row>
+    </div>
+    
+    
+</div>
+
+@code {
+
+    [Parameter]
+    public User User { get; set; }
+
+}

@@ -3,14 +3,16 @@
 @using SEP3BlazorT1Client.Data
 @using System.IO
 @using System.Text
+@using GraphQL
 @using SEP3BlazorT1Client.Authentication
 @inject MatDialogService MatDialogService
 @inject NavigationManager NavigationManager
 @inject IHostService HostService
 @inject IGuestService GuestService
 @inject AuthenticationStateProvider AuthStateProvider
-<AuthorizeView Policy="MustBeHost">
-    <Authorized Context="Hello">
+<AuthorizeView Policy="MustBeApprovedHost">
+    <Authorized Context="Auth">
+        <p>@ErrorMessage</p>
         @if (_newGuest != null && _host != null)
         {
             <div class="mat-layout-grid">
@@ -67,41 +69,51 @@
     private Guest _newGuest;
     private bool _dialogIsOpen = false;
     private string _errorLabel = "";
+    private string ErrorMessage="";
 
 
     protected override async Task OnInitializedAsync()
     {
-        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        Console.WriteLine("\nClaims:");
-        foreach (var claim in user.Claims)
+        try
         {
-            Console.WriteLine($"{claim.Type.ToString()} {claim.Value}");
+            var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            Console.WriteLine("\nClaims:");
+            foreach (var claim in user.Claims)
+            {
+                Console.WriteLine($"{claim.Type.ToString()} {claim.Value}");
+            }
+            _host = await HostService.GetHostByEmail((user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value));
+
+            _newGuest = new Guest
+            {
+                FirstName = _host.FirstName,
+                LastName = _host.LastName,
+                Cpr = _host.Cpr,
+                Email = _host.Email,
+                Id = _host.Id,
+                IsApprovedHost = _host.IsApprovedHost,
+                Password = _host.Password,
+                HostReviews = _host.HostReviews,
+                GuestReviews = new List<GuestReview>(),
+                IsApprovedGuest = false,
+                ViaId = 0,
+                PhoneNumber = _host.PhoneNumber,
+                ProfileImageUrl = _host.ProfileImageUrl
+            };
+
+
+            if (!user.Identity.IsAuthenticated)
+            {
+                NavigationManager.NavigateTo("Login");
+            }
         }
-        _host = await HostService.GetHostByEmail((user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value));
-
-        _newGuest = new Guest
+        catch (Exception e)
         {
-            FirstName = _host.FirstName,
-            LastName = _host.LastName,
-            Cpr = _host.Cpr,
-            Email = _host.Email,
-            Id = _host.Id,
-            IsApprovedHost = _host.IsApprovedHost,
-            Password = _host.Password,
-            HostReviews = _host.HostReviews,
-            GuestReviews = new List<GuestReview>(),
-            IsApprovedGuest = false,
-            ViaId = 0,
-            PhoneNumber = _host.PhoneNumber,
-            ProfileImageUrl = _host.ProfileImageUrl
-        };
-
-
-        if (!user.Identity.IsAuthenticated)
-        {
-            NavigationManager.NavigateTo("/");
+            ErrorMessage = "";
+            ErrorMessage = "Something went wrong.. try refreshing the page";
         }
+       
     }
 
     private void OpenDialog()
@@ -118,7 +130,7 @@
             _dialogIsOpen = false;
             ResetModel();
             StateHasChanged();
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("Login");
         }
         catch (Exception e)
         {

@@ -6,11 +6,8 @@ namespace SEP3T2GraphQL.Repositories
 {
     public interface IHostReviewGuestRepository
     {
-        
-        Task<HostReview> CreateGuestReviewAsync(HostReview hostReview);
-        
-        Task<HostReview> UpdateGuestReviewAsync(HostReview hostReview);
-        
-        Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id);
+        Task<HostReview> CreateHostReviewAsync(HostReview hostReview);
+        Task<HostReview> UpdateHostReviewAsync(HostReview hostReview);
+        Task<IEnumerable<HostReview>> GetAllHostReviewsByGuestIdAsync(int id);
     }
 }

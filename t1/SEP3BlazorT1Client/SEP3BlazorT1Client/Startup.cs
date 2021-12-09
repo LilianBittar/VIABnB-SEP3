@@ -49,6 +49,7 @@ namespace SEP3BlazorT1Client
             services.AddScoped<IRentalService, GraphQlRentalService>();
             services.AddScoped<IUserService, GraphQlUserService>();
             services.AddScoped<IGuestReviewService, GraphQlGuestReviewService>();
+            services.AddScoped<IHostReviewService, GraphQlHostReviewService>();
             services.AddScoped<IResidenceReviewService, GraphQlResidenceReviewService>();
             
             //TODO add policies here:
@@ -58,6 +59,8 @@ namespace SEP3BlazorT1Client
                         apb.RequireAuthenticatedUser().RequireClaim("Role" ,"Admin"));
                     options.AddPolicy("MustBeGuest", abp => abp.RequireAuthenticatedUser().RequireClaim("Role", "Guest", "Admin"));
                     options.AddPolicy("MustBeHost", abp => abp.RequireAuthenticatedUser().RequireClaim("Role", "Host", "Guest", "Admin"));
+                    options.AddPolicy("MustBeApprovedHost", abd => abd.RequireAuthenticatedUser().RequireClaim("Approved", "Host", "Guest"));
+                    options.AddPolicy("MustBeApprovedGuest", abd => abd.RequireAuthenticatedUser().RequireClaim("Approved", "Guest"));
                 }
             );
         }

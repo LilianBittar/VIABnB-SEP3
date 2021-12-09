@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using HotChocolate;
 using SEP3T2GraphQL.Models;
@@ -17,11 +18,12 @@ namespace SEP3T2GraphQL.Graphql
         private readonly IFacilityService _facilityService;
         private readonly IGuestReviewService _guestReviewService;
         private readonly IHostReviewService _hostReview;
-        private readonly IResidenceReviewService _residenceReviewService; 
+        private readonly IResidenceReviewService _residenceReviewService;
+        private readonly IUserService _userService;
 
         public Mutation(IResidenceService residenceService, IHostService hostService, IGuestService guestService,
             IRentalService rentalService, IFacilityService facilityService, IRuleService ruleService,
-            IGuestReviewService guestReviewService, IHostReviewService hostReviewService, IResidenceReviewService residenceReviewService)
+            IGuestReviewService guestReviewService, IHostReviewService hostReviewService, IResidenceReviewService residenceReviewService, IUserService userService)
         {
             _residenceService = residenceService;
             _hostService = hostService;
@@ -31,7 +33,8 @@ namespace SEP3T2GraphQL.Graphql
             _ruleService = ruleService;
             _guestReviewService = guestReviewService;
             _hostReview = hostReviewService;
-            _residenceReviewService = residenceReviewService; 
+            _residenceReviewService = residenceReviewService;
+            _userService = userService;
         }
 
         public async Task<Residence> CreateResidence(Residence residence)
@@ -61,6 +64,8 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<Host> RegisterHost(Host host)
         {
+            Console.WriteLine("in mutation");
+            Console.WriteLine(JsonSerializer.Serialize(host));
             return await _hostService.RegisterHostAsync(host);
         }
 
@@ -86,12 +91,12 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<GuestReview> CreateGuestReview(GuestReview guestReview)
         {
-            throw new NotImplementedException();
+            return await _guestReviewService.CreateGuestReviewAsync(guestReview);
         }
 
-        public async Task<GuestReview> UpdaeGuestReview(GuestReview guestReview)
+        public async Task<GuestReview> UpdateGuestReview(GuestReview guestReview)
         {
-            throw new NotImplementedException();
+            return await _guestReviewService.UpdateGuestReviewAsync(guestReview);
         }
 
         public async Task<ResidenceReview> CreateResidenceReview(Residence residence, ResidenceReview residenceReview)
@@ -109,5 +114,39 @@ namespace SEP3T2GraphQL.Graphql
             return await _hostReview.UpdateHostReviewAsync(hostReview);
         }
 
+        public async Task<Rule> UpdateResidenceRule(Rule rule)
+        {
+            return await _ruleService.UpdateRuleAsync(rule);
+        }
+
+        public async Task<Residence> UpdateResidence(Residence residence)
+        {
+            return await _residenceService.UpdateResidenceAsync(residence);
+        }
+
+        public async Task<Rule> DeleteRule(Rule rule)
+        {
+            return await _ruleService.DeleteRule(rule);
+        }
+
+        public async Task<Facility> DeleteResidenceFacility(Facility facility, int residenceId)
+        {
+            return await _facilityService.DeleteResidenceFacilityAsync(facility, residenceId);
+        }
+
+        public async Task<Residence> DeleteResidence(Residence residence)
+        {
+            return await _residenceService.DeleteResidenceAsync(residence);
+        }
+
+        public async Task<User> UpdateUser(User user)
+        {
+           return await _userService.UpdateUserAsync(user);
+        }
+
+        public async Task<User> DeleteUser(User user)
+        {
+            return await _userService.DeleteUserSync(user);
+        }
     }
 }

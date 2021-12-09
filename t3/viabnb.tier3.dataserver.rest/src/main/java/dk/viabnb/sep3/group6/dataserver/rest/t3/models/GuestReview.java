@@ -7,15 +7,19 @@ public class GuestReview
 
   private double rating;
   private String text;
-  private String hostEmail;
   private LocalDate createdDate;
+  private int guestId;
+  private int hostId;
+  private String hostEmail;
 
-  public GuestReview(double rating, String text, String hostEmail, LocalDate createdDate)
+  public GuestReview(double rating, String text,  LocalDate createdDate, int guestId, int hostId, String hostEmail)
   {
     this.rating = rating;
     this.text = text;
-    this.hostEmail = hostEmail;
     this.createdDate = createdDate;
+    this.guestId = guestId;
+    this.hostId=hostId;
+    this.hostEmail=hostEmail;
   }
 
   public double getRating()
@@ -38,21 +42,35 @@ public class GuestReview
     this.text = text;
   }
 
-  public String getHostEmail()
-  {
-    return hostEmail;
-  }
-
-  public void setHostEmail(String hostEmail)
-  {
-    this.hostEmail = hostEmail;
-  }
-
   public LocalDate getCreatedDate() {
     return createdDate;
   }
 
   public void setCreatedDate(LocalDate createdDate) {
     this.createdDate = createdDate;
+  }
+
+  public int getGuestId() {
+    return guestId;
+  }
+
+  public int getHostId() {
+    return hostId;
+  }
+
+  public void setGuestId(int guestId) {
+    this.guestId = guestId;
+  }
+
+  public void setHostId(int hostId) {
+    this.hostId = hostId;
+  }
+
+  public String getHostEmail() {
+    return hostEmail;
+  }
+
+  public void setHostEmail(String hostEmail) {
+    this.hostEmail = hostEmail;
   }
 }

@@ -1,0 +1,18 @@
+.message-container {
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+.message-container .message__header p {
+  font-weight: bold;
+}
+.message-container .message__header p#email {
+  margin-top: 0;
+  font-weight: normal;
+  opacity: 0.7;
+}
+.message-container .message__header span#time-sent {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/*# sourceMappingURL=ChatMessage.razor.css.map */

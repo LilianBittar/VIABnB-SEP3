@@ -7,6 +7,7 @@ import dk.viabnb.sep3.group6.dataserver.rest.t3.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,5 +57,36 @@ public class UserController
       LOGGER.error(e.getMessage());
     }
     return ResponseEntity.ok(user);
+  }
+
+  @PatchMapping("/users/{id}")
+  public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("id") int id)
+  {
+    try
+    {
+      user = userDAO.updateUser(user);
+      return ResponseEntity.ok(user);
+    }
+    catch (Exception e)
+    {
+      LOGGER.error(e.getMessage());
+      return ResponseEntity.internalServerError().build();
+    }
+  }
+
+  @DeleteMapping("/users/{id}")
+  public ResponseEntity<Void> deleteUser(@PathVariable("id") int id)
+  {
+    try
+    {
+      LOGGER.info("deleted");
+      userDAO.deleteUser(id);
+      return new ResponseEntity<>(HttpStatus.OK);
+    }
+    catch (Exception e)
+    {
+      LOGGER.error(e.getMessage());
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }

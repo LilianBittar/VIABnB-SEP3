@@ -31,8 +31,8 @@ class RentRequestControllerTest {
             "test",
             "test",
             "+4588888888",
-            new ArrayList<>(),
             null,
+            new ArrayList<>(),
             "111111-1111",
             true,
             293886,
@@ -45,20 +45,20 @@ class RentRequestControllerTest {
 
 
     @Test
-    public void CreateRentRequestNullRequestReturnsBadRequest() {
+    public void createRentRequestNullRequestReturnsBadRequest() {
         RentRequest request = null;
         assertEquals(ResponseEntity.badRequest().build(), controller.createRentRequest(request));
     }
 
     @Test
-    public void CreateRentRequestRentRepositoryDoesNotCreateRequestReturnsInternalServerError() {
+    public void createRentRequestRentRepositoryDoesNotCreateRequestReturnsInternalServerError() {
         RentRequest request = new RentRequest(1, LocalDate.now(), LocalDate.now(), 1, RentRequestStatus.NOTANSWERED, guest, residence, LocalDate.now());
         when(rentRequestDAO.createNewRentRequest(request)).thenReturn(null);
         assertEquals(ResponseEntity.internalServerError().build(), controller.createRentRequest(request));
     }
 
     @Test
-    public void CreateRentRequestRentRepositoryThrowsIllegalStateReturnsInternalServerError() {
+    public void createRentRequestRentRepositoryThrowsIllegalStateReturnsInternalServerError() {
         RentRequest request = new RentRequest(1,LocalDate.now(), LocalDate.now(), 1, RentRequestStatus.NOTANSWERED, guest, residence, LocalDate.now());
         when(rentRequestDAO.createNewRentRequest(request)).thenThrow(IllegalStateException.class);
         assertEquals(ResponseEntity.internalServerError().build(), controller.createRentRequest(request));

@@ -70,19 +70,15 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             HttpContent content = new StringContent(guestAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PatchAsync($"{uri}/{residence.Id}", content);
+            HttpResponseMessage response = await client.PutAsync($"{uri}/residences/{residence.Id}", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
+            
 
-            var updatedResidence = JsonSerializer.Deserialize<Residence>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
-
-            return updatedResidence;
+            return residence;
         }
 
         public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
@@ -110,11 +106,42 @@ namespace SEP3T2GraphQL.Repositories.Impl
              return residences;
         }
 
+        public async Task<Residence> UpdateResidenceAsync(Residence residence)
+        {
+            var residenceAsJson = JsonSerializer.Serialize(residence, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            var content = new StringContent(residenceAsJson, Encoding.UTF8, "application/json");
+            var response = await client.PatchAsync($"{uri}/residences/{residence.Id}", content);
+            await HandleErrorResponse(response);
+
+            var updatedResidence = JsonSerializer.Deserialize<Residence>(await response.Content.ReadAsStringAsync(),
+                new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+
+            return updatedResidence;
+        }
+
+        public async Task<Residence> DeleteResidenceAsync(Residence residence)
+        {
+            var deleteResidence = JsonSerializer.Serialize(residence, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            var response = await client.DeleteAsync($"{uri}/residences/{residence}");
+            await HandleErrorResponse(response);
+            
+            return residence;
+        }
+
         private static async Task HandleErrorResponse(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)
             {
-                Console.WriteLine(await response.Content.ReadAsStringAsync());
+                Console.WriteLine(await response.Content.ReadAsStringAsync()+" " + response.StatusCode);
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
         }

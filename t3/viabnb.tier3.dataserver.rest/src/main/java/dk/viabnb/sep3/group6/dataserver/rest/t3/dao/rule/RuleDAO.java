@@ -21,4 +21,20 @@ public interface RuleDAO
    * @throws IllegalStateException if can't connect to database
    * */
   List<Rule> getAllRules();
+  /**
+   * Update an existing rule in the system by identify its residence and replace that residence's rule info
+   * @param rule The new rule witch will have the new arguments
+   * @return the newly updated rule
+   *
+   * @throws IllegalStateException if cant connect to database
+   * */
+  Rule updateRule(Rule rule);
+  /**
+   * Delete rule from the system
+   * @param description The targeted rule description for deletion
+   * @param residenceId The targeted rule residence id for deletion
+   *
+   * @throws IllegalStateException if can't connect to database
+   * */
+  void deleteRule(String description, int residenceId);
 }

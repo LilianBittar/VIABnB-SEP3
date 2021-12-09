@@ -15,6 +15,7 @@ namespace UnitTests.AdministrationTest
     [TestFixture]
     public class ReadAndUpdateGuestRequestTest
     {
+        //TODO go over tests. Check for gets
         private IGuestService _guestService;
         private IEnumerable<Guest> _guestList;
 

@@ -1,0 +1,12 @@
+#intro
+{
+    text-align: center;
+}
+
+#intro-image
+{
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}

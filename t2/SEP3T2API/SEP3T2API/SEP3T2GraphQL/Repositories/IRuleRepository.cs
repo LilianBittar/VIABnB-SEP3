@@ -9,5 +9,7 @@ namespace SEP3T2GraphQL.Repositories
     {
         Task<Rule> CreateRule(Rule rule);
         Task<IEnumerable<Rule>> GetAllRules();
+        Task<Rule> UpdateRule(Rule rule);
+        Task<Rule> DeleteRule(Rule rule);
     }
 }

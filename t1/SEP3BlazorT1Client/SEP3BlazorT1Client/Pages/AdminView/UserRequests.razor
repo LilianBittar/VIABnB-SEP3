@@ -2,6 +2,7 @@
 @using SEP3BlazorT1Client.Models
 <AuthorizeView Policy="MustBeAdmin">
     <Authorized>
+    <p>@ErrorMessage</p>
 <MatTabGroup>
     <MatTab Label="Hosts Requests">
         <ChildContent>
@@ -12,7 +13,6 @@
             }
             else if (!_hostRequestList.Any())
             {
-                <MatProgressCircle Indeterminate="true" />
                 <p>
                     <em>There are no host requests at the moment....</em>
                 </p>
@@ -108,7 +108,7 @@
 </Authorized>
     <NotAuthorized>
         <div id="errorBox">
-            <p>You must <a href="AdminLogin">login as an admin</a> to be able to see the content of this page</p>
+            <p>You must <a href="Login">login as an admin</a> to be able to see the content of this page</p>
         </div>
     </NotAuthorized>
 </AuthorizeView>

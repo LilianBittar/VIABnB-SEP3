@@ -24,6 +24,8 @@ namespace SEP3BlazorT1Client.Authentication
         private bool isAdmin = false;
         private bool isHost = false;
         private bool isGuest = false;
+        private bool _isApprovedHost = false;
+        private bool _isApprovedGuest = false;
         
         public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IUserService userService, IHostService hostService, IGuestService guestService, IAdministrationService administrationService)
         {
@@ -35,6 +37,7 @@ namespace SEP3BlazorT1Client.Authentication
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
+            Console.WriteLine($"{this} {isAdmin} {isGuest} {isHost}");
             var identity = new ClaimsIdentity();
             if (cachedUser == null)
             {
@@ -42,6 +45,7 @@ namespace SEP3BlazorT1Client.Authentication
                 if (!string.IsNullOrEmpty(userAsJson))
                 {
                     cachedUser = JsonSerializer.Deserialize<User>(userAsJson);
+                    await ValidateLogin(cachedUser.Email, cachedUser.Password);
                     identity = SetupClaimsForUser(cachedUser);
                 }
             }
@@ -70,18 +74,28 @@ namespace SEP3BlazorT1Client.Authentication
             try
             {
                 cachedUser = await _userService.ValidateUserAsync(email, password);
+                var _guest = await _guestService.GetGuestByEmail(email);
+                var _host = await _hostService.GetHostByEmail(email);
                 if (await _administrationService.GetAdminByEmail(email) != null)
                 {
                     isAdmin = true;
                 }
 
-                else if (await _guestService.GetGuestByEmail(email) != null)
+                else if (_host != null)
                 {
-                    isGuest = true;
-                }
-                else if (await _hostService.GetHostByEmail(email) != null)
-                {
+                    if (_host.IsApprovedHost)
+                    {
+                        _isApprovedHost = true;
+                    }
                     isHost = true;
+                }
+                else if (_guest != null)
+                {
+                    if (_guest.IsApprovedGuest)
+                    {
+                        _isApprovedGuest = true;
+                    }
+                    isGuest = true;
                 }
 
                 identity = SetupClaimsForUser(cachedUser);
@@ -99,7 +113,7 @@ namespace SEP3BlazorT1Client.Authentication
         private  ClaimsIdentity SetupClaimsForUser(User user)
         {
             var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
+            claims.Add(new Claim(ClaimTypes.Name, user.Email));
             claims.Add(new Claim("lastName", user.LastName));
             claims.Add(new Claim("email", user.Email));
             claims.Add(new Claim("phoneNumber", user.PhoneNumber));
@@ -107,17 +121,31 @@ namespace SEP3BlazorT1Client.Authentication
             if (isAdmin)
             {
                 Console.WriteLine("Admin");
+                claims.Add(new Claim("Approved", "Host"));
+                claims.Add(new Claim("Approved", "Guest"));
                 claims.Add(new Claim("Role", "Admin"));
             }
             else if (isHost)
             {
+                if (_isApprovedHost)
+                {
+                    claims.Add(new Claim("Approved", "Host"));
+                }
                 Console.WriteLine("Host");
                 claims.Add(new Claim("Role", "Host"));
             }
             else if (isGuest)
             {
-                Console.WriteLine("Guest");
-                claims.Add(new Claim("Role", "Guest"));
+                if (_isApprovedHost)
+                {
+                    claims.Add(new Claim("Approved", "Host"));
+                    if (_isApprovedGuest)
+                    {
+                        claims.Add(new Claim("Approved", "Guest"));
+                    }
+                    Console.WriteLine("Guest");
+                    claims.Add(new Claim("Role", "Guest"));
+                }
             }
             var identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;

@@ -4,6 +4,7 @@ using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes.GuestResponseTypes;
 using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Data.Impl
@@ -19,29 +20,32 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"mutation($newGuest:GuestInput){
                           createGuest(guest:$newGuest){
-                            viaId,
+                            viaId
                             guestReviews{
-                              rating,
-                              text,
-                              hostEmail,
+                              rating
+                              text
+                              hostEmail
                               createdDate
-                            },
-                            isApprovedGuest,
-                            id,
-                            firstName,
-                            lastName,
-                            phoneNumber,
-                            email,
-                            password,
+                              guestId
+                              hostId
+                            }
+                            isApprovedGuest
                             hostReviews{
-                              viaId,
-                              rating,
-                              text,
-                            createdDate
-                            },
-                            profileImageUrl,
-                            cpr,
+                              rating
+                              text
+                              guestId
+                              createdDate
+                              hostId
+                            }
+                            cpr
                             isApprovedHost
+                            id
+                            email
+                            password
+                            firstName
+                            lastName
+                            phoneNumber
+                            profileImageUrl
                           }
                         }",
                 Variables = new {newGuest = guest}

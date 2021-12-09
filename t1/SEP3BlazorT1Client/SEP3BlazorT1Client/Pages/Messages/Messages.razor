@@ -1,0 +1,296 @@
+@page "/Messages"
+@using SEP3BlazorT1Client.Models
+@using SEP3BlazorT1Client.Components.ChatConversationEntry
+@using SEP3BlazorT1Client.Components.ChatMessage
+@using Microsoft.AspNetCore.SignalR.Client
+@using SEP3BlazorT1Client.Data
+@using System.Text.Json
+@using AngleSharp.Common
+@inject NavigationManager NavigationManager; 
+@inject IMatDialogService MatDialogService;
+@inject AuthenticationStateProvider AuthenticationStateProvider; 
+@inject IUserService UserService
+
+<AuthorizeView Policy="MustBeHost">
+    <Authorized>
+        @if (!_connectionFailed)
+        {
+            if (_messages != null)
+            {
+                <div class="mat-layout-grid">
+                    <div class="mat-layout-grid-inner">
+                        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-3 chat-conversations">
+                            <div class="chat-conversations__search">
+                                <h4>All messages </h4>
+                                <MatTextField Label="Filter by email" @bind-Value="@ConversationFilter" Outlined="true" OnKeyPress="@FilterConversations"/>
+                                <MatButton OnClick="@StartNewConversation" Label="Start new conversation"/>
+                                <hr/>
+                            </div>
+                            @foreach (var conversation in _usersInConversationToShow.Keys)
+                            {
+                                <MatButton OnClick="@(() => { SetReceiver(_usersInConversation[conversation]); })" Style="min-height: 80px !important;">
+                                    <ChatConversationEntry User="@_usersInConversation[conversation]"/>
+                                </MatButton>
+                                <hr/>
+                            }
+                        </div>
+                        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-9 chat-window">
+                            <div class="chat-window__header">
+                                @if (_receiver != null)
+                                {
+                                    <h3>You are chatting with: @_receiver.FirstName</h3>
+                                    <hr/>
+                                }
+                                else
+                                {
+                                    <h3>No conversation chosen yet</h3>
+                                    <hr/>
+                                }
+                            </div>
+
+                            <div class="chat-window__messages">
+                                @foreach (var message in _messages)
+                                {
+                                    if (_receiver != null)
+                                    {
+                                        @if (message.Receiver.Id == _receiver.Id || message.Sender.Id == _receiver.Id)
+                                        {
+                                            <div class="mb-3">
+                                                <ChatMessage Message="message"/>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            </div>
+
+                            <div class="chat-window__input">
+                                <div class="container-fluid d-flex flex-row">
+                                    @if (_receiver != null)
+                                    {
+                                        <MatTextField @bind-Value="@_messageContent" Outlined="true" FullWidth="true" Style="background-color: #ddd;"/>
+                                        <MatButton Label="Send" Raised="true" OnClick="@(async () => await SendMessage())"/>
+                                    }
+                                </div>
+                                <p hidden="@(!_isSendingMessage)">
+                                    <MatProgressBar Indeterminate="true" Reversed="true"></MatProgressBar>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <MatDialog @bind-IsOpen="@_addingNewConversation">
+                    <MatDialogTitle>Starting a new conversation</MatDialogTitle>
+                    <MatDialogContent>
+                        <p>Enter email of the user you want to chat with</p>
+                        <MatTextField @bind-Value="@_newConversationEmail" FullWidth="true" Label="Email"/>
+                        <p class="error-label">@_errorMessage</p>
+                    </MatDialogContent>
+                    <MatDialogActions>
+                        <MatButton OnClick="@(e => { _addingNewConversation = !_addingNewConversation; })">Cancel</MatButton>'
+                        <MatButton OnClick="@CreateConversation">Start</MatButton>
+                    </MatDialogActions>
+                </MatDialog>
+            }
+            else
+            {
+                <div class="container-fluid d-flex justify-content-center">
+                    <div class="row">
+                        <div class="col">
+                            <p>
+                                <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Something went wrong, try again later...</p>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <div class="container-fluid d-flex justify-content-center">
+            <div class="row">
+                <div class="col">
+                    <p>You must be logged in to chat.</p>
+                </div>
+            </div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+    private Queue<Message> _messages;
+    private HubConnection _connection;
+    private bool _addingNewConversation = false;
+    private bool _isSendingMessage = false;
+    private string _conversationFilter = "";
+    private User _sender;
+    private User _receiver;
+    private IDictionary<string, User> _usersInConversation = new Dictionary<string, User>();
+    private IDictionary<string, User> _usersInConversationToShow = new Dictionary<string, User>();
+    private bool _connectionFailed = false;
+
+    public string ConversationFilter
+    {
+        get => _conversationFilter;
+        set
+        {
+            _conversationFilter = value;
+            StateHasChanged();
+            FilterConversations();
+        }
+    }
+
+    private string _messageContent = "";
+    private string _newConversationEmail = "";
+    private string _errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await ConnectToServer();
+            PopulateUsersInConversation();
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            _connectionFailed = true;
+        }
+    }
+
+
+    private async Task ConnectToServer()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        foreach (var userClaim in user.Claims)
+        {
+            Console.WriteLine(userClaim.Value.ToString());
+        }
+        if (user.Identity.IsAuthenticated)
+        {
+            _sender = await UserService.GetUserByEmailAsync(user.Identity.Name);
+            _connection = new HubConnectionBuilder().WithUrl($"https://localhost:5001/chat?email={_sender.Email}").WithAutomaticReconnect().Build();
+            _connection.On<string>("ReceiveMessage", ReceiveMessage);
+            _connection.On<string>("ReceiveUserMessages", ReceiveUserMessages);
+            await _connection.StartAsync();
+            await _connection.InvokeAsync("GetMessages");
+            _connectionFailed = false;
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+    }
+
+    private void ReceiveMessage(string messageAsJson)
+    {
+        _isSendingMessage = false;
+        var messageReceived = JsonSerializer.Deserialize<Message>(messageAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+        _messages.Enqueue(messageReceived);
+        Console.WriteLine("Received new message");
+    // Adding user to window of conversations if the user have never chatted with the sender before. 
+        if (messageReceived.Sender.Email != _sender.Email && !_usersInConversation.ContainsKey(messageReceived.Sender.Email))
+        {
+            _usersInConversation.TryAdd(messageReceived.Sender.Email, messageReceived.Sender);
+        }
+        StateHasChanged();
+    }
+
+    private void PopulateUsersInConversation()
+    {
+        foreach (var message in _messages)
+        {
+            if (message.Receiver.Email != _sender.Email && !_usersInConversation.ContainsKey(message.Receiver.Email))
+            {
+                _usersInConversation.TryAdd(message.Receiver.Email, message.Receiver);
+            }
+            if (message.Sender.Email != _sender.Email && !_usersInConversation.ContainsKey(message.Sender.Email))
+            {
+                _usersInConversation.TryAdd(message.Sender.Email, message.Sender);
+            }
+        }
+        _usersInConversationToShow = _usersInConversation;
+    }
+
+    private void FilterConversations()
+    {
+        if (!string.IsNullOrEmpty(ConversationFilter))
+        {
+            _usersInConversationToShow = _usersInConversation.Where(mapEntry => mapEntry.Key.ToLower().Contains(ConversationFilter.ToString())).ToDictionary(k => k.Key, v => v.Value);
+            Console.WriteLine("Filtering conversation");
+            StateHasChanged();
+        }
+        else
+        {
+            _usersInConversationToShow = _usersInConversation;
+            Console.WriteLine("Unfiltering conversation");
+
+            StateHasChanged();
+        }
+    }
+
+    private void ReceiveUserMessages(string messagesAsJson)
+    {
+        Console.WriteLine($"Received messages: {messagesAsJson}");
+        var receivedMessages = JsonSerializer.Deserialize<Queue<Message>>(messagesAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+        _messages = receivedMessages;
+        StateHasChanged();
+    }
+
+    private void SetReceiver(User user)
+    {
+        _receiver = user;
+        StateHasChanged();
+    }
+
+    private void StartNewConversation()
+    {
+        _newConversationEmail = "";
+        _errorMessage = "";
+        _addingNewConversation = true;
+    }
+
+    private async void CreateConversation()
+    {
+        try
+        {
+            var user = await UserService.GetUserByEmailAsync(_newConversationEmail);
+            if (user == null)
+            {
+                _errorMessage = "Not found";
+                StateHasChanged();
+            }
+            _usersInConversation.TryAdd(user.Email, user);
+            _errorMessage = "";
+            _addingNewConversation = false;
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            _errorMessage = "Not found";
+            StateHasChanged();
+        }
+    }
+
+    private async Task SendMessage()
+    {
+        if (_receiver != null)
+        {
+            Message newMessage = new()
+            {
+                Sender = _sender,
+                Content = _messageContent, Receiver = _receiver, TimeSent = DateTime.Now
+            };
+            _isSendingMessage = true;
+            var newMessageAsJson = JsonSerializer.Serialize(newMessage, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+            await _connection.InvokeAsync("SendMessage", newMessageAsJson);
+            _messageContent = "";
+        }
+    }
+
+}

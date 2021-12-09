@@ -8,13 +8,11 @@
     <PackageReference Include="GraphQL.Client" Version="4.0.1" />
     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="4.0.1" />
     <PackageReference Include="MatBlazor" Version="2.8.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.12" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="StrawberryShake.Transport.Http" Version="12.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Pages\AdminView\AdminLogin.cs">
-      <DependentUpon>AdminLogin.razor</DependentUpon>
-    </Compile>
     <Compile Update="Pages\RentRequest\RentRequests.cs">
       <DependentUpon>RentRequests.razor</DependentUpon>
     </Compile>
@@ -24,11 +22,23 @@
     <Compile Update="Pages\RentRequest\GuestReviews.cs">
       <DependentUpon>GuestReviews.razor</DependentUpon>
     </Compile>
+    <Compile Update="Pages\UserProfile\UserView.cs">
+      <DependentUpon>UserView.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\UserProfile\MyProfile.cs">
+      <DependentUpon>MyProfile.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\UserLogin\Login.cs">
+      <DependentUpon>Login.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\UserProfile\HostReviews.cs">
+      <DependentUpon>MyReviews.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\UserProfile\GuestReviews.cs">
+      <DependentUpon>GuestReviews.razor</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Pages\AdminView\AdminLogin.css">
-      <DependentUpon>AdminLogin.razor</DependentUpon>
-    </None>
     <None Update="Pages\RentRequest\RentRequests.css">
       <DependentUpon>RentRequests.razor</DependentUpon>
     </None>

@@ -86,7 +86,6 @@ public class Residence
     this.type = type;
   }
 
-  @JsonProperty("isAvailable")
   public boolean isAvailable()
   {
     return isAvailable;
@@ -127,14 +126,14 @@ public class Residence
     this.facilities = facilities;
   }
 
-  public String getImageURL()
+  public String getImageUrl()
   {
     return imageUrl;
   }
 
-  public void setImageURL(String imageURL)
+  public void setImageUrl(String imageUrl)
   {
-    this.imageUrl = imageURL;
+    this.imageUrl = imageUrl;
   }
 
   public LocalDate getAvailableFrom()
@@ -157,19 +156,13 @@ public class Residence
     this.availableTo = availableTo;
   }
 
-  public String getImageUrl() {
-    return imageUrl;
-  }
-
-  public void setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
-  }
-
-  public int getMaxNumberOfGuests() {
+  public int getMaxNumberOfGuests()
+  {
     return maxNumberOfGuests;
   }
 
-  public void setMaxNumberOfGuests(int maxNumberOfGuests) {
+  public void setMaxNumberOfGuests(int maxNumberOfGuests)
+  {
     this.maxNumberOfGuests = maxNumberOfGuests;
   }
 

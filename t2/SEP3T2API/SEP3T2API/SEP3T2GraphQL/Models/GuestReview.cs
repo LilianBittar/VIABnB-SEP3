@@ -16,5 +16,11 @@ namespace SEP3T2GraphQL.Models
         public string HostEmail { get; set; }
         [JsonProperty("createdDate")]
         public DateTime CreatedDate { get; set; }
+        [Required]
+        [JsonProperty("guestId")]
+        public int GuestId { get; set; }
+        [Required]
+        [JsonProperty("hostId")]
+        public int HostId { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
+using SEP3BlazorT1Client.Data.Impl.ResponseTypes.UserResponseTypes;
 using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Data.Impl
@@ -96,7 +97,51 @@ namespace SEP3BlazorT1Client.Data.Impl
             HandleErrorResponse(response);
             return response.Data.User;
         }
-        
+
+        public async Task<User> UpdateUserAsync(User user)
+        {
+            var mutation = new GqlQuery()
+            {
+                Query = @"mutation($newUser: UserInput){
+                          updateUser(user:$newUser){
+                            id
+                            email
+                            password
+                            firstName
+                            lastName
+                            phoneNumber
+                            profileImageUrl
+                          }
+                        }",
+                Variables = new {newUser = user}
+            };
+            var response = await _client.PostQueryAsync<UpdateUserResponseType>(mutation);
+            HandleErrorResponse(response);
+            return response.Data.User;
+        }
+
+        public async Task<User> DeleteUserAsync(User user)
+        {
+            var mutation = new GqlQuery()
+            {
+                Query = @"mutation($dUser: UserInput){
+                          deleteUser(user:$dUser){
+                            id
+                            email
+                            password
+                            firstName
+                            lastName
+                            phoneNumber
+                            profileImageUrl
+                          }
+                        }",
+                Variables = new {dUser = user}
+            };
+            var response = await _client.PostQueryAsync<DeleteUserResponseType>(mutation);
+            HandleErrorResponse(response);
+            return response.Data.User;
+        }
+
         private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)
         {
             if (response.Errors != null)

@@ -9,8 +9,7 @@
 @inject IRentalService RentalService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
-@* TODO: Add AuthorizeView *@
-<AuthorizeView Policy="MustBeGuest">
+<AuthorizeView Context="Auth" Policy="MustBeApprovedGuest">
     <Authorized>
         @if (_newRentRequest.Residence != null)
         {
@@ -104,39 +103,48 @@
 
     protected override async Task OnInitializedAsync()
     {
-        EditContext = new EditContext(_newRentRequest);
+        try
+        {
+            EditContext = new EditContext(_newRentRequest);
     // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
     // var user = authState.User;
     // if (user.Identity.IsAuthenticated)
     // {
     //TODO: Get authenticated guest instead of hard-coded guest. 
     // var guest = await GuestService.GetGuestById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
-        // var guest = await GuestService.GetGuestById(3);
-        var guest = new Guest()
-        {
-            Cpr = "3333333333", Email = "test@test.test", Id = 2, Password = "Test123", FirstName = "test", GuestReviews = new List<GuestReview>(),
-            HostReviews = new List<HostReview>(), LastName = "test", PhoneNumber = "33333333", ViaId = 293886, IsApprovedGuest = false, IsApprovedHost = true, ProfileImageUrl = "test"
-        }; 
-        var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
-        if (guest != null)
-        {
-            _newRentRequest.Guest = guest;
-        }
-        else
-        {
-            NavigationManager.NavigateTo("/");
-        }
-        if (residence != null)
-        {
-            _newRentRequest.Residence = residence;
-        }
-        EditContext = new EditContext(_newRentRequest);
-        Console.WriteLine(JsonSerializer.Serialize(_newRentRequest));
+    // var guest = await GuestService.GetGuestById(3);
+            var guest = new Guest()
+            {
+                Cpr = "3333333333", Email = "test@test.test", Id = 2, Password = "Test123", FirstName = "test", GuestReviews = new List<GuestReview>(),
+                HostReviews = new List<HostReview>(), LastName = "test", PhoneNumber = "33333333", ViaId = 293886, IsApprovedGuest = false, IsApprovedHost = true, ProfileImageUrl = "test"
+            }; 
+            var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
+            if (guest != null)
+            {
+                _newRentRequest.Guest = guest;
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/");
+            }
+            if (residence != null)
+            {
+                _newRentRequest.Residence = residence;
+            }
+            EditContext = new EditContext(_newRentRequest);
+            Console.WriteLine(JsonSerializer.Serialize(_newRentRequest));
     // }
     // else
     // {
     //     NavigationManager.NavigateTo("/login");
     // }
+        }
+        catch (Exception e)
+        {
+            _errorMessage = "";
+            _errorMessage = "Something went wrong.. try refreshing the page";
+        }
+     
     }
 
     private int GetTotalDays()

@@ -8,6 +8,6 @@ namespace SEP3T2GraphQL.Services
     {
         Task<GuestReview> CreateGuestReviewAsync(GuestReview guestReview);
         Task<GuestReview> UpdateGuestReviewAsync(GuestReview guestReview);
-        Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestIdAsync(int id);
+        Task<IEnumerable<GuestReview>> GetAllGuestReviewsByHostIdAsync(int id);
     }
 }

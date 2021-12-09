@@ -18,7 +18,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             client = new HttpClient();
         }
         
-        public async Task<HostReview> CreateGuestReviewAsync(HostReview hostReview)
+        public async Task<HostReview> CreateHostReviewAsync(HostReview hostReview)
         {
             var hostAsJson = JsonSerializer.Serialize(hostReview, new JsonSerializerOptions()
             {
@@ -42,7 +42,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return createdHostReview;
         }
 
-        public async Task<HostReview> UpdateGuestReviewAsync(HostReview hostReview)
+        public async Task<HostReview> UpdateHostReviewAsync(HostReview hostReview)
         {
             var hostAsJson = JsonSerializer.Serialize(hostReview, new JsonSerializerOptions()
             {
@@ -64,7 +64,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return updatedHostReview;
         }
 
-        public async Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id)
+        public async Task<IEnumerable<HostReview>> GetAllHostReviewsByGuestIdAsync(int id)
         {
             var response = await client.GetAsync($"{uri}/{id}");
             if (!response.IsSuccessStatusCode)

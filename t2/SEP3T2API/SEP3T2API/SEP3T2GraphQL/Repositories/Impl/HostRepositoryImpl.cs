@@ -21,8 +21,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
         
         public async Task<Host> RegisterHostAsync(Host host)
         {
-            System.Console.WriteLine($"{this} was passed args: {JsonSerializer.Serialize(host)}");
-            
+
             string newHost = JsonSerializer.Serialize(host, new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
@@ -31,8 +30,10 @@ namespace SEP3T2GraphQL.Repositories.Impl
             Console.WriteLine(newHost);
             StringContent content = new StringContent(newHost, Encoding.UTF8, "application/json");
             HttpResponseMessage responseMessage = await client.PostAsync(uri + "/host", content);
+            Console.WriteLine("before if in rep");
             if (!responseMessage.IsSuccessStatusCode)
             {
+                Console.WriteLine("inside if in rep");
                 Console.WriteLine(await responseMessage.Content.ReadAsStringAsync());
                 throw new Exception(await responseMessage.Content.ReadAsStringAsync());
             }
@@ -48,7 +49,9 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Host> GetHostByEmail(string email)
         {
+            Console.WriteLine("before get host by email");
             var response = await client.GetAsync(uri + $"/host?email={email}");
+            Console.WriteLine("after get host by email");
 
             Console.WriteLine(await response.Content.ReadAsStringAsync());
             if (!response.IsSuccessStatusCode)
@@ -58,6 +61,10 @@ namespace SEP3T2GraphQL.Repositories.Impl
             }
             
             var result = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrEmpty(result))
+            {
+                return null;
+            }
             var host = JsonSerializer.Deserialize<Host>(result, new JsonSerializerOptions(
                 new JsonSerializerOptions
                 {

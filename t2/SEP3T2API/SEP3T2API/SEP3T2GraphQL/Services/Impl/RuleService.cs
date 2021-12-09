@@ -36,5 +36,31 @@ namespace SEP3T2GraphQL.Services.Impl
 
             return ruleListToReturn;
         }
+
+        public async Task<Rule> UpdateRuleAsync(Rule rule)
+        {
+            try
+            {
+                return await _ruleRepository.UpdateRule(rule);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<Rule> DeleteRule(Rule rule)
+        {
+            try
+            {
+               return await _ruleRepository.DeleteRule(rule);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

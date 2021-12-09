@@ -35,28 +35,44 @@
                 <MatButtonLink class="text-white nav-link mat-elevation-z14" Match="NavLinkMatch.All" href="/" Style="margin-right: 1em;">
                     Home
                 </MatButtonLink> 
+                <AuthorizeView Policy="MustBeHost">
+                    <Authorized>
+                        <MatButtonLink class="text-white nav-link mat-elevation-z14" Match="NavLinkMatch.All" href="/User" Style="margin-right: 1em;">
+                            My Page
+                        </MatButtonLink>
+                    </Authorized>
+                </AuthorizeView>
                 <MatButtonLink class="text-white nav-link mat-elevation-z14" Match="NavLinkMatch.All" href="/residences" Style="margin-right: 1em;">
                     Browse
                 </MatButtonLink>
                 
-                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/registerresidence" Style="margin-right: 1em;">
+                <AuthorizeView Policy="MustBeGuest">
+                    <NotAuthorized>
+                        <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/BecomeGuest" Style="margin-right: 1em;">
+                            Become Guest
+                        </MatButtonLink>
+                    </NotAuthorized>
+                </AuthorizeView>
+                <AuthorizeView Policy="MustBeAdmin">
+                    <Authorized>
+                        <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/UserRequests" Style="margin-right: 1em;">
+                            Administration
+                        </MatButtonLink>
+                    </Authorized>
+                </AuthorizeView>
+                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/about" Style="margin-right: 1em;">
                     About
                 </MatButtonLink>
-                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/RentRequests" Style="margin-right: 1em;">
-                    Rent Requests
-                </MatButtonLink>
-                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/RentRequestHistory" Style="margin-right: 1em;">
-                    Rent Requests history
-                </MatButtonLink>
-                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/BecomeGuest" Style="margin-right: 1em;">
-                    Become Guest
-                </MatButtonLink>
-                <MatButtonLink class="text-white nav-link mat-elevation-z14" href="/AdminLogin" Style="margin-right: 1em;">
-                    Administration
-                </MatButtonLink>
-                <MatButton class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
-                    Log out
-                </MatButton>
+                <AuthorizeView>
+                    <Authorized>
+                        <MatButton class="text-white nav-link mat-elevation-z14" OnClick="LogOut" Style="margin-right: 1em;">
+                            Log out
+                        </MatButton>
+                    </Authorized>
+                    <NotAuthorized>
+                        <MatButton Class="text-white nav-link mat-elevation-z14" OnClick="ToLogin" Style="margin-right: 1em;">Login</MatButton>
+                    </NotAuthorized>
+                </AuthorizeView>
             </MatAppBarSection>
         </MatAppBarRow>
     </MatAppBar>
@@ -72,7 +88,7 @@
                             Register New Residence
                         </MatListItem>
                         <MatListItem Href="/hostresidences" OnClick="@(()=>_opened= !_opened)">
-                          My Residences
+                            My Residences
                         </MatListItem>
                         <MatListItem Href="/registerhost" OnClick="@(()=>_opened= !_opened)">
                             Register As Host
@@ -113,5 +129,10 @@
         catch (Exception e)
         {
         }
+    }
+
+    private void ToLogin()
+    {
+        NavigationManager.NavigateTo("Login");
     }
 }
