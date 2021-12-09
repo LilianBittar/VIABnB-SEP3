@@ -179,13 +179,13 @@ CREATE TABLE IF NOT EXISTS message
 
 --The system's admins
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
-VALUES ('291597@via.dk', '1234', 'Kutaiba', 'Kashmar', '+4511111111', 'image');
+VALUES ('291597@via.dk', 'Aa123456', 'Kutaiba', 'Kashmar', '11111111', 'image');
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
-VALUES ('293886@via.dk', '1234', 'Michael', 'Bui', '+4522222222', 'image');
+VALUES ('293886@via.dk', 'Aa123456', 'Michael', 'Bui', '22222222', 'image');
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
-VALUES ('304218@via.dk', '1234', 'Kasper', 'Jensen', '+4533333333', 'image');
+VALUES ('304218@via.dk', 'Aa123456', 'Kasper', 'Jensen', '33333333', 'image');
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
-VALUES ('293336@via.dk', '1234', 'Lilian', 'Bittar', '+4544444444', 'image');
+VALUES ('293336@via.dk', 'Aa123456', 'Lilian', 'Bittar', '44444444', 'image');
 
 INSERT INTO Admin(initials)
 VALUES ('KNK');
@@ -198,46 +198,46 @@ VALUES ('LBB');
 
 --Other users
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
-VALUES ('john@gmail.com', 'Aa11', 'John', 'Johnson', '+4555555555', 'image');
+VALUES ('john@gmail.com', 'Aa123456', 'John', 'Johnson', '55555555', 'image');
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
-VALUES ('bob@gmail.com', 'Aa11', 'Bob', 'Bobsen', '+4566666666', 'image');
+VALUES ('bob@gmail.com', 'Aa123456', 'Bob', 'Bobsen', '66666666', 'image');
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
-VALUES ('sara@hotmail.com', 'Aa11', 'Sara', 'Sarsen', '+4577777777', 'image');
+VALUES ('sara@hotmail.com', 'Aa123456', 'Sara', 'Sarsen', '77777777', 'image');
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
-VALUES ('alice@outlook.com', 'Aa11', 'Alice', 'Aliceson', '+458888888', 'image');
+VALUES ('alice@outlook.com', 'Aa123456', 'Alice', 'Aliceson', '8888888', 'image');
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
-VALUES ('shrek@ogre.org', 'Aa11', 'Shrek', 'Shrekson', '+4599999999', 'image');
+VALUES ('shrek@ogre.org', 'Aa123456', 'Shrek', 'Shrekson', '99999999', 'image');
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
-VALUES ('mario@nintendo.org', 'Aa11', 'Mario', 'Mario', '+4510000000', 'image');
+VALUES ('mario@nintendo.org', 'Aa123456', 'Mario', 'Mario', '10000000', 'image');
 
 --Host
 INSERT INTO Host(hostid, cprNumber, isApproved)
-VALUES (5, '1111111111', false);
+VALUES (5, '1111111111', true);
 INSERT INTO Host(hostid, cprNumber, isApproved)
-VALUES (6, '2222222222', false);
+VALUES (6, '2222222222', true);
 INSERT INTO Host(hostid, cprNumber, isApproved)
-VALUES (7, '3333333333', false);
+VALUES (7, '3333333333', true);
 INSERT INTO Host(hostid, cprNumber, isApproved)
-VALUES (8, '444444444', false);
+VALUES (8, '444444444', true);
 INSERT INTO Host(hostid, cprNumber, isApproved)
-VALUES (9, '5555555555', false);
+VALUES (9, '5555555555', true);
 INSERT INTO Host(hostid, cprNumber, isApproved)
-VALUES (10, '6666666666', false);
+VALUES (10, '6666666666', true);
 
 --Guest
 
 INSERT INTO Guest(guestid, viaId, isApprovedGuest)
-VALUES (5, 111111, false);
+VALUES (5, 111111, true);
 INSERT INTO Guest(guestid, viaId, isApprovedGuest)
-VALUES (6, 222222, false);
+VALUES (6, 222222, true);
 INSERT INTO Guest(guestid, viaId, isApprovedGuest)
-VALUES (7, 333333, false);
+VALUES (7, 333333, true);
 INSERT INTO Guest(guestid, viaId, isApprovedGuest)
-VALUES (8, 444444, false);
+VALUES (8, 444444, true);
 INSERT INTO Guest(guestid, viaId, isApprovedGuest)
-VALUES (9, 555555, false);
+VALUES (9, 555555, true);
 INSERT INTO Guest(guestid, viaId, isApprovedGuest)
-VALUES (10, 666666, false);
+VALUES (10, 666666, true);
 
 --City
 

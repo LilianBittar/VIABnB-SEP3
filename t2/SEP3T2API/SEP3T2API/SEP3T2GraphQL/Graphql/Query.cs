@@ -182,6 +182,10 @@ namespace SEP3T2GraphQL.Graphql
         {
             return await _residenceReviewService.GetAllByResidenceIdAsync(residenceId);
         }
-        
+
+        public async Task<Guest> GetGuestById(int guestId)
+        {
+            return await _guestService.GetGuestById(guestId);
+        }
     }
 }

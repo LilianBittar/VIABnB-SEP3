@@ -130,9 +130,13 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
     public RentRequest approveRentRequest(RentRequest request) {
         try (Connection connection = getConnection()) {
             PreparedStatement stm = connection.prepareStatement(
-                    "UPDATE rentrequest SET status = 'APPROVED' WHERE rentrequestid = ?");
+                    "UPDATE rentrequest SET status = 'APPROVED' WHERE rentrequestid = ?;");
             stm.setInt(1, request.getId());
             stm.executeUpdate();
+            PreparedStatement stm2 = connection.prepareStatement
+                ("UPDATE residence SET isavailable = false WHERE residenceid = ?");
+            stm2.setInt(1, request.getResidence().getId());
+            stm2.executeUpdate();
             connection.commit();
             return request;
         } catch (SQLException throwables) {
