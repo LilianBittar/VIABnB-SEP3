@@ -12,12 +12,11 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
     public partial class UserView
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
-        [Inject] public IHostService HostService { get; set; }
-        [Inject] public IGuestService GuestService { get; set; }
+        [Inject] public IUserService UserService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public AuthenticationStateProvider AuthStateProvider { get; set; }
         
-        private Host _host;
+        private User _user;
         private bool _dialogIsOpen = false;
         private string _errorLabel = "";
         
@@ -30,7 +29,15 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
             {
                 Console.WriteLine($"{claim.Type.ToString()} {claim.Value}");
             }
-            _host = await HostService.GetHostByEmail((user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value));
+
+            try
+            {
+                _user = await UserService.GetUserByEmailAsync((user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value));
+            }
+            catch (Exception e)
+            {
+                _errorLabel = e.Message;
+            }
 
             if (!user.Identity.IsAuthenticated)
             {
@@ -48,9 +55,13 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
             NavigationManager.NavigateTo($"MyProfile/{id}");
         }
 
-        private void ToMyReviews()
+        private void ToHostReviews(int id)
         {
-            NavigationManager.NavigateTo("MyReviews");
+            NavigationManager.NavigateTo($"HostReviews/{id}");
+        }
+        private void ToGuestReviews()
+        {
+            NavigationManager.NavigateTo("GuestReviews");
         }
 
         private void ToMyMail()

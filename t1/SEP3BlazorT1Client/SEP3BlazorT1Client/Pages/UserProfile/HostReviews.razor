@@ -1,3 +1,56 @@
-@page "/HostReviews"
-<h3>MyReviews</h3>
-
+@page "/HostReviews/{Id:int}"
+@if (_hostReviewList == null)
+{
+    <h3 class="mat-subtitle1">Loading</h3>
+    <MatProgressCircle Indeterminate="true"/>
+}
+else if (!_hostReviewList.Any())
+{
+    <p>
+        <em>There are no host requests at the moment....</em>
+    </p>
+}
+else
+{
+    <MatAccordion Multi="true">
+        @foreach (var item in _hostReviewList)
+        {
+            <MatExpansionPanel>
+                <MatExpansionPanelSummary>
+                    <MatExpansionPanelHeader>
+                        <p>@item.Rating</p>
+                    </MatExpansionPanelHeader>
+                    <MatExpansionPanelSubHeader>
+                        @item.CreatedDate
+                    </MatExpansionPanelSubHeader>
+                    <MatExpansionPanelDetails>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <MatSubtitle2>@item.Rating</MatSubtitle2>
+                                </div>
+                                <div class="form-group">
+                                    <MatSubtitle2>@item.Text</MatSubtitle2>
+                                </div>
+                                <div class="form-group">
+                                    <MatSubtitle2>@item.CreatedDate</MatSubtitle2>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @_guest.FirstName
+                                </div>
+                                <div class="form-group">
+                                    @_guest.LastName
+                                </div>
+                                <div class="form-group">
+                                    @_guest.Email
+                                </div>
+                            </div>
+                        </div>
+                    </MatExpansionPanelDetails>
+                </MatExpansionPanelSummary>
+            </MatExpansionPanel>
+        }
+    </MatAccordion>
+}

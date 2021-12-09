@@ -125,7 +125,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             var mutation = new GqlQuery()
             {
                 Query = @"mutation($dUser: UserInput){
-                          updateUser(user:$dUser){
+                          deleteUser(user:$dUser){
                             id
                             email
                             password

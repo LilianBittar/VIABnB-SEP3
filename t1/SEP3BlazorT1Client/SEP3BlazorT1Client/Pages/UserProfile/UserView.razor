@@ -12,7 +12,7 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="(() => ToMyProfile(_host.Id))">More</MatButton>
+                            <MatButton @onclick="(() => ToMyProfile(_user.Id))">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Account_circle" Class="user-icons"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -40,7 +40,7 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="ToMyReviews">More</MatButton>
+                            <MatButton @onclick="@(() => ToHostReviews(_user.Id))">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -162,7 +162,7 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="ToMyReviews">More</MatButton>
+                            <MatButton>More</MatButton>
                             <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon>
                         </MatCardActions>
                     </MatCard>

@@ -87,12 +87,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
-            var userToReturn = JsonSerializer.Deserialize<User>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
 
-            return userToReturn;
+            return user;
         }
 
         private static async Task HandleErrorResponse(HttpResponseMessage response)

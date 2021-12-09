@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using SEP3BlazorT1Client.Authentication;
 using SEP3BlazorT1Client.Data;
 using SEP3BlazorT1Client.Models;
 
@@ -55,8 +56,16 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
 
         private async Task DeleteProfile()
         {
-            await UserService.DeleteUserAsync(_user);
-            NavigationManager.NavigateTo("Login");
+            var deletedUser = await UserService.DeleteUserAsync(_user);
+            if (deletedUser != null)
+            {
+                ((CustomAuthenticationStateProvider) AuthStateProvider).Logout();
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                Console.WriteLine("can't delete");
+            }
         }
         
         private async Task<User> UpdateUser()

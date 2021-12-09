@@ -21,24 +21,26 @@ namespace SEP3BlazorT1Client.Data.Impl
         {
             GqlQuery registerHostMutation = new GqlQuery()
             {
-                    Query = @"mutation($newHost: HostInput) {
-                                  hostReviews{
-                                  rating
-                                  text
-                                  guestId
-                                  createdDate
-                                  hostId
-                                }
-                                cpr
-                                isApprovedHost
-                                id
-                                email
-                                password
-                                firstName
-                                lastName
-                                phoneNumber
-                                profileImageUrl
+                    Query = @"mutation($newHost: HostInput) 
+                                {
+                                  registerHost(host:$newHost){
+                                  hostReviews {
+                                    rating
+                                    text
+                                    guestId
+                                    createdDate
+                                    hostId
                                   }
+                                  cpr
+                                  isApprovedHost
+                                  id
+                                  email
+                                  password
+                                  firstName
+                                  lastName
+                                  phoneNumber
+                                  profileImageUrl
+                                }
                                 }",
                 Variables = new {newHost = host}
             };

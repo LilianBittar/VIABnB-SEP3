@@ -137,11 +137,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
             });
             var response = await client.DeleteAsync($"{uri}/residences/{residence}");
             await HandleErrorResponse(response);
-            var residenceToReturn = JsonSerializer.Deserialize<Residence>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
-            return residenceToReturn;
+            
+            return residence;
         }
 
         private static async Task HandleErrorResponse(HttpResponseMessage response)
