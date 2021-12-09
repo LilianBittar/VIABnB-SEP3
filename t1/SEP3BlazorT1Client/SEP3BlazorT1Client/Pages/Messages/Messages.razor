@@ -9,98 +9,113 @@
 @inject IMatDialogService MatDialogService;
 @inject AuthenticationStateProvider AuthenticationStateProvider; 
 @inject IUserService UserService
-@if (!_connectionFailed)
-{
-    if (_messages != null)
-    {
-        <div class="mat-layout-grid">
-            <div class="mat-layout-grid-inner">
-                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-3 chat-conversations">
-                    <div class="chat-conversations__search">
-                        <h4>All messages </h4>
-                        <MatTextField Label="Search" @bind-Value="@_filterConversations" Outlined="true"/>
-                        <MatButton OnClick="@StartNewConversation" Label="Start new conversation"/>
-                        <hr/>
-                    </div>
-                    @foreach (var conversation in _usersInConversation.Keys)
-                    {
-                        <MatButton OnClick="@(() => { SetReceiver(_usersInConversation[conversation]); })" Style="min-height: 80px !important;">
-                            <ChatConversationEntry User="@_usersInConversation[conversation]"/>
-                        </MatButton>
-                        <hr/>
-                    }
-                </div>
-                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-9 chat-window">
-                    <div class="chat-window__header">
-                        @if (_receiver != null)
-                        {
-                            <h3>@_receiver.FirstName</h3>
-                            <hr/>
-                        }
-                        else
-                        {
-                            <h3>No conversation chosen yet</h3>
-                            <hr/>
-                        }
-                    </div>
 
-                    <div class="chat-window__messages">
-                        @foreach (var message in _messages)
-                        {
-                            if (_receiver != null)
+<AuthorizeView Policy="MustBeHost">
+    <Authorized>
+        @if (!_connectionFailed)
+        {
+            if (_messages != null)
+            {
+                <div class="mat-layout-grid">
+                    <div class="mat-layout-grid-inner">
+                        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-3 chat-conversations">
+                            <div class="chat-conversations__search">
+                                <h4>All messages </h4>
+                                <MatTextField Label="Search" @bind-Value="@_filterConversations" Outlined="true"/>
+                                <MatButton OnClick="@StartNewConversation" Label="Start new conversation"/>
+                                <hr/>
+                            </div>
+                            @foreach (var conversation in _usersInConversation.Keys)
                             {
-                                @if (message.Receiver.Id == _receiver.Id || message.Sender.Id == _receiver.Id)
+                                <MatButton OnClick="@(() => { SetReceiver(_usersInConversation[conversation]); })" Style="min-height: 80px !important;">
+                                    <ChatConversationEntry User="@_usersInConversation[conversation]"/>
+                                </MatButton>
+                                <hr/>
+                            }
+                        </div>
+                        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-9 chat-window">
+                            <div class="chat-window__header">
+                                @if (_receiver != null)
                                 {
-                                    <div class="mb-3">
-                                        <ChatMessage Message="message"/>
-                                    </div>
+                                    <h3>@_receiver.FirstName</h3>
+                                    <hr/>
                                 }
-                            }
-                        }
-                    </div>
+                                else
+                                {
+                                    <h3>No conversation chosen yet</h3>
+                                    <hr/>
+                                }
+                            </div>
 
-                    <div class="chat-window__input">
-                        <div class="container-fluid d-flex flex-row">
-                            @if (_receiver != null)
-                            {
-                                <MatTextField @bind-Value="@_messageContent" Outlined="true" FullWidth="true" Style="background-color: #ddd;"/>
-                                <MatButton Label="Send" Raised="true" OnClick="@(async () => await SendMessage())"/>
-                            }
+                            <div class="chat-window__messages">
+                                @foreach (var message in _messages)
+                                {
+                                    if (_receiver != null)
+                                    {
+                                        @if (message.Receiver.Id == _receiver.Id || message.Sender.Id == _receiver.Id)
+                                        {
+                                            <div class="mb-3">
+                                                <ChatMessage Message="message"/>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            </div>
+
+                            <div class="chat-window__input">
+                                <div class="container-fluid d-flex flex-row">
+                                    @if (_receiver != null)
+                                    {
+                                        <MatTextField @bind-Value="@_messageContent" Outlined="true" FullWidth="true" Style="background-color: #ddd;"/>
+                                        <MatButton Label="Send" Raised="true" OnClick="@(async () => await SendMessage())"/>
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <MatDialog @bind-IsOpen="@_addingNewConversation">
-            <MatDialogTitle>Starting a new conversation</MatDialogTitle>
-            <MatDialogContent>
-                <p>Enter email of the user you want to chat with</p>
-                <MatTextField @bind-Value="@_newConversationEmail" FullWidth="true" Label="Email"/>
-                <p class="error-label">@_errorMessage</p>
-            </MatDialogContent>
-            <MatDialogActions>
-                <MatButton OnClick="@(e => { _addingNewConversation = !_addingNewConversation; })">Cancel</MatButton>'
-                <MatButton OnClick="@CreateConversation">Start</MatButton>
-            </MatDialogActions>
-        </MatDialog>
-    }
-    else
-    {
+                <MatDialog @bind-IsOpen="@_addingNewConversation">
+                    <MatDialogTitle>Starting a new conversation</MatDialogTitle>
+                    <MatDialogContent>
+                        <p>Enter email of the user you want to chat with</p>
+                        <MatTextField @bind-Value="@_newConversationEmail" FullWidth="true" Label="Email"/>
+                        <p class="error-label">@_errorMessage</p>
+                    </MatDialogContent>
+                    <MatDialogActions>
+                        <MatButton OnClick="@(e => { _addingNewConversation = !_addingNewConversation; })">Cancel</MatButton>'
+                        <MatButton OnClick="@CreateConversation">Start</MatButton>
+                    </MatDialogActions>
+                </MatDialog>
+            }
+            else
+            {
+                <div class="container-fluid d-flex justify-content-center">
+                    <div class="row">
+                        <div class="col">
+                            <p>
+                                <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Something went wrong, try again later...</p>
+        }
+    </Authorized>
+    <NotAuthorized>
         <div class="container-fluid d-flex justify-content-center">
             <div class="row">
                 <div class="col">
-                    <p>
-                        <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
-                    </p>
+                    <p>You must be logged in to chat.</p>
                 </div>
             </div>
         </div>
-    }
-}
-else
-{
-    <p>Something went wrong, try again later...</p>
-}
+    </NotAuthorized>
+</AuthorizeView>
+
 
 @code {
     private Queue<Message> _messages;
