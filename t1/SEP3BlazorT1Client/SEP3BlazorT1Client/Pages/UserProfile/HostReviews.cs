@@ -20,15 +20,19 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         private IEnumerable<HostReview> _hostReviewList = new List<HostReview>();
         private Guest _guest = new Guest();
 
-        private bool isLoading;
+        private bool _isLoading;
 
         protected override async Task OnInitializedAsync()
         {
-            isLoading = true;
+            _isLoading = true;
             _hostReviewList = await HostReviewService.GetAllHostReviewsByHostIdAsync(Id);
-            _guest = await GuestService.GetGuestById(Id);
             StateHasChanged();
-            isLoading = false;
+            _isLoading = false;
+        }
+
+        private async Task<Guest> GetGuestById(int guestId)
+        {
+            return await GuestService.GetGuestById(guestId);
         }
     }
 }

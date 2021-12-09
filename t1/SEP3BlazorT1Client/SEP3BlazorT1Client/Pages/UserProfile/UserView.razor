@@ -162,7 +162,7 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton>More</MatButton>
+                            <MatButton @onclick="@(() => ToGuestReviews(_user.Id))">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon>
                         </MatCardActions>
                     </MatCard>

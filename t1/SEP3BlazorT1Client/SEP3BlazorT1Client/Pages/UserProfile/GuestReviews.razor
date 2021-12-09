@@ -1,6 +1,55 @@
-@page "/GuestReviews"
-<h3>GuestReviews</h3>
-
-@code {
-    
+@page "/GuestReviews/{Id:int}"
+@if (_guestReviewList == null)
+{
+    <h3 class="mat-subtitle1">Loading</h3>
+    <MatProgressCircle Indeterminate="true"/>
+}
+else if (!_guestReviewList.Any())
+{
+    <p>
+        <em>There are no host requests at the moment....</em>
+    </p>
+}
+else
+{
+    <MatAccordion Multi="true">
+        @foreach (var item in _guestReviewList)
+        {
+            <MatExpansionPanel>
+                <MatExpansionPanelSummary>
+                    <MatExpansionPanelHeader>
+                        <p>@item.Rating</p>
+                    </MatExpansionPanelHeader>
+                    <MatExpansionPanelSubHeader>
+                        @item.CreatedDate
+                    </MatExpansionPanelSubHeader>
+                </MatExpansionPanelSummary>
+                <MatExpansionPanelDetails>
+                    <div class="mat-layout-grid mat-layout-grid-align-left" style="max-width: 800px;">
+                        <div class="mat-layout-grid-inner">
+                            <div class="mat-layout-grid-cell">
+                                <div class="form-group">
+                                    <MatSubtitle2>Rating: @item.Rating</MatSubtitle2>
+                                </div>
+                                <div class="form-group">
+                                    <MatSubtitle2>Description: @item.Text</MatSubtitle2>
+                                </div>
+                                <div class="form-group">
+                                    <MatSubtitle2>Date of review: @item.CreatedDate</MatSubtitle2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mat-layout-grid-cell">
+                            <div class="form-group">
+                                <MatSubtitle2>Reviewd by: </MatSubtitle2>
+                            </div>
+                            <div class="form-group">
+                                <MatSubtitle2>Reviewrs e-mail: </MatSubtitle2>
+                            </div>
+                        </div>
+                    </div>
+                </MatExpansionPanelDetails>
+            </MatExpansionPanel>
+        }
+    </MatAccordion>
 }

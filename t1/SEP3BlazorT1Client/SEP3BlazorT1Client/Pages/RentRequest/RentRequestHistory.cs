@@ -32,7 +32,7 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
 
         private void ViewGuestReviews(int id)
         {
-            NavigationManager.NavigateTo($"GuestReviews/{id}");
+            NavigationManager.NavigateTo($"Reviews/{id}");
         }
     }
 }

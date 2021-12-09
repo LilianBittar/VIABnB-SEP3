@@ -10,7 +10,7 @@ using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Pages.RentRequest
 {
-    public partial class GuestReviews
+    public partial class Reviews
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }

@@ -23,33 +23,32 @@ else
                     <MatExpansionPanelSubHeader>
                         @item.CreatedDate
                     </MatExpansionPanelSubHeader>
-                    <MatExpansionPanelDetails>
-                        <div class="row">
-                            <div class="col-md-6">
+                </MatExpansionPanelSummary>
+                <MatExpansionPanelDetails>
+                    <div class="mat-layout-grid mat-layout-grid-align-left" style="max-width: 800px;">
+                        <div class="mat-layout-grid-inner">
+                            <div class="mat-layout-grid-cell">
                                 <div class="form-group">
-                                    <MatSubtitle2>@item.Rating</MatSubtitle2>
+                                    <MatSubtitle2>Rating: @item.Rating</MatSubtitle2>
                                 </div>
                                 <div class="form-group">
-                                    <MatSubtitle2>@item.Text</MatSubtitle2>
+                                    <MatSubtitle2>Description: @item.Text</MatSubtitle2>
                                 </div>
                                 <div class="form-group">
-                                    <MatSubtitle2>@item.CreatedDate</MatSubtitle2>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    @_guest.FirstName
-                                </div>
-                                <div class="form-group">
-                                    @_guest.LastName
-                                </div>
-                                <div class="form-group">
-                                    @_guest.Email
+                                    <MatSubtitle2>Date of review: @item.CreatedDate</MatSubtitle2>
                                 </div>
                             </div>
                         </div>
-                    </MatExpansionPanelDetails>
-                </MatExpansionPanelSummary>
+                        <div class="mat-layout-grid-cell">
+                            <div class="form-group">
+                                <MatSubtitle2>Reviewd by: @_guest.FirstName @_guest.LastName</MatSubtitle2>
+                            </div>
+                            <div class="form-group">
+                                <MatSubtitle2>Reviewrs e-mail: </MatSubtitle2>
+                            </div>
+                        </div>
+                    </div>
+                </MatExpansionPanelDetails>
             </MatExpansionPanel>
         }
     </MatAccordion>

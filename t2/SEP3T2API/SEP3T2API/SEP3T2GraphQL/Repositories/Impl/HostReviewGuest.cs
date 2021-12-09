@@ -80,5 +80,22 @@ namespace SEP3T2GraphQL.Repositories.Impl
             });
             return responseList;
         }
+
+        public async Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id)
+        {
+            var response = await client.GetAsync($"{uri}/host/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            var result = await response.Content.ReadAsStringAsync();
+            var responseList = JsonSerializer.Deserialize<List<HostReview>>(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return responseList;
+        }
     }
 }

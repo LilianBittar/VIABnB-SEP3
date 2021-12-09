@@ -19,8 +19,8 @@
     <Compile Update="Pages\RentRequest\RentRequestHistory.cs">
       <DependentUpon>RentRequestHistory.razor</DependentUpon>
     </Compile>
-    <Compile Update="Pages\RentRequest\GuestReviews.cs">
-      <DependentUpon>GuestReviews.razor</DependentUpon>
+    <Compile Update="Pages\RentRequest\Reviews.cs">
+      <DependentUpon>Reviews.razor</DependentUpon>
     </Compile>
     <Compile Update="Pages\UserProfile\UserView.cs">
       <DependentUpon>UserView.razor</DependentUpon>
@@ -45,7 +45,7 @@
     <None Update="Pages\RentRequest\RentRequestHistory.css">
       <DependentUpon>RentRequestHistory.razor</DependentUpon>
     </None>
-    <None Update="Pages\RentRequest\GuestReviews.css">
+    <None Update="Pages\RentRequest\Reviews.css">
       <DependentUpon>GuestReviews.razor</DependentUpon>
     </None>
   </ItemGroup>

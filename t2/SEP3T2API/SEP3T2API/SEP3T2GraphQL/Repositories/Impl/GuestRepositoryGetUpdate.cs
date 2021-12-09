@@ -20,7 +20,10 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 throw new Exception(await response.Content.ReadAsStringAsync()); 
             }
 
-            var fetchedGuest = JsonSerializer.Deserialize<Guest>(await response.Content.ReadAsStringAsync());
+            var fetchedGuest = JsonSerializer.Deserialize<Guest>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
             return fetchedGuest;
         }
 

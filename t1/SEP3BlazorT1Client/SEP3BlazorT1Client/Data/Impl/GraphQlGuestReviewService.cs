@@ -75,7 +75,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             var query = new GqlQuery()
             {
                 Query = @"query($guestId:Int!){
-                              allGuestReviewsByHostId(id:$guestId){
+                              allGuestReviewsByGuestId(id:$guestId){
                                 rating
                             text
                             hostEmail
