@@ -84,6 +84,36 @@ public class GuestReviewDAOImpl extends BaseDao implements GuestReviewDAO
     }
   }
 
+  @Override public List<GuestReview> getAllGuestReviewsByGuestId(int id)
+  {
+    List<GuestReview> guestReviewList = new ArrayList<>();
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement
+          ("SELECT * FROM guestreview WHERE guestid = ?");
+      stm.setInt(1, id);
+      ResultSet result = stm.executeQuery();
+      while (result.next())
+      {
+        GuestReview guestReview = new GuestReview
+            (
+                result.getDouble("guestrating"),
+                result.getString("guestreviewtext"),
+                LocalDate.parse(result.getDate("createddate").toString()),
+                result.getInt("guestid"),
+                result.getInt("hostid"),
+                hostDAO.getHostById(result.getInt("hostid")).getEmail()
+            );
+        guestReviewList.add(guestReview);
+      }
+      return guestReviewList;
+    }
+    catch (SQLException throwables)
+    {
+      throw new IllegalStateException(throwables.getMessage());
+    }
+  }
+
   private Host getHostById(int id)
   {
     try (Connection connection = getConnection())

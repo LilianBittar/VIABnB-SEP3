@@ -35,7 +35,7 @@ public class HostReviewDAOImpl extends BaseDao implements HostReviewDAO {
     @Override
     public HostReview updateHostReview(HostReview hostReview) {
         try (Connection connection = getConnection()) {
-            PreparedStatement stm = connection.prepareStatement("UPDATE hostview " +
+            PreparedStatement stm = connection.prepareStatement("UPDATE hostreview " +
                     "SET hostrating = ?, hostreviewtext = ?, createddate = ? " +
                     "where hostid = ? and guestid = ?");
             stm.setDouble(1, hostReview.getRating());
@@ -72,6 +72,35 @@ public class HostReviewDAOImpl extends BaseDao implements HostReviewDAO {
         } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());
 
+        }
+    }
+
+    @Override public List<HostReview> getAllHostReviewsByHostId(int id)
+    {
+        List<HostReview> hostReviewList = new ArrayList<>();
+        try(Connection connection = getConnection())
+        {
+            PreparedStatement stm = connection.prepareStatement
+                ("SELECT * FROM hostreview WHERE hostid = ?");
+            stm.setInt(1, id);
+            ResultSet result = stm.executeQuery();
+            while (result.next())
+            {
+                HostReview hostReview = new HostReview
+                    (
+                        result.getDouble("hostrating"),
+                        result.getString("hostreviewtext"),
+                        result.getInt("guestid"),
+                        LocalDate.parse(result.getDate("createddate").toString()),
+                        result.getInt("hostid")
+                    );
+                hostReviewList.add(hostReview);
+            }
+            return hostReviewList;
+        }
+        catch (SQLException throwables)
+        {
+            throw new IllegalStateException(throwables.getMessage());
         }
     }
 }

@@ -21,10 +21,18 @@ public class HostReviewController {
         this.hostReviewDAO = hostReviewDAO;
     }
 
-    @GetMapping("/hostreviews/{id}")
-    public ResponseEntity<List<HostReview>> getAllHostReviews(@PathVariable("id") int id)
+   /* @GetMapping("/hostreviews/guest/{id}")
+    public ResponseEntity<List<HostReview>> getAllHostReviewsBuGuestId(@PathVariable("id") int id)
     {
         List<HostReview> hostReviews = hostReviewDAO.getAllHostReviewsByGuestId(id);
+        LOGGER.info("Request for: " + gson.toJson(hostReviews));
+        return ResponseEntity.ok(hostReviews);
+    }*/
+
+    @GetMapping("/hostreviews/host/{id}")
+    public ResponseEntity<List<HostReview>> getAllHostReviewsByHostId(@PathVariable("id") int id)
+    {
+        List<HostReview> hostReviews = hostReviewDAO.getAllHostReviewsByHostId(id);
         LOGGER.info("Request for: " + gson.toJson(hostReviews));
         return ResponseEntity.ok(hostReviews);
     }

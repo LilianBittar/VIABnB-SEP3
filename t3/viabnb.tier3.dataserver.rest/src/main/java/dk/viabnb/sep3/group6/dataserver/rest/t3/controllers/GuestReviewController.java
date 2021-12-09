@@ -28,10 +28,17 @@ public class GuestReviewController
     this.guestReviewDAO = guestReviewDAO;
   }
 
-  @GetMapping("/guestreviews/{id}")
+  /*@GetMapping("/guestreviews/{id}")
   public ResponseEntity<List<GuestReview>> getAllGuestReviews(@PathVariable("id") int id)
   {
     List<GuestReview> guestReviews = guestReviewDAO.getAllGuestReviewsByHostId(id);
+    LOGGER.info("Request for: " + gson.toJson(guestReviews));
+    return ResponseEntity.ok(guestReviews);
+  }*/
+  @GetMapping("/guestreviews/{id}")
+  public ResponseEntity<List<GuestReview>> getAllGuestReviewsByGuestId(@PathVariable("id") int id)
+  {
+    List<GuestReview> guestReviews = guestReviewDAO.getAllGuestReviewsByGuestId(id);
     LOGGER.info("Request for: " + gson.toJson(guestReviews));
     return ResponseEntity.ok(guestReviews);
   }
