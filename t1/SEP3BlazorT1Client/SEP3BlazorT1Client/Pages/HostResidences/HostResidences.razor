@@ -35,7 +35,7 @@
 {
     <MatProgressBar Indeterminate="true" Reversed="true"></MatProgressBar>
 }
-@if (_residences.Count == 0)
+else if (_residences.Count == 0)
 {
     <p> You have no registered residences. Press the button below to register one.</p>
     <MatButton OnClick="@(() => NavigationManager.NavigateTo("/registerresidence"))" Label="Go to residence registration"></MatButton>
@@ -69,7 +69,14 @@ else
                         </MatCardContent>
                         <MatCardActions>
                             <MatButton OnClick="@(() => OpenResidenceDetailsDialog(residence))">Details</MatButton>
-                            <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
+                            @if (!residence.IsAvailable)
+                            {
+                                <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
+                            }
+                            else
+                            {
+                                <MatButton Class="bg-danger" OnClick="@(() => SetToPrivate(residence))">set to private</MatButton>
+                            }
                         </MatCardActions>
                     </MatCard>
                 </div>
@@ -246,7 +253,7 @@ else
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
     IEnumerable<ResidenceReview> ResidenceReviews = new List<ResidenceReview>();
 
-    IList<Residence> _residences = new List<Residence>();
+    IList<Residence> _residences;
 
     Residence ResidenceForRent = new Residence();
     Residence ViewedResidence = new Residence();
@@ -283,6 +290,14 @@ else
         viewResidenceDetailsDialog = true;
     }
 
+   async void SetToPrivate(Residence residence)
+   {
+       residence.IsAvailable = false;
+       Residence updatedResidence = await ResidenceService.UpdateResidenceAsync(residence);
+       residence.IsAvailable = updatedResidence.IsAvailable;
+       StateHasChanged();
+    }
+
     private async void OkClick()
     {
     //clear error messages
@@ -311,12 +326,6 @@ else
             dialogIsOpen = false;
             Console.WriteLine("succes");
         }
-    }
-
-
-    private async Task<Residence> ChangeAvailability(Residence residence)
-    {
-        return await ResidenceService.UpdateResidenceAvailabilityAsync(residence);
     }
 
 }

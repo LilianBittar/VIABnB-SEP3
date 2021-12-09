@@ -202,6 +202,7 @@ import java.util.List;
     }
     catch (Exception e)
     {
+      LOGGER.error("Connection failed " + e.getMessage());
       return ResponseEntity.internalServerError().build();
     }
   }

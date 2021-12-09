@@ -103,7 +103,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Query =
                     @"mutation($residenceInput: ResidenceInput)
                       {
-                        updateAvailabilityStatus(residence: $residenceInput)
+                        updateResidenceAvailability(residence: $residenceInput)
                             {
                             id
                               address {
@@ -318,6 +318,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 id
                                 streetName
                                 streetNumber
+                                houseNumber
                                 city {
                                   id
                                   cityName

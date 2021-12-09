@@ -5,7 +5,7 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes.ResidenceResponseTypes
 {
     public class ResidenceUpdateAvailabilityResponsetype
     {
-        [JsonProperty("updateAvailabilityStatus")]
+        [JsonProperty("updateResidenceAvailability")]
         public Residence UpdateResidenceAvailability { get; set; }
     }
 }
