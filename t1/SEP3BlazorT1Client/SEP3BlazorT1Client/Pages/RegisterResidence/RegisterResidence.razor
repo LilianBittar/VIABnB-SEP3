@@ -69,6 +69,11 @@
                                 </p>
 
                                 <p>
+                                    <MatTextField Label="Max number of guests" @bind-Value="_newResidence.MaxNumberOfGuests"/>
+                                    <ValidationMessage For="@(() => _newResidence.PricePerNight)"/>
+                                </p>
+
+                                <p>
                                     <MatButton OnClick="@(() => AddNewRule())">Add new Rule</MatButton>
                                     <MatButton OnClick="@(() => OpenAddFacilityDialog())">Add Facility</MatButton>
                                 </p>
