@@ -34,12 +34,18 @@ namespace SEP3T2GraphQL.Services.Impl
                 throw new ArgumentException("Message cannot be null");
             }
 
-            var existingUser = await _userRepository.GetUserByIdAsync(message.Receiver.Id);
-            if (existingUser == null)
+            try
             {
-                throw new KeyNotFoundException("Receiver does not exist");
+                var existingUser = await _userRepository.GetUserByIdAsync(message.Receiver.Id);
+                if (existingUser == null)
+                {
+                    throw new KeyNotFoundException("Receiver does not exist");
+                }
             }
-
+            catch (NullReferenceException e)
+            {
+                    throw new KeyNotFoundException("Receiver does not exist");
+            }
             try
             {
                 message.TimeSent = DateTime.UtcNow;
