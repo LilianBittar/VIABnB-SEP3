@@ -70,19 +70,15 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             HttpContent content = new StringContent(guestAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PatchAsync($"{uri}/{residence.Id}", content);
+            HttpResponseMessage response = await client.PutAsync($"{uri}/residences/{residence.Id}", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
+            
 
-            var updatedResidence = JsonSerializer.Deserialize<Residence>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
-
-            return updatedResidence;
+            return residence;
         }
 
         public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
@@ -145,6 +141,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
         {
             if (!response.IsSuccessStatusCode)
             {
+                Console.WriteLine(await response.Content.ReadAsStringAsync()+" " + response.StatusCode);
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
         }

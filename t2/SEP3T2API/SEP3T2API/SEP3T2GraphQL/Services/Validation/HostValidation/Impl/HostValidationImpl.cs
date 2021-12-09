@@ -9,18 +9,18 @@ using SEP3T2GraphQL.Services.Impl;
 namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 {
     public class HostValidationImpl : IHostValidation
-    {
-        private IHostRepository _repository;
+    {private IHostRepository _repository;
+        private IUserService _userService;
 
-        public HostValidationImpl(IHostRepository repository)
+        public HostValidationImpl( IUserService userService)
         {
-            _repository = repository;
+            _userService = userService;
         }
 
         public async Task<bool> IsValidEmail(string email)
         {
-            Host host = await _repository.GetHostByEmail(email);
-            if (host == null)
+            User user = await _userService.GetUserByEmailAsync(email);
+            if (user == null)
             {
                 if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
                 {
@@ -37,7 +37,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 
                 throw new FormatException("email not formatted correctly");
             }
-            throw new ArgumentException("Host already exists");
+            throw new ArgumentException("Email already in use");
         }
 
         public bool IsValidFirstname(string firstname)

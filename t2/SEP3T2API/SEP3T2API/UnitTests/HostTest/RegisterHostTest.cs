@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
@@ -17,13 +18,15 @@ namespace UnitTests
         private Host host = new Host();
         private IHostService HostService;
         private Mock<IHostRepository> HostRepository;
+        private Mock<IUserService> _userService;
+
 
         [SetUp]
         public void SetUp()
         {
             HostRepository = new Mock<IHostRepository>();
-            
-            HostService = new HostServiceImpl(HostRepository.Object,new HostValidationImpl(HostRepository.Object));
+            _userService = new Mock<IUserService>();
+            HostService = new HostServiceImpl(HostRepository.Object,new HostValidationImpl(_userService.Object));
         }
 
         [Test]
@@ -70,6 +73,44 @@ namespace UnitTests
 
             //act and assert
             Assert.ThrowsAsync<FormatException>(() => HostService.RegisterHostAsync(host));
+        }
+        
+        [Test]
+        public void IsValidHost_EmailAlreadyExists_Throws()
+        {
+            //arange
+            User user = new Host()
+            {
+                Id = 0,
+                FirstName = "Kasper",
+                LastName = "Bobsen",
+                Email = "bob@gmail.com",
+                HostReviews = null,
+                IsApprovedHost = false,
+                Password = "Hejmaeddig123",
+                PhoneNumber = "12345678",
+                ProfileImageUrl = null
+            };
+            
+            User user2 = new Host()
+            {
+                Id = 5,
+                FirstName = "Bob",
+                LastName = "Bobsen",
+                Email = "bob@gmail.com",
+                HostReviews = null,
+                IsApprovedHost = false,
+                Password = "Hejmaeddig123",
+                PhoneNumber = "12345678",
+                ProfileImageUrl = null
+            };
+            
+            _userService
+                .Setup<User>(x => x.GetUserByEmailAsync(host.Email).Result)
+                .Returns(user2);
+
+            //act and assert
+            Assert.ThrowsAsync<ArgumentException>(() => HostService.RegisterHostAsync(host));
         }
         
         [TestCase("Kasper34")]
