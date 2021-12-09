@@ -13,9 +13,44 @@ namespace SEP3BlazorT1Client.Data.Impl
 {
     public partial class GraphQlGuestService : IGuestService
     {
-        public Task<Guest> GetGuestById(int id)
+        public async Task<Guest> GetGuestById(int id)
         {
-            throw new System.NotImplementedException();
+            var query = new GqlQuery()
+            {
+                Query = @"query($guestId:Int!){
+                              guestById(guestId:$guestId){
+                                viaId
+                                guestReviews{
+                                  rating
+                                  text
+                                  hostEmail
+                                  createdDate
+                                  guestId
+                                  hostId
+                                }
+                                isApprovedGuest
+                                hostReviews{
+                                  rating
+                                  text
+                                  guestId
+                                  createdDate
+                                  hostId
+                                }
+                                cpr
+                                isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
+                              }
+                            }",
+                Variables = new {guestId = id}
+            };
+            var response = await _client.PostQueryAsync<GuestByIdResponseType>(query);
+            return response.Data.Guest;
         }
 
         public async Task<Guest> GetGuestByEmail(string email)
