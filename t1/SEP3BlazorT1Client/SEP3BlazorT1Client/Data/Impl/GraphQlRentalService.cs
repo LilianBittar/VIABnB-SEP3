@@ -46,8 +46,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 hostReviews {
                                   rating
                                   text
-                                  viaId
+                                  guestId
                                   createdDate
+                                  hostId
                                 }
                                 profileImageUrl
                                 cpr
@@ -93,8 +94,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   hostReviews{
                                     rating
                                     text
-                                    viaId
+                                    guestId
                                     createdDate
+                                    hostId
                                   }
                                   profileImageUrl
                                   cpr
@@ -152,8 +154,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 hostReviews {
                                   rating
                                   text
-                                  viaId
+                                  guestId
                                   createdDate
+                                  hostId
                                 }
                                 profileImageUrl
                                 cpr
@@ -199,8 +202,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   hostReviews{
                                     rating
                                     text
-                                    viaId
+                                    guestId
                                     createdDate
+                                    hostId
                                   }
                                   profileImageUrl
                                   cpr
@@ -235,7 +239,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"query 
                           {
-                           allRentRequests{ id
+                           id
                               startDate
                               endDate
                               numberOfGuests
@@ -258,8 +262,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 hostReviews {
                                   rating
                                   text
-                                  viaId
+                                  guestId
                                   createdDate
+                                  hostId
                                 }
                                 profileImageUrl
                                 cpr
@@ -305,8 +310,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   hostReviews{
                                     rating
                                     text
-                                    viaId
+                                    guestId
                                     createdDate
+                                    hostId
                                   }
                                   profileImageUrl
                                   cpr
@@ -364,8 +370,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 hostReviews {
                                   rating
                                   text
-                                  viaId
+                                  guestId
                                   createdDate
+                                  hostId
                                 }
                                 profileImageUrl
                                 cpr
@@ -411,8 +418,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   hostReviews{
                                     rating
                                     text
-                                    viaId
+                                    guestId
                                     createdDate
+                                    hostId
                                   }
                                   profileImageUrl
                                   cpr
@@ -472,8 +480,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 hostReviews {
                                   rating
                                   text
-                                  viaId
+                                  guestId
                                   createdDate
+                                  hostId
                                 }
                                 profileImageUrl
                                 cpr
@@ -519,8 +528,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   hostReviews{
                                     rating
                                     text
-                                    viaId
+                                    guestId
                                     createdDate
+                                    hostId
                                   }
                                   profileImageUrl
                                   cpr
@@ -573,9 +583,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 hostReviews {
                                   rating
                                   text
-                                  viaId
+                                  guestId
                                   createdDate
-
+                                  hostId
                                 }
                                 profileImageUrl
                                 cpr
@@ -621,9 +631,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   hostReviews{
                                     rating
                                     text
-                                    viaId
-                                  createdDate
-
+                                    guestId
+                                    createdDate
+                                    hostId
                                   }
                                   profileImageUrl
                                   cpr
@@ -634,7 +644,6 @@ namespace SEP3BlazorT1Client.Data.Impl
                                   reviewText
                                   guestViaId
                                   createdDate
-
                                 }
                                 
                               }

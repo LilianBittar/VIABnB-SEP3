@@ -20,15 +20,13 @@ namespace SEP3BlazorT1Client.Data.Impl
         {
             var query = new GqlQuery()
             {
-                Query = @"mutation($newHostReview: hostReview) {
-                              createHostReview(
-                                hostReview: $newHostReview
-                              ) {
+                Query = @"mutation($newHostReview: HostReviewInput) {
+                              createHostReview(hostReview: $newHostReview) {
                                 rating
-                                reviewText
-                                viaId
-                                hostId
+                                text
+                                guestId
                                 createdDate
+                                hostId
                               }
                             }
                             ",
@@ -55,15 +53,16 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery updateHostReviewMutation = new GqlQuery()
             {
                 Query =
-                    @"mutation($newHostReview:hostReview){
-    updateHostReview(hostReview:$newHostReview) {
-                                rating
-                                reviewText
-                                viaId
-                                hostId
-                                createdDate
-                              }
-                             }",
+                    @"mutation($newHostReview: HostReviewInput) {
+                          updateHostReview(hostReview: $newHostReview) {
+                            rating
+                            text
+                            guestId
+                            createdDate
+                            hostId
+                          }
+                        }
+                        ",
 
                 Variables = new {newHostReview = hostReview}
             };
@@ -80,15 +79,16 @@ namespace SEP3BlazorT1Client.Data.Impl
         {
             var query = new GqlQuery()
             {
-                Query = @"query($hostId:Int!){
-                              allHostReviewsByHostId(id:$hostId){
+                Query = @"query($hostId: Int!) {
+                              allHostReviewsByHostId(id: $hostId) {
                                 rating
                                 text
-                                viaId
+                                guestId
                                 createdDate
                                 hostId
                               }
-                            }",
+                            }
+                            ",
                 Variables = new {hostId = id}
             };
             var graphQlResponse =

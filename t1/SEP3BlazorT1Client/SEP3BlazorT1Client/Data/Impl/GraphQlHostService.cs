@@ -22,22 +22,22 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery registerHostMutation = new GqlQuery()
             {
                     Query = @"mutation($newHost: HostInput) {
-                                  registerHost(host: $newHost) {
-                                hostReviews{
+                                  hostReviews{
                                   rating
                                   text
-                                  viaId
+                                  guestId
                                   createdDate
                                   hostId
                                 }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                    email
-                                    password
-                                    firstName
-                                    lastName
-                                    phoneNumber
+                                cpr
+                                isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
                                   }
                                 }",
                 Variables = new {newHost = host}
@@ -59,22 +59,22 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"query($hostEmail:String) {
                                   hostByEmail(email:$hostEmail) {
-                                    hostReviews {
-                                      rating
-                                      text
-                                      viaId,
-                                    createdDate
-
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
-                                    id
-                                    email
-                                    password
-                                    firstName
-                                    lastName
-                                    phoneNumber
+                                    hostReviews{
+                                  rating
+                                  text
+                                  guestId
+                                  createdDate
+                                  hostId
+                                }
+                                cpr
+                                isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
                                   }
                                 }
                             ",
@@ -94,22 +94,22 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"query($hostId: Int!) {
                                 hostById(id: $hostId) {
-                                    id
-                                    firstName
-                                    lastName
-                                    phoneNumber
-                                    email
-                                    password
-                                    hostReviews {
-                                    rating
-                                    text
-                                    viaId
-                                    createdDate
-
-                                    }
-                                    profileImageUrl
-                                    cpr
-                                    isApprovedHost
+                                    hostReviews{
+                                  rating
+                                  text
+                                  guestId
+                                  createdDate
+                                  hostId
+                                }
+                                cpr
+                                isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
                                 }
                             }
                             ",
@@ -125,7 +125,22 @@ namespace SEP3BlazorT1Client.Data.Impl
             var hostQuery = new GqlQuery()
             {
                 Query =
-                    @"query{allNotApprovedHost{id, firstName,lastName,phoneNumber,email,password,hostReviews{rating,text,viaId,createdDate},profileImageUrl,cpr,isApprovedHost}}",
+                    @"query{allNotApprovedHost{ hostReviews{
+                                  rating
+                                  text
+                                  guestId
+                                  createdDate
+                                  hostId
+                                }
+                                cpr
+                                isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl}}",
             };
             GqlRequestResponse<HostListResponseType> graphQlResponse =
                 await client.PostQueryAsync<HostListResponseType>(hostQuery);
@@ -139,21 +154,22 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"mutation($newHost:HostInput){
                           updateHostStatus(host:$newHost){
-                            id,
-                            firstName,
-                            lastName,
-                            phoneNumber,
-                            email,
-                            password,
-                            hostReviews{
-                              viaId,
-                              rating,
-                              text,
-                                createdDate
-                            },
-                            profileImageUrl,
-                            cpr,
-                            isApprovedHost
+                             hostReviews{
+                                  rating
+                                  text
+                                  guestId
+                                  createdDate
+                                  hostId
+                                }
+                                cpr
+                                isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
                           }
                         }",
                 Variables = new {newHost = host}
