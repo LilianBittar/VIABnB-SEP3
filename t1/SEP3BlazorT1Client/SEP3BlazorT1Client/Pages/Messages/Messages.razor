@@ -122,7 +122,7 @@
 
 
 @code {
-    private Queue<Message> _messages;
+    private IList<Message> _messages;
     private HubConnection _connection;
     private bool _addingNewConversation = false;
     private bool _isSendingMessage = false;
@@ -191,7 +191,7 @@
     {
         _isSendingMessage = false;
         var messageReceived = JsonSerializer.Deserialize<Message>(messageAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-        _messages.Enqueue(messageReceived);
+        _messages.Add(messageReceived);
         Console.WriteLine("Received new message");
     // Adding user to window of conversations if the user have never chatted with the sender before. 
         if (messageReceived.Sender.Email != _sender.Email && !_usersInConversation.ContainsKey(messageReceived.Sender.Email))
@@ -237,7 +237,7 @@
     private void ReceiveUserMessages(string messagesAsJson)
     {
         Console.WriteLine($"Received messages: {messagesAsJson}");
-        var receivedMessages = JsonSerializer.Deserialize<Queue<Message>>(messagesAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+        var receivedMessages = JsonSerializer.Deserialize<IList<Message>>(messagesAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         _messages = receivedMessages;
         StateHasChanged();
     }
