@@ -18,10 +18,10 @@ else
             <MatExpansionPanel>
                 <MatExpansionPanelSummary>
                     <MatExpansionPanelHeader>
-                        <p>@item.Rating</p>
+                        <p>Ratings: @item.Rating</p>
                     </MatExpansionPanelHeader>
                     <MatExpansionPanelSubHeader>
-                        @item.CreatedDate
+                        Date of review:  @item.CreatedDate
                     </MatExpansionPanelSubHeader>
                 </MatExpansionPanelSummary>
                 <MatExpansionPanelDetails>
@@ -41,10 +41,10 @@ else
                         </div>
                         <div class="mat-layout-grid-cell">
                             <div class="form-group">
-                                <MatSubtitle2>Reviewd by: @_guest.FirstName @_guest.LastName</MatSubtitle2>
+                                <MatSubtitle2>Reviewd by: @_guestList.First(guest => guest.Id == item.GuestId).FirstName @_guestList.First(guest => guest.Id == item.GuestId).LastName</MatSubtitle2>
                             </div>
                             <div class="form-group">
-                                <MatSubtitle2>Reviewrs e-mail: </MatSubtitle2>
+                                <MatSubtitle2>Reviewrs e-mail: @_guestList.First(guest => guest.Id == item.GuestId).Email</MatSubtitle2>
                             </div>
                         </div>
                     </div>

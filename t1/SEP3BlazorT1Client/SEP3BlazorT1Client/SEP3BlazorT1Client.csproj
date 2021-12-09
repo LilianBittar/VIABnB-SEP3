@@ -32,7 +32,7 @@
       <DependentUpon>Login.razor</DependentUpon>
     </Compile>
     <Compile Update="Pages\UserProfile\HostReviews.cs">
-      <DependentUpon>MyReviews.razor</DependentUpon>
+      <DependentUpon>HostReviews.razor</DependentUpon>
     </Compile>
     <Compile Update="Pages\UserProfile\GuestReviews.cs">
       <DependentUpon>GuestReviews.razor</DependentUpon>
