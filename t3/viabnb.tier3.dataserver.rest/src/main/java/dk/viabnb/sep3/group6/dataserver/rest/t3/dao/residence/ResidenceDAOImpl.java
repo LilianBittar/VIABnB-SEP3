@@ -117,7 +117,7 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO
     {
       PreparedStatement stm = connection.prepareStatement(
           "INSERT INTO residence(addressid, type, description, isavailable, priceprnight, availablefrom, "
-              + "availableto, imageurl, hostid) VALUES(?,?,?,?,?,?,?,?,?)",
+              + "availableto, imageurl, hostid, maxnumberofguests) VALUES(?,?,?,?,?,?,?,?,?,?)",
           Statement.RETURN_GENERATED_KEYS);
       stm.setInt(1, residence.getAddress().getId());
       stm.setString(2, residence.getType());
@@ -128,6 +128,7 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO
       stm.setDate(7, (Date.valueOf(residence.getAvailableTo())));
       stm.setString(8, residence.getImageUrl());
       stm.setInt(9, residence.getHost().getId());
+      stm.setInt(10, residence.getMaxNumberOfGuests());
       stm.executeUpdate();
       connection.commit();
       ResultSet keys = stm.getGeneratedKeys();

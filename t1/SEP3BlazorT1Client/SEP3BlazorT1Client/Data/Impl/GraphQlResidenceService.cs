@@ -513,6 +513,7 @@ namespace SEP3BlazorT1Client.Data.Impl
  at HotChocolate.Execution.Processing.Tasks.ResolverTask.ExecuteResolverPipelineAsync(CancellationToken cancellationToken)\r\n   at HotChocolate.Execution.Processing.Tasks.ResolverTask.TryExecuteAsync(CancellationToken cancellationToken)"}}]}
                 */
                 System.Console.WriteLine($"/n {this} Inside error, throwing new Exception.... /n");
+                System.Console.WriteLine($"{this} {JsonConvert.SerializeObject(mutationResponse.Errors)}");
                 // String manipulation to seperate the Error message from the sample error response. 
                 throw new ArgumentException(JsonConvert.SerializeObject(mutationResponse.Errors).Split(",")[4]
                     .Split(":")[2]);

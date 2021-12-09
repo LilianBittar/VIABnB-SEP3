@@ -58,9 +58,7 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 StateHasChanged();
                 if (user.Identity.IsAuthenticated)
                 {
-                    var host = await HostService.GetHostByEmail(user.Claims
-                        .FirstOrDefault(c => c.Type.ToString() == "email")
-                        .Value);
+                    var host = await HostService.GetHostByEmail(user.Identity.Name);
                     _newResidence.Host = host;
                     StateHasChanged();
                 }

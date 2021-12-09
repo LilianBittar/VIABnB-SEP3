@@ -38,7 +38,7 @@
                             <div class="chat-window__header">
                                 @if (_receiver != null)
                                 {
-                                    <h3>@_receiver.FirstName</h3>
+                                    <h3>You are chatting with: @_receiver.FirstName</h3>
                                     <hr/>
                                 }
                                 else
@@ -135,7 +135,7 @@
 
     public string ConversationFilter
     {
-        get => _conversationFilter; 
+        get => _conversationFilter;
         set
         {
             _conversationFilter = value;
@@ -189,6 +189,7 @@
 
     private void ReceiveMessage(string messageAsJson)
     {
+        _isSendingMessage = false;
         var messageReceived = JsonSerializer.Deserialize<Message>(messageAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         _messages.Enqueue(messageReceived);
         Console.WriteLine("Received new message");
@@ -197,7 +198,6 @@
         {
             _usersInConversation.TryAdd(messageReceived.Sender.Email, messageReceived.Sender);
         }
-        _isSendingMessage = false;
         StateHasChanged();
     }
 
@@ -286,10 +286,10 @@
                 Sender = _sender,
                 Content = _messageContent, Receiver = _receiver, TimeSent = DateTime.Now
             };
+            _isSendingMessage = true;
             var newMessageAsJson = JsonSerializer.Serialize(newMessage, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             await _connection.InvokeAsync("SendMessage", newMessageAsJson);
             _messageContent = "";
-            _isSendingMessage = true;
         }
     }
 

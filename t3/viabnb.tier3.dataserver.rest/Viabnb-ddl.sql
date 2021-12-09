@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS message
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
 VALUES ('291597@via.dk', '1234', 'Kutaiba', 'Kashmar', '+4511111111', 'image');
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
-VALUES ('293885@via.dk', '1234', 'Michael', 'Bui', '+4522222222', 'image');
+VALUES ('293886@via.dk', '1234', 'Michael', 'Bui', '+4522222222', 'image');
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
 VALUES ('304218@via.dk', '1234', 'Kasper', 'Jensen', '+4533333333', 'image');
 INSERT INTO _User(email, password, fName, lName, phoneNumber, personalImage)
