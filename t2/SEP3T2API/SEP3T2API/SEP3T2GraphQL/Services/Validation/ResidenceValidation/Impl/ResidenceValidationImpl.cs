@@ -14,7 +14,6 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
                 ((address.Id != null && address.Id >= 0) &&
                  (!string.IsNullOrEmpty(address.StreetName)) &&
                  (!string.IsNullOrEmpty(address.StreetNumber)) &&
-                 (!string.IsNullOrEmpty(address.HouseNumber)) &&
                  (!string.IsNullOrEmpty(address.City.CityName) && IsLettersOnly(address.City.CityName)) &&
                  ((address.City.ZipCode is >= 1000 and <= 9999) && address.City.ZipCode != null)))
             {
