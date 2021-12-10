@@ -1,0 +1,111 @@
+@page "/EditResidence/{Id:int}"
+<AuthorizeView Policy="MustBeApprovedHost">
+    <Authorized>
+        @if (_isLoading)
+        {
+            <h3 class="mat-subtitle1">Loading</h3>
+            <MatProgressCircle Indeterminate="true"/>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-4 left-bar">
+                    <br/>
+                    <div class="form-group">
+                        <img id="img" src="media/EditResidence.jpg" alt="Generic residence image"/>
+                    </div>
+                    <div class="form-group">
+                        <MatHeadline6>@_residence.Address.StreetName @_residence.Address.StreetNumber @_residence.Address.HouseNumber</MatHeadline6>
+                    </div>
+                    <div class="form-group">
+                        <MatHeadline5> @_residence.Address.City.CityName @_residence.Address.City.ZipCode</MatHeadline5>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <MatButton OnClick="@EditContent" TrailingIcon="edit" Unelevated="true" Style="width: 200px;">Edit Residence Info</MatButton>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <MatButton OnClick="@(_ => OpenConfirmUpdateFromService())" TrailingIcon="save" Unelevated="true" Style="height: 200px; background-color: green;">Save Changes</MatButton>
+                    </div>
+                    <MatSnackbar @bind-Value="@_snackBarIsOpen">
+                        <MatSnackbarContent>Your residence has been updated!!</MatSnackbarContent>
+                    </MatSnackbar>
+                    <br/>
+                    <div class="form-group">
+                        <MatButton OnClick="DeleteResidence" TrailingIcon="cancel" Unelevated="true" Style="background-color: red; width: 200px;">Delete My Residence</MatButton>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <MatButton OnClick="ToHostResidence" TrailingIcon="home" Unelevated="true" Style="width: 200px; background-color: blue;">Back To My Residence</MatButton>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <br/>
+                    <div class="form-group">
+                        <p>
+                            <MatTextField @bind-Value="_residence.Description" Label="Description" Icon="description" IconTrailing="true" FullWidth="true" Disabled="_isEditable" TextArea="true"></MatTextField>
+                        </p>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <p>
+                            <MatTextField @bind-Value="_residence.Type" Label="Type" Icon="label" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
+                        </p>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <p>
+                            <MatTextField @bind-Value="_residence.PricePerNight" Label="price per night" Icon="attach_money" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
+                        </p>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <p>
+                            <MatTextField @bind-Value="_residence.MaxNumberOfGuests" Label="Max number of guests" Icon="people_outline" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
+                        </p>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p> Start Date
+                                    <MatDatePicker @bind-Value="@_residence.AvailableFrom"></MatDatePicker>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    <p> End Date
+                                        <MatDatePicker @bind-Value="@_residence.AvailableTo"></MatDatePicker>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <br/>
+        <div id="warning-box">
+            <div class="form-group">
+                <p>You must be logged in to view the content of this page.<a id="redirect-link" href="Login">Go to login</a></p>
+            </div>
+            <br/>
+            <div class="form-group">
+                <img src="media/Stop.jpg" alt="Warning image" id="warning"/>
+            </div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>

@@ -113,7 +113,7 @@
             {
     //TODO: Get authenticated guest instead of hard-coded guest. 
                 var guest = await GuestService.GetGuestById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
-                var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
+                var residence = await ResidenceService.GetResidenceByIdAsync(ResidenceId);
                 if (guest != null)
                 {
                     _newRentRequest.Guest = guest;

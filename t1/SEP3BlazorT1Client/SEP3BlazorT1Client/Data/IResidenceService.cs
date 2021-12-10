@@ -11,7 +11,7 @@ namespace SEP3BlazorT1Client.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns> the found residence which matches the id of the parameter </returns>
-        Task<Residence> GetResidenceAsync(int id);
+        Task<Residence> GetResidenceByIdAsync(int id);
         /// <summary>
         /// method in order to create a new residence and store it in the system
         /// </summary>

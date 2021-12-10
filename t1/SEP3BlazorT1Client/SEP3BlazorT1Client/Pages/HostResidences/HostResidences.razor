@@ -87,6 +87,7 @@ else
                             {
                                 <MatButton Class="bg-danger" OnClick="@(() => SetToPrivate(residence))">set to private</MatButton>
                             }
+                            <MatButton OnClick="@(() => ToEditResidence(residence.Id))">Edit Residence</MatButton>
                         </MatCardActions>
                     </MatCard>
                 </div>
@@ -388,6 +389,11 @@ else
             dialogIsOpen = false;
             Console.WriteLine("success");
         }
+    }
+
+    private void ToEditResidence(int id)
+    {
+        NavigationManager.NavigateTo($"EditResidence/{id}");
     }
 
 }

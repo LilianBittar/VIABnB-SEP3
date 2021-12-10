@@ -38,6 +38,9 @@
       <DependentUpon>ReviewHost.razor</DependentUpon>
     </Compile>
     <Compile Remove="Pages\RentRequest\RentRequestHistory.cs" />
+    <Compile Update="Pages\HostResidences\EditResidence.cs">
+      <DependentUpon>EditResidence.razor</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Update="Pages\RentRequest\RentRequests.css">
@@ -50,6 +53,9 @@
       <DependentUpon>ReviewHost.razor</DependentUpon>
     </None>
     <None Remove="Pages\RentRequest\RentRequestHistory.css" />
+    <None Update="Pages\HostResidences\EditResidence.css">
+      <DependentUpon>EditResidence.razor</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Pages\RentRequest\RentRequestHistory.razor" />

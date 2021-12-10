@@ -83,7 +83,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residence/{id}");
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residence/host/{id}");
 
             await HandleErrorResponse(responseMessage);
 

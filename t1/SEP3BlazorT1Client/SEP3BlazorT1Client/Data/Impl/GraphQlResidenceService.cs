@@ -21,9 +21,8 @@ namespace SEP3BlazorT1Client.Data.Impl
         private const string Url = "https://localhost:5001/graphql";
         private readonly GqlClient _client = new GqlClient(Url);
 
-        public async Task<Residence> GetResidenceAsync(int id)
+        public async Task<Residence> GetResidenceByIdAsync(int id)
         {
-            GqlClient client = new GqlClient(Url);
             var residenceQuery = new GqlQuery()
             {
                 Query = @"query ($residenceId:Int!){
@@ -84,7 +83,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                           ",
                 Variables = new {residenceId = id}
             };
-            var graphQlResponse = await client.PostQueryAsync<ResidenceQueryResponseType>(residenceQuery);
+            var graphQlResponse = await _client.PostQueryAsync<ResidenceQueryResponseType>(residenceQuery);
             if (graphQlResponse.Errors != null)
             {
                 throw new ArgumentException(
