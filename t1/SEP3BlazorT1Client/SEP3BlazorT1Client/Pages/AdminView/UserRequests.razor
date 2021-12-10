@@ -2,8 +2,9 @@
 @using SEP3BlazorT1Client.Models
 <AuthorizeView Policy="MustBeAdmin">
     <Authorized>
-    <p>@ErrorMessage</p>
-<MatTabGroup>
+        <p>@ErrorMessage</p>
+        <div class="d-flex justify-content-center">
+<MatTabGroup Style="width: 500px">
     <MatTab Label="Hosts Requests">
         <ChildContent>
             @if (_hostRequestList == null)
@@ -11,7 +12,7 @@
                 <h3 class="mat-subtitle1">Loading</h3>
                 <MatProgressCircle Indeterminate="true" />
             }
-            else if (!_hostRequestList.Any())
+            else if (_hostRequestList.Count()==0)
             {
                 <p>
                     <em>There are no host requests at the moment....</em>
@@ -105,6 +106,7 @@
         </ChildContent>
     </MatTab>
 </MatTabGroup>
+</div>
 </Authorized>
     <NotAuthorized>
         <div id="errorBox">

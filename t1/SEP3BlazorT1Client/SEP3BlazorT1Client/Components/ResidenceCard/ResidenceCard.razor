@@ -22,7 +22,7 @@
 
         <div class="residence-card__content">
             <div class="rating">
-                <span>@Residence.GetAverageRating(), <span style="font-weight: normal !important; font-size: 11px !important;">(@Residence.ResidenceReviews.Count() reviews)</span></span>
+                <span>Average rating: @Residence.GetAverageRating(), <span style="font-weight: normal !important; font-size: 11px !important;">(@Residence.ResidenceReviews.Count() reviews)</span></span>
             </div>
             <div class="place-and-price">
                 <span class="place">@Residence.Address.City.CityName, <br> @Residence.Address.StreetName</span>

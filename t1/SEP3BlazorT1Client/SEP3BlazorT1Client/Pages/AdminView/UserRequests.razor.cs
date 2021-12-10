@@ -18,7 +18,7 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         [Inject] public NavigationManager NavigationManager { get; set; }
         
         private IEnumerable<Guest> _guestRequestList = new List<Guest>();
-        private IEnumerable<Host> _hostRequestList = new List<Host>();
+        private IEnumerable<Host> _hostRequestList;
         private string ErrorMessage="";
         
         protected override async Task OnInitializedAsync()
