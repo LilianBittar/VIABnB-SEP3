@@ -4,7 +4,7 @@
         <div class="mat-layout-grid">
             <div class="mat-layout-grid-inner">
                 <div class="mat-layout-grid-cell"></div>
-                <div class="mat-layout-grid-cell">
+                <div class="mat-layout-grid-cell" >
                     <MatPaper Elevation="8" Rounded="true" class="d-flex justify-content-center">
 
                         <div class="d-flex flex-column p-3">
@@ -17,11 +17,14 @@
                             <div hidden="@(!loginAsHost)">
                                 <MatTextField Class="d-flex" @bind-Value="@studentNumber" Label="Student number" Outlined="true"/>
                             </div>
-
-                            <MatTextField type="password" @bind-Value="@password" Dense="true" Label="Password" Outlined="true"/>
-
-                            <MatDivider class="my-2"/>
-
+                        
+                            <div class="d-flex justify-content-between">
+                                <MatTextField type="@TxtType" @bind-Value="@password" Dense="true" Label="Password" Outlined="true"/> 
+                                <span><MatButton Icon="@MatIconNames.Visibility" @onclick="@ShowPassword"></MatButton></span>
+                               
+                            </div>
+                            
+                             <MatDivider class="my-2"/>
                             <p style="color: red">@ErrorMessage</p>
                             <MatButton Raised="true" OnClick="@(PerformLogin)">Log in</MatButton>
                             <MatDivider class="my-1"/>

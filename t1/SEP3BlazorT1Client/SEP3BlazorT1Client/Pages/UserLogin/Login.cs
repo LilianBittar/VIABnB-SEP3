@@ -18,12 +18,25 @@ namespace SEP3BlazorT1Client.Pages.UserLogin
             private string ErrorMessage;
             private bool loginAsHost;
             private int studentNumber;
+            public string TxtType = "password"; 
             private bool IsShow {get;set;} = true;
             private void ShowLoadingBar()
             {
                 IsShow =   !IsShow;
             }  
         
+            public void ShowPassword() 
+            { 
+                if(this.TxtType== "password") 
+                { 
+                    this.TxtType = "text"; 
+                } 
+                else 
+                { 
+                    this.TxtType = "password"; 
+                } 
+            } 
+            
             private async Task PerformLogin()
             {
               
