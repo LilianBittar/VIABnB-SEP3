@@ -1,5 +1,7 @@
 
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
@@ -30,6 +32,8 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
             foreach (var item in _guestReviewList)
             {
                 var h = await HostService.GetHostById(item.HostId);
+                Console.WriteLine(JsonSerializer.Serialize(h));
+                _hostList.Add(h);
             }
             StateHasChanged();
             _isLoading = false;
