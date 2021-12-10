@@ -88,14 +88,14 @@ namespace SEP3BlazorT1Client.Authentication
                         _isApprovedHost = true;
                     }
                     isHost = true;
-                }
-                else if (_guest != null)
-                {
-                    if (_guest.IsApprovedGuest)
+                    if (_guest != null)
                     {
-                        _isApprovedGuest = true;
+                        if (_guest.IsApprovedGuest)
+                        {
+                            _isApprovedGuest = true; 
+                        }
+                        isGuest = true; 
                     }
-                    isGuest = true;
                 }
 
                 identity = SetupClaimsForUser(cachedUser);
