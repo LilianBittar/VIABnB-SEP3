@@ -19,7 +19,7 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         private string ErrorMessage="";
 
-        private IEnumerable<Models.RentRequest> _activeRentRequestList = new List<Models.RentRequest>();
+        private IEnumerable<Models.RentRequest> _activeRentRequestList;
         private IEnumerable<Models.RentRequest> _oldRentRequestList = new List<Models.RentRequest>();
         protected override async Task OnInitializedAsync()
         {

@@ -11,7 +11,7 @@
                 <h3 class="mat-subtitle1">Loading</h3>
                 <MatProgressCircle Indeterminate="true" />
             }
-            else if (!_hostRequestList.Any())
+            else if (_hostRequestList.Count()==0)
             {
                 <p>
                     <em>There are no host requests at the moment....</em>

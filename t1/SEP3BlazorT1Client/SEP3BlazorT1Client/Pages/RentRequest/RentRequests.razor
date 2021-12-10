@@ -9,7 +9,7 @@
                     <h3 class="mat-subtitle1">Loading</h3>
                     <MatProgressCircle Indeterminate="true"/>
                 }
-                else if (!_activeRentRequestList.Any())
+                else if (_activeRentRequestList.Count()==0)
                 {
                     <p>
                         <em>There are no rent requests at the moment...</em>
