@@ -24,7 +24,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            StringContent payload = new(hostAsJson, Encoding.UTF8, "application/json");
+            var payload = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await client.PostAsync(uri, payload);
 
@@ -34,6 +34,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
 
+            Console.WriteLine("We are here");
             var createdHostReview = JsonSerializer.Deserialize<HostReview>(await response.Content.ReadAsStringAsync(),
                 new JsonSerializerOptions()
                 {
@@ -49,7 +50,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             HttpContent content = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PatchAsync($"{uri}/{hostReview.hostId}", content);
+            HttpResponseMessage response = await client.PutAsync($"{uri}/host/{hostReview.hostId}", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
@@ -66,7 +67,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<IEnumerable<HostReview>> GetAllHostReviewsByGuestIdAsync(int id)
         {
-            var response = await client.GetAsync($"{uri}/{id}");
+            var response = await client.GetAsync($"{uri}/host/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
