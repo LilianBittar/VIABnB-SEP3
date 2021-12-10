@@ -315,7 +315,8 @@ else
                residence.IsAvailable = updatedResidence.IsAvailable;
                
                snackBarText = "Your residence is now private";
-               StateHasChanged();   
+               StateHasChanged();
+               await MatDialogService.AlertAsync("Your residence is now private");
                snackBarIsOpen = true;
               StateHasChanged();
            }
