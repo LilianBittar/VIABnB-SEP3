@@ -1,0 +1,102 @@
+@page "/ReviewHost/{Id:int}"
+<AuthorizeView Policy="MustBeApprovedGuest">
+    <Authorized>
+        @if (_isLoading)
+        {
+            <h3 class="mat-subtitle1">Loading</h3>
+            <MatProgressCircle Indeterminate="true" />
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-6 left-bar">
+                    <br/>
+                    <div class="form-group">
+                        <img id="img" src="media/User.png" alt="user"/>
+                    </div>
+                    <div class="form-group">
+                        <MatHeadline6> @_host.FirstName @_host.LastName</MatHeadline6>
+                    </div>
+                    <div class="form-group"><MatSubtitle2>Average rating: </MatSubtitle2></div>
+                    <div class="form-group">
+                        <MatButton OnClick="@OpenDialog" Raised="true" TrailingIcon="star" Unelevated="true" Style="width: 45em; background-color: green">Give a review</MatButton>
+                    </div>
+                    <div class="form-group">
+                        <MatButton @onclick="ToBrowse" TrailingIcon="cancel" Unelevated="true" Style="width: 45em; background-color: red">Cancel</MatButton>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <br/>
+                    @if (_host.HostReviews == null)
+                    {
+                        <p>
+                            No reviews at the momment
+                        </p>
+                    }
+                    else
+                    {
+                        <MatAccordion Multi="true">
+                            @foreach (var item in _host.HostReviews)
+                            {
+                                <MatExpansionPanel>
+                                    <MatExpansionPanelSummary>
+                                        <MatExpansionPanelHeader>
+                                            <MatSubtitle2>Ratings: @item.Rating</MatSubtitle2>
+                                        </MatExpansionPanelHeader>
+                                        <MatExpansionPanelSubHeader>
+                                            Date of review:  @item.CreatedDate
+                                        </MatExpansionPanelSubHeader>
+                                    </MatExpansionPanelSummary>
+                                    <MatExpansionPanelDetails>
+                                        <div class="mat-layout-grid mat-layout-grid-align-left" style="max-width: 800px;">
+                                            <div class="mat-layout-grid-inner">
+                                                <div class="mat-layout-grid-cell">
+                                                    <div class="form-group">
+                                                        <MatSubtitle2>Rating: @item.Rating</MatSubtitle2>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <MatSubtitle2>Description: @item.Text</MatSubtitle2>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <MatSubtitle2>Date of review: @item.CreatedDate</MatSubtitle2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mat-layout-grid-cell">
+                                                <div class="form-group">
+                                                    <MatSubtitle2>Reviewd by: @_guests.First(guest => guest.Id == item.GuestId).FirstName @_guests.First(guest => guest.Id == item.GuestId).LastName</MatSubtitle2>
+                                                </div>
+                                                <div class="form-group">
+                                                    <MatSubtitle2>Reviewrs e-mail: @_guests.First(guest => guest.Id == item.GuestId).Email</MatSubtitle2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </MatExpansionPanelDetails>
+                                </MatExpansionPanel>
+                            }
+                        </MatAccordion>
+                    }
+                </div>
+            </div>
+            <MatDialog @bind-IsOpen="@dialogIsOpen">
+                <MatDialogTitle>Hello! add your review here</MatDialogTitle>
+                <MatDialogContent>
+                    <p>Your opinion matters</p>
+                    <MatSelect Label="Rating" @bind-Value="_rating">
+                        <MatOption TValue="double" Value="0">0</MatOption>
+                        <MatOption TValue="double" Value="1">1</MatOption>
+                        <MatOption TValue="double" Value="2">2</MatOption>
+                        <MatOption TValue="double" Value="3">3</MatOption>
+                        <MatOption TValue="double" Value="4">4</MatOption>
+                        <MatOption TValue="double" Value="5">5</MatOption>
+                    </MatSelect>
+                    <MatTextField @bind-Value="_reviewText" TextArea="true"></MatTextField>
+                </MatDialogContent>
+                <MatDialogActions>
+                    <MatButton OnClick="OkClick" Style="background-color: green">Review</MatButton>
+                    <MatButton OnClick="@(e => { dialogIsOpen = false;})" Style="background-color: red">Cancel</MatButton>
+                </MatDialogActions>
+            </MatDialog>
+        }
+    </Authorized> 
+</AuthorizeView>
