@@ -60,12 +60,11 @@ else
                                 </MatSubtitle2>
                                 @if (residence.IsAvailable == true)
                                 {
-                                    <MatSubtitle2 class="demo-mat-card-clean-margin">
-                                     Available from: @residence.AvailableFrom.Value.Date
-                                    </MatSubtitle2>
-                                    <MatSubtitle2 class="demo-mat-card-clean-margin">
-                                        Available to: @residence.AvailableTo.Value.Date
-                                    </MatSubtitle2>
+                                    <div class="available-period">
+                                        <span>@residence.AvailableFrom.Value.ToShortDateString()</span>
+
+                                        <span>@residence.AvailableTo.Value.ToShortDateString()</span>
+                                    </div>
                                 }
                                 
                             </div>

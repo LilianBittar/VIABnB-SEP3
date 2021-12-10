@@ -167,7 +167,6 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
                         result.getInt("viaid"),
                         guestReview,
                         result.getBoolean("isapprovedguest"));
-                guest.setGuestReviews(new ArrayList<>());
                 return guest;
             }
             return null;
@@ -201,7 +200,6 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
                         result.getInt("viaid"),
                         guestReview,
                         result.getBoolean("isapprovedguest"));
-                guest.setGuestReviews(new ArrayList<>());
                 return guest;
             }
             return null;
@@ -265,7 +263,7 @@ public class GuestDAOImpl extends BaseDao implements GuestDAO {
             while (result.next()) {
                 GuestReview review = new GuestReview(result.getInt("guestrating"),
                         result.getString("guestreviewtext"), result.getDate("createddate").toLocalDate(),
-                        result.getInt("guestid"), result.getInt("hostid"), "");
+                        result.getInt("guestid"), result.getInt("hostid"));
                 guestReviews.add(review);
             }
             return guestReviews;

@@ -11,5 +11,6 @@ namespace SEP3T2GraphQL.Repositories
         Task<GuestReview> UpdateGuestReviewAsync(GuestReview guestReview);
         
         Task<IEnumerable<GuestReview>> GetAllGuestReviewsByHostIdAsync(int id);
+        Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestIdAsync(int id);
     }
 }

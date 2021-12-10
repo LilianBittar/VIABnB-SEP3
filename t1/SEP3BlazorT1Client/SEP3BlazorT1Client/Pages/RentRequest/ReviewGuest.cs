@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Components.Authorization;
 using SEP3BlazorT1Client.Data;
 using SEP3BlazorT1Client.Models;
 
-namespace SEP3BlazorT1Client.Pages.Residences
+namespace SEP3BlazorT1Client.Pages.RentRequest
 {
-    public partial class ReviewHost
+    public partial class ReviewGuest
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
-        [Inject] public IHostReviewService HostReviewService { get; set; }
+        [Inject] public IGuestReviewService GuestReviewService { get; set; }
         [Inject] public IHostService HostService { get; set; }
         [Inject] public IGuestService GuestService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
@@ -23,69 +23,71 @@ namespace SEP3BlazorT1Client.Pages.Residences
 
         private Host _host = new Host();
         private Guest _guest = new Guest();
-        private List<Guest> _guests = new List<Guest>();
-        private HostReview _hostReview;
+        private List<Host> _hosts = new List<Host>();
+        private GuestReview _guestReview = new GuestReview();
 
-        private bool _isLoading;
-        private  bool dialogIsOpen = false;
+        private bool _isloading;
+        private bool dialogIsOpen = false;
         private double _rating = 0;
-        private string _reviewText  = "";
+        private string _reviewTest = "";
 
         protected override async Task OnInitializedAsync()
         {
-            _isLoading = true;
-            _host = await HostService.GetHostById(Id);
+            _isloading = true;
+            _guest = await GuestService.GetGuestById(Id);
             var authState = await AuthStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
             try
             {
-                var guest = await GuestService.GetGuestByEmail(user.Claims
-                    .FirstOrDefault(c => c.Type.ToString() == "email")?.Value);
-                _guest = guest;
+                var host = await HostService.GetHostByEmail(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email")
+                    ?.Value);
+                _host = host;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-            if (_host.HostReviews != null)
+
+            if (_guest.GuestReviews != null)
             {
                 foreach (var item in _host.HostReviews)
                 {
-                    var g = await GuestService.GetGuestById(item.GuestId);
-                    _guests.Add(g);
+                    var h = await HostService.GetHostById(item.HostId);
+                    _hosts.Add(h);
                 }
             }
             StateHasChanged();
-            _isLoading = false;
+            _isloading = false;
         }
-        
+
         private void OpenDialog()
         {
             dialogIsOpen = true;
         }
-        private async void OkClick()
+
+        private void OkClick()
         {
-             await CreateReview();
+            CreateReview();
             dialogIsOpen = false;
         }
 
         private async Task CreateReview()
         {
-            _hostReview = new HostReview()
+            _guestReview = new GuestReview()
             {
-                CreatedDate = DateTime.Now,
                 Rating = _rating,
-                HostId = Id,
-                GuestId = _guest.Id,
-                Text = _reviewText
+                Text = _reviewTest,
+                CreatedDate = DateTime.Now,
+                GuestId = Id,
+                HostId = _host.Id
             };
-             await HostReviewService.CreateHostReviewAsync(_hostReview);
+            await GuestReviewService.CreateGuestReviewAsync(_guestReview);
         }
 
-        private void ToBrowse()
+        private void ToUserReview()
         {
-            NavigationManager.NavigateTo("residences");
+            NavigationManager.NavigateTo("userView");
         }
     }
 }

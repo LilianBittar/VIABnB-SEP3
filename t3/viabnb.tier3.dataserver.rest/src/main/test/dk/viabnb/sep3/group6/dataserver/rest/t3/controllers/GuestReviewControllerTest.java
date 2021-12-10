@@ -22,8 +22,7 @@ class GuestReviewControllerTest
     guestReview = new GuestReview
         (
           3.5,
-          "Test",  LocalDate.now(),1,2,
-          "Test@test.tt"
+          "Test",  LocalDate.now(),1,2
         );
   }
 

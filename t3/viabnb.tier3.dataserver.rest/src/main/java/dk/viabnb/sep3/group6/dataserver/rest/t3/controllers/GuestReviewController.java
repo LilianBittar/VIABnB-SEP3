@@ -35,7 +35,7 @@ public class GuestReviewController
     LOGGER.info("Request for: " + gson.toJson(guestReviews));
     return ResponseEntity.ok(guestReviews);
   }*/
-  @GetMapping("/guestreviews/{id}")
+  @GetMapping("/guestreviews/guest/{id}")
   public ResponseEntity<List<GuestReview>> getAllGuestReviewsByGuestId(@PathVariable("id") int id)
   {
     List<GuestReview> guestReviews = guestReviewDAO.getAllGuestReviewsByGuestId(id);
@@ -63,7 +63,7 @@ public class GuestReviewController
     }
   }
 
-  @PutMapping("/guestreviews/{id}")
+  @PutMapping("/guestreviews/guest/{id}")
   public ResponseEntity<GuestReview> UpdateGuestReview(@RequestBody GuestReview guestReview, @PathVariable int id) {
     try {
       List<GuestReview> existingGuestReviews = guestReviewDAO.getAllGuestReviewsByHostId(id);
@@ -72,7 +72,7 @@ public class GuestReviewController
         return ResponseEntity.notFound().build();
       }
 
-      boolean found = false;
+      /*boolean found = false;
       for (GuestReview review : existingGuestReviews) {
         if (review.getHostId() == guestReview.getHostId()) {
           found = true;
@@ -81,9 +81,9 @@ public class GuestReviewController
       }
       if (!found) {
         return ResponseEntity.notFound().build();
-      }
+      }*/
 
-      guestReviewDAO.updateGuestReview(guestReview);
+      ResponseEntity.ok(guestReviewDAO.updateGuestReview(guestReview));
 
     } catch (Exception e) {
       LOGGER.error(e.getMessage());
