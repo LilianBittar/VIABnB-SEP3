@@ -2,8 +2,9 @@
 @using SEP3BlazorT1Client.Models
 <AuthorizeView Policy="MustBeAdmin">
     <Authorized>
-    <p>@ErrorMessage</p>
-<MatTabGroup>
+        <p>@ErrorMessage</p>
+        <div class="d-flex justify-content-center">
+<MatTabGroup Style="width: 500px">
     <MatTab Label="Hosts Requests">
         <ChildContent>
             @if (_hostRequestList == null)
@@ -105,6 +106,7 @@
         </ChildContent>
     </MatTab>
 </MatTabGroup>
+</div>
 </Authorized>
     <NotAuthorized>
         <div id="errorBox">
