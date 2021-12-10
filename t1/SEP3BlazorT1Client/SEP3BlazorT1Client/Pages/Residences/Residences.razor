@@ -158,9 +158,9 @@ else
                             {
                                 foreach (var item in _hostReviewList)
                                 {
-                                    <p>
+                                    <MatButton @onclick="@(() => ToReviewHost(item.HostId))">
                                         <b>Host Rating: @item.Rating</b>
-                                    </p>
+                                    </MatButton>
                         
                                     <p style="color:grey">Reviewdate: @item.CreatedDate.Date.ToString("MMMM") @item.CreatedDate.Year</p>
                                     <p>Rating @item.Rating <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon></p>
@@ -271,4 +271,8 @@ else
         }
     }
 
+    private void ToReviewHost(int id)
+    {
+        NavigationManager.NavigateTo($"ReviewHost/{id}");
+    }
 }

@@ -15,22 +15,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HostDAOImpl extends BaseDao implements HostDAO
-{
-    private static final Logger LOGGER= LoggerFactory.getLogger(HostDAO.class);
+public class HostDAOImpl extends BaseDao implements HostDAO {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HostDAO.class);
 
     @Override
     public Host registerHost(Host host) {
         try (Connection connection = getConnection()) {
-            PreparedStatement stm1 = connection.prepareStatement("insert into _user(fname, lname, email, phonenumber, password, personalimage) values (?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
-            PreparedStatement stm2 = connection.prepareStatement("insert into host(hostid, cprnumber, isapproved ) values (?,?,?)");
+            PreparedStatement stm1 = connection.prepareStatement("insert into _user(fname, lname, email, phonenumber," +
+                    " password, personalimage) values (?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement stm2 = connection.prepareStatement("insert into host(hostid, cprnumber, isapproved ) " +
+                    "values (?,?,?)");
             //insert into user
             stm1.setString(1, host.getFirstName());
             stm1.setString(2, host.getLastName());
             stm1.setString(3, host.getEmail());
             stm1.setString(4, host.getPhoneNumber());
             stm1.setString(5, host.getPassword());
-            stm1.setString(6,host.getProfileImageUrl());
+            stm1.setString(6, host.getProfileImageUrl());
             stm1.executeUpdate();
             ResultSet resultSet = stm1.getGeneratedKeys();
             resultSet.next();
@@ -38,7 +39,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             //insert into host
             stm2.setInt(1, resultSet.getInt(1));
             stm2.setString(2, host.getCpr());
-            stm2.setBoolean(3,host.isApprovedHost());
+            stm2.setBoolean(3, host.isApprovedHost());
 
             stm2.executeUpdate();
             connection.commit();
@@ -51,12 +52,12 @@ public class HostDAOImpl extends BaseDao implements HostDAO
 
     @Override
     public Host getHostByEmail(String email) {
-        try (Connection connection = getConnection()){
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM _user JOIN host h ON _user.userid = h.hostid WHERE email = ?");
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM _user JOIN host h ON _user.userid = h" +
+                    ".hostid WHERE email = ?");
             stm.setString(1, email);
             ResultSet result = stm.executeQuery();
-            if (result.next())
-            {
+            if (result.next()) {
 
                 List<HostReview> hostReviews = new ArrayList<>();
                 return new Host(
@@ -73,7 +74,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO
                 );
             }
             return null;
-        } catch (SQLException throwables){
+        } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());
         }
     }
@@ -81,23 +82,24 @@ public class HostDAOImpl extends BaseDao implements HostDAO
     @Override
     public Host getHostById(int id) {
         try (Connection connection = getConnection()) {
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM _user JOIN host h ON _user.userid = h.hostid where userid = ?");
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM _user JOIN host h ON _user.userid = h" +
+                    ".hostid where userid = ?");
             stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
             result.next();
-            List<HostReview> hostReviews = new ArrayList<>();
+            List<HostReview> hostReviews = getHostReviewsByHostId(result.getInt("hostid"));
             return new Host
                     (
-                        result.getInt("userid"),
-                        result.getString("email"),
-                        result.getString("password"),
-                        result.getString("fname"),
-                        result.getString("lname"),
-                        result.getString("phonenumber"),
-                        result.getString("personalimage"),
-                        hostReviews,
-                        result.getString("cprnumber"),
-                        result.getBoolean("isapproved")
+                            result.getInt("userid"),
+                            result.getString("email"),
+                            result.getString("password"),
+                            result.getString("fname"),
+                            result.getString("lname"),
+                            result.getString("phonenumber"),
+                            result.getString("personalimage"),
+                            hostReviews,
+                            result.getString("cprnumber"),
+                            result.getBoolean("isapproved")
                     );
 
         } catch (SQLException throwables) {
@@ -115,24 +117,24 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             );
             ResultSet result = stm.executeQuery();
             while (result.next()) {
-                List<HostReview> hostReviews = new ArrayList<>();
+                List<HostReview> hostReviews = getHostReviewsByHostId(result.getInt("hostid"));
                 Host hostToAdd = new Host
                         (
-                            result.getInt("userid"),
-                            result.getString("email"),
-                            result.getString("password"),
-                            result.getString("fname"),
-                            result.getString("lname"),
-                            result.getString("phonenumber"),
-                            result.getString("personalimage"),
-                            hostReviews,
-                            result.getString("cprnumber"),
-                            result.getBoolean("isapproved")
+                                result.getInt("userid"),
+                                result.getString("email"),
+                                result.getString("password"),
+                                result.getString("fname"),
+                                result.getString("lname"),
+                                result.getString("phonenumber"),
+                                result.getString("personalimage"),
+                                hostReviews,
+                                result.getString("cprnumber"),
+                                result.getBoolean("isapproved")
                         );
                 hostsToReturn.add(hostToAdd);
             }
             return hostsToReturn;
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throw new IllegalStateException(throwables.getMessage());
         }
     }
@@ -146,19 +148,19 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             stm.setBoolean(1, false);
             ResultSet result = stm.executeQuery();
             while (result.next()) {
-                List<HostReview> hostReviews = new ArrayList<>();
+                List<HostReview> hostReviews = getHostReviewsByHostId(result.getInt("hostid"));
                 Host hostToAdd = new Host
                         (
-                            result.getInt("userid"),
-                            result.getString("email"),
-                            result.getString("password"),
-                            result.getString("fname"),
-                            result.getString("lname"),
-                            result.getString("phonenumber"),
-                            result.getString("personalimage"),
-                            hostReviews,
-                            result.getString("cprnumber"),
-                            result.getBoolean("isapproved")
+                                result.getInt("userid"),
+                                result.getString("email"),
+                                result.getString("password"),
+                                result.getString("fname"),
+                                result.getString("lname"),
+                                result.getString("phonenumber"),
+                                result.getString("personalimage"),
+                                hostReviews,
+                                result.getString("cprnumber"),
+                                result.getBoolean("isapproved")
                         );
                 hostsToReturn.add(hostToAdd);
             }
@@ -192,6 +194,24 @@ public class HostDAOImpl extends BaseDao implements HostDAO
             connection.commit();
             return host;
         } catch (SQLException throwables) {
+            throw new IllegalStateException(throwables.getMessage());
+        }
+    }
+
+    private List<HostReview> getHostReviewsByHostId(int hostId) {
+        try (Connection connection = getConnection()) {
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM hostreview where hostid = ?");
+            stm.setInt(1, hostId);
+            ResultSet result = stm.executeQuery();
+            List<HostReview> hostReviews = new ArrayList<>();
+            while (result.next()) {
+                HostReview review = new HostReview(result.getInt("hostrating"), result.getString("hostreviewtext"),
+                        result.getInt("guestid"), result.getDate("createddate").toLocalDate(), result.getInt("hostid"));
+                hostReviews.add(review);
+            }
+            return hostReviews;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
             throw new IllegalStateException(throwables.getMessage());
         }
     }

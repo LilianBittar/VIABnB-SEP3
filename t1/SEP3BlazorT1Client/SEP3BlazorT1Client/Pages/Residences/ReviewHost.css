@@ -1,0 +1,15 @@
+.left-bar
+{
+    text-align: center;
+    margin-top: 1em;
+}
+
+#img
+{
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
