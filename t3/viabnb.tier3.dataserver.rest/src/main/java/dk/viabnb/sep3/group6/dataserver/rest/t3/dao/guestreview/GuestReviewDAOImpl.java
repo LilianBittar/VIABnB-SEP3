@@ -73,8 +73,7 @@ public class GuestReviewDAOImpl extends BaseDao implements GuestReviewDAO
                 result.getString("guestreviewtext"),
                 LocalDate.parse(result.getDate("createddate").toString()),
                 result.getInt("guestid"),
-                result.getInt("hostid"),
-                hostDAO.getHostById(result.getInt("hostid")).getEmail());
+                result.getInt("hostid"));
         guestReviews.add(guestReview);
       }
       return guestReviews;
@@ -101,8 +100,7 @@ public class GuestReviewDAOImpl extends BaseDao implements GuestReviewDAO
                 result.getString("guestreviewtext"),
                 LocalDate.parse(result.getDate("createddate").toString()),
                 result.getInt("guestid"),
-                result.getInt("hostid"),
-                hostDAO.getHostById(result.getInt("hostid")).getEmail()
+                result.getInt("hostid")
             );
         guestReviewList.add(guestReview);
       }

@@ -10,16 +10,14 @@ public class GuestReview
   private LocalDate createdDate;
   private int guestId;
   private int hostId;
-  private String hostEmail;
 
-  public GuestReview(double rating, String text,  LocalDate createdDate, int guestId, int hostId, String hostEmail)
+  public GuestReview(double rating, String text,  LocalDate createdDate, int guestId, int hostId)
   {
     this.rating = rating;
     this.text = text;
     this.createdDate = createdDate;
     this.guestId = guestId;
     this.hostId=hostId;
-    this.hostEmail=hostEmail;
   }
 
   public double getRating()
@@ -66,11 +64,4 @@ public class GuestReview
     this.hostId = hostId;
   }
 
-  public String getHostEmail() {
-    return hostEmail;
-  }
-
-  public void setHostEmail(String hostEmail) {
-    this.hostEmail = hostEmail;
-  }
 }
