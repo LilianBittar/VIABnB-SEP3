@@ -58,6 +58,16 @@ else
                                 <MatSubtitle2 class="demo-mat-card-clean-margin">
                                     @residence.Address.ToString()
                                 </MatSubtitle2>
+                                @if (residence.IsAvailable == true)
+                                {
+                                    <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                     Available from: @residence.AvailableFrom.Value.Date
+                                    </MatSubtitle2>
+                                    <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                        Available to: @residence.AvailableTo.Value.Date
+                                    </MatSubtitle2>
+                                }
+                                
                             </div>
 
                             <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
@@ -94,21 +104,21 @@ else
                     <p>
                         <b> Start Date</b>
                     </p>
-                    <MatDatePicker @bind-Value="@ResidenceForRent.AvailableFrom"></MatDatePicker>
+                    <MatDatePicker @bind-Value="@_startDateInput"></MatDatePicker>
 
-                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Now.Date; })">
+                    <MatButton OnClick="@(_ => { _startDateInput = DateTime.Now.Date; })">
                         Now
                     </MatButton>
-                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = null; })">
+                    <MatButton OnClick="@(_ => { _startDateInput = null; })">
                         Empty
                     </MatButton>
 
                     <p>
                         <b> End Date</b>
                     </p>
-                    <MatDatePicker @bind-Value="@ResidenceForRent.AvailableTo"></MatDatePicker>
+                    <MatDatePicker @bind-Value="@_endDateInput"></MatDatePicker>
 
-                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableTo = null; })">
+                    <MatButton OnClick="@(_ => { _endDateInput = null; })">
                         Empty
                     </MatButton>
                     <p>@ErrorMessage2</p>
@@ -235,9 +245,14 @@ else
             </MatDialog>
         </div>
     </div>
-    <MatSnackbar  @bind-IsOpen="@snackBarIsOpen">
-        <MatSnackbarContent>@snackBarText</MatSnackbarContent>
+    <MatSnackbar  @bind-IsOpen="@snackBarIsOpenPublic">
+        <MatSnackbarContent>@snackBarPublicText</MatSnackbarContent>
+      
     </MatSnackbar>
+    <MatSnackbar  @bind-IsOpen="@snackBarIsOpenPrivate">
+        <MatSnackbarContent>@snackBarPrivateText</MatSnackbarContent>
+    </MatSnackbar>
+   
 }
 </Authorized>
 <NotAuthorized>
@@ -247,9 +262,6 @@ else
 
 
 @code {
-
-    //TODO this is buggy af, someone fix.
-    
     
     
     bool dialogIsOpen = false;
@@ -260,8 +272,12 @@ else
     private string ErrorMessage2 = "";
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
     IEnumerable<ResidenceReview> ResidenceReviews = new List<ResidenceReview>();
-    private bool snackBarIsOpen=false;
-    private string snackBarText = "";
+    private bool snackBarIsOpenPublic=false;
+    private bool snackBarIsOpenPrivate=false;
+    private string snackBarPublicText = "Your residence is now public";
+    private string snackBarPrivateText = "Your residence is now private";
+    private DateTime? _startDateInput;
+    private DateTime? _endDateInput;
 
     IList<Residence> _residences;
 
@@ -310,15 +326,15 @@ else
        {
            try
            {
+               residence.AvailableFrom = DateTime.MaxValue.AddDays(-1);
+               residence.AvailableTo = DateTime.MaxValue;
                residence.IsAvailable = false;
                Residence updatedResidence = await ResidenceService.UpdateResidenceAsync(residence);
                residence.IsAvailable = updatedResidence.IsAvailable;
                
-               snackBarText = "Your residence is now private";
                StateHasChanged();
-               await MatDialogService.AlertAsync("Your residence is now private");
-               snackBarIsOpen = true;
-              StateHasChanged();
+               snackBarIsOpenPrivate = true;
+
            }
            catch (Exception e)
            {
@@ -349,12 +365,17 @@ else
                 if (isConfirmed)
                 {
                     ResidenceForRent.IsAvailable = true;
+                    Console.WriteLine(_startDateInput + " and to: "+ _endDateInput);
+                    
+                    ResidenceForRent.AvailableFrom = _startDateInput.Value.AddDays(1);
+                    ResidenceForRent.AvailableTo = _endDateInput.Value.AddDays(1);
+                    
                     await ResidenceService.UpdateResidenceAsync(ResidenceForRent);
                     dialogIsOpen = false;
-                
-                    snackBarText = "Your residence is now public";
-                    snackBarIsOpen = true;
+
                     StateHasChanged();
+                    snackBarIsOpenPublic = true;
+                   
                 }
                 
             }
