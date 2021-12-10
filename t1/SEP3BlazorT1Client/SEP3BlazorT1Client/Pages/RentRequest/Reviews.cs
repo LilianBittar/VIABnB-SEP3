@@ -36,5 +36,10 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
             }
             
         }
+
+        private void ToReviewGuest(int id)
+        {
+            NavigationManager.NavigateTo($"ReviewGuest/{id}");
+        }
     }
 }

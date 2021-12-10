@@ -16,9 +16,6 @@
     <Compile Update="Pages\RentRequest\RentRequests.cs">
       <DependentUpon>RentRequests.razor</DependentUpon>
     </Compile>
-    <Compile Update="Pages\RentRequest\RentRequestHistory.cs">
-      <DependentUpon>RentRequestHistory.razor</DependentUpon>
-    </Compile>
     <Compile Update="Pages\RentRequest\Reviews.cs">
       <DependentUpon>Reviews.razor</DependentUpon>
     </Compile>
@@ -40,19 +37,21 @@
     <Compile Update="Pages\Residences\ReviewHost.cs">
       <DependentUpon>ReviewHost.razor</DependentUpon>
     </Compile>
+    <Compile Remove="Pages\RentRequest\RentRequestHistory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Pages\RentRequest\RentRequests.css">
       <DependentUpon>RentRequests.razor</DependentUpon>
     </None>
-    <None Update="Pages\RentRequest\RentRequestHistory.css">
-      <DependentUpon>RentRequestHistory.razor</DependentUpon>
-    </None>
     <None Update="Pages\RentRequest\Reviews.css">
-      <DependentUpon>GuestReviews.razor</DependentUpon>
+      <DependentUpon>Reviews.razor</DependentUpon>
     </None>
     <None Update="Pages\Residences\ReviewHost.css">
       <DependentUpon>ReviewHost.razor</DependentUpon>
     </None>
+    <None Remove="Pages\RentRequest\RentRequestHistory.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Pages\RentRequest\RentRequestHistory.razor" />
   </ItemGroup>
 </Project>

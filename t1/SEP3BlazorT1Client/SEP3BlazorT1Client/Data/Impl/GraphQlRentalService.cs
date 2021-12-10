@@ -31,10 +31,11 @@ namespace SEP3BlazorT1Client.Data.Impl
                               guest {
                                 viaId
                                 guestReviews {
-                                  rating
-                                  text
-                                  hostEmail
-                                  createdDate
+                                 rating
+                              text
+                              createdDate
+                              guestId
+                              hostId
                                 }
                                 isApprovedGuest
                                 id
@@ -140,9 +141,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 viaId
                                 guestReviews {
                                   rating
-                                  text
-                                  hostEmail
-                                  createdDate
+                              text
+                              createdDate
+                              guestId
+                              hostId
                                 }
                                 isApprovedGuest
                                 id
@@ -239,6 +241,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"query 
                           {
+                          allRentRequests{
                            id
                               startDate
                               endDate
@@ -248,9 +251,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 viaId
                                 guestReviews {
                                   rating
-                                  text
-                                  hostEmail
-                                  createdDate
+                              text
+                              createdDate
+                              guestId
+                              hostId
                                 }
                                 isApprovedGuest
                                 id
@@ -345,7 +349,8 @@ namespace SEP3BlazorT1Client.Data.Impl
         {
             var getRentRequest = new GqlQuery()
             {
-                Query = @"query($requestId:int) 
+                Query = @"query($requestId:int){ 
+                            rentRequestById(id:$requestId){
                           {
                             id
                               startDate
@@ -356,9 +361,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 viaId
                                 guestReviews {
                                   rating
-                                  text
-                                  hostEmail
-                                  createdDate
+                              text
+                              createdDate
+                              guestId
+                              hostId
                                 }
                                 isApprovedGuest
                                 id
@@ -466,9 +472,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 viaId
                                 guestReviews {
                                   rating
-                                  text
-                                  hostEmail
-                                  createdDate
+                              text
+                              createdDate
+                              guestId
+                              hostId
                                 }
                                 isApprovedGuest
                                 id
@@ -569,9 +576,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 viaId
                                 guestReviews {
                                   rating
-                                  text
-                                  hostEmail
-                                  createdDate
+                              text
+                              createdDate
+                              guestId
+                              hostId
                                 }
                                 isApprovedGuest
                                 id

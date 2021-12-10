@@ -26,12 +26,12 @@ namespace SEP3T2GraphQL.Services.Impl
                 throw new ArgumentException("guestReview is required");
             }
             _createGuestReviewValidation.ValidateGuestReview(guestReview);
-            var guestReviews = await _guestReviewRepository.GetAllGuestReviewsByHostIdAsync(guestReview.HostId);
+            var guestReviews = await _guestReviewRepository.GetAllGuestReviewsByGuestIdAsync(guestReview.GuestId);
             
             // Updates review if host already have an HostReview for the guest. 
             if (guestReviews.Where(h => h.GuestId == guestReview.GuestId && h.HostId == guestReview.HostId).ToList().Any())
             {
-                var updatedReview = await _guestReviewRepository.UpdateGuestReviewAsync(guestReview);
+                var updatedReview = await UpdateGuestReviewAsync(guestReview);
                 return updatedReview;
             }
 

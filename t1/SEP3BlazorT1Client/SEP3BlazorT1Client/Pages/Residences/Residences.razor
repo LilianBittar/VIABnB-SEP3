@@ -54,14 +54,13 @@ else
 }
 
 
-<MatDialog @bind-IsOpen="@viewResidenceDetailsDialog" Style="min-width: 1000px; min-height:600px">
+<MatDialog @bind-IsOpen="@viewResidenceDetailsDialog" Style="min-width: 1000px!important; min-height:600px" Class="detail-container large" SurfaceStyle="min-width:1000px !important;">
     <MatDialogTitle>Residence Details</MatDialogTitle>
-    <MatDialogContent Style="min-width: 1000px; min-height:600px">
+    <MatDialogContent Style="min-width: 1000px; min-height:600px" Class="large">
         <div class="d-flex flex-column container-fluid" >
             <div class="d-flex justify-content-center">
                 <img class="my-4" width="600" height="240" src="@ViewedResidence.ImageUrl" alt="">
             </div>
-
             <MatTabGroup>
                 <MatTab class="my-4">
                     <LabelContent>
