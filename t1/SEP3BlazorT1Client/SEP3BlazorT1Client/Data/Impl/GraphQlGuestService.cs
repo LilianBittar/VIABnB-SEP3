@@ -24,7 +24,6 @@ namespace SEP3BlazorT1Client.Data.Impl
                             guestReviews{
                               rating
                               text
-                              hostEmail
                               createdDate
                               guestId
                               hostId

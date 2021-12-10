@@ -21,18 +21,17 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery createGuestReviewMutation = new GqlQuery()
             {
                 Query =
-                    @"mutation($newGuestReview: GuestReviewInput) {
-                          createGuestReview(guestReview: $newGuestReview) {
+                    @"mutation($review:GuestReviewInput){
+                          createGuestReview(guestReview:$review){
                             rating
                             text
-                            hostEmail
                             createdDate
                             guestId
                             hostId
                           }
                         }",
 
-                Variables = new {newGuestReview = guestReview}
+                Variables = new {review = guestReview}
             };
             var response = await _client.PostQueryAsync<CreateGuestReviewResponseType>(createGuestReviewMutation);
             if (response.Errors != null)
@@ -48,18 +47,17 @@ namespace SEP3BlazorT1Client.Data.Impl
             GqlQuery updateGuestReviewMutation = new GqlQuery()
             {
                 Query =
-                    @"mutation($newGuestReview:GuestReviewInput){
-    updateGuestReview(hostReview:$newHostReview) {
-                                rating
+                    @"mutation($review:GuestReviewInput){
+                          updateGuestReview(guestReview:$review){
+                            rating
                             text
-                            hostEmail
                             createdDate
                             guestId
                             hostId
-                              }
-                             }",
+                          }
+                        }",
 
-                Variables = new {newHostReview = guestReview}
+                Variables = new {review = guestReview}
             };
             var response = await _client.PostQueryAsync<UpdateGuestReviewResponseType>(updateGuestReviewMutation);
             if (response.Errors != null)
@@ -78,7 +76,6 @@ namespace SEP3BlazorT1Client.Data.Impl
                               allGuestReviewsByGuestId(id:$guestId){
                                 rating
                             text
-                            hostEmail
                             createdDate
                             guestId
                             hostId

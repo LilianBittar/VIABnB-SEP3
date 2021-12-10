@@ -24,7 +24,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            StringContent payload = new(guestAsJson, Encoding.UTF8, "application/json");
+            var payload = new StringContent(guestAsJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await client.PostAsync(uri, payload);
 
@@ -49,7 +49,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             HttpContent content = new StringContent(guestAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PatchAsync($"{uri}/{guestReview.GuestId}", content);
+            HttpResponseMessage response = await client.PutAsync($"{uri}/guest/{guestReview.GuestId}", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
@@ -66,7 +66,24 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<IEnumerable<GuestReview>> GetAllGuestReviewsByHostIdAsync(int id)
         {
-            var response = await client.GetAsync($"{uri}/{id}");
+            var response = await client.GetAsync($"{uri}/guest/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+
+            var result = await response.Content.ReadAsStringAsync();
+            var responseList = JsonSerializer.Deserialize<List<GuestReview>>(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return responseList;
+        }
+
+        public async Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestIdAsync(int id)
+        {
+            var response = await client.GetAsync($"{uri}/guest/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");

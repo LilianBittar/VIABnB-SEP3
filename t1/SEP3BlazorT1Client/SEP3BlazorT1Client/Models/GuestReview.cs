@@ -11,9 +11,7 @@ namespace SEP3BlazorT1Client.Models
         public double Rating { get; set; }
         [JsonProperty("text")]
         public string Text { get; set; }
-        [Required]
-        [JsonProperty("hostEmail")]
-        public string HostEmail { get; set; }
+        
         [JsonProperty("createdDate")]
         public DateTime CreatedDate { get; set; }
         [Required]

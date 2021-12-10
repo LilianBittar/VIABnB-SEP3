@@ -12,7 +12,7 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="(() => ToMyProfile(_user.Id))">More</MatButton>
+                            <MatButton @onclick="@(() => ToMyProfile(_user.Id))">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Account_circle" Class="user-icons"></MatIcon>
                         </MatCardActions>
                     </MatCard>
