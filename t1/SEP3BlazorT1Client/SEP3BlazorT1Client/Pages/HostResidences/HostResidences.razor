@@ -8,6 +8,7 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @inject IResidenceReviewService ResidenceReviewService
+@inject MatDialogService MatDialogService
 
 
 <!--<h3>BuildingOverview</h3>-->
@@ -52,7 +53,7 @@ else
                             <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
                             <div class="demo-mat-card-content">
                                 <MatHeadline6 class="demo-mat-card-clean-margin">
-                                  UwU
+                                    UwU
                                 </MatHeadline6>
                                 <MatSubtitle2 class="demo-mat-card-clean-margin">
                                     @residence.Address.ToString()
@@ -63,7 +64,7 @@ else
                                 @residence.Description
                             </MatBody2>
                             <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-                                @residence.PricePerNight
+                                @residence.PricePerNight DKK ,- / pr. night
                             </MatBody2>
 
                         </MatCardContent>
@@ -85,7 +86,6 @@ else
             <MatDialog @bind-IsOpen="@dialogIsOpen">
                 <MatDialogTitle>Details of the Residence</MatDialogTitle>
                 <MatDialogContent>
-
                     <p>
                         <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@ResidenceForRent.MaxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
                         </MatNumericUpDownField>
@@ -96,7 +96,7 @@ else
                     </p>
                     <MatDatePicker @bind-Value="@ResidenceForRent.AvailableFrom"></MatDatePicker>
 
-                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Now; })">
+                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Now.Date; })">
                         Now
                     </MatButton>
                     <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = null; })">
@@ -111,6 +111,7 @@ else
                     <MatButton OnClick="@(_ => { ResidenceForRent.AvailableTo = null; })">
                         Empty
                     </MatButton>
+                    <p>@ErrorMessage2</p>
                 </MatDialogContent>
                 <MatDialogActions>
                     <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
@@ -229,11 +230,14 @@ else
                     </div>
                 </MatDialogContent>
                 <MatDialogActions>
-                    <MatButton OnClick="@(e => { viewResidenceDetailsDialog = false; })">Cancel</MatButton>
+                    <MatButton OnClick="@(e => { viewResidenceDetailsDialog = false; ErrorMessage = ""; ErrorMessage2 = "";})">Cancel</MatButton>
                 </MatDialogActions>
             </MatDialog>
         </div>
     </div>
+    <MatSnackbar  @bind-IsOpen="@snackBarIsOpen">
+        <MatSnackbarContent>@snackBarText</MatSnackbarContent>
+    </MatSnackbar>
 }
 </Authorized>
 <NotAuthorized>
@@ -244,14 +248,20 @@ else
 
 @code {
 
-
+    //TODO this is buggy af, someone fix.
+    
+    
+    
     bool dialogIsOpen = false;
     bool viewResidenceDetailsDialog = false;
     int maxNumberOfGuests;
-    private string _errorText;
+    private string _errorText = "";
     private string ErrorMessage = "";
+    private string ErrorMessage2 = "";
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
     IEnumerable<ResidenceReview> ResidenceReviews = new List<ResidenceReview>();
+    private bool snackBarIsOpen=false;
+    private string snackBarText = "";
 
     IList<Residence> _residences;
 
@@ -278,6 +288,9 @@ else
 
     void OpenDialog(Residence residence)
     {
+        residence.AvailableFrom = null;
+        residence.AvailableTo = null;
+        ErrorMessage2 = "";
         ResidenceForRent = residence;
         dialogIsOpen = true;
     }
@@ -286,16 +299,35 @@ else
     {
         ResidenceReviews = await ResidenceReviewService.GetAllByResidenceIdAsync(residence.Id);
         ViewedResidence = residence;
-
         viewResidenceDetailsDialog = true;
     }
 
    async void SetToPrivate(Residence residence)
    {
-       residence.IsAvailable = false;
-       Residence updatedResidence = await ResidenceService.UpdateResidenceAsync(residence);
-       residence.IsAvailable = updatedResidence.IsAvailable;
-       StateHasChanged();
+       
+    bool isConfirmed = await MatDialogService.ConfirmAsync("Are you sure you want to set your residence to private?");
+       if (isConfirmed)
+       {
+           try
+           {
+               residence.IsAvailable = false;
+               Residence updatedResidence = await ResidenceService.UpdateResidenceAsync(residence);
+               residence.IsAvailable = updatedResidence.IsAvailable;
+               
+               snackBarText = "Your residence is now private";
+               StateHasChanged();
+               await MatDialogService.AlertAsync("Your residence is now private");
+               snackBarIsOpen = true;
+              StateHasChanged();
+           }
+           catch (Exception e)
+           {
+               ErrorMessage2 = "";
+               ErrorMessage2 = e.Message;
+           }
+           
+       }
+      
     }
 
     private async void OkClick()
@@ -311,10 +343,20 @@ else
 
         if (rentIsValid)
         {
-            ResidenceForRent.IsAvailable = true;
             try
             {
-                await ResidenceService.UpdateResidenceAvailabilityAsync(ResidenceForRent);
+               bool isConfirmed = await MatDialogService.ConfirmAsync("Are you sure you want to set the residence to public?");
+                if (isConfirmed)
+                {
+                    ResidenceForRent.IsAvailable = true;
+                    await ResidenceService.UpdateResidenceAvailabilityAsync(ResidenceForRent);
+                    dialogIsOpen = false;
+                
+                    snackBarText = "Your residence is now public";
+                    snackBarIsOpen = true;
+                    StateHasChanged();
+                }
+                
             }
             catch (Exception e)
             {
@@ -324,7 +366,7 @@ else
             }
 
             dialogIsOpen = false;
-            Console.WriteLine("succes");
+            Console.WriteLine("success");
         }
     }
 
