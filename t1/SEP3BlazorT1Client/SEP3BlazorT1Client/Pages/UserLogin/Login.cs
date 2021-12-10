@@ -19,7 +19,7 @@ namespace SEP3BlazorT1Client.Pages.UserLogin
         private string ErrorMessage;
         private bool loginAsHost;
         private string TxtType = "password";
-        private string IconType = MatIconNames.Visibility_off;
+        private string IconType = MatIconNames.Visibility;
         private bool IsShow { get; set; } = true;
 
         private void ShowLoadingBar()   
@@ -32,12 +32,12 @@ namespace SEP3BlazorT1Client.Pages.UserLogin
             if (this.TxtType == "password")
             {
                 this.TxtType = "text";
-                IconType = MatIconNames.Visibility;
+                IconType = MatIconNames.Visibility_off;
             }
             else
             {
                 this.TxtType = "password";
-                IconType = MatIconNames.Visibility_off;
+                IconType = MatIconNames.Visibility;
             }
         }
 

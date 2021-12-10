@@ -58,8 +58,8 @@ else
     <MatDialogTitle>Residence Details</MatDialogTitle>
     <MatDialogContent Style="min-width: 1000px; min-height:600px" Class="large">
         <div class="d-flex flex-column container-fluid" >
-            <div class="d-flex justify-content-center">
-                <img class="my-4" width="600" height="240" src="@ViewedResidence.ImageUrl" alt="">
+            <div class="">
+              @ViewedResidence.Address
             </div>
             <MatTabGroup>
                 <MatTab class="my-4">
@@ -90,6 +90,7 @@ else
                                 @foreach (var facility in @ViewedResidence.Facilities)
                                 {
                                     <li class="list-group-item">@facility.Name</li>
+                                    <MatDivider class="my-1"/>
                                 }
                             }
                             else
@@ -113,6 +114,7 @@ else
                                 foreach (var rule in @ViewedResidence.Rules)
                                 {
                                     <li class="list-group-item">@rule.Description</li>
+                                    <MatDivider class="my-1"/>
                                 }
                             }
                             else
@@ -141,6 +143,7 @@ else
                                     <p style="color:grey">Reviewdate: @review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</p>
                                     <p>Rating @review.Rating <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon></p>
                                     <li class="list-group-item">@review.ReviewText</li>
+                                    <MatDivider class="my-1"/>
                                 }
                             }
                             else
@@ -164,6 +167,7 @@ else
                                     <p style="color:grey">Reviewdate: @item.CreatedDate.Date.ToString("MMMM") @item.CreatedDate.Year</p>
                                     <p>Rating @item.Rating <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon></p>
                                     <li class="list-group-item">@item.Text</li>
+                                    <MatDivider class="my-1"/>
                                 }
                             }
                             else
