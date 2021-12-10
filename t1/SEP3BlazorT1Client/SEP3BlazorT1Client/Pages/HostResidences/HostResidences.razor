@@ -96,7 +96,7 @@ else
                     </p>
                     <MatDatePicker @bind-Value="@ResidenceForRent.AvailableFrom"></MatDatePicker>
 
-                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Today; })">
+                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Now.Date; })">
                         Now
                     </MatButton>
                     <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = null; })">
