@@ -88,14 +88,14 @@ namespace SEP3BlazorT1Client.Authentication
                         _isApprovedHost = true;
                     }
                     isHost = true;
-                }
-                else if (_guest != null)
-                {
-                    if (_guest.IsApprovedGuest)
+                    if (_guest != null)
                     {
-                        _isApprovedGuest = true;
+                        if (_guest.IsApprovedGuest)
+                        {
+                            _isApprovedGuest = true; 
+                        }
+                        isGuest = true; 
                     }
-                    isGuest = true;
                 }
 
                 identity = SetupClaimsForUser(cachedUser);
@@ -133,19 +133,15 @@ namespace SEP3BlazorT1Client.Authentication
                 }
                 Console.WriteLine("Host");
                 claims.Add(new Claim("Role", "Host"));
-            }
-            else if (isGuest)
-            {
-                if (_isApprovedHost)
+                if (isGuest)
                 {
-                    claims.Add(new Claim("Approved", "Host"));
+                    claims.Add(new Claim("Approved", "Guest"));
                     if (_isApprovedGuest)
                     {
                         claims.Add(new Claim("Approved", "Guest"));
                     }
-                    Console.WriteLine("Guest");
-                    claims.Add(new Claim("Role", "Guest"));
                 }
+                
             }
             var identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
