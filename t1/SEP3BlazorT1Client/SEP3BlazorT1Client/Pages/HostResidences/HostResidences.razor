@@ -349,7 +349,7 @@ else
                 if (isConfirmed)
                 {
                     ResidenceForRent.IsAvailable = true;
-                    await ResidenceService.UpdateResidenceAvailabilityAsync(ResidenceForRent);
+                    await ResidenceService.UpdateResidenceAsync(ResidenceForRent);
                     dialogIsOpen = false;
                 
                     snackBarText = "Your residence is now public";
