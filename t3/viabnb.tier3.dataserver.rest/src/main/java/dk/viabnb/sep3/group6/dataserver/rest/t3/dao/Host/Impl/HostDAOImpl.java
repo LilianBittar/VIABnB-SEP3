@@ -59,7 +59,7 @@ public class HostDAOImpl extends BaseDao implements HostDAO {
             ResultSet result = stm.executeQuery();
             if (result.next()) {
 
-                List<HostReview> hostReviews = new ArrayList<>();
+                List<HostReview> hostReviews = getHostReviewsByHostId(result.getInt("userid")); 
                 return new Host(
                         result.getInt("userid"),
                         result.getString("email"),
