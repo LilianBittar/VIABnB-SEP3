@@ -60,7 +60,7 @@ namespace SEP3BlazorT1Client
                     options.AddPolicy("MustBeGuest", abp => abp.RequireAuthenticatedUser().RequireClaim("Role", "Guest", "Admin"));
                     options.AddPolicy("MustBeHost", abp => abp.RequireAuthenticatedUser().RequireClaim("Role", "Host", "Guest", "Admin"));
                     options.AddPolicy("MustBeApprovedHost", abd => abd.RequireAuthenticatedUser().RequireClaim("Approved", "Host", "Guest"));
-                    options.AddPolicy("MustBeApprovedGuest", abd => abd.RequireAuthenticatedUser().RequireClaim("Approved", "Guest", "Host"));
+                    options.AddPolicy("MustBeApprovedGuest", abd => abd.RequireAuthenticatedUser().RequireClaim("Approved", "Guest"));
                 }
             );
         }

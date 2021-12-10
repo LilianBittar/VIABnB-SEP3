@@ -133,19 +133,15 @@ namespace SEP3BlazorT1Client.Authentication
                 }
                 Console.WriteLine("Host");
                 claims.Add(new Claim("Role", "Host"));
-            }
-            else if (isGuest)
-            {
-                if (_isApprovedHost)
+                if (isGuest)
                 {
-                    claims.Add(new Claim("Approved", "Host"));
+                    claims.Add(new Claim("Approved", "Guest"));
                     if (_isApprovedGuest)
                     {
                         claims.Add(new Claim("Approved", "Guest"));
                     }
-                    Console.WriteLine("Guest");
-                    claims.Add(new Claim("Role", "Guest"));
                 }
+                
             }
             var identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
