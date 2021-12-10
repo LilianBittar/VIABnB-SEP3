@@ -56,16 +56,16 @@ public class HostReviewController {
         }
     }
 
-    @PutMapping("/hostreviews/{id}")
+    @PutMapping("/hostreviews/host/{id}")
     public ResponseEntity<HostReview> UpdateHostReview(@RequestBody HostReview hostReview, @PathVariable int id) {
         try {
-            List<HostReview> existingHostReviews = hostReviewDAO.getAllHostReviewsByGuestId(id);
+            List<HostReview> existingHostReviews = hostReviewDAO.getAllHostReviewsByHostId(id);
 
             if (existingHostReviews == null) {
                 return ResponseEntity.notFound().build();
             }
 
-            boolean found = false;
+            /*boolean found = false;
             for (HostReview review : existingHostReviews) {
                 if (review.getGuestId() == hostReview.getGuestId()) {
                     found = true;
@@ -74,9 +74,9 @@ public class HostReviewController {
             }
             if (!found) {
                 return ResponseEntity.notFound().build();
-            }
-
-            hostReviewDAO.updateHostReview(hostReview);
+            }*/
+            LOGGER.info(gson.toJson(hostReviewDAO.updateHostReview(hostReview)));
+            ResponseEntity.ok(hostReviewDAO.updateHostReview(hostReview));
 
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
