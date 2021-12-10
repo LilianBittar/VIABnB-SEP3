@@ -1,10 +1,11 @@
 @page "/MyProfile/{Id:int}"
 <AuthorizeView Policy="MustBeApprovedHost">
     <Authorized>
+        <p>@ErrorMessage</p>
         @if (isLoading)
         {
             <h3 class="mat-subtitle1">Loading</h3>
-            <MatProgressCircle Indeterminate="true" />
+            <MatProgressCircle Indeterminate="true"/>
         }
         else
         {
@@ -28,7 +29,7 @@
                     <div class="form-group">
                         <MatButton OnClick="@(_ => OpenConfirmFromService())" TrailingIcon="save" Unelevated="true" Style="width: 200px; background-color: green">Save changes</MatButton>
                     </div>
-                    <MatSnackbar  @bind-IsOpen="@snackBarIsOpen">
+                    <MatSnackbar @bind-IsOpen="@snackBarIsOpen">
                         <MatSnackbarContent>Your acount has been successfully updated!!</MatSnackbarContent>
                     </MatSnackbar>
                     <br/>
