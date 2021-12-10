@@ -1,43 +1,43 @@
 @using SEP3BlazorT1Client.Models
 @inject NavigationManager NavigationManager
-@if ( Residence!= null)
+@if (Residence != null)
 {
-        <div class="residence-card">
-            <div class="residence-card__image">
-                @if (Residence.ImageUrl != null)
-                {
-                    <img src="@Residence.ImageUrl" alt="Image of residence" on/>
-                    <div class="description">
-                        <p>@Residence.Description</p>
-                    </div>
-                }
-                else
-                {
-                    <img src="assets/1024px-No_image_available.svg.png" alt="No image provided"/>
-                    <div class="description">
-                        <p>@Residence.Description</p>
-                    </div>
-                }
+    <div class="residence-card">
+        <div class="residence-card__image">
+            @if (Residence.ImageUrl != null)
+            {
+                <img src="@Residence.ImageUrl" alt="Image of residence" on/>
+                <div class="description">
+                    <p>@Residence.Description</p>
+                </div>
+            }
+            else
+            {
+                <img src="assets/1024px-No_image_available.svg.png" alt="No image provided"/>
+                <div class="description">
+                    <p>@Residence.Description</p>
+                </div>
+            }
+        </div>
+
+        <div class="residence-card__content">
+            <div class="rating">
+                <span>@Residence.GetAverageRating(), <span style="font-weight: normal !important; font-size: 11px !important;">(@Residence.ResidenceReviews.Count() reviews)</span></span>
             </div>
+            <div class="place-and-price">
+                <span class="place">@Residence.Address.City.CityName, <br> @Residence.Address.StreetName</span>
+                <span class="price">@Residence.PricePerNight DKK.- / night</span>
+            </div>
+            <div class="available-period">
+                <span>@Residence.AvailableFrom.Value.ToShortDateString()</span>
 
-            <div class="residence-card__content">
-                <div class="rating">
-                    <span>@Residence.GetAverageRating()</span>
-                </div>
-                <div class="place-and-price">
-                    <span class="place">@Residence.Address.City.CityName, @Residence.Address.StreetName</span>
-                    <span class="price">@Residence.PricePerNight DKK.- / night</span>
-                </div>
-                <div class="available-period">
-                    <span>@Residence.AvailableFrom.Value.ToShortDateString()</span>
-
-                    <span>@Residence.AvailableTo.Value.ToShortDateString()</span>
-                </div>
-                <div>
-                    <MatButton Label="Rent" OnClick="@(()=>NavigationManager.NavigateTo($"/rentresidence/{Residence.Id}"))"/>
-                </div>
+                <span>@Residence.AvailableTo.Value.ToShortDateString()</span>
+            </div>
+            <div>
+                <MatButton Label="Rent" OnClick="@(() => NavigationManager.NavigateTo($"/rentresidence/{Residence.Id}"))"/>
             </div>
         </div>
+    </div>
 }
 else
 {
