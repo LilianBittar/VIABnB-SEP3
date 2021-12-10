@@ -6,6 +6,8 @@
 @inject IResidenceReviewService residenceReviewService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IGuestService GuestService
+@inject IHostService HostService
+@inject IHostReviewService HostReviewService
 @inject NavigationManager NavigationManager
 @* TODO: Add AuthorizeView *@
 
@@ -48,7 +50,7 @@
 }
 else
 {
-     <MatProgressBar  Indeterminate="true" Reversed="true"></MatProgressBar>
+    <MatProgressBar  Indeterminate="true" Reversed="true"></MatProgressBar>
 }
 
 
@@ -151,6 +153,29 @@ else
                             }
 
                         </ul>
+                        <ul class="list-group">
+                            @if (_hostReviewList.Count() != 0)
+                            {
+                                foreach (var item in _hostReviewList)
+                                {
+                                    <p>
+                                        <b>Host Rating: @item.Rating</b>
+                                    </p>
+                        
+                                    <p style="color:grey">Reviewdate: @item.CreatedDate.Date.ToString("MMMM") @item.CreatedDate.Year</p>
+                                    <p>Rating @item.Rating <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon></p>
+                                    <li class="list-group-item">@item.Text</li>
+                                }
+                            }
+                            else
+                            {
+                                <p>
+                                    The host has
+                                    no reviews
+                                </p>
+                            }
+                        
+                        </ul>
                     </ChildContent>
                 </MatTab>
             </MatTabGroup>
@@ -171,6 +196,8 @@ else
     private IList<Residence> _residencesToShow;
     Residence ViewedResidence = new Residence();
     IEnumerable<ResidenceReview> ResidenceReviews = new List<ResidenceReview>();
+    private IEnumerable<HostReview> _hostReviewList = new List<HostReview>();
+    private Host _host;
     private Guest guest;
     private string _cityFilter = "";
     private long? _maxPriceFilter = 0;
@@ -202,7 +229,7 @@ else
     {
         ViewedResidence = residence;
         ResidenceReviews = await residenceReviewService.GetAllByResidenceIdAsync(residence.Id);
-
+        _hostReviewList = await HostReviewService.GetAllHostReviewsByHostIdAsync(residence.Host.Id);
         viewResidenceDetailsDialog = true;
         StateHasChanged();
     }

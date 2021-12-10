@@ -82,5 +82,10 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         {
             NavigationManager.NavigateTo("RentRequests");
         }
+
+        private void ToRentResidence()
+        {
+            NavigationManager.NavigateTo("residences");
+        }
     }
 }
