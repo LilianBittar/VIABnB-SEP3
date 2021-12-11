@@ -20,9 +20,6 @@ public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO {
     @Override
     public RentRequest createNewRentRequest(RentRequest request) {
         try (Connection connection = getConnection()) {
-            // TODO: Change DDL to have guestId instead of hostid and residenceid as foreign key to residence
-            // BUG: SQL Cannot parse Util.Date, but can parse LocalDate form the time / JodaTime library.
-
             PreparedStatement stm = connection.prepareStatement(
                     "insert into rentrequest(startdate, enddate, numberofguests, status, hostid, residenceid, guestid, createdate) values (?,?,?,?,?,?,?,?)");
             LOGGER.info("statement set");
