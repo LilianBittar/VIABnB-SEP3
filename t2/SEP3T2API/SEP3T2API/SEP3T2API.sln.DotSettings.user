@@ -42,6 +42,7 @@
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.AddressServiceTest.CreateAddressTest.CreateAddress_StreetNumberIsWhiteSpaceOnly_ThrowsArgumentException&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestReviewHostServiceTest.CreateGuestReviewTest.CreateGuestReview_InvalidRating_ThrowsArgumentException&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestReviewHostServiceTest.CreateGuestReviewTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F229A044-D462-406E-A6DC-B550C2DC17F1::net5.0::UnitTests.GuestReviewHostServiceTest.UpdateGuestReviewTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
