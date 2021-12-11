@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
@@ -26,20 +27,31 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
         private Host _host = new Host();
         private IEnumerable<Rule> _rules = new List<Rule>();
         private IEnumerable<Facility> _facilities = new List<Facility>();
-        private Facility _matSelectItemType;
+        private Facility _newFacility = new Facility();
         private bool _isLoading;
         private bool _isEditable;
         private bool _snackBarIsOpen = false;
+        private bool _dialogIsOpen = false;
+        private string _ruleDescription;
+        private int _ruleResidenceId;
 
         protected override async Task OnInitializedAsync()
         {
-            _isEditable = true;
-            _isLoading = true;
-            _residence = await ResidenceService.GetResidenceByIdAsync(Id);
-            _facilities = await FacilityService.GetAllFacilities();
-            _rules = _residence.Rules;
-            StateHasChanged();
-            _isLoading = false;
+            try
+            {
+                _isLoading = true;
+                _isEditable = true;
+                _residence = await ResidenceService.GetResidenceByIdAsync(Id);
+                _facilities = await FacilityService.GetAllFacilities();
+                _rules = _residence.Rules;
+                StateHasChanged();
+                _isLoading = false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         private void EditContent()
@@ -49,8 +61,10 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
 
         private async Task DeleteResidence()
         {
-            var deleteResidence = await ResidenceService.DeleteResidenceAsync(_residence);
-            if (deleteResidence != null)
+            Console.WriteLine(JsonSerializer.Serialize(_residence));
+            var residence = await ResidenceService.DeleteResidenceAsync(_residence);
+            Console.WriteLine(JsonSerializer.Serialize(residence));
+            if (residence != null)
             {
                 NavigationManager.NavigateTo("HostResidences");
             }
@@ -60,6 +74,32 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
             }
         }
 
+        private void AddRule()
+        {
+            var newRule = new Rule()
+            {
+                Description = _ruleDescription
+            };
+            if (!string.IsNullOrEmpty(newRule.Description) && _residence.Rules.All(rule => rule.Description != newRule.Description))
+            {
+                _residence.Rules.Add(newRule);
+            }
+            StateHasChanged();
+        }
+
+        private void DeleteRule(Rule delete)
+        {
+            _residence.Rules.Remove(delete);
+        }
+        private void AddFacility()
+        {
+            var updateFacility = _facilities.FirstOrDefault(facility => facility.Name == _newFacility.Name);
+            if (updateFacility != null && !string.IsNullOrEmpty(_newFacility.Name) && _residence.Facilities.All(facility => facility.Name != updateFacility.Name))
+            {
+                _residence.Facilities.Add(new Facility(){Id = updateFacility.Id, Name = updateFacility.Name});
+            }
+            StateHasChanged();
+        }
         private async Task<Residence> UpdateResidence()
         {
             return await ResidenceService.UpdateResidenceAsync(_residence);
@@ -92,6 +132,16 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
         private void ToHostResidence()
         {
             NavigationManager.NavigateTo("HostResidences");
+        }
+
+        private void DialogIsOpen()
+        {
+            _dialogIsOpen = true;
+        }
+
+        private void OkClick()
+        {
+            _dialogIsOpen = false;
         }
     }
 }

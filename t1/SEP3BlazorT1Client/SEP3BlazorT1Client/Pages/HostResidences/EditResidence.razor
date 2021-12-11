@@ -22,25 +22,27 @@
                     </div>
                     <br/>
                     <div class="form-group">
-                        <MatButton OnClick="@EditContent" TrailingIcon="edit" Unelevated="true" Style="width: 200px;">Edit Residence Info</MatButton>
+                        <MatButton OnClick="@EditContent" TrailingIcon="edit" Unelevated="true" Style="width:20em; height: 2em;">Edit Residence Info</MatButton>
                     </div>
                     <br/>
                     <div class="form-group">
-                        <MatButton OnClick="@(_ => OpenConfirmUpdateFromService())" TrailingIcon="save" Unelevated="true" Style="height: 200px; background-color: green;">Save Changes</MatButton>
+                        <MatButton OnClick="@(_ => OpenConfirmUpdateFromService())" TrailingIcon="save" Unelevated="true" Style=" width:20em; height: 2em; background-color: green;">Save Changes</MatButton>
                     </div>
                     <MatSnackbar @bind-Value="@_snackBarIsOpen">
                         <MatSnackbarContent>Your residence has been updated!!</MatSnackbarContent>
                     </MatSnackbar>
                     <br/>
                     <div class="form-group">
-                        <MatButton OnClick="DeleteResidence" TrailingIcon="cancel" Unelevated="true" Style="background-color: red; width: 200px;">Delete My Residence</MatButton>
+                        <MatButton OnClick="DeleteResidence" TrailingIcon="cancel" Unelevated="true" Style="background-color: red; width:20em; height: 2em;">Delete My Residence</MatButton>
                     </div>
                     <br/>
                     <div class="form-group">
-                        <MatButton OnClick="ToHostResidence" TrailingIcon="home" Unelevated="true" Style="width: 200px; background-color: blue;">Back To My Residence</MatButton>
+                        <MatButton OnClick="ToHostResidence" TrailingIcon="home" Unelevated="true" Style="width:20em; height: 2em; background-color: blue;">Back To My Residence</MatButton>
                     </div>
                 </div>
                 <div class="col-md-8">
+                    <br/>
+                    <br/>
                     <br/>
                     <div class="form-group">
                         <p>
@@ -69,15 +71,25 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
-                                <p> Start Date
-                                    <MatDatePicker @bind-Value="@_residence.AvailableFrom"></MatDatePicker>
-                                </p>
+                                <div class="form-group">
+                                    <p>Start Date</p>
+                                </div>
+                                <div class="form-group">
+                                    <p> 
+                                        <MatDatePicker @bind-Value="@_residence.AvailableFrom"></MatDatePicker>
+                                    </p>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="col-md-6">
-                                    <p> End Date
-                                        <MatDatePicker @bind-Value="@_residence.AvailableTo"></MatDatePicker>
-                                    </p>
+                                    <div class="form-group">
+                                        <p> End Date</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p>
+                                            <MatDatePicker @bind-Value="@_residence.AvailableTo"></MatDatePicker>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -86,10 +98,65 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
+                                <MatSelect Label="Facility" @bind-Value="_newFacility.Name">
+                                    @if (_facilities.Any())
+                                    {
+                                        @foreach (var item in _facilities)
+                                        {
+                                            <MatOptionString Value="@item.Name">@item.Name</MatOptionString>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <MatOptionString>No Factilities available</MatOptionString>
+                                    }
+                                </MatSelect>
                             </div>
                             <div class="col-md-6">
-                                
+                                <MatButton OnClick="@DialogIsOpen" Raised="true">Rules Of Residence</MatButton>
                             </div>
+                            <MatDialog @bind-IsOpen="@_dialogIsOpen">
+                                <MatDialogTitle>Edit your residence's rules</MatDialogTitle>
+                                <MatDialogContent>
+                                    @if (_rules.Any())
+                                    {
+                                        @foreach (var item in _rules)
+                                        {
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <MatTextField @bind-Value="item.Description"></MatTextField>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <MatButton OnClick="@(() => DeleteRule(item))" Icon="cancel" Style="background-color: red">Delete</MatButton>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <MatTextField @bind-Value="_ruleDescription" TextArea="true" Label="Description"></MatTextField>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <MatButton OnClick="AddRule" Icon="save">Add New</MatButton>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </MatDialogContent>
+                                <MatDialogActions>
+                                    <MatButton OnClick="OkClick"> Done</MatButton>
+                                </MatDialogActions>
+                            </MatDialog>
                         </div>
                     </div>
                 </div>

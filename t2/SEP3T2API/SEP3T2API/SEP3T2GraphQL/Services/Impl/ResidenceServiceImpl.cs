@@ -129,7 +129,7 @@ namespace SEP3T2GraphQL.Services
 
         public async Task<Residence> UpdateResidenceAsync(Residence residence)
         {
-            if (!_residenceValidation.IsValidResidence(residence)) throw new ArgumentException("Invalid residence");
+            if (!_residenceValidation.IsValidResidenceForUpdate(residence)) throw new ArgumentException("Invalid residence");
             try
             {
                 return await _residenceRepository.UpdateResidenceAsync(residence);

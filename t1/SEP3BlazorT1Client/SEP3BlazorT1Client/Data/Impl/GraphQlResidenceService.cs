@@ -25,14 +25,15 @@ namespace SEP3BlazorT1Client.Data.Impl
         {
             var residenceQuery = new GqlQuery()
             {
-                Query = @"query ($residenceId:Int!){
-                            residence(id:$residenceId) {
+                Query = @"query($residenceId: Int!) {
+                            residence(id: $residenceId) {
                               id
-                              address {
+                              address{
                                 id
                                 streetName
+                                houseNumber
                                 streetNumber
-                                city {
+                                city{
                                   id
                                   cityName
                                   zipCode
@@ -42,41 +43,41 @@ namespace SEP3BlazorT1Client.Data.Impl
                               type
                               isAvailable
                               pricePerNight
-                              rules {
+                              rules{
                                 description
                                 residenceId
                               }
-                              facilities {
+                              facilities{
                                 id
                                 name
                               }
+                              imageUrl
                               availableFrom
                               availableTo
                               maxNumberOfGuests
-                              host {
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
+                              host{
+                                hostReviews{
                                   rating
                                   text
                                   guestId
                                   createdDate
                                   hostId
                                 }
-                                profileImageUrl
                                 cpr
                                 isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
                               }
-                              residenceReviews {
+                              residenceReviews{
                                 rating
                                 reviewText
                                 guestViaId
-                                 createdDate
-
+                                createdDate
                               }
                             }
                           }
@@ -105,11 +106,12 @@ namespace SEP3BlazorT1Client.Data.Impl
                         updateResidenceAvailability(residence: $residenceInput)
                             {
                             id
-                              address {
+                              address{
                                 id
                                 streetName
+                                houseNumber
                                 streetNumber
-                                city {
+                                city{
                                   id
                                   cityName
                                   zipCode
@@ -119,41 +121,41 @@ namespace SEP3BlazorT1Client.Data.Impl
                               type
                               isAvailable
                               pricePerNight
-                              rules {
+                              rules{
                                 description
                                 residenceId
                               }
-                              facilities {
+                              facilities{
                                 id
                                 name
                               }
+                              imageUrl
                               availableFrom
                               availableTo
                               maxNumberOfGuests
-                              host {
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
+                              host{
+                                hostReviews{
                                   rating
                                   text
                                   guestId
                                   createdDate
                                   hostId
                                 }
-                                profileImageUrl
                                 cpr
                                 isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
                               }
-                              residenceReviews {
+                              residenceReviews{
                                 rating
                                 reviewText
                                 guestViaId
-                                 createdDate
-
+                                createdDate
                               }}}",
                 Variables = new {residenceInput = residence}
             };
@@ -178,11 +180,12 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Query = @"query ($hostId:Int!) {
                        residencesByHostId(id: $hostId) {                   
                         id
-                              address {
+                              address{
                                 id
                                 streetName
+                                houseNumber
                                 streetNumber
-                                city {
+                                city{
                                   id
                                   cityName
                                   zipCode
@@ -192,41 +195,41 @@ namespace SEP3BlazorT1Client.Data.Impl
                               type
                               isAvailable
                               pricePerNight
-                              rules {
+                              rules{
                                 description
                                 residenceId
                               }
-                              facilities {
+                              facilities{
                                 id
                                 name
                               }
+                              imageUrl
                               availableFrom
                               availableTo
                               maxNumberOfGuests
-                              host {
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
+                              host{
+                                hostReviews{
                                   rating
                                   text
                                   guestId
                                   createdDate
                                   hostId
                                 }
-                                profileImageUrl
                                 cpr
                                 isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
                               }
-                              residenceReviews {
+                              residenceReviews{
                                 rating
                                 reviewText
                                 guestViaId
-                                 createdDate
-
+                                createdDate
                               }
                   }
                 }
@@ -246,12 +249,13 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query = @"query {
                           availableResidences {
-                           id
-                              address {
+                          id
+                              address{
                                 id
                                 streetName
+                                houseNumber
                                 streetNumber
-                                city {
+                                city{
                                   id
                                   cityName
                                   zipCode
@@ -261,41 +265,41 @@ namespace SEP3BlazorT1Client.Data.Impl
                               type
                               isAvailable
                               pricePerNight
-                              rules {
+                              rules{
                                 description
                                 residenceId
                               }
-                              facilities {
+                              facilities{
                                 id
                                 name
                               }
+                              imageUrl
                               availableFrom
                               availableTo
                               maxNumberOfGuests
-                              host {
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
+                              host{
+                                hostReviews{
                                   rating
                                   text
                                   guestId
                                   createdDate
                                   hostId
                                 }
-                                profileImageUrl
                                 cpr
                                 isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
                               }
-                              residenceReviews {
+                              residenceReviews{
                                 rating
                                 reviewText
                                 guestViaId
-                                 createdDate
-
+                                createdDate
                               }
                           }
                         }
@@ -313,12 +317,12 @@ namespace SEP3BlazorT1Client.Data.Impl
             Query = @"mutation($newResidence:ResidenceInput){
                         updateResidence(residence:$newResidence){
                           id
-                              address {
+                              address{
                                 id
                                 streetName
-                                streetNumber
                                 houseNumber
-                                city {
+                                streetNumber
+                                city{
                                   id
                                   cityName
                                   zipCode
@@ -328,41 +332,41 @@ namespace SEP3BlazorT1Client.Data.Impl
                               type
                               isAvailable
                               pricePerNight
-                              rules {
+                              rules{
                                 description
                                 residenceId
                               }
-                              facilities {
+                              facilities{
                                 id
                                 name
                               }
+                              imageUrl
                               availableFrom
                               availableTo
                               maxNumberOfGuests
-                              host {
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
+                              host{
+                                hostReviews{
                                   rating
                                   text
                                   guestId
                                   createdDate
                                   hostId
                                 }
-                                profileImageUrl
                                 cpr
                                 isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
                               }
-                              residenceReviews {
+                              residenceReviews{
                                 rating
                                 reviewText
                                 guestViaId
-                                 createdDate
-
+                                createdDate
                               }
                         }
                       }",
@@ -378,13 +382,14 @@ namespace SEP3BlazorT1Client.Data.Impl
           var mutation = new GqlQuery()
           {
             Query = @"mutation($dResidence:ResidenceInput){
-                        updateResidence(residence:$dResidence){
+                        deleteResidence(residence:$dResidence){
                           id
-                              address {
+                              address{
                                 id
                                 streetName
+                                houseNumber
                                 streetNumber
-                                city {
+                                city{
                                   id
                                   cityName
                                   zipCode
@@ -394,41 +399,41 @@ namespace SEP3BlazorT1Client.Data.Impl
                               type
                               isAvailable
                               pricePerNight
-                              rules {
+                              rules{
                                 description
                                 residenceId
                               }
-                              facilities {
+                              facilities{
                                 id
                                 name
                               }
+                              imageUrl
                               availableFrom
                               availableTo
                               maxNumberOfGuests
-                              host {
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
+                              host{
+                                hostReviews{
                                   rating
                                   text
                                   guestId
                                   createdDate
                                   hostId
                                 }
-                                profileImageUrl
                                 cpr
                                 isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
                               }
-                              residenceReviews {
+                              residenceReviews{
                                 rating
                                 reviewText
                                 guestViaId
-                                 createdDate
-
+                                createdDate
                               }
                         }
                       }",
@@ -446,12 +451,13 @@ namespace SEP3BlazorT1Client.Data.Impl
             {
                 Query =
                     @"mutation($residenceInput: ResidenceInput){createResidence(residence: $residenceInput){
-                                  id
-                              address {
+                                 id
+                              address{
                                 id
                                 streetName
+                                houseNumber
                                 streetNumber
-                                city {
+                                city{
                                   id
                                   cityName
                                   zipCode
@@ -461,41 +467,41 @@ namespace SEP3BlazorT1Client.Data.Impl
                               type
                               isAvailable
                               pricePerNight
-                              rules {
+                              rules{
                                 description
                                 residenceId
                               }
-                              facilities {
+                              facilities{
                                 id
                                 name
                               }
+                              imageUrl
                               availableFrom
                               availableTo
                               maxNumberOfGuests
-                              host {
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
+                              host{
+                                hostReviews{
                                   rating
                                   text
                                   guestId
                                   createdDate
                                   hostId
                                 }
-                                profileImageUrl
                                 cpr
                                 isApprovedHost
+                                id
+                                email
+                                password
+                                firstName
+                                lastName
+                                phoneNumber
+                                profileImageUrl
                               }
-                              residenceReviews {
+                              residenceReviews{
                                 rating
                                 reviewText
                                 guestViaId
-                                 createdDate
-
+                                createdDate
                               }
                                   }
                                 }",

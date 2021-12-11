@@ -131,7 +131,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            var response = await client.DeleteAsync($"{uri}/residences/{residence}");
+            var response = await client.DeleteAsync($"{uri}/residences/{residence.Id}");
             await HandleErrorResponse(response);
             
             return residence;
