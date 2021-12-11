@@ -13,14 +13,14 @@ namespace SEP3T2GraphQL.Repositories.Impl
         private string uri = "http://localhost:8080";
         private readonly HttpClient client = new HttpClient();
         
-        public async Task<Facility> CreateFacility(Facility facility)
+        public async Task<Facility> CreateResidenceFacility(Facility facility, int residenceId)
         {
             var facilityAsJson = JsonSerializer.Serialize(facility, new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             HttpContent content = new StringContent(facilityAsJson, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync($"{uri}/facility", content);
+            var response = await client.PostAsync($"{uri}/facility/{facility.Id}/{residenceId}", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
@@ -82,12 +82,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
 
-            var newFacility = JsonSerializer.Deserialize<Facility>(await response.Content.ReadAsStringAsync(),
-                new JsonSerializerOptions()
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                });
-            return newFacility;
+            return facility;
         }
     }
 }

@@ -74,6 +74,16 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
             }
         }
 
+        private async Task DeleteResidenceFacility(int id)
+        {
+            var fac = await FacilityService.DeleteResidenceFacility(_residence.Facilities.First(f => f.Id == id), _residence.Id);
+            if (fac == null)
+            {
+                Console.WriteLine("can't");
+                
+            }
+        }
+
         private void AddRule()
         {
             var newRule = new Rule()
@@ -93,16 +103,18 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
         }
         private void AddFacility()
         {
-            var updateFacility = _facilities.FirstOrDefault(facility => facility.Name == _newFacility.Name);
-            if (updateFacility != null && !string.IsNullOrEmpty(_newFacility.Name) && _residence.Facilities.All(facility => facility.Name != updateFacility.Name))
+            _newFacility = _facilities.FirstOrDefault(facility => facility.Name == _newFacility.Name);
+            if (_newFacility != null && !string.IsNullOrEmpty(_newFacility.Name) && _residence.Facilities.All(facility => facility.Name != _newFacility.Name))
             {
-                _residence.Facilities.Add(new Facility(){Id = updateFacility.Id, Name = updateFacility.Name});
+                FacilityService.CreateResidenceFacility(_newFacility, _residence.Id);
             }
             StateHasChanged();
         }
         private async Task<Residence> UpdateResidence()
         {
-            return await ResidenceService.UpdateResidenceAsync(_residence);
+            var res = _residence;
+            Console.WriteLine(JsonSerializer.Serialize(res));
+            return await ResidenceService.UpdateResidenceAsync(res);
         }
 
         private async Task OpenConfirmUpdateFromService()

@@ -69,9 +69,9 @@ namespace SEP3T2GraphQL.Graphql
             return await _hostService.RegisterHostAsync(host);
         }
 
-        public async Task<Facility> CreateNewFacility(Facility facility)
+        public async Task<Facility> CreateResidenceFacility(Facility facility, int residenceId)
         {
-            return await _facilityService.CreateFacility(facility);
+            return await _facilityService.CreateResidenceFacility(facility, residenceId);
         }
 
         public async Task<Rule> CreateNewRule(Rule rule)

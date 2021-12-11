@@ -15,9 +15,9 @@ namespace SEP3T2GraphQL.Services.Impl
             _facilityRepository = facilityRepository;
         }
 
-        public async Task<Facility> CreateFacility(Facility facility)
+        public async Task<Facility> CreateResidenceFacility(Facility facility, int residenceId)
         {
-            var newFacility = await _facilityRepository.CreateFacility(facility);
+            var newFacility = await _facilityRepository.CreateResidenceFacility(facility, residenceId);
 
             if (newFacility == null)
             {
