@@ -1,6 +1,6 @@
 @page "/EditResidence/{Id:int}"
 <AuthorizeView Policy="MustBeApprovedHost">
-    <Authorized>
+    <Authorized Context="Auth">
         @if (_isLoading)
         {
             <h3 class="mat-subtitle1">Loading</h3>
@@ -33,7 +33,7 @@
                     </MatSnackbar>
                     <br/>
                     <div class="form-group">
-                        <MatButton OnClick="DeleteResidence" TrailingIcon="cancel" Unelevated="true" Style="background-color: red; width:20em; height: 2em;">Delete My Residence</MatButton>
+                        <MatButton OnClick="@(_=> OpenConfirmDeleteFromService())" TrailingIcon="cancel" Unelevated="true" Style="background-color: red; width:20em; height: 2em;">Delete My Residence</MatButton>
                     </div>
                     <br/>
                     <div class="form-group">
@@ -41,123 +41,145 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <br/>
-                    <br/>
-                    <br/>
                     <div class="form-group">
-                        <p>
-                            <MatTextField @bind-Value="_residence.Description" Label="Description" Icon="description" IconTrailing="true" FullWidth="true" Disabled="_isEditable" TextArea="true"></MatTextField>
-                        </p>
-                    </div>
-                    <br/>
-                    <div class="form-group">
-                        <p>
-                            <MatTextField @bind-Value="_residence.Type" Label="Type" Icon="label" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
-                        </p>
-                    </div>
-                    <br/>
-                    <div class="form-group">
-                        <p>
-                            <MatTextField @bind-Value="_residence.PricePerNight" Label="price per night" Icon="attach_money" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
-                        </p>
-                    </div>
-                    <br/>
-                    <div class="form-group">
-                        <p>
-                            <MatTextField @bind-Value="_residence.MaxNumberOfGuests" Label="Max number of guests" Icon="people_outline" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
-                        </p>
-                    </div>
-                    <br/>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <p>Start Date</p>
-                                </div>
-                                <div class="form-group">
-                                    <p> 
-                                        <MatDatePicker @bind-Value="@_residence.AvailableFrom"></MatDatePicker>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="form-group">
+                            <p>
+                                <MatTextField @bind-Value="_residence.Description" Label="Description" Icon="description" IconTrailing="true" FullWidth="true" Disabled="_isEditable" TextArea="true"></MatTextField>
+                            </p>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <p>
+                                <MatTextField @bind-Value="_residence.Type" Label="Type" Icon="label" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
+                            </p>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <p>
+                                <MatTextField @bind-Value="_residence.PricePerNight" Label="price per night" Icon="attach_money" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
+                            </p>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <p>
+                                <MatTextField @bind-Value="_residence.MaxNumberOfGuests" Label="Max number of guests" Icon="people_outline" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
+                            </p>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <p> End Date</p>
+                                        <p>Start Date</p>
                                     </div>
                                     <div class="form-group">
                                         <p>
-                                            <MatDatePicker @bind-Value="@_residence.AvailableTo"></MatDatePicker>
+                                            <MatDatePicker @bind-Value="@_residence.AvailableFrom"></MatDatePicker>
                                         </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <p> End Date</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <p>
+                                                <MatDatePicker @bind-Value="@_residence.AvailableTo"></MatDatePicker>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <br/>
                     </div>
-                    <br/>
                     <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <MatSelect Label="Facility" @bind-Value="_newFacility.Name">
-                                    @if (_facilities.Any())
-                                    {
-                                        @foreach (var item in _facilities)
+                        <MatHeadline3>Facilities</MatHeadline3>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <MatSelect Label="Facility" @bind-Value="_newFacility.Name">
+                                        @if (_facilities.Any())
                                         {
-                                            <MatOptionString Value="@item.Name">@item.Name</MatOptionString>
+                                            @foreach (var item in _facilities)
+                                            {
+                                                <MatOptionString Value="@item.Name">@item.Name</MatOptionString>
+                                            }
                                         }
-                                    }
-                                    else
-                                    {
-                                        <MatOptionString>No Factilities available</MatOptionString>
-                                    }
-                                </MatSelect>
-                            </div>
-                            <div class="col-md-6">
-                                <MatButton OnClick="@DialogIsOpen" Raised="true">Rules Of Residence</MatButton>
-                            </div>
-                            <MatDialog @bind-IsOpen="@_dialogIsOpen">
-                                <MatDialogTitle>Edit your residence's rules</MatDialogTitle>
-                                <MatDialogContent>
-                                    @if (_rules.Any())
-                                    {
-                                        @foreach (var item in _rules)
+                                        else
                                         {
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <MatTextField @bind-Value="item.Description"></MatTextField>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <MatButton OnClick="@(() => DeleteRule(item))" Icon="cancel" Style="background-color: red">Delete</MatButton>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <MatOptionString>No Factilities available</MatOptionString>
                                         }
-                                    }
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <MatTextField @bind-Value="_ruleDescription" TextArea="true" Label="Description"></MatTextField>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <MatButton OnClick="AddRule" Icon="save">Add New</MatButton>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </MatDialogContent>
-                                <MatDialogActions>
-                                    <MatButton OnClick="OkClick"> Done</MatButton>
-                                </MatDialogActions>
-                            </MatDialog>
+                                    </MatSelect>
+                                    <MatButton OnClick="AddFacility">Add facility</MatButton>
+                                </div>
+                            </div>
                         </div>
+                        @if (_facilities.Any() && _facilities != null)
+                        {
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Facility Name</th>
+                                    <th>Remove</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var  item in _residence.Facilities)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td><MatButton OnClick="@(()=> DeleteResidenceFacility(@item.Id))" Icon="restore_from_trash"></MatButton></td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <MatSubtitle2>There are no facilities</MatSubtitle2>
+                            </div>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <MatHeadline3>Rules</MatHeadline3>
+                        <p>
+                            <MatTextField @bind-Value="_ruleDescription" Label="Description" Icon="description" IconTrailing="true" FullWidth="true" Disabled="_isEditable" TextArea="true"></MatTextField>
+                        </p>
+                        <MatButton OnClick="AddRule">Add rule</MatButton>
+                        @if (_rules.Any() && _rules != null)
+                        {
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Remove</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var  item in _rules)
+                                {
+                                    <tr>
+                                        <td>@item.Description</td>
+                                        <td>
+                                            <MatButton OnClick="@(() => DeleteRule(@item))" Icon="restore_from_trash"></MatButton>
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <MatSubtitle2>There are no rules</MatSubtitle2>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

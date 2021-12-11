@@ -9,11 +9,12 @@ public interface FacilityDAO
   /**
    * Create a new facility object in the system
    * @param facility The new facility
+   * @param residenceId
    * @return the newly created facility
    *
    * @throws IllegalStateException if can't connect to database
    * */
-  Facility createFacility(Facility facility);
+  Facility createResidenceFacility(Facility facility, int residenceId);
   /**
    * Handles query a list of all the facilities in the system
    * @return a list of facility objects

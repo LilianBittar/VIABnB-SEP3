@@ -98,9 +98,9 @@ namespace SEP3T2GraphQL.Graphql
             return await _facilityService.GetFacilityById(id);
         }
 
-        public async Task<IEnumerable<Rule>> GetAllRules()
+        public async Task<IEnumerable<Rule>> GetAllRulesByResidenceId(int residenceId)
         {
-            return await _ruleService.GetAllRules();
+            return await _ruleService.GetAllRulesByResidenceId(residenceId);
         }
 
         public async Task<Administrator> ValidateAdmin(string email, string password)
