@@ -12,7 +12,7 @@ public interface ResidenceDAO
    * @return Residence object
    * @throws IllegalStateException if can't connect to database
    * */
-  Residence getByResidenceId(int id);
+  Residence getResidenceById(int id);
   /**
    * Return a list of Residence objects based on a host id
    * @param id The id of the host who owns the residence

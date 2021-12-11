@@ -12,7 +12,7 @@ import java.util.List;
 
 public class RuleDAOImpl extends BaseDao implements RuleDAO
 {
-  @Override public Rule createRule(Rule rule)
+  @Override public Rule createResidenceRule(Rule rule)
   {
     try(Connection connection = getConnection())
     {
@@ -30,13 +30,14 @@ public class RuleDAOImpl extends BaseDao implements RuleDAO
     }
   }
 
-  @Override public List<Rule> getAllRules()
+  @Override public List<Rule> getAllRulesByResidenceId(int residenceId)
   {
     List<Rule> ruleListToReturn = new ArrayList<>();
     try(Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement
-          ("SELECT * FROM rule JOIN residence r ON r.residenceid = rule.residenceid");
+          ("SELECT * FROM rule JOIN residence r ON r.residenceid = rule.residenceid WHERE r.residenceid = ?");
+      stm.setInt(1, residenceId);
       ResultSet result = stm.executeQuery();
       while (result.next())
       {
@@ -55,14 +56,15 @@ public class RuleDAOImpl extends BaseDao implements RuleDAO
     }
   }
 
-  @Override public Rule updateRule(Rule rule)
+  @Override public Rule updateRule(Rule rule, String description)
   {
     try(Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement
-          ("UPDATE rule SET ruledescription = ? WHERE residenceid = ?");
+          ("UPDATE rule SET ruledescription = ? WHERE residenceid = ? AND ruledescription = ?");
       stm.setString(1, rule.getDescription());
       stm.setInt(2, rule.getResidenceId());
+      stm.setString(3, description);
       stm.executeUpdate();
       connection.commit();
       return rule;

@@ -53,7 +53,7 @@
       <DependentUpon>ReviewHost.razor</DependentUpon>
     </None>
     <None Remove="Pages\RentRequest\RentRequestHistory.css" />
-    <None Update="Pages\HostResidences\EditResidence.css">
+    <None Update="Pages\HostResidences\EditResidence.razor.css">
       <DependentUpon>EditResidence.razor</DependentUpon>
     </None>
   </ItemGroup>

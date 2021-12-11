@@ -33,7 +33,7 @@ import java.util.List;
 
   //TODO: Move this to host controller maybe (/hosts/residences)? Or maybe the getAll method with a query param.
   // e.g. /residence/1 SHOULD mean give me the residence with the id of 1.  -mic
-  @GetMapping("/residence/{id}") public ResponseEntity<List<Residence>> getAllResidencesByHostId(
+  @GetMapping("/residence/host/{id}") public ResponseEntity<List<Residence>> getAllResidencesByHostId(
       @PathVariable int id)
   {
     List<Residence> residences;
@@ -45,12 +45,12 @@ import java.util.List;
     return new ResponseEntity<>(residences, HttpStatus.OK);
   }
 
-  @GetMapping("/residences/{id}") public ResponseEntity<Residence> getById(
+  @GetMapping("/residences/{id}") public ResponseEntity<Residence> getResidenceById(
       @PathVariable int id)
   {
     try
     {
-      Residence residence = residenceDAO.getByResidenceId(id);
+      Residence residence = residenceDAO.getResidenceById(id);
       return ResponseEntity.ok(residence);
     }
     catch (IllegalStateException e)
@@ -104,7 +104,7 @@ import java.util.List;
 
     try
     {
-      Residence existingResidence = residenceDAO.getByResidenceId(id);
+      Residence existingResidence = residenceDAO.getResidenceById(id);
 
       if (existingResidence == null)
       {
@@ -134,7 +134,7 @@ import java.util.List;
     }
     try
     {
-      Residence residence = residenceDAO.getByResidenceId(residenceId);
+      Residence residence = residenceDAO.getResidenceById(residenceId);
       ResidenceReview createdReview = residenceReviewDAO.createResidenceReview(
           residence, residenceReview);
       if (createdReview == null)

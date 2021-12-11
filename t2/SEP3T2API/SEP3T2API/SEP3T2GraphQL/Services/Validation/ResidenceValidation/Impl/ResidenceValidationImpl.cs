@@ -96,5 +96,24 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
 
             return true;
         }
+
+        public bool IsValidResidenceForUpdate(Residence residence)
+        {
+            if ((residence != null) &&
+                ((residence.Id != null && residence.Id >= 0) &&
+                 (!string.IsNullOrEmpty(residence.Description)) &&
+                 (!string.IsNullOrEmpty(residence.Type)) &&
+                 (residence.IsAvailable != null) &&
+                 (residence.PricePerNight >= 0) &&
+                 IsValidRules(residence.Rules) &&
+                 (IsValidFacilities(residence.Facilities)) &&
+                 IsValidAvailabilityPeriod(residence.AvailableFrom, residence.AvailableTo)
+                ) && residence.MaxNumberOfGuests > 0)
+            {
+                return true;
+            }
+
+            throw new ArgumentException("Invalid Residence");
+        }
     }
 }

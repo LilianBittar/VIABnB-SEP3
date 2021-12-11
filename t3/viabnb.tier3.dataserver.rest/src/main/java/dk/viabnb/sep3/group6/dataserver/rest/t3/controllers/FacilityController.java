@@ -22,10 +22,10 @@ import java.util.List;
     this.facilityDAO = facilityDAO;
   }
 
-  @PostMapping("/facility") public ResponseEntity<Facility> createFacility(
-      @RequestBody Facility facility)
+  @PostMapping("/facility/{facilityId}/{residenceId}") public ResponseEntity<Facility> createFacility(
+      @RequestBody Facility facility, @PathVariable("facilityId") int facilityId, @PathVariable("residenceId") int residenceId)
   {
-    Facility newFacility = facilityDAO.createFacility(facility);
+    Facility newFacility = facilityDAO.createResidenceFacility(facility, residenceId);
     if (newFacility == null)
     {
       return ResponseEntity.internalServerError().build();

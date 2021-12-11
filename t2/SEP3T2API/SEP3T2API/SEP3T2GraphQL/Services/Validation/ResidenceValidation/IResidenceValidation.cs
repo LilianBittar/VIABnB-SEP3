@@ -14,5 +14,7 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
 
         bool IsValidAvailabilityPeriod(DateTime? startDate, DateTime? EndDate);
 
+        bool IsValidResidenceForUpdate(Residence residence);
+
     }
 }

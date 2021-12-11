@@ -12,13 +12,15 @@ import java.util.List;
 
 public class FacilityDAOImpl extends BaseDao implements FacilityDAO
 {
-  @Override public Facility createFacility(Facility facility)
+  @Override public Facility createResidenceFacility(Facility facility,
+      int residenceId)
   {
     try(Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement
-          ("INSERT INTO facility(name) VALUES (?)");
-      stm.setString(1, facility.getName());
+          ("INSERT INTO residencefacility(facilityid, residenceid) VALUES (?,?)");
+      stm.setInt(1, facility.getId());
+      stm.setInt(2, residenceId);
       stm.executeUpdate();
       connection.commit();
       return facility;
