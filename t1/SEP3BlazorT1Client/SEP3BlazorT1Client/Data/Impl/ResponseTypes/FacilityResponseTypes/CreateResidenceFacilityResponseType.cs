@@ -3,8 +3,8 @@ using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes.FacilityResponseTypes
 {
-    public class CreateFacilityResponseType
+    public class CreateResidenceFacilityResponseType
     {
-        [JsonProperty("createNewFacility")] public Facility NewFacility { get; set; }
+        [JsonProperty("createResidenceFacility")] public Facility Facility { get; set; }
     }
 }
