@@ -58,7 +58,7 @@
                                     <hr>
                                     <div class="d-flex flex-row justify-content-between">
                                         <span style="font-weight: bold">Price in total</span>
-                                        <span style="font-weight: bold">@_newRentRequest.GetTotalPrice() DKK.-</span>
+                                        <span style="font-weight: bold">@(GetTotalDays() * _newRentRequest.Residence.PricePerNight * _newRentRequest.NumberOfGuests) DKK.-</span>
                                     </div>
                                 </div>
                             </div>
