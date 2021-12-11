@@ -7,7 +7,7 @@
                 <div class="mat-layout-grid-cell">
                     <MatCard Class="demo-mat-card">
                         <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl="https://github.com/LilianBittar/VIABnB-SEP3/blob/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MyProfile.jpg?raw=true"></MatCardMedia>
+                            <MatCardMedia Wide="true" ImageUrl="https://github.com/LilianBittar/VIABnB-SEP3/blob/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MyProfile.jpg?raw=true" @onclick="@(() => ToMyProfile(_user.Id))"></MatCardMedia>
                             <div class="demo-mat-card-content" style="margin-left: 35%">
                                 <MatHeadline6 class="demo-mat-card-clean-margin">My Profile</MatHeadline6>
                             </div>
