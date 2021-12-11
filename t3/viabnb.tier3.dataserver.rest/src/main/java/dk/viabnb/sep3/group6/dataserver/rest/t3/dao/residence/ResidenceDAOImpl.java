@@ -15,7 +15,7 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO
 {
   private AddressDAO addressDAO = new AddressDAOImpl();
 
-  @Override public Residence getByResidenceId(int id)
+  @Override public Residence getResidenceById(int id)
   {
     try (Connection connection = getConnection())
     {
