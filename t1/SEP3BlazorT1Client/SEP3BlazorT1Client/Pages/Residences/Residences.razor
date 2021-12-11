@@ -29,7 +29,7 @@
             <div class="container-fluid d-flex flex-wrap residence-directory">
                 @foreach (var r in _residencesToShow)
                 {
-                    <MatRipple>
+                    <MatRipple @onclick="@(() => OpenResidenceDetailsDialog(r))">
                         <ResidenceCard Residence="@r"/>
                         <MatButton OnClick="@(() => OpenResidenceDetailsDialog(r))">Details</MatButton>
                     </MatRipple>
