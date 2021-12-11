@@ -74,9 +74,9 @@ namespace SEP3T2GraphQL.Graphql
             return await _facilityService.CreateResidenceFacility(facility, residenceId);
         }
 
-        public async Task<Rule> CreateNewRule(Rule rule)
+        public async Task<Rule> CreateNewResidenceRule(Rule rule)
         {
-            return await _ruleService.CreateRule(rule);
+            return await _ruleService.CreateResidenceRule(rule);
         }
 
         public async Task<RentRequest> UpdateRentRequestStatus(RentRequest request)
@@ -114,9 +114,9 @@ namespace SEP3T2GraphQL.Graphql
             return await _hostReview.UpdateHostReviewAsync(hostReview);
         }
 
-        public async Task<Rule> UpdateResidenceRule(Rule rule)
+        public async Task<Rule> UpdateResidenceRule(Rule rule, string description)
         {
-            return await _ruleService.UpdateRuleAsync(rule);
+            return await _ruleService.UpdateRuleAsync(rule, description);
         }
 
         public async Task<Residence> UpdateResidence(Residence residence)

@@ -43,7 +43,7 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
                 _isEditable = true;
                 _residence = await ResidenceService.GetResidenceByIdAsync(Id);
                 _facilities = await FacilityService.GetAllFacilities();
-                _rules = _residence.Rules;
+                _rules = await RuleService.GetAllRulesByResidenceIdAsync(Id);
                 StateHasChanged();
                 _isLoading = false;
             }
@@ -88,18 +88,19 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
         {
             var newRule = new Rule()
             {
-                Description = _ruleDescription
+                Description = _ruleDescription,
+                ResidenceId = Id
             };
             if (!string.IsNullOrEmpty(newRule.Description) && _residence.Rules.All(rule => rule.Description != newRule.Description))
             {
-                _residence.Rules.Add(newRule);
+                RuleService.CreateResidenceRuleAsync(newRule);
             }
             StateHasChanged();
         }
 
         private void DeleteRule(Rule delete)
         {
-            _residence.Rules.Remove(delete);
+            RuleService.DeleteRuleAsync(delete);
         }
         private void AddFacility()
         {
@@ -135,7 +136,7 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
             isReady = await MatDialogService.ConfirmAsync("Are you sure you want to delete your residence?");
             if (isReady)
             {
-                UpdateResidence();
+                DeleteResidence();
                 _snackBarIsOpen = true;
                 StateHasChanged();
             }

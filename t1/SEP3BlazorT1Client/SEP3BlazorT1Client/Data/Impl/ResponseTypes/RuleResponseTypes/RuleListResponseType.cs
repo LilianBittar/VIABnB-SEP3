@@ -6,6 +6,6 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes.RuleResponseTypes
 {
     public class RuleListResponseType
     {
-        [JsonProperty("allRules")] public IEnumerable<Rule> Rules { get; set; }
+        [JsonProperty("allRulesByResidenceId")] public IEnumerable<Rule> Rules { get; set; }
     }
 }

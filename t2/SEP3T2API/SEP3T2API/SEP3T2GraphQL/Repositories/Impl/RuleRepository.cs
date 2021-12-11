@@ -14,14 +14,14 @@ namespace SEP3T2GraphQL.Repositories.Impl
         private string uri = "http://localhost:8080";
         private readonly HttpClient client = new HttpClient();
         
-        public async Task<Rule> CreateRule(Rule rule)
+        public async Task<Rule> CreateResidenceRule(Rule rule)
         {
             var ruleAsJson = JsonSerializer.Serialize(rule, new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             HttpContent content = new StringContent(ruleAsJson, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync($"{uri}/rule", content);
+            var response = await client.PostAsync($"{uri}/rule/{rule.ResidenceId}", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
@@ -36,9 +36,9 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return newRule;
         }
 
-        public async Task<IEnumerable<Rule>> GetAllRules()
+        public async Task<IEnumerable<Rule>> GetAllRulesByResidenceId(int residenceId)
         {
-            var response = await client.GetAsync($"{uri}/rules");
+            var response = await client.GetAsync($"{uri}/rule/{residenceId}");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
@@ -52,14 +52,14 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return rulesToReturn;
         }
 
-        public async Task<Rule> UpdateRule(Rule rule)
+        public async Task<Rule> UpdateResidenceRule(Rule rule, string description)
         {
             var ruleAsJson = JsonSerializer.Serialize(rule, new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             HttpContent content = new StringContent(ruleAsJson, Encoding.UTF8, "application/json");
-            var response = await client.PatchAsync($"{uri}/rule/{rule.Description}/{rule.ResidenceId}", content);
+            var response = await client.PatchAsync($"{uri}/rule/{description}/{rule.ResidenceId}", content);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
@@ -85,12 +85,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
-            var newRule = JsonSerializer.Deserialize<Rule>(await response.Content.ReadAsStringAsync(),
-                new JsonSerializerOptions()
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                });
-            return newRule;
+            
+            return rule;
         }
     }
 }
