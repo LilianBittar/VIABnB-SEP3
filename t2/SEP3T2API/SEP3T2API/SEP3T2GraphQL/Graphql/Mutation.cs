@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using HotChocolate;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services;
 
 namespace SEP3T2GraphQL.Graphql
@@ -106,7 +104,7 @@ namespace SEP3T2GraphQL.Graphql
         
         public async Task<HostReview> CreateHostReview(HostReview hostReview)
         {
-           return await _hostReview.CreateHostReviewAsync(hostReview);
+            return await _hostReview.CreateHostReviewAsync(hostReview);
         }
 
         public async Task<HostReview> UpdateHostReview(HostReview hostReview)
@@ -141,7 +139,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<User> UpdateUser(User user)
         {
-           return await _userService.UpdateUserAsync(user);
+            return await _userService.UpdateUserAsync(user);
         }
 
         public async Task<User> DeleteUser(User user)
