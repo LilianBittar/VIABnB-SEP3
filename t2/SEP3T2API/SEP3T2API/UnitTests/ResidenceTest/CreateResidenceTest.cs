@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Repositories;
-using SEP3T2GraphQL.Repositories.Impl;
-using SEP3T2GraphQL.Services;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl;
 
-namespace UnitTests
+namespace UnitTests.ResidenceTest
 {
     [TestFixture]
     public class CreateResidenceTest
@@ -17,11 +14,11 @@ namespace UnitTests
         private IResidenceValidation _residenceValidation;
       
         
-        private Address address;
-        private City city;
-        private IList<Facility> facilities;
-        private IList<Rule> rules;
-        private Residence residence;
+        private Address _address;
+        private City _city;
+        private IList<Facility> _facilities;
+        private IList<Rule> _rules;
+        private Residence _residence;
 
         [SetUp]
         public void SetUp()
@@ -29,45 +26,45 @@ namespace UnitTests
            
             _residenceValidation = new ResidenceValidationImpl();
 
-            city = new City()
+            _city = new City()
             {
                 Id = 1,
                 CityName = "Horsens",
                 ZipCode = 8700
             };
 
-            address = new Address()
+            _address = new Address()
             {
                 Id = 1,
                 StreetName = "StreetNameTest",
                 HouseNumber = "1A",
                 StreetNumber = "2A",
-                City = city
+                City = _city
             };
             
-            facilities = new List<Facility>();
-            facilities.Add(new Facility
+            _facilities = new List<Facility>();
+            _facilities.Add(new Facility
             {
                 Id = 1,
                 Name = "FacilityTest"
             });
             
-            rules = new List<Rule>();
-            rules.Add(new Rule()
+            _rules = new List<Rule>();
+            _rules.Add(new Rule()
             {
                 Description = "DescriptionTest"
             });
 
-            residence = new Residence()
+            _residence = new Residence()
             {
                 Id = 1,
-                Address = address,
+                Address = _address,
                 Description = "DescriptionTest",
                 Type = "TypeTes",
                 IsAvailable = false,
                 PricePerNight = 1,
-                Rules = rules,
-                Facilities = facilities,
+                Rules = _rules,
+                Facilities = _facilities,
                 ImageUrl = "URLTest",
                 AvailableFrom = new DateTime(2050, 11, 11),
                 AvailableTo = new DateTime(2050, 11, 12)
@@ -77,7 +74,7 @@ namespace UnitTests
         [Test]
         public void CreateResidenceSunnyScenarioTest()
         {
-            Assert.DoesNotThrow(() => _residenceValidation.IsValidResidence(residence));
+            Assert.DoesNotThrow(() => _residenceValidation.IsValidResidence(_residence));
         }
 
         [Test]
@@ -91,8 +88,8 @@ namespace UnitTests
                 Type = "Test",
                 IsAvailable = false,
                 PricePerNight = 1,
-                Rules = rules,
-                Facilities = facilities,
+                Rules = _rules,
+                Facilities = _facilities,
                 ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
@@ -112,7 +109,7 @@ namespace UnitTests
         [TestCase("Test", "Test", "Test", "Test", 0)]
         public void CreateResidenceWithAnAddressWithInvalidAddressTest(string streetName, string houseNumber, string streetNumber, string cityName, int zipCode)
         {
-            Address a = new Address()
+            var a = new Address()
             {
                 Id = 1,
                 StreetName = streetName,
@@ -125,7 +122,7 @@ namespace UnitTests
                     ZipCode = zipCode
                 }
             };
-            Residence r = new Residence()
+            var r = new Residence()
             {
                 Id = 2,
                 Address = a,
@@ -133,8 +130,8 @@ namespace UnitTests
                 Type = "Test",
                 IsAvailable = false,
                 PricePerNight = 1,
-                Rules = rules,
-                Facilities = facilities,
+                Rules = _rules,
+                Facilities = _facilities,
                 ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
@@ -151,7 +148,7 @@ namespace UnitTests
         [TestCase("1A")]
         public void CreateResidenceWithAnAddressWithAnInvalidCityNameTest(string cityName)
         {
-            Address a = new Address()
+            var a = new Address()
             {
                 Id = 1,
                 StreetName = "Test",
@@ -164,7 +161,7 @@ namespace UnitTests
                     ZipCode = 1111
                 }
             };
-            Residence r = new Residence()
+            var r = new Residence()
             {
                 Id = 2,
                 Address = a,
@@ -172,8 +169,8 @@ namespace UnitTests
                 Type = "Test",
                 IsAvailable = false,
                 PricePerNight = 1,
-                Rules = rules,
-                Facilities = facilities,
+                Rules = _rules,
+                Facilities = _facilities,
                 ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
@@ -188,16 +185,16 @@ namespace UnitTests
         [TestCase("Test", "")]
         public void CreateResidenceWithAnInvalidTypeAndDescriptionTest(string type, string description)
         {
-            Residence r = new Residence()
+            var r = new Residence()
             {
                 Id = 2,
-                Address = address,
+                Address = _address,
                 Description = description,
                 Type = type,
                 IsAvailable = false,
                 PricePerNight = 1,
-                Rules = rules,
-                Facilities = facilities,
+                Rules = _rules,
+                Facilities = _facilities,
                 ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
@@ -209,16 +206,16 @@ namespace UnitTests
         [TestCase(-100)]
         public void CreateResidenceWithAnInvalidPricePerNightAndAverageRatingTest( int ppn)
         {
-            Residence r = new Residence()
+            var r = new Residence()
             {
                 Id = 2,
-                Address = address,
+                Address = _address,
                 Description = "Test",
                 Type = "Test",
                 IsAvailable = false,
                 PricePerNight = ppn,
-                Rules = rules,
-                Facilities = facilities,
+                Rules = _rules,
+                Facilities = _facilities,
                 ImageUrl = "Test",
                 AvailableFrom = DateTime.Now,
                 AvailableTo = DateTime.Now
@@ -246,10 +243,10 @@ namespace UnitTests
                     Name = name
                 }
             );
-            Residence r = new Residence()
+            var r = new Residence()
             {
                 Id = 2,
-                Address = address,
+                Address = _address,
                 Description = "Test",
                 Type = "Test",
                 IsAvailable = false,
@@ -267,16 +264,16 @@ namespace UnitTests
         [TestCase(2050, 11, 11)]
         public void CreateResidenceWithInvalidFromDateTest(int year, int month, int day)
         {
-            Residence r = new Residence()
+            var r = new Residence()
             {
                 Id = 2,
-                Address = address,
+                Address = _address,
                 Description = "Test",
                 Type = "Test",
                 IsAvailable = false,
                 PricePerNight = 1,
-                Rules = rules,
-                Facilities = facilities,
+                Rules = _rules,
+                Facilities = _facilities,
                 ImageUrl = "Test",
                 AvailableFrom = new DateTime(year, month, day),
                 AvailableTo = DateTime.Now

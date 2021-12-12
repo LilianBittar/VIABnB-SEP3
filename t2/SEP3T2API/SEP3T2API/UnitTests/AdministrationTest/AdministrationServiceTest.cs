@@ -50,7 +50,6 @@ namespace UnitTests.AdministrationTest
             _administrationRepository.Setup<IEnumerable<Administrator>>(x => x.GetAllAdmins().Result)
                 .Returns(adminList);
             Assert.ThrowsAsync<ArgumentException>(async () => await _administrationService.GetAdminByEmail(email));
- 
         }
     }
 }

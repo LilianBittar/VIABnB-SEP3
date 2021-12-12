@@ -42,6 +42,7 @@ namespace UnitTests.AddressServiceTest
             TestAssertCreateThrowsArgumentExceptionAsync(address);
         }
 
+        [Test]
         public void CreateAddress_StreetNameNull_ThrowsArgumentException()
         {
             City city = new()
@@ -54,6 +55,7 @@ namespace UnitTests.AddressServiceTest
             };
             TestAssertCreateThrowsArgumentExceptionAsync(address);
         }  
+        [Test]
         public void CreateAddress_StreetNumberNull_ThrowsArgumentException()
         {
             City city = new()
@@ -122,7 +124,8 @@ namespace UnitTests.AddressServiceTest
             };
             TestAssertCreateThrowsArgumentExceptionAsync(address); 
         }
-        public void TestAssertCreateThrowsArgumentExceptionAsync(Address address)
+
+        private void TestAssertCreateThrowsArgumentExceptionAsync(Address address)
         {
             Assert.ThrowsAsync<ArgumentException>(async () => await _addressService.CreateAddressAsync(address));
         }

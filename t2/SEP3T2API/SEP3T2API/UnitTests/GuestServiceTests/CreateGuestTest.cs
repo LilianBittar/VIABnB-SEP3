@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Moq;
-using NUnit.Core;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
@@ -50,8 +48,6 @@ namespace UnitTests.GuestServiceTests
         [Test]
         public void CreateGuest_HostDoesNotExist_ThrowsKeyNotFoundException()
         {
-            //This test caught an bug where NullReferenceException was thrown instead of KeyNotfound
-
             Guest guest = new()
             {
                 Id = 2, Cpr = "222222-2222", Email = "test@test.com", Password = "test123123", FirstName = "test",
@@ -68,7 +64,7 @@ namespace UnitTests.GuestServiceTests
         [Test]
         public void CreateGuest_GuestWithSameStudentNumberExist_ThrowsArgumentException()
         {
-            Guest guestWithSameStudentNumber = new Guest()
+            var guestWithSameStudentNumber = new Guest()
             {
                 Id = 3, Cpr = "222222-2222", Email = "test@test.com", Password = "test123123", FirstName = "test",
                 GuestReviews = new List<GuestReview>(), HostReviews = new List<HostReview>(), LastName = "test",

@@ -40,6 +40,10 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<GuestReview> UpdateGuestReviewAsync(GuestReview guestReview)
         {
+            if (guestReview == null)
+            {
+                throw new ArgumentException("You are updating with null guest review");
+            }
             return await _guestReviewRepository.UpdateGuestReviewAsync(guestReview);
         }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
@@ -12,7 +11,6 @@ namespace UnitTests.GuestReviewHostServiceTest
     [TestFixture]
     public class CreateGuestReviewTest
     {
-        private GuestReview _guestReview;
         private Mock<IGuestReviewRepository> _guestReviewHostRepository;
         private CreateGuestReviewValidation _validator;
         private GuestReviewService _guestReviewService;
@@ -20,15 +18,6 @@ namespace UnitTests.GuestReviewHostServiceTest
         [SetUp]
         public void SetUp()
         {
-            _guestReview = new GuestReview()
-            {
-                CreatedDate = new DateTime(),
-                GuestId = 1,
-                HostId = 3,
-                Rating = 4.0,
-                Text = "Was oki doki."
-            };
-    
             _guestReviewHostRepository = new Mock<IGuestReviewRepository>();
             _validator = new CreateGuestReviewValidation();
             _guestReviewService = new GuestReviewService(_guestReviewHostRepository.Object, _validator);

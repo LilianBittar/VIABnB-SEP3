@@ -56,7 +56,7 @@ namespace UnitTests.UserTest
                 ProfileImageUrl = "Test"
             };
 
-            Assert.ThrowsAsync<FormatException>(() => _userService.UpdateUserAsync(_user));
+            Assert.ThrowsAsync<ArgumentException>(() => _userService.UpdateUserAsync(_user));
         }
         
         [TestCase("Test34")]

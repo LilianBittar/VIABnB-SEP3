@@ -113,7 +113,6 @@ namespace UnitTests.RentalServiceTests
         public void CreateRentRequest_NumberOfGuestsExceedsHostsMaxNumberOfGuests_ThrowsArgumentException(
             int numberOfGuests)
         {
-            //This test caught a bug where null was returned instead of throwing ArgumentException. 
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = CreateDate("02/12/2021"),
@@ -231,7 +230,6 @@ namespace UnitTests.RentalServiceTests
         [Test]
         public void CreateRentRequest_ResidenceHasAnAlreadyApprovedRentRequestInSameRentPeriod_ThrowsArgumentException()
         {
-            //This test caught an bug where the wrong id was being compared in CreateRentRequestValidator resulting in null being returned. 
             Guest otherGuest = new()
             {
                 Cpr = "111111-1112",

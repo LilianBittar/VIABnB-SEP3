@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using HotChocolate.Types;
 using Moq;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;

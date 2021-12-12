@@ -96,7 +96,5 @@ namespace UnitTests.CityServiceTest
         {
             Assert.ThrowsAsync<ArgumentException>(async () => await _cityService.CreateCityAsync(city));
         }
-
-        
     }
 }

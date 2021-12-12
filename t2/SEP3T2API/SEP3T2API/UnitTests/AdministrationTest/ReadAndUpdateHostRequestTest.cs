@@ -14,8 +14,6 @@ namespace UnitTests.AdministrationTest
     [TestFixture]
     public class ReadAndUpdateHostRequestTest
     {
-        
-        //TODO go over tests. Check for gets
         private IHostService _hostService;
         private IEnumerable<Host> _hostList;
         [SetUp]
