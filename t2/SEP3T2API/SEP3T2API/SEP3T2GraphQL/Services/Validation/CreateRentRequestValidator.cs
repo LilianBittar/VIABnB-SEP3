@@ -151,7 +151,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">If approved rent request exist for request's residence in same rent period as the request.</exception>
         private async Task ValidateRentPeriodOverlaps(RentRequest request)
         {
-            var allRequests = await _rentRequestRepository.GetAllAsync();
+            var allRequests = await _rentRequestRepository.GetAllRentRequestAsync();
             if (allRequests == null || allRequests.Count() == 0)
             {
                 return;
@@ -181,7 +181,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">if guest has existing RentRequest for residence in same rent period</exception>
         private async Task ValidateGuestHasNoRentRequestsInSamePeriod(RentRequest request)
         {
-            var guestRentRequests = await _rentRequestRepository.GetRentRequestsByGuestId(request.Guest.Id);
+            var guestRentRequests = await _rentRequestRepository.GetRentRequestsByGuestIdAsync(request.Guest.Id);
             var requestsInSamePeriod = guestRentRequests.Where(r =>
                 r.Id != request.Id && r.Residence.Id == request.Residence.Id &&
                 (request.StartDate.Date>=r.StartDate.Date && request.EndDate.Date <= r.EndDate.Date)).ToList();

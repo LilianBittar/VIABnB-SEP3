@@ -74,7 +74,7 @@ namespace UnitTests.ResidenceReviewServiceTests
                 StartDate = DateTime.Now, EndDate = DateTime.Today.AddDays(2), NumberOfGuests = 1,
                 RequestCreationDate = DateTime.Now
             };
-            _rentRequestRepository.Setup(x => x.GetRentRequestsByGuestId(_guest.Id).Result)
+            _rentRequestRepository.Setup(x => x.GetRentRequestsByGuestIdAsync(_guest.Id).Result)
                 .Returns(new List<RentRequest>() {existingRentRequest});
             ResidenceReview review = new()
             {
@@ -98,7 +98,7 @@ namespace UnitTests.ResidenceReviewServiceTests
                 StartDate = DateTime.Now, EndDate = DateTime.Today.AddDays(2), NumberOfGuests = 1,
                 RequestCreationDate = DateTime.Now
             };
-            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaId(_guest.ViaId).Result)
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaIdAsync(_guest.ViaId).Result)
                 .Returns(new List<RentRequest>() {existingRentRequest});
             ResidenceReview review = new()
             {
@@ -119,7 +119,7 @@ namespace UnitTests.ResidenceReviewServiceTests
                 StartDate = DateTime.Now, EndDate = DateTime.Today.AddDays(2), NumberOfGuests = 1,
                 RequestCreationDate = DateTime.Now
             };
-            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaId(_guest.ViaId).Result)
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaIdAsync(_guest.ViaId).Result)
                 .Returns(new List<RentRequest>() {existingRentRequest});
             ResidenceReview review = new()
             {
@@ -159,7 +159,7 @@ namespace UnitTests.ResidenceReviewServiceTests
                 StartDate = DateTime.Now, EndDate = DateTime.Today.AddDays(2), NumberOfGuests = 1,
                 RequestCreationDate = DateTime.Now
             };
-            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaId(_guest.ViaId).Result)
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaIdAsync(_guest.ViaId).Result)
                 .Returns(new List<RentRequest>() {existingRentRequest});
             ResidenceReview review = new()
             {

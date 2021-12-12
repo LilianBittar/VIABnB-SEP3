@@ -47,7 +47,7 @@ namespace SEP3T2GraphQL.Services.Validation
         private async Task ValidateGuestHasRentedResidence(Residence residence, ResidenceReview residenceReview)
         {
             var rentRequests =
-                (await _rentRequestRepository.GetRentRequestsByViaId(residenceReview.GuestViaId)).Where(r =>
+                (await _rentRequestRepository.GetRentRequestsByViaIdAsync(residenceReview.GuestViaId)).Where(r =>
                     r.Residence.Id == residence.Id);
             if (rentRequests == null || !rentRequests.Any())
             {

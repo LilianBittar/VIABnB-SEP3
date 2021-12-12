@@ -1,36 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
 
 namespace SEP3T2GraphQL.Repositories.Impl
 {
     public class ResidenceRepositoryImpl: IResidenceRepository
     {
-        private string uri = "http://localhost:8080";
-        private readonly HttpClient client;
-        private IResidenceValidation _residenceValidation;
-
+        private const string Uri = "http://localhost:8080";
+        private readonly HttpClient _client;
         public ResidenceRepositoryImpl()
         {
-           
-            client = new HttpClient();
+            _client = new HttpClient();
         }
 
         public async Task<Residence> GetResidenceByIdAsync(int id)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + $"/residences/{id}");
-
+            var responseMessage = await _client.GetAsync(Uri + $"/residences/{id}");
             await HandleErrorResponse(responseMessage);
-
-
-            string result = await responseMessage.Content.ReadAsStringAsync();
-            Residence residence = JsonSerializer.Deserialize<Residence>(result, new JsonSerializerOptions(
+            var result = await responseMessage.Content.ReadAsStringAsync();
+            var residence = JsonSerializer.Deserialize<Residence>(result, new JsonSerializerOptions(
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
@@ -44,22 +36,18 @@ namespace SEP3T2GraphQL.Repositories.Impl
         public async Task<Residence> CreateResidenceAsync(Residence residence)
         {
             residence.Id = this.GetTheLastAddedResidence().Id + 1;
-            System.Console.WriteLine($"{this} was passed args: {JsonSerializer.Serialize(residence)}");
-            string newResidence = JsonSerializer.Serialize(residence, new JsonSerializerOptions()
+            var newResidence = JsonSerializer.Serialize(residence, new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            Console.WriteLine(newResidence);
-            StringContent content = new StringContent(newResidence, Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/residences", content);
+            var content = new StringContent(newResidence, Encoding.UTF8, "application/json");
+            var responseMessage = await _client.PostAsync(Uri + "/residences", content);
             await HandleErrorResponse(responseMessage);
-
-
-            Residence r = JsonSerializer.Deserialize<Residence>(await responseMessage.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            
+            var r = JsonSerializer.Deserialize<Residence>(await responseMessage.Content.ReadAsStringAsync(), new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            Console.WriteLine(r.ToString()); 
             return r;
         }
 
@@ -69,41 +57,36 @@ namespace SEP3T2GraphQL.Repositories.Impl
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            HttpContent content = new StringContent(guestAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync($"{uri}/residences/{residence.Id}", content);
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
+            var content = new StringContent(guestAsJson, Encoding.UTF8, "application/json");
+            var response = await _client.PutAsync($"{Uri}/residences/{residence.Id}", content);
+            await HandleErrorResponse(response);
             
-
             return residence;
         }
 
         public async Task<IList<Residence>> GetAllRegisteredResidencesByHostIdAsync(int id)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residence/host/{id}");
+            var responseMessage = await _client.GetAsync($"{Uri}/residence/host/{id}");
 
             await HandleErrorResponse(responseMessage);
 
-            string result = await responseMessage.Content.ReadAsStringAsync();
+            var result = await responseMessage.Content.ReadAsStringAsync();
 
-            List<Residence> residences = JsonSerializer.Deserialize<List<Residence>>(result,
+            var residences = JsonSerializer.Deserialize<List<Residence>>(result,
                 new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
 
             return residences;
         }
 
-        public async Task<IList<Residence>> GetAllAsync()
+        public async Task<IList<Residence>> GetAllResidenceAsync()
         {
-            HttpResponseMessage response = await client.GetAsync($"{uri}/residences");
-             await HandleErrorResponse(response);
-             var residences = JsonSerializer.Deserialize<IList<Residence>>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
-             {
-                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-             });
-             return residences;
+            var response = await _client.GetAsync($"{Uri}/residences");
+            await HandleErrorResponse(response);
+            var residences = JsonSerializer.Deserialize<IList<Residence>>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return residences;
         }
 
         public async Task<Residence> UpdateResidenceAsync(Residence residence)
@@ -113,7 +96,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             var content = new StringContent(residenceAsJson, Encoding.UTF8, "application/json");
-            var response = await client.PatchAsync($"{uri}/residences/{residence.Id}", content);
+            var response = await _client.PatchAsync($"{Uri}/residences/{residence.Id}", content);
             await HandleErrorResponse(response);
 
             var updatedResidence = JsonSerializer.Deserialize<Residence>(await response.Content.ReadAsStringAsync(),
@@ -131,7 +114,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            var response = await client.DeleteAsync($"{uri}/residences/{residence.Id}");
+            var response = await _client.DeleteAsync($"{Uri}/residences/{residence.Id}");
             await HandleErrorResponse(response);
             
             return residence;
@@ -148,12 +131,12 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Residence> GetTheLastAddedResidence()
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/residence");
+            var responseMessage = await _client.GetAsync($"{Uri}/residence");
 
             await HandleErrorResponse(responseMessage);
-            string result = await responseMessage.Content.ReadAsStringAsync();
+            var result = await responseMessage.Content.ReadAsStringAsync();
 
-            List<Residence> residences = JsonSerializer.Deserialize<List<Residence>>(result,
+            var residences = JsonSerializer.Deserialize<List<Residence>>(result,
                 new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
 
             return residences[residences.Capacity - 1];

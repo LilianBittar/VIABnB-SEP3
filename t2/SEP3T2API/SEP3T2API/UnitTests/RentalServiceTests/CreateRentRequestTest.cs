@@ -247,7 +247,7 @@ namespace UnitTests.RentalServiceTests
                 NumberOfGuests = 2
             };
 
-            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetAllAsync().Result)
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetAllRentRequestAsync().Result)
                 .Returns(new List<RentRequest>() {approvedRequestInSamePeriod});
 
             RentRequest request = new()
@@ -273,7 +273,7 @@ namespace UnitTests.RentalServiceTests
                 NumberOfGuests = 2
             };
             _rentRequestRepository
-                .Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaId(_validGuest.Id).Result)
+                .Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaIdAsync(_validGuest.Id).Result)
                 .Returns(new List<RentRequest>() {existingRequest});
             RentRequest newRequest = new()
             {

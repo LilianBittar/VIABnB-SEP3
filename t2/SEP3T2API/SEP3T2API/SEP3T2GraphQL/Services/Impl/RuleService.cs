@@ -17,7 +17,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Rule> CreateResidenceRule(Rule rule)
         {
-            var newRule = await _ruleRepository.CreateResidenceRule(rule);
+            var newRule = await _ruleRepository.CreateResidenceRuleAsync(rule);
             if (newRule == null)
             {
                 throw new Exception("Rule can't be null");
@@ -28,7 +28,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<IEnumerable<Rule>> GetAllRulesByResidenceId(int residenceId)
         {
-            var ruleListToReturn = await _ruleRepository.GetAllRulesByResidenceId(residenceId);
+            var ruleListToReturn = await _ruleRepository.GetAllRulesByResidenceIdAsync(residenceId);
             if (ruleListToReturn == null)
             {
                 throw new Exception("Rule list can't be null");
@@ -41,7 +41,7 @@ namespace SEP3T2GraphQL.Services.Impl
         {
             try
             {
-                return await _ruleRepository.UpdateResidenceRule(rule, description);
+                return await _ruleRepository.UpdateResidenceRuleAsync(rule, description);
             }
             catch (Exception e)
             {
@@ -54,7 +54,7 @@ namespace SEP3T2GraphQL.Services.Impl
         {
             try
             {
-               return await _ruleRepository.DeleteRule(rule);
+               return await _ruleRepository.DeleteRuleAsync(rule);
             }
             catch (Exception e)
             {

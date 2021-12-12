@@ -10,10 +10,15 @@ namespace SEP3T2GraphQL.Repositories.Impl
 {
     public class CityRepository : ICityRepository
     {
-        private readonly HttpClient _client = new();
+        private readonly HttpClient _client;
         private const string Uri = "http://localhost:8080/cities";
 
-        public async Task<IEnumerable<City>> GetAllAsync()
+        public CityRepository()
+        {
+            _client = new HttpClient();
+        }
+
+        public async Task<IEnumerable<City>> GetAllCityAsync()
         {
             var response = await _client.GetAsync(Uri);
             await HandleErrorResponse(response);
@@ -21,7 +26,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         }
 
-        public async Task<City> CreateAsync(City city)
+        public async Task<City> CreateCityAsync(City city)
         {
             var cityAsJson = JsonSerializer.Serialize(city,
                 new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});

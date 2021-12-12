@@ -17,7 +17,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Facility> CreateResidenceFacility(Facility facility, int residenceId)
         {
-            var newFacility = await _facilityRepository.CreateResidenceFacility(facility, residenceId);
+            var newFacility = await _facilityRepository.CreateResidenceFacilityAsync(facility, residenceId);
 
             if (newFacility == null)
             {
@@ -29,7 +29,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<IEnumerable<Facility>> GetAllFacilities()
         {
-            var facilityListToReturn = await _facilityRepository.GetAllFacilities();
+            var facilityListToReturn = await _facilityRepository.GetAllFacilitiesAsync();
             if (facilityListToReturn == null)
             {
                 throw new Exception("Facility list can't be null");
@@ -40,7 +40,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Facility> GetFacilityById(int id)
         {
-            var facilityToReturn = await _facilityRepository.GetFacilityById(id);
+            var facilityToReturn = await _facilityRepository.GetFacilityByIdAsync(id);
             if (facilityToReturn == null)
             {
                 throw new Exception("Facility can't be null");
@@ -53,7 +53,7 @@ namespace SEP3T2GraphQL.Services.Impl
         {
             try
             {
-               return await _facilityRepository.DeleteResidenceFacility(facility, residenceId);
+               return await _facilityRepository.DeleteResidenceFacilityAsync(facility, residenceId);
             }
             catch (Exception e)
             {

@@ -8,14 +8,14 @@ using SEP3T2GraphQL.Models;
 
 namespace SEP3T2GraphQL.Repositories.Impl
 {
-    public class HostReviewGuest : IHostReviewGuestRepository
+    public class HostReviewRepository : IHostReviewRepository
     {
-        private string uri = "http://localhost:8080/hostreviews";
-        private readonly HttpClient client;
+        private const string Uri = "http://localhost:8080/hostreviews";
+        private readonly HttpClient _client;
 
-        public HostReviewGuest()
+        public HostReviewRepository()
         {
-            client = new HttpClient();
+            _client = new HttpClient();
         }
         
         public async Task<HostReview> CreateHostReviewAsync(HostReview hostReview)
@@ -26,15 +26,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
             });
             var payload = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync(uri, payload);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
-
-            Console.WriteLine("We are here");
+            var response = await _client.PostAsync(Uri, payload);
+            await HandleErrorResponse(response);
             var createdHostReview = JsonSerializer.Deserialize<HostReview>(await response.Content.ReadAsStringAsync(),
                 new JsonSerializerOptions()
                 {
@@ -49,15 +42,11 @@ namespace SEP3T2GraphQL.Repositories.Impl
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            HttpContent content = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync($"{uri}/host/{hostReview.hostId}", content);
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
+            var content = new StringContent(hostAsJson, Encoding.UTF8, "application/json");
+            var response = await _client.PutAsync($"{Uri}/host/{hostReview.hostId}", content);
+            await HandleErrorResponse(response);
 
-            var updatedHostReview = JsonSerializer.Deserialize<HostReview>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            var updatedHostReview = JsonSerializer.Deserialize<Models.HostReview>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
@@ -67,13 +56,8 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<IEnumerable<HostReview>> GetAllHostReviewsByGuestIdAsync(int id)
         {
-            var response = await client.GetAsync($"{uri}/host/{id}");
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
-
+            var response = await _client.GetAsync($"{Uri}/host/{id}");
+            await HandleErrorResponse(response);
             var result = await response.Content.ReadAsStringAsync();
             var responseList = JsonSerializer.Deserialize<List<HostReview>>(result, new JsonSerializerOptions
             {
@@ -84,19 +68,23 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id)
         {
-            var response = await client.GetAsync($"{uri}/host/{id}");
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
-
+            var response = await _client.GetAsync($"{Uri}/host/{id}");
+            await HandleErrorResponse(response);
             var result = await response.Content.ReadAsStringAsync();
             var responseList = JsonSerializer.Deserialize<List<HostReview>>(result, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             return responseList;
+        }
+        
+        private static async Task HandleErrorResponse(HttpResponseMessage response)
+        {
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine(await response.Content.ReadAsStringAsync());
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
         }
     }
 }

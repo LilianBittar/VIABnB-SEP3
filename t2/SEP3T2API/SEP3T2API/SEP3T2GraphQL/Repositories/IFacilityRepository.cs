@@ -6,9 +6,9 @@ namespace SEP3T2GraphQL.Repositories
 {
     public interface IFacilityRepository
     {
-        Task<Facility> CreateResidenceFacility(Facility facility, int residenceId);
-        Task<IEnumerable<Facility>> GetAllFacilities();
-        Task<Facility> GetFacilityById(int id);
-        Task<Facility> DeleteResidenceFacility(Facility facility, int residenceId);
+        Task<Facility> CreateResidenceFacilityAsync(Facility facility, int residenceId);
+        Task<IEnumerable<Facility>> GetAllFacilitiesAsync();
+        Task<Facility> GetFacilityByIdAsync(int id);
+        Task<Facility> DeleteResidenceFacilityAsync(Facility facility, int residenceId);
     }
 }

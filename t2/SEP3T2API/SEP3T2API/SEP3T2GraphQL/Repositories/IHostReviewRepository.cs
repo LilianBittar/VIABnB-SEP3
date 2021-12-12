@@ -4,7 +4,7 @@ using SEP3T2GraphQL.Models;
 
 namespace SEP3T2GraphQL.Repositories
 {
-    public interface IHostReviewGuestRepository
+    public interface IHostReviewRepository
     {
         Task<HostReview> CreateHostReviewAsync(HostReview hostReview);
         Task<HostReview> UpdateHostReviewAsync(HostReview hostReview);

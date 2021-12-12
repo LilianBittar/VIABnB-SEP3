@@ -10,11 +10,15 @@ namespace SEP3T2GraphQL.Repositories.Impl
 {
     public class AddressRepository : IAddressRepository
     {
-        private readonly HttpClient _client = new();
+        private readonly HttpClient _client;
         private const string Uri = "http://localhost:8080/addresses";
 
+        public AddressRepository()
+        {
+            _client = new HttpClient();
+        }
 
-        public async Task<IEnumerable<Address>> GetAllAsync()
+        public async Task<IEnumerable<Address>> GetAllAddressAsync()
         {
             var response = await _client.GetAsync(Uri);
             await HandleErrorResponse(response);
@@ -22,7 +26,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         }
 
-        public async Task<Address> CreateAsync(Address address)
+        public async Task<Address> CreateAddressAsync(Address address)
         {
             var addressAsJson = JsonSerializer.Serialize(address,
                 new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});

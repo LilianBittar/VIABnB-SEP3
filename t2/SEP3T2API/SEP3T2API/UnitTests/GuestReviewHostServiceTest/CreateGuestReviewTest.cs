@@ -13,7 +13,7 @@ namespace UnitTests.GuestReviewHostServiceTest
     public class CreateGuestReviewTest
     {
         private GuestReview _guestReview;
-        private Mock<IGuestReviewHostRepository> _guestReviewHostRepository;
+        private Mock<IGuestReviewRepository> _guestReviewHostRepository;
         private CreateGuestReviewValidation _validator;
         private GuestReviewService _guestReviewService;
         
@@ -29,7 +29,7 @@ namespace UnitTests.GuestReviewHostServiceTest
                 Text = "Was oki doki."
             };
     
-            _guestReviewHostRepository = new Mock<IGuestReviewHostRepository>();
+            _guestReviewHostRepository = new Mock<IGuestReviewRepository>();
             _validator = new CreateGuestReviewValidation(_guestReviewHostRepository.Object);
             _guestReviewService = new GuestReviewService(_guestReviewHostRepository.Object, _validator);
         }

@@ -123,7 +123,7 @@ namespace SEP3T2GraphQL.Services
 
         public async Task<IList<Residence>> GetAvailableResidencesAsync()
         {
-            var allResidences = await _residenceRepository.GetAllAsync();
+            var allResidences = await _residenceRepository.GetAllResidenceAsync();
             return allResidences.Where(r => r.IsAvailable).ToList();
         }
 

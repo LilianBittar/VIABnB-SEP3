@@ -51,9 +51,9 @@ namespace SEP3T2GraphQL
             services.AddScoped<IHostService, HostServiceImpl>();
             services.AddScoped<IHostReviewService, HostReviewServiceImpl>();
             services.AddScoped<CreateHostReviewValidation>();
-            services.AddScoped<IGuestReviewHostRepository, GuestReviewHost>();
+            services.AddScoped<IGuestReviewRepository, GuestReviewRepository>();
             services.AddScoped<CreateGuestReviewValidation>();
-            services.AddScoped<IHostReviewGuestRepository, HostReviewGuest>();
+            services.AddScoped<IHostReviewRepository, HostReviewRepository>();
             services.AddScoped<IHostValidation, HostValidationImpl>();
             services.AddScoped<IGuestValidation, GuestValidationImpl>();
             services.AddScoped<IGuestService, GuestServiceImpl>();

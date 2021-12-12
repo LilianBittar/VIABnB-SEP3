@@ -6,11 +6,11 @@ namespace SEP3T2GraphQL.Services.Validation
 {
     public class CreateGuestReviewValidation
     {
-        private readonly IGuestReviewHostRepository _guestReviewHostRepository;
+        private readonly IGuestReviewRepository _guestReviewRepository;
 
-        public CreateGuestReviewValidation(IGuestReviewHostRepository guestReviewHostRepository)
+        public CreateGuestReviewValidation(IGuestReviewRepository guestReviewRepository)
         {
-            _guestReviewHostRepository = guestReviewHostRepository;
+            _guestReviewRepository = guestReviewRepository;
         }
         
         public void ValidateGuestReview(GuestReview guestReview)

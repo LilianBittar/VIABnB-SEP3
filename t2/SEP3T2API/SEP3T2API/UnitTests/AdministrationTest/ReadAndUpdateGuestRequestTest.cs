@@ -9,6 +9,8 @@ using SEP3T2GraphQL.Repositories.Impl;
 using SEP3T2GraphQL.Services;
 using SEP3T2GraphQL.Services.Impl;
 using SEP3T2GraphQL.Services.Validation;
+using GuestReview = SEP3T2GraphQL.Models.GuestReview;
+using HostReview = SEP3T2GraphQL.Models.HostReview;
 
 namespace UnitTests.AdministrationTest
 {
@@ -86,7 +88,7 @@ namespace UnitTests.AdministrationTest
             _guestList = new List<Guest>() {guest1, guest2};
 
             var guestRepository = new Mock<IGuestRepository>();
-            guestRepository.Setup(ex => ex.GetAllNotApprovedGuests().Result).Returns(_guestList);
+            guestRepository.Setup(ex => ex.GetAllNotApprovedGuestsAsync().Result).Returns(_guestList);
             var hostService = new Mock<IHostService>();
             hostService.Setup(ex => ex.GetHostById(1).Result).Returns(host1);
             hostService.Setup(ex => ex.GetHostById(2).Result).Returns(host2);

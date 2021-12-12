@@ -49,7 +49,7 @@ namespace SEP3T2GraphQL.Services.Impl
                 {
                     Console.WriteLine($"{this} logging in...");
                     Console.WriteLine($"{this}: Was passed this arg: {JsonConvert.SerializeObject(studentNumber)}");
-                    return await _guestRepository.GetGuestByStudentNumber(studentNumber);
+                    return await _guestRepository.GetGuestByStudentNumberAsync(studentNumber);
                 }
                 catch (Exception e)
                 {

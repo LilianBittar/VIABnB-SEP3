@@ -102,7 +102,7 @@ namespace UnitTests.RentalServiceTests
                 Residence = _residence
             };
             var rentList = new List<RentRequest> {request};
-            _rentRequestRepository.Setup<IEnumerable<RentRequest>>( exp =>  exp.GetAllAsync().Result).Returns(rentList);
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>( exp =>  exp.GetAllRentRequestAsync().Result).Returns(rentList);
             Assert.DoesNotThrowAsync(async () => await _rentalService.UpdateRentRequestStatusAsync(request));
         }
 
@@ -111,7 +111,7 @@ namespace UnitTests.RentalServiceTests
         {
             RentRequest request = null;
             var rentList = new List<RentRequest> {request};
-            _rentRequestRepository.Setup<IEnumerable<RentRequest>>( exp =>  exp.GetAllAsync().Result).Returns(rentList);
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>( exp =>  exp.GetAllRentRequestAsync().Result).Returns(rentList);
             Assert.ThrowsAsync<ArgumentException>(async () => await _rentalService.UpdateRentRequestStatusAsync(request));
         }
 

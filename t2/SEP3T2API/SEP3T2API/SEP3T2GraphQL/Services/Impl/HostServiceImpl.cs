@@ -52,7 +52,7 @@ namespace SEP3T2GraphQL.Services.Impl
         {
             try
             {
-                return await _hostRepository.GetHostByEmail(email);
+                return await _hostRepository.GetHostByEmailAsync(email);
             }
             catch (Exception e)
             {
@@ -79,7 +79,7 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 try
                 {
-                    return await _hostRepository.GetHostById(id);
+                    return await _hostRepository.GetHostByIdAsync(id);
                 }
                 catch (Exception e)
                 {
@@ -93,7 +93,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<IEnumerable<Host>> GetAllNotApprovedHostsAsync()
         {
-            var hostListToReturn = await _hostRepository.GetAllNotApprovedHosts();
+            var hostListToReturn = await _hostRepository.GetAllNotApprovedHostsAsync();
             if (hostListToReturn == null)
             {
                 throw new ArgumentException("Host list is null");
@@ -111,7 +111,7 @@ namespace SEP3T2GraphQL.Services.Impl
                 throw new ArgumentException("Host can't be null");
             }
 
-            var updatedHost = await _hostRepository.UpdateHostStatus(host);
+            var updatedHost = await _hostRepository.UpdateHostStatusAsync(host);
             if (updatedHost == null)
             {
                 throw new ArgumentException("Can't update the host status!!!");

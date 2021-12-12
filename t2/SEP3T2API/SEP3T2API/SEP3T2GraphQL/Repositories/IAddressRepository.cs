@@ -11,7 +11,7 @@ namespace SEP3T2GraphQL.Repositories
         /// </summary>
         /// <exception cref="Exception">Thrown if the API response is not successful</exception>
         /// <returns>A list containing all the addresses registered in the system</returns>
-        public Task<IEnumerable<Address>> GetAllAsync();
+        public Task<IEnumerable<Address>> GetAllAddressAsync();
         
         /// <summary>
         /// Method that creates an address and stored in the system 
@@ -19,6 +19,6 @@ namespace SEP3T2GraphQL.Repositories
         /// <param name="address">The targeted Address to stored in the system </param>
         /// <exception cref="Exception">Thrown if the API response is not successful</exception>
         /// <returns>Address object</returns>
-        public Task<Address> CreateAsync(Address address); 
+        public Task<Address> CreateAddressAsync(Address address); 
     }
 }

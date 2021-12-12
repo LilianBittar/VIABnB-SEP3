@@ -10,12 +10,12 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public class GuestReviewService : IGuestReviewService
     {
-        private readonly IGuestReviewHostRepository _guestReviewRepository;
+        private readonly IGuestReviewRepository _guestReviewRepository;
         private readonly CreateGuestReviewValidation _createGuestReviewValidation;
 
-        public GuestReviewService(IGuestReviewHostRepository guestReviewHostRepository, CreateGuestReviewValidation createGuestReviewValidation)
+        public GuestReviewService(IGuestReviewRepository guestReviewRepository, CreateGuestReviewValidation createGuestReviewValidation)
         {
-            _guestReviewRepository = guestReviewHostRepository;
+            _guestReviewRepository = guestReviewRepository;
             _createGuestReviewValidation = createGuestReviewValidation;
         }
 

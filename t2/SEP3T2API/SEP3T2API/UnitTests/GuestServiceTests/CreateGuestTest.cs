@@ -34,7 +34,7 @@ namespace UnitTests.GuestServiceTests
                 ProfileImageUrl = null
             };
             var hostService = new Mock<IHostService>();
-            _hostRepository.Setup<Host>(x => x.GetHostById(4).Result).Returns(new Host());
+            _hostRepository.Setup<Host>(x => x.GetHostByIdAsync(4).Result).Returns(new Host());
 
             _guestService = new GuestServiceImpl(_guestRepository.Object, hostService.Object,
                 new CreateGuestValidator(_guestRepository.Object, _hostRepository.Object));
@@ -60,7 +60,7 @@ namespace UnitTests.GuestServiceTests
                 ProfileImageUrl = null
             };
             Host nullHost = null;
-            _hostRepository.Setup<Host>(x => x.GetHostById(2).Result).Returns(nullHost);
+            _hostRepository.Setup<Host>(x => x.GetHostByIdAsync(2).Result).Returns(nullHost);
 
             Assert.ThrowsAsync<KeyNotFoundException>(async () => await _guestService.CreateGuestAsync(guest));
         }
@@ -75,7 +75,7 @@ namespace UnitTests.GuestServiceTests
                 PhoneNumber = "+4588888888", ViaId = 293886, IsApprovedHost = true, IsApprovedGuest = true,
                 ProfileImageUrl = null
             };
-            _guestRepository.Setup<IEnumerable<Guest>>(x => x.GetAllGuests().Result)
+            _guestRepository.Setup<IEnumerable<Guest>>(x => x.GetAllGuestsAsync().Result)
                 .Returns(new List<Guest>() {guestWithSameStudentNumber});
             Guest guest = new()
             {
@@ -117,7 +117,7 @@ namespace UnitTests.GuestServiceTests
         [Test]
         public void CreateGuest_ValidGuest_DoesNotThrow()
         {
-            _hostRepository.Setup<Host>(x => x.GetHostById(4).Result).Returns(new Host() {Id = 4});
+            _hostRepository.Setup<Host>(x => x.GetHostByIdAsync(4).Result).Returns(new Host() {Id = 4});
             Guest guest = new()
             {
                 Id = 4, Cpr = "222222-2222", Email = "test@test.com", Password = "test123123", FirstName = "test",
@@ -151,7 +151,7 @@ namespace UnitTests.GuestServiceTests
         [Test]
         public void CreateGuest_GuestIsNotApprovedHost_ThrowsArgumentException()
         {
-            _hostRepository.Setup<Host>(x => x.GetHostById(4).Result)
+            _hostRepository.Setup<Host>(x => x.GetHostByIdAsync(4).Result)
                 .Returns(new Host() {Id = 4, IsApprovedHost = false});
             Guest guest = new()
             {
@@ -167,7 +167,7 @@ namespace UnitTests.GuestServiceTests
         [Test]
         public void CreateGuest_NullFirstName_ThrowsArgumentException()
         {
-            _hostRepository.Setup<Host>(x => x.GetHostById(4).Result)
+            _hostRepository.Setup<Host>(x => x.GetHostByIdAsync(4).Result)
                 .Returns(new Host() {Id = 4});
             Guest guest = new()
             {
@@ -182,7 +182,7 @@ namespace UnitTests.GuestServiceTests
         [Test]
         public void CreateGuest_NullLastName_ThrowsArgumentException()
         {
-            _hostRepository.Setup<Host>(x => x.GetHostById(4).Result)
+            _hostRepository.Setup<Host>(x => x.GetHostByIdAsync(4).Result)
                 .Returns(new Host() {Id = 4});
             Guest guest = new()
             {
@@ -196,7 +196,7 @@ namespace UnitTests.GuestServiceTests
 
         [Test]
         public void CreateGuest_NullPhoneNumber_ThrowsArgumentException()
-        {   _hostRepository.Setup<Host>(x => x.GetHostById(4).Result)
+        {   _hostRepository.Setup<Host>(x => x.GetHostByIdAsync(4).Result)
                 .Returns(new Host() {Id = 4});
             Guest guest = new()
             {
@@ -211,7 +211,7 @@ namespace UnitTests.GuestServiceTests
         [Test]
         public void CreateGuest_NullEmail_ThrowsArgumentException()
         {
-            _hostRepository.Setup<Host>(x => x.GetHostById(4).Result)
+            _hostRepository.Setup<Host>(x => x.GetHostByIdAsync(4).Result)
                 .Returns(new Host() {Id = 4});
             Guest guest = new()
             {
@@ -227,7 +227,7 @@ namespace UnitTests.GuestServiceTests
         [Test]
         public void CreateGuest_NullPassword_ThrowsArgumentException()
         {
-            _hostRepository.Setup<Host>(x => x.GetHostById(4).Result)
+            _hostRepository.Setup<Host>(x => x.GetHostByIdAsync(4).Result)
                 .Returns(new Host() {Id = 4});
             Guest guest = new()
             {

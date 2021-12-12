@@ -51,8 +51,8 @@ namespace UnitTests.AdministrationTest
             _hostList = new List<Host> {host1, host2};
             
             var hostRepository = new Mock<IHostRepository>();
-            hostRepository.Setup(ex => ex.GetAllNotApprovedHosts().Result).Returns(_hostList);
-            hostRepository.Setup(ex => ex.UpdateHostStatus(host1).Result).Returns(host1);
+            hostRepository.Setup(ex => ex.GetAllNotApprovedHostsAsync().Result).Returns(_hostList);
+            hostRepository.Setup(ex => ex.UpdateHostStatusAsync(host1).Result).Returns(host1);
 
             var userService = new Mock<IUserService>();
             _hostService = new HostServiceImpl(hostRepository.Object, new HostValidationImpl(userService.Object));
