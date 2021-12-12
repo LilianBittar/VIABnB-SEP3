@@ -1,23 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using MatBlazor;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SEP3BlazorT1Client.Authentication;
 using SEP3BlazorT1Client.Data;
 using SEP3BlazorT1Client.Data.Impl;
-using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
-using SEP3BlazorT1Client.Pages.RegisterResidence;
-using SEP3BlazorT1Client.ViewModels;
 
 namespace SEP3BlazorT1Client
 {
@@ -40,7 +30,6 @@ namespace SEP3BlazorT1Client
             services.AddScoped<MatDialogService>();
             services.AddScoped<IResidenceService, GraphQlResidenceService>();
             services.AddScoped<IHostService, GraphQlHostService>();
-            services.AddScoped<RegisterResidenceViewModel>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddScoped<IGuestService, GraphQlGuestService>();
             services.AddScoped<IFacilityService, GraphQlFacilityService>();

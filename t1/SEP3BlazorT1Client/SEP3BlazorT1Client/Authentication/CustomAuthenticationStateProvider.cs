@@ -57,7 +57,17 @@ namespace SEP3BlazorT1Client.Authentication
             var cachedClaimsPrincipal = new ClaimsPrincipal(identity);
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
         }
-
+        /// <summary>
+        /// Validate the User's login.
+        /// Based on the returned User type, one of the three boolean is set to true.
+        /// If A host is returned the _isHost is set to true.  If that Host is an approved host then set the boolean _isApprovedHost to true
+        /// If A guest is returned the _isGuest is set to true. If that Guest is an approved guest then set the boolean _isApprovedGust to true
+        /// If An admin is returned the _isAdmin is set to true. If that Admin is an approved admin then set the boolean _isApprovedAdmin to true
+        /// </summary>
+        /// <param name="email">The given User's e-mail</param>
+        /// <param name="password">The given user's password</param>
+        /// <exception cref="ArgumentException">If the User's e-mail is null or empty string</exception>
+        /// <exception cref="ArgumentException">If the User's password is null or empty password</exception>
         public async Task ValidateLogin(string email, string password)
         {
             if (string.IsNullOrEmpty(email))
@@ -74,9 +84,9 @@ namespace SEP3BlazorT1Client.Authentication
             try
             {
                 cachedUser = await _userService.ValidateUserAsync(email, password);
-                var _guest = await _guestService.GetGuestByEmail(email);
-                var _host = await _hostService.GetHostByEmail(email);
-                if (await _administrationService.GetAdminByEmail(email) != null)
+                var _guest = await _guestService.GetGuestByEmailAsync(email);
+                var _host = await _hostService.GetHostByEmailAsync(email);
+                if (await _administrationService.GetAdminByEmailAsync(email) != null)
                 {
                     isAdmin = true;
                 }

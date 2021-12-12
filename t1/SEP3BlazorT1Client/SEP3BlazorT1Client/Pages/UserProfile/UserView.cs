@@ -66,7 +66,7 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
 
         private void ToMyMail()
         {
-           NavigationManager.NavigateTo("/messages");
+            NavigationManager.NavigateTo("/messages");
         }
 
         private void ToMyRentRequest()

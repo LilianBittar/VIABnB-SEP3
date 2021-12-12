@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
@@ -29,7 +28,7 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
             _hostReviewList = await HostReviewService.GetAllHostReviewsByHostIdAsync(Id);
             foreach (var item in _hostReviewList)
             {
-                var g =  await GuestService.GetGuestById(item.GuestId);
+                var g =  await GuestService.GetGuestByIdAsync(item.GuestId);
                 _guestList.Add(g);
             }
             StateHasChanged();

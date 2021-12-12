@@ -17,14 +17,12 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
         [Inject] public IResidenceService ResidenceService { get; set; }
         [Inject] public IRuleService RuleService { get; set; }
         [Inject] public IFacilityService FacilityService { get; set; }
-        [Inject] public IHostService HostService { get; set; }
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         
         [Parameter] public int Id { get; set; }
 
         private Residence _residence = new Residence();
-        private Host _host = new Host();
         private IEnumerable<Rule> _rules = new List<Rule>();
         private IEnumerable<Facility> _facilities = new List<Facility>();
         private Facility _newFacility = new Facility();
@@ -42,7 +40,7 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
                 _isLoading = true;
                 _isEditable = true;
                 _residence = await ResidenceService.GetResidenceByIdAsync(Id);
-                _facilities = await FacilityService.GetAllFacilities();
+                _facilities = await FacilityService.GetAllFacilitiesAsync();
                 _rules = await RuleService.GetAllRulesByResidenceIdAsync(Id);
                 StateHasChanged();
                 _isLoading = false;
@@ -76,7 +74,7 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
 
         private async Task DeleteResidenceFacility(int id)
         {
-            var fac = await FacilityService.DeleteResidenceFacility(_residence.Facilities.First(f => f.Id == id), _residence.Id);
+            var fac = await FacilityService.DeleteResidenceFacilityAsync(_residence.Facilities.First(f => f.Id == id), _residence.Id);
             if (fac == null)
             {
                 Console.WriteLine("can't");
@@ -107,7 +105,7 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
             _newFacility = _facilities.FirstOrDefault(facility => facility.Name == _newFacility.Name);
             if (_newFacility != null && !string.IsNullOrEmpty(_newFacility.Name) && _residence.Facilities.All(facility => facility.Name != _newFacility.Name))
             {
-                FacilityService.CreateResidenceFacility(_newFacility, _residence.Id);
+                FacilityService.CreateResidenceFacilityAsync(_newFacility, _residence.Id);
             }
             StateHasChanged();
         }
@@ -145,16 +143,6 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
         private void ToHostResidence()
         {
             NavigationManager.NavigateTo("HostResidences");
-        }
-
-        private void DialogIsOpen()
-        {
-            _dialogIsOpen = true;
-        }
-
-        private void OkClick()
-        {
-            _dialogIsOpen = false;
         }
     }
 }

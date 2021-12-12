@@ -5,7 +5,6 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @using SEP3BlazorT1Client.Data
 @using System.Text.Json
-@using AngleSharp.Common
 @inject NavigationManager NavigationManager; 
 @inject IMatDialogService MatDialogService;
 @inject AuthenticationStateProvider AuthenticationStateProvider; 
@@ -133,7 +132,7 @@
     private IDictionary<string, User> _usersInConversationToShow = new Dictionary<string, User>();
     private bool _connectionFailed = false;
 
-    public string ConversationFilter
+    private string ConversationFilter
     {
         get => _conversationFilter;
         set

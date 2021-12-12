@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
-using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes.FacilityResponseTypes;
 using SEP3BlazorT1Client.Models;
 
@@ -14,7 +13,7 @@ namespace SEP3BlazorT1Client.Data.Impl
     {
         private const string Url = "https://localhost:5001/graphql";
         private readonly IGqlClient _client = new GqlClient(Url); 
-        public async Task<Facility> CreateResidenceFacility(Facility facility, int residenceId)
+        public async Task<Facility> CreateResidenceFacilityAsync(Facility facility, int residenceId)
         {
             var query = new GqlQuery()
             {
@@ -31,7 +30,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             return response.Data.Facility;
         }
 
-        public async Task<IEnumerable<Facility>> GetAllFacilities()
+        public async Task<IEnumerable<Facility>> GetAllFacilitiesAsync()
         {
             var query = new GqlQuery()
             {
@@ -44,15 +43,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                         "
             };
             var response = await _client.PostQueryAsync<FacilityListResponseType>(query);
+            HandleErrorResponse(response);
             return response.Data.Facilities; 
         }
-
-        public Task<Facility> GetFacilityById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<Facility> DeleteResidenceFacility(Facility facility, int residenceId)
+        public async Task<Facility> DeleteResidenceFacilityAsync(Facility facility, int residenceId)
         {
             var query = new GqlQuery()
             {

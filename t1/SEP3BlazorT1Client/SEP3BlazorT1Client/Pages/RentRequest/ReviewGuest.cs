@@ -34,12 +34,12 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         protected override async Task OnInitializedAsync()
         {
             _isloading = true;
-            _guest = await GuestService.GetGuestById(Id);
+            _guest = await GuestService.GetGuestByIdAsync(Id);
             var authState = await AuthStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
             try
             {
-                var host = await HostService.GetHostByEmail(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email")
+                var host = await HostService.GetHostByEmailAsync(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email")
                     ?.Value);
                 _host = host;
             }
@@ -53,7 +53,7 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
             {
                 foreach (var item in _host.HostReviews)
                 {
-                    var h = await HostService.GetHostById(item.HostId);
+                    var h = await HostService.GetHostByIdAsync(item.HostId);
                     _hosts.Add(h);
                 }
             }

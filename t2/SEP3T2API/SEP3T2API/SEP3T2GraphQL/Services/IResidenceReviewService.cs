@@ -25,7 +25,6 @@ namespace SEP3T2GraphQL.Services
         /// <param name="residenceId">id of the residence</param>
         /// <returns>all residence reviews of residence with id of <c>residenceId</c></returns>
         /// <exception cref="System.ArgumentException">If the Residence id is 0</exception>
-
         public Task<IEnumerable<ResidenceReview>> GetAllResidenceReviewByResidenceIdAsync(int residenceId); 
     }
 }

@@ -4,16 +4,14 @@ using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
-using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes.GuestResponseTypes;
 using SEP3BlazorT1Client.Models;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3BlazorT1Client.Data.Impl
 {
     public partial class GraphQlGuestService : IGuestService
     {
-        public async Task<Guest> GetGuestById(int id)
+        public async Task<Guest> GetGuestByIdAsync(int id)
         {
             var query = new GqlQuery()
             {
@@ -49,10 +47,11 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Variables = new {guestId = id}
             };
             var response = await _client.PostQueryAsync<GuestByIdResponseType>(query);
+            HandleErrorResponse(response);
             return response.Data.Guest;
         }
 
-        public async Task<Guest> GetGuestByEmail(string email)
+        public async Task<Guest> GetGuestByEmailAsync(string email)
         {
             var guestQuery = new GqlQuery()
             {
@@ -90,20 +89,10 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Variables = new {wantedGuestEmail = email}
             };
             var response = await _client.PostQueryAsync<GuestByEmailResponseType>(guestQuery);
+            HandleErrorResponse(response);
             return response.Data.Guest;
         }
-
-        public Task<Guest> UpdateGuest(Guest guest)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<IEnumerable<Guest>> GetAllGuests()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuests()
+        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuestsAsync()
         {
             var guestQuery = new GqlQuery()
             {
@@ -135,8 +124,9 @@ namespace SEP3BlazorT1Client.Data.Impl
                         profileImageUrl
                     }}"
             };
-            GqlRequestResponse<GuestListResponse> graphQlResponse =
+            var graphQlResponse =
                 await _client.PostQueryAsync<GuestListResponse>(guestQuery);
+            HandleErrorResponse(graphQlResponse);
             return graphQlResponse.Data.Guests;
         }
 
@@ -175,12 +165,19 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Variables = new {newGuest = guest}
             };
             var response = await _client.PostQueryAsync<UpdateGuestMutationResponseType>(updateStatusMutation);
+            HandleErrorResponse(response);
+            return response.Data.UpdateGuest;
+        }
+        
+        private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)
+        {
             if (response.Errors != null)
             {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
+                // String manipulation to seperate the Error message from the sample error response. 
+                Console.WriteLine(JsonConvert.SerializeObject(response.Errors));
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4]
+                    .Split(":")[2]);
             }
-
-            return response.Data.UpdateGuest;
         }
     }
 }

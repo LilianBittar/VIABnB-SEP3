@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
+using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
-using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes.GuestResponseTypes;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes.GuestReviewResponseType;
-using SEP3BlazorT1Client.Data.Impl.ResponseTypes.HostReviewsResponseTypes;
 using SEP3BlazorT1Client.Models;
 
 namespace SEP3BlazorT1Client.Data.Impl
@@ -34,37 +33,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Variables = new {review = guestReview}
             };
             var response = await _client.PostQueryAsync<CreateGuestReviewResponseType>(createGuestReviewMutation);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
-            }
-
-            return response.Data.GuestReview;
-        }
-
-        public async Task<GuestReview> UpdateGuestReviewAsync(GuestReview guestReview)
-        {
-            GqlQuery updateGuestReviewMutation = new GqlQuery()
-            {
-                Query =
-                    @"mutation($review:GuestReviewInput){
-                          updateGuestReview(guestReview:$review){
-                            rating
-                            text
-                            createdDate
-                            guestId
-                            hostId
-                          }
-                        }",
-
-                Variables = new {review = guestReview}
-            };
-            var response = await _client.PostQueryAsync<UpdateGuestReviewResponseType>(updateGuestReviewMutation);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
-            }
-
+            HandleErrorResponse(response);
             return response.Data.GuestReview;
         }
 
@@ -85,7 +54,19 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
             var graphQlResponse =
                 await _client.PostQueryAsync<AllGuestReviewsByGuestIdResponseType>(query);
+            HandleErrorResponse(graphQlResponse);
             return graphQlResponse.Data.GuestReviews;
+        }
+        
+        private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)
+        {
+            if (response.Errors != null)
+            {
+                // String manipulation to seperate the Error message from the sample error response. 
+                Console.WriteLine(JsonConvert.SerializeObject(response.Errors));
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4]
+                    .Split(":")[2]);
+            }
         }
     }
 }

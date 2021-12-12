@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Components.Forms;
 using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data;
 using SEP3BlazorT1Client.Models;
-using SEP3BlazorT1Client.ViewModels;
 
 namespace SEP3BlazorT1Client.Pages.RegisterResidence
 {
@@ -51,14 +50,14 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
                 };
                 FormEditContextResidence = new EditContext(_newResidence);
                 FormEditContextAddress = new EditContext(_newResidenceAddress);
-                _allFacilities = await FacilityService.GetAllFacilities();
+                _allFacilities = await FacilityService.GetAllFacilitiesAsync();
                 Console.WriteLine(JsonConvert.SerializeObject(_allFacilities));
                 var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 var user = authState.User;
                 StateHasChanged();
                 if (user.Identity.IsAuthenticated)
                 {
-                    var host = await HostService.GetHostByEmail(user.Identity.Name);
+                    var host = await HostService.GetHostByEmailAsync(user.Identity.Name);
                     _newResidence.Host = host;
                     StateHasChanged();
                 }
@@ -147,11 +146,11 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
 
         private void PrintDebugMessages()
         {
-            System.Console.WriteLine($"Residence address: {JsonConvert.SerializeObject(_newResidenceAddress)}");
-            System.Console.WriteLine($"Residence: {JsonConvert.SerializeObject(_newResidence)}");
-            System.Console.WriteLine("Validation triggered");
-            System.Console.WriteLine($"Address is valid: {FormEditContextAddress.Validate()}");
-            System.Console.WriteLine($"Residence is valid: {FormEditContextResidence.Validate()}");
+            Console.WriteLine($"Residence address: {JsonConvert.SerializeObject(_newResidenceAddress)}");
+            Console.WriteLine($"Residence: {JsonConvert.SerializeObject(_newResidence)}");
+            Console.WriteLine("Validation triggered");
+            Console.WriteLine($"Address is valid: {FormEditContextAddress.Validate()}");
+            Console.WriteLine($"Residence is valid: {FormEditContextResidence.Validate()}");
         }
     }
 }

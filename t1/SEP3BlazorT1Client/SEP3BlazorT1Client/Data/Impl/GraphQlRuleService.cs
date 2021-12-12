@@ -48,23 +48,6 @@ namespace SEP3BlazorT1Client.Data.Impl
             return response.Data.Rules;
         }
 
-        public async Task<Rule> UpdateRuleAsync(Rule rule, string description)
-        {
-            var mutation = new GqlQuery()
-            {
-                Query = @"mutation($newRule:RuleInput, $ruleDes){
-                              updateResidenceRule(rule:$newRule, description:$ruleDes){
-                                description
-                                residenceId
-                              }
-                            }",
-                Variables = new {newRule = rule, ruleDes = description}
-            };
-            var response = await _client.PostQueryAsync<UpdateRuleResponseType>(mutation);
-            HandleErrorResponse(response);
-            return response.Data.Rule;
-        }
-
         public async Task<Rule> DeleteRuleAsync(Rule rule)
         {
             var mutation = new GqlQuery()

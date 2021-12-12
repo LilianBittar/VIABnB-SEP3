@@ -42,6 +42,9 @@
     <Compile Update="Pages\HostResidences\EditResidence.cs">
       <DependentUpon>EditResidence.razor</DependentUpon>
     </Compile>
+    <Compile Update="Pages\RentRequest\ReviewGuest.cs">
+      <DependentUpon>ReviewGuest.razor</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Update="Pages\RentRequest\RentRequests.css">

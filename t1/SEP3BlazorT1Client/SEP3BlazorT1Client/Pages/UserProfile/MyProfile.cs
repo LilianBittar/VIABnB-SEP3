@@ -13,7 +13,6 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
         [Inject] public IHostService HostService { get; set; }
-        [Inject] public IGuestService GuestService { get; set; }
         [Inject] public IUserService UserService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public AuthenticationStateProvider AuthStateProvider { get; set; }
@@ -33,7 +32,7 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
             {
                 isEditable = true;
                 isLoading = true;
-                _host = await HostService.GetHostById(Id);
+                _host = await HostService.GetHostByIdAsync(Id);
                 StateHasChanged();
                 isLoading = false;
                 _user = new User()

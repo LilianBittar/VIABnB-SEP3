@@ -16,12 +16,33 @@ namespace SEP3BlazorT1Client.Data
         /// <param name="request">the request which contains the residence that the guest wishes to rent
         /// and the guest, who wishes to rent a residence. </param>
         /// <returns>the created RentRequest</returns>
-        Task<RentRequest> CreateRentRequest(RentRequest request);
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
+        Task<RentRequest> CreateRentRequestAsync(RentRequest request);
+        /// <summary>
+        /// Update a RentRequest object via repository
+        /// </summary>
+        /// <param name="request">The targeted RentRequest for update</param>
+        /// <returns>The updated RentRequest object</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
         Task<RentRequest> UpdateRentRequestAsync(RentRequest request);
+        /// <summary>
+        /// Get a list of RentRequest objects with status: NOTANSWERED via repository
+        /// </summary>
+        /// <returns>a list of RentRequest objects</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
         Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync();
-        Task<IEnumerable<RentRequest>> GetAllRentRequestByResidenceId(int residenceId);
-        Task<RentRequest> GetRentRequestAsync(int id);
+        /// <summary>
+        /// Get a list of RentRequest objects via repository
+        /// </summary>
+        /// <returns>a list of RentRequest objects</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
         Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync();
+        /// <summary>
+        /// Get a RentRequest object based on the given parameter via repository
+        /// </summary>
+        /// <param name="guestId">The targeted RentRequest's Guest's id</param>
+        /// <returns>A RentRequest object</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
         Task<IEnumerable<RentRequest>> GetRentRequestsByGuestIdAsync(int guestId); 
     }
 }

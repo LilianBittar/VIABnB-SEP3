@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -31,7 +30,7 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
             _guestReviewList = await GuestReviewService.GetAllGuestReviewsByGuestIdAsync(Id);
             foreach (var item in _guestReviewList)
             {
-                var h = await HostService.GetHostById(item.HostId);
+                var h = await HostService.GetHostByIdAsync(item.HostId);
                 Console.WriteLine(JsonSerializer.Serialize(h));
                 _hostList.Add(h);
             }

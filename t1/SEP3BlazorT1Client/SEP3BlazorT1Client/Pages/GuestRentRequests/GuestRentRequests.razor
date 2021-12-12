@@ -1,14 +1,13 @@
 ﻿@page "/guestrentrequests"
 @using SEP3BlazorT1Client.Data;
 @using SEP3BlazorT1Client.Models;
-@using Newtonsoft.Json
 @inject IRentalService RentalService;
 @inject IGuestService GuestService;
 @inject AuthenticationStateProvider AuthenticationStateProvider;  
 @inject NavigationManager NavigationManager;
 <AuthorizeView Policy="MustBeApprovedGuest">
     <Authorized>
-    <p>@ErrorMessage</p>
+        <p>@ErrorMessage</p>
         @if (_rentRequests != null)
         {
             if (_rentRequests.Any())

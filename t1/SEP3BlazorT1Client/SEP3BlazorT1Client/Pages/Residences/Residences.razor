@@ -9,7 +9,6 @@
 @inject IHostService HostService
 @inject IHostReviewService HostReviewService
 @inject NavigationManager NavigationManager
-@* TODO: Add AuthorizeView *@
 
 <p>@Errormessage</p>
 
@@ -59,7 +58,7 @@ else
     <MatDialogContent Style="min-width: 1000px; min-height:600px" Class="large">
         <div class="d-flex flex-column container-fluid" >
             <div class="">
-              @ViewedResidence.Address
+                @ViewedResidence.Address
             </div>
             <MatTabGroup>
                 <MatTab class="my-4">

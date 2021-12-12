@@ -4,10 +4,8 @@ using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
-using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes.RentRequestResponseTypes;
 using SEP3BlazorT1Client.Models;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3BlazorT1Client.Data.Impl
 {
@@ -17,7 +15,7 @@ namespace SEP3BlazorT1Client.Data.Impl
         private readonly GqlClient _client = new GqlClient(Url) {EnableLogging = true};
 
 
-        public async Task<RentRequest> CreateRentRequest(RentRequest request)
+        public async Task<RentRequest> CreateRentRequestAsync(RentRequest request)
         {
             var rentResidenceMutation = new GqlQuery()
             {
@@ -227,11 +225,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Variables = new {updatedRentRequest = request}
             };
             var response = await _client.PostQueryAsync<UpdatedRentRequestResponseType>(updatedRentRequest);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
-            }
-
+            HandleErrorResponse(response);
             return response.Data.RentRequest;
         }
 
@@ -337,122 +331,8 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
             var graphQlResponse =
                 await _client.PostQueryAsync<RentRequestListResponseType>(allRents);
+            HandleErrorResponse(graphQlResponse);
             return graphQlResponse.Data.RentRequests;
-        }
-
-        public Task<IEnumerable<RentRequest>> GetAllRentRequestByResidenceId(int residenceId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<RentRequest> GetRentRequestAsync(int id)
-        {
-            var getRentRequest = new GqlQuery()
-            {
-                Query = @"query($requestId:int){ 
-                            rentRequestById(id:$requestId){
-                          {
-                            id
-                              startDate
-                              endDate
-                              numberOfGuests
-                              status
-                              guest {
-                                viaId
-                                guestReviews {
-                                  rating
-                              text
-                              createdDate
-                              guestId
-                              hostId
-                                }
-                                isApprovedGuest
-                                id
-                                firstName
-                                lastName
-                                phoneNumber
-                                email
-                                password
-                                hostReviews {
-                                  rating
-                                  text
-                                  guestId
-                                  createdDate
-                                  hostId
-                                }
-                                profileImageUrl
-                                cpr
-                                isApprovedHost
-                              }
-                              residence {
-                                averageRating
-                                id
-                                address {
-                                  id
-                                  streetName
-                                  houseNumber
-                                  streetNumber
-                                  city {
-                                    id
-                                    cityName
-                                    zipCode
-                                  }
-                                }
-                                description
-                                type
-                                isAvailable
-                                pricePerNight
-                                rules {
-                                  residenceId
-                                  description
-                                }
-                                facilities {
-                                  id
-                                  name
-                                }
-                                imageUrl
-                                availableFrom
-                                availableTo
-                                maxNumberOfGuests
-                                host{
-                                  id
-                                  firstName
-                                  lastName
-                                  phoneNumber
-                                  email
-                                  password
-                                  hostReviews{
-                                    rating
-                                    text
-                                    guestId
-                                    createdDate
-                                    hostId
-                                  }
-                                  profileImageUrl
-                                  cpr
-                                  isApprovedHost
-                                }
-                                residenceReviews {
-                                  rating
-                                  reviewText
-                                  guestViaId
-                                  createdDate
-                                }
-                                
-                              }
-                            requestCreationDate
-                        }
-                       }
-                        ",
-                Variables = new {requestId = id}
-            };
-            var response = await _client.PostQueryAsync<RentRequestIdResponseType>(getRentRequest);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
-            }
-
-            return response.Data.RentRequest;
         }
 
         public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync()
@@ -558,6 +438,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
             var graphQlResponse =
                 await _client.PostQueryAsync<AllNotAnsweredRentRequestResponseType>(allNotAnsweredRentRequestQuery);
+            HandleErrorResponse(graphQlResponse);
             return graphQlResponse.Data.RentRequests;
         }
 

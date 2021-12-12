@@ -1,10 +1,6 @@
 ﻿@page "/BecomeGuest"
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Data
-@using System.IO
-@using System.Text
-@using GraphQL
-@using SEP3BlazorT1Client.Authentication
 @inject MatDialogService MatDialogService
 @inject NavigationManager NavigationManager
 @inject IHostService HostService
@@ -64,7 +60,6 @@
 </AuthorizeView>
 
 @code {
-    //TODO: Fetch auth user and set as Host in new Request, wrap components in CascadingAuthenticationState
     private Host _host;
     private Guest _newGuest;
     private bool _dialogIsOpen = false;
@@ -83,7 +78,7 @@
             {
                 Console.WriteLine($"{claim.Type.ToString()} {claim.Value}");
             }
-            _host = await HostService.GetHostByEmail((user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value));
+            _host = await HostService.GetHostByEmailAsync((user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value));
 
             _newGuest = new Guest
             {

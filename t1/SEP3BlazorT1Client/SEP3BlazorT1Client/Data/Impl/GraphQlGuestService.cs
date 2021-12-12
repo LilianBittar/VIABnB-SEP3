@@ -51,11 +51,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
 
             var response = await _client.PostQueryAsync<CreateGuestMutationResponseType>(createGuestMutation);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4].Split(":")[2]);
-            }
-
+            HandleErrorResponse(response);
             return response.Data.CreateGuest;
         }
     }
