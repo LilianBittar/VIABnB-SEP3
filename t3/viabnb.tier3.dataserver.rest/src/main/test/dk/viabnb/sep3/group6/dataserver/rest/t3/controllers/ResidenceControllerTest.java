@@ -114,9 +114,11 @@ class ResidenceControllerTest
   @Test public void updateResidenceDoesNotUpdateButReturnsInternalServerErrorTest()
   {
     Residence residence = new Residence(1, address, "Test", "Test", true, 11,
-        new ArrayList<>(), new ArrayList<>(), "Test", LocalDate.now(), LocalDate.now(), 3, host,
-        new ArrayList<>());
-    when(residenceDAO.updateResidence(residence)).thenThrow(IllegalStateException.class);
-    assertEquals(ResponseEntity.internalServerError().build(), controller.updateResidence(residence, 1));
+        new ArrayList<>(), new ArrayList<>(), "Test", LocalDate.now(),
+        LocalDate.now(), 3, host, new ArrayList<>());
+    when(residenceDAO.updateResidence(residence)).thenThrow(
+        IllegalStateException.class);
+    assertEquals(ResponseEntity.internalServerError().build(),
+        controller.updateResidence(residence, 1));
   }
 }

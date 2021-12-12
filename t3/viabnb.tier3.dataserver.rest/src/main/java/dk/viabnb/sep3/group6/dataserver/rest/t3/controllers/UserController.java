@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-public class UserController
+@RestController public class UserController
 {
   private static final Logger LOGGER = LoggerFactory.getLogger(
       UserController.class);
@@ -26,8 +25,8 @@ public class UserController
     this.userDAO = userDAO;
   }
 
-  @GetMapping("/users")
-  public ResponseEntity<List<User>> getAllUsers(@RequestParam(required = false) String email)
+  @GetMapping("/users") public ResponseEntity<List<User>> getAllUsers(
+      @RequestParam(required = false) String email)
   {
     List<User> users = userDAO.getAllUsers();
     try
@@ -44,8 +43,8 @@ public class UserController
     return ResponseEntity.ok(users);
   }
 
-  @GetMapping("/users/{id}")
-  public ResponseEntity<User> getUserById(@PathVariable("id") int id)
+  @GetMapping("/users/{id}") public ResponseEntity<User> getUserById(
+      @PathVariable("id") int id)
   {
     User user = null;
     try
@@ -55,12 +54,13 @@ public class UserController
     catch (Exception e)
     {
       LOGGER.error(e.getMessage());
+      return ResponseEntity.internalServerError().build();
     }
     return ResponseEntity.ok(user);
   }
 
-  @PatchMapping("/users/{id}")
-  public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("id") int id)
+  @PatchMapping("/users/{id}") public ResponseEntity<User> updateUser(
+      @RequestBody User user, @PathVariable("id") int id)
   {
     try
     {
@@ -74,8 +74,8 @@ public class UserController
     }
   }
 
-  @DeleteMapping("/users/{id}")
-  public ResponseEntity<Void> deleteUser(@PathVariable("id") int id)
+  @DeleteMapping("/users/{id}") public ResponseEntity<Void> deleteUser(
+      @PathVariable("id") int id)
   {
     try
     {

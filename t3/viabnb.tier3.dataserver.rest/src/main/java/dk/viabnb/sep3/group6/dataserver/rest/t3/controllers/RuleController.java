@@ -24,8 +24,8 @@ import java.util.List;
     this.ruleDAO = ruleDAO;
   }
 
-  @PostMapping("/rule/{residenceId}")
-  public ResponseEntity<Rule> createResidenceRule(@RequestBody Rule rule, @PathVariable("residenceId") int residenceId)
+  @PostMapping("/rule/{residenceId}") public ResponseEntity<Rule> createResidenceRule(
+      @RequestBody Rule rule, @PathVariable("residenceId") int residenceId)
   {
     try
     {
@@ -38,8 +38,8 @@ import java.util.List;
     }
   }
 
-  @GetMapping("/rule/{residenceId}")
-  public ResponseEntity<List<Rule>> getAllResidenceRules(@PathVariable("residenceId") int residenceId)
+  @GetMapping("/rule/{residenceId}") public ResponseEntity<List<Rule>> getAllResidenceRules(
+      @PathVariable("residenceId") int residenceId)
   {
     List<Rule> ruleList = ruleDAO.getAllRulesByResidenceId(residenceId);
     if (ruleList == null)
@@ -49,8 +49,9 @@ import java.util.List;
     return ResponseEntity.ok(ruleList);
   }
 
-  @PatchMapping("/rule/{description}/{residenceId}")
-  public ResponseEntity<Rule> updateRule(@RequestBody Rule rule, @PathVariable("description") String description, @PathVariable("residenceId") int residenceId)
+  @PatchMapping("/rule/{description}/{residenceId}") public ResponseEntity<Rule> updateRule(
+      @RequestBody Rule rule, @PathVariable("description") String description,
+      @PathVariable("residenceId") int residenceId)
   {
     try
     {
@@ -65,8 +66,9 @@ import java.util.List;
     }
   }
 
-  @DeleteMapping("/rule/{description}/{residenceId}")
-  public ResponseEntity<Void> deleteRule(@PathVariable("description") String description, @PathVariable("residenceId") int residenceId)
+  @DeleteMapping("/rule/{description}/{residenceId}") public ResponseEntity<Void> deleteRule(
+      @PathVariable("description") String description,
+      @PathVariable("residenceId") int residenceId)
   {
     try
     {
