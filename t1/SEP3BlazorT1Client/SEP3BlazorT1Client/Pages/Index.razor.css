@@ -20,5 +20,9 @@
 .landing-page-container .background-image .cta-host h1 {
   text-shadow: 0 0 10px black;
 }
+.landing-page-container .background-image .cta-host p {
+  color: #c9c9c9;
+  font-weight: 200;
+}
 
 /*# sourceMappingURL=Index.razor.css.map */
