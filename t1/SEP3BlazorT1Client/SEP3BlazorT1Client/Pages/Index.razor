@@ -1,16 +1,16 @@
 @page "/"
 @inject NavigationManager NavigationManager
-<Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(1)">
+<Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(2)">
     <div class="landing-page-container">
         <div class="background-image">
             <div class="cta-host">
-                <Animate Animation="Animations.SlideLeft" Duration="TimeSpan.FromSeconds(0.5)" Easing="Easings.EaseIn"> 
+                <Animate Animation="Animations.FadeLeft" Duration="TimeSpan.FromSeconds(0.7)" Easing="Easings.EaseIn"> 
                     <h1>Want to help the future engineers, pedagogues, nurses and more of Denmark?</h1>
                 </Animate>
-                <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(1.5)" Delay="TimeSpan.FromSeconds(1.5)">
+                <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(1.5)" Delay="TimeSpan.FromSeconds(1.2)" Easing="Easings.EaseInOut">
                    <p>Got a residence you are willing to rent out <br/> to students in need?</p>  
                 </Animate> 
-                <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(1.5)" Delay="TimeSpan.FromSeconds(2)">
+                <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(1.5)" Delay="TimeSpan.FromSeconds(2)" Easing="Easings.EaseInOut">
                     <MatButton Label="Become a Host" Raised="true" OnClick="@(() => NavigationManager.NavigateTo("/registerhost"))" />
                 </Animate>
             </div>
