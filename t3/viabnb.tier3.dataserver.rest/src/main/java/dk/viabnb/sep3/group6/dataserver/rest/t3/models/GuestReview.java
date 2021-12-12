@@ -11,13 +11,14 @@ public class GuestReview
   private int guestId;
   private int hostId;
 
-  public GuestReview(double rating, String text,  LocalDate createdDate, int guestId, int hostId)
+  public GuestReview(double rating, String text, LocalDate createdDate,
+      int guestId, int hostId)
   {
     this.rating = rating;
     this.text = text;
     this.createdDate = createdDate;
     this.guestId = guestId;
-    this.hostId=hostId;
+    this.hostId = hostId;
   }
 
   public double getRating()
@@ -40,27 +41,33 @@ public class GuestReview
     this.text = text;
   }
 
-  public LocalDate getCreatedDate() {
+  public LocalDate getCreatedDate()
+  {
     return createdDate;
   }
 
-  public void setCreatedDate(LocalDate createdDate) {
+  public void setCreatedDate(LocalDate createdDate)
+  {
     this.createdDate = createdDate;
   }
 
-  public int getGuestId() {
+  public int getGuestId()
+  {
     return guestId;
   }
 
-  public int getHostId() {
+  public int getHostId()
+  {
     return hostId;
   }
 
-  public void setGuestId(int guestId) {
+  public void setGuestId(int guestId)
+  {
     this.guestId = guestId;
   }
 
-  public void setHostId(int hostId) {
+  public void setHostId(int hostId)
+  {
     this.hostId = hostId;
   }
 

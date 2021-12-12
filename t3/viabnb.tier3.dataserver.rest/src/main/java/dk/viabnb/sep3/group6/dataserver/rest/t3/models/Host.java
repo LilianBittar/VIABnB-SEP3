@@ -41,8 +41,7 @@ public class Host extends User
     this.cpr = cpr;
   }
 
-  @JsonProperty("isApprovedHost")
-  public boolean isApprovedHost()
+  @JsonProperty("isApprovedHost") public boolean isApprovedHost()
   {
     return isApprovedHost;
   }

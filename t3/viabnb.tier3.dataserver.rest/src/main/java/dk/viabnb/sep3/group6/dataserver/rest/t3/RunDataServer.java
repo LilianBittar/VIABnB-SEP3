@@ -35,98 +35,85 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 
-@SpringBootApplication
-public class RunDataServer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(
-            RunDataServer.class);
+@SpringBootApplication public class RunDataServer
+{
+  private static final Logger LOGGER = LoggerFactory.getLogger(
+      RunDataServer.class);
 
-    public static void main(String[] args) {
-        SpringApplication.run(RunDataServer.class, args);
-        LOGGER.info("Swagger-UI at: http://localhost:8080/swagger-ui.html");
-    }
+  public static void main(String[] args)
+  {
+    SpringApplication.run(RunDataServer.class, args);
+    LOGGER.info("Swagger-UI at: http://localhost:8080/swagger-ui.html");
+  }
 
-    @Bean
-    @Scope("singleton")
-    GuestDAO guestDAO() {
-        return new GuestDAOImpl();
-    }
+  @Bean @Scope("singleton") GuestDAO guestDAO()
+  {
+    return new GuestDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    HostDAO hostDAO() {
-        return new HostDAOImpl();
-    }
+  @Bean @Scope("singleton") HostDAO hostDAO()
+  {
+    return new HostDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    ResidenceDAO residenceDAO() {
-        return new ResidenceDAOImpl();
-    }
+  @Bean @Scope("singleton") ResidenceDAO residenceDAO()
+  {
+    return new ResidenceDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    RentRequestDAO rentRequestDAO() {
-        return new RentRequestDAOImpl();
-    }
+  @Bean @Scope("singleton") RentRequestDAO rentRequestDAO()
+  {
+    return new RentRequestDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    AddressDAO addressDAO() {
-        return new AddressDAOImpl();
-    }
+  @Bean @Scope("singleton") AddressDAO addressDAO()
+  {
+    return new AddressDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    CityDAO cityDAO() {
-        return new CityDAOImpl();
-    }
+  @Bean @Scope("singleton") CityDAO cityDAO()
+  {
+    return new CityDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    AdministrationDAO administrationDAO() {
-        return new AdministrationDAOImpl();
-    }
+  @Bean @Scope("singleton") AdministrationDAO administrationDAO()
+  {
+    return new AdministrationDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    FacilityDAO facilityDAO() {
-        return new FacilityDAOImpl();
-    }
+  @Bean @Scope("singleton") FacilityDAO facilityDAO()
+  {
+    return new FacilityDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    RuleDAO ruleDAO() {
-        return new RuleDAOImpl();
-    }
+  @Bean @Scope("singleton") RuleDAO ruleDAO()
+  {
+    return new RuleDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    UserDAO userDAO() {
-        return new UserDAOImpl();
-    }
+  @Bean @Scope("singleton") UserDAO userDAO()
+  {
+    return new UserDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    GuestReviewDAO guestReviewDAO() {
-        return new GuestReviewDAOImpl();
-    }
+  @Bean @Scope("singleton") GuestReviewDAO guestReviewDAO()
+  {
+    return new GuestReviewDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    ResidenceReviewDAO residenceReviewDAO() {
-        return new ResidenceReviewDAOImpl();
-    }
+  @Bean @Scope("singleton") ResidenceReviewDAO residenceReviewDAO()
+  {
+    return new ResidenceReviewDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    HostReviewDAO hostReviewDAO() {
-        return new HostReviewDAOImpl();
-    }
+  @Bean @Scope("singleton") HostReviewDAO hostReviewDAO()
+  {
+    return new HostReviewDAOImpl();
+  }
 
-    @Bean
-    @Scope("singleton")
-    MessageDAO messageDAO() {
-        return new MessageDAOImpl();
-    }
+  @Bean @Scope("singleton") MessageDAO messageDAO()
+  {
+    return new MessageDAOImpl();
+  }
 }
 

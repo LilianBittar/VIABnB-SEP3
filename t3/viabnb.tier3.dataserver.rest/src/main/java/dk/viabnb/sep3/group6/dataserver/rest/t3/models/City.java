@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class City
 {
-  @JsonProperty("id")
-  private int cityId;
+  @JsonProperty("id") private int cityId;
   private String cityName;
   private int zipCode;
 
