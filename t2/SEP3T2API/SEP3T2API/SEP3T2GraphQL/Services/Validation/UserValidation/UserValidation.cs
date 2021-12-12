@@ -8,13 +8,6 @@ namespace SEP3T2GraphQL.Services.Validation.UserValidation
 {
     public class UserValidation
     {
-        private IUserRepository _repository;
-
-        public UserValidation(IUserRepository repository)
-        {
-            _repository = repository;
-        }
-
         private static bool IsValidFirstname(string firstname)
         {
             if (firstname != null && IsLettersOnly(firstname))
@@ -49,7 +42,7 @@ namespace SEP3T2GraphQL.Services.Validation.UserValidation
             }
 
 
-            foreach (char c in passWord)
+            foreach (var c in passWord)
             {
                 if (passWord.Any(char.IsLower))
                 {
@@ -60,7 +53,7 @@ namespace SEP3T2GraphQL.Services.Validation.UserValidation
                 throw new ArgumentException("password must contain at least one lowercase letter");
             }
 
-            foreach (char c in passWord)
+            foreach (var c in passWord)
             {
                 if (passWord.Any(char.IsUpper))
                 {
@@ -71,7 +64,7 @@ namespace SEP3T2GraphQL.Services.Validation.UserValidation
                 throw new ArgumentException("password must contain at least one uppercase letter");
             }
 
-            foreach (char c in passWord)
+            foreach (var c in passWord)
             {
                 if (passWord.Any(char.IsDigit))
                 {

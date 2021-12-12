@@ -11,9 +11,13 @@ namespace SEP3T2GraphQL.Repositories.Impl
 {
     public class UserRepository : IUserRepository
     {
-        private readonly HttpClient _client = new HttpClient();
+        private readonly HttpClient _client;
         private const string Uri = "http://localhost:8080/users";
 
+        public UserRepository()
+        {
+            _client = new HttpClient();
+        }
 
         public async Task<User> GetUserByEmailAsync(string email)
         {
@@ -62,11 +66,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             
             var content = new StringContent(newUser, Encoding.UTF8, "application/json");
             var response = await _client.PatchAsync($"{Uri}/{user.Id}", content);
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
+            await HandleErrorResponse(response);
 
             var userToReturn = JsonSerializer.Deserialize<User>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
             {
@@ -82,11 +82,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             var response = await _client.DeleteAsync($"{Uri}/{user.Id}");
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
+            await HandleErrorResponse(response);
 
             return user;
         }

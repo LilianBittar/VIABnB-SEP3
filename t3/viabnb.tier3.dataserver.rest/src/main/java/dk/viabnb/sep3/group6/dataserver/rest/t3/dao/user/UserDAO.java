@@ -7,41 +7,33 @@ import java.util.List;
 public interface UserDAO
 {
   /**
-   * Handle a query that returns a user object based on the given parameter
-   * @param email The targeted user's email
-   * @return a user object
+   * Query a User object based on the given parameter
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
-  User getUserByEmail(String email);
-  /**
-   * Handle a query that returns a user object based on the given parameter
-   * @param id The targeted user's id
-   * @return a user object
-   *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @param id The targeted User's id
+   * @return a User object
+   * @throws IllegalStateException if connection to database failed or query execution failed
+   */
   User getUserById(int id);
   /**
-   * Handle a query that returns a list of all the users in tghe system
-   * @return a list of user objects
+   * Query that a list of User objects
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @return a list of User objects
+   * @throws IllegalStateException if connection to database failed or query execution failed
+   */
   List<User> getAllUsers();
   /**
-   * Update an existing user
-   * @param user The new user who has the new arguments
-   * @return the newly updated user
+   * Update an existing User object and store it in the database
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @param user The new updated User object
+   * @return the newly updated User object
+   * @throws IllegalStateException if connection to database failed or executing the update failed
+   */
   User updateUser(User user);
   /**
-   * Delete a user from th system
-   * @param userid The targeted user's id
+   * Delete a User object from th system
    *
-   * @throws IllegalStateException if cant connect to database
-   * */
+   * @param userid The targeted User's id
+   * @throws IllegalStateException if connection to database failed or executing the update failed
+   */
   void deleteUser(int userid);
 }

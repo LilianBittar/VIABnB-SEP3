@@ -16,46 +16,70 @@ import java.util.List;
   private FacilityDAO facilityDAO;
   private Gson gson = new GsonBuilder().serializeNulls().create();
 
-  @Autowired
-  public FacilityController(FacilityDAO facilityDAO)
+  @Autowired public FacilityController(FacilityDAO facilityDAO)
   {
     this.facilityDAO = facilityDAO;
   }
 
   @PostMapping("/facility/{facilityId}/{residenceId}") public ResponseEntity<Facility> createFacility(
-      @RequestBody Facility facility, @PathVariable("facilityId") int facilityId, @PathVariable("residenceId") int residenceId)
+      @RequestBody Facility facility,
+      @PathVariable("facilityId") int facilityId,
+      @PathVariable("residenceId") int residenceId)
   {
-    Facility newFacility = facilityDAO.createResidenceFacility(facility, residenceId);
-    if (newFacility == null)
+    Facility newFacility = facilityDAO.createResidenceFacility(facility,
+        residenceId);
+    try
+    {
+      if (newFacility == null)
+      {
+        return ResponseEntity.internalServerError().build();
+      }
+      return new ResponseEntity<>(newFacility, HttpStatus.OK);
+    }
+    catch (Exception e)
     {
       return ResponseEntity.internalServerError().build();
     }
-    return new ResponseEntity<>(newFacility, HttpStatus.OK);
   }
 
   @GetMapping("/facilities") public ResponseEntity<List<Facility>> getAllFacilities()
   {
     List<Facility> facilityListToReturn = facilityDAO.getAllFacilities();
-    if (facilityListToReturn == null)
+    try
+    {
+      if (facilityListToReturn == null)
+      {
+        return ResponseEntity.internalServerError().build();
+      }
+      return new ResponseEntity<>(facilityListToReturn, HttpStatus.OK);
+    }
+    catch (Exception e)
     {
       return ResponseEntity.internalServerError().build();
     }
-    return new ResponseEntity<>(facilityListToReturn, HttpStatus.OK);
   }
 
   @GetMapping("/facility/{id}") public ResponseEntity<Facility> getFacilityById(
       @PathVariable int id)
   {
     Facility facilityToReturn = facilityDAO.getFacilityById(id);
-    if (facilityToReturn == null)
+    try
+    {
+      if (facilityToReturn == null)
+      {
+        return ResponseEntity.internalServerError().build();
+      }
+      return new ResponseEntity<>(facilityToReturn, HttpStatus.OK);
+    }
+    catch (Exception e)
     {
       return ResponseEntity.internalServerError().build();
     }
-    return new ResponseEntity<>(facilityToReturn, HttpStatus.OK);
   }
 
-  @DeleteMapping("/residencefacilities/{facilityId}/{residenceId}")
-  public ResponseEntity<Void> deleteResidenceFacility(@PathVariable("facilityId") int facilityId, @PathVariable("residenceId") int residenceId)
+  @DeleteMapping("/residencefacilities/{facilityId}/{residenceId}") public ResponseEntity<Void> deleteResidenceFacility(
+      @PathVariable("facilityId") int facilityId,
+      @PathVariable("residenceId") int residenceId)
   {
     try
     {

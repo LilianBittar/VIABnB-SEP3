@@ -9,7 +9,9 @@ public class ResidenceReview
   private int guestViaId;
   private LocalDate createdDate;
 
-  public ResidenceReview(double rating, String reviewText, int guestViaId, LocalDate createdDate) {
+  public ResidenceReview(double rating, String reviewText, int guestViaId,
+      LocalDate createdDate)
+  {
     this.rating = rating;
     this.reviewText = reviewText;
     this.guestViaId = guestViaId;
@@ -46,11 +48,13 @@ public class ResidenceReview
     this.guestViaId = guestViaId;
   }
 
-  public LocalDate getCreatedDate() {
+  public LocalDate getCreatedDate()
+  {
     return createdDate;
   }
 
-  public void setCreatedDate(LocalDate createdDate) {
+  public void setCreatedDate(LocalDate createdDate)
+  {
     this.createdDate = createdDate;
   }
 }

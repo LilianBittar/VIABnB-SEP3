@@ -3,7 +3,6 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
-//TODO missing List<GuestReview> from constructor refactor later with group
 public class Guest extends Host
 {
   private int viaId;

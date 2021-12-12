@@ -9,8 +9,8 @@ using SEP3T2GraphQL.Services.Impl;
 namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 {
     public class HostValidationImpl : IHostValidation
-    {private IHostRepository _repository;
-        private IUserService _userService;
+    {
+        private readonly IUserService _userService;
 
         public HostValidationImpl( IUserService userService)
         {
@@ -19,7 +19,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 
         public async Task<bool> IsValidEmail(string email)
         {
-            User user = await _userService.GetUserByEmailAsync(email);
+            var user = await _userService.GetUserByEmailAsync(email);
             if (user == null)
             {
                 if (email != null && !email.Trim().EndsWith(".") && email.Contains("."))
@@ -74,7 +74,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             }
 
 
-            foreach (char c in passWord)
+            foreach (var c in passWord)
             {
                 if (passWord.Any(char.IsLower))
                 {
@@ -85,7 +85,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
                 throw new ArgumentException("password must contain at least one lowercase letter");
             }
 
-            foreach (char c in passWord)
+            foreach (var c in passWord)
             {
                 if (passWord.Any(char.IsUpper))
                 {
@@ -96,7 +96,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
                 throw new ArgumentException("password must contain at least one uppercase letter");
             }
 
-            foreach (char c in passWord)
+            foreach (var c in passWord)
             {
                 if (passWord.Any(char.IsDigit))
                 {

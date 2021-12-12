@@ -6,11 +6,10 @@ namespace SEP3T2GraphQL.Services
 {
     public interface IHostService
     {
-        Task<Host> UpdateHost(Host host);
         Task<Host> RegisterHostAsync(Host host);
         Task<Host> ValidateHostAsync(string email, string password);
-        Task<Host> GetHostByEmail(string email);
-        Task<Host> GetHostById(int id);
+        Task<Host> GetHostByEmailAsync(string email);
+        Task<Host> GetHostByIdAsync(int id);
         /// <summary>
         /// Method that returns a list of Host objects with IsApprovedHost bool value of false from a repository
         /// </summary>

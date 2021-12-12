@@ -11,9 +11,14 @@ namespace SEP3T2GraphQL.Repositories.Impl
     public class RentRequestRepository : IRentRequestRepository
     {
         private const string Url = "http://localhost:8080/rentrequests";
-        private readonly HttpClient _client = new HttpClient();
+        private readonly HttpClient _client;
 
-        public async Task<RentRequest> CreateAsync(RentRequest request)
+        public RentRequestRepository()
+        {
+            _client = new HttpClient();
+        }
+
+        public async Task<RentRequest> CreateRentRequestAsync(RentRequest request)
         {
             var requestAsJson = JsonSerializer.Serialize(request, new JsonSerializerOptions()
             {
@@ -33,20 +38,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return createdRentRequest;
         }
 
-        public async Task<RentRequest> UpdateAsync(RentRequest request)
-        {
-            var requestAsJson = JsonSerializer.Serialize(request);
-            StringContent payload = new StringContent(requestAsJson, Encoding.UTF8, "application/json");
-            var response = await _client.PutAsync($"{Url}/{request.Id}", payload);
-            await HandleErrorResponse(response);
-            return JsonSerializer.Deserialize<RentRequest>(await response.Content.ReadAsStringAsync(),
-                new JsonSerializerOptions()
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                });
-        }
-
-        public async Task<RentRequest> GetAsync(int id)
+        public async Task<RentRequest> GetRentRequestByIdAsync(int id)
         {
             var response = await _client.GetAsync($"{Url}/{id}");
             await HandleErrorResponse(response);
@@ -57,7 +49,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 });
         }
 
-        public async Task<IEnumerable<RentRequest>> GetAllAsync()
+        public async Task<IEnumerable<RentRequest>> GetAllRentRequestAsync()
         {
             var response = await _client.GetAsync($"{Url}?status=APPROVED&?status=NOTAPPROVED");
             await HandleErrorResponse(response);
@@ -108,7 +100,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return requestList;
         }
 
-        public async Task<IEnumerable<RentRequest>> GetRentRequestsByGuestId(int guestId)
+        public async Task<IEnumerable<RentRequest>> GetRentRequestsByGuestIdAsync(int guestId)
         {
             var response = await _client.GetAsync($"{Url}?guestId={guestId}");
             Console.WriteLine(JsonSerializer.Serialize(await response.Content.ReadAsStringAsync()));
@@ -117,7 +109,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         }
 
-        public async Task<IEnumerable<RentRequest>> GetRentRequestsByViaId(int viaId)
+        public async Task<IEnumerable<RentRequest>> GetRentRequestsByViaIdAsync(int viaId)
         {
             var response = await _client.GetAsync($"{Url}??viaId={viaId}");
             await HandleErrorResponse(response);

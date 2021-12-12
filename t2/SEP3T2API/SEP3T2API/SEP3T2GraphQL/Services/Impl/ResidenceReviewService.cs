@@ -21,7 +21,7 @@ namespace SEP3T2GraphQL.Services.Impl
             _validator = validator;
         }
 
-        public async Task<ResidenceReview> CreateAsync(Residence residence, ResidenceReview residenceReview)
+        public async Task<ResidenceReview> CreateResidenceReviewAsync(Residence residence, ResidenceReview residenceReview)
         {
             if (residence == null || residenceReview == null)
             {
@@ -29,15 +29,15 @@ namespace SEP3T2GraphQL.Services.Impl
             }
 
             await _validator.ValidateResidenceReview(residence, residenceReview);
-            var residenceReviews = await _residenceReviewRepository.GetAllByResidenceIdAsync(residence.Id);
+            var residenceReviews = await _residenceReviewRepository.GetAllResidenceReviewByResidenceIdAsync(residence.Id);
             // Updates review if guest already have an ResidenceReview for the residence. 
             if (residenceReviews.Where(r => r.GuestViaId == residenceReview.GuestViaId).ToList().Any())
             {
-                var updatedReview = await _residenceReviewRepository.UpdateAsync(residence.Id, residenceReview);
+                var updatedReview = await _residenceReviewRepository.UpdateResidenceReviewAsync(residence.Id, residenceReview);
                 return updatedReview;
             }
 
-            return await _residenceReviewRepository.CreateAsync(residence, residenceReview);
+            return await _residenceReviewRepository.CreateResidenceReviewAsync(residence, residenceReview);
         }
         
     }

@@ -7,54 +7,59 @@ import java.util.List;
 public interface ResidenceDAO
 {
   /**
-   * Return a Residence object based on the given id
-   * @param id The targeted residence id
-   * @return Residence object
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * Query a Residence object based on the given parameter
+   *
+   * @param id The targeted Residence's id
+   * @return Residence object if any, or null
+   * @throws IllegalStateException if connection to database failed or query execution failed
+   */
   Residence getResidenceById(int id);
   /**
-   * Return a list of Residence objects based on a host id
-   * @param id The id of the host who owns the residence
-   * @return List<Residence>
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * Query a list of Residence objects based on the given parameter
+   *
+   * @param id The residence's Host's id
+   * @return A list of Residence object
+   * @throws IllegalStateException if connection to database failed or query execution failed
+   */
   List<Residence> getAllResidenceByHostId(int id);
   /**
-   * Create a new Residence object in the database
+   * Create a new Residence object and store it in the database
+   *
    * @param residence The new Residence object
    * @return newly created Residence object
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @throws IllegalStateException if connection to database failed or executing the update failed
+   */
   Residence createResidence(Residence residence);
 
   /**
-   * Returns all residences registered in the system
-   * @return List of all residences
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * Query a list of Residence objects
+   *
+   * @return a list of Residence objects
+   * @throws IllegalStateException if connection to database failed or query execution failed
+   */
   List<Residence> getAllResidences() throws IllegalStateException;
 
   /**
-   * updates start date, end date and sets availability to true
-   * @param residence
-   * @return updated residence
-   * @throws IllegalStateException
-   */
-  Residence UpdateAvailabilityPeriod(Residence residence);
-  /**
-   * Update an existing residence in the system by identifying it and replacing its info
-   * @param residence The new residence witch have the new arguments
-   * @return the newly updated residence
+   * Update start date, end date and sets availability to true
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @param residence The new updated Residence object
+   * @return The newly updated Residence object
+   * @throws IllegalStateException if connection to database failed or executing the update failed
+   */
+  Residence updateAvailabilityPeriod(Residence residence);
+  /**
+   * Update a Residence object in the database
+   *
+   * @param residence The new updated Residence object
+   * @return the newly updated Residence object
+   * @throws IllegalStateException if connection to database failed or executing the update failed
+   */
   Residence updateResidence(Residence residence);
   /**
-   * Delete a residence from the system
-   * @param residenceId The targeted residence's id
+   * Delete a Residence object from the database
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @param residenceId The targeted Residence's id
+   * @throws IllegalStateException if connection to database failed or executing the update failed
+   */
   void deleteResidence(int residenceId);
 }

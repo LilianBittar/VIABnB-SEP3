@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
-using SEP3T2GraphQL.Services.Impl;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
+using SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl;
 
-namespace SEP3T2GraphQL.Services
+namespace SEP3T2GraphQL.Services.Impl
 {
     public class ResidenceServiceImpl : IResidenceService
     {
@@ -60,34 +59,27 @@ namespace SEP3T2GraphQL.Services
             {
                 try
                 {
-                    var allCities = await _cityService.GetAllAsync();
-                    var allAddresses = await _addressService.GetAllAsync();
+                    var allCities = await _cityService.GetAllCityAsync();
+                    var allAddresses = await _addressService.GetAllAddressAsync();
                     // Creates new city if none exists. 
                     var existingCity = allCities.FirstOrDefault(c => c.Equals(residence.Address.City));
                     if (existingCity == null)
                     {
-                        Console.WriteLine("Creating new city...");
-                        residence.Address.City = await _cityService.CreateAsync(residence.Address.City);
+                        residence.Address.City = await _cityService.CreateCityAsync(residence.Address.City);
                     }
                     else
                     {
-                        Console.WriteLine("Existing city found...");
-                        Console.WriteLine(existingCity.Id);
-                        Console.WriteLine(existingCity.CityName);
                         residence.Address.City = existingCity;
                     }
 
                     var existingAddress = allAddresses.FirstOrDefault(a => a.Equals(residence.Address));
                     if (existingAddress == null)
                     {
-                        Console.WriteLine("Creating new address...");
-                        var newAddress= await _addressService.CreateAsync(residence.Address);
-                        Console.WriteLine(newAddress.Id);
+                        var newAddress= await _addressService.CreateAddressAsync(residence.Address);
                         residence.Address.Id = newAddress.Id;
                     }
                     else
                     {
-                        Console.WriteLine("Existing address found...");
                         residence.Address = existingAddress;
                     }
 
@@ -123,7 +115,7 @@ namespace SEP3T2GraphQL.Services
 
         public async Task<IList<Residence>> GetAvailableResidencesAsync()
         {
-            var allResidences = await _residenceRepository.GetAllAsync();
+            var allResidences = await _residenceRepository.GetAllResidenceAsync();
             return allResidences.Where(r => r.IsAvailable).ToList();
         }
 

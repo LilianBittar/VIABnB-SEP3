@@ -10,12 +10,12 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public class GuestReviewService : IGuestReviewService
     {
-        private readonly IGuestReviewHostRepository _guestReviewRepository;
+        private readonly IGuestReviewRepository _guestReviewRepository;
         private readonly CreateGuestReviewValidation _createGuestReviewValidation;
 
-        public GuestReviewService(IGuestReviewHostRepository guestReviewHostRepository, CreateGuestReviewValidation createGuestReviewValidation)
+        public GuestReviewService(IGuestReviewRepository guestReviewRepository, CreateGuestReviewValidation createGuestReviewValidation)
         {
-            _guestReviewRepository = guestReviewHostRepository;
+            _guestReviewRepository = guestReviewRepository;
             _createGuestReviewValidation = createGuestReviewValidation;
         }
 
@@ -40,6 +40,10 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<GuestReview> UpdateGuestReviewAsync(GuestReview guestReview)
         {
+            if (guestReview == null)
+            {
+                throw new ArgumentException("You are updating with null guest review");
+            }
             return await _guestReviewRepository.UpdateGuestReviewAsync(guestReview);
         }
 

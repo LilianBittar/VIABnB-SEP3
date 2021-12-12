@@ -85,7 +85,6 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">if start date of request is same as residence's available to date</exception>
         private void ValidateRentPeriod(RentRequest request)
         {
-            //TODO: Refactor the boolean expressions to separate methods with descriptive names for more readability.  
             if (request.StartDate == null || request.EndDate == null)
             {
                 throw new ArgumentException("Start date and end date is required");
@@ -151,7 +150,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">If approved rent request exist for request's residence in same rent period as the request.</exception>
         private async Task ValidateRentPeriodOverlaps(RentRequest request)
         {
-            var allRequests = await _rentRequestRepository.GetAllAsync();
+            var allRequests = await _rentRequestRepository.GetAllRentRequestAsync();
             if (allRequests == null || allRequests.Count() == 0)
             {
                 return;
@@ -167,7 +166,7 @@ namespace SEP3T2GraphQL.Services.Validation
 
             if (allRequestsForSameResidence.Any(r =>
                 ( request.StartDate.Date>= r.StartDate.Date &&
-                 request.EndDate.Date <= r.EndDate.Date) &&
+                  request.EndDate.Date <= r.EndDate.Date) &&
                 (r.Status == RentRequestStatus.APPROVED)))
             {
                 throw new ArgumentException("Approved rent request for same rent period already exists");
@@ -181,7 +180,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">if guest has existing RentRequest for residence in same rent period</exception>
         private async Task ValidateGuestHasNoRentRequestsInSamePeriod(RentRequest request)
         {
-            var guestRentRequests = await _rentRequestRepository.GetRentRequestsByGuestId(request.Guest.Id);
+            var guestRentRequests = await _rentRequestRepository.GetRentRequestsByGuestIdAsync(request.Guest.Id);
             var requestsInSamePeriod = guestRentRequests.Where(r =>
                 r.Id != request.Id && r.Residence.Id == request.Residence.Id &&
                 (request.StartDate.Date>=r.StartDate.Date && request.EndDate.Date <= r.EndDate.Date)).ToList();

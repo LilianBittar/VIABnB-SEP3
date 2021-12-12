@@ -10,8 +10,13 @@ namespace SEP3T2GraphQL.Repositories.Impl
 {
     public class MessageRepository : IMessageRepository
     {
-        private readonly HttpClient _client = new HttpClient();
+        private readonly HttpClient _client;
         private const string Uri = "http://localhost:8080/messages";
+
+        public MessageRepository()
+        {
+            _client = new HttpClient();
+        }
 
         public async Task<IEnumerable<Message>> GetAllMessagesAsync()
         {

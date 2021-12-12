@@ -6,7 +6,7 @@ namespace SEP3T2GraphQL.Repositories
 {
     public interface ICityRepository
     {
-        public Task<IEnumerable<City>> GetAllAsync();
-        public Task<City> CreateAsync(City city);
+        public Task<IEnumerable<City>> GetAllCityAsync();
+        public Task<City> CreateCityAsync(City city);
     }
 }

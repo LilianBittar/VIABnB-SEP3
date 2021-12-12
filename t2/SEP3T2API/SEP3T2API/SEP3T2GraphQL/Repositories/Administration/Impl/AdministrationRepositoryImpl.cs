@@ -10,22 +10,18 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
 {
     public class AdministrationRepositoryImpl : IAdministrationRepository
     {
-        private string uri = "http://localhost:8080";
-        private readonly HttpClient client;
+        private const string Uri = "http://localhost:8080";
+        private readonly HttpClient _client;
 
         public AdministrationRepositoryImpl()
         {
-            client = new HttpClient();
+            _client = new HttpClient();
         }
 
         public async Task<Administrator> GetAdminByEmail(string email)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/admin/{email}");
-            if (!responseMessage.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await responseMessage.Content.ReadAsStringAsync()} with status code {responseMessage.StatusCode}");
-                throw new Exception(await responseMessage.Content.ReadAsStringAsync());
-            }
+            var responseMessage = await _client.GetAsync($"{Uri}/admin/{email}");
+            await HandleErrorResponse(responseMessage);
 
             var adminToReturn =
                 JsonSerializer.Deserialize<Administrator>(await responseMessage.Content.ReadAsStringAsync(), new JsonSerializerOptions(
@@ -38,12 +34,8 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
 
         public async Task<IEnumerable<Administrator>> GetAllAdmins()
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/admins");
-            if (!responseMessage.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await responseMessage.Content.ReadAsStringAsync()} with status code {responseMessage.StatusCode}");
-                throw new Exception(await responseMessage.Content.ReadAsStringAsync());
-            }
+            var responseMessage = await _client.GetAsync($"{Uri}/admins");
+            await HandleErrorResponse(responseMessage);
 
             var result = await responseMessage.Content.ReadAsStringAsync();
             var adminListToReturn = JsonSerializer.Deserialize<List<Administrator>>(result, new JsonSerializerOptions
@@ -62,6 +54,15 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
             }
 
             return adminToValidate;
+        }
+        
+        private static async Task HandleErrorResponse(HttpResponseMessage response)
+        {
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine(await response.Content.ReadAsStringAsync());
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
         }
     }
 }

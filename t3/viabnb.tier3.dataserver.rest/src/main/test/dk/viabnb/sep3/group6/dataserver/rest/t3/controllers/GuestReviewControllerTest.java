@@ -14,16 +14,11 @@ class GuestReviewControllerTest
   private GuestReviewController guestReviewController;
   private GuestReview guestReview;
 
-  @BeforeEach
-  public void setUp()
+  @BeforeEach public void setUp()
   {
     guestReviewDAO = mock(GuestReviewDAO.class);
     guestReviewController = new GuestReviewController(guestReviewDAO);
-    guestReview = new GuestReview
-        (
-          3.5,
-          "Test",  LocalDate.now(),1,2
-        );
+    guestReview = new GuestReview(3.5, "Test", LocalDate.now(), 1, 2);
   }
 
 }

@@ -10,8 +10,13 @@ namespace SEP3T2GraphQL.Repositories.Impl
 {
     public partial class GuestRepository : IGuestRepository
     {
-        private readonly HttpClient _client = new HttpClient();
+        private readonly HttpClient _client;
         private const string Uri = "http://localhost:8080/guests";
+
+        public GuestRepository()
+        {
+            _client = new HttpClient();
+        }
 
         public async Task<Guest> CreateGuestAsync(Guest guest)
         {
@@ -20,21 +25,23 @@ namespace SEP3T2GraphQL.Repositories.Impl
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             StringContent payload = new(guestAsJson, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await _client.PostAsync(Uri, payload);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
-
+            var response = await _client.PostAsync(Uri, payload);
+            await HandleErrorResponse(response);
             var createdGuest = JsonSerializer.Deserialize<Guest>(await response.Content.ReadAsStringAsync(),
                 new JsonSerializerOptions()
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
             return createdGuest;
+        }
+        
+        private static async Task HandleErrorResponse(HttpResponseMessage response)
+        {
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine(await response.Content.ReadAsStringAsync());
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
         }
     }
 }

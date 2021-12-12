@@ -7,16 +7,18 @@ import java.util.List;
 public interface AdministrationDAO
 {
   /**
-   * Handle a query to return an administrator object based on the given parameter
-   * @param email The targeted admin's emain
-   * @return an administrator object if found, and a null if not found
+   * Query an Administrator object based on the given parameter
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @param email The targeted administrator's e-mail
+   * @return an administrator object if any is found, or null
+   * @throws IllegalStateException if connection to database failed or query execution failed
+   */
   Administrator getAdministratorByEmail(String email);
   /**
-   * Handle a query that returns a list of administrator objects
+   * Query a list of Administrator objects
+   *
    * @return a list of Administrator object if any, or nul if there is non
-   * */
+   * @throws IllegalStateException if connection to database failed or query execution failed
+   */
   List<Administrator> getAllAdministrators();
 }

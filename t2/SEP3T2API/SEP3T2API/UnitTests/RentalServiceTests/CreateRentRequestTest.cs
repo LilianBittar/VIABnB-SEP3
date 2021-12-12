@@ -81,7 +81,7 @@ namespace UnitTests.RentalServiceTests
             List<RentRequest> emptyRentRequestList = new();
             _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetAllNotAnsweredRentRequestAsync().Result)
                 .Returns(emptyRentRequestList);
-            Assert.DoesNotThrowAsync(async () => await _rentalService.CreateRentRequest(request));
+            Assert.DoesNotThrowAsync(async () => await _rentalService.CreateRentRequestAsync(request));
         }
 
         [Test]
@@ -113,7 +113,6 @@ namespace UnitTests.RentalServiceTests
         public void CreateRentRequest_NumberOfGuestsExceedsHostsMaxNumberOfGuests_ThrowsArgumentException(
             int numberOfGuests)
         {
-            //This test caught a bug where null was returned instead of throwing ArgumentException. 
             RentRequest request = new()
             {
                 Guest = _validGuest, Id = 1, StartDate = CreateDate("02/12/2021"),
@@ -231,7 +230,6 @@ namespace UnitTests.RentalServiceTests
         [Test]
         public void CreateRentRequest_ResidenceHasAnAlreadyApprovedRentRequestInSameRentPeriod_ThrowsArgumentException()
         {
-            //This test caught an bug where the wrong id was being compared in CreateRentRequestValidator resulting in null being returned. 
             Guest otherGuest = new()
             {
                 Cpr = "111111-1112",
@@ -247,7 +245,7 @@ namespace UnitTests.RentalServiceTests
                 NumberOfGuests = 2
             };
 
-            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetAllAsync().Result)
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetAllRentRequestAsync().Result)
                 .Returns(new List<RentRequest>() {approvedRequestInSamePeriod});
 
             RentRequest request = new()
@@ -273,7 +271,7 @@ namespace UnitTests.RentalServiceTests
                 NumberOfGuests = 2
             };
             _rentRequestRepository
-                .Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaId(_validGuest.Id).Result)
+                .Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaIdAsync(_validGuest.Id).Result)
                 .Returns(new List<RentRequest>() {existingRequest});
             RentRequest newRequest = new()
             {
@@ -301,7 +299,7 @@ namespace UnitTests.RentalServiceTests
         /// <param name="request">Request being tested</param>
         private void TestCreateThrowsArgumentExceptionAsync(RentRequest request)
         {
-            Assert.ThrowsAsync<ArgumentException>(async () => await _rentalService.CreateRentRequest(request));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _rentalService.CreateRentRequestAsync(request));
         }
     }
 }

@@ -10,9 +10,14 @@ namespace SEP3T2GraphQL.Repositories.Impl
     public partial class ResidenceReviewRepository : IResidenceReviewRepository
     {
         private const string Uri = "http://localhost:8080";
-        private readonly HttpClient _client = new HttpClient();
+        private readonly HttpClient _client;
 
-        public async Task<ResidenceReview> CreateAsync(Residence residence, ResidenceReview residenceReview)
+        public ResidenceReviewRepository()
+        {
+            _client = new HttpClient();
+        }
+
+        public async Task<ResidenceReview> CreateResidenceReviewAsync(Residence residence, ResidenceReview residenceReview)
         {
             var residenceReviewAsJson = JsonSerializer.Serialize(residenceReview,
                 new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
@@ -22,7 +27,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return JsonSerializer.Deserialize<ResidenceReview>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions(){PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         }
 
-        public async Task<ResidenceReview> UpdateAsync(int residenceId, ResidenceReview updatedReview)
+        public async Task<ResidenceReview> UpdateResidenceReviewAsync(int residenceId, ResidenceReview updatedReview)
         {
             var residenceReviewAsJson = JsonSerializer.Serialize(updatedReview,
                 new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});

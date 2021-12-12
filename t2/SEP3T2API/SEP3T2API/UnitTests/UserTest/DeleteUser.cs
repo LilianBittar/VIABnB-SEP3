@@ -20,7 +20,7 @@ namespace UnitTests.UserTest
         public void SetUp()
         {
             _userRepository = new Mock<IUserRepository>();
-            _userService = new UserService(_userRepository.Object, new UserValidation(_userRepository.Object));
+            _userService = new UserService(_userRepository.Object, new UserValidation());
         }
 
         [Test]
