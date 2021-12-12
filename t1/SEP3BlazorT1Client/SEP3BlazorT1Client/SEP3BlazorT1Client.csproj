@@ -3,6 +3,7 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="BlazorAnimate" Version="3.0.0" />
     <PackageReference Include="bunit" Version="1.2.49" />
     <PackageReference Include="CatQL.GraphQL.Client" Version="2.1.2" />
     <PackageReference Include="GraphQL.Client" Version="4.0.1" />
