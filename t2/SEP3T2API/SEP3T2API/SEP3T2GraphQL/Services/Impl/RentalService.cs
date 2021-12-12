@@ -78,10 +78,5 @@ namespace SEP3T2GraphQL.Services.Impl
         {
             return await _rentRequestRepository.GetRentRequestsByGuestIdAsync(guestId);
         }
-
-        public async Task<IEnumerable<RentRequest>> GetRentRequestsByViaId(int viaId)
-        {
-            return await _rentRequestRepository.GetRentRequestsByGuestIdAsync(viaId);
-        }
     }
 } 

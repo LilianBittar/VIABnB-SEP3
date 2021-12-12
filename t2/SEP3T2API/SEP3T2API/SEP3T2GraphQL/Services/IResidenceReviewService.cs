@@ -17,12 +17,15 @@ namespace SEP3T2GraphQL.Services
         /// <param name="residence"></param>
         /// <param name="residenceReview"></param>
         /// <returns>newly created review if no existing review exists, else the old review updated with the new values for properties</returns>
+        /// <exception cref="System.ArgumentException">If the Residence is null or the ResidenceReview is null</exception>
         public Task<ResidenceReview> CreateResidenceReviewAsync(Residence residence, ResidenceReview residenceReview);
         /// <summary>
         /// Returns an <c>IEnumerable</c> with all <c>ResidenceReview</c> of a residence with the id of <c>residenceId</c>
         /// </summary>
         /// <param name="residenceId">id of the residence</param>
         /// <returns>all residence reviews of residence with id of <c>residenceId</c></returns>
+        /// <exception cref="System.ArgumentException">If the Residence id is 0</exception>
+
         public Task<IEnumerable<ResidenceReview>> GetAllResidenceReviewByResidenceIdAsync(int residenceId); 
     }
 }

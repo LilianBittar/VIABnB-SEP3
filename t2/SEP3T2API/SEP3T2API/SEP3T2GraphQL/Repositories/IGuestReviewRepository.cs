@@ -7,35 +7,35 @@ namespace SEP3T2GraphQL.Repositories
     public interface IGuestReviewRepository
     {
         /// <summary>
-        /// Method for creating the review for any guest 
+        /// Create a new GuestReview object via API
         /// </summary>
-        /// <param name="guestReview">The targeted GuestReview object to create</param>
-        /// <exception cref="Exception">Thrown if the API response is not successful</exception>
+        /// <param name="guestReview">The new GuestReview</param>
         /// <returns>GuestReview object</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
         Task<GuestReview> CreateGuestReviewAsync(GuestReview guestReview);
         
         /// <summary>
-        /// Method for updating the review for any guest 
+        /// Update a GuestReview object via API
         /// </summary>
-        /// <param name="guestReview">The targeted GuestReview object to update</param>
-        /// <exception cref="Exception">Thrown if the API response is not successful</exception>
+        /// <param name="guestReview">The updated GuestReview</param>
         /// <returns>GuestReview object</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
         Task<GuestReview> UpdateGuestReviewAsync(GuestReview guestReview);
         
         /// <summary>
-        /// Method for getting all guest review  the review for any guest by host id
+        /// Get a GuestReview objects based on the given parameter via API
         /// </summary>
-        /// <param name="id">The targeted id of the host that we need to get all the guests review from </param>
-        /// <exception cref="Exception">Thrown if the API response is not successful</exception>
-        /// <returns>the list with all the guestReview object</returns>
+        /// <param name="id">The Host's id who created the GuestReview</param>
+        /// <returns>List og GuestREview</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
         Task<IEnumerable<GuestReview>> GetAllGuestReviewsByHostIdAsync(int id);
         
         /// <summary>
-        /// Method for getting all guest review  the review for any guest by guest id
+        /// Get a list of GuestReview objects based on the given parameter via API
         /// </summary>
-        /// <param name="id">The targeted id of the guest that we need to get all the guests review from </param>
-        /// <exception cref="Exception">Thrown if the API response is not successful</exception>
-        /// <returns>the list with all the guestReview object</returns>
+        /// <param name="id">The Guest's id who the GuestReview belongs to</param>
+        /// <returns>List of GuestReview objects</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
         Task<IEnumerable<GuestReview>> GetAllGuestReviewsByGuestIdAsync(int id);
     }
 }

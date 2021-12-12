@@ -45,17 +45,6 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
             return adminListToReturn;
         }
 
-        public async Task<Administrator> ValidateAdmin(Administrator administrator)
-        {
-            var adminToValidate = await GetAdminByEmail(administrator.Email);
-            if (adminToValidate == null)
-            {
-                throw new ArgumentException("Admin cant be found---> check for null");
-            }
-
-            return adminToValidate;
-        }
-        
         private static async Task HandleErrorResponse(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)

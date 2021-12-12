@@ -7,18 +7,18 @@ namespace SEP3T2GraphQL.Repositories
     public interface IAddressRepository
     {
         /// <summary>
-        /// Method that gets all the addresses and returns them in a list
+        /// Get a list of Address objects via API
         /// </summary>
-        /// <exception cref="Exception">Thrown if the API response is not successful</exception>
         /// <returns>A list containing all the addresses registered in the system</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
         public Task<IEnumerable<Address>> GetAllAddressAsync();
         
         /// <summary>
-        /// Method that creates an address and stored in the system 
+        /// Create a new Address object via API
         /// </summary>
-        /// <param name="address">The targeted Address to stored in the system </param>
-        /// <exception cref="Exception">Thrown if the API response is not successful</exception>
+        /// <param name="address">The new Address</param>
         /// <returns>Address object</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
         public Task<Address> CreateAddressAsync(Address address); 
     }
 }

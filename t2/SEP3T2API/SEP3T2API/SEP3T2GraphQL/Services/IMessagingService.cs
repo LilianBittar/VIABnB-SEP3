@@ -15,7 +15,11 @@ namespace SEP3T2GraphQL.Services
         /// <exception href="ArgumentException">If message could not be created</exception>
         /// <exception href="KeyNotFoundException">If Recevier does not exist</exception>
         /// <returns>The sent message</returns>
-        public Task<Message> SendMessageAsync(Message message);
+        public Task<Message> SendMessageAsync(Message message); 
+        /// <summary>
+        /// Get a list of Message objects via repository
+        /// </summary>
+        /// <returns>A list of Message objects</returns>
         public Task<IEnumerable<Message>> GetMessagesByUserIdAsync(int userId);
     }
 }

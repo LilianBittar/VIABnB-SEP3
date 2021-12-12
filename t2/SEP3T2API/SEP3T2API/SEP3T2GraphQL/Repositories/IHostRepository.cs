@@ -7,25 +7,38 @@ namespace SEP3T2GraphQL.Repositories
     public interface IHostRepository
     {
         /// <summary>
-        /// Method that returns a host registration based on the given parameter
+        /// Create a new Host object via API
         /// </summary>
-        /// <param name="host">The Id of the host object that created the registration</param>
+        /// <param name="host">The new Host</param>
         /// <returns>Host object</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
         Task<Host> RegisterHostAsync(Host host);
+        /// <summary>
+        /// Get a Host object based on the given parameter via API
+        /// </summary>
+        /// <param name="email">The host's e-mail</param>
+        /// <returns>Host object</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
         Task<Host> GetHostByEmailAsync(string email);
+        /// <summary>
+        /// Get a Host object by the given parameter via API
+        /// </summary>
+        /// <param name="id">The targeted Host's id</param>
+        /// <returns>Host object</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
         Task<Host> GetHostByIdAsync(int id);
         /// <summary>
-        /// Method that returns a list of Host objects with IsApprovedHost bool value of false
+        /// Get a list of Host object with a false IsApproved status via API
         /// </summary>
-        /// <exception cref="Exception"> Thrown if the API response is not successful</exception>
-        /// <returns>IEnumerable<Host> a lit of Host objects</returns>
+        /// <returns>A list of Host objects</returns>
+        /// <exception cref="System.Exception"> Thrown if the API response is not successful</exception>
         Task<IEnumerable<Host>> GetAllNotApprovedHostsAsync();
         /// <summary>
-        /// Method that updates the bool value IsApprovedHost of a given host
+        /// Update a Host object via API
         /// </summary>
-        /// <param name="host">The targeted Host object to update</param>
-        /// <exception cref="Exception">Thrown if the API response is not successful</exception>
+        /// <param name="host">The updated host object</param>
         /// <returns>Host object</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
         Task<Host> UpdateHostStatusAsync(Host host);
     }
 }

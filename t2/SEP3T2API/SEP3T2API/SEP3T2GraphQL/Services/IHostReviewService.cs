@@ -7,27 +7,25 @@ namespace SEP3T2GraphQL.Services
     public interface IHostReviewService
     {
         /// <summary>
-        /// Creates a new <c>hostReview</c> for a guest
+        /// Create a new HostReview object if any is not found, if any is found update the HostReview via repository
         /// </summary>
-        /// <remarks>
-        /// To create a new <c>GuestReview</c> the guest, that the host is reviewing, must have an RentRequest with status of <c>APPROVED</c>
-        /// for the guest that the review is intended for. If the host have already made an review for that particular  guest,
-        /// then the old review will get updated with the new <c>Rating</c>, <c>ReviewText</c> and <c>CreatedDate</c>. 
-        /// </remarks>
-        /// <param name="hostReview"></param>
-        /// <returns>newly created review if no existing review exists, else the old review updated with the new values for properties</returns>
+        /// <param name="hostReview">The new HostReview</param>
+        /// <returns>The newly created H ostReview object</returns>
+        /// <exception cref="System.ArgumentException">If the HostReview is null</exception>
+        /// <exception cref="System.ArgumentException">If the HostReview's rating is not between 0 and 5</exception>
         Task<HostReview> CreateHostReviewAsync(HostReview hostReview);
         
         /// <summary>
-        /// Updates <c>hostReview</c>
+        /// Update a HostReview object via repository
         /// </summary>
-        /// <remarks>
-        /// To update the <c>HostReview</c> there has to be a review with the same hostId and viaId that is already existing in the system,
-        /// then the old review will get updated with the new <c>Rating</c>, <c>ReviewText</c> and <c>CreatedDate</c>. 
-        /// </remarks>
-        /// <param name="hostReview"></param>
-        /// <returns>Newly updated review if there has been an existing review with the same hostId and viaId</returns>
+        /// <param name="hostReview">The updated HostReview</param>
+        /// <returns>A HostReview object</returns>
         Task<HostReview> UpdateHostReviewAsync(HostReview hostReview);
+        /// <summary>
+        /// Get a list of HostReview objects based on the given parameter via repository
+        /// </summary>
+        /// <param name="id">The targeted HostReview's Host's id</param>
+        /// <returns>A list of HostReview objects</returns>
         Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id);
     
     }

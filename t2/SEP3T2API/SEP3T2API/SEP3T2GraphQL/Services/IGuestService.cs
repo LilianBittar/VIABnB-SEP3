@@ -17,8 +17,23 @@ namespace SEP3T2GraphQL.Services
         /// <exception cref="ArgumentException">If guest is invalid <see cref="CreateGuestValidator"/></exception>
         /// <returns>the created guest</returns>
         Task<Guest> CreateGuestAsync(Guest guest);
+        /// <summary>
+        /// Get a Guest object based on the given parameter via API
+        /// </summary>
+        /// <param name="id">The Guest's id</param>
+        /// <returns>Guest object</returns>
         Task<Guest> GetGuestByIdAsync(int id);
+        /// <summary>
+        /// Get a Guest object based on the given parameter via API
+        /// </summary>
+        /// <param name="studentNumber">The Guest's ViaId</param>
+        /// <returns>Guest object</returns>
         Task<Guest> GetGuestByStudentNumberAsync(int studentNumber);
+        /// <summary>
+        /// Get a Guest object based on the given parameter via API
+        /// </summary>
+        /// <param name="email">The Guest's e-mail</param>
+        /// <returns>A Guest object</returns>
         Task<Guest> GetGuestByEmailAsync(string email);
         /// <summary>
         /// Method that returns a list of Guest objects of a IsApprovedGuest value false from a repository
