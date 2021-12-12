@@ -1,7 +1,7 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.Impl.HostDAOImpl;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.AddressDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.address.AddressDAOImpl;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.citry.CityDAO;

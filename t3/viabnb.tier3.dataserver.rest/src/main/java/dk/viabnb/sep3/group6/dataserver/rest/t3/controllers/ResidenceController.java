@@ -111,7 +111,7 @@ import java.util.List;
         return ResponseEntity.notFound().build();
       }
 
-      residenceDAO.UpdateAvailabilityPeriod(residence);
+      residenceDAO.updateAvailabilityPeriod(residence);
 
     }
     catch (Exception e)

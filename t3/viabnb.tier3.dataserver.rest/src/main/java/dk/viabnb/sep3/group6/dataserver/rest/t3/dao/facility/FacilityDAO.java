@@ -7,33 +7,34 @@ import java.util.List;
 public interface FacilityDAO
 {
   /**
-   * Create a new facility object in the system
-   * @param facility The new facility
-   * @param residenceId
-   * @return the newly created facility
+   * Create a new facility object and store it in the database
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @param facility    The new facility
+   * @param residenceId The Residence's id which the Facility belongs to
+   * @return the newly created facility
+   * @throws IllegalStateException if connection to database failed or executing the update failed
+   */
   Facility createResidenceFacility(Facility facility, int residenceId);
   /**
-   * Handles query a list of all the facilities in the system
-   * @return a list of facility objects
+   * Query a list Facility objects
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @return a list of Facility objects
+   * @throws IllegalStateException if connection to database failed or query execution failed
+   */
   List<Facility> getAllFacilities();
   /**
-   * Handle query a facility based on the given parameter
-   * @param id The targeted facility's id
+   * Query a Facility object based on the given parameter
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @param id The targeted Facility's id
+   * @return a Facility object if any is found, or null
+   * @throws IllegalStateException if connection to database failed or query execution failed
+   */
   Facility getFacilityById(int id);
   /**
-   * Delete a facility from the system
-   * @param residenceId The targeted facility to delete
+   * Delete a facility from the database
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @param residenceId The targeted Facility to delete
+   * @throws IllegalStateException if connection to database failed or executing the update failed
+   */
   void deleteResidenceFacility(int facilityId, int residenceId);
 }

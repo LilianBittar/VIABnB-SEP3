@@ -7,36 +7,36 @@ import java.util.List;
 public interface RuleDAO
 {
   /**
-   * Create a new rule object
-   * @param rule The new rule
-   * @return The newly created rule object
+   * Create a new Rule object and store it in the database
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @param rule The new Rule object
+   * @return The newly created Rule object
+   * @throws IllegalStateException if connection to database failed or executing the update failed
+   */
   Rule createResidenceRule(Rule rule);
   /**
-   * Handle a query that returns a list of all the rules ibased on the given parameter
-   * @return a list of rule objects
-   * @param residenceId The targeted residence's id
+   * Query a list of Rule objects based on the given parameter
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @param residenceId The targeted Residence's id
+   * @return a list of Rule objects
+   * @throws IllegalStateException if connection to database failed or query execution failed
+   */
   List<Rule> getAllRulesByResidenceId(int residenceId);
   /**
-   * Update an existing rule in the system by identify its residence and replace that residence's rule info
-   * @param rule The new rule witch will have the new arguments
-   * @param description
-   * @return the newly updated rule
+   * Update an existing Rule object and store it in the database
    *
-   * @throws IllegalStateException if cant connect to database
-   * */
+   * @param rule        The new Rule object
+   * @param description The Rule's Description
+   * @return the newly updated Rule object
+   * @throws IllegalStateException if connection to database failed or executing the update failed
+   */
   Rule updateRule(Rule rule, String description);
   /**
-   * Delete rule from the system
-   * @param description The targeted rule description for deletion
-   * @param residenceId The targeted rule residence id for deletion
+   * Delete a Rule object from the database
    *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @param description The targeted Rule's description for deletion
+   * @param residenceId The targeted Rule's residence id for deletion
+   * @throws IllegalStateException if connection to database failed or executing the update failed
+   */
   void deleteRule(String description, int residenceId);
 }
