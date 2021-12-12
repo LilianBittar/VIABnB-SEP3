@@ -85,7 +85,6 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">if start date of request is same as residence's available to date</exception>
         private void ValidateRentPeriod(RentRequest request)
         {
-            //TODO: Refactor the boolean expressions to separate methods with descriptive names for more readability.  
             if (request.StartDate == null || request.EndDate == null)
             {
                 throw new ArgumentException("Start date and end date is required");
@@ -167,7 +166,7 @@ namespace SEP3T2GraphQL.Services.Validation
 
             if (allRequestsForSameResidence.Any(r =>
                 ( request.StartDate.Date>= r.StartDate.Date &&
-                 request.EndDate.Date <= r.EndDate.Date) &&
+                  request.EndDate.Date <= r.EndDate.Date) &&
                 (r.Status == RentRequestStatus.APPROVED)))
             {
                 throw new ArgumentException("Approved rent request for same rent period already exists");

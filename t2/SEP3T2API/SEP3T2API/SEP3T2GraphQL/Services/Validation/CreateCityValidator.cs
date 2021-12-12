@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Linq;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Repositories;
-using SEP3T2GraphQL.Services.Impl;
 
 namespace SEP3T2GraphQL.Services.Validation
 {
     public class CreateCityValidator
     {
-        public CreateCityValidator()
-        {
-        }
-
         /// <summary>
         /// Validates  if the create city event can occur. 
         /// </summary>

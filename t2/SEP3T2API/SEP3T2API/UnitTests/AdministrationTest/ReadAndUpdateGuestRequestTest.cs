@@ -17,7 +17,6 @@ namespace UnitTests.AdministrationTest
     [TestFixture]
     public class ReadAndUpdateGuestRequestTest
     {
-        //TODO go over tests. Check for gets
         private IGuestService _guestService;
         private IEnumerable<Guest> _guestList;
 
@@ -90,16 +89,16 @@ namespace UnitTests.AdministrationTest
             var guestRepository = new Mock<IGuestRepository>();
             guestRepository.Setup(ex => ex.GetAllNotApprovedGuestsAsync().Result).Returns(_guestList);
             var hostService = new Mock<IHostService>();
-            hostService.Setup(ex => ex.GetHostById(1).Result).Returns(host1);
-            hostService.Setup(ex => ex.GetHostById(2).Result).Returns(host2);
-            _guestService = new GuestServiceImpl(guestRepository.Object, hostService.Object,
+            hostService.Setup(ex => ex.GetHostByIdAsync(1).Result).Returns(host1);
+            hostService.Setup(ex => ex.GetHostByIdAsync(2).Result).Returns(host2);
+            _guestService = new GuestServiceImpl(guestRepository.Object, 
                 new CreateGuestValidator(guestRepository.Object, new Mock<IHostRepository>().Object));
         }
         
         [Test]
         public void GetNotNullListOfAllNotApprovedGuestDoesNotThrowExceptionTest()
         {
-            Assert.DoesNotThrowAsync(()=> _guestService.GetAllNotApprovedGuests());
+            Assert.DoesNotThrowAsync(()=> _guestService.GetAllNotApprovedGuestsAsync());
         }
 
         [TestCase(true)]
@@ -108,13 +107,13 @@ namespace UnitTests.AdministrationTest
         {
             var guestToUpdate = _guestList.First(h => h.Id == 1);
             guestToUpdate.IsApprovedGuest = status;
-            Assert.DoesNotThrowAsync(()=> _guestService.UpdateGuestStatus(guestToUpdate));
+            Assert.DoesNotThrowAsync(()=> _guestService.UpdateGuestStatusAsync(guestToUpdate));
         }
 
         [Test]
         public void UpdateANullGuestThrowsArgumentException()
         {
-            Assert.ThrowsAsync<ArgumentException>(() => _guestService.UpdateGuestStatus(null));
+            Assert.ThrowsAsync<ArgumentException>(() => _guestService.UpdateGuestStatusAsync(null));
         }
     }
 }

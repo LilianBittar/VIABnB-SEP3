@@ -28,13 +28,6 @@ namespace SEP3T2GraphQL.Services
         /// <param name="hostReview"></param>
         /// <returns>Newly updated review if there has been an existing review with the same hostId and viaId</returns>
         Task<HostReview> UpdateHostReviewAsync(HostReview hostReview);
-        
-        /// <summary>
-        /// Returns an <c>IEnumerable</c> with all <c>HostReview</c> of a host with the id of <c>id</c>
-        /// </summary>
-        /// <param name="id">id of the host</param>
-        /// <returns>All reviews of guests made by that host with id of <c>id</c></returns>
-        Task<IEnumerable<HostReview>> GetAllHostReviewsByGuestIdAsync(int id);
         Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id);
     
     }

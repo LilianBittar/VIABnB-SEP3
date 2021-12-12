@@ -6,7 +6,6 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
-using SEP3T2GraphQL.Repositories.Impl;
 
 namespace SEP3T2GraphQL.Services.Validation
 {
@@ -15,8 +14,8 @@ namespace SEP3T2GraphQL.Services.Validation
     /// </summary>
     public  class CreateGuestValidator
     {
-        private IGuestRepository _guestRepository;
-        private IHostRepository _hostRepository;
+        private readonly IGuestRepository _guestRepository;
+        private readonly IHostRepository _hostRepository;
 
         public CreateGuestValidator(IGuestRepository guestRepository, IHostRepository hostRepository)
         {

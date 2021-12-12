@@ -9,8 +9,8 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public class UserService : IUserService
     {
-        private IUserRepository _userRepository;
-        private UserValidation _userValidation;
+        private readonly IUserRepository _userRepository;
+        private readonly UserValidation _userValidation;
 
         public UserService(IUserRepository userRepository, UserValidation userValidation)
         {
@@ -82,7 +82,7 @@ namespace SEP3T2GraphQL.Services.Impl
             }
             try
             {
-               return await _userRepository.DeleteUserAsync(user);
+                return await _userRepository.DeleteUserAsync(user);
             }
             catch (Exception e)
             {

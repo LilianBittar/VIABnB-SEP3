@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using SEP3T2GraphQL.Models;
 
-namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
+namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl
 {
     public class ResidenceValidationImpl : IResidenceValidation
     {

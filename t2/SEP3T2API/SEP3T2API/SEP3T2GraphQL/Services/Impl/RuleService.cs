@@ -8,14 +8,14 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public class RuleService : IRuleService
     {
-        private IRuleRepository _ruleRepository;
+        private readonly IRuleRepository _ruleRepository;
 
         public RuleService(IRuleRepository ruleRepository)
         {
             _ruleRepository = ruleRepository;
         }
 
-        public async Task<Rule> CreateResidenceRule(Rule rule)
+        public async Task<Rule> CreateResidenceRuleAsync(Rule rule)
         {
             var newRule = await _ruleRepository.CreateResidenceRuleAsync(rule);
             if (newRule == null)
@@ -26,7 +26,7 @@ namespace SEP3T2GraphQL.Services.Impl
             return newRule;
         }
 
-        public async Task<IEnumerable<Rule>> GetAllRulesByResidenceId(int residenceId)
+        public async Task<IEnumerable<Rule>> GetAllRulesByResidenceIdAsync(int residenceId)
         {
             var ruleListToReturn = await _ruleRepository.GetAllRulesByResidenceIdAsync(residenceId);
             if (ruleListToReturn == null)
@@ -50,7 +50,7 @@ namespace SEP3T2GraphQL.Services.Impl
             }
         }
 
-        public async Task<Rule> DeleteRule(Rule rule)
+        public async Task<Rule> DeleteRuleAsync(Rule rule)
         {
             try
             {

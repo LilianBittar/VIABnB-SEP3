@@ -29,7 +29,7 @@ namespace UnitTests.GuestReviewHostServiceTest
             };
     
             _guestReviewHostRepository = new Mock<IGuestReviewRepository>();
-            _validator = new CreateGuestReviewValidation(_guestReviewHostRepository.Object);
+            _validator = new CreateGuestReviewValidation();
             _guestReviewService = new GuestReviewService(_guestReviewHostRepository.Object, _validator);
         }
 

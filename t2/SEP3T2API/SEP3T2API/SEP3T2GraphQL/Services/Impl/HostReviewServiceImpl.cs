@@ -45,12 +45,6 @@ namespace SEP3T2GraphQL.Services.Impl
             return await _hostReviewRepository.UpdateHostReviewAsync(hostReview);
 
         }
-
-        public async Task<IEnumerable<HostReview>> GetAllHostReviewsByGuestIdAsync(int id)
-        {
-            return await _hostReviewRepository.GetAllHostReviewsByGuestIdAsync(id);
-        }
-
         public async Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id)
         {
             return await _hostReviewRepository.GetAllHostReviewsByHostIdAsync(id);

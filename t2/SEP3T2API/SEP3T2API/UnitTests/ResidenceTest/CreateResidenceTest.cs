@@ -6,6 +6,7 @@ using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Repositories.Impl;
 using SEP3T2GraphQL.Services;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
+using SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl;
 
 namespace UnitTests
 {

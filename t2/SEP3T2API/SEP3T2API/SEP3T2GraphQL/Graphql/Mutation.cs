@@ -52,12 +52,12 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<Guest> UpdateGuestStatus(Guest guest)
         {
-            return await _guestService.UpdateGuestStatus(guest);
+            return await _guestService.UpdateGuestStatusAsync(guest);
         }
 
         public async Task<RentRequest> RentResidence(RentRequest request)
         {
-            return await _rentalService.CreateRentRequest(request);
+            return await _rentalService.CreateRentRequestAsync(request);
         }
 
         public async Task<Host> RegisterHost(Host host)
@@ -69,12 +69,12 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<Facility> CreateResidenceFacility(Facility facility, int residenceId)
         {
-            return await _facilityService.CreateResidenceFacility(facility, residenceId);
+            return await _facilityService.CreateResidenceFacilityAsync(facility, residenceId);
         }
 
         public async Task<Rule> CreateNewResidenceRule(Rule rule)
         {
-            return await _ruleService.CreateResidenceRule(rule);
+            return await _ruleService.CreateResidenceRuleAsync(rule);
         }
 
         public async Task<RentRequest> UpdateRentRequestStatus(RentRequest request)
@@ -99,7 +99,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<ResidenceReview> CreateResidenceReview(Residence residence, ResidenceReview residenceReview)
         {
-            return await _residenceReviewService.CreateAsync(residence, residenceReview); 
+            return await _residenceReviewService.CreateResidenceReviewAsync(residence, residenceReview); 
         }
         
         public async Task<HostReview> CreateHostReview(HostReview hostReview)
@@ -124,7 +124,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<Rule> DeleteRule(Rule rule)
         {
-            return await _ruleService.DeleteRule(rule);
+            return await _ruleService.DeleteRuleAsync(rule);
         }
 
         public async Task<Facility> DeleteResidenceFacility(Facility facility, int residenceId)

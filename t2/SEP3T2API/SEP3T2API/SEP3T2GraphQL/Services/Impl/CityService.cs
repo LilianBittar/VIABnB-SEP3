@@ -17,12 +17,12 @@ namespace SEP3T2GraphQL.Services.Impl
             _createCityValidator = createCityValidator;
         }
 
-        public async Task<IEnumerable<City>> GetAllAsync()
+        public async Task<IEnumerable<City>> GetAllCityAsync()
         {
             return await _cityRepository.GetAllCityAsync();
         }
 
-        public async Task<City> CreateAsync(City city)
+        public async Task<City> CreateCityAsync(City city)
         {
             _createCityValidator.Validate(city);
             return await _cityRepository.CreateCityAsync(city);

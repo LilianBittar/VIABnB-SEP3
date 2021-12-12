@@ -81,7 +81,7 @@ namespace UnitTests.RentalServiceTests
             List<RentRequest> emptyRentRequestList = new();
             _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetAllNotAnsweredRentRequestAsync().Result)
                 .Returns(emptyRentRequestList);
-            Assert.DoesNotThrowAsync(async () => await _rentalService.CreateRentRequest(request));
+            Assert.DoesNotThrowAsync(async () => await _rentalService.CreateRentRequestAsync(request));
         }
 
         [Test]
@@ -301,7 +301,7 @@ namespace UnitTests.RentalServiceTests
         /// <param name="request">Request being tested</param>
         private void TestCreateThrowsArgumentExceptionAsync(RentRequest request)
         {
-            Assert.ThrowsAsync<ArgumentException>(async () => await _rentalService.CreateRentRequest(request));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _rentalService.CreateRentRequestAsync(request));
         }
     }
 }

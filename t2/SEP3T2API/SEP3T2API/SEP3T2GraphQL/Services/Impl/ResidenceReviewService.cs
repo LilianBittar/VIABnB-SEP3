@@ -21,7 +21,7 @@ namespace SEP3T2GraphQL.Services.Impl
             _validator = validator;
         }
 
-        public async Task<ResidenceReview> CreateAsync(Residence residence, ResidenceReview residenceReview)
+        public async Task<ResidenceReview> CreateResidenceReviewAsync(Residence residence, ResidenceReview residenceReview)
         {
             if (residence == null || residenceReview == null)
             {

@@ -1,24 +1,16 @@
 ﻿using System;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Repositories;
 
 namespace SEP3T2GraphQL.Services.Validation
 {
     public class CreateGuestReviewValidation
     {
-        private readonly IGuestReviewRepository _guestReviewRepository;
-
-        public CreateGuestReviewValidation(IGuestReviewRepository guestReviewRepository)
-        {
-            _guestReviewRepository = guestReviewRepository;
-        }
-        
         public void ValidateGuestReview(GuestReview guestReview)
         {
             ValidateRating(guestReview);
         }
 
-        private void ValidateRating(GuestReview guestReview)
+        private static void ValidateRating(GuestReview guestReview)
         {
             if (guestReview.Rating is < 0 or > 5)
             {

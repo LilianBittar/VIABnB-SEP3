@@ -53,19 +53,6 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
             return updatedHostReview;
         }
-
-        public async Task<IEnumerable<HostReview>> GetAllHostReviewsByGuestIdAsync(int id)
-        {
-            var response = await _client.GetAsync($"{Uri}/host/{id}");
-            await HandleErrorResponse(response);
-            var result = await response.Content.ReadAsStringAsync();
-            var responseList = JsonSerializer.Deserialize<List<HostReview>>(result, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
-            return responseList;
-        }
-
         public async Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id)
         {
             var response = await _client.GetAsync($"{Uri}/host/{id}");

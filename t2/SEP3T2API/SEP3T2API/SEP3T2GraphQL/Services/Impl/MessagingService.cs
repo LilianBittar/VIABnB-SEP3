@@ -74,16 +74,6 @@ namespace SEP3T2GraphQL.Services.Impl
         {
             return _messageMap.ContainsKey(userId) ? _messageMap[userId] : new List<Message>().AsEnumerable();
         }
-
-        public void ConnectUser(int userId)
-        {
-            if (!_messageMap.ContainsKey(userId))
-            {
-                _messageMap.TryAdd(userId, new ConcurrentQueue<Message>());
-            }
-        }
-
-
         private void InitializeMessageMap()
         {
             var allMessages = _messageRepository.GetAllMessagesAsync().Result;

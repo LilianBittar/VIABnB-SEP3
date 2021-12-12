@@ -16,12 +16,12 @@ namespace SEP3T2GraphQL.Services.Impl
             _createAddressValidator = validator; 
         }
 
-        public async Task<IEnumerable<Address>> GetAllAsync()
+        public async Task<IEnumerable<Address>> GetAllAddressAsync()
         {
             return await _addressRepository.GetAllAddressAsync(); 
         }
 
-        public async Task<Address> CreateAsync(Address address)
+        public async Task<Address> CreateAddressAsync(Address address)
         {
             _createAddressValidator.Validate(address);
             return await _addressRepository.CreateAddressAsync(address); 

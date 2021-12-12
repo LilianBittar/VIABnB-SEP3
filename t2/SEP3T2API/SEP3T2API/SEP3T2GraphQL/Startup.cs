@@ -1,13 +1,10 @@
-using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using GraphQL.Server.Ui.GraphiQL;
 using GraphQL.Server.Ui.Playground;
 using HotChocolate.Types;
-using Microsoft.AspNetCore.ResponseCompression;
 using SEP3T2GraphQL.Graphql;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Repositories.Administration;
@@ -23,6 +20,7 @@ using SEP3T2GraphQL.Services.Validation.GuestValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.HostValidation;
 using SEP3T2GraphQL.Services.Validation.HostValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
+using SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.UserValidation;
 using SEP3T2GraphQL.SignalR;
 

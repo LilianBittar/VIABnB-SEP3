@@ -20,12 +20,7 @@ namespace SEP3T2GraphQL.Services.Impl
             _rentRequestRepository = rentRequestRepository;
             _createRentRequestValidator = createRentRequestValidator;
         }
-
-        /// <summary>
-        /// This implementation of the IRentalService uses an <see cref="CreateRentRequestValidator"/> for validating
-        /// the business logic of creating a new RentRequest. 
-        /// </summary>
-        public async Task<RentRequest> CreateRentRequest(RentRequest request)
+        public async Task<RentRequest> CreateRentRequestAsync(RentRequest request)
         {
             if (request == null)
             {
@@ -44,11 +39,6 @@ namespace SEP3T2GraphQL.Services.Impl
             }
 
             return rentRequestListToReturn;
-        }
-
-        public Task<IEnumerable<RentRequest>> GetAllRentRequestByResidenceId(int residenceId)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<RentRequest> GetRentRequestAsync(int id)
@@ -81,11 +71,10 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("Request list is null");
             }
-            Console.WriteLine(JsonSerializer.Serialize(rentRequestList));
             return rentRequestList;
         }
 
-        public async Task<IEnumerable<RentRequest>> GetRentRequestsByGuestId(int guestId)
+        public async Task<IEnumerable<RentRequest>> GetRentRequestsByGuestIdAsync(int guestId)
         {
             return await _rentRequestRepository.GetRentRequestsByGuestIdAsync(guestId);
         }

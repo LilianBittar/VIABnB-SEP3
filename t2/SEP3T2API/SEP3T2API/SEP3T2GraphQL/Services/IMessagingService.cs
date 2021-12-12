@@ -8,6 +8,5 @@ namespace SEP3T2GraphQL.Services
     {
         public Task<Message> SendMessageAsync(Message message);
         public Task<IEnumerable<Message>> GetMessagesByUserIdAsync(int userId);
-        public void ConnectUser(int userId);
     }
 }

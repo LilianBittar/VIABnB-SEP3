@@ -81,7 +81,7 @@ namespace UnitTests.ResidenceReviewServiceTests
                 Rating = rating, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
             };
             Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _residenceReviewService.CreateAsync(_residence, review));
+                await _residenceReviewService.CreateResidenceReviewAsync(_residence, review));
         }
 
 
@@ -104,7 +104,7 @@ namespace UnitTests.ResidenceReviewServiceTests
             {
                 Rating = rating, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
             };
-            Assert.DoesNotThrowAsync(async () => await _residenceReviewService.CreateAsync(_residence, review));
+            Assert.DoesNotThrowAsync(async () => await _residenceReviewService.CreateResidenceReviewAsync(_residence, review));
         }
 
         [Test]
@@ -126,7 +126,7 @@ namespace UnitTests.ResidenceReviewServiceTests
                 Rating = 1, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
             };
             Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _residenceReviewService.CreateAsync(_residence, review));
+                await _residenceReviewService.CreateResidenceReviewAsync(_residence, review));
         }
 
         [Test]
@@ -166,7 +166,7 @@ namespace UnitTests.ResidenceReviewServiceTests
                 Rating = 1, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
             };
             Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _residenceReviewService.CreateAsync(_residence, review));
+                await _residenceReviewService.CreateResidenceReviewAsync(_residence, review));
         }
     }
 }

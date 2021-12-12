@@ -32,7 +32,7 @@ namespace UnitTests.AddressServiceTest
             {
                 City = city, Id = 1, HouseNumber = "1.th", StreetName = "Test", StreetNumber = "1t"
             };
-            Assert.DoesNotThrowAsync(async () =>await _addressService.CreateAsync(address));
+            Assert.DoesNotThrowAsync(async () =>await _addressService.CreateAddressAsync(address));
         }
         
         [Test]
@@ -124,7 +124,7 @@ namespace UnitTests.AddressServiceTest
         }
         public void TestAssertCreateThrowsArgumentExceptionAsync(Address address)
         {
-            Assert.ThrowsAsync<ArgumentException>(async () => await _addressService.CreateAsync(address));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _addressService.CreateAddressAsync(address));
         }
     }
 }

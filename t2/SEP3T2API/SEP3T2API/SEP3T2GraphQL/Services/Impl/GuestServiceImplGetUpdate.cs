@@ -9,27 +9,16 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public partial class GuestServiceImpl : IGuestService
     {
-        public async Task<Guest> GetGuestById(int id)
+        public async Task<Guest> GetGuestByIdAsync(int id)
         {
             return await _guestRepository.GetGuestByIdAsync(id); 
         }
 
-        public async Task<Guest> GetGuestByEmail(string email)
+        public async Task<Guest> GetGuestByEmailAsync(string email)
         {
             return await _guestRepository.GetGuestByEmailAsync(email);
         }
-
-        public async Task<Guest> UpdateGuest(Guest guest)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Guest>> GetAllGuests()
-        {
-            return await _guestRepository.GetAllGuestsAsync(); 
-        }
-
-        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuests()
+        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuestsAsync()
         {
             var guestListToReturn = await _guestRepository.GetAllNotApprovedGuestsAsync();
             if (guestListToReturn == null)
@@ -40,9 +29,8 @@ namespace SEP3T2GraphQL.Services.Impl
             return guestListToReturn;
         }
 
-        public async Task<Guest> UpdateGuestStatus(Guest guest)
+        public async Task<Guest> UpdateGuestStatusAsync(Guest guest)
         {
-            Console.WriteLine($"{this} {nameof(UpdateGuestStatus)} received params: {JsonSerializer.Serialize(guest)}");
             if (guest == null)
             {
                 throw new ArgumentException("Guest can't be null");
