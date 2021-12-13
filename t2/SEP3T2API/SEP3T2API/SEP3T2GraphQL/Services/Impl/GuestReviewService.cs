@@ -13,7 +13,8 @@ namespace SEP3T2GraphQL.Services.Impl
         private readonly IGuestReviewRepository _guestReviewRepository;
         private readonly CreateGuestReviewValidation _createGuestReviewValidation;
 
-        public GuestReviewService(IGuestReviewRepository guestReviewRepository, CreateGuestReviewValidation createGuestReviewValidation)
+        public GuestReviewService(IGuestReviewRepository guestReviewRepository,
+            CreateGuestReviewValidation createGuestReviewValidation)
         {
             _guestReviewRepository = guestReviewRepository;
             _createGuestReviewValidation = createGuestReviewValidation;
@@ -25,11 +26,12 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("guestReview is required");
             }
-            _createGuestReviewValidation.ValidateGuestReview(guestReview);
+            await _createGuestReviewValidation.ValidateGuestReview(guestReview);
             var guestReviews = await _guestReviewRepository.GetAllGuestReviewsByGuestIdAsync(guestReview.GuestId);
-            
+
             // Updates review if host already have an HostReview for the guest. 
-            if (guestReviews.Where(h => h.GuestId == guestReview.GuestId && h.HostId == guestReview.HostId).ToList().Any())
+            if (guestReviews.Where(h => h.GuestId == guestReview.GuestId && h.HostId == guestReview.HostId).ToList()
+                .Any())
             {
                 var updatedReview = await UpdateGuestReviewAsync(guestReview);
                 return updatedReview;
@@ -44,6 +46,7 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("You are updating with null guest review");
             }
+
             return await _guestReviewRepository.UpdateGuestReviewAsync(guestReview);
         }
 

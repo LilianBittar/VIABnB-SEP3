@@ -23,7 +23,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <param name="guestReview">review being validated</param>
         /// <exception cref="ArgumentException">If guest has no approved <c>RentRequest</c> for a residence owned by host of the <c>GuestReview</c></exception>
         /// <exception cref="ArgumentException">If rating is not between 0 and 5</exception>
-        public async void ValidateGuestReview(GuestReview guestReview)
+        public async Task ValidateGuestReview(GuestReview guestReview)
         {
             ValidateRating(guestReview);
             await ValidateGuestHasRentResidenceOfHost(guestReview);
