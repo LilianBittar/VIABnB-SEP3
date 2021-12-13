@@ -21,21 +21,30 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         [Parameter] public int Id { get; set; }
         private IEnumerable<GuestReview> _guestReviewList = new List<GuestReview>();
         private List<Host> _hostList = new List<Host>();
+        private string ErrorMessage = "";
         
         private bool _isLoading;
 
         protected override async Task OnInitializedAsync()
         {
-            _isLoading = true;
-            _guestReviewList = await GuestReviewService.GetAllGuestReviewsByGuestIdAsync(Id);
-            foreach (var item in _guestReviewList)
+            try
             {
-                var h = await HostService.GetHostByIdAsync(item.HostId);
-                Console.WriteLine(JsonSerializer.Serialize(h));
-                _hostList.Add(h);
+                _isLoading = true;
+                _guestReviewList = await GuestReviewService.GetAllGuestReviewsByGuestIdAsync(Id);
+                foreach (var item in _guestReviewList)
+                {
+                    var h = await HostService.GetHostByIdAsync(item.HostId);
+                    Console.WriteLine(JsonSerializer.Serialize(h));
+                    _hostList.Add(h);
+                }
+                StateHasChanged();
+                _isLoading = false;
             }
-            StateHasChanged();
-            _isLoading = false;
+            catch (Exception e)
+            {
+                ErrorMessage = "";
+                ErrorMessage = "Something went wrong, try refreshing the page";
+            }
         }
     }
 }
