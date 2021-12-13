@@ -39,7 +39,7 @@ namespace SEP3T2GraphQL.Repositories.Impl
         {
             if (!response.IsSuccessStatusCode)
             {
-                Console.WriteLine(await response.Content.ReadAsStringAsync());
+                Console.WriteLine(await response.Content.ReadAsStringAsync()+ response.StatusCode);
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
         }

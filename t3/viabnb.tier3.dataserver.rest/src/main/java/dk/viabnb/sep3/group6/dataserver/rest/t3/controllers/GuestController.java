@@ -81,11 +81,11 @@ import java.util.NoSuchElementException;
         LOGGER.info(this + "Was provided: " + email);
         allGuests.removeIf(guest -> !guest.getEmail().equals(email));
       }
-      LOGGER.info("getAllGuests returned: " + new Gson().toJson(allGuests));
       return ResponseEntity.ok(allGuests);
     }
     catch (Exception e)
     {
+      LOGGER.error(e.getMessage());
       return ResponseEntity.internalServerError().build();
     }
   }
