@@ -27,12 +27,14 @@ namespace SEP3T2GraphQL.Services
         /// <exception cref="ArgumentException">If residence is not available</exception>
         /// <exception cref="ArgumentException">If approved rent request exist for request's residence in same rent period as the request.</exception>
         Task<RentRequest> CreateRentRequestAsync(RentRequest request);
+
         /// <summary>
         /// Get a list of RentRequest objects via repository
         /// </summary>
+        /// <param name="hostId"></param>
         /// <returns>A list of RentRequest object</returns>
         /// <exception cref="System.ArgumentException">If the returned RentRequest is null</exception>
-        Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync();
+        Task<IEnumerable<RentRequest>> GetAllRentRequestsByHostIdAsync(int hostId);
         /// <summary>
         /// Get a list of RentRequest objects via repository
         /// </summary>
@@ -56,12 +58,14 @@ namespace SEP3T2GraphQL.Services
         /// <exception cref="ArgumentException">If approved rent request exist for request's residence in same rent period as the request.</exception>
 
         Task<RentRequest> UpdateRentRequestStatusAsync(RentRequest request);
+
         /// <summary>
         /// Get a list of RentRequest objects with status: NOTANSWERED via repository
         /// </summary>
+        /// <param name="hostId"></param>
         /// <returns>a list of RentRequest objects</returns>
         /// <exception cref="System.ArgumentException">If the returned RentRequest is null</exception>
-        Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync();
+        Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync(int hostId);
         /// <summary>
         /// Get a RentRequest object based on the given parameter via repository
         /// </summary>

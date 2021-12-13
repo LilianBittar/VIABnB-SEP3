@@ -30,9 +30,9 @@ namespace SEP3T2GraphQL.Services.Impl
             return await _rentRequestRepository.CreateRentRequestAsync(request);
         }
 
-        public async Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync()
+        public async Task<IEnumerable<RentRequest>> GetAllRentRequestsByHostIdAsync(int hostId)
         {
-            var rentRequestListToReturn = await _rentRequestRepository.GetAllRentRequestAsync();
+            var rentRequestListToReturn = (await _rentRequestRepository.GetAllRentRequestAsync()).Where(r => r.Residence.Host.Id == hostId);
             if (rentRequestListToReturn == null)
             {
                 throw new ArgumentException("Rent request list is null");
@@ -64,9 +64,11 @@ namespace SEP3T2GraphQL.Services.Impl
             return updatedRequest;
         }
 
-        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync()
+        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync(int hostId)
         {
-            var rentRequestList = await _rentRequestRepository.GetAllNotAnsweredRentRequestAsync();
+            var rentRequestList =
+                (await _rentRequestRepository.GetAllNotAnsweredRentRequestAsync()).Where(r =>
+                    r.Residence.Host.Id == hostId);
             if (rentRequestList == null)
             {
                 throw new ArgumentException("Request list is null");

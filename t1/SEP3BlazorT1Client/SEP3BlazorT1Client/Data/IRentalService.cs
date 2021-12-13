@@ -25,18 +25,22 @@ namespace SEP3BlazorT1Client.Data
         /// <returns>The updated RentRequest object</returns>
         /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
         Task<RentRequest> UpdateRentRequestAsync(RentRequest request);
+
         /// <summary>
         /// Get a list of RentRequest objects with status: NOTANSWERED via repository
         /// </summary>
+        /// <param name="hostId"></param>
         /// <returns>a list of RentRequest objects</returns>
         /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
-        Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync();
+        Task<IEnumerable<RentRequest>> GetAllRentRequestsByHostIdAsync(int hostId);
+
         /// <summary>
         /// Get a list of RentRequest objects via repository
         /// </summary>
+        /// <param name="hostId"></param>
         /// <returns>a list of RentRequest objects</returns>
         /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
-        Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync();
+        Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync(int hostId);
         /// <summary>
         /// Get a RentRequest object based on the given parameter via repository
         /// </summary>

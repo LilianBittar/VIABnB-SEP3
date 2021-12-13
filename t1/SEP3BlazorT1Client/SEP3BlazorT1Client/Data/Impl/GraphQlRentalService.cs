@@ -229,13 +229,13 @@ namespace SEP3BlazorT1Client.Data.Impl
             return response.Data.RentRequest;
         }
 
-        public async Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync()
+        public async Task<IEnumerable<RentRequest>> GetAllRentRequestsByHostIdAsync(int hostId)
         {
             var allRents = new GqlQuery()
             {
-                Query = @"query 
+                Query = @"query($id : Int!) 
                           {
-                          allRentRequests{
+                          allRentRequestsByHostId(hostId: $id){
                            id
                               startDate
                               endDate
@@ -327,7 +327,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                             requestCreationDate
                         }
                        }
-                        ",
+                        ", Variables = new {id = hostId}
             };
             var graphQlResponse =
                 await _client.PostQueryAsync<RentRequestListResponseType>(allRents);
@@ -335,13 +335,13 @@ namespace SEP3BlazorT1Client.Data.Impl
             return graphQlResponse.Data.RentRequests;
         }
 
-        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync()
+        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequestAsync(int hostId)
         {
             var allNotAnsweredRentRequestQuery = new GqlQuery()
             {
-                Query = @"query
+                Query = @"query($id: Int!) 
                           {
-                            allNotAnsweredRentRequest
+                            allNotAnsweredRentRequest(hostId: $id)
                              {
                               id
                               startDate
@@ -435,7 +435,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                         }
                        }
                         ",
-            };
+            Variables = new {id = hostId}};
             var graphQlResponse =
                 await _client.PostQueryAsync<AllNotAnsweredRentRequestResponseType>(allNotAnsweredRentRequestQuery);
             HandleErrorResponse(graphQlResponse);

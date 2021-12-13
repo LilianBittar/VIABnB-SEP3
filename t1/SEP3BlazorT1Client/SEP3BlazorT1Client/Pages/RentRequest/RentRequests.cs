@@ -17,6 +17,7 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         [Inject] public IRentalService RentalService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject] public IHostService HostService { get; set; }
         private string ErrorMessage="";
 
         private IEnumerable<Models.RentRequest> _activeRentRequestList;
@@ -25,8 +26,10 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         {
             try
             {
-                _activeRentRequestList = await RentalService.GetAllNotAnsweredRentRequestAsync();
-                _oldRentRequestList = await RentalService.GetAllRentRequestsAsync();
+                var host = await HostService.GetHostByEmailAsync(
+                    (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity.Name); 
+                _activeRentRequestList = await RentalService.GetAllNotAnsweredRentRequestAsync(host.Id);
+                _oldRentRequestList = await RentalService.GetAllRentRequestsByHostIdAsync(host.Id);
             }
             catch (Exception e)
             {

@@ -104,14 +104,14 @@ namespace SEP3T2GraphQL.Graphql
             return await _administrationService.ValidateAdmin(email, password);
         }
 
-        public async Task<IEnumerable<RentRequest>> GetAllRentRequests()
+        public async Task<IEnumerable<RentRequest>> GetAllRentRequestsByHostId(int hostId)
         {
-            return await _rentalService.GetAllRentRequestsAsync();
+            return await _rentalService.GetAllRentRequestsByHostIdAsync(hostId);
         }
 
-        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequest()
+        public async Task<IEnumerable<RentRequest>> GetAllNotAnsweredRentRequest(int hostId)
         {
-            return await _rentalService.GetAllNotAnsweredRentRequestAsync();
+            return await _rentalService.GetAllNotAnsweredRentRequestAsync(hostId);
         }
 
         public Task<RentRequest> GetRentRequestById(int id)
