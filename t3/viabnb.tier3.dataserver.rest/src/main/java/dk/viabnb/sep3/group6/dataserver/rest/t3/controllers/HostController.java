@@ -46,7 +46,6 @@ import java.util.NoSuchElementException;
         LOGGER.error("DB error");
         return ResponseEntity.internalServerError().build();
       }
-      LOGGER.info("Request for: " + gson.toJson(newHost));
       return new ResponseEntity<>(newHost, HttpStatus.OK);
 
     }
@@ -67,7 +66,6 @@ import java.util.NoSuchElementException;
       Host host;
       System.out.println(email);
       host = hostDAO.getHostByEmail(email);
-      LOGGER.info("Request for: " + gson.toJson(host));
       return ResponseEntity.ok(host);
     }
     catch (Exception e)
@@ -84,7 +82,6 @@ import java.util.NoSuchElementException;
     try
     {
       host = hostDAO.getHostById(id);
-      LOGGER.info("Request for: " + gson.toJson(host));
       return new ResponseEntity<>(host, HttpStatus.OK);
     }
     catch (Exception e)
@@ -107,7 +104,6 @@ import java.util.NoSuchElementException;
   @RequestMapping(value = "/hosts/{id}/approval", produces = "application/json", method = RequestMethod.PATCH) public ResponseEntity<Host> updateHostStatus(
       @RequestBody Host host, @PathVariable("id") int id)
   {
-    LOGGER.info("Recived updated host from t2: " + new Gson().toJson(host));
     Host updatedHost = null;
     try
     {
