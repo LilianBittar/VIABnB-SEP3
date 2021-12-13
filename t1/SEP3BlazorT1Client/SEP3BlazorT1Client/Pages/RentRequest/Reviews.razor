@@ -36,6 +36,17 @@
                             <div class="form-group">
                                 <p>Date: @item.CreatedDate</p>
                             </div>
+                            @if (_hosts.Any() && _hosts != null)
+                            {
+                                <div class="mat-layout-grid-cell">
+                                    <div class="form-group">
+                                        <MatSubtitle2>Reviewd by: @_hosts.First(h => h.Id == item.HostId).FirstName @_hosts.First(host => host.Id == item.HostId).LastName</MatSubtitle2>
+                                    </div>
+                                    <div class="form-group">
+                                        <MatSubtitle2>Reviewrs e-mail: @_hosts.First(host => host.Id == item.HostId).Email</MatSubtitle2>
+                                    </div>
+                                </div>
+                            }
                         </MatExpansionPanelDetails>
                     </MatExpansionPanel>
                 }

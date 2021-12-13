@@ -8,11 +8,11 @@ using SEP3T2GraphQL.Models;
 
 namespace SEP3T2GraphQL.Repositories.Impl
 {
-    public class ResidenceRepositoryImpl: IResidenceRepository
+    public class ResidenceRepository: IResidenceRepository
     {
         private const string Uri = "http://localhost:8080";
         private readonly HttpClient _client;
-        public ResidenceRepositoryImpl()
+        public ResidenceRepository()
         {
             _client = new HttpClient();
         }

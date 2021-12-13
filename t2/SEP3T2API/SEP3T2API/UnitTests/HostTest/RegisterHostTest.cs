@@ -22,7 +22,7 @@ namespace UnitTests.HostTest
         {
             HostRepository = new Mock<IHostRepository>();
             _userService = new Mock<IUserService>();
-            HostService = new HostServiceImpl(HostRepository.Object,new HostValidationImpl(_userService.Object));
+            HostService = new HostService(HostRepository.Object,new HostValidation(_userService.Object));
         }
 
         [Test]

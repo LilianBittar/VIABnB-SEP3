@@ -34,7 +34,7 @@ namespace UnitTests.GuestServiceTests
             var hostService = new Mock<IHostService>();
             _hostRepository.Setup<Host>(x => x.GetHostByIdAsync(4).Result).Returns(new Host());
 
-            _guestService = new GuestServiceImpl(_guestRepository.Object,
+            _guestService = new GuestService(_guestRepository.Object,
                 new CreateGuestValidator(_guestRepository.Object, _hostRepository.Object));
         }
 

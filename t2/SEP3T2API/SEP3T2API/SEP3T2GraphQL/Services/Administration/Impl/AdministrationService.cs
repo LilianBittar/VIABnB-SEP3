@@ -6,10 +6,10 @@ using SEP3T2GraphQL.Repositories.Administration;
 
 namespace SEP3T2GraphQL.Services.Administration.Impl
 {
-    public class AdministrationServiceImpl : IAdministrationService
+    public class AdministrationService : IAdministrationService
     {
         private readonly IAdministrationRepository _administrationRepository;
-        public AdministrationServiceImpl(IAdministrationRepository administrationRepository)
+        public AdministrationService(IAdministrationRepository administrationRepository)
         {
             _administrationRepository = administrationRepository;
         }

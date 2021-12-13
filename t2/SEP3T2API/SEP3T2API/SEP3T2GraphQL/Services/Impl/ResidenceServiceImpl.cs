@@ -20,7 +20,7 @@ namespace SEP3T2GraphQL.Services.Impl
             IAddressService addressService)
         {
             _residenceRepository = residenceRepository;
-            _residenceValidation = new ResidenceValidationImpl();
+            _residenceValidation = new ResidenceValidation();
             _cityService = cityService;
             _addressService = addressService;
         }
