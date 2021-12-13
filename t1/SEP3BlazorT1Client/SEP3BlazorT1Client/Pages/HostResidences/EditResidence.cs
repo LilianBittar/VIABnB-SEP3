@@ -75,14 +75,14 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
         private async Task DeleteResidenceFacility(int id)
         {
             var fac = await FacilityService.DeleteResidenceFacilityAsync(_residence.Facilities.First(f => f.Id == id), _residence.Id);
+            StateHasChanged();
             if (fac == null)
             {
                 Console.WriteLine("can't");
-                
             }
         }
 
-        private void AddRule()
+        private async Task AddRule()
         {
             var newRule = new Rule()
             {
@@ -91,7 +91,7 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
             };
             if (!string.IsNullOrEmpty(newRule.Description) && _residence.Rules.All(rule => rule.Description != newRule.Description))
             {
-                RuleService.CreateResidenceRuleAsync(newRule);
+                await RuleService.CreateResidenceRuleAsync(newRule);
             }
             StateHasChanged();
         }
@@ -100,31 +100,32 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
         {
             RuleService.DeleteRuleAsync(delete);
         }
-        private void AddFacility()
+        private async Task AddFacility()
         {
             _newFacility = _facilities.FirstOrDefault(facility => facility.Name == _newFacility.Name);
             if (_newFacility != null && !string.IsNullOrEmpty(_newFacility.Name) && _residence.Facilities.All(facility => facility.Name != _newFacility.Name))
             {
-                FacilityService.CreateResidenceFacilityAsync(_newFacility, _residence.Id);
+                await FacilityService.CreateResidenceFacilityAsync(_newFacility, _residence.Id);
             }
             StateHasChanged();
         }
-        private async Task<Residence> UpdateResidence()
+        private async Task UpdateResidence()
         {
             var res = _residence;
-            Console.WriteLine(JsonSerializer.Serialize(res));
-            return await ResidenceService.UpdateResidenceAsync(res);
+            await ResidenceService.UpdateResidenceAsync(res);
+            StateHasChanged();
         }
 
         private async Task OpenConfirmUpdateFromService()
         {
             bool isReady;
             isReady = await MatDialogService.ConfirmAsync("Are you sure you want to update your residence?");
+            StateHasChanged();
             if (isReady)
             {
-                UpdateResidence();
+                await UpdateResidence();
+                StateHasChanged();  
                 _snackBarIsOpen = true;
-                StateHasChanged();
             }
         }
         
@@ -134,7 +135,8 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
             isReady = await MatDialogService.ConfirmAsync("Are you sure you want to delete your residence?");
             if (isReady)
             {
-                DeleteResidence();
+                await DeleteResidence();
+                ToHostResidence();
                 _snackBarIsOpen = true;
                 StateHasChanged();
             }

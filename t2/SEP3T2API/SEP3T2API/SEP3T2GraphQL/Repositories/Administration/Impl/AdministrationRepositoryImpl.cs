@@ -21,6 +21,10 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
         public async Task<Administrator> GetAdminByEmail(string email)
         {
             var responseMessage = await _client.GetAsync($"{Uri}/admin/{email}");
+            if (string.IsNullOrEmpty(await responseMessage.Content.ReadAsStringAsync()))
+            {
+                return null;
+            }
             await HandleErrorResponse(responseMessage);
 
             var adminToReturn =

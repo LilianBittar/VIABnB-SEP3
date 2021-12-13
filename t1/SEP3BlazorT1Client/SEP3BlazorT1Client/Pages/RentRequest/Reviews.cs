@@ -13,6 +13,7 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
     public partial class Reviews
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
+        [Inject] public IHostService HostService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [Inject] public IGuestReviewService GuestReviewService { get; set; }
@@ -21,6 +22,10 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         
         [Parameter]
         public int Id { get; set; }
+        private List<Host> _hosts = new List<Host>();
+        private Guest _guest = new Guest();
+
+
         
         protected override async Task OnInitializedAsync()
         {
@@ -28,6 +33,14 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
             {
                 Console.WriteLine(JsonSerializer.Serialize(await GuestReviewService.GetAllGuestReviewsByGuestIdAsync(Id)));
                 _guestReviews = await GuestReviewService.GetAllGuestReviewsByGuestIdAsync(Id);
+                if (_guest.GuestReviews != null)
+                {
+                    foreach (var item in _guestReviews)
+                    {
+                        var h = await HostService.GetHostByIdAsync(item.HostId);
+                        _hosts.Add(h);
+                    }
+                }
             }
             catch (Exception e)
             {
