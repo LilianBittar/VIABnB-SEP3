@@ -24,7 +24,7 @@ namespace UnitTests.ResidenceTest
         public void SetUp()
         {
            
-            _residenceValidation = new ResidenceValidationImpl();
+            _residenceValidation = new ResidenceValidation();
 
             _city = new City()
             {

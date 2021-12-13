@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace SEP3T2GraphQL.Services.Validation.GuestValidation.Impl
 {
-    public class GuestValidationImpl : IGuestValidation
+    public class GuestValidation : IGuestValidation
     {
         public bool IsValidStudentNumber(int studentNumber)
         {

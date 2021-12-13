@@ -9,17 +9,17 @@ using SEP3T2GraphQL.Services.Validation.GuestValidation.Impl;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
-    public partial class GuestServiceImpl : IGuestService
+    public partial class GuestService : IGuestService
     {
         private readonly IGuestRepository _guestRepository;
         private readonly IGuestValidation _guestValidation;
         private readonly CreateGuestValidator _createGuestValidator;
 
-        public GuestServiceImpl(IGuestRepository guestRepository, CreateGuestValidator createGuestValidator)
+        public GuestService(IGuestRepository guestRepository, CreateGuestValidator createGuestValidator)
         {
             _guestRepository = guestRepository;
             _createGuestValidator = createGuestValidator;
-            _guestValidation = new GuestValidationImpl();
+            _guestValidation = new GuestValidation();
         }
 
         public async Task<Guest> CreateGuestAsync(Guest guest)

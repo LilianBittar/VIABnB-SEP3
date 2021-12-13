@@ -90,7 +90,7 @@ namespace UnitTests.AdministrationTest
             var hostService = new Mock<IHostService>();
             hostService.Setup(ex => ex.GetHostByIdAsync(1).Result).Returns(host1);
             hostService.Setup(ex => ex.GetHostByIdAsync(2).Result).Returns(host2);
-            _guestService = new GuestServiceImpl(guestRepository.Object, 
+            _guestService = new GuestService(guestRepository.Object, 
                 new CreateGuestValidator(guestRepository.Object, new Mock<IHostRepository>().Object));
         }
         

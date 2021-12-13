@@ -12,12 +12,12 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
-    public class HostServiceImpl : IHostService
+    public class HostService : IHostService
     {
         private readonly IHostRepository _hostRepository;
         private readonly IHostValidation _hostValidation;
 
-        public HostServiceImpl(IHostRepository hostRepository, IHostValidation hostValidation)
+        public HostService(IHostRepository hostRepository, IHostValidation hostValidation)
         {
             _hostRepository = hostRepository;
             _hostValidation = hostValidation;

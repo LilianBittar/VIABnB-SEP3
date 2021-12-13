@@ -8,12 +8,12 @@ using SEP3T2GraphQL.Models;
 
 namespace SEP3T2GraphQL.Repositories.Administration.Impl
 {
-    public class AdministrationRepositoryImpl : IAdministrationRepository
+    public class AdministrationRepository : IAdministrationRepository
     {
         private const string Uri = "http://localhost:8080";
         private readonly HttpClient _client;
 
-        public AdministrationRepositoryImpl()
+        public AdministrationRepository()
         {
             _client = new HttpClient();
         }

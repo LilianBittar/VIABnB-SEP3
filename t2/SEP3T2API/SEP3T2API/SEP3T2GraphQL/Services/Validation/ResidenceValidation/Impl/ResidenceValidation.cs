@@ -5,7 +5,7 @@ using SEP3T2GraphQL.Models;
 
 namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl
 {
-    public class ResidenceValidationImpl : IResidenceValidation
+    public class ResidenceValidation : IResidenceValidation
     {
         public bool IsValidAddress(Address address)
         {

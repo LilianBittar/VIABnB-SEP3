@@ -53,7 +53,7 @@ namespace UnitTests.AdministrationTest
             hostRepository.Setup(ex => ex.UpdateHostStatusAsync(host1).Result).Returns(host1);
 
             var userService = new Mock<IUserService>();
-            _hostService = new HostServiceImpl(hostRepository.Object, new HostValidationImpl(userService.Object));
+            _hostService = new HostService(hostRepository.Object, new HostValidation(userService.Object));
         }
 
         [Test]
