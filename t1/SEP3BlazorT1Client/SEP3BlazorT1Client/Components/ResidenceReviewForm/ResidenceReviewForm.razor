@@ -3,7 +3,7 @@
 @using System.Text.Json
 @inject IResidenceReviewService ResidenceReviewService
 @inject NavigationManager NavigationManager
-<AuthorizeView Policy="MustBeGuest">
+<AuthorizeView Policy="MustBeApprovedGuest">
     <Authorized>
         <div class="review-container">
             <div class="container-fluid d-flex">
