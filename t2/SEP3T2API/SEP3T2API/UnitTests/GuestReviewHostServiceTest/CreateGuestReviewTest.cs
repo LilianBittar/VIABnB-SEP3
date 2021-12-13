@@ -3,6 +3,7 @@ using Moq;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Services;
 using SEP3T2GraphQL.Services.Impl;
 using SEP3T2GraphQL.Services.Validation;
 
@@ -11,6 +12,7 @@ namespace UnitTests.GuestReviewHostServiceTest
     [TestFixture]
     public class CreateGuestReviewTest
     {
+        private Mock<IRentalService> _rentalService;
         private Mock<IGuestReviewRepository> _guestReviewHostRepository;
         private CreateGuestReviewValidation _validator;
         private GuestReviewService _guestReviewService;
@@ -18,8 +20,9 @@ namespace UnitTests.GuestReviewHostServiceTest
         [SetUp]
         public void SetUp()
         {
+            _rentalService = new Mock<IRentalService>();
             _guestReviewHostRepository = new Mock<IGuestReviewRepository>();
-            _validator = new CreateGuestReviewValidation();
+            _validator = new CreateGuestReviewValidation(_rentalService.Object);
             _guestReviewService = new GuestReviewService(_guestReviewHostRepository.Object, _validator);
         }
         
