@@ -26,6 +26,11 @@
                                 </div>
 
                                 <div class="card__content">
+                                    <div class="available-period">
+                                        <span>@residence.AvailableFrom.Value.ToShortDateString()</span>
+
+                                        <span>@residence.AvailableTo.Value.ToShortDateString()</span>
+                                    </div>
                                     <div class="d-flex flex-row">
                                         <MatDatePicker @bind-Value="@_startDateInput" Required="true" Outlined="true" Label="Start date" OnInput="@(StateHasChanged)"/>
                                         <MatDatePicker @bind-Value="@_endDateInput" Required="true" Outlined="true" Label="End date" OnInput="@(StateHasChanged)"/>
@@ -82,7 +87,7 @@
 
     [Parameter]
     public int ResidenceId { get; set; }
-    
+
     private DateTime _startDateInput;
     private DateTime _endDateInput;
 
@@ -92,6 +97,7 @@
     public EditContext EditContext { get; private set; }
 
     private Residence _testResidence;
+    private Residence residence = new Residence();
 
     private string _errorMessage = "";
 
@@ -102,10 +108,11 @@
             EditContext = new EditContext(_newRentRequest);
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
+            residence = await ResidenceService.GetResidenceByIdAsync(ResidenceId);
             if (user.Identity.IsAuthenticated)
             {
                 var guest = await GuestService.GetGuestByIdAsync(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
-                var residence = await ResidenceService.GetResidenceByIdAsync(ResidenceId);
+
                 if (guest != null)
                 {
                     _newRentRequest.Guest = guest;

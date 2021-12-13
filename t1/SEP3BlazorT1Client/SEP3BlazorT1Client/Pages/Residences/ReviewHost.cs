@@ -67,6 +67,7 @@ namespace SEP3BlazorT1Client.Pages.Residences
         private async void OkClick()
         {
              await CreateReview();
+             StateHasChanged();
             dialogIsOpen = false;
         }
 
