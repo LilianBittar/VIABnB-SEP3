@@ -45,7 +45,7 @@ else
                             <MatSubtitle2 class="demo-mat-card-clean-margin">
                                 @residence.Address.ToString()
                             </MatSubtitle2>
-                            @if (residence.IsAvailable == true)
+                            @if (residence.IsAvailable)
                             {
                                 <div class="available-period">
                                     <span>@residence.AvailableFrom.Value.ToShortDateString()</span>
