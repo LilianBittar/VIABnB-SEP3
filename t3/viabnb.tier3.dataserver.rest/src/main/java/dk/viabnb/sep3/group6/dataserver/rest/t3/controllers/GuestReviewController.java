@@ -31,7 +31,6 @@ import java.util.List;
     {
       List<GuestReview> guestReviews = guestReviewDAO.getAllGuestReviewsByGuestId(
           id);
-      LOGGER.info("Request for: " + gson.toJson(guestReviews));
       return ResponseEntity.ok(guestReviews);
     }
     catch (Exception e)
