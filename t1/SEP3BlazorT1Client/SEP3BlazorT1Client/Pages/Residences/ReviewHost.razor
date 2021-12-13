@@ -90,11 +90,11 @@
                         <MatOption TValue="double" Value="4">4</MatOption>
                         <MatOption TValue="double" Value="5">5</MatOption>
                     </MatSelect>
-                    <MatTextField @bind-Value="_reviewText" TextArea="true"></MatTextField>
+                    <MatTextField Label="Description" @bind-Value="_reviewText" TextArea="true"></MatTextField>
                 </MatDialogContent>
                 <MatDialogActions>
-                    <MatButton OnClick="OkClick" Style="background-color: green">Review</MatButton>
-                    <MatButton OnClick="@(e => { dialogIsOpen = false;})" Style="background-color: red">Cancel</MatButton>
+                    <MatButton OnClick="OkClick" Unelevated="true" Style="width: 45em; background-color: green">Review</MatButton>
+                    <MatButton OnClick="@(e => { dialogIsOpen = false;})" Unelevated="true" Style="width: 45em; background-color: red">Cancel</MatButton>
                 </MatDialogActions>
             </MatDialog>
         }
