@@ -43,7 +43,7 @@ public interface ResidenceDAO
    * Update start date, end date and sets availability to true
    *
    * @param residence The new updated Residence object
-   * @return The newly updated Residence object 
+   * @return The newly updated Residence object
    * @throws IllegalStateException if connection to database failed or executing the update failed
    */
   Residence updateAvailabilityPeriod(Residence residence);
