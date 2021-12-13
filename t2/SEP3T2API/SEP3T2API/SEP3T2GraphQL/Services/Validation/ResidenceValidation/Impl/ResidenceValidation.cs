@@ -78,12 +78,13 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl
 
         public bool IsValidAvailabilityPeriod(DateTime? startDate, DateTime? EndDate)
         {
+          
             if (startDate == null || EndDate == null)
             {
                 throw new ArgumentException("Start and end date must be picked");
             }
 
-            if (startDate.Value.Date < DateTime.Now.Date || EndDate.Value.Date < DateTime.Now.Date)
+            if (startDate.Value.Date < DateTime.Today || EndDate.Value.Date < DateTime.Today)
             {
                 throw new ArgumentException("Rent period cannot be in the past");
             }
