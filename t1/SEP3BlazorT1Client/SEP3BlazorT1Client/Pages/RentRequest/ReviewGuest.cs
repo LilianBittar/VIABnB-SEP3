@@ -78,7 +78,7 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
 
         private void ToUserReview()
         {
-            NavigationManager.NavigateTo("userView");
+            NavigationManager.NavigateTo("user");
         }
     }
 }

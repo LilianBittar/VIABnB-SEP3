@@ -28,13 +28,16 @@ else
         @foreach (var residence in _residences)
         {
             <div class="mat-layout-grid-cell">
-                <MatCard class="demo-mat-card">
+                <MatCard class="demo-mat-card p-3" >
                     <MatCardContent>
                         @if (string.IsNullOrEmpty(residence.ImageUrl))
                         {
                             <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-10/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/assets/dirt.jpeg"></MatCardMedia>
                         }
+                        else
+                        {
                         <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
+                        }
                         <div class="demo-mat-card-content">
                             <MatHeadline6 class="demo-mat-card-clean-margin">
                                 UwU
@@ -62,16 +65,16 @@ else
 
                     </MatCardContent>
                     <MatCardActions>
-                        <MatButton OnClick="@(() => OpenResidenceDetailsDialog(residence))">Details</MatButton>
+                        <MatButton Unelevated="true" Style="width:20em; height: 2em; background-color: blue;" OnClick="@(() => OpenResidenceDetailsDialog(residence))">Details</MatButton>
                         @if (!residence.IsAvailable)
                         {
-                            <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
+                            <MatButton Unelevated="true" Style=" width:20em; height: 2em; background-color: green;" OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
                         }
                         else
                         {
-                            <MatButton Class="bg-danger" OnClick="@(() => SetToPrivate(residence))">set to private</MatButton>
+                            <MatButton TrailingIcon="cancel" Unelevated="true" Style="background-color: red; width:20em; height: 2em;" OnClick="@(() => SetToPrivate(residence))">set to private</MatButton>
                         }
-                        <MatButton OnClick="@(() => ToEditResidence(residence.Id))">Edit Residence</MatButton>
+                        <MatButton TrailingIcon="edit" Unelevated="true" Style="width:20em; height: 2em;" OnClick="@(() => ToEditResidence(residence.Id))">Edit Residence</MatButton>
                     </MatCardActions>
                 </MatCard>
             </div>

@@ -47,7 +47,7 @@
                         <br/>
                         <div class="form-group">
                             <p>
-                                <MatTextField @bind-Value="_residence.Description" Label="Description" Icon="description" IconTrailing="true" FullWidth="true" Disabled="_isEditable" TextArea="true"></MatTextField>
+                                <MatTextField @bind-Value="_residence.Description" Label="Description" Icon="description" IconTrailing="true" FullWidth="true" Disabled="_isEditable" Style="height: 100px" ></MatTextField>
                             </p>
                         </div>
                         <br/>
@@ -149,7 +149,7 @@
                     <div class="form-group">
                         <MatHeadline3>Rules</MatHeadline3>
                         <p>
-                            <MatTextField @bind-Value="_ruleDescription" Label="Description" Icon="description" IconTrailing="true" FullWidth="true" Disabled="_isEditable" TextArea="true"></MatTextField>
+                            <MatTextField @bind-Value="_ruleDescription" Label="Description" Icon="description" IconTrailing="true" FullWidth="true" Disabled="_isEditable" Style="height: 100px"></MatTextField>
                         </p>
                         <MatButton OnClick="AddRule">Add rule</MatButton>
                         @if (_rules.Any() && _rules != null)
