@@ -8,12 +8,12 @@ using SEP3T2GraphQL.Services.Validation;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
-    public class HostReviewServiceImpl : IHostReviewService
+    public class HostReviewService : IHostReviewService
     {
         private readonly IHostReviewRepository _hostReviewRepository;
         private readonly CreateHostReviewValidation _createHostReviewValidation;
 
-        public HostReviewServiceImpl(IHostReviewRepository hostReviewRepository,
+        public HostReviewService(IHostReviewRepository hostReviewRepository,
             CreateHostReviewValidation createHostReviewValidation)
         {
             _hostReviewRepository = hostReviewRepository;

@@ -207,6 +207,7 @@ import java.util.List;
     }
     catch (Exception e)
     {
+      LOGGER.error(e.getMessage());
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

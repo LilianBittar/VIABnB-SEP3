@@ -42,19 +42,19 @@ namespace SEP3T2GraphQL
                 .AddQueryType<Query>()
                 .AddType<ListType>()
                 .AddMutationType<Mutation>().ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true);
-            services.AddScoped<IResidenceRepository, ResidenceRepositoryImpl>();
+            services.AddScoped<IResidenceRepository, ResidenceRepository>();
             services.AddScoped<IResidenceService, ResidenceServiceImpl>();
-            services.AddScoped<IResidenceValidation, ResidenceValidationImpl>();
-            services.AddScoped<IHostRepository, HostRepositoryImpl>();
-            services.AddScoped<IHostService, HostServiceImpl>();
-            services.AddScoped<IHostReviewService, HostReviewServiceImpl>();
+            services.AddScoped<IResidenceValidation, ResidenceValidation>();
+            services.AddScoped<IHostRepository, HostRepository>();
+            services.AddScoped<IHostService, HostService>();
+            services.AddScoped<IHostReviewService, HostReviewService>();
             services.AddScoped<CreateHostReviewValidation>();
             services.AddScoped<IGuestReviewRepository, GuestReviewRepository>();
             services.AddScoped<CreateGuestReviewValidation>();
             services.AddScoped<IHostReviewRepository, HostReviewRepository>();
-            services.AddScoped<IHostValidation, HostValidationImpl>();
-            services.AddScoped<IGuestValidation, GuestValidationImpl>();
-            services.AddScoped<IGuestService, GuestServiceImpl>();
+            services.AddScoped<IHostValidation, HostValidation>();
+            services.AddScoped<IGuestValidation, GuestValidation>();
+            services.AddScoped<IGuestService, GuestService>();
             services.AddScoped<IGuestRepository, GuestRepository>();
             services.AddScoped<IRentalService, RentalService>();
             services.AddScoped<IRentRequestRepository, RentRequestRepository>();
@@ -63,8 +63,8 @@ namespace SEP3T2GraphQL
             services.AddScoped<IFacilityRepository, FacilityRepository>();
             services.AddScoped<IRuleService, RuleService>();
             services.AddScoped<IRuleRepository, RuleRepository>();
-            services.AddScoped<IAdministrationService, AdministrationServiceImpl>();
-            services.AddScoped<IAdministrationRepository, AdministrationRepositoryImpl>();
+            services.AddScoped<IAdministrationService, AdministrationService>();
+            services.AddScoped<IAdministrationRepository, AdministrationRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IGuestReviewRepository, GuestReviewRepository>();

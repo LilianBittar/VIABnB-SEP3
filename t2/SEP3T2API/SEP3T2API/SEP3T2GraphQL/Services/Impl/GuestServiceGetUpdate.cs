@@ -7,7 +7,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
-    public partial class GuestServiceImpl : IGuestService
+    public partial class GuestService : IGuestService
     {
         public async Task<Guest> GetGuestByIdAsync(int id)
         {

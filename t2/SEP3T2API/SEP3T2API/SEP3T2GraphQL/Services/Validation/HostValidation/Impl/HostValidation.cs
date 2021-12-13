@@ -8,11 +8,11 @@ using SEP3T2GraphQL.Services.Impl;
 
 namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
 {
-    public class HostValidationImpl : IHostValidation
+    public class HostValidation : IHostValidation
     {
         private readonly IUserService _userService;
 
-        public HostValidationImpl( IUserService userService)
+        public HostValidation( IUserService userService)
         {
             _userService = userService;
         }
