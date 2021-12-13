@@ -86,7 +86,7 @@
     private DateTime _startDateInput;
     private DateTime _endDateInput;
 
-    private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1), Status = RentRequestStatus.NOTANSWERED};
+    private RentRequest _newRentRequest = new() {StartDate = DateTime.UtcNow, EndDate = DateTime.UtcNow.AddDays(1), Status = RentRequestStatus.NOTANSWERED, RequestCreationDate = DateTime.UtcNow};
 
     [CascadingParameter]
     public EditContext EditContext { get; private set; }

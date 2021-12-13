@@ -30,6 +30,10 @@ else
             <div class="mat-layout-grid-cell">
                 <MatCard class="demo-mat-card">
                     <MatCardContent>
+                        @if (string.IsNullOrEmpty(residence.ImageUrl))
+                        {
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-10/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/assets/dirt.jpeg"></MatCardMedia>
+                        }
                         <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
                         <div class="demo-mat-card-content">
                             <MatHeadline6 class="demo-mat-card-clean-margin">
@@ -46,7 +50,7 @@ else
                                     <span>@residence.AvailableTo.Value.ToShortDateString()</span>
                                 </div>
                             }
-                                
+
                         </div>
 
                         <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
@@ -73,7 +77,7 @@ else
             </div>
         }
 
-        <MatDialog @bind-IsOpen="@dialogIsOpen">
+        <MatDialog @bind-IsOpen="@dialogIsOpen" SurfaceStyle="min-width: 1000px !important;"Class="detail-container large">
             <MatDialogTitle>Details of the Residence</MatDialogTitle>
             <MatDialogContent>
                 <p>

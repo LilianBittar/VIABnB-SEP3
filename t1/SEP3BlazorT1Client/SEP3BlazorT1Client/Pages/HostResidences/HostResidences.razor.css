@@ -1,7 +1,7 @@
-﻿.available-period{
+﻿.available-period {
     display: flex;
     justify-content: space-between;
-    color:gray;
+    color: gray;
 }
 
 .demo-mat-card {
@@ -17,3 +17,27 @@
 .demo-mat-card-clean-margin {
     margin: 0px;
 }
+
+
+.mdc-dialog__surface {
+    min-width: 1000px !important;
+}
+
+.mdc-dialog .mdc-dialog__surface {
+    min-width: 1000px !important;
+}
+
+@media (min-width: 592px) {
+    .mdc-dialog .mdc-dialog__surface {
+        max-width: 1000px;
+        min-width: 1000px;
+    }
+}
+.mdc-dialog .mdc-dialog__surface {
+    min-width: 1000px !important;
+    width: 100% !important;
+}
+.large .mdc-dialog__surface {
+    min-width: 80vw !important;
+}
+
