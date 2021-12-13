@@ -36,6 +36,7 @@
                                         @if (request.Status == RentRequestStatus.APPROVED)
                                         {
                                             <MatButton Label="Review Residence" Link=@($"/createresidencereview/{request.Residence.Id}") Raised="true"/>
+                                            <MatButton Label="Review Host" Link=@($"/reviewhost/{request.Residence.Host.Id}")/>
                                         }
                                     </div>
                                     <div class="right">
