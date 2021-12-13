@@ -344,3 +344,133 @@ INSERT INTO Facility(name)
 VALUES ('Hair dryer');
 INSERT INTO Facility(name)
 VALUES ('ShampooShampoo');
+
+--Residence host
+
+INSERT INTO ResidenceFacility(facilityId, residenceId)
+VALUES (1,1);
+INSERT INTO ResidenceFacility(facilityId, residenceId)
+VALUES (2,1);
+INSERT INTO ResidenceFacility(facilityId, residenceId)
+VALUES (3,2);
+INSERT INTO ResidenceFacility(facilityId, residenceId)
+VALUES (4,2);
+INSERT INTO ResidenceFacility(facilityId, residenceId)
+VALUES (5,3);
+INSERT INTO ResidenceFacility(facilityId, residenceId)
+VALUES (6,3);
+INSERT INTO ResidenceFacility(facilityId, residenceId)
+VALUES (7,4);
+INSERT INTO ResidenceFacility(facilityId, residenceId)
+VALUES (1,4);
+INSERT INTO ResidenceFacility(facilityId, residenceId)
+VALUES (2,5);
+INSERT INTO ResidenceFacility(facilityId, residenceId)
+VALUES (8,5);
+
+--Residence rules
+
+INSERT INTO Rule(ruleDescription, residenceId)
+VALUES ('No smoking', 1);
+INSERT INTO Rule(ruleDescription, residenceId)
+VALUES ('No pets', 1);
+INSERT INTO Rule(ruleDescription, residenceId)
+VALUES ('No parties', 2);
+INSERT INTO Rule(ruleDescription, residenceId)
+VALUES ('No Children',2);
+INSERT INTO Rule(ruleDescription, residenceId)
+VALUES ('No smoking', 3);
+INSERT INTO Rule(ruleDescription, residenceId)
+VALUES ('No music', 3);
+INSERT INTO Rule(ruleDescription, residenceId)
+VALUES ('No smoking', 4);
+INSERT INTO Rule(ruleDescription, residenceId)
+VALUES ('No parking on the site', 4);
+INSERT INTO Rule(ruleDescription, residenceId)
+VALUES ('No smoking',5 );
+INSERT INTO Rule(ruleDescription, residenceId)
+VALUES ('No dancing',6 );
+
+--Residence reviews
+
+INSERT INTO residencereview(residenceRating, residenceReviewText, residenceId, guestId, createdDate)
+VALUES (3, 'ok', 1, 5, '2021-12-15');
+
+INSERT INTO residencereview(residenceRating, residenceReviewText, residenceId, guestId, createdDate)
+VALUES (5, 'good', 1, 8,  '2021-12-15');
+
+INSERT INTO residencereview(residenceRating, residenceReviewText, residenceId, guestId, createdDate)
+VALUES (1, 'bad', 2, 6,  '2021-12-15');
+
+INSERT INTO residencereview(residenceRating, residenceReviewText, residenceId, guestId, createdDate)
+VALUES (4, 'nice', 2, 7,  '2021-12-15');
+
+INSERT INTO residencereview(residenceRating, residenceReviewText, residenceId, guestId, createdDate)
+VALUES (2, 'not good', 3, 9,  '2021-12-15');
+
+INSERT INTO residencereview(residenceRating, residenceReviewText, residenceId, guestId, createdDate)
+VALUES (1, 'bad', 3, 5,  '2021-12-15');
+
+INSERT INTO residencereview(residenceRating, residenceReviewText, residenceId, guestId, createdDate)
+VALUES (5, 'good', 4, 5,  '2021-12-15');
+
+INSERT INTO residencereview(residenceRating, residenceReviewText, residenceId, guestId, createdDate)
+VALUES (5, 'good', 4, 6,  '2021-12-15');
+
+INSERT INTO residencereview(residenceRating, residenceReviewText, residenceId, guestId, createdDate)
+VALUES (1, 'bad', 5, 7,  '2021-12-15');
+
+INSERT INTO residencereview(residenceRating, residenceReviewText, residenceId, guestId, createdDate)
+VALUES (1, 'bad', 5, 8,  '2021-12-15');
+
+--host reviews
+
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (1, 'bad', 5, 6, '2021-12-15');
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (5, 'god', 5, 7, '2021-12-15');
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (3, 'ok', 6, 5, '2021-12-15');
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (4, 'not bad', 6, 8, '2021-12-15');
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (1, 'bad', 7, 5, '2021-12-15');
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (5, 'good', 7, 6, '2021-12-15');
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (3, 'nice', 8, 9, '2021-12-15');
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (2, 'somewhat bad', 8, 6, '2021-12-15');
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (5, 'god', 9, 7, '2021-12-15');
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (5, 'god', 9, 6, '2021-12-15');
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (4, 'nice', 10, 5, '2021-12-15');
+INSERT INTO HostReview(hostRating, hostReviewText, hostId, guestId, createdDate)
+VALUES (2, 'bad', 10, 6, '2021-12-15');
+
+-- Guest reviews
+
+INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
+VALUES (1, 'bad', 6, 5, '2021-12-15');
+INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
+VALUES (2, 'ok', 7, 5, '2021-12-15');
+INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
+VALUES (3, 'ok', 5, 6, '2021-12-15');
+INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
+VALUES (5, 'good', 7, 6, '2021-12-15');
+INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
+VALUES (5, 'good', 8, 7, '2021-12-15');
+INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
+VALUES (2, 'ok', 9, 7, '2021-12-15');
+INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
+VALUES (3, 'nice', 9, 8, '2021-12-15');
+INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
+VALUES (1, 'bad', 10, 9, '2021-12-15');
+INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
+VALUES (5, 'good', 5, 9, '2021-12-15');
+INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
+VALUES (5, 'good', 6, 10, '2021-12-15');
+INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
+VALUES (5, 'good', 7, 10, '2021-12-15');
