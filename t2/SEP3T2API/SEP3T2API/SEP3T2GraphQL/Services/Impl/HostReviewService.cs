@@ -41,7 +41,11 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<HostReview> UpdateHostReviewAsync(HostReview hostReview)
         {
-
+            if (hostReview == null)
+            {
+                throw new ArgumentException("You are updating with null host review");
+            }
+            _createHostReviewValidation.ValidateHostReview(hostReview);
             return await _hostReviewRepository.UpdateHostReviewAsync(hostReview);
 
         }
