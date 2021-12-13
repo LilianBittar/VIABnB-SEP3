@@ -71,11 +71,6 @@ namespace UnitTests.ResidenceTest
             };
         }
 
-        [Test]
-        public void CreateResidenceSunnyScenarioTest()
-        {
-            Assert.DoesNotThrow(() => _residenceValidation.IsValidResidence(_residence));
-        }
 
         [Test]
         public void CreateResidenceAddressWithNullAddressTest()
@@ -98,12 +93,10 @@ namespace UnitTests.ResidenceTest
         }
 
         [TestCase(null, "Test", "Test", "Test", 1111)]
-        [TestCase("Test", null, "Test", "Test", 1111)]
         [TestCase("Test", "Test", "Test", null, 1111)]
         [TestCase("Test", "Test", "Test", "Test", -1111)]
         [TestCase("Test", "Test", null, "Test", 1111)]
         [TestCase("", "Test", "Test", "Test", 1111)]
-        [TestCase("Test", "", "Test", "Test", 1111)]
         [TestCase("Test", "Test", "", "Test", 1111)]
         [TestCase("Test", "Test", "Test", "", 1111)]
         [TestCase("Test", "Test", "Test", "Test", 0)]

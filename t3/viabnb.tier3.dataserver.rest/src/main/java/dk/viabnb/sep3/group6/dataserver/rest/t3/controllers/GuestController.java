@@ -62,6 +62,9 @@ import java.util.NoSuchElementException;
       @RequestParam(required = false) String email)
   {
 
+    if (email != null){
+      LOGGER.info(email);
+    }
     try
     {
       List<Guest> allGuests = guestDAO.getAllGuests();
@@ -75,6 +78,7 @@ import java.util.NoSuchElementException;
       }
       if (email != null)
       {
+        LOGGER.info(this + "Was provided: " + email);
         allGuests.removeIf(guest -> !guest.getEmail().equals(email));
       }
       LOGGER.info("getAllGuests returned: " + new Gson().toJson(allGuests));
