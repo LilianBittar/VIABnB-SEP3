@@ -57,9 +57,18 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
             dialogIsOpen = true;
         }
 
-        private void OkClick()
+        private async void OkClick()
         {
-            CreateReview();
+
+            try
+            {
+                await CreateReview();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             dialogIsOpen = false;
         }
 
