@@ -31,10 +31,6 @@ import java.util.List;
         email);
     try
     {
-      if (adminToReturn == null)
-      {
-        return ResponseEntity.internalServerError().build();
-      }
       return new ResponseEntity<>(adminToReturn, HttpStatus.OK);
     }
     catch (Exception e)
