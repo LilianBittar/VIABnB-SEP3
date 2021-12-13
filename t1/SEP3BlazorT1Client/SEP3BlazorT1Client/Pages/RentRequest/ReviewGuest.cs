@@ -23,7 +23,6 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
 
         private Host _host = new Host();
         private Guest _guest = new Guest();
-        private List<Host> _hosts = new List<Host>();
         private GuestReview _guestReview = new GuestReview();
 
         private bool _isloading;
@@ -48,15 +47,7 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
                 Console.WriteLine(e);
                 throw;
             }
-
-            if (_guest.GuestReviews != null)
-            {
-                foreach (var item in _host.HostReviews)
-                {
-                    var h = await HostService.GetHostByIdAsync(item.HostId);
-                    _hosts.Add(h);
-                }
-            }
+            
             StateHasChanged();
             _isloading = false;
         }
