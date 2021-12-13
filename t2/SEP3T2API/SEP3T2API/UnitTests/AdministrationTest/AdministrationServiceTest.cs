@@ -29,7 +29,7 @@ namespace UnitTests.AdministrationTest
                 PhoneNumber = "11111111"
             };
             _administrationRepository = new Mock<IAdministrationRepository>();
-            _administrationService = new AdministrationServiceImpl(_administrationRepository.Object);
+            _administrationService = new AdministrationService(_administrationRepository.Object);
         }
 
         [Test]
@@ -50,7 +50,6 @@ namespace UnitTests.AdministrationTest
             _administrationRepository.Setup<IEnumerable<Administrator>>(x => x.GetAllAdmins().Result)
                 .Returns(adminList);
             Assert.ThrowsAsync<ArgumentException>(async () => await _administrationService.GetAdminByEmail(email));
- 
         }
     }
 }

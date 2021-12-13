@@ -1,33 +1,14 @@
 ﻿@page "/HostResidences"
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Data
-@using System.Reflection.Metadata
 @using System.ComponentModel.DataAnnotations
 @inject IResidenceService ResidenceService
 @inject IHostService hostService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @inject IResidenceReviewService ResidenceReviewService
+@inject MatDialogService MatDialogService
 
-
-<!--<h3>BuildingOverview</h3>-->
-
-
-<style>
-            .demo-mat-card {
-                max-width: 400px;
-                padding-top: 5px;
-                margin-top: 6px;
-            }
- 
-            .demo-mat-card-content {
-                padding: 1rem;
-            }
- 
-            .demo-mat-card-clean-margin {
-                margin: 0px;
-            }
-  </style>
 <AuthorizeView Policy="MustBeApprovedHost">
 <Authorized>
 <p>@ErrorMessage</p>
@@ -43,197 +24,215 @@ else if (_residences.Count == 0)
 else
 {
     <div class="mat-layout-grid">
-        <div class="mat-layout-grid-inner">
-            @foreach (var residence in _residences)
-            {
-                <div class="mat-layout-grid-cell">
-                    <MatCard class="demo-mat-card">
-                        <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
-                            <div class="demo-mat-card-content">
-                                <MatHeadline6 class="demo-mat-card-clean-margin">
-                                  UwU
-                                </MatHeadline6>
-                                <MatSubtitle2 class="demo-mat-card-clean-margin">
-                                    @residence.Address.ToString()
-                                </MatSubtitle2>
-                            </div>
-
-                            <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-                                @residence.Description
-                            </MatBody2>
-                            <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-                                @residence.PricePerNight
-                            </MatBody2>
-
-                        </MatCardContent>
-                        <MatCardActions>
-                            <MatButton OnClick="@(() => OpenResidenceDetailsDialog(residence))">Details</MatButton>
-                            @if (!residence.IsAvailable)
+    <div class="mat-layout-grid-inner">
+        @foreach (var residence in _residences)
+        {
+            <div class="mat-layout-grid-cell">
+                <MatCard class="demo-mat-card">
+                    <MatCardContent>
+                        <MatCardMedia Wide="true" ImageUrl=@residence.ImageUrl></MatCardMedia>
+                        <div class="demo-mat-card-content">
+                            <MatHeadline6 class="demo-mat-card-clean-margin">
+                                UwU
+                            </MatHeadline6>
+                            <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                @residence.Address.ToString()
+                            </MatSubtitle2>
+                            @if (residence.IsAvailable == true)
                             {
-                                <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
+                                <div class="available-period">
+                                    <span>@residence.AvailableFrom.Value.ToShortDateString()</span>
+
+                                    <span>@residence.AvailableTo.Value.ToShortDateString()</span>
+                                </div>
                             }
-                            else
-                            {
-                                <MatButton Class="bg-danger" OnClick="@(() => SetToPrivate(residence))">set to private</MatButton>
-                            }
-                        </MatCardActions>
-                    </MatCard>
-                </div>
-            }
-
-            <MatDialog @bind-IsOpen="@dialogIsOpen">
-                <MatDialogTitle>Details of the Residence</MatDialogTitle>
-                <MatDialogContent>
-
-                    <p>
-                        <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@ResidenceForRent.MaxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
-                        </MatNumericUpDownField>
-                    </p>
-
-                    <p>
-                        <b> Start Date</b>
-                    </p>
-                    <MatDatePicker @bind-Value="@ResidenceForRent.AvailableFrom"></MatDatePicker>
-
-                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = DateTime.Now; })">
-                        Now
-                    </MatButton>
-                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableFrom = null; })">
-                        Empty
-                    </MatButton>
-
-                    <p>
-                        <b> End Date</b>
-                    </p>
-                    <MatDatePicker @bind-Value="@ResidenceForRent.AvailableTo"></MatDatePicker>
-
-                    <MatButton OnClick="@(_ => { ResidenceForRent.AvailableTo = null; })">
-                        Empty
-                    </MatButton>
-                </MatDialogContent>
-                <MatDialogActions>
-                    <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
-                    <MatButton OnClick="@OkClick">Publish</MatButton>
-                </MatDialogActions>
-                @foreach (var errorMessage in validationResults)
-                {
-                    <p class="error-label text-danger">@errorMessage</p>
-                }
-                <p class="error-label text-danger">@_errorText</p>
-            </MatDialog>
-
-
-            <MatDialog @bind-IsOpen="@viewResidenceDetailsDialog">
-                <MatDialogTitle>Residence Details</MatDialogTitle>
-                <MatDialogContent>
-                    <div class="d-flex flex-column">
-
-                        <div class="d-flex justify-content-center">
-                            <img class="my-4" width="480" height="240" src="@ViewedResidence.ImageUrl" alt="">
+                                
                         </div>
 
-                        <MatTabGroup>
-                            <MatTab class="my-4">
-                                <LabelContent>
-                                    Description <MatIcon Icon="@MatIconNames.Info"></MatIcon>
-                                </LabelContent>
-                                <ChildContent >
-                                    @if (ViewedResidence.Description != null)
+                        <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                            @residence.Description
+                        </MatBody2>
+                        <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                            @residence.PricePerNight DKK ,- / pr. night
+                        </MatBody2>
+
+                    </MatCardContent>
+                    <MatCardActions>
+                        <MatButton OnClick="@(() => OpenResidenceDetailsDialog(residence))">Details</MatButton>
+                        @if (!residence.IsAvailable)
+                        {
+                            <MatButton OnClick="@(() => OpenDialog(residence))">set to public</MatButton>
+                        }
+                        else
+                        {
+                            <MatButton Class="bg-danger" OnClick="@(() => SetToPrivate(residence))">set to private</MatButton>
+                        }
+                        <MatButton OnClick="@(() => ToEditResidence(residence.Id))">Edit Residence</MatButton>
+                    </MatCardActions>
+                </MatCard>
+            </div>
+        }
+
+        <MatDialog @bind-IsOpen="@dialogIsOpen">
+            <MatDialogTitle>Details of the Residence</MatDialogTitle>
+            <MatDialogContent>
+                <p>
+                    <MatNumericUpDownField Label="Maximum number of guests"@bind-Value=@ResidenceForRent.MaxNumberOfGuests DecimalPlaces=0 Minimum=1 Maximum=9999>
+                    </MatNumericUpDownField>
+                </p>
+
+                <p>
+                    <b> Start Date</b>
+                </p>
+                <MatDatePicker @bind-Value="@_startDateInput"></MatDatePicker>
+
+                <MatButton OnClick="@(_ => { _startDateInput = DateTime.Now.Date; })">
+                    Now
+                </MatButton>
+                <MatButton OnClick="@(_ => { _startDateInput = null; })">
+                    Empty
+                </MatButton>
+
+                <p>
+                    <b> End Date</b>
+                </p>
+                <MatDatePicker @bind-Value="@_endDateInput"></MatDatePicker>
+
+                <MatButton OnClick="@(_ => { _endDateInput = null; })">
+                    Empty
+                </MatButton>
+                <p>@ErrorMessage2</p>
+            </MatDialogContent>
+            <MatDialogActions>
+                <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
+                <MatButton OnClick="@OkClick">Publish</MatButton>
+            </MatDialogActions>
+            @foreach (var errorMessage in validationResults)
+            {
+                <p class="error-label text-danger">@errorMessage</p>
+            }
+            <p class="error-label text-danger">@_errorText</p>
+        </MatDialog>
+
+
+        <MatDialog @bind-IsOpen="@viewResidenceDetailsDialog">
+            <MatDialogTitle>Residence Details</MatDialogTitle>
+            <MatDialogContent>
+                <div class="d-flex flex-column">
+
+                    <div class="d-flex justify-content-center">
+                        <img class="my-4" width="480" height="240" src="@ViewedResidence.ImageUrl" alt="">
+                    </div>
+
+                    <MatTabGroup>
+                        <MatTab class="my-4">
+                            <LabelContent>
+                                Description <MatIcon Icon="@MatIconNames.Info"></MatIcon>
+                            </LabelContent>
+                            <ChildContent >
+                                @if (ViewedResidence.Description != null)
+                                {
+                                    <p>@ViewedResidence.Description</p>
+                                }
+                                else
+                                {
+                                    <p>The residence has no rules</p>
+                                }
+                            </ChildContent>
+                        </MatTab>
+                        <MatTab class="my-4">
+                            <LabelContent>
+                                Facilities <MatIcon Icon="@MatIconNames.List"></MatIcon>
+                            </LabelContent>
+                            <ChildContent>
+                                <ul class="list-group">
+                                    @if (ViewedResidence.Facilities.Count != 0)
                                     {
-                                        <p>@ViewedResidence.Description</p>
+                                        @foreach (var facility in @ViewedResidence.Facilities)
+                                        {
+                                            <li class="list-group-item">@facility.Name</li>
+                                        }
                                     }
                                     else
                                     {
                                         <p>The residence has no rules</p>
                                     }
-                                </ChildContent>
-                            </MatTab>
-                            <MatTab class="my-4">
-                                <LabelContent>
-                                    Facilities <MatIcon Icon="@MatIconNames.List"></MatIcon>
-                                </LabelContent>
-                                <ChildContent>
-                                    <ul class="list-group">
-                                        @if (ViewedResidence.Facilities.Count != 0)
-                                        {
-                                            @foreach (var facility in @ViewedResidence.Facilities)
-                                            {
-                                                <li class="list-group-item">@facility.Name</li>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <p>The residence has no rules</p>
-                                        }
 
-                                    </ul>
-                                </ChildContent>
-                            </MatTab>
+                                </ul>
+                            </ChildContent>
+                        </MatTab>
 
-                            <MatTab class="my-4">
-                                <LabelContent>
-                                    Rules <MatIcon Icon="@MatIconNames.Done_outline"></MatIcon>
-                                </LabelContent>
-                                <ChildContent>
-                                    <ul class="list-group">
-                                        @if (ViewedResidence.Rules.Count() != 0)
+                        <MatTab class="my-4">
+                            <LabelContent>
+                                Rules <MatIcon Icon="@MatIconNames.Done_outline"></MatIcon>
+                            </LabelContent>
+                            <ChildContent>
+                                <ul class="list-group">
+                                    @if (ViewedResidence.Rules.Count() != 0)
+                                    {
+                                        @foreach (var rule in @ViewedResidence.Rules)
                                         {
-                                            @foreach (var rule in @ViewedResidence.Rules)
-                                            {
-                                                <li class="list-group-item">@rule.Description</li>
-                                            }
+                                            <li class="list-group-item">@rule.Description</li>
                                         }
-                                        else
-                                        {
-                                            <p>The residence has no rules</p>
-                                        }
-                                    </ul>
-                                </ChildContent>
-                            </MatTab>
+                                    }
+                                    else
+                                    {
+                                        <p>The residence has no rules</p>
+                                    }
+                                </ul>
+                            </ChildContent>
+                        </MatTab>
 
-                            <MatTab class="my-4">
-                                <LabelContent>
-                                    Reviews <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon>
-                                </LabelContent>
-                                <ChildContent>
-                                    <ul class="list-group">
-                                        @if (ResidenceReviews.Count() != 0)
-                                        {
-                                            foreach (var review in ResidenceReviews)
-                                            {
-                                                <p>
-                                                    <b>Guest ID: @review.GuestViaId</b>
-                                                </p>
-
-                                                <p style="color:grey">Reviewdate: @review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</p>
-                                                <p>Rating @review.Rating <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon></p>
-                                                <li class="list-group-item">@review.ReviewText</li>
-                                            }
-                                        }
-                                        else
+                        <MatTab class="my-4">
+                            <LabelContent>
+                                Reviews <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon>
+                            </LabelContent>
+                            <ChildContent>
+                                <ul class="list-group">
+                                    @if (ResidenceReviews.Count() != 0)
+                                    {
+                                        foreach (var review in ResidenceReviews)
                                         {
                                             <p>
-                                                The residence has
-                                                no reviews
+                                                <b>Guest ID: @review.GuestViaId</b>
                                             </p>
+
+                                            <p style="color:grey">Reviewdate: @review.CreatedDate.Date.ToString("MMMM") @review.CreatedDate.Year</p>
+                                            <p>Rating @review.Rating <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon></p>
+                                            <li class="list-group-item">@review.ReviewText</li>
                                         }
+                                    }
+                                    else
+                                    {
+                                        <p>
+                                            The residence has
+                                            no reviews
+                                        </p>
+                                    }
 
-                                    </ul>
-                                </ChildContent>
-                            </MatTab>
+                                </ul>
+                            </ChildContent>
+                        </MatTab>
 
-                        </MatTabGroup>
-                        <MatDivider class="my-1"/>
+                    </MatTabGroup>
+                    <MatDivider class="my-1"/>
 
-                    </div>
-                </MatDialogContent>
-                <MatDialogActions>
-                    <MatButton OnClick="@(e => { viewResidenceDetailsDialog = false; })">Cancel</MatButton>
-                </MatDialogActions>
-            </MatDialog>
-        </div>
+                </div>
+            </MatDialogContent>
+            <MatDialogActions>
+                <MatButton OnClick="@(e => { viewResidenceDetailsDialog = false; ErrorMessage = ""; ErrorMessage2 = "";})">Cancel</MatButton>
+            </MatDialogActions>
+        </MatDialog>
     </div>
+    </div>
+    <MatSnackbar  @bind-IsOpen="@snackBarIsOpenPublic">
+        <MatSnackbarContent>@snackBarPublicText</MatSnackbarContent>
+      
+    </MatSnackbar>
+    <MatSnackbar  @bind-IsOpen="@snackBarIsOpenPrivate">
+        <MatSnackbarContent>@snackBarPrivateText</MatSnackbarContent>
+    </MatSnackbar>
+   
 }
 </Authorized>
 <NotAuthorized>
@@ -243,15 +242,22 @@ else
 
 
 @code {
-
-
+    
+    
     bool dialogIsOpen = false;
     bool viewResidenceDetailsDialog = false;
     int maxNumberOfGuests;
-    private string _errorText;
+    private string _errorText = "";
     private string ErrorMessage = "";
+    private string ErrorMessage2 = "";
     private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
     IEnumerable<ResidenceReview> ResidenceReviews = new List<ResidenceReview>();
+    private bool snackBarIsOpenPublic=false;
+    private bool snackBarIsOpenPrivate=false;
+    private string snackBarPublicText = "Your residence is now public";
+    private string snackBarPrivateText = "Your residence is now private";
+    private DateTime? _startDateInput;
+    private DateTime? _endDateInput;
 
     IList<Residence> _residences;
 
@@ -264,7 +270,7 @@ else
         var user = authState.User;
         try
         {
-            var host = await hostService.GetHostByEmail(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email")?.Value);
+            var host = await hostService.GetHostByEmailAsync(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email")?.Value);
             _residences = await ResidenceService.GetResidencesByHostIdAsync(host.Id);
             StateHasChanged();
         }
@@ -278,6 +284,9 @@ else
 
     void OpenDialog(Residence residence)
     {
+        residence.AvailableFrom = null;
+        residence.AvailableTo = null;
+        ErrorMessage2 = "";
         ResidenceForRent = residence;
         dialogIsOpen = true;
     }
@@ -286,16 +295,35 @@ else
     {
         ResidenceReviews = await ResidenceReviewService.GetAllByResidenceIdAsync(residence.Id);
         ViewedResidence = residence;
-
         viewResidenceDetailsDialog = true;
     }
 
-   async void SetToPrivate(Residence residence)
-   {
-       residence.IsAvailable = false;
-       Residence updatedResidence = await ResidenceService.UpdateResidenceAsync(residence);
-       residence.IsAvailable = updatedResidence.IsAvailable;
-       StateHasChanged();
+    async void SetToPrivate(Residence residence)
+    {
+       
+        var isConfirmed = await MatDialogService.ConfirmAsync("Are you sure you want to set your residence to private?");
+        if (isConfirmed)
+        {
+            try
+            {
+                residence.AvailableFrom = DateTime.MaxValue.AddDays(-1);
+                residence.AvailableTo = DateTime.MaxValue;
+                residence.IsAvailable = false;
+                Residence updatedResidence = await ResidenceService.UpdateResidenceAsync(residence);
+                residence.IsAvailable = updatedResidence.IsAvailable;
+               
+                StateHasChanged();
+                snackBarIsOpenPrivate = true;
+                StateHasChanged();
+            }
+            catch (Exception e)
+            {
+                ErrorMessage2 = "";
+                ErrorMessage2 = e.Message;
+            }
+           
+        }
+      
     }
 
     private async void OkClick()
@@ -303,18 +331,33 @@ else
     //clear error messages
         validationResults.Clear();
     // the validator validates in the context of a residence object
-        ValidationContext validationContext = new ValidationContext(ResidenceForRent);
+        var validationContext = new ValidationContext(ResidenceForRent);
 
     //validates all residence properties in context of residence model
-        bool rentIsValid = Validator.TryValidateObject(ResidenceForRent, validationContext, validationResults, true);
+        var rentIsValid = Validator.TryValidateObject(ResidenceForRent, validationContext, validationResults, true);
 
 
         if (rentIsValid)
         {
-            ResidenceForRent.IsAvailable = true;
             try
             {
-                await ResidenceService.UpdateResidenceAvailabilityAsync(ResidenceForRent);
+                var isConfirmed = await MatDialogService.ConfirmAsync("Are you sure you want to set the residence to public?");
+                if (isConfirmed)
+                {
+                    ResidenceForRent.IsAvailable = true;
+                    Console.WriteLine(_startDateInput + " and to: "+ _endDateInput);
+                    
+                    ResidenceForRent.AvailableFrom = _startDateInput.Value.AddDays(1);
+                    ResidenceForRent.AvailableTo = _endDateInput.Value.AddDays(1);
+                    
+                    await ResidenceService.UpdateResidenceAsync(ResidenceForRent);
+                    dialogIsOpen = false;
+
+                    StateHasChanged();
+                    snackBarIsOpenPublic = true;
+                    StateHasChanged();
+                }
+                
             }
             catch (Exception e)
             {
@@ -324,8 +367,13 @@ else
             }
 
             dialogIsOpen = false;
-            Console.WriteLine("succes");
+            Console.WriteLine("success");
         }
+    }
+
+    private void ToEditResidence(int id)
+    {
+        NavigationManager.NavigateTo($"EditResidence/{id}");
     }
 
 }

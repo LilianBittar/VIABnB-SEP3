@@ -15,10 +15,9 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         [Inject] public MatDialogService MatDialogService { get; set; }
         [Inject] public IHostService HostService { get; set; }
         [Inject] public IGuestService GuestService { get; set; }
-        [Inject] public NavigationManager NavigationManager { get; set; }
         
         private IEnumerable<Guest> _guestRequestList = new List<Guest>();
-        private IEnumerable<Host> _hostRequestList = new List<Host>();
+        private IEnumerable<Host> _hostRequestList;
         private string ErrorMessage="";
         
         protected override async Task OnInitializedAsync()
@@ -26,7 +25,7 @@ namespace SEP3BlazorT1Client.Pages.AdminView
             try
             {
                 _hostRequestList = await HostService.GetAllNotApprovedHostsAsync();
-                _guestRequestList = await GuestService.GetAllNotApprovedGuests();
+                _guestRequestList = await GuestService.GetAllNotApprovedGuestsAsync();
                 StateHasChanged();
             }
             catch (Exception e)

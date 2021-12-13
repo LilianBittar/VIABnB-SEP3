@@ -76,7 +76,7 @@
         try
         {
             Console.WriteLine(JsonSerializer.Serialize(_newReview));
-            await ResidenceReviewService.CreateAsync(Residence, _newReview);
+            await ResidenceReviewService.CreateResidenceReviewAsync(Residence, _newReview);
             _errorMessage = "";
             NavigationManager.NavigateTo("/");
         }

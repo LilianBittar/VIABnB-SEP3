@@ -59,16 +59,20 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         {
             NavigationManager.NavigateTo($"HostReviews/{id}");
         }
-        private void ToGuestReviews()
+        private void ToGuestReviews(int id)
         {
-            NavigationManager.NavigateTo("GuestReviews");
+            NavigationManager.NavigateTo($"GuestReviews/{id}");
         }
 
         private void ToMyMail()
         {
-            
+            NavigationManager.NavigateTo("/messages");
         }
 
+        private void ToMyRentRequest()
+        {
+            NavigationManager.NavigateTo("/");
+        }
         private void ToRegisterResidence()
         {
             NavigationManager.NavigateTo("registerresidence");
@@ -77,6 +81,11 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         private void ToRentRequest()
         {
             NavigationManager.NavigateTo("RentRequests");
+        }
+
+        private void ToRentResidence()
+        {
+            NavigationManager.NavigateTo("residences");
         }
     }
 }

@@ -2,27 +2,6 @@
 @inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
-@* <div class="page"> *@
-@*     <div class="sidebar"> *@
-@*         <NavMenu/> *@
-@*     </div> *@
-@* *@
-@*     <div class="main"> *@
-@*         <div class="top-row px-4"> *@
-@*             <TopNavMenu/> *@
-@*         </div> *@
-@* *@
-@*         <div class="content"> *@
-@*             @Body *@
-@*         </div> *@
-@*     </div> *@
-@* </div> *@
-
-
-
-
-@* New Navigation links will go into MatAppBarSection *@
-@* Documentation for MatBlazor can be found at: https://www.matblazor.com/ *@
 
 <MatAppBarContainer>
     <MatAppBar Fixed="true" class="mat-elevation-z4">
@@ -78,7 +57,6 @@
     </MatAppBar>
     
     <MatAppBarContent>
-        @* Navigation modal. Opens the side menu *@
         <MatDrawerContainer>
             <MatDrawer @bind-Opened="_opened" Mode="MatDrawerMode.Modal">
                 <MatListGroup>

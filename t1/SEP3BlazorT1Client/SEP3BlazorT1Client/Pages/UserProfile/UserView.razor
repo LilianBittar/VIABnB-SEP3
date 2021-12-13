@@ -1,18 +1,19 @@
 @page "/User"
 <AuthorizeView Policy="MustBeApprovedHost">
     <Authorized>
+        <p>@_errorLabel</p>
         <div class="mat-layout-grid mat-layout-grid-align-left" style="max-width: 2000px;">
             <div class="mat-layout-grid-inner">
                 <div class="mat-layout-grid-cell">
                     <MatCard Class="demo-mat-card">
                         <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl="https://github.com/LilianBittar/VIABnB-SEP3/blob/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MyProfile.jpg?raw=true"></MatCardMedia>
+                            <MatCardMedia Wide="true" ImageUrl="https://github.com/LilianBittar/VIABnB-SEP3/blob/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MyProfile.jpg?raw=true" @onclick="@(() => ToMyProfile(_user.Id))"></MatCardMedia>
                             <div class="demo-mat-card-content" style="margin-left: 35%">
                                 <MatHeadline6 class="demo-mat-card-clean-margin">My Profile</MatHeadline6>
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="(() => ToMyProfile(_user.Id))">More</MatButton>
+                            <MatButton @onclick="@(() => ToMyProfile(_user.Id))">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Account_circle" Class="user-icons"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -20,7 +21,7 @@
                 <div class="mat-layout-grid-cell">
                     <MatCard Class="demo-mat-card">
                         <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MyResidence.jpg"></MatCardMedia>
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MyResidence.jpg" @onclick="ToHostResidence"></MatCardMedia>
                             <div class="demo-mat-card-content" style="margin-left: 30%">
                                 <MatHeadline6 class="demo-mat-card-clean-margin">My Residences</MatHeadline6>
                             </div>
@@ -34,7 +35,7 @@
                 <div class="mat-layout-grid-cell">
                     <MatCard Class="demo-mat-card">
                         <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MyReviews.jpg"></MatCardMedia>
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MyReviews.jpg" @onclick="@(() => ToHostReviews(_user.Id))"></MatCardMedia>
                             <div class="demo-mat-card-content" style="margin-left: 35%">
                                 <MatHeadline6 class="demo-mat-card-clean-margin">Reviews As A Host</MatHeadline6>
                             </div>
@@ -52,7 +53,7 @@
                 <div class="mat-layout-grid-cell">
                     <MatCard Class="demo-mat-card">
                         <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MailBox.png"></MatCardMedia>
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/MailBox.png" @onclick="ToMyMail"></MatCardMedia>
                             <div class="demo-mat-card-content" style="margin-left: 40%">
                                 <MatHeadline6 class="demo-mat-card-clean-margin">Mail Box</MatHeadline6>
                             </div>
@@ -66,7 +67,7 @@
                 <div class="mat-layout-grid-cell">
                     <MatCard Class="demo-mat-card">
                         <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/NewResidence.png"></MatCardMedia>
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/NewResidence.png" @onclick="ToRegisterResidence"></MatCardMedia>
                             <div class="demo-mat-card-content" style="margin-left: 30%">
                                 <MatHeadline6 class="demo-mat-card-clean-margin">New Residence</MatHeadline6>
                             </div>
@@ -80,7 +81,7 @@
                 <div class="mat-layout-grid-cell">
                     <MatCard Class="demo-mat-card">
                         <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/RentRequest.png"></MatCardMedia>
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/RentRequest.png" @onclick="ToRentRequest"></MatCardMedia>
                             <div class="demo-mat-card-content" style="margin-left: 35%">
                                 <MatHeadline6 class="demo-mat-card-clean-margin">Recived Requests</MatHeadline6>
                             </div>
@@ -94,7 +95,7 @@
                 <div class="mat-layout-grid-cell">
                     <MatCard Class="demo-mat-card">
                         <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/RequestStatus.jpg"></MatCardMedia>
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/RequestStatus.jpg" @onclick="ToRegisterResidence"></MatCardMedia>
                             <div class="demo-mat-card-content" style="margin-left: 30%">
                                 <MatHeadline6 class="demo-mat-card-clean-margin">My Request Status</MatHeadline6>
                             </div>
@@ -128,13 +129,13 @@
                 <div class="mat-layout-grid-cell">
                     <MatCard Class="demo-mat-card">
                         <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/RentResidence.jpg"></MatCardMedia>
-                            <div class="demo-mat-card-content" style="margin-left: 40%">
+                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/RentResidence.jpg"  @onclick="ToRentResidence"></MatCardMedia>
+                            <div class="demo-mat-card-content" style="margin-left: 40%" >
                                 <MatHeadline6 class="demo-mat-card-clean-margin">Rent A Residence</MatHeadline6>
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton OnClick="ToMyMail">More</MatButton>
+                            <MatButton OnClick="ToRentResidence">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Vpn_key"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -148,7 +149,7 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="ToRegisterResidence">More</MatButton>
+                            <MatButton>More</MatButton>
                             <MatIcon Icon="@MatIconNames.Free_breakfast"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -162,7 +163,7 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton>More</MatButton>
+                            <MatButton @onclick="@(() => ToGuestReviews(_user.Id))">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon>
                         </MatCardActions>
                     </MatCard>

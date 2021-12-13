@@ -6,7 +6,6 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
-using SEP3T2GraphQL.Repositories.Impl;
 
 namespace SEP3T2GraphQL.Services.Validation
 {
@@ -15,8 +14,8 @@ namespace SEP3T2GraphQL.Services.Validation
     /// </summary>
     public  class CreateGuestValidator
     {
-        private IGuestRepository _guestRepository;
-        private IHostRepository _hostRepository;
+        private readonly IGuestRepository _guestRepository;
+        private readonly IHostRepository _hostRepository;
 
         public CreateGuestValidator(IGuestRepository guestRepository, IHostRepository hostRepository)
         {
@@ -143,7 +142,7 @@ namespace SEP3T2GraphQL.Services.Validation
         {
             try
             {
-                Host existingHost = await _hostRepository.GetHostById(guest.Id);
+                Host existingHost = await _hostRepository.GetHostByIdAsync(guest.Id);
                 if (existingHost == null)
                 {
                     throw new KeyNotFoundException("Host does not exist"); 
@@ -161,7 +160,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException">If an guest with same student number already exists</exception>
         private async Task ValidateViaIdUnused(Guest guest)
         {
-            var allGuests = await _guestRepository.GetAllGuests();
+            var allGuests = await _guestRepository.GetAllGuestsAsync();
             if (allGuests.Any(g => g.ViaId == guest.ViaId))
             {
                 throw new ArgumentException("Guest with provided student number already exists");

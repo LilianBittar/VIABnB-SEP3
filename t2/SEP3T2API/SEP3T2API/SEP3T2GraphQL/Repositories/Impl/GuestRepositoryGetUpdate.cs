@@ -12,42 +12,31 @@ namespace SEP3T2GraphQL.Repositories.Impl
 {
     public partial class GuestRepository : IGuestRepository
     {
-        public async Task<Guest> GetGuestById(int id)
+        public async Task<Guest> GetGuestByIdAsync(int id)
         {
-            HttpResponseMessage response = await _client.GetAsync($"{Uri}/{id}");
-            if (!response.IsSuccessStatusCode)
+            var response = await _client.GetAsync($"{Uri}/{id}");
+            await HandleErrorResponse(response);
+            var fetchedGuest = JsonSerializer.Deserialize<Guest>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
             {
-                throw new Exception(await response.Content.ReadAsStringAsync()); 
-            }
-
-            var fetchedGuest = JsonSerializer.Deserialize<Guest>(await response.Content.ReadAsStringAsync());
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
             return fetchedGuest;
         }
 
-        public async Task<Guest> GetGuestByStudentNumber(int studentNumber)
+        public async Task<Guest> GetGuestByStudentNumberAsync(int studentNumber)
         {
             
-            HttpResponseMessage response = await _client.GetAsync($"{Uri}?studentNumber={studentNumber}");
-            Console.WriteLine(await response.Content.ReadAsStringAsync());
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception(await response.Content.ReadAsStringAsync()); 
-            }
-
+            var response = await _client.GetAsync($"{Uri}?studentNumber={studentNumber}");
+            await HandleErrorResponse(response);
             var fetchedGuests = JsonConvert.DeserializeObject<List<Guest>>(await response.Content.ReadAsStringAsync());
             var fetchedGuest = fetchedGuests[0];
             return fetchedGuest;
         }
 
-        public async Task<Guest> GetGuestByEmail(string email)
+        public async Task<Guest> GetGuestByEmailAsync(string email)
         {
             var response = await _client.GetAsync($"{Uri}?={email}");
-            Console.WriteLine(await response.Content.ReadAsStringAsync());
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
-
+            await HandleErrorResponse(response);
             var result = await response.Content.ReadAsStringAsync();
             var guestToReturn = JsonSerializer.Deserialize<Guest[]>(result, new JsonSerializerOptions
             {
@@ -56,30 +45,18 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return guestToReturn[0];
         }
 
-
-        public async Task<Guest> UpdateGuest(Guest guest)
+        public async Task<IEnumerable<Guest>> GetAllGuestsAsync()
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Guest>> GetAllGuests()
-        {
-            HttpResponseMessage response = await _client.GetAsync($"{Uri}");
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception(await response.Content.ReadAsStringAsync()); 
-            }
+            var response = await _client.GetAsync($"{Uri}");
+            await HandleErrorResponse(response);
             var fetchedGuests = JsonSerializer.Deserialize<List<Guest>>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions(){PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             return fetchedGuests;
         }
 
-        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuests()
+        public async Task<IEnumerable<Guest>> GetAllNotApprovedGuestsAsync()
         {
-            HttpResponseMessage response = await _client.GetAsync(Uri + $"/notApproved");
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
+            var response = await _client.GetAsync(Uri + $"/notApproved");
+            await HandleErrorResponse(response);
             var result = await response.Content.ReadAsStringAsync();
             var guestListToReturn = JsonSerializer.Deserialize<List<Guest>>(result,  new JsonSerializerOptions
             {
@@ -88,19 +65,15 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return guestListToReturn;
         }
 
-        public async Task<Guest> UpdateGuestStatus(Guest guest)
+        public async Task<Guest> UpdateGuestStatusAsync(Guest guest)
         {
             var guestAsJson = JsonSerializer.Serialize(guest, new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            HttpContent content = new StringContent(guestAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PatchAsync($"{Uri}/{guest.Id}/approval", content);
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
+            var content = new StringContent(guestAsJson, Encoding.UTF8, "application/json");
+            var response = await _client.PatchAsync($"{Uri}/{guest.Id}/approval", content);
+            await HandleErrorResponse(response);
 
             var updatedGuest = JsonSerializer.Deserialize<Guest>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
             {

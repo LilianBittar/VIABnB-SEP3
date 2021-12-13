@@ -8,18 +8,11 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public partial class ResidenceReviewService : IResidenceReviewService
     {
-       
-        
-        public Task<IEnumerable<ResidenceReview>> GetAllAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-            
-        public async Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId)
+        public async Task<IEnumerable<ResidenceReview>> GetAllResidenceReviewByResidenceIdAsync(int residenceId)
         {
             if (residenceId!=0)
             {
-                return await _residenceReviewRepository.GetAllByResidenceIdAsync(residenceId);
+                return await _residenceReviewRepository.GetAllResidenceReviewByResidenceIdAsync(residenceId);
             }
 
             throw new ArgumentException("residenceId required");

@@ -12,8 +12,7 @@ public class Residence
   private Address address;
   private String description;
   private String type;
-  @JsonProperty("isAvailable")
-  private boolean isAvailable;
+  @JsonProperty("isAvailable") private boolean isAvailable;
   private double pricePerNight;
   private List<Rule> rules;
   private List<Facility> facilities;
@@ -25,10 +24,10 @@ public class Residence
   private List<ResidenceReview> residenceReviews;
 
   public Residence(int id, Address address, String description, String type,
-                   boolean isAvailable, double pricePerNight, List<Rule> rules,
-                   List<Facility> facilities, String imageUrl, LocalDate availableFrom,
-                   LocalDate availableTo, int maxNumberOfGuests, Host host,
-                   List<ResidenceReview> residenceReviews)
+      boolean isAvailable, double pricePerNight, List<Rule> rules,
+      List<Facility> facilities, String imageUrl, LocalDate availableFrom,
+      LocalDate availableTo, int maxNumberOfGuests, Host host,
+      List<ResidenceReview> residenceReviews)
   {
     this.id = id;
     this.address = address;
@@ -190,10 +189,9 @@ public class Residence
   {
     return "Residence{" + "id=" + id + ", address=" + address
         + ", description='" + description + '\'' + ", type='" + type + '\''
-        + ", isAvailable=" + isAvailable
-        + ", pricePerNight=" + pricePerNight + ", rules=" + rules
-        + ", facilities=" + facilities + ", imageURL='" + imageUrl + '\''
-        + ", availableFrom=" + availableFrom + ", availableTo=" + availableTo
-        + '}';
+        + ", isAvailable=" + isAvailable + ", pricePerNight=" + pricePerNight
+        + ", rules=" + rules + ", facilities=" + facilities + ", imageURL='"
+        + imageUrl + '\'' + ", availableFrom=" + availableFrom
+        + ", availableTo=" + availableTo + '}';
   }
 }

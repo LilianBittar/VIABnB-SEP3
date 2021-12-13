@@ -10,23 +10,23 @@ namespace SEP3T2GraphQL.Repositories.Impl
 {
     public class FacilityRepository : IFacilityRepository
     {
-        private string uri = "http://localhost:8080";
-        private readonly HttpClient client = new HttpClient();
-        
-        public async Task<Facility> CreateFacility(Facility facility)
+        private const string Uri = "http://localhost:8080";
+        private readonly HttpClient _client;
+
+        public FacilityRepository()
+        {
+            _client = new HttpClient();
+        }
+
+        public async Task<Facility> CreateResidenceFacilityAsync(Facility facility, int residenceId)
         {
             var facilityAsJson = JsonSerializer.Serialize(facility, new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            HttpContent content = new StringContent(facilityAsJson, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync($"{uri}/facility", content);
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
-
+            var content = new StringContent(facilityAsJson, Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync($"{Uri}/facility/{facility.Id}/{residenceId}", content);
+            await HandleErrorResponse(response);
             var newFacility = JsonSerializer.Deserialize<Facility>(await response.Content.ReadAsStringAsync(),
                 new JsonSerializerOptions()
                 {
@@ -35,15 +35,10 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return newFacility;
         }
 
-        public async Task<IEnumerable<Facility>> GetAllFacilities()
+        public async Task<IEnumerable<Facility>> GetAllFacilitiesAsync()
         {
-            var response = await client.GetAsync($"{uri}/facilities");
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
-
+            var response = await _client.GetAsync($"{Uri}/facilities");
+            await HandleErrorResponse(response);
             var result = await response.Content.ReadAsStringAsync();
             var facilitiesToReturn = JsonSerializer.Deserialize<List<Facility>>(result, new JsonSerializerOptions
             {
@@ -52,15 +47,10 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return facilitiesToReturn;
         }
 
-        public async Task<Facility> GetFacilityById(int id)
+        public async Task<Facility> GetFacilityByIdAsync(int id)
         {
-            var response = await client.GetAsync($"{uri}/facility/{id}");
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
-
+            var response = await _client.GetAsync($"{Uri}/facility/{id}");
+            await HandleErrorResponse(response);
             var result = await response.Content.ReadAsStringAsync();
             var facilityToReturn = JsonSerializer.Deserialize<Facility>(result, new JsonSerializerOptions
             {
@@ -69,25 +59,25 @@ namespace SEP3T2GraphQL.Repositories.Impl
             return facilityToReturn;
         }
 
-        public async Task<Facility> DeleteResidenceFacility(Facility facility, int residenceId)
+        public async Task<Facility> DeleteResidenceFacilityAsync(Facility facility, int residenceId)
         {
             var facilityAsJson = JsonSerializer.Serialize(facility, new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            var response = await client.DeleteAsync($"{uri}/residencefacilities/{facility.Id}/{residenceId}");
+            var response = await _client.DeleteAsync($"{Uri}/residencefacilities/{facility.Id}/{residenceId}");
+            await HandleErrorResponse(response);
+
+            return facility;
+        }
+        
+        private static async Task HandleErrorResponse(HttpResponseMessage response)
+        {
             if (!response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"{this} caught exception: {await response.Content.ReadAsStringAsync()} with status code {response.StatusCode}");
+                Console.WriteLine(await response.Content.ReadAsStringAsync());
                 throw new Exception(await response.Content.ReadAsStringAsync());
             }
-
-            var newFacility = JsonSerializer.Deserialize<Facility>(await response.Content.ReadAsStringAsync(),
-                new JsonSerializerOptions()
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                });
-            return newFacility;
         }
     }
 }

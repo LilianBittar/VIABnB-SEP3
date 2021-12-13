@@ -12,13 +12,15 @@ import java.util.List;
 
 public class FacilityDAOImpl extends BaseDao implements FacilityDAO
 {
-  @Override public Facility createFacility(Facility facility)
+  @Override public Facility createResidenceFacility(Facility facility,
+      int residenceId)
   {
-    try(Connection connection = getConnection())
+    try (Connection connection = getConnection())
     {
-      PreparedStatement stm = connection.prepareStatement
-          ("INSERT INTO facility(name) VALUES (?)");
-      stm.setString(1, facility.getName());
+      PreparedStatement stm = connection.prepareStatement(
+          "INSERT INTO residencefacility(facilityid, residenceid) VALUES (?,?)");
+      stm.setInt(1, facility.getId());
+      stm.setInt(2, residenceId);
       stm.executeUpdate();
       connection.commit();
       return facility;
@@ -32,18 +34,15 @@ public class FacilityDAOImpl extends BaseDao implements FacilityDAO
   @Override public List<Facility> getAllFacilities()
   {
     List<Facility> facilityListToReturn = new ArrayList<>();
-    try(Connection connection = getConnection())
+    try (Connection connection = getConnection())
     {
-      PreparedStatement stm = connection.prepareStatement
-          ("SELECT * FROM facility");
+      PreparedStatement stm = connection.prepareStatement(
+          "SELECT * FROM facility");
       ResultSet result = stm.executeQuery();
       while (result.next())
       {
-        Facility facility = new Facility
-            (
-                result.getInt("facilityid"),
-                result.getString("name")
-            );
+        Facility facility = new Facility(result.getInt("facilityid"),
+            result.getString("name"));
         facilityListToReturn.add(facility);
       }
       return facilityListToReturn;
@@ -77,10 +76,10 @@ public class FacilityDAOImpl extends BaseDao implements FacilityDAO
 
   @Override public void deleteResidenceFacility(int facilityId, int residenceId)
   {
-    try(Connection connection = getConnection())
+    try (Connection connection = getConnection())
     {
-      PreparedStatement stm = connection.prepareStatement
-          ("DELETE FROM residencefacility WHERE facilityid = ? AND residenceid = ?");
+      PreparedStatement stm = connection.prepareStatement(
+          "DELETE FROM residencefacility WHERE facilityid = ? AND residenceid = ?");
       stm.setInt(1, facilityId);
       stm.setInt(2, residenceId);
       stm.executeUpdate();

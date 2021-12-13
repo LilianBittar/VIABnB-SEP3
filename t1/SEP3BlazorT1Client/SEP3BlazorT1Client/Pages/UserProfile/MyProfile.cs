@@ -13,7 +13,6 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
     {
         [Inject] public MatDialogService MatDialogService { get; set; }
         [Inject] public IHostService HostService { get; set; }
-        [Inject] public IGuestService GuestService { get; set; }
         [Inject] public IUserService UserService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public AuthenticationStateProvider AuthStateProvider { get; set; }
@@ -25,24 +24,34 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         private bool isLoading;
         private bool isEditable;
         bool snackBarIsOpen = false;
+        private string ErrorMessage="";
 
         protected override async Task OnInitializedAsync()
         {
-            isEditable = true;
-            isLoading = true;
-            _host = await HostService.GetHostById(Id);
-            StateHasChanged();
-            isLoading = false;
-            _user = new User()
+            try
             {
-                Id = _host.Id,
-                FirstName = _host.FirstName,
-                LastName = _host.LastName,
-                Email = _host.Email,
-                Password = _host.Password,
-                PhoneNumber = _host.PhoneNumber,
-                ProfileImageUrl = _host.ProfileImageUrl
-            };
+                isEditable = true;
+                isLoading = true;
+                _host = await HostService.GetHostByIdAsync(Id);
+                StateHasChanged();
+                isLoading = false;
+                _user = new User()
+                {
+                    Id = _host.Id,
+                    FirstName = _host.FirstName,
+                    LastName = _host.LastName,
+                    Email = _host.Email,
+                    Password = _host.Password,
+                    PhoneNumber = _host.PhoneNumber,
+                    ProfileImageUrl = _host.ProfileImageUrl
+                };
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = "";
+                ErrorMessage = "Something went wrong.. try refreshing the page";
+            }
+           
         }
         private void FilesReady()
         {

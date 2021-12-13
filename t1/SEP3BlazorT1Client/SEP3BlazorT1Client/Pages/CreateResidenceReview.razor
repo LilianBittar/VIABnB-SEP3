@@ -51,8 +51,8 @@
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        _guest = await GuestService.GetGuestByEmail(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value);
-        _residence = await ResidenceService.GetResidenceAsync(ResidenceId);
+        _guest = await GuestService.GetGuestByEmailAsync(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value);
+        _residence = await ResidenceService.GetResidenceByIdAsync(ResidenceId);
         StateHasChanged();
     }
 

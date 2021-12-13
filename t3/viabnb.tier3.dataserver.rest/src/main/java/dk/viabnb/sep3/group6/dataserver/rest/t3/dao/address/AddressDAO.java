@@ -7,25 +7,18 @@ import java.util.List;
 public interface AddressDAO
 {
   /**
-   * Return an Address object based on a given id
-   * @param addressId The targeted address' id
-   * @return Address Object
-   * @throws IllegalStateException if can't connect to database
-   * */
-  Address getAddressById(int addressId);
-  /**
-   * Create a new address object
+   * Create a new Address object and store it in the database
+   *
    * @param address The new address object
    * @return the newly created object
-   *
-   * @throws IllegalStateException if can't connect to database
-   * */
+   * @throws IllegalStateException if connection to database failed or executing the update is failed
+   */
   Address creteNewAddress(Address address);
   /**
-   * Returns all addresses
-   * @return {@code List<Address>} with all addresses
+   * Query all Address objects in the database
    *
-   * @throws IllegalStateException if connection to data source failed.
+   * @return a list of Address objects
+   * @throws IllegalStateException if connection to database failed or query execution failed
    */
   List<Address> getAll();
 }

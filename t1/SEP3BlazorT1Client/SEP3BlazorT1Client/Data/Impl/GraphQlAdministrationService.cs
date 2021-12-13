@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
-using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
+using CatQL.GraphQL.QueryResponses;
+using Newtonsoft.Json;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes.AdminResponseTypes;
 using SEP3BlazorT1Client.Models;
 
@@ -13,7 +14,7 @@ namespace SEP3BlazorT1Client.Data.Impl
         private const string Url = "https://localhost:5001/graphql";
         private readonly GqlClient _client = new(Url) {EnableLogging = true};
 
-        public async Task<Administrator> GetAdminByEmail(string email)
+        public async Task<Administrator> GetAdminByEmailAsync(string email)
         {
             GqlQuery adminQuery = new()
             {
@@ -22,47 +23,19 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Variables = new {aEmail = email}
             };
             var response = await _client.PostQueryAsync<AdminResponseType>(adminQuery);
-            if (response == null)
-            {
-                Console.WriteLine(response.Errors);
-                throw new ArgumentException("Email incorrect");
-            }
-
+            HandleErrorResponse(response);
             return response.Data.Administrator;
         }
 
-        public async Task<IEnumerable<Administrator>> GetAllAdmins()
+        private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)
         {
-            var adminQuery = new GqlQuery()
+            if (response.Errors != null)
             {
-                Query = @"query{allAdmins{id,firstName,lastName,email,phoneNumber,password}}"
-            };
-            var response = await _client.PostQueryAsync<AdminListResponseType>(adminQuery);
-            if (response == null)
-            {
-                Console.WriteLine(response.Errors);
-                throw new Exception("Admin list can't be null");
+                // String manipulation to seperate the Error message from the sample error response. 
+                Console.WriteLine(JsonConvert.SerializeObject(response.Errors));
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4]
+                    .Split(":")[2]);
             }
-
-            return response.Data.Administrators;
-        }
-
-        public async Task<Administrator> ValidateAdmin(string email, string password)
-        {
-            var validateAdminQuery = new GqlQuery()
-            {
-                Query =
-                    @"query($aEmail:String,$aPassword:String){validateAdmin(email:$aEmail,password:$aPassword){id,firstName,lastName,email,phoneNumber,password}}",
-                Variables = new {aEmail = email, aPassword = password}
-            };
-            var response = await _client.PostQueryAsync<ValidateAdminResponseType>(validateAdminQuery);
-            if (response.Data.Administrator == null)
-            {
-                Console.WriteLine(response.Errors);
-                throw new ArgumentException("Incorrect password or email. Please try again");
-            }
-
-            return response.Data.Administrator;
         }
     }
 }

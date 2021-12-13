@@ -1,31 +1,15 @@
 .page-container {
   padding-top: 2rem;
-  -webkit-animation-name: fade-in;
-          animation-name: fade-in;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+  animation-name: fade-in;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
 }
-
 .page-container .residence-filters {
   margin-bottom: 1rem;
   gap: 1rem;
 }
-
 .page-container .residence-directory {
   gap: 2rem;
-}
-
-
-
-@-webkit-keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 @keyframes fade-in {
@@ -36,19 +20,25 @@
     opacity: 1;
   }
 }
-.mdc-dialog .mdc-dialog__container {
-  width: 1000px;
+.details-container .mdc-dialog__surface {
+  min-width: 1000px !important;
 }
-
-
-.mdc-dialog .mdc-dialog__surface {
-  max-width: none !important;
-  width: 1000px;
+.details-container .mdc-dialog .mdc-dialog__surface {
+  min-width: 1000px !important;
 }
-
 @media (min-width: 592px) {
-  .mdc-dialog .mdc-dialog__surface {
-    max-width: 1000px !important;
+  .details-container .mdc-dialog .mdc-dialog__surface {
+    max-width: 1000px;
+    min-width: 1000px;
   }
 }
+.details-container .mdc-dialog .mdc-dialog__surface {
+  min-width: 1000px !important;
+  width: 100% !important;
+}
+
+.large .mdc-dialog__surface {
+  min-width: 80vw !important;
+}
+
 /*# sourceMappingURL=Residences.razor.css.map */

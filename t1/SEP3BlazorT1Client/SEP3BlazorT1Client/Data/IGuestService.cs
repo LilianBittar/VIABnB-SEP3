@@ -7,52 +7,40 @@ namespace SEP3BlazorT1Client.Data
     public interface IGuestService
     {
         /// <summary>
-        /// create a new guest and stores it in the system
+        /// Creates a new guest
         /// </summary>
-        /// <param name="guest"></param>
-        /// <returns> the created guest</returns>
+        /// <param name="guest">the guest to be created</param>
+        /// <returns>the created guest</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
         Task<Guest> CreateGuestAsync(Guest guest);
-
         /// <summary>
-        /// a method to get a guest by using his id
+        /// Get a Guest object based on the given parameter via API
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns> the guest with this specific id</returns>
-        Task<Guest> GetGuestById(int id);
-
+        /// <param name="id">The Guest's id</param>
+        /// <returns>Guest object</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
+        Task<Guest> GetGuestByIdAsync(int id);
         /// <summary>
-        /// a method to get a guest by using his email
+        /// Get a Guest object based on the given parameter via API
         /// </summary>
-        /// <param name="email"></param>
-        /// <returns> the guest with this specific email</returns>
-        Task<Guest> GetGuestByEmail(string email);
-
+        /// <param name="email">The Guest's e-mail</param>
+        /// <returns>A Guest object</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
+        Task<Guest> GetGuestByEmailAsync(string email);
         /// <summary>
-        /// a method to update the guest information 
+        /// Method that returns a list of Guest objects of a IsApprovedGuest value false from a repository
         /// </summary>
-        /// <param name="guest"></param>
-        /// <returns> the newly updated guest information</returns>
-        Task<Guest> UpdateGuest(Guest guest);
-
-        /// <summary>
-        /// a method to get all the guests
-        /// </summary>
-        /// <returns> a list with all the guests stored in the system</returns>
-        /// 
-        Task<IEnumerable<Guest>> GetAllGuests();
-
-        /// <summary>
-        /// Method that returns a list of Guest objects of a IsApprovedGuest value false from a GraphQl server
-        /// </summary>
+        /// <exception cref="ArgumentException">Thrown if the guest list is null</exception>
         /// <returns>IEnumerable<Guest> list of Guest objects</returns>
-        Task<IEnumerable<Guest>> GetAllNotApprovedGuests();
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
+        Task<IEnumerable<Guest>> GetAllNotApprovedGuestsAsync();
 
         /// <summary>
-        /// Method that updates the bool value IsApprovedGuest of a given host using a GraphQl server
+        /// Method that updates the bool value IsApprovedGuest of a given host from a repository
         /// </summary>
         /// <param name="guest">The targeted Guest object to update</param>
-        /// <exception cref="ArgumentException">Thrown if the mutation response is null</exception>
         /// <returns>Guest object</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
         Task<Host> UpdateGuestStatusAsync(Guest guest);
     }
 }

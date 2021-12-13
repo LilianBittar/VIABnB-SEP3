@@ -10,7 +10,8 @@ public class HostReview
   private LocalDate createdDate;
   private int hostId;
 
-  public HostReview(double rating, String text, int guestId, LocalDate createdDate, int hostId)
+  public HostReview(double rating, String text, int guestId,
+      LocalDate createdDate, int hostId)
   {
     this.rating = rating;
     this.text = text;
@@ -39,28 +40,34 @@ public class HostReview
     this.text = text;
   }
 
-  public int getGuestId() {
+  public int getGuestId()
+  {
     return guestId;
   }
 
-  public void setGuestId(int guestId) {
+  public void setGuestId(int guestId)
+  {
     this.guestId = guestId;
   }
 
-  public LocalDate getCreatedDate() {
+  public LocalDate getCreatedDate()
+  {
     return createdDate;
   }
 
-  public void setCreatedDate(LocalDate createdDate) {
+  public void setCreatedDate(LocalDate createdDate)
+  {
     this.createdDate = createdDate;
   }
 
-  public int getHostId() {
+  public int getHostId()
+  {
 
     return hostId;
   }
 
-  public void setHostId(int hostId) {
+  public void setHostId(int hostId)
+  {
     this.hostId = hostId;
   }
 }

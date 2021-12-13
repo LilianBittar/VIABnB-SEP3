@@ -20,7 +20,7 @@ namespace UnitTests.UserTest
         public void SetUp()
         {
             _userRepository = new Mock<IUserRepository>();
-            _userService = new UserService(_userRepository.Object, new UserValidation(_userRepository.Object));
+            _userService = new UserService(_userRepository.Object, new UserValidation());
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace UnitTests.UserTest
                 ProfileImageUrl = "Test"
             };
 
-            Assert.ThrowsAsync<FormatException>(() => _userService.UpdateUserAsync(_user));
+            Assert.ThrowsAsync<ArgumentException>(() => _userService.UpdateUserAsync(_user));
         }
         
         [TestCase("Test34")]

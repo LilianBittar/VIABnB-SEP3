@@ -1,12 +1,28 @@
-#intro
-{
-    text-align: center;
+.landing-page-container {
+  height: 100vh;
+  width: 100%;
+}
+.landing-page-container .background-image {
+  position: relative;
+  /*Overriding parent padding*/
+  width: calc(100% + 14rem);
+  margin-left: -7rem;
+  height: 100%;
+  background: url("assets/cozy-house-outside-01.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+.landing-page-container .background-image .cta-host {
+  color: white;
+  width: 30%;
+  margin-left: 10rem;
+  padding-top: 3rem;
+}
+.landing-page-container .background-image .cta-host h1 {
+  text-shadow: 0 0 10px black;
+}
+.landing-page-container .background-image .cta-host p {
+  color: #c9c9c9;
+  font-weight: 200;
 }
 
-#intro-image
-{
-    display: block;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
+/*# sourceMappingURL=Index.razor.css.map */

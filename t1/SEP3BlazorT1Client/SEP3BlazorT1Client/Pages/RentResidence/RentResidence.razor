@@ -1,8 +1,6 @@
 @page "/RentResidence/{ResidenceId:int}"
 @using SEP3BlazorT1Client.Data
 @using SEP3BlazorT1Client.Models
-@using System.ComponentModel.DataAnnotations
-@using Newtonsoft.Json
 @using JsonSerializer = System.Text.Json.JsonSerializer
 @inject IGuestService GuestService
 @inject IResidenceService ResidenceService
@@ -58,7 +56,7 @@
                                     <hr>
                                     <div class="d-flex flex-row justify-content-between">
                                         <span style="font-weight: bold">Price in total</span>
-                                        <span style="font-weight: bold">@_newRentRequest.GetTotalPrice() DKK.-</span>
+                                        <span style="font-weight: bold">@(GetTotalDays() * _newRentRequest.Residence.PricePerNight * _newRentRequest.NumberOfGuests) DKK.-</span>
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +70,7 @@
             <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Medium"/>
         }
     </Authorized>
-    
+
     <NotAuthorized>
         <div class="container-fluid">
             <p>Must be logged in as guest to rent residences</p>
@@ -84,13 +82,9 @@
 
     [Parameter]
     public int ResidenceId { get; set; }
-    /*
-     * DatePicker times are bound to these value instead of directly to _newRequest.StartDate and _newRequest.EndDate,
-     * because there is a known issue where the DatePicker returns the selected date minus 1 day.
-     * https://github.com/SamProf/MatBlazor/issues/723
-     */
+    
     private DateTime _startDateInput;
-    private DateTime _endDateInput; 
+    private DateTime _endDateInput;
 
     private RentRequest _newRentRequest = new() {StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1), Status = RentRequestStatus.NOTANSWERED};
 
@@ -106,45 +100,37 @@
         try
         {
             EditContext = new EditContext(_newRentRequest);
-    // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-    // var user = authState.User;
-    // if (user.Identity.IsAuthenticated)
-    // {
-    //TODO: Get authenticated guest instead of hard-coded guest. 
-    // var guest = await GuestService.GetGuestById(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
-    // var guest = await GuestService.GetGuestById(3);
-            var guest = new Guest()
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            if (user.Identity.IsAuthenticated)
             {
-                Cpr = "3333333333", Email = "test@test.test", Id = 2, Password = "Test123", FirstName = "test", GuestReviews = new List<GuestReview>(),
-                HostReviews = new List<HostReview>(), LastName = "test", PhoneNumber = "33333333", ViaId = 293886, IsApprovedGuest = false, IsApprovedHost = true, ProfileImageUrl = "test"
-            }; 
-            var residence = await ResidenceService.GetResidenceAsync(ResidenceId);
-            if (guest != null)
-            {
-                _newRentRequest.Guest = guest;
+                var guest = await GuestService.GetGuestByIdAsync(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
+                var residence = await ResidenceService.GetResidenceByIdAsync(ResidenceId);
+                if (guest != null)
+                {
+                    _newRentRequest.Guest = guest;
+                }
+                else
+                {
+                    NavigationManager.NavigateTo("/");
+                }
+                if (residence != null)
+                {
+                    _newRentRequest.Residence = residence;
+                }
+                EditContext = new EditContext(_newRentRequest);
+                Console.WriteLine(JsonSerializer.Serialize(_newRentRequest));
             }
             else
             {
-                NavigationManager.NavigateTo("/");
+                NavigationManager.NavigateTo("/login");
             }
-            if (residence != null)
-            {
-                _newRentRequest.Residence = residence;
-            }
-            EditContext = new EditContext(_newRentRequest);
-            Console.WriteLine(JsonSerializer.Serialize(_newRentRequest));
-    // }
-    // else
-    // {
-    //     NavigationManager.NavigateTo("/login");
-    // }
         }
         catch (Exception e)
         {
             _errorMessage = "";
             _errorMessage = "Something went wrong.. try refreshing the page";
         }
-     
     }
 
     private int GetTotalDays()
@@ -156,16 +142,15 @@
     {
         try
         {
-            /*
+    /*
              Bug MatBlazor DatePicker subtracts 1 day from the actual selected date.
              This is a known issue and has an open issue on github. 
              */
             _newRentRequest.StartDate = _startDateInput.AddDays(1);
             _newRentRequest.EndDate = _endDateInput.AddDays(1);
-            
-            await RentalService.CreateRentRequest(_newRentRequest);
+
+            await RentalService.CreateRentRequestAsync(_newRentRequest);
             StateHasChanged();
-            //TODO: Navigate to list of rent requests.
             NavigationManager.NavigateTo("/residences");
         }
         catch (Exception e)

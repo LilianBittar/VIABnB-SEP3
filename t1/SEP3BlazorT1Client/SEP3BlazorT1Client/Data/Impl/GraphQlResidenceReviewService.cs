@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
-using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes.ResidenceReviewResponseTypes;
 using SEP3BlazorT1Client.Models;
 
@@ -14,11 +13,6 @@ namespace SEP3BlazorT1Client.Data.Impl
     {
         private const string Url = "https://localhost:5001/graphql";
         private readonly GqlClient _client = new GqlClient(Url) {EnableLogging = true};
-
-        public Task<IEnumerable<ResidenceReview>> GetAllAsync()
-        {
-            throw new System.NotImplementedException();
-        }
 
         public async Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId)
         {
@@ -36,10 +30,11 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
             var graphQlResponse =
                 await _client.PostQueryAsync<ResidenceReviewsByResidenceIdResponseType>(query);
+            HandleErrorResponse(graphQlResponse);
             return graphQlResponse.Data.ResidenceReviews;
         }
 
-        public async Task<ResidenceReview> CreateAsync(Residence residence, ResidenceReview residenceReview)
+        public async Task<ResidenceReview> CreateResidenceReviewAsync(Residence residence, ResidenceReview residenceReview)
         {
             var query = new GqlQuery()
             {

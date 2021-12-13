@@ -1,6 +1,56 @@
-@page "/GuestReviews"
-<h3>GuestReviews</h3>
-
-@code {
-    
+@page "/GuestReviews/{Id:int}"
+<p>@ErrorMessage</p>
+@if (_guestReviewList == null)
+{
+    <h3 class="mat-subtitle1">Loading</h3>
+    <MatProgressCircle Indeterminate="true"/>
+}
+else if (!_guestReviewList.Any())
+{
+    <p>
+        <em>There are no host requests at the moment....</em>
+    </p>
+}
+else
+{
+    <MatAccordion Multi="true">
+        @foreach (var item in _guestReviewList)
+        {
+            <MatExpansionPanel>
+                <MatExpansionPanelSummary>
+                    <MatExpansionPanelHeader>
+                        <p>Ratings: @item.Rating</p>
+                    </MatExpansionPanelHeader>
+                    <MatExpansionPanelSubHeader>
+                        Date of review:  @item.CreatedDate
+                    </MatExpansionPanelSubHeader>
+                </MatExpansionPanelSummary>
+                <MatExpansionPanelDetails>
+                    <div class="mat-layout-grid mat-layout-grid-align-left" style="max-width: 800px;">
+                        <div class="mat-layout-grid-inner">
+                            <div class="mat-layout-grid-cell">
+                                <div class="form-group">
+                                    <MatSubtitle2>Rating: @item.Rating</MatSubtitle2>
+                                </div>
+                                <div class="form-group">
+                                    <MatSubtitle2>Description: @item.Text</MatSubtitle2>
+                                </div>
+                                <div class="form-group">
+                                    <MatSubtitle2>Date of review: @item.CreatedDate.Date</MatSubtitle2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mat-layout-grid-cell">
+                            <div class="form-group">
+                                <MatSubtitle2>Reviewd by: @_hostList.First(host => host.Id == item.HostId).FirstName @_hostList.First(h => h.Id == item.HostId).LastName</MatSubtitle2>
+                            </div>
+                            <div class="form-group">
+                                <MatSubtitle2>Reviewrs e-mail: @_hostList.First(host => host.Id == item.HostId).Email</MatSubtitle2>
+                            </div>
+                        </div>
+                    </div>
+                </MatExpansionPanelDetails>
+            </MatExpansionPanel>
+        }
+    </MatAccordion>
 }

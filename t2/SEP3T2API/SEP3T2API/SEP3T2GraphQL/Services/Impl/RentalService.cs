@@ -20,24 +20,19 @@ namespace SEP3T2GraphQL.Services.Impl
             _rentRequestRepository = rentRequestRepository;
             _createRentRequestValidator = createRentRequestValidator;
         }
-
-        /// <summary>
-        /// This implementation of the IRentalService uses an <see cref="CreateRentRequestValidator"/> for validating
-        /// the business logic of creating a new RentRequest. 
-        /// </summary>
-        public async Task<RentRequest> CreateRentRequest(RentRequest request)
+        public async Task<RentRequest> CreateRentRequestAsync(RentRequest request)
         {
             if (request == null)
             {
                 throw new ArgumentException("Request cannot be null");
             }
             await _createRentRequestValidator.ValidateRentRequest(request);
-            return await _rentRequestRepository.CreateAsync(request);
+            return await _rentRequestRepository.CreateRentRequestAsync(request);
         }
 
         public async Task<IEnumerable<RentRequest>> GetAllRentRequestsAsync()
         {
-            var rentRequestListToReturn = await _rentRequestRepository.GetAllAsync();
+            var rentRequestListToReturn = await _rentRequestRepository.GetAllRentRequestAsync();
             if (rentRequestListToReturn == null)
             {
                 throw new ArgumentException("Rent request list is null");
@@ -46,14 +41,9 @@ namespace SEP3T2GraphQL.Services.Impl
             return rentRequestListToReturn;
         }
 
-        public Task<IEnumerable<RentRequest>> GetAllRentRequestByResidenceId(int residenceId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<RentRequest> GetRentRequestAsync(int id)
         {
-            var rentRequestListToReturn = await _rentRequestRepository.GetAsync(id);
+            var rentRequestListToReturn = await _rentRequestRepository.GetRentRequestByIdAsync(id);
             if (rentRequestListToReturn == null)
             {
                 throw new ArgumentException("Rent request list is null");
@@ -81,18 +71,12 @@ namespace SEP3T2GraphQL.Services.Impl
             {
                 throw new ArgumentException("Request list is null");
             }
-            Console.WriteLine(JsonSerializer.Serialize(rentRequestList));
             return rentRequestList;
         }
 
-        public async Task<IEnumerable<RentRequest>> GetRentRequestsByGuestId(int guestId)
+        public async Task<IEnumerable<RentRequest>> GetRentRequestsByGuestIdAsync(int guestId)
         {
-            return await _rentRequestRepository.GetRentRequestsByGuestId(guestId);
-        }
-
-        public async Task<IEnumerable<RentRequest>> GetRentRequestsByViaId(int viaId)
-        {
-            return await _rentRequestRepository.GetRentRequestsByGuestId(viaId);
+            return await _rentRequestRepository.GetRentRequestsByGuestIdAsync(guestId);
         }
     }
 } 

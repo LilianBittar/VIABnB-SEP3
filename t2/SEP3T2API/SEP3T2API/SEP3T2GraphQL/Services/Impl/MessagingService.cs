@@ -34,12 +34,18 @@ namespace SEP3T2GraphQL.Services.Impl
                 throw new ArgumentException("Message cannot be null");
             }
 
-            var existingUser = await _userRepository.GetUserByIdAsync(message.Receiver.Id);
-            if (existingUser == null)
+            try
+            {
+                var existingUser = await _userRepository.GetUserByIdAsync(message.Receiver.Id);
+                if (existingUser == null)
+                {
+                    throw new KeyNotFoundException("Receiver does not exist");
+                }
+            }
+            catch (NullReferenceException e)
             {
                 throw new KeyNotFoundException("Receiver does not exist");
             }
-
             try
             {
                 message.TimeSent = DateTime.UtcNow;
@@ -54,6 +60,7 @@ namespace SEP3T2GraphQL.Services.Impl
                 {
                     _messageMap.TryAdd(message.Sender.Id, new ConcurrentQueue<Message>());
                 }
+                // Adds message to both the receiver and senders queue, so both users can see the message. 
                 _messageMap[message.Receiver.Id].Enqueue(newMessage);
                 _messageMap[message.Sender.Id].Enqueue(newMessage);
                 return newMessage;
@@ -68,15 +75,6 @@ namespace SEP3T2GraphQL.Services.Impl
         {
             return _messageMap.ContainsKey(userId) ? _messageMap[userId] : new List<Message>().AsEnumerable();
         }
-
-        public void ConnectUser(int userId)
-        {
-            if (!_messageMap.ContainsKey(userId))
-            {
-                _messageMap.TryAdd(userId, new ConcurrentQueue<Message>());
-            }
-        }
-
 
         private void InitializeMessageMap()
         {

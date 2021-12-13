@@ -3,7 +3,7 @@
 @using System.ComponentModel.DataAnnotations
 @using SEP3BlazorT1Client.Data
 @using SEP3BlazorT1Client.Models
-@inject NavigationManager NavigationManager
+@inject NavigationManager _navigationManager
 @inject IHostService _hostservice
 
 <AuthorizeView>
@@ -54,8 +54,8 @@
                     <p class="error-label text-danger">@_errorText</p>
 
                     <MatButton OnClick="@CreateHost" Label="Register" Raised="true"></MatButton>
-                    <MatButton OnClick="@(() => NavigationManager.NavigateTo("Login"))" Label="Already have an account?"></MatButton>
-                     <p hidden="@IsShow"> <MatProgressBar  Indeterminate="true" Reversed="true"></MatProgressBar></p>
+                    <MatButton OnClick="@(() => _navigationManager.NavigateTo("Login"))" Label="Already have an account?"></MatButton>
+                    <p hidden="@IsShow"> <MatProgressBar  Indeterminate="true" Reversed="true"></MatProgressBar></p>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
             }
     //User is logged on upon successful account creation
     //   await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_newUser.Username, _newUser.Password);
-            NavigationManager.NavigateTo("Login");
+            _navigationManager.NavigateTo("Login");
         }
     }
 

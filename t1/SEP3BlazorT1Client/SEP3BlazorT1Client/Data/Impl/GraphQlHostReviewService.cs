@@ -36,44 +36,6 @@ namespace SEP3BlazorT1Client.Data.Impl
             HandleErrorResponse(response);
             return response.Data.HostReview;
         }
-        
-        private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)
-        {
-            if (response.Errors != null)
-            {
-                // String manipulation to seperate the Error message from the sample error response. 
-                Console.WriteLine(JsonConvert.SerializeObject(response.Errors));
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4]
-                    .Split(":")[2]);
-            }
-        }
-
-        public async Task<HostReview> UpdateHostReviewAsync(HostReview hostReview)
-        {
-            GqlQuery updateHostReviewMutation = new GqlQuery()
-            {
-                Query =
-                    @"mutation($newHostReview: HostReviewInput) {
-                          updateHostReview(hostReview: $newHostReview) {
-                            rating
-                            text
-                            guestId
-                            createdDate
-                            hostId
-                          }
-                        }
-                        ",
-
-                Variables = new {newHostReview = hostReview}
-            };
-            var response = await _client.PostQueryAsync<UpdateHostReviewResponseType>(updateHostReviewMutation);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
-            }
-
-            return response.Data.HostReview;
-        }
 
         public async Task<IEnumerable<HostReview>> GetAllHostReviewsByHostIdAsync(int id)
         {
@@ -93,7 +55,19 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
             var graphQlResponse =
                 await _client.PostQueryAsync<AllHostReviewsByHostIdResponseType>(query);
+            HandleErrorResponse(graphQlResponse);
             return graphQlResponse.Data.HostReviews;
+        }
+        
+        private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)
+        {
+            if (response.Errors != null)
+            {
+                // String manipulation to seperate the Error message from the sample error response. 
+                Console.WriteLine(JsonConvert.SerializeObject(response.Errors));
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4]
+                    .Split(":")[2]);
+            }
         }
     }
 }

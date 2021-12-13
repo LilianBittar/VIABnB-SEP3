@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
-using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes.HostResponseTypes;
 using SEP3BlazorT1Client.Models;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SEP3BlazorT1Client.Data.Impl
 {
@@ -19,9 +16,9 @@ namespace SEP3BlazorT1Client.Data.Impl
 
         public async Task<Host> RegisterHostAsync(Host host)
         {
-            GqlQuery registerHostMutation = new GqlQuery()
+            var registerHostMutation = new GqlQuery()
             {
-                    Query = @"mutation($newHost: HostInput) 
+                Query = @"mutation($newHost: HostInput) 
                                 {
                                   registerHost(host:$newHost){
                                   hostReviews {
@@ -46,18 +43,14 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
 
             var response = await _client.PostQueryAsync<RegisterHostResponseType>(registerHostMutation);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4].Split(":")[2]);
-            }
-
+            HandleErrorResponse(response);
             return response.Data.RegisterHost;
         }
         
 
-        public async Task<Host> GetHostByEmail(string email)
+        public async Task<Host> GetHostByEmailAsync(string email)
         {
-            GqlQuery query = new()
+            var query = new GqlQuery()
             {
                 Query = @"query($hostEmail:String) {
                                   hostByEmail(email:$hostEmail) {
@@ -83,16 +76,13 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Variables = new {hostEmail = email}
             };
             var response = await _client.PostQueryAsync<HostByEmailResponseType>(query);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
-            }
+            HandleErrorResponse(response);
             return response.Data.Host;
         }
 
-        public async Task<Host> GetHostById(int id)
+        public async Task<Host> GetHostByIdAsync(int id)
         {
-            GqlQuery query = new()
+            var query = new GqlQuery()
             {
                 Query = @"query($hostId: Int!) {
                                 hostById(id: $hostId) {
@@ -118,6 +108,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                 Variables = new {hostId = id}
             };
             var response = await _client.PostQueryAsync<HostByIdQueryResponseType>(query);
+            HandleErrorResponse(response);
             return response.Data.HostById;
         }
 
@@ -144,15 +135,15 @@ namespace SEP3BlazorT1Client.Data.Impl
                                 phoneNumber
                                 profileImageUrl}}",
             };
-            GqlRequestResponse<HostListResponseType> graphQlResponse =
+            var graphQlResponse =
                 await client.PostQueryAsync<HostListResponseType>(hostQuery);
+            HandleErrorResponse(graphQlResponse);
             return graphQlResponse.Data.Hosts;
         }
 
         public async Task<Host> UpdateHostStatusAsync(Host host)
         {
-            GqlClient client = new GqlClient(Url);
-            GqlQuery updateHostStatusMutation = new GqlQuery()
+            var updateHostStatusMutation = new GqlQuery()
             {
                 Query = @"mutation($newHost:HostInput){
                           updateHostStatus(host:$newHost){
@@ -176,18 +167,19 @@ namespace SEP3BlazorT1Client.Data.Impl
                         }",
                 Variables = new {newHost = host}
             };
-            var response = await client.PostQueryAsync<UpdateHostMutationResponseType>(updateHostStatusMutation);
-            if (response.Errors != null)
-            {
-                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors));
-            }
-
+            var response = await _client.PostQueryAsync<UpdateHostMutationResponseType>(updateHostStatusMutation);
+            HandleErrorResponse(response);
             return response.Data.updateHostStatus;
         }
-
-        public Task<Host> UpdateHost(Host host)
+        private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)
         {
-            throw new System.NotImplementedException();
+            if (response.Errors != null)
+            {
+                // String manipulation to seperate the Error message from the sample error response. 
+                Console.WriteLine(JsonConvert.SerializeObject(response.Errors));
+                throw new ArgumentException(JsonConvert.SerializeObject(response.Errors).Split(",")[4]
+                    .Split(":")[2]);
+            }
         }
     }
 }

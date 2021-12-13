@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
-using SEP3T2GraphQL.Repositories.Impl;
 using SEP3T2GraphQL.Services;
 using SEP3T2GraphQL.Services.Impl;
-using SEP3T2GraphQL.Services.Validation.HostValidation;
 using SEP3T2GraphQL.Services.Validation.HostValidation.Impl;
 
-
-namespace UnitTests
+namespace UnitTests.HostTest
 {
     public class RegisterHostTest
     {
-        private Host host = new Host();
+        private Host _host = new Host();
         private IHostService HostService;
         private Mock<IHostRepository> HostRepository;
         private Mock<IUserService> _userService;
@@ -26,14 +22,14 @@ namespace UnitTests
         {
             HostRepository = new Mock<IHostRepository>();
             _userService = new Mock<IUserService>();
-            HostService = new HostServiceImpl(HostRepository.Object,new HostValidationImpl(_userService.Object));
+            HostService = new HostService(HostRepository.Object,new HostValidation(_userService.Object));
         }
 
         [Test]
         public void IsValidHost_ExpectedValues_DoesNotThrow()
         {
             //arange
-            host = new Host()
+            _host = new Host()
             {
                 Id = 0,
                 FirstName = "Kasper",
@@ -48,7 +44,7 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(host));
+            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(_host));
         }
         
         [TestCase("email@gmailcom")]
@@ -58,7 +54,7 @@ namespace UnitTests
         public void IsValidHost_InvalidEmail_Throws(string email)
         {
             //arange
-            host = new Host()
+            _host = new Host()
             {
                 Id = 0,
                 FirstName = "Kasper",
@@ -72,7 +68,7 @@ namespace UnitTests
             };
 
             //act and assert
-            Assert.ThrowsAsync<FormatException>(() => HostService.RegisterHostAsync(host));
+            Assert.ThrowsAsync<FormatException>(() => HostService.RegisterHostAsync(_host));
         }
         
         [Test]
@@ -106,11 +102,11 @@ namespace UnitTests
             };
             
             _userService
-                .Setup<User>(x => x.GetUserByEmailAsync(host.Email).Result)
+                .Setup<User>(x => x.GetUserByEmailAsync(_host.Email).Result)
                 .Returns(user2);
 
             //act and assert
-            Assert.ThrowsAsync<ArgumentException>(() => HostService.RegisterHostAsync(host));
+            Assert.ThrowsAsync<ArgumentException>(() => HostService.RegisterHostAsync(_host));
         }
         
         [TestCase("Kasper34")]
@@ -119,7 +115,7 @@ namespace UnitTests
         public void IsValidHost_InvalidFirstname_Throws(String firstname)
         {
             //arange
-            host = new Host()
+            _host = new Host()
             {
                 Id = 0,
                 FirstName = firstname,
@@ -133,7 +129,7 @@ namespace UnitTests
             };
 
             //act and assert
-            TestCreateThrowsArgumentExceptionAsync(host);
+            TestCreateThrowsArgumentExceptionAsync(_host);
         }
         
         [TestCase("B00bsen")]
@@ -142,7 +138,7 @@ namespace UnitTests
         public void IsValidHost_InvalidLastname_Throws(string lastname)
         {
             //arange
-            host = new Host()
+            _host = new Host()
             {
                 Id = 0,
                 FirstName = "Kasper",
@@ -156,7 +152,7 @@ namespace UnitTests
             };
 
             //act and assert
-            TestCreateThrowsArgumentExceptionAsync(host);
+            TestCreateThrowsArgumentExceptionAsync(_host);
         }
         
         [TestCase("121232132131233")]
@@ -170,7 +166,7 @@ namespace UnitTests
         public void IsValidHost_InvalidPassword_Throws(string password)
         {
             //arange
-            host = new Host()
+            _host = new Host()
             {
                 Id = 0,
                 FirstName = "Kasper",
@@ -184,7 +180,7 @@ namespace UnitTests
             };
 
             //act and assert
-            TestCreateThrowsArgumentExceptionAsync(host);
+            TestCreateThrowsArgumentExceptionAsync(_host);
         }
         
         [TestCase("345345a")]
@@ -193,7 +189,7 @@ namespace UnitTests
         public void IsValidHost_InvalidPhoneNumber_Throws(string phoneNumber)
         {
             //arange
-            host = new Host()
+            _host = new Host()
             {
                 Id = 0,
                 FirstName = "Kasper",
@@ -208,7 +204,7 @@ namespace UnitTests
             };
 
             //act and assert
-            TestCreateThrowsArgumentExceptionAsync(host);
+            TestCreateThrowsArgumentExceptionAsync(_host);
         }
 
       
@@ -221,7 +217,7 @@ namespace UnitTests
         public void IsValidEmail_ExpectedValues_DoesNotThrow(string email)
         {
             //arrange
-            host = new Host()
+            _host = new Host()
             {
                 Id = 0,
                 FirstName = "Bob",
@@ -234,7 +230,7 @@ namespace UnitTests
                 ProfileImageUrl = null
             };
             //act and assert
-            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(host));
+            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(_host));
 
         }
 
@@ -245,7 +241,7 @@ namespace UnitTests
         public void IsValidPassword_length8orHigher_DoesNotThrow(string password)
         {
             //arrange
-            host = new Host()
+            _host = new Host()
             {
                 Id = 0,
                 FirstName = "Bob",
@@ -258,7 +254,7 @@ namespace UnitTests
                 ProfileImageUrl = null
             };
             //act and assert
-            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(host));
+            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(_host));
         }
 
         
@@ -268,7 +264,7 @@ namespace UnitTests
         public void IsValidCpr_CorrectLengthWithAndWithoutDash_DoesNotThrow(string cpr)
         {
             //arrange
-            host = new Host()
+            _host = new Host()
             {
                 Id = 0,
                 FirstName = "Bob",
@@ -282,7 +278,7 @@ namespace UnitTests
                 ProfileImageUrl = null
             };
             //act and assert
-            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(host));
+            Assert.DoesNotThrow(() => HostService.RegisterHostAsync(_host));
         }
         
         
@@ -293,7 +289,7 @@ namespace UnitTests
         public void IsValidCpr_IncorrectLengthWithAndWithoutDash_Throws(string cpr)
         {
             //arrange
-            host = new Host()
+            _host = new Host()
             {
                 Id = 0,
                 FirstName = "Bob",
@@ -307,7 +303,7 @@ namespace UnitTests
                 ProfileImageUrl = null
             };
             //act and assert
-            TestCreateThrowsArgumentExceptionAsync(host);
+            TestCreateThrowsArgumentExceptionAsync(_host);
         }
         private void TestCreateThrowsArgumentExceptionAsync(Host _host)
         {

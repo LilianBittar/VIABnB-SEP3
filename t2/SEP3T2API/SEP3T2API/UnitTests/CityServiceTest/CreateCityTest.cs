@@ -28,7 +28,7 @@ namespace UnitTests.CityServiceTest
             {
                 CityName = "horsens", Id = 1, ZipCode = 8700
             };
-            Assert.DoesNotThrowAsync(async ()=> await _cityService.CreateAsync(city));
+            Assert.DoesNotThrowAsync(async ()=> await _cityService.CreateCityAsync(city));
         }
         
         [Test]
@@ -94,9 +94,7 @@ namespace UnitTests.CityServiceTest
 
         private void AssertCreateThrowsAsyncArgumentException(City city)
         {
-            Assert.ThrowsAsync<ArgumentException>(async () => await _cityService.CreateAsync(city));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _cityService.CreateCityAsync(city));
         }
-
-        
     }
 }

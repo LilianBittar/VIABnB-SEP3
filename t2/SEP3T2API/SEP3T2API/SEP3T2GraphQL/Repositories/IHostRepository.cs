@@ -7,27 +7,38 @@ namespace SEP3T2GraphQL.Repositories
     public interface IHostRepository
     {
         /// <summary>
-        /// Method that returns a host registration based on the given parameter
+        /// Create a new Host object via API
         /// </summary>
-        /// <param name="host">The Id of the host object that created the registration</param>
+        /// <param name="host">The new Host</param>
         /// <returns>Host object</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
         Task<Host> RegisterHostAsync(Host host);
-        Task<Host> GetHostByEmail(string email);
-        Task<Host> GetHostById(int id);
-        Task<Host> ValidateHostAsync(Host host);
-        Task<Host> UpdateHost(Host host);
         /// <summary>
-        /// Method that returns a list of Host objects with IsApprovedHost bool value of false
+        /// Get a Host object based on the given parameter via API
         /// </summary>
-        /// <exception cref="Exception"> Thrown if the API response is not successful</exception>
-        /// <returns>IEnumerable<Host> a lit of Host objects</returns>
-        Task<IEnumerable<Host>> GetAllNotApprovedHosts();
-        /// <summary>
-        /// Method that updates the bool value IsApprovedHost of a given host
-        /// </summary>
-        /// <param name="host">The targeted Host object to update</param>
-        /// <exception cref="Exception">Thrown if the API response is not successful</exception>
+        /// <param name="email">The host's e-mail</param>
         /// <returns>Host object</returns>
-        Task<Host> UpdateHostStatus(Host host);
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
+        Task<Host> GetHostByEmailAsync(string email);
+        /// <summary>
+        /// Get a Host object by the given parameter via API
+        /// </summary>
+        /// <param name="id">The targeted Host's id</param>
+        /// <returns>Host object</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
+        Task<Host> GetHostByIdAsync(int id);
+        /// <summary>
+        /// Get a list of Host object with a false IsApproved status via API
+        /// </summary>
+        /// <returns>A list of Host objects</returns>
+        /// <exception cref="System.Exception"> Thrown if the API response is not successful</exception>
+        Task<IEnumerable<Host>> GetAllNotApprovedHostsAsync();
+        /// <summary>
+        /// Update a Host object via API
+        /// </summary>
+        /// <param name="host">The updated host object</param>
+        /// <returns>Host object</returns>
+        /// <exception cref="System.Exception">Thrown if the API response is not successful</exception>
+        Task<Host> UpdateHostStatusAsync(Host host);
     }
 }

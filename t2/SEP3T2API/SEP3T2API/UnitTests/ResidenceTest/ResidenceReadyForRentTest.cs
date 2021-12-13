@@ -1,31 +1,33 @@
 ﻿using System;
-using System.Globalization;
 using Moq;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services;
+using SEP3T2GraphQL.Services.Impl;
 
-namespace UnitTests
+namespace UnitTests.ResidenceTest
 {
     [TestFixture]
     public class ResidenceReadyForRentTest
     {
-        private Residence residence = new Residence();
-        private IResidenceService ResidenceService;
-        private Mock<IResidenceRepository> ResidenceRepository;
+        private Residence _residence = new Residence();
+        private IResidenceService _residenceService;
+        private Mock<IResidenceRepository> _residenceRepository;
         private IAddressService _addressService;
         private ICityService _cityService;
-        private DateTime _dateTime;
+        public ResidenceReadyForRentTest(IAddressService addressService, ICityService cityService)
+        {
+            _addressService = addressService;
+            _cityService = cityService;
+        }
 
-        
-        
+
         [SetUp]
         public void SetUp()
         {
-            ResidenceRepository = new Mock<IResidenceRepository>();
-            ResidenceService = new ResidenceServiceImpl(ResidenceRepository.Object,_cityService,_addressService);
-            _dateTime = DateTime.Today.AddDays(1);
+            _residenceRepository = new Mock<IResidenceRepository>();
+            _residenceService = new ResidenceServiceImpl(_residenceRepository.Object,_cityService,_addressService);
         }
         
         [TestCase(1,3)]
@@ -34,14 +36,14 @@ namespace UnitTests
         public void UpdateResidenceAvailabilityAsync_ExpectedValues_DoesNotThrow(int from,int to)
         {
             //arange
-            residence = new Residence()
+            _residence = new Residence()
             {
-               AvailableFrom = DateTime.Today.AddDays(from),
-               AvailableTo = DateTime.Today.AddDays(to)
+                AvailableFrom = DateTime.Today.AddDays(from),
+                AvailableTo = DateTime.Today.AddDays(to)
             };
 
             //act and assert
-            Assert.DoesNotThrowAsync(() => ResidenceService.UpdateResidenceAvailabilityAsync(residence));
+            Assert.DoesNotThrowAsync(() => _residenceService.UpdateResidenceAvailabilityAsync(_residence));
         }
         
         
@@ -49,28 +51,28 @@ namespace UnitTests
         public void UpdateResidenceAvailabilityAsync_FromDateIsNull_Throws()
         {
             //arange
-            residence = new Residence()
+            _residence = new Residence()
             {
                 AvailableFrom = null,
                 AvailableTo = DateTime.Today.AddDays(3)
             };
 
             //act and assert
-            Assert.ThrowsAsync<ArgumentException>(() => ResidenceService.UpdateResidenceAvailabilityAsync(residence));
+            Assert.ThrowsAsync<ArgumentException>(() => _residenceService.UpdateResidenceAvailabilityAsync(_residence));
         }
         
         [Test]
         public void UpdateResidenceAvailabilityAsync_ToDateIsNull_Throws()
         {
             //arange
-            residence = new Residence()
+            _residence = new Residence()
             {
                 AvailableFrom = DateTime.Today.AddDays(3),
                 AvailableTo = null
             };
 
             //act and assert
-            Assert.ThrowsAsync<ArgumentException>(() => ResidenceService.UpdateResidenceAvailabilityAsync(residence));
+            Assert.ThrowsAsync<ArgumentException>(() => _residenceService.UpdateResidenceAvailabilityAsync(_residence));
         }
         
         [TestCase(-2,1)]
@@ -79,14 +81,14 @@ namespace UnitTests
         public void UpdateResidenceAvailabilityAsync_RentPeriodInThePast_Throws(int from,int to)
         {
             //arange
-            residence = new Residence()
+            _residence = new Residence()
             {
                 AvailableFrom = DateTime.Today.AddDays(from),
                 AvailableTo = DateTime.Today.AddDays(to)
             };
 
             //act and assert
-            Assert.ThrowsAsync<ArgumentException>(() => ResidenceService.UpdateResidenceAvailabilityAsync(residence));
+            Assert.ThrowsAsync<ArgumentException>(() => _residenceService.UpdateResidenceAvailabilityAsync(_residence));
         }
         
         [TestCase(5,4)]
@@ -95,14 +97,14 @@ namespace UnitTests
         public void UpdateResidenceAvailabilityAsync_FromDateNotBeforeToDate_Throws(int from,int to)
         {
             //arange
-            residence = new Residence()
+            _residence = new Residence()
             {
                 AvailableFrom = DateTime.Today.AddDays(from),
                 AvailableTo = DateTime.Today.AddDays(to)
             };
 
             //act and assert
-            Assert.ThrowsAsync<ArgumentException>(() => ResidenceService.UpdateResidenceAvailabilityAsync(residence));
+            Assert.ThrowsAsync<ArgumentException>(() => _residenceService.UpdateResidenceAvailabilityAsync(_residence));
         }
     }
 }

@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,eAAe,CAAA;EACb,WAAW,EAAE,IAAI;EACjB,cAAc,EAAE,OAAO;EACvB,kBAAkB,EAAE,EAAE;EACtB,mBAAmB,EAAE,QAAQ;CAU9B;;AAdD,AAME,eANa,CAMb,kBAAkB,CAAA;EAChB,aAAa,EAAE,IAAI;EACnB,GAAG,EAAE,IAAI;CACV;;AATH,AAWE,eAXa,CAWb,oBAAoB,CAAA;EAClB,GAAG,EAAE,IAAI;CACV;;AAGH,UAAU,CAAV,OAAU;EACR,EAAE;IACA,OAAO,EAAE,CAAC;;EAGZ,IAAI;IACF,OAAO,EAAE,CAAC",
-    "sources": [
-        "Residences.razor.scss"
-    ],
-    "names": [],
-    "file": "Residences.razor.css"
-}
+{"version":3,"sourceRoot":"","sources":["Residences.razor.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;EACA;;AAEA;EACE;EACA;;AAGF;EACE;;;AAIJ;EACE;IACE;;EAEF;IACE;;;AAIF;EACE;;AAGF;EACE;;AAGF;EACE;IACE;IACA;;;AAGJ;EACE;EACA;;;AAIF;EACE","file":"Residences.razor.css"}

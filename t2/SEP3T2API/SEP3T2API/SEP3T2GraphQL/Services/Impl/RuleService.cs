@@ -8,16 +8,16 @@ namespace SEP3T2GraphQL.Services.Impl
 {
     public class RuleService : IRuleService
     {
-        private IRuleRepository _ruleRepository;
+        private readonly IRuleRepository _ruleRepository;
 
         public RuleService(IRuleRepository ruleRepository)
         {
             _ruleRepository = ruleRepository;
         }
 
-        public async Task<Rule> CreateRule(Rule rule)
+        public async Task<Rule> CreateResidenceRuleAsync(Rule rule)
         {
-            var newRule = await _ruleRepository.CreateRule(rule);
+            var newRule = await _ruleRepository.CreateResidenceRuleAsync(rule);
             if (newRule == null)
             {
                 throw new Exception("Rule can't be null");
@@ -26,9 +26,9 @@ namespace SEP3T2GraphQL.Services.Impl
             return newRule;
         }
 
-        public async Task<IEnumerable<Rule>> GetAllRules()
+        public async Task<IEnumerable<Rule>> GetAllRulesByResidenceIdAsync(int residenceId)
         {
-            var ruleListToReturn = await _ruleRepository.GetAllRules();
+            var ruleListToReturn = await _ruleRepository.GetAllRulesByResidenceIdAsync(residenceId);
             if (ruleListToReturn == null)
             {
                 throw new Exception("Rule list can't be null");
@@ -37,11 +37,11 @@ namespace SEP3T2GraphQL.Services.Impl
             return ruleListToReturn;
         }
 
-        public async Task<Rule> UpdateRuleAsync(Rule rule)
+        public async Task<Rule> UpdateRuleAsync(Rule rule, string description)
         {
             try
             {
-                return await _ruleRepository.UpdateRule(rule);
+                return await _ruleRepository.UpdateResidenceRuleAsync(rule, description);
             }
             catch (Exception e)
             {
@@ -50,11 +50,11 @@ namespace SEP3T2GraphQL.Services.Impl
             }
         }
 
-        public async Task<Rule> DeleteRule(Rule rule)
+        public async Task<Rule> DeleteRuleAsync(Rule rule)
         {
             try
             {
-               return await _ruleRepository.DeleteRule(rule);
+               return await _ruleRepository.DeleteRuleAsync(rule);
             }
             catch (Exception e)
             {

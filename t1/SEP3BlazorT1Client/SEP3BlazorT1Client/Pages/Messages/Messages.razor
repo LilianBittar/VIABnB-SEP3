@@ -5,7 +5,6 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @using SEP3BlazorT1Client.Data
 @using System.Text.Json
-@using AngleSharp.Common
 @inject NavigationManager NavigationManager; 
 @inject IMatDialogService MatDialogService;
 @inject AuthenticationStateProvider AuthenticationStateProvider; 
@@ -122,7 +121,7 @@
 
 
 @code {
-    private Queue<Message> _messages;
+    private IList<Message> _messages;
     private HubConnection _connection;
     private bool _addingNewConversation = false;
     private bool _isSendingMessage = false;
@@ -133,7 +132,7 @@
     private IDictionary<string, User> _usersInConversationToShow = new Dictionary<string, User>();
     private bool _connectionFailed = false;
 
-    public string ConversationFilter
+    private string ConversationFilter
     {
         get => _conversationFilter;
         set
@@ -191,7 +190,7 @@
     {
         _isSendingMessage = false;
         var messageReceived = JsonSerializer.Deserialize<Message>(messageAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-        _messages.Enqueue(messageReceived);
+        _messages.Add(messageReceived);
         Console.WriteLine("Received new message");
     // Adding user to window of conversations if the user have never chatted with the sender before. 
         if (messageReceived.Sender.Email != _sender.Email && !_usersInConversation.ContainsKey(messageReceived.Sender.Email))
@@ -237,7 +236,7 @@
     private void ReceiveUserMessages(string messagesAsJson)
     {
         Console.WriteLine($"Received messages: {messagesAsJson}");
-        var receivedMessages = JsonSerializer.Deserialize<Queue<Message>>(messagesAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+        var receivedMessages = JsonSerializer.Deserialize<IList<Message>>(messagesAsJson, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         _messages = receivedMessages;
         StateHasChanged();
     }

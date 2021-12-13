@@ -96,8 +96,8 @@ CREATE TABLE IF NOT EXISTS RentRequest
     guestId        Int,
     createDate     DATE,
     PRIMARY KEY (rentRequestId),
-    FOREIGN KEY (hostId) REFERENCES Host (hostid),
-    FOREIGN KEY (residenceId) REFERENCES Residence (residenceid),
+    FOREIGN KEY (hostId) REFERENCES Host (hostid) ON DELETE CASCADE ,
+    FOREIGN KEY (residenceId) REFERENCES Residence (residenceid) ON DELETE CASCADE ,
     foreign key (guestId) references Guest (guestId)
 );
 CREATE TABLE IF NOT EXISTS Rule
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS ResidenceReview
     guestId             INT,
     createdDate         DATE,
     PRIMARY KEY (residenceId, guestId),
-    FOREIGN KEY (residenceId) REFERENCES Residence (residenceId),
+    FOREIGN KEY (residenceId) REFERENCES Residence (residenceId) ON DELETE CASCADE ,
     FOREIGN KEY (guestId) REFERENCES Guest (guestId) ON DELETE CASCADE
 );
 

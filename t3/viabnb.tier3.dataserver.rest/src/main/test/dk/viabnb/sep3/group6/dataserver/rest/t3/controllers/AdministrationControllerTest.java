@@ -5,12 +5,9 @@ import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Administrator;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.logging.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 
-import java.util.logging.Logger;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -21,29 +18,20 @@ class AdministrationControllerTest
   private Administrator administrator;
   private User user;
 
-  @BeforeEach
-  public void setUp()
+  @BeforeEach public void setUp()
   {
     administrationDAO = mock(AdministrationDAO.class);
     controller = new AdministrationController(administrationDAO);
-    user = new Administrator
-        (
-            1,
-            "Test@test.tt",
-            "Aa11",
-            "Test",
-            "Test",
-            "11111",
-            "Test",
-            "TT"
-        );
+    user = new Administrator(1, "Test@test.tt", "Aa11", "Test", "Test", "11111",
+        "Test", "TT");
   }
 
-  @Test
-  public void getAdminByEmailReturnsInternalServerErrorWhenRepositoryThrowsIllegalStateExceptionTest()
+  @Test public void getAdminByEmailReturnsInternalServerErrorWhenRepositoryThrowsIllegalStateExceptionTest()
   {
     String email = "test";
-    when(administrationDAO.getAdministratorByEmail(email)).thenThrow(IllegalStateException.class);
-    assertEquals(ResponseEntity.internalServerError().build(), controller.getAdminByEmail(email));
+    when(administrationDAO.getAdministratorByEmail(email)).thenThrow(
+        IllegalStateException.class);
+    assertEquals(ResponseEntity.internalServerError().build(),
+        controller.getAdminByEmail(email));
   }
 }

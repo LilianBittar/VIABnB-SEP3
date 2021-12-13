@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MatBlazor;
@@ -18,17 +19,31 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         
         [Parameter] public int Id { get; set; }
         private IEnumerable<HostReview> _hostReviewList = new List<HostReview>();
-        private Guest _guest = new Guest();
+        private List<Guest> _guestList = new List<Guest>();
+        private string ErrorMessage = "";
 
-        private bool isLoading;
+        private bool _isLoading;
 
         protected override async Task OnInitializedAsync()
         {
-            isLoading = true;
-            _hostReviewList = await HostReviewService.GetAllHostReviewsByHostIdAsync(Id);
-            _guest = await GuestService.GetGuestById(Id);
-            StateHasChanged();
-            isLoading = false;
+            try
+            {
+                _isLoading = true;
+                _hostReviewList = await HostReviewService.GetAllHostReviewsByHostIdAsync(Id);
+                foreach (var item in _hostReviewList)
+                {
+                    var g =  await GuestService.GetGuestByIdAsync(item.GuestId);
+                    _guestList.Add(g);
+                }
+                StateHasChanged();
+                _isLoading = false;
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = "";
+                ErrorMessage = "Something went wrong, try refreshing the page";
+            }
+           
         }
     }
 }

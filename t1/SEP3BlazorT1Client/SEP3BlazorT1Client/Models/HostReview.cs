@@ -12,8 +12,8 @@ namespace SEP3BlazorT1Client.Models
         [JsonProperty("text")]
         public string Text { get; set; }
         [Required]
-        [JsonProperty("viaId")]
-        public int ViaId { get; set; }
+        [JsonProperty("guestId")]
+        public int GuestId { get; set; }
         [JsonProperty("createdDate")]
         public DateTime CreatedDate { get; set; }
         [Required]

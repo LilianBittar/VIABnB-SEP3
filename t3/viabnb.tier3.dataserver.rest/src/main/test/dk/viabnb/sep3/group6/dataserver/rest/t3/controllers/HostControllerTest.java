@@ -19,42 +19,44 @@ class HostControllerTest
   private HostController controller;
   private Host host;
 
-  @BeforeEach
-  void setup()
+  @BeforeEach void setup()
   {
     hostDAO = mock(HostDAO.class);
     controller = new HostController(hostDAO);
   }
 
-  @Test
-  public void RegisterHostNullRequestReturnsBadRequest() {
+  @Test public void RegisterHostNullRequestReturnsBadRequest()
+  {
     //arrange
     Host host = null;
 
     //act and assert
-    assertEquals(ResponseEntity.badRequest().build(), controller.createHost(host));
+    assertEquals(ResponseEntity.badRequest().build(),
+        controller.createHost(host));
   }
 
-  @Test
-  void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNull()
+  @Test void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNull()
   {
     //arrange
-    Host host = new Host(1, "test", "test", "12345678", "email@test.tt", "Test123","test", new ArrayList<>(),  "1234567891", false);
+    Host host = new Host(1, "test", "test", "12345678", "email@test.tt",
+        "Test123", "test", new ArrayList<>(), "1234567891", false);
     when(hostDAO.registerHost(host)).thenReturn(null);
 
     //act and assert
-    Assertions.assertEquals(ResponseEntity.internalServerError().build(), controller.createHost(host));
+    Assertions.assertEquals(ResponseEntity.internalServerError().build(),
+        controller.createHost(host));
   }
 
-  @Test
-  void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNullTest()
+  @Test void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNullTest()
   {
     //aarange
-    Host host = new Host(1, "test", "test", "12345678", "email@test.tt", "Test123","test", new ArrayList<>(), "1234567891", false);
+    Host host = new Host(1, "test", "test", "12345678", "email@test.tt",
+        "Test123", "test", new ArrayList<>(), "1234567891", false);
     when(hostDAO.registerHost(host)).thenThrow(IllegalStateException.class);
 
     //act and assert
-    Assertions.assertEquals(ResponseEntity.internalServerError().build(), controller.createHost(host));
+    Assertions.assertEquals(ResponseEntity.internalServerError().build(),
+        controller.createHost(host));
   }
 
 }

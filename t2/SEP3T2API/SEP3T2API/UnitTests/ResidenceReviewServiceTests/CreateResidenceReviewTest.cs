@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Moq;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
@@ -74,14 +73,14 @@ namespace UnitTests.ResidenceReviewServiceTests
                 StartDate = DateTime.Now, EndDate = DateTime.Today.AddDays(2), NumberOfGuests = 1,
                 RequestCreationDate = DateTime.Now
             };
-            _rentRequestRepository.Setup(x => x.GetRentRequestsByGuestId(_guest.Id).Result)
+            _rentRequestRepository.Setup(x => x.GetRentRequestsByGuestIdAsync(_guest.Id).Result)
                 .Returns(new List<RentRequest>() {existingRentRequest});
             ResidenceReview review = new()
             {
                 Rating = rating, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
             };
             Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _residenceReviewService.CreateAsync(_residence, review));
+                await _residenceReviewService.CreateResidenceReviewAsync(_residence, review));
         }
 
 
@@ -98,13 +97,13 @@ namespace UnitTests.ResidenceReviewServiceTests
                 StartDate = DateTime.Now, EndDate = DateTime.Today.AddDays(2), NumberOfGuests = 1,
                 RequestCreationDate = DateTime.Now
             };
-            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaId(_guest.ViaId).Result)
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaIdAsync(_guest.ViaId).Result)
                 .Returns(new List<RentRequest>() {existingRentRequest});
             ResidenceReview review = new()
             {
                 Rating = rating, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
             };
-            Assert.DoesNotThrowAsync(async () => await _residenceReviewService.CreateAsync(_residence, review));
+            Assert.DoesNotThrowAsync(async () => await _residenceReviewService.CreateResidenceReviewAsync(_residence, review));
         }
 
         [Test]
@@ -119,14 +118,14 @@ namespace UnitTests.ResidenceReviewServiceTests
                 StartDate = DateTime.Now, EndDate = DateTime.Today.AddDays(2), NumberOfGuests = 1,
                 RequestCreationDate = DateTime.Now
             };
-            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaId(_guest.ViaId).Result)
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaIdAsync(_guest.ViaId).Result)
                 .Returns(new List<RentRequest>() {existingRentRequest});
             ResidenceReview review = new()
             {
                 Rating = 1, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
             };
             Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _residenceReviewService.CreateAsync(_residence, review));
+                await _residenceReviewService.CreateResidenceReviewAsync(_residence, review));
         }
 
         [Test]
@@ -159,14 +158,14 @@ namespace UnitTests.ResidenceReviewServiceTests
                 StartDate = DateTime.Now, EndDate = DateTime.Today.AddDays(2), NumberOfGuests = 1,
                 RequestCreationDate = DateTime.Now
             };
-            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaId(_guest.ViaId).Result)
+            _rentRequestRepository.Setup<IEnumerable<RentRequest>>(x => x.GetRentRequestsByViaIdAsync(_guest.ViaId).Result)
                 .Returns(new List<RentRequest>() {existingRentRequest});
             ResidenceReview review = new()
             {
                 Rating = 1, CreatedDate = DateTime.Now, ReviewText = "test", GuestViaId = _guest.ViaId
             };
             Assert.ThrowsAsync<ArgumentException>(async () =>
-                await _residenceReviewService.CreateAsync(_residence, review));
+                await _residenceReviewService.CreateResidenceReviewAsync(_residence, review));
         }
     }
 }

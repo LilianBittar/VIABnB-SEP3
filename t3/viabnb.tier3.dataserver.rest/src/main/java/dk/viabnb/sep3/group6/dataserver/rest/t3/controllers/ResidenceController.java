@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//TODO: Change routes to /residences as that is the standard for RESTful collections -mic
 @RestController public class ResidenceController
 {
   private ResidenceDAO residenceDAO;
@@ -31,9 +30,7 @@ import java.util.List;
     this.residenceReviewDAO = residenceReviewDAO;
   }
 
-  //TODO: Move this to host controller maybe (/hosts/residences)? Or maybe the getAll method with a query param.
-  // e.g. /residence/1 SHOULD mean give me the residence with the id of 1.  -mic
-  @GetMapping("/residence/{id}") public ResponseEntity<List<Residence>> getAllResidencesByHostId(
+  @GetMapping("/residence/host/{id}") public ResponseEntity<List<Residence>> getAllResidencesByHostId(
       @PathVariable int id)
   {
     List<Residence> residences;
@@ -45,12 +42,12 @@ import java.util.List;
     return new ResponseEntity<>(residences, HttpStatus.OK);
   }
 
-  @GetMapping("/residences/{id}") public ResponseEntity<Residence> getById(
+  @GetMapping("/residences/{id}") public ResponseEntity<Residence> getResidenceById(
       @PathVariable int id)
   {
     try
     {
-      Residence residence = residenceDAO.getByResidenceId(id);
+      Residence residence = residenceDAO.getResidenceById(id);
       return ResponseEntity.ok(residence);
     }
     catch (IllegalStateException e)
@@ -74,14 +71,6 @@ import java.util.List;
     return new ResponseEntity<>(newResidence, HttpStatus.OK);
   }
 
-  /**
-   * Handles requests for getting all residences in the system
-   *
-   * @return HTTP OK with list of all residences if connection to Data source
-   * could be established.
-   * HTTP Internal server error if connection to Data source could not
-   * be established.
-   */
   @GetMapping("/residences") public ResponseEntity<List<Residence>> getAll()
   {
     try
@@ -104,14 +93,14 @@ import java.util.List;
 
     try
     {
-      Residence existingResidence = residenceDAO.getByResidenceId(id);
+      Residence existingResidence = residenceDAO.getResidenceById(id);
 
       if (existingResidence == null)
       {
         return ResponseEntity.notFound().build();
       }
 
-      residenceDAO.UpdateAvailabilityPeriod(residence);
+      residenceDAO.updateAvailabilityPeriod(residence);
 
     }
     catch (Exception e)
@@ -134,7 +123,7 @@ import java.util.List;
     }
     try
     {
-      Residence residence = residenceDAO.getByResidenceId(residenceId);
+      Residence residence = residenceDAO.getResidenceById(residenceId);
       ResidenceReview createdReview = residenceReviewDAO.createResidenceReview(
           residence, residenceReview);
       if (createdReview == null)
@@ -151,7 +140,6 @@ import java.util.List;
     }
   }
 
-  // Might have to add /{viaid} after /residencereviews, but might be too long endpoint / bad design? (PK of a review is a composite key)
   @PutMapping("/residences/{residenceId}/residencereviews") public ResponseEntity<ResidenceReview> updateReview(
       @PathVariable int residenceId,
       @RequestBody ResidenceReview residenceReview)
@@ -192,15 +180,14 @@ import java.util.List;
     }
   }
 
-  @PatchMapping("/residences/{residenceId}")
-  public ResponseEntity<Residence> updateResidence(@RequestBody Residence residence, @PathVariable("residenceId") int residenceId)
+  @PatchMapping("/residences/{residenceId}") public ResponseEntity<Residence> updateResidence(
+      @RequestBody Residence residence,
+      @PathVariable("residenceId") int residenceId)
   {
     try
     {
       residence = residenceDAO.updateResidence(residence);
-      LOGGER.info(gson.toJson(
-              residence
-      ));
+      LOGGER.info(gson.toJson(residence));
       return ResponseEntity.ok(residence);
     }
     catch (Exception e)
@@ -210,8 +197,8 @@ import java.util.List;
     }
   }
 
-  @DeleteMapping("/residences/{residenceId}")
-  public ResponseEntity<Void> deleteResidence(@PathVariable("residenceId") int residenceId)
+  @DeleteMapping("/residences/{residenceId}") public ResponseEntity<Void> deleteResidence(
+      @PathVariable("residenceId") int residenceId)
   {
     try
     {
@@ -220,6 +207,7 @@ import java.util.List;
     }
     catch (Exception e)
     {
+      LOGGER.error(e.getMessage());
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

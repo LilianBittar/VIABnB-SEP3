@@ -3,6 +3,7 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="BlazorAnimate" Version="3.0.0" />
     <PackageReference Include="bunit" Version="1.2.49" />
     <PackageReference Include="CatQL.GraphQL.Client" Version="2.1.2" />
     <PackageReference Include="GraphQL.Client" Version="4.0.1" />
@@ -16,11 +17,8 @@
     <Compile Update="Pages\RentRequest\RentRequests.cs">
       <DependentUpon>RentRequests.razor</DependentUpon>
     </Compile>
-    <Compile Update="Pages\RentRequest\RentRequestHistory.cs">
-      <DependentUpon>RentRequestHistory.razor</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\RentRequest\GuestReviews.cs">
-      <DependentUpon>GuestReviews.razor</DependentUpon>
+    <Compile Update="Pages\RentRequest\Reviews.cs">
+      <DependentUpon>Reviews.razor</DependentUpon>
     </Compile>
     <Compile Update="Pages\UserProfile\UserView.cs">
       <DependentUpon>UserView.razor</DependentUpon>
@@ -32,21 +30,38 @@
       <DependentUpon>Login.razor</DependentUpon>
     </Compile>
     <Compile Update="Pages\UserProfile\HostReviews.cs">
-      <DependentUpon>MyReviews.razor</DependentUpon>
+      <DependentUpon>HostReviews.razor</DependentUpon>
     </Compile>
     <Compile Update="Pages\UserProfile\GuestReviews.cs">
       <DependentUpon>GuestReviews.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Residences\ReviewHost.cs">
+      <DependentUpon>ReviewHost.razor</DependentUpon>
+    </Compile>
+    <Compile Remove="Pages\RentRequest\RentRequestHistory.cs" />
+    <Compile Update="Pages\HostResidences\EditResidence.cs">
+      <DependentUpon>EditResidence.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\RentRequest\ReviewGuest.cs">
+      <DependentUpon>ReviewGuest.razor</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Update="Pages\RentRequest\RentRequests.css">
       <DependentUpon>RentRequests.razor</DependentUpon>
     </None>
-    <None Update="Pages\RentRequest\RentRequestHistory.css">
-      <DependentUpon>RentRequestHistory.razor</DependentUpon>
+    <None Update="Pages\RentRequest\Reviews.css">
+      <DependentUpon>Reviews.razor</DependentUpon>
     </None>
-    <None Update="Pages\RentRequest\GuestReviews.css">
-      <DependentUpon>GuestReviews.razor</DependentUpon>
+    <None Update="Pages\Residences\ReviewHost.css">
+      <DependentUpon>ReviewHost.razor</DependentUpon>
     </None>
+    <None Remove="Pages\RentRequest\RentRequestHistory.css" />
+    <None Update="Pages\HostResidences\EditResidence.razor.css">
+      <DependentUpon>EditResidence.razor</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Pages\RentRequest\RentRequestHistory.razor" />
   </ItemGroup>
 </Project>

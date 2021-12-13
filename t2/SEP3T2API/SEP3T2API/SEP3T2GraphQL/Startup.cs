@@ -1,13 +1,10 @@
-using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using GraphQL.Server.Ui.GraphiQL;
 using GraphQL.Server.Ui.Playground;
 using HotChocolate.Types;
-using Microsoft.AspNetCore.ResponseCompression;
 using SEP3T2GraphQL.Graphql;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Repositories.Administration;
@@ -23,6 +20,7 @@ using SEP3T2GraphQL.Services.Validation.GuestValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.HostValidation;
 using SEP3T2GraphQL.Services.Validation.HostValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
+using SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl;
 using SEP3T2GraphQL.Services.Validation.UserValidation;
 using SEP3T2GraphQL.SignalR;
 
@@ -44,19 +42,19 @@ namespace SEP3T2GraphQL
                 .AddQueryType<Query>()
                 .AddType<ListType>()
                 .AddMutationType<Mutation>().ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true);
-            services.AddScoped<IResidenceRepository, ResidenceRepositoryImpl>();
+            services.AddScoped<IResidenceRepository, ResidenceRepository>();
             services.AddScoped<IResidenceService, ResidenceServiceImpl>();
-            services.AddScoped<IResidenceValidation, ResidenceValidationImpl>();
-            services.AddScoped<IHostRepository, HostRepositoryImpl>();
-            services.AddScoped<IHostService, HostServiceImpl>();
-            services.AddScoped<IHostReviewService, HostReviewServiceImpl>();
+            services.AddScoped<IResidenceValidation, ResidenceValidation>();
+            services.AddScoped<IHostRepository, HostRepository>();
+            services.AddScoped<IHostService, HostService>();
+            services.AddScoped<IHostReviewService, HostReviewService>();
             services.AddScoped<CreateHostReviewValidation>();
-            services.AddScoped<IGuestReviewHostRepository, GuestReviewHost>();
+            services.AddScoped<IGuestReviewRepository, GuestReviewRepository>();
             services.AddScoped<CreateGuestReviewValidation>();
-            services.AddScoped<IHostReviewGuestRepository, HostReviewGuest>();
-            services.AddScoped<IHostValidation, HostValidationImpl>();
-            services.AddScoped<IGuestValidation, GuestValidationImpl>();
-            services.AddScoped<IGuestService, GuestServiceImpl>();
+            services.AddScoped<IHostReviewRepository, HostReviewRepository>();
+            services.AddScoped<IHostValidation, HostValidation>();
+            services.AddScoped<IGuestValidation, GuestValidation>();
+            services.AddScoped<IGuestService, GuestService>();
             services.AddScoped<IGuestRepository, GuestRepository>();
             services.AddScoped<IRentalService, RentalService>();
             services.AddScoped<IRentRequestRepository, RentRequestRepository>();
@@ -65,8 +63,8 @@ namespace SEP3T2GraphQL
             services.AddScoped<IFacilityRepository, FacilityRepository>();
             services.AddScoped<IRuleService, RuleService>();
             services.AddScoped<IRuleRepository, RuleRepository>();
-            services.AddScoped<IAdministrationService, AdministrationServiceImpl>();
-            services.AddScoped<IAdministrationRepository, AdministrationRepositoryImpl>();
+            services.AddScoped<IAdministrationService, AdministrationService>();
+            services.AddScoped<IAdministrationRepository, AdministrationRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IGuestReviewRepository, GuestReviewRepository>();

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
@@ -47,7 +45,7 @@ namespace SEP3T2GraphQL.Services.Validation
         private async Task ValidateGuestHasRentedResidence(Residence residence, ResidenceReview residenceReview)
         {
             var rentRequests =
-                (await _rentRequestRepository.GetRentRequestsByViaId(residenceReview.GuestViaId)).Where(r =>
+                (await _rentRequestRepository.GetRentRequestsByViaIdAsync(residenceReview.GuestViaId)).Where(r =>
                     r.Residence.Id == residence.Id);
             if (rentRequests == null || !rentRequests.Any())
             {

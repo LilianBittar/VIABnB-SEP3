@@ -7,29 +7,35 @@ import java.util.List;
 public interface GuestReviewDAO
 {
   /**
-   * Method to create a new GuestReview object and store it in a database
+   * Create a new GuestReview object and store it in a database
    *
    * @param guestReview The new object
    * @return newly created GuestReview object
-   *
-   * @throws IllegalArgumentException if can't connect to database
-   * */
+   * @throws IllegalArgumentException if connection to database failed or executing the update failed
+   */
   GuestReview createGuestReview(GuestReview guestReview);
   /**
-   * Method to update a GuestReview object and store it in a database
+   * Update a GuestReview object and store it in a database
    *
    * @param guestReview The new updated object
    * @return newly updated GuestReview object
-   *
-   * @throws IllegalArgumentException if can't connect to database
-   * */
+   * @throws IllegalArgumentException if connection to database failed or executing the update failed
+   */
   GuestReview updateGuestReview(GuestReview guestReview);
   /**
-   * Method that query a list of guest reviews
-   * @param id The id of the guest whom the reviews belongs to
-   * @return A list of GuestReview objects with a guest id that matches the given parameter
+   * Query a list of GuestReview objects based on the given parameter
    *
-   * @throws IllegalArgumentException if can't connect to database
-   * */
+   * @param id The id of the Guest whom the GuestReview objects belongs to
+   * @return A list of GuestReview objects
+   * @throws IllegalArgumentException if connection to database failed or query execution failed
+   */
   List<GuestReview> getAllGuestReviewsByHostId(int id);
+  /**
+   * Query a list of GuestReview objects based on the given parameter
+   *
+   * @param id The targeted GuestReview's Guest's id
+   * @return A list of GuestReview Object
+   * @throws IllegalStateException if connection to database failed or query execution failed
+   */
+  List<GuestReview> getAllGuestReviewsByGuestId(int id);
 }

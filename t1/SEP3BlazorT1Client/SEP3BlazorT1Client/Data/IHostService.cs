@@ -7,45 +7,39 @@ namespace SEP3BlazorT1Client.Data
     public interface IHostService
     {
         /// <summary>
-        /// create a new host and stores it in the system
+        /// Create a new Host object via repository
         /// </summary>
-        /// <param name="host"></param>
-        /// <returns> the created host</returns>
+        /// <param name="host">The new Host</param>
+        /// <returns>Host object</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
         Task<Host> RegisterHostAsync(Host host);
-
         /// <summary>
-        /// a method to get a host by using his email
+        /// Get a Host object based on the given parameter via repository
         /// </summary>
-        /// <param name="email"></param>
-        /// <returns> the host with this specific email</returns>
-        Task<Host> GetHostByEmail(string email);
-
+        /// <param name="email">The host's e-mail</param>
+        /// <returns>Host object</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
+        Task<Host> GetHostByEmailAsync(string email);
         /// <summary>
-        /// a method to get a host by using his id
+        /// Get a Host object by the given parameter via repository
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns> the host with this specific id</returns>
-        Task<Host> GetHostById(int id);
-
+        /// <param name="id">The targeted Host's id</param>
+        /// <returns>Host object</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
+        Task<Host> GetHostByIdAsync(int id);
         /// <summary>
-        /// Method that returns a list of Host objects with IsApprovedHost bool value of false from a GraphQl server
+        /// Get a list of Host object with a false IsApproved status via repository
         /// </summary>
-        /// <returns>IEnumerable<Host> a lit of Host objects</returns>
+        /// <returns>A list of Host objects</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
         Task<IEnumerable<Host>> GetAllNotApprovedHostsAsync();
 
         /// <summary>
-        /// Method that updates the bool value IsApprovedHost of a given host from a repository using a GraphQl server
+        /// Update a Host object via repository
         /// </summary>
-        /// <param name="host">The targeted Host object to update</param>
-        /// <exception cref="ArgumentException">Thrown if the mutation response is null</exception>
+        /// <param name="host">The updated host object</param>
         /// <returns>Host object</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
         Task<Host> UpdateHostStatusAsync(Host host);
-
-        /// <summary>
-        /// a method to update the host information 
-        /// </summary>
-        /// <param name="host"></param>
-        /// <returns> the newly updated host information</returns>
-        Task<Host> UpdateHost(Host host);
     }
 }

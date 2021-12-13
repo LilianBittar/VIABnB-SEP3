@@ -7,23 +7,26 @@ namespace SEP3BlazorT1Client.Data
     public interface IFacilityService
     {
         /// <summary>
-        /// create a new facility and stores it in the system
+        /// Crate a new Facility via repository
         /// </summary>
-        /// <param name="facility"></param>
-        /// <returns> the created facility</returns>
-        Task<Facility> CreateFacility(Facility facility);
-        
+        /// <param name="facility">The new Facility</param>
+        /// <param name="residenceId">The Facility's Residence's id</param>
+        /// <returns>Facility object</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
+        Task<Facility> CreateResidenceFacilityAsync(Facility facility, int residenceId);
         /// <summary>
-        /// a method to get all the facilities stored in the system
+        /// Get a list of Guest objects via repository
         /// </summary>
-        /// <returns> a list with all the facilites</returns>
-        Task<IEnumerable<Facility>> GetAllFacilities();
-        
+        /// <returns>List of Guest objects</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
+        Task<IEnumerable<Facility>> GetAllFacilitiesAsync();
         /// <summary>
-        /// method to get the facility using an id 
+        /// Delete a Facility object via repository
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns> the facility that matches the parameter id</returns>
-        Task<Facility> GetFacilityById(int id);
+        /// <param name="facility">The Facility to be deleted</param>
+        /// <param name="residenceId">The Facility's Residence's id</param>
+        /// <returns>Updated Facility object</returns>
+        /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
+        Task<Facility> DeleteResidenceFacilityAsync(Facility facility, int residenceId);
     }
 }

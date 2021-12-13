@@ -13,12 +13,12 @@ namespace SEP3BlazorT1Client.Data.Impl
     {
         private const string Url = "https://localhost:5001/graphql";
         private readonly GqlClient _client = new GqlClient(Url) {EnableLogging = true};
-        public async Task<Rule> CreateRuleAsync(Rule rule)
+        public async Task<Rule> CreateResidenceRuleAsync(Rule rule)
         {
             var mutation = new GqlQuery()
             {
                 Query = @"mutation($newRule:RuleInput){
-                              createNewRule(rule:$newRule){
+                              createNewResidenceRule(rule:$newRule){
                                 description
                                 residenceId
                               }
@@ -27,40 +27,25 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
             var response = await _client.PostQueryAsync<CreateRuleResponseType>(mutation);
             HandleErrorResponse(response);
-            return response.Data.NewRule;
+            return response.Data.Rule;
         }
 
-        public async Task<IEnumerable<Rule>> GetAllRulesAsync()
+        public async Task<IEnumerable<Rule>> GetAllRulesByResidenceIdAsync(int residenceId)
         {
             var query = new GqlQuery()
             {
-                Query = @"query{
-                          allRules{
-                            description
-                            residenceId
-                          }
-                        }"
+                Query = @"query ($id:Int!){
+                              allRulesByResidenceId(residenceId: $id) {
+                                description
+                                residenceId
+                              }
+                            }
+                            ",
+                Variables = new {id = residenceId}
             };
             var response = await _client.PostQueryAsync<RuleListResponseType>(query);
             HandleErrorResponse(response);
             return response.Data.Rules;
-        }
-
-        public async Task<Rule> UpdateRuleAsync(Rule rule)
-        {
-            var mutation = new GqlQuery()
-            {
-                Query = @"mutation($newRule:RuleInput){
-                              updateResidenceRule(rule:$newRule){
-                                description
-                                residenceId
-                              }
-                            }",
-                Variables = new {newRule = rule}
-            };
-            var response = await _client.PostQueryAsync<UpdateRuleResponseType>(mutation);
-            HandleErrorResponse(response);
-            return response.Data.Rule;
         }
 
         public async Task<Rule> DeleteRuleAsync(Rule rule)

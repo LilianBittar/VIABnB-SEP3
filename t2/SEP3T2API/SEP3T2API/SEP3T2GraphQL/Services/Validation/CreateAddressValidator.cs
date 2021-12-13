@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Repositories;
 
 namespace SEP3T2GraphQL.Services.Validation
 {
@@ -10,9 +9,6 @@ namespace SEP3T2GraphQL.Services.Validation
     /// </summary>
     public class CreateAddressValidator
     {
-        public CreateAddressValidator()
-        {
-        }
 
         /// <summary>
         ///  Method to validate if an address can be created. 

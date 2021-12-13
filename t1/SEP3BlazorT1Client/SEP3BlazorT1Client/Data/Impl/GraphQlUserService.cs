@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using CatQL.GraphQL.Client;
 using CatQL.GraphQL.QueryResponses;
 using Newtonsoft.Json;
-using SEP3BlazorT1Client.Data.Impl.ResponseTypes;
 using SEP3BlazorT1Client.Data.Impl.ResponseTypes.UserResponseTypes;
 using SEP3BlazorT1Client.Models;
 
@@ -34,47 +32,6 @@ namespace SEP3BlazorT1Client.Data.Impl
             var response = await _client.PostQueryAsync<UserByEmailResponseType>(query);
             HandleErrorResponse(response);
             return response.Data.User;
-        }
-
-        public async Task<User> GetUserByIdAsync(int id)
-        {
-            var query = new GqlQuery()
-            {
-                Query = @"query($userId:Int!){
-                              userById(id:$userId){
-                                id
-                                email
-                                password
-                                firstName
-                                lastName
-                                phoneNumber
-                              }
-                            }",
-                Variables = new {userId = id}
-            };
-            var response = await _client.PostQueryAsync<UserByIdResponseType>(query);
-            HandleErrorResponse(response);
-            return response.Data.User;
-        }
-
-        public async Task<IEnumerable<User>> GetAllUsersAsync()
-        {
-            var query = new GqlQuery()
-            {
-            Query = @"query{
-                        allUsers{
-                           id
-                           email
-                           password
-                           firstName
-                           lastName
-                           phoneNumber
-                         }
-                       }"
-        };
-        var response = await _client.PostQueryAsync<AllUsersResponseType>(query);
-        HandleErrorResponse(response);
-            return response.Data.Users;
         }
 
         public async Task<User> ValidateUserAsync(string email, string password)

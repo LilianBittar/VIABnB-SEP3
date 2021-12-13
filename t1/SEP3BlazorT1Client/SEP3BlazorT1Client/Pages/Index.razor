@@ -1,13 +1,19 @@
 @page "/"
-<div class="mat-layout-grid mat-layout-grid-align-center" style="max-width: 1000px;">
-    <div class="mat-layout-grid-inner">
-        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
-            <MatHeadline1>Welcome to VIABnB</MatHeadline1>
+@inject NavigationManager NavigationManager
+<Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(2)">
+    <div class="landing-page-container">
+        <div class="background-image">
+            <div class="cta-host">
+                <Animate Animation="Animations.FadeLeft" Duration="TimeSpan.FromSeconds(0.7)" Easing="Easings.EaseIn"> 
+                    <h1>Want to help the future engineers, pedagogues, nurses and more of Denmark?</h1>
+                </Animate>
+                <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(1.5)" Delay="TimeSpan.FromSeconds(1.2)" Easing="Easings.EaseInOut">
+                    <p>Got a residence you are willing to rent out <br/> to students in need?</p>  
+                </Animate> 
+                <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(1.5)" Delay="TimeSpan.FromSeconds(2)" Easing="Easings.EaseInOut">
+                    <MatButton Label="Become a Host" Raised="true" OnClick="@(() => NavigationManager.NavigateTo("/registerhost"))" />
+                </Animate>
+            </div>
         </div>
     </div>
-</div>
-<div class="mat-layout-grid" style="max-width: 2000px;">
-    <div class="mat-layout-grid-cell mat-layout-grid-cell-span-12">
-        <img src="media/Intro.jpg" alt="Intro img" id="intro-image"/>
-    </div>
-</div>
+</Animate>

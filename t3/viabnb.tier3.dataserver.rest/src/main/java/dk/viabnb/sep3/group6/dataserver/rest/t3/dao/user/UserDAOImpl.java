@@ -1,10 +1,7 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.user;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,31 +12,6 @@ import java.util.List;
 
 public class UserDAOImpl extends BaseDao implements UserDAO
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger(UserDAO.class);
-
-  @Override public User getUserByEmail(String email)
-  {
-    try (Connection connection = getConnection())
-    {
-      PreparedStatement stm = connection.prepareStatement(
-          "SELECT * FROM _user WHERE email = ?");
-      stm.setString(1, email);
-      ResultSet result = stm.executeQuery();
-      if (result.next())
-      {
-        return new User(result.getInt("userid"), result.getString("email"),
-            result.getString("password"), result.getString("fname"),
-            result.getString("lname"), result.getString("phonenumber"),
-            result.getString("personalimage"));
-      }
-      return null;
-    }
-    catch (SQLException throwables)
-    {
-      throw new IllegalStateException(throwables.getMessage());
-    }
-  }
-
   @Override public User getUserById(int id)
   {
     try (Connection connection = getConnection())
@@ -112,10 +84,10 @@ public class UserDAOImpl extends BaseDao implements UserDAO
 
   @Override public void deleteUser(int userid)
   {
-    try(Connection connection = getConnection())
+    try (Connection connection = getConnection())
     {
-      PreparedStatement stm = connection.prepareStatement
-          ("DELETE FROM _user WHERE userid = ?");
+      PreparedStatement stm = connection.prepareStatement(
+          "DELETE FROM _user WHERE userid = ?");
       stm.setInt(1, userid);
       stm.executeUpdate();
       connection.commit();

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using HotChocolate;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services;
 
 namespace SEP3T2GraphQL.Graphql
@@ -54,12 +52,12 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<Guest> UpdateGuestStatus(Guest guest)
         {
-            return await _guestService.UpdateGuestStatus(guest);
+            return await _guestService.UpdateGuestStatusAsync(guest);
         }
 
         public async Task<RentRequest> RentResidence(RentRequest request)
         {
-            return await _rentalService.CreateRentRequest(request);
+            return await _rentalService.CreateRentRequestAsync(request);
         }
 
         public async Task<Host> RegisterHost(Host host)
@@ -69,14 +67,14 @@ namespace SEP3T2GraphQL.Graphql
             return await _hostService.RegisterHostAsync(host);
         }
 
-        public async Task<Facility> CreateNewFacility(Facility facility)
+        public async Task<Facility> CreateResidenceFacility(Facility facility, int residenceId)
         {
-            return await _facilityService.CreateFacility(facility);
+            return await _facilityService.CreateResidenceFacilityAsync(facility, residenceId);
         }
 
-        public async Task<Rule> CreateNewRule(Rule rule)
+        public async Task<Rule> CreateNewResidenceRule(Rule rule)
         {
-            return await _ruleService.CreateRule(rule);
+            return await _ruleService.CreateResidenceRuleAsync(rule);
         }
 
         public async Task<RentRequest> UpdateRentRequestStatus(RentRequest request)
@@ -101,12 +99,12 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<ResidenceReview> CreateResidenceReview(Residence residence, ResidenceReview residenceReview)
         {
-            return await _residenceReviewService.CreateAsync(residence, residenceReview); 
+            return await _residenceReviewService.CreateResidenceReviewAsync(residence, residenceReview); 
         }
         
         public async Task<HostReview> CreateHostReview(HostReview hostReview)
         {
-           return await _hostReview.CreateHostReviewAsync(hostReview);
+            return await _hostReview.CreateHostReviewAsync(hostReview);
         }
 
         public async Task<HostReview> UpdateHostReview(HostReview hostReview)
@@ -114,9 +112,9 @@ namespace SEP3T2GraphQL.Graphql
             return await _hostReview.UpdateHostReviewAsync(hostReview);
         }
 
-        public async Task<Rule> UpdateResidenceRule(Rule rule)
+        public async Task<Rule> UpdateResidenceRule(Rule rule, string description)
         {
-            return await _ruleService.UpdateRuleAsync(rule);
+            return await _ruleService.UpdateRuleAsync(rule, description);
         }
 
         public async Task<Residence> UpdateResidence(Residence residence)
@@ -126,7 +124,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<Rule> DeleteRule(Rule rule)
         {
-            return await _ruleService.DeleteRule(rule);
+            return await _ruleService.DeleteRuleAsync(rule);
         }
 
         public async Task<Facility> DeleteResidenceFacility(Facility facility, int residenceId)
@@ -141,7 +139,7 @@ namespace SEP3T2GraphQL.Graphql
 
         public async Task<User> UpdateUser(User user)
         {
-           return await _userService.UpdateUserAsync(user);
+            return await _userService.UpdateUserAsync(user);
         }
 
         public async Task<User> DeleteUser(User user)
