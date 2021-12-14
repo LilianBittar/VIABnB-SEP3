@@ -83,6 +83,7 @@
                         <MatOption TValue="double" Value="5">5</MatOption>
                     </MatSelect>
                     <MatTextField Label="Description" @bind-Value="_reviewTest" TextArea="true"></MatTextField>
+                    <p>@_errorMessage</p>
                 </MatDialogContent>
                 <MatDialogActions>
                     <MatButton OnClick="OkClick" Unelevated="true" Style="width: 45em; background-color: green">Review</MatButton>

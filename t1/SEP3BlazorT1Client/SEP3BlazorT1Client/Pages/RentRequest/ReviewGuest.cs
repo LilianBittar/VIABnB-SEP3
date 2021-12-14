@@ -24,7 +24,7 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         private Host _host = new Host();
         private Guest _guest = new Guest();
         private GuestReview _guestReview = new GuestReview();
-
+        private string _errorMessage = "";
         private bool _isloading;
         private bool dialogIsOpen = false;
         private double _rating = 0;
@@ -62,12 +62,14 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
 
             try
             {
+                _errorMessage = "";
                 await CreateReview();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                _errorMessage = e.Message;
+                StateHasChanged();
             }
             dialogIsOpen = false;
         }
