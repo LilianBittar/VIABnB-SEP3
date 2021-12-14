@@ -9,28 +9,6 @@ import java.util.List;
 
 public class CityDAOImpl extends BaseDao implements CityDAO
 {
-  @Override public City getCityById(int id)
-  {
-    try (Connection connection = getConnection())
-    {
-      PreparedStatement stm = connection.prepareStatement(
-          "SELECT * FROM city WHERE cityid = ?");
-      stm.setInt(1, id);
-
-      ResultSet result = stm.executeQuery();
-      if (result.next())
-      {
-        return new City(result.getInt("cityId"), result.getString("cityname"),
-            result.getInt("zipcode"));
-      }
-      return null;
-    }
-    catch (SQLException throwables)
-    {
-      throw new IllegalStateException(throwables.getMessage());
-    }
-  }
-
   @Override public City createNewCity(City city)
   {
     try (Connection connection = getConnection())
@@ -53,7 +31,7 @@ public class CityDAOImpl extends BaseDao implements CityDAO
     }
   }
 
-  @Override public List<City> getAll()
+  @Override public List<City> getAllCities()
   {
     try (Connection connection = getConnection())
     {

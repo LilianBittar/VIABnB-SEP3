@@ -7,14 +7,6 @@ import java.util.List;
 public interface CityDAO
 {
   /**
-   * Return a City object based on a given parameter
-   *
-   * @param id The targeted city's id
-   * @return City Object if any is found, or null
-   * @throws IllegalStateException if connection to database failed or query execution failed
-   */
-  City getCityById(int id);
-  /**
    * Create a new City object and store in in the database
    *
    * @param city The new city
@@ -28,5 +20,5 @@ public interface CityDAO
    * @return a list of City objetcs
    * @throws IllegalStateException if connection to database failed or query execution failed
    */
-  List<City> getAll();
+  List<City> getAllCities();
 }

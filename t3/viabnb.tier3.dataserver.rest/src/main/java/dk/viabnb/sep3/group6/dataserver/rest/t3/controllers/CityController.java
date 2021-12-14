@@ -28,7 +28,7 @@ import java.util.List;
     try
     {
       LOGGER.info("GET request received for /cities");
-      return ResponseEntity.ok(cityDAO.getAll());
+      return ResponseEntity.ok(cityDAO.getAllCities());
     }
     catch (Exception e)
     {

@@ -34,7 +34,7 @@ import java.util.List;
     }
     try
     {
-      Message createdMessage = messageDAO.create(message);
+      Message createdMessage = messageDAO.createMessage(message);
       if (createdMessage == null)
       {
         return ResponseEntity.internalServerError().build();
@@ -53,7 +53,7 @@ import java.util.List;
     LOGGER.info("GET request received for /messages");
     try
     {
-      return ResponseEntity.ok(messageDAO.getAll());
+      return ResponseEntity.ok(messageDAO.getAllMessages());
     }
     catch (Exception e)
     {

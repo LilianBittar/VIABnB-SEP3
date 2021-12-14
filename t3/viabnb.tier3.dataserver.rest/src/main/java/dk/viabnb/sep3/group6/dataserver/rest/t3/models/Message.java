@@ -6,7 +6,7 @@ public class Message
 {
   private User sender;
   private User receiver;
-  private String Content;
+  private String content;
   private LocalDateTime timeSent;
 
   public Message(User sender, User receiver, String content,
@@ -14,7 +14,7 @@ public class Message
   {
     this.sender = sender;
     this.receiver = receiver;
-    Content = content;
+    this.content = content;
     this.timeSent = timeSent;
   }
 
@@ -30,7 +30,7 @@ public class Message
 
   public String getContent()
   {
-    return Content;
+    return content;
   }
 
   public LocalDateTime getTimeSent()
@@ -50,7 +50,7 @@ public class Message
 
   public void setContent(String content)
   {
-    Content = content;
+    this.content = content;
   }
 
   public void setTimeSent(LocalDateTime timeSent)

@@ -13,12 +13,12 @@ public interface AddressDAO
    * @return the newly created object
    * @throws IllegalStateException if connection to database failed or executing the update is failed
    */
-  Address creteNewAddress(Address address);
+  Address createNewAddress(Address address);
   /**
    * Query all Address objects in the database
    *
    * @return a list of Address objects
    * @throws IllegalStateException if connection to database failed or query execution failed
    */
-  List<Address> getAll();
+  List<Address> getAllAddress();
 }

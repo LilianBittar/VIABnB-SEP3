@@ -13,12 +13,12 @@ public interface MessageDAO
    * @return The newly created Message object
    * @throws IllegalStateException if connection to database failed or executing the update failed
    */
-  Message create(Message message);
+  Message createMessage(Message message);
   /**
    * Auery a list of Message objects
    *
    * @return A list o Message objects
    * @throws IllegalStateException if connection to database failed or query execution failed
    */
-  List<Message> getAll();
+  List<Message> getAllMessages();
 }

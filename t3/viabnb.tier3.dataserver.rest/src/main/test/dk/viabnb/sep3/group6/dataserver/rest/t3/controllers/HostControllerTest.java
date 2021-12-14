@@ -1,6 +1,6 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.host.HostDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

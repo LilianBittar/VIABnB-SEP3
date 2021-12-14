@@ -2,7 +2,7 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.host.HostDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

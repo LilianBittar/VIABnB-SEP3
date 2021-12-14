@@ -1,4 +1,4 @@
-package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host;
+package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.host;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;

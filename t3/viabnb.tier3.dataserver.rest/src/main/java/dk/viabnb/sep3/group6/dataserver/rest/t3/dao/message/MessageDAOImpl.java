@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MessageDAOImpl extends BaseDao implements MessageDAO
 {
-  @Override public Message create(Message message)
+  @Override public Message createMessage(Message message)
   {
     try (Connection connection = getConnection())
     {
@@ -32,7 +32,7 @@ public class MessageDAOImpl extends BaseDao implements MessageDAO
     }
   }
 
-  @Override public List<Message> getAll()
+  @Override public List<Message> getAllMessages()
   {
     try (Connection connection = getConnection())
     {
