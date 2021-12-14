@@ -64,7 +64,7 @@ import java.util.List;
     }
   }
 
-  @PutMapping("/hostreviews/host/{id}") public ResponseEntity<HostReview> UpdateHostReview(
+  @PutMapping("/hostreviews/host/{id}") public ResponseEntity<HostReview> updateHostReview(
       @RequestBody HostReview hostReview, @PathVariable int id)
   {
     try

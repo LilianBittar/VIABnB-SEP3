@@ -71,7 +71,7 @@ import java.util.List;
     return new ResponseEntity<>(newResidence, HttpStatus.OK);
   }
 
-  @GetMapping("/residences") public ResponseEntity<List<Residence>> getAll()
+  @GetMapping("/residences") public ResponseEntity<List<Residence>> getAllResidence()
   {
     try
     {
@@ -87,7 +87,7 @@ import java.util.List;
     }
   }
 
-  @PutMapping("/residences/{id}") public ResponseEntity<Residence> UpdateAvailabilityPeriod(
+  @PutMapping("/residences/{id}") public ResponseEntity<Residence> updateAvailabilityPeriod(
       @RequestBody Residence residence, @PathVariable int id)
   {
 
@@ -112,7 +112,7 @@ import java.util.List;
     return null;
   }
 
-  @PostMapping("/residences/{residenceId}/residencereviews") public ResponseEntity<ResidenceReview> createReview(
+  @PostMapping("/residences/{residenceId}/residencereviews") public ResponseEntity<ResidenceReview> createResidenceReview(
       @PathVariable int residenceId,
       @RequestBody ResidenceReview residenceReview)
   {
@@ -140,7 +140,7 @@ import java.util.List;
     }
   }
 
-  @PutMapping("/residences/{residenceId}/residencereviews") public ResponseEntity<ResidenceReview> updateReview(
+  @PutMapping("/residences/{residenceId}/residencereviews") public ResponseEntity<ResidenceReview> updateResidenceReview(
       @PathVariable int residenceId,
       @RequestBody ResidenceReview residenceReview)
   {

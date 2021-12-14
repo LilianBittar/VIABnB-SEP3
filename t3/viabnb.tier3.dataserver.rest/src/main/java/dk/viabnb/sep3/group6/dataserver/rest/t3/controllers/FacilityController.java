@@ -1,7 +1,5 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.facility.FacilityDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Facility;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import java.util.List;
 @RestController public class FacilityController
 {
   private FacilityDAO facilityDAO;
-  private Gson gson = new GsonBuilder().serializeNulls().create();
 
   @Autowired public FacilityController(FacilityDAO facilityDAO)
   {

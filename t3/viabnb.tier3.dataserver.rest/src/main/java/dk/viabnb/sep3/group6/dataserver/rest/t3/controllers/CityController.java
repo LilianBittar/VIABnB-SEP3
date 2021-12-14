@@ -23,7 +23,7 @@ import java.util.List;
     this.cityDAO = cityDAO;
   }
 
-  @GetMapping("/cities") public ResponseEntity<List<City>> getAll()
+  @GetMapping("/cities") public ResponseEntity<List<City>> getAllCity()
   {
     try
     {
@@ -38,7 +38,7 @@ import java.util.List;
     }
   }
 
-  @PostMapping("/cities") public ResponseEntity<City> create(
+  @PostMapping("/cities") public ResponseEntity<City> createCity(
       @RequestBody City city)
   {
     if (city == null)

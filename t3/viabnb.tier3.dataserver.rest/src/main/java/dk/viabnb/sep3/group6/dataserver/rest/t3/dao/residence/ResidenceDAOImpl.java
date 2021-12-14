@@ -56,7 +56,7 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO
     }
   }
 
-  @Override public List<Residence> getAllResidenceByHostId(int id)
+  @Override public List<Residence> getAllResidenceByHostId(int hostId)
       throws IllegalStateException
   {
 
@@ -66,7 +66,7 @@ public class ResidenceDAOImpl extends BaseDao implements ResidenceDAO
           "SELECT * FROM residence JOIN address a on a"
               + ".addressid = residence.addressid JOIN city c on c.cityid = a.cityid JOIN _user u on u.userid = "
               + "residence.hostid JOIN host h on u.userid = h.hostid WHERE userid = ?");
-      stm.setInt(1, id);
+      stm.setInt(1, hostId);
       ResultSet result = stm.executeQuery();
       List<Residence> residences = new ArrayList<>();
       while (result.next())
