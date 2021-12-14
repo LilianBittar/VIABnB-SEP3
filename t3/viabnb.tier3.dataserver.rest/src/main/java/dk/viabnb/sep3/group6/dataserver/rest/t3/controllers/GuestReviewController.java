@@ -1,7 +1,5 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guestreview.GuestReviewDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.GuestReview;
 import org.slf4j.Logger;
@@ -15,7 +13,6 @@ import java.util.List;
 @RestController public class GuestReviewController
 {
   private GuestReviewDAO guestReviewDAO;
-  private Gson gson = new GsonBuilder().serializeNulls().create();
   private static final Logger LOGGER = LoggerFactory.getLogger(
       GuestController.class);
 
@@ -64,7 +61,7 @@ import java.util.List;
     }
   }
 
-  @PutMapping("/guestreviews/guest/{id}") public ResponseEntity<GuestReview> UpdateGuestReview(
+  @PutMapping("/guestreviews/guest/{id}") public ResponseEntity<GuestReview> updateGuestReview(
       @RequestBody GuestReview guestReview, @PathVariable int id)
   {
     try

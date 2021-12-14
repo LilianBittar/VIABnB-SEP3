@@ -17,7 +17,6 @@ class HostControllerTest
 {
   private HostDAO hostDAO;
   private HostController controller;
-  private Host host;
 
   @BeforeEach void setup()
   {
@@ -25,7 +24,7 @@ class HostControllerTest
     controller = new HostController(hostDAO);
   }
 
-  @Test public void RegisterHostNullRequestReturnsBadRequest()
+  @Test public void registerHostNullRequestReturnsBadRequest()
   {
     //arrange
     Host host = null;
@@ -35,7 +34,7 @@ class HostControllerTest
         controller.createHost(host));
   }
 
-  @Test void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNull()
+  @Test void controllerReturnsInternalServerErrorWhenRepositoryReturnsNull()
   {
     //arrange
     Host host = new Host(1, "test", "test", "12345678", "email@test.tt",
@@ -47,7 +46,7 @@ class HostControllerTest
         controller.createHost(host));
   }
 
-  @Test void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNullTest()
+  @Test void controllerReturnsInternalServerErrorWhenRepositoryReturnsNullTest()
   {
     //aarange
     Host host = new Host(1, "test", "test", "12345678", "email@test.tt",

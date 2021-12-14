@@ -17,11 +17,11 @@ public interface ResidenceDAO
   /**
    * Query a list of Residence objects based on the given parameter
    *
-   * @param id The residence's Host's id
+   * @param hostId The residence's Host's id
    * @return A list of Residence object
    * @throws IllegalStateException if connection to database failed or query execution failed
    */
-  List<Residence> getAllResidenceByHostId(int id);
+  List<Residence> getAllResidenceByHostId(int hostId);
   /**
    * Create a new Residence object and store it in the database
    *
@@ -37,7 +37,7 @@ public interface ResidenceDAO
    * @return a list of Residence objects
    * @throws IllegalStateException if connection to database failed or query execution failed
    */
-  List<Residence> getAllResidences() throws IllegalStateException;
+  List<Residence> getAllResidences();
 
   /**
    * Update start date, end date and sets availability to true

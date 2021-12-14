@@ -56,32 +56,32 @@ class ResidenceControllerTest
     when(residenceDAO.getAllResidences()).thenThrow(
         IllegalStateException.class);
     assertEquals(ResponseEntity.internalServerError().build(),
-        controller.getAll());
+        controller.getAllResidence());
   }
 
   @Test public void createReviewReturnsBadRequestWhenResidenceReviewIsNullI()
   {
     assertEquals(ResponseEntity.badRequest().build(),
-        controller.createReview(1, null));
+        controller.createResidenceReview(1, null));
   }
 
   @Test public void createReviewReturnsBadRequestWhenResidenceIdIsZero()
   {
-    assertEquals(ResponseEntity.badRequest().build(), controller.createReview(0,
+    assertEquals(ResponseEntity.badRequest().build(), controller.createResidenceReview(0,
         new ResidenceReview(1, "test", 293886, LocalDate.now())));
   }
 
   @Test public void createReviewReturnsBadRequestWhenResidenceIdIsMinusOne()
   {
     assertEquals(ResponseEntity.badRequest().build(),
-        controller.createReview(-1,
+        controller.createResidenceReview(-1,
             new ResidenceReview(1, "test", 293886, LocalDate.now())));
   }
 
   @Test public void createReviewReturnsBadRequestWhenResidenceIdIsMinusTen()
   {
     assertEquals(ResponseEntity.badRequest().build(),
-        controller.createReview(-10,
+        controller.createResidenceReview(-10,
             new ResidenceReview(1, "test", 293886, LocalDate.now())));
   }
 
@@ -95,7 +95,7 @@ class ResidenceControllerTest
     when(residenceReviewDAO.createResidenceReview(residence,
         residenceReview)).thenThrow(IllegalStateException.class);
     assertEquals(ResponseEntity.internalServerError().build(),
-        controller.createReview(residence.getId(), residenceReview));
+        controller.createResidenceReview(residence.getId(), residenceReview));
   }
 
   @Test public void createReviewReturnsInternalServerErrorWhenCreatedReviewIsNull()
@@ -108,7 +108,7 @@ class ResidenceControllerTest
     when(residenceReviewDAO.createResidenceReview(residence,
         residenceReview)).thenReturn(null);
     assertEquals(ResponseEntity.internalServerError().build(),
-        controller.createReview(residence.getId(), residenceReview));
+        controller.createResidenceReview(residence.getId(), residenceReview));
   }
 
   @Test public void updateResidenceDoesNotUpdateButReturnsInternalServerErrorTest()

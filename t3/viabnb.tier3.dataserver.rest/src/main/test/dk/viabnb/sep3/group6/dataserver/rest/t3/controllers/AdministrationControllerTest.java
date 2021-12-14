@@ -15,7 +15,6 @@ class AdministrationControllerTest
 {
   private AdministrationDAO administrationDAO;
   private AdministrationController controller;
-  private Administrator administrator;
   private User user;
 
   @BeforeEach public void setUp()
