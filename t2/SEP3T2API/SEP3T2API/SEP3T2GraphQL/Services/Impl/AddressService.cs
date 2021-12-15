@@ -23,7 +23,7 @@ namespace SEP3T2GraphQL.Services.Impl
 
         public async Task<Address> CreateAddressAsync(Address address)
         {
-            _createAddressValidator.Validate(address);
+            _createAddressValidator.ValidateAddress(address);
             return await _addressRepository.CreateAddressAsync(address); 
         }
     }

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
-using SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl;
 
 namespace SEP3T2GraphQL.Services.Impl
 {

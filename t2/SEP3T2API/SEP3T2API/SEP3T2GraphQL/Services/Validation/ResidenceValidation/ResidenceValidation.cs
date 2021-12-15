@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SEP3T2GraphQL.Models;
 
-namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl
+namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
 {
     public class ResidenceValidation : IResidenceValidation
     {
@@ -22,7 +22,7 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl
             throw new ArgumentException("Invalid address");
         }
 
-        public bool IsValidRules(IList<Rule> rules)
+        private static bool IsValidRules(IList<Rule> rules)
         {
             if (rules != null && (rules.All(rule => !string.IsNullOrEmpty(rule.Description))))
             {
@@ -32,7 +32,7 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl
             throw new ArgumentException("Invalid rules");
         }
 
-        public bool IsValidFacilities(IList<Facility> facilities)
+        private static bool IsValidFacilities(IList<Facility> facilities)
         {
             if (facilities != null &&
                 (facilities.All(facility =>
@@ -66,7 +66,7 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl
             throw new ArgumentException("Invalid Residence");
         }
 
-        public bool IsLettersOnly(string arg)
+        private static bool IsLettersOnly(string arg)
         {
             if (arg.All(char.IsLetter))
             {

@@ -5,7 +5,6 @@ using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services.Validation;
 using SEP3T2GraphQL.Services.Validation.GuestValidation;
-using SEP3T2GraphQL.Services.Validation.GuestValidation.Impl;
 
 namespace SEP3T2GraphQL.Services.Impl
 {

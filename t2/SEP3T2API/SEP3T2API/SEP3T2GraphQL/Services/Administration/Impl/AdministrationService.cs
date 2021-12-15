@@ -20,13 +20,13 @@ namespace SEP3T2GraphQL.Services.Administration.Impl
             {
                 throw new ArgumentException("Invalid email");
             }
-            var administratorToReturn = await _administrationRepository.GetAdminByEmail(email);
+            var administratorToReturn = await _administrationRepository.GetAdminByEmailAsync(email);
             return administratorToReturn;
         }
 
         public async Task<IEnumerable<Administrator>> GetAllAdmins()
         {
-            var administratorsToReturn = await _administrationRepository.GetAllAdmins();
+            var administratorsToReturn = await _administrationRepository.GetAllAdminsAsync();
             if (administratorsToReturn == null)
             {
                 throw new Exception("Admin list cant be null");

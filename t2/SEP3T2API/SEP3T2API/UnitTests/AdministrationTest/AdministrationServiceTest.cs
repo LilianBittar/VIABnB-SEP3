@@ -37,7 +37,7 @@ namespace UnitTests.AdministrationTest
         {
             var adminList = new List<Administrator>() {_administrator};
             var email = "Test@test.tt";
-            _administrationRepository.Setup<IEnumerable<Administrator>>(x => x.GetAllAdmins().Result)
+            _administrationRepository.Setup<IEnumerable<Administrator>>(x => x.GetAllAdminsAsync().Result)
                 .Returns(adminList);
             Assert.DoesNotThrowAsync(async () => await _administrationService.GetAdminByEmail(email));
         }
@@ -47,7 +47,7 @@ namespace UnitTests.AdministrationTest
         public void GetAdminByInvalidEmailThrowsArgumentExceptionTest(string email)
         {
             var adminList = new List<Administrator>() {_administrator};
-            _administrationRepository.Setup<IEnumerable<Administrator>>(x => x.GetAllAdmins().Result)
+            _administrationRepository.Setup<IEnumerable<Administrator>>(x => x.GetAllAdminsAsync().Result)
                 .Returns(adminList);
             Assert.ThrowsAsync<ArgumentException>(async () => await _administrationService.GetAdminByEmail(email));
         }

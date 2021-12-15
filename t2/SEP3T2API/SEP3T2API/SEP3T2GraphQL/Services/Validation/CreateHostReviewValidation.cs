@@ -38,28 +38,5 @@ namespace SEP3T2GraphQL.Services.Validation
                 throw new ArgumentException("Invalid rating, must be between 0 and 5");
             }
         }
-
-        /// <summary>
-        /// Validates if the guest doing the review has ever rented a residence of the host under review
-        /// </summary>
-        /// <remarks>Method will return void if valid, else an exception will be thrown</remarks>
-        /// <param name="hostReview">review being validated</param>
-        /// <exception cref="ArgumentException">If guest has no approved <c>RentRequest</c> for a residence owned by host of the <c>GuestReview</c></exception>
-        private async Task ValidateGuestHasRentedResidenceOwnedByHost(HostReview hostReview)
-        {
-            var allGuestRentRequests = await _rentalService.GetRentRequestsByGuestIdAsync(hostReview.GuestId);
-            var guestRentRequests = allGuestRentRequests.ToList();
-            if (!guestRentRequests.Any())
-            {
-                throw new ArgumentException("Guest has never rented a residence owned by the host before");
-            }
-
-            var approvedRequestsHostIsOwner = guestRentRequests.Where(r =>
-                r.Residence.Host.Id == hostReview.hostId && r.Status == RentRequestStatus.APPROVED);
-            if (!approvedRequestsHostIsOwner.Any())
-            {
-                throw new ArgumentException("Guest has never rented a residence owned by the host before");
-            }
-        }
     }
 }

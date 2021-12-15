@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
-using SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl;
 
 namespace UnitTests.ResidenceTest
 {
