@@ -12,14 +12,13 @@ namespace SEP3BlazorT1Client.Pages.UserLogin
     {
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
-        [Inject] public IGuestService GuestService { get; set; }
 
-        private string email;
-        private string password;
-        private string ErrorMessage;
-        private bool loginAsHost;
-        private string TxtType = "password";
-        private string IconType = MatIconNames.Visibility;
+        private string _email;
+        private string _password;
+        private string _errorMessage;
+        private bool _loginAsHost;
+        private string _txtType = "password";
+        private string _iconType = MatIconNames.Visibility;
         private bool IsShow { get; set; } = true;
 
         private void ShowLoadingBar()   
@@ -27,47 +26,47 @@ namespace SEP3BlazorT1Client.Pages.UserLogin
             IsShow = !IsShow;
         }
 
-        public void ShowPassword()
+        private void ShowPassword()
         {
-            if (this.TxtType == "password")
+            if (_txtType == "password")
             {
-                this.TxtType = "text";
-                IconType = MatIconNames.Visibility_off;
+                _txtType = "text";
+                _iconType = MatIconNames.Visibility_off;
             }
             else
             {
-                this.TxtType = "password";
-                IconType = MatIconNames.Visibility;
+                _txtType = "password";
+                _iconType = MatIconNames.Visibility;
             }
         }
 
         private async Task PerformLogin()
         {
-            ErrorMessage = "";
+            _errorMessage = "";
             try
             {
-                if (loginAsHost)
+                if (_loginAsHost)
                 {
                     ShowLoadingBar();
-                    await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email,
-                        password);
-                    password = "";
+                    await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_email,
+                        _password);
+                    _password = "";
                     NavigationManager.NavigateTo("/HostResidences");
                 }
                 else
                 {
                     ShowLoadingBar();
-                    await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(email,
-                        password);
-                    email = "";
-                    password = "";
+                    await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(_email,
+                        _password);
+                    _email = "";
+                    _password = "";
                     NavigationManager.NavigateTo("/User");
                 }
             }
             catch (Exception e)
             {
                 ShowLoadingBar();
-                ErrorMessage = e.Message;
+                _errorMessage = e.Message;
                 Console.WriteLine(e.Message);
             }
         }

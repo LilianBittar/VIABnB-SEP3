@@ -78,7 +78,7 @@
                     }
                 </div>
             </div>
-            <MatDialog @bind-IsOpen="@dialogIsOpen">
+            <MatDialog @bind-IsOpen="@_dialogIsOpen">
                 <MatDialogTitle>Hello! add your review here</MatDialogTitle>
                 <MatDialogContent>
                     <p>Your opinion matters</p>
@@ -94,7 +94,7 @@
                 </MatDialogContent>
                 <MatDialogActions>
                     <MatButton OnClick="OkClick" Unelevated="true" Style="width: 45em; background-color: green">Review</MatButton>
-                    <MatButton OnClick="@(e => { dialogIsOpen = false;})" Unelevated="true" Style="width: 45em; background-color: red">Cancel</MatButton>
+                    <MatButton OnClick="@(e => { _dialogIsOpen = false;})" Unelevated="true" Style="width: 45em; background-color: red">Cancel</MatButton>
                 </MatDialogActions>
             </MatDialog>
         }

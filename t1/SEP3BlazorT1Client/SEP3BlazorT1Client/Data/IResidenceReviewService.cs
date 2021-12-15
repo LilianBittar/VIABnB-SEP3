@@ -12,7 +12,7 @@ namespace SEP3BlazorT1Client.Data
         /// <param name="residenceId">id of the residence</param>
         /// <returns>all residence reviews of residence with id of <c>residenceId</c></returns>
         /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
-        public Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId);
+        Task<IEnumerable<ResidenceReview>> GetAllByResidenceIdAsync(int residenceId);
         /// <summary>
         /// Creates a new <c>ResidenceReview</c> for an residence via repository
         /// </summary>
@@ -25,7 +25,7 @@ namespace SEP3BlazorT1Client.Data
         /// <param name="residenceReview"></param>
         /// <returns>newly created review if no existing review exists, else the old review updated with the new values for properties</returns>
         /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
-        public Task<ResidenceReview> CreateResidenceReviewAsync(Residence residence, ResidenceReview residenceReview); 
+        Task<ResidenceReview> CreateResidenceReviewAsync(Residence residence, ResidenceReview residenceReview); 
 
     }
 }

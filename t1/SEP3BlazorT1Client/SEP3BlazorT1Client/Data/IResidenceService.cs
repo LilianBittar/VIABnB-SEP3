@@ -20,13 +20,14 @@ namespace SEP3BlazorT1Client.Data
         /// <returns>A Residence object</returns>
         /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
         Task<Residence> CreateResidenceAsync(Residence residence);
+
         /// <summary>
         /// Get a list of Residence objects by a given parameter via Repository
         /// </summary>
         /// <param name="id">The Host's id who own the Residences</param>
         /// <returns>A list of Residence objects</returns>
         /// <exception cref="System.ArgumentException">If the repository can't execute the method</exception>
-        Task<IList<Residence>> GetResidencesByHostIdAsync(int Id);
+        Task<IList<Residence>> GetResidencesByHostIdAsync(int id);
         /// <summary>
         /// Get a list of Residence objects via Repository
         /// </summary>

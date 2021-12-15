@@ -20,21 +20,21 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         [Parameter] public int Id { get; set; }
         private Host _host = new Host();
         private User _user = new User();
-        private string newPassword;
-        private bool isLoading;
-        private bool isEditable;
-        bool snackBarIsOpen = false;
-        private string ErrorMessage="";
+        private string _newPassword;
+        private bool _isLoading;
+        private bool _isEditable;
+        private bool _snackBarIsOpen = false;
+        private string _errorMessage="";
 
         protected override async Task OnInitializedAsync()
         {
             try
             {
-                isEditable = true;
-                isLoading = true;
+                _isEditable = true;
+                _isLoading = true;
                 _host = await HostService.GetHostByIdAsync(Id);
                 StateHasChanged();
-                isLoading = false;
+                _isLoading = false;
                 _user = new User()
                 {
                     Id = _host.Id,
@@ -48,19 +48,19 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
             }
             catch (Exception e)
             {
-                ErrorMessage = "";
-                ErrorMessage = "Something went wrong.. try refreshing the page";
+                _errorMessage = "";
+                _errorMessage = "Something went wrong.. try refreshing the page";
             }
            
         }
-        private void FilesReady()
+        private static void FilesReady()
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Not working for now");
         }
 
         private void EditContent()
         {
-            isEditable = false;
+            _isEditable = false;
         }
 
         private async Task DeleteProfile()
@@ -77,9 +77,9 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
             }
         }
         
-        private async Task<User> UpdateUser()
+        private async Task UpdateUser()
         {
-            return await UserService.UpdateUserAsync(_user);
+            await UserService.UpdateUserAsync(_user);
         }
         
         private async Task OpenConfirmFromService()
@@ -88,8 +88,8 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
             isReady = await MatDialogService.ConfirmAsync("Are you sure you want to update your profile?");
             if (isReady)
             {
-                UpdateUser();
-                snackBarIsOpen = true;
+                await UpdateUser();
+                _snackBarIsOpen = true;
                 StateHasChanged();
             }
         }

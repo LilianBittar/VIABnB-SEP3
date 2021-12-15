@@ -18,7 +18,7 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [Inject] public IHostService HostService { get; set; }
-        private string ErrorMessage="";
+        private string _errorMessage="";
 
         private IEnumerable<Models.RentRequest> _activeRentRequestList;
         private IEnumerable<Models.RentRequest> _oldRentRequestList = new List<Models.RentRequest>();
@@ -33,8 +33,8 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
             }
             catch (Exception e)
             {
-                ErrorMessage = "";
-                ErrorMessage = "Something went wrong.. try refreshing the page";
+                _errorMessage = "";
+                _errorMessage = "Something went wrong.. try refreshing the page";
             }
            
         }

@@ -5,10 +5,10 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @using SEP3BlazorT1Client.Data
 @using System.Text.Json
-@inject NavigationManager NavigationManager; 
-@inject IMatDialogService MatDialogService;
-@inject AuthenticationStateProvider AuthenticationStateProvider; 
-@inject IUserService UserService
+@inject NavigationManager _navigationManager; 
+@inject IMatDialogService _matDialogService;
+@inject AuthenticationStateProvider _authenticationStateProvider; 
+@inject IUserService _userService
 
 <AuthorizeView Policy="MustBeHost">
     <Authorized>
@@ -164,7 +164,7 @@
 
     private async Task ConnectToServer()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var authState = await _authenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         foreach (var userClaim in user.Claims)
         {
@@ -172,7 +172,7 @@
         }
         if (user.Identity.IsAuthenticated)
         {
-            _sender = await UserService.GetUserByEmailAsync(user.Identity.Name);
+            _sender = await _userService.GetUserByEmailAsync(user.Identity.Name);
             _connection = new HubConnectionBuilder().WithUrl($"https://localhost:5001/chat?email={_sender.Email}").WithAutomaticReconnect().Build();
             _connection.On<string>("ReceiveMessage", ReceiveMessage);
             _connection.On<string>("ReceiveUserMessages", ReceiveUserMessages);
@@ -182,7 +182,7 @@
         }
         else
         {
-            NavigationManager.NavigateTo("/login");
+            _navigationManager.NavigateTo("/login");
         }
     }
 
@@ -258,7 +258,7 @@
     {
         try
         {
-            var user = await UserService.GetUserByEmailAsync(_newConversationEmail);
+            var user = await _userService.GetUserByEmailAsync(_newConversationEmail);
             if (user == null)
             {
                 _errorMessage = "Not found";

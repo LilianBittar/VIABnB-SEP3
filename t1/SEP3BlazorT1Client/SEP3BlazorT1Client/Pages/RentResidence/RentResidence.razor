@@ -2,11 +2,11 @@
 @using SEP3BlazorT1Client.Data
 @using SEP3BlazorT1Client.Models
 @using JsonSerializer = System.Text.Json.JsonSerializer
-@inject IGuestService GuestService
-@inject IResidenceService ResidenceService
-@inject IRentalService RentalService
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject NavigationManager NavigationManager
+@inject IGuestService _guestService
+@inject IResidenceService _residenceService
+@inject IRentalService _rentalService
+@inject AuthenticationStateProvider _authenticationStateProvider
+@inject NavigationManager _navigationManager
 <AuthorizeView Context="Auth" Policy="MustBeApprovedGuest">
     <Authorized>
         @if (_newRentRequest.Residence != null)
@@ -27,9 +27,9 @@
 
                                 <div class="card__content">
                                     <div class="available-period">
-                                        <span>@residence.AvailableFrom.Value.ToShortDateString()</span>
+                                        <span>@_residence.AvailableFrom.Value.ToShortDateString()</span>
 
-                                        <span>@residence.AvailableTo.Value.ToShortDateString()</span>
+                                        <span>@_residence.AvailableTo.Value.ToShortDateString()</span>
                                     </div>
                                     <div class="d-flex flex-row">
                                         <MatDatePicker @bind-Value="@_startDateInput" Required="true" Outlined="true" Label="Start date" OnInput="@(StateHasChanged)"/>
@@ -96,8 +96,7 @@
     [CascadingParameter]
     public EditContext EditContext { get; private set; }
 
-    private Residence _testResidence;
-    private Residence residence = new Residence();
+    private Residence _residence = new Residence();
 
     private string _errorMessage = "";
 
@@ -106,12 +105,12 @@
         try
         {
             EditContext = new EditContext(_newRentRequest);
-            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var authState = await _authenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
-            residence = await ResidenceService.GetResidenceByIdAsync(ResidenceId);
+            _residence = await _residenceService.GetResidenceByIdAsync(ResidenceId);
             if (user.Identity.IsAuthenticated)
             {
-                var guest = await GuestService.GetGuestByIdAsync(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
+                var guest = await _guestService.GetGuestByIdAsync(Int32.Parse(user.Claims.FirstOrDefault(c => c.Type.ToString() == "Id").Value));
 
                 if (guest != null)
                 {
@@ -119,18 +118,18 @@
                 }
                 else
                 {
-                    NavigationManager.NavigateTo("/");
+                    _navigationManager.NavigateTo("/");
                 }
-                if (residence != null)
+                if (_residence != null)
                 {
-                    _newRentRequest.Residence = residence;
+                    _newRentRequest.Residence = _residence;
                 }
                 EditContext = new EditContext(_newRentRequest);
                 Console.WriteLine(JsonSerializer.Serialize(_newRentRequest));
             }
             else
             {
-                NavigationManager.NavigateTo("/login");
+                _navigationManager.NavigateTo("/login");
             }
         }
         catch (Exception e)
@@ -140,7 +139,7 @@
         }
     }
 
-    private int GetTotalDays()
+        private int GetTotalDays()
     {
         return (_endDateInput.Date - _startDateInput.Date).Days;
     }
@@ -149,16 +148,14 @@
     {
         try
         {
-    /*
-             Bug MatBlazor DatePicker subtracts 1 day from the actual selected date.
-             This is a known issue and has an open issue on github. 
-             */
+    /* Bug MatBlazor DatePicker subtracts 1 day from the actual selected date.
+             This is a known issue and has an open issue on github.*/
             _newRentRequest.StartDate = _startDateInput.AddDays(1);
             _newRentRequest.EndDate = _endDateInput.AddDays(1);
 
-            await RentalService.CreateRentRequestAsync(_newRentRequest);
+            await _rentalService.CreateRentRequestAsync(_newRentRequest);
             StateHasChanged();
-            NavigationManager.NavigateTo("/residences");
+            _navigationManager.NavigateTo("/residences");
         }
         catch (Exception e)
         {

@@ -1,7 +1,7 @@
 @using SEP3BlazorT1Client.Authentication
 @inherits LayoutComponentBase
-@inject NavigationManager NavigationManager
-@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager _navigationManager
+@inject AuthenticationStateProvider _authenticationStateProvider
 
 <MatAppBarContainer>
     <MatAppBar Fixed="true" class="mat-elevation-z4">
@@ -101,8 +101,8 @@
     {
         try
         {
-            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
-            NavigationManager.NavigateTo("/");
+            ((CustomAuthenticationStateProvider) _authenticationStateProvider).Logout();
+            _navigationManager.NavigateTo("/");
         }
         catch (Exception e)
         {
@@ -111,6 +111,6 @@
 
     private void ToLogin()
     {
-        NavigationManager.NavigateTo("Login");
+        _navigationManager.NavigateTo("Login");
     }
 }

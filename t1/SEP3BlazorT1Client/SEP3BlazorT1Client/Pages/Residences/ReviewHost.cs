@@ -27,7 +27,7 @@ namespace SEP3BlazorT1Client.Pages.Residences
         private HostReview _hostReview;
 
         private bool _isLoading;
-        private  bool dialogIsOpen = false;
+        private  bool _dialogIsOpen = false;
         private double _rating = 0;
         private string _reviewText  = "";
 
@@ -62,13 +62,13 @@ namespace SEP3BlazorT1Client.Pages.Residences
         
         private void OpenDialog()
         {
-            dialogIsOpen = true;
+            _dialogIsOpen = true;
         }
         private async void OkClick()
         {
              await CreateReview();
              StateHasChanged();
-            dialogIsOpen = false;
+            _dialogIsOpen = false;
         }
 
         private async Task CreateReview()

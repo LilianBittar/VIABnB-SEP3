@@ -1,5 +1,5 @@
 @using SEP3BlazorT1Client.Models
-@inject NavigationManager NavigationManager
+@inject NavigationManager _navigationManager
 @if (Residence != null)
 {
     <div class="residence-card">
@@ -34,7 +34,7 @@
                 <span>@Residence.AvailableTo.Value.ToShortDateString()</span>
             </div>
             <div>
-                <MatButton Label="Rent" OnClick="@(() => NavigationManager.NavigateTo($"/rentresidence/{Residence.Id}"))"/>
+                <MatButton Label="Rent" OnClick="@(() => _navigationManager.NavigateTo($"/rentresidence/{Residence.Id}"))"/>
             </div>
         </div>
     </div>

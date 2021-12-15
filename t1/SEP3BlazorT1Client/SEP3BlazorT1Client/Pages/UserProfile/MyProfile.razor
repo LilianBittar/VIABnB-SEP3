@@ -1,8 +1,8 @@
 @page "/MyProfile/{Id:int}"
 <AuthorizeView Policy="MustBeApprovedHost">
     <Authorized>
-        <p>@ErrorMessage</p>
-        @if (isLoading)
+        <p>@_errorMessage</p>
+        @if (_isLoading)
         {
             <h3 class="mat-subtitle1">Loading</h3>
             <MatProgressCircle Indeterminate="true"/>
@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <MatButton OnClick="@(_ => OpenConfirmFromService())" TrailingIcon="save" Unelevated="true" Style="width: 200px; background-color: green">Save changes</MatButton>
                     </div>
-                    <MatSnackbar @bind-IsOpen="@snackBarIsOpen">
+                    <MatSnackbar @bind-IsOpen="@_snackBarIsOpen">
                         <MatSnackbarContent>Your acount has been successfully updated!!</MatSnackbarContent>
                     </MatSnackbar>
                     <br/>
@@ -45,13 +45,13 @@
                     <br/>
                     <div class="form-group">
                         <p>
-                            <MatTextField @bind-Value="_user.FirstName" Label="First Name" Icon="person" IconTrailing="true" FullWidth="true" Disabled="isEditable"></MatTextField>
+                            <MatTextField @bind-Value="_user.FirstName" Label="First Name" Icon="person" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
                         </p>
                     </div>
                     <br/>
                     <div class="form-group">
                         <p>
-                            <MatTextField @bind-Value="_user.LastName" Label="Last Name" Icon="person" IconTrailing="true" FullWidth="true" Disabled="isEditable"></MatTextField>
+                            <MatTextField @bind-Value="_user.LastName" Label="Last Name" Icon="person" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
                         </p>
                     </div>
                     <br/>
@@ -69,19 +69,19 @@
                     <br/>
                     <div class="form-group">
                         <p>
-                            <MatTextField @bind-Value="_user.PhoneNumber" Label="Phone Number" Icon="phone" IconTrailing="true" FullWidth="true" Disabled="isEditable"></MatTextField>
+                            <MatTextField @bind-Value="_user.PhoneNumber" Label="Phone Number" Icon="phone" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
                         </p>
                     </div>
                     <br/>
                     <div class="form-group">
                         <p>
-                            <MatTextField @bind-Value="_user.Password" Label="New Password" Type="password" Icon="lock" IconTrailing="true" FullWidth="true" Disabled="isEditable"></MatTextField>
+                            <MatTextField @bind-Value="_user.Password" Label="New Password" Type="password" Icon="lock" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
                         </p>
                     </div>
                     <br/>
                     <div class="form-group">
                         <p>
-                            <MatTextField @bind-Value="newPassword" Label="Confirm Password" Type="password" Icon="lock" IconTrailing="true" FullWidth="true" Disabled="isEditable"></MatTextField>
+                            <MatTextField @bind-Value="_newPassword" Label="Confirm Password" Type="password" Icon="lock" IconTrailing="true" FullWidth="true" Disabled="_isEditable"></MatTextField>
                         </p>
                     </div>
                 </div>

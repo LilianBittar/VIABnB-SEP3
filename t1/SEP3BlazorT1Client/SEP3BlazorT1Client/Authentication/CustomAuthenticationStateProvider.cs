@@ -13,23 +13,23 @@ namespace SEP3BlazorT1Client.Authentication
     public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {
 
-        private readonly IJSRuntime jsRuntime;
+        private readonly IJSRuntime _jsRuntime;
         private readonly IUserService _userService;
         private readonly IHostService _hostService;
         private readonly IGuestService _guestService;
         private readonly IAdministrationService _administrationService;
 
-        private User cachedUser;
+        private User _cachedUser;
 
-        private bool isAdmin = false;
-        private bool isHost = false;
-        private bool isGuest = false;
+        private bool _isAdmin = false;
+        private bool _isHost = false;
+        private bool _isGuest = false;
         private bool _isApprovedHost = false;
         private bool _isApprovedGuest = false;
         
         public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IUserService userService, IHostService hostService, IGuestService guestService, IAdministrationService administrationService)
         {
-            this.jsRuntime = jsRuntime;
+            this._jsRuntime = jsRuntime;
             _userService = userService;
             _hostService = hostService;
             _guestService = guestService;
@@ -37,21 +37,21 @@ namespace SEP3BlazorT1Client.Authentication
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            Console.WriteLine($"{this} {isAdmin} {isGuest} {isHost}");
+            Console.WriteLine($"{this} {_isAdmin} {_isGuest} {_isHost}");
             var identity = new ClaimsIdentity();
-            if (cachedUser == null)
+            if (_cachedUser == null)
             {
-                var userAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
+                var userAsJson = await _jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
                 if (!string.IsNullOrEmpty(userAsJson))
                 {
-                    cachedUser = JsonSerializer.Deserialize<User>(userAsJson);
-                    await ValidateLogin(cachedUser.Email, cachedUser.Password);
-                    identity = SetupClaimsForUser(cachedUser);
+                    _cachedUser = JsonSerializer.Deserialize<User>(userAsJson);
+                    await ValidateLogin(_cachedUser.Email, _cachedUser.Password);
+                    identity = SetupClaimsForUser(_cachedUser);
                 }
             }
             else
             {
-                identity = SetupClaimsForUser(cachedUser);
+                identity = SetupClaimsForUser(_cachedUser);
             }
 
             var cachedClaimsPrincipal = new ClaimsPrincipal(identity);
@@ -83,12 +83,12 @@ namespace SEP3BlazorT1Client.Authentication
             var identity = new ClaimsIdentity();
             try
             {
-                cachedUser = await _userService.ValidateUserAsync(email, password);
+                _cachedUser = await _userService.ValidateUserAsync(email, password);
                 var _guest = await _guestService.GetGuestByEmailAsync(email);
                 var _host = await _hostService.GetHostByEmailAsync(email);
                 if (await _administrationService.GetAdminByEmailAsync(email) != null)
                 {
-                    isAdmin = true;
+                    _isAdmin = true;
                 }
 
                 else if (_host != null)
@@ -97,20 +97,20 @@ namespace SEP3BlazorT1Client.Authentication
                     {
                         _isApprovedHost = true;
                     }
-                    isHost = true;
+                    _isHost = true;
                     if (_guest != null)
                     {
                         if (_guest.IsApprovedGuest)
                         {
                             _isApprovedGuest = true; 
                         }
-                        isGuest = true; 
+                        _isGuest = true; 
                     }
                 }
 
-                identity = SetupClaimsForUser(cachedUser);
-                var userAsJson = JsonSerializer.Serialize(cachedUser);
-                await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", userAsJson);
+                identity = SetupClaimsForUser(_cachedUser);
+                var userAsJson = JsonSerializer.Serialize(_cachedUser);
+                await _jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", userAsJson);
             }
             catch (Exception e)
             {
@@ -128,14 +128,14 @@ namespace SEP3BlazorT1Client.Authentication
             claims.Add(new Claim("email", user.Email));
             claims.Add(new Claim("phoneNumber", user.PhoneNumber));
             claims.Add(new Claim("Id", user.Id.ToString()));
-            if (isAdmin)
+            if (_isAdmin)
             {
                 Console.WriteLine("Admin");
                 claims.Add(new Claim("Approved", "Host"));
                 claims.Add(new Claim("Approved", "Guest"));
                 claims.Add(new Claim("Role", "Admin"));
             }
-            else if (isHost)
+            else if (_isHost)
             {
                 if (_isApprovedHost)
                 {
@@ -143,7 +143,7 @@ namespace SEP3BlazorT1Client.Authentication
                 }
                 Console.WriteLine("Host");
                 claims.Add(new Claim("Role", "Host"));
-                if (isGuest)
+                if (_isGuest)
                 {
                     claims.Add(new Claim("Approved", "Guest"));
                     if (_isApprovedGuest)
@@ -159,9 +159,9 @@ namespace SEP3BlazorT1Client.Authentication
         
         public void Logout()
         {
-            cachedUser = null;
+            _cachedUser = null;
             var user = new ClaimsPrincipal(new ClaimsIdentity());
-            jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", "");
+            _jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", "");
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
         }
     }

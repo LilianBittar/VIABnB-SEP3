@@ -17,7 +17,6 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         [Inject] public AuthenticationStateProvider AuthStateProvider { get; set; }
         
         private User _user;
-        private bool _dialogIsOpen = false;
         private string _errorLabel = "";
         
         protected override async Task OnInitializedAsync()
@@ -59,19 +58,9 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         {
             NavigationManager.NavigateTo($"HostReviews/{id}");
         }
-        private void ToGuestReviews(int id)
-        {
-            NavigationManager.NavigateTo($"GuestReviews/{id}");
-        }
-
         private void ToMyMail()
         {
             NavigationManager.NavigateTo("/messages");
-        }
-
-        private void ToMyRentRequest()
-        {
-            NavigationManager.NavigateTo("/");
         }
         private void ToRegisterResidence()
         {

@@ -13,7 +13,6 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="@(() => ToMyProfile(_user.Id))">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Account_circle" Class="user-icons"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -27,7 +26,6 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="ToHostResidence">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Home"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -41,7 +39,6 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="@(() => ToHostReviews(_user.Id))">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -59,7 +56,6 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton OnClick="ToMyMail">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Mail"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -73,7 +69,6 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="ToRegisterResidence">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Home"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -87,22 +82,7 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="ToRentRequest">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Lock"></MatIcon>
-                        </MatCardActions>
-                    </MatCard>
-                </div>
-                <div class="mat-layout-grid-cell">
-                    <MatCard Class="demo-mat-card">
-                        <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl="https://raw.githubusercontent.com/LilianBittar/VIABnB-SEP3/sprint-8/t1/SEP3BlazorT1Client/SEP3BlazorT1Client/wwwroot/media/RequestStatus.jpg" @onclick="ToRegisterResidence"></MatCardMedia>
-                            <div class="demo-mat-card-content" style="margin-left: 30%">
-                                <MatHeadline6 class="demo-mat-card-clean-margin">My Request Status</MatHeadline6>
-                            </div>
-                        </MatCardContent>
-                        <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="ToRegisterResidence">More</MatButton>
-                            <MatIcon Icon="@MatIconNames.Lock_open"></MatIcon>
                         </MatCardActions>
                     </MatCard>
                 </div>
@@ -135,7 +115,6 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton OnClick="ToRentResidence">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Vpn_key"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -149,7 +128,6 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton>More</MatButton>
                             <MatIcon Icon="@MatIconNames.Free_breakfast"></MatIcon>
                         </MatCardActions>
                     </MatCard>
@@ -163,7 +141,6 @@
                             </div>
                         </MatCardContent>
                         <MatCardActions Class="justify-content-between">
-                            <MatButton @onclick="@(() => ToGuestReviews(_user.Id))">More</MatButton>
                             <MatIcon Icon="@MatIconNames.Star_rate"></MatIcon>
                         </MatCardActions>
                     </MatCard>

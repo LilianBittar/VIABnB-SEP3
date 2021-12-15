@@ -21,16 +21,15 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
         [Inject] public IFacilityService FacilityService { get; set; }
         [Inject] public IHostService HostService { get; set; }
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-        public EditContext FormEditContextResidence { get; set; }
-        public EditContext FormEditContextAddress { get; set; }
+        private EditContext FormEditContextResidence { get; set; }
+        private EditContext FormEditContextAddress { get; set; }
         private Residence _newResidence;
-        public string Name { get; set; }
         private bool _isLoading = false; 
         private bool _showFacilityDialog = false;
         private IEnumerable<Facility> _allFacilities = new List<Facility>();
         private Facility _facilityToBeAdded = new Facility();
         private Address _newResidenceAddress = new Address() {City = new City()};
-        private string ErrorMessage="";
+        private string _errorMessage="";
         private string _registerResidenceErrorMessage = "";
 
         protected override async Task OnInitializedAsync()
@@ -68,15 +67,15 @@ namespace SEP3BlazorT1Client.Pages.RegisterResidence
             }
             catch (Exception e)
             {
-                ErrorMessage = "";
-                ErrorMessage = "Something went wrong.. try refreshing the page";
+                _errorMessage = "";
+                _errorMessage = "Something went wrong.. try refreshing the page";
             }
          
         }
 
         private async void AddNewRule()
         {
-            Rule newRule = new Rule()
+            var newRule = new Rule()
             {
                 Description = await MatDialogService.PromptAsync("Enter rule", "")
             };

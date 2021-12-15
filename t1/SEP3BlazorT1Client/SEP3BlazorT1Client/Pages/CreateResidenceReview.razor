@@ -2,10 +2,10 @@
 @using SEP3BlazorT1Client.Data
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Components.ResidenceReviewForm
-@inject IResidenceService ResidenceService
-@inject NavigationManager NavigationManager
-@inject IGuestService GuestService
-@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IResidenceService _residenceService
+@inject NavigationManager _navigationManager
+@inject IGuestService _guestService
+@inject AuthenticationStateProvider _authenticationStateProvider
 <AuthorizeView Policy="MustBeApprovedGuest">
     <Authorized>
         <div class="container-fluid d-flex justify-content-center mt-3">
@@ -47,12 +47,12 @@
     private Residence _residence;
     private Guest _guest;
 
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var authState = await _authenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        _guest = await GuestService.GetGuestByEmailAsync(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value);
-        _residence = await ResidenceService.GetResidenceByIdAsync(ResidenceId);
+        _guest = await _guestService.GetGuestByEmailAsync(user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value);
+        _residence = await _residenceService.GetResidenceByIdAsync(ResidenceId);
         StateHasChanged();
     }
 
