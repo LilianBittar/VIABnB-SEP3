@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Services;
-using SEP3T2GraphQL.Services.Administration;
 
 namespace SEP3T2GraphQL.Graphql
 {

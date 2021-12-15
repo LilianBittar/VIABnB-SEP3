@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 
-namespace SEP3T2GraphQL.Repositories.Administration
+namespace SEP3T2GraphQL.Repositories
 {
     public interface IAdministrationRepository
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Repositories.Administration;
-using SEP3T2GraphQL.Services.Administration;
-using SEP3T2GraphQL.Services.Administration.Impl;
+using SEP3T2GraphQL.Repositories;
+using SEP3T2GraphQL.Services;
+using SEP3T2GraphQL.Services.Impl;
 
 namespace UnitTests.AdministrationTest
 {

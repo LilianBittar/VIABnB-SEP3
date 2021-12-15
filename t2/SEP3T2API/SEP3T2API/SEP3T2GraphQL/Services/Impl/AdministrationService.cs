@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Repositories.Administration;
+using SEP3T2GraphQL.Repositories;
 
-namespace SEP3T2GraphQL.Services.Administration.Impl
+namespace SEP3T2GraphQL.Services.Impl
 {
     public class AdministrationService : IAdministrationService
     {

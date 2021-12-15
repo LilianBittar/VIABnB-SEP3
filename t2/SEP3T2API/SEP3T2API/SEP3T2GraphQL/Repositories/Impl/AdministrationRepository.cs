@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 
-namespace SEP3T2GraphQL.Repositories.Administration.Impl
+namespace SEP3T2GraphQL.Repositories.Impl
 {
     public class AdministrationRepository : IAdministrationRepository
     {
