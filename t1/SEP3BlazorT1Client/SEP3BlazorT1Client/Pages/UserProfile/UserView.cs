@@ -76,5 +76,10 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         {
             NavigationManager.NavigateTo("residences");
         }
+
+        private void ToGuestReviews(int id)
+        {
+            NavigationManager.NavigateTo($"GuestReviews/{id}");
+        }
     }
 }
