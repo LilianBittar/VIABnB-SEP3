@@ -1,6 +1,5 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.RentRequest;
 import org.slf4j.Logger;
@@ -18,7 +17,6 @@ import java.util.NoSuchElementException;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(
       RentRequestController.class);
-  private Gson gson = new Gson();
 
   @Autowired public RentRequestController(RentRequestDAO rentRequestDAO)
   {
@@ -65,7 +63,6 @@ import java.util.NoSuchElementException;
   {
 
     List<RentRequest> requestsToReturn = rentRequestDAO.getAllRentRequests();
-        LOGGER.info(gson.toJson(requestsToReturn));
     try
     {
       if (residenceId != null)
@@ -91,7 +88,6 @@ import java.util.NoSuchElementException;
       }
       if (status != null)
       {
-        LOGGER.info(gson.toJson("We are here"));
         requestsToReturn.removeIf(
             request -> !request.getStatus().name().equals(status));
       }

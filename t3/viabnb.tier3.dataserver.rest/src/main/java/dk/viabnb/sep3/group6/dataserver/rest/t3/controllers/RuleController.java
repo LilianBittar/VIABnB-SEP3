@@ -1,7 +1,5 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rule.RuleDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Rule;
 import org.slf4j.Logger;
@@ -15,7 +13,6 @@ import java.util.List;
 @RestController public class RuleController
 {
   private RuleDAO ruleDAO;
-  private Gson gson = new GsonBuilder().serializeNulls().create();
   private static final Logger LOGGER = LoggerFactory.getLogger(
       RuleController.class);
 
@@ -56,7 +53,6 @@ import java.util.List;
     try
     {
       rule = ruleDAO.updateRule(rule, description);
-      LOGGER.info(gson.toJson(rule));
       return ResponseEntity.ok(rule);
     }
     catch (Exception e)

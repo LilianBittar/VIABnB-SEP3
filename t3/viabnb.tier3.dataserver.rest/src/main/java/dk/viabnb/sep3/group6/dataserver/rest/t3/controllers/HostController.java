@@ -1,7 +1,5 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.host.HostDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
 import org.slf4j.Logger;
@@ -20,7 +18,6 @@ import java.util.NoSuchElementException;
       HostController.class);
 
   private HostDAO hostDAO;
-  private Gson gson = new GsonBuilder().serializeNulls().create();
 
   @Autowired public HostController(HostDAO hostDAO)
   {
@@ -30,7 +27,7 @@ import java.util.NoSuchElementException;
   @PostMapping("/host") public ResponseEntity<Host> createHost(
       @RequestBody Host host)
   {
-    LOGGER.info("Request for: " + gson.toJson(host));
+    LOGGER.info("POST request received for /host");
 
     if (host == null)
     {

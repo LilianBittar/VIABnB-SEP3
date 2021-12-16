@@ -1,7 +1,5 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residence.ResidenceDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.residencereview.ResidenceReviewDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Residence;
@@ -19,7 +17,6 @@ import java.util.List;
 {
   private ResidenceDAO residenceDAO;
   private ResidenceReviewDAO residenceReviewDAO;
-  private Gson gson = new GsonBuilder().serializeNulls().create();
   private static final Logger LOGGER = LoggerFactory.getLogger(
       ResidenceController.class);
 
@@ -61,8 +58,7 @@ import java.util.List;
       @RequestBody Residence residence)
   {
     LOGGER.info(
-        "POST request received for /residences with params: " + gson.toJson(
-            residence));
+"POST request received for /residences");
     Residence newResidence = residenceDAO.createResidence(residence);
     if (newResidence == null)
     {
@@ -75,9 +71,8 @@ import java.util.List;
   {
     try
     {
-      LOGGER.info("Request for all residences received");
+      LOGGER.info("GET request received for /residences");
       List<Residence> residences = residenceDAO.getAllResidences();
-      LOGGER.info("Returning: " + gson.toJson(residences));
       return ResponseEntity.ok(residences);
     }
     catch (Exception e)
@@ -170,7 +165,6 @@ import java.util.List;
       LOGGER.info("Request for all residencereviews received");
       List<ResidenceReview> residencereviews = residenceReviewDAO.getAllResidenceReviewsByResidenceId(
           residenceId);
-      LOGGER.info("Returning: " + gson.toJson(residencereviews));
       return ResponseEntity.ok(residencereviews);
     }
     catch (Exception e)
@@ -187,7 +181,6 @@ import java.util.List;
     try
     {
       residence = residenceDAO.updateResidence(residence);
-      LOGGER.info(gson.toJson(residence));
       return ResponseEntity.ok(residence);
     }
     catch (Exception e)

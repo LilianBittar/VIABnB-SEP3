@@ -1,6 +1,5 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import com.google.gson.Gson;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.guest.GuestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest.RentRequestDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Guest;
@@ -33,7 +32,7 @@ import java.util.NoSuchElementException;
       @RequestBody Guest guest)
   {
     LOGGER.info(
-        "Received createGuest request with params " + new Gson().toJson(guest));
+        "Received POST request for /guests");
     Guest createGuest = null;
     try
     {

@@ -1,7 +1,5 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.hostreview.HostReviewDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.HostReview;
 import org.slf4j.Logger;
@@ -15,7 +13,6 @@ import java.util.List;
 @RestController public class HostReviewController
 {
   private HostReviewDAO hostReviewDAO;
-  private Gson gson = new GsonBuilder().serializeNulls().create();
   private static final Logger LOGGER = LoggerFactory.getLogger(
       HostController.class);
 
@@ -31,7 +28,7 @@ import java.util.List;
     {
       List<HostReview> hostReviews = hostReviewDAO.getAllHostReviewsByHostId(
           id);
-      LOGGER.info("Request for: " + gson.toJson(hostReviews));
+      LOGGER.info("GET Request received");
       return ResponseEntity.ok(hostReviews);
     }
     catch (Exception e)
@@ -77,7 +74,6 @@ import java.util.List;
         return ResponseEntity.notFound().build();
       }
 
-      LOGGER.info(gson.toJson(hostReviewDAO.updateHostReview(hostReview)));
       return ResponseEntity.ok(hostReviewDAO.updateHostReview(hostReview));
     }
     catch (Exception e)
