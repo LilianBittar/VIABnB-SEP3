@@ -47,7 +47,7 @@
                                             <p>Guest VIA ID: @item.Guest.ViaId</p>
                                         </div>
                                         <div class="form-group">
-                                            <p>Guest reviews: @item.Guest.GuestReviews.Count <button class="btn btn-outline-dark" @onclick="(() => ViewGuestReviews(item.Guest.Id))">See details</button></p>
+                                            <p>Guest reviews: <button class="btn btn-outline-dark" @onclick="(() => ViewGuestReviews(item.Guest.Id))">See details</button></p>
                                             <MatButton Label="Give review" OnClick="@(() => NavigationManager.NavigateTo($"reviewguest/{item.Guest.Id}"))"/>
                                         </div>
                                         <div class="form-group">
