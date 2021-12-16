@@ -474,3 +474,5 @@ INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDa
 VALUES (5, 'good', 6, 10, '2021-12-15');
 INSERT INTO GuestReview(guestRating, guestReviewText, hostId, guestId, createdDate)
 VALUES (5, 'good', 7, 10, '2021-12-15');
+
+SELECT * FROM rentrequest JOIN residence r on r.residenceid = rentrequest.residenceid JOIN address a on a.addressid = r.addressid JOIN city c on c.cityid = a.cityid JOIN _user u on u.userid = r.hostid JOIN host h on h.hostid = rentrequest.hostid

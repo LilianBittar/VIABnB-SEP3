@@ -65,6 +65,7 @@ import java.util.NoSuchElementException;
   {
 
     List<RentRequest> requestsToReturn = rentRequestDAO.getAllRentRequests();
+        LOGGER.info(gson.toJson(requestsToReturn));
     try
     {
       if (residenceId != null)
@@ -90,6 +91,7 @@ import java.util.NoSuchElementException;
       }
       if (status != null)
       {
+        LOGGER.info(gson.toJson("We are here"));
         requestsToReturn.removeIf(
             request -> !request.getStatus().name().equals(status));
       }
