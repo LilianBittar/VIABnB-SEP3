@@ -129,6 +129,7 @@ namespace UnitTests.ResidenceTest
                 AvailableTo = DateTime.Now
             };
 
+            
             Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidAddress(a));
             Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
@@ -272,6 +273,37 @@ namespace UnitTests.ResidenceTest
             };
             Assert.Throws<ArgumentException>(() => _residenceValidation.IsValidResidence(r));
         }
-        
+
+        [Test]
+        public void CreateResidence_HostIsNotApproved_ThrowsArgumentException()
+        {
+
+            var host = new Host()
+            {
+                Cpr = "1111111111",
+                Email = "test@test.com",
+                Id = 1,
+                Password = "Test123123",
+                FirstName = "Test",
+                HostReviews = new List<HostReview>(),
+                LastName = "Test", PhoneNumber = "88888888", IsApprovedHost = false, ProfileImageUrl = "test"
+            };
+            var r = new Residence()
+            {
+                Id = 2,
+                Address = _address,
+                Description = "Test",
+                Type = "Test",
+                IsAvailable = false,
+                PricePerNight = 1,
+                Rules = _rules,
+                Facilities = _facilities,
+                Host = host, 
+                ImageUrl = "Test",
+                AvailableFrom = DateTime.Now.AddDays(1),
+                AvailableTo = DateTime.Now.AddDays(7)
+            };
+            Assert.Throws<ArgumentException>( () =>  _residenceValidation.IsValidResidence(r));
+        }
     }
 }

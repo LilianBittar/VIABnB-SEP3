@@ -22,6 +22,16 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
             throw new ArgumentException("Invalid address");
         }
 
+        private static bool IsApprovedHost(Host host)
+        {
+            if (host.IsApprovedHost)
+            {
+                return true; 
+            }
+
+            throw new ArgumentException("Host must be approved");
+        }
+
         private static bool IsValidRules(IList<Rule> rules)
         {
             if (rules != null && (rules.All(rule => !string.IsNullOrEmpty(rule.Description))))
@@ -58,7 +68,7 @@ namespace SEP3T2GraphQL.Services.Validation.ResidenceValidation
                  IsValidRules(residence.Rules) &&
                  (IsValidFacilities(residence.Facilities)) &&
                  IsValidAvailabilityPeriod(residence.AvailableFrom, residence.AvailableTo)
-                ) && residence.MaxNumberOfGuests > 0)
+                ) && residence.MaxNumberOfGuests > 0 && IsApprovedHost(residence.Host))
             {
                 return true;
             }
