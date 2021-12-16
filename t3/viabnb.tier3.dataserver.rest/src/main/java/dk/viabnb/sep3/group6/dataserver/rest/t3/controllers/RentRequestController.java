@@ -29,8 +29,7 @@ import java.util.NoSuchElementException;
       @RequestBody RentRequest request)
   {
     LOGGER.info(
-        "Request for: createRentRequest received with params: " + gson.toJson(
-            request));
+        "POST request for /rentrequests received");
     if (request == null)
     {
       LOGGER.error("Bad request: request was null");
@@ -47,7 +46,7 @@ import java.util.NoSuchElementException;
         return ResponseEntity.internalServerError().build();
       }
       LOGGER.info(
-          "New rent request was created: " + gson.toJson(createdRentRequest));
+          "New rent request was created");
       return ResponseEntity.ok(createdRentRequest);
     }
     catch (Exception e)

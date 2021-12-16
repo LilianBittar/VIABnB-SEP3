@@ -18,7 +18,7 @@ namespace SEP3BlazorT1Client.Pages.AdminView
         
         private IEnumerable<Guest> _guestRequestList = new List<Guest>();
         private IEnumerable<Host> _hostRequestList;
-        private string ErrorMessage="";
+        private string _errorMessage="";
         
         protected override async Task OnInitializedAsync()
         {
@@ -30,8 +30,8 @@ namespace SEP3BlazorT1Client.Pages.AdminView
             }
             catch (Exception e)
             {
-                ErrorMessage = "";
-                ErrorMessage = "Something went wrong.. try refreshing the page";
+                _errorMessage = "";
+                _errorMessage = "Something went wrong.. try refreshing the page";
             }
         }
         

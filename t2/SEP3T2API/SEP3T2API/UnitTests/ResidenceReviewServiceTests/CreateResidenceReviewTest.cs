@@ -54,7 +54,7 @@ namespace UnitTests.ResidenceReviewServiceTests
             _rentRequestRepository = new Mock<IRentRequestRepository>();
 
             _validator =
-                new CreateResidenceReviewValidator(_residenceReviewRepository.Object, _rentRequestRepository.Object);
+                new CreateResidenceReviewValidator(_rentRequestRepository.Object);
             _residenceReviewService = new ResidenceReviewService(_residenceReviewRepository.Object, _validator);
         }
 

@@ -13,8 +13,7 @@ public interface RentRequestDAO
    * @return the newly created RentRequest object
    * @throws IllegalStateException if connection to database failed or executing the query failed
    */
-  RentRequest createNewRentRequest(RentRequest request)
-      throws IllegalStateException;
+  RentRequest createNewRentRequest(RentRequest request);
   /**
    * Update a RentRequest object
    *

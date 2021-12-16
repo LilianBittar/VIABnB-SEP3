@@ -1,5 +1,5 @@
 @page "/HostReviews/{Id:int}"
-<p>@ErrorMessage</p>
+<p>@_errorMessage</p>
 @if (_hostReviewList == null)
 {
     <h3 class="mat-subtitle1">Loading</h3>
@@ -8,7 +8,7 @@
 else if (!_hostReviewList.Any())
 {
     <p>
-        <em>There are no host requests at the moment....</em>
+        <em>There are no host reviews at the moment....</em>
     </p>
 }
 else

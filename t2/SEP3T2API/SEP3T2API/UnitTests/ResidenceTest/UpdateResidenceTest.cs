@@ -32,7 +32,7 @@ namespace UnitTests.ResidenceTest
             _addressRepository = new Mock<IAddressRepository>();
             _addressService = new AddressService(_addressRepository.Object, new CreateAddressValidator());
             _cityService = new CityService(_cityRepository.Object, new CreateCityValidator());
-            _residenceService = new ResidenceServiceImpl(_residenceRepository.Object, _cityService, _addressService);
+            _residenceService = new ResidenceService(_residenceRepository.Object, _cityService, _addressService);
             _city = new City()
             {
                 Id = 1,

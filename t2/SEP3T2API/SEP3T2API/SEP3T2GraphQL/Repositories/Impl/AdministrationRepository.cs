@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 
-namespace SEP3T2GraphQL.Repositories.Administration.Impl
+namespace SEP3T2GraphQL.Repositories.Impl
 {
     public class AdministrationRepository : IAdministrationRepository
     {
@@ -18,7 +17,7 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
             _client = new HttpClient();
         }
 
-        public async Task<Administrator> GetAdminByEmail(string email)
+        public async Task<Administrator> GetAdminByEmailAsync(string email)
         {
             var responseMessage = await _client.GetAsync($"{Uri}/admin/{email}");
             if (string.IsNullOrEmpty(await responseMessage.Content.ReadAsStringAsync()))
@@ -36,7 +35,7 @@ namespace SEP3T2GraphQL.Repositories.Administration.Impl
             return adminToReturn;
         }
 
-        public async Task<IEnumerable<Administrator>> GetAllAdmins()
+        public async Task<IEnumerable<Administrator>> GetAllAdminsAsync()
         {
             var responseMessage = await _client.GetAsync($"{Uri}/admins");
             await HandleErrorResponse(responseMessage);

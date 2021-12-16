@@ -1,5 +1,5 @@
 @page "/"
-@inject NavigationManager NavigationManager
+@inject NavigationManager _navigationManager
 <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(2)">
     <div class="landing-page-container">
         <div class="background-image">
@@ -11,7 +11,7 @@
                     <p>Got a residence you are willing to rent out <br/> to students in need?</p>  
                 </Animate> 
                 <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(1.5)" Delay="TimeSpan.FromSeconds(2)" Easing="Easings.EaseInOut">
-                    <MatButton Label="Become a Host" Raised="true" OnClick="@(() => NavigationManager.NavigateTo("/registerhost"))" />
+                    <MatButton Label="Become a Host" Raised="true" OnClick="@(() => _navigationManager.NavigateTo("/registerhost"))" />
                 </Animate>
             </div>
         </div>

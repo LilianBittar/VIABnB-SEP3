@@ -8,13 +8,10 @@ namespace SEP3T2GraphQL.Services.Validation
 {
     public class CreateResidenceReviewValidator
     {
-        private readonly IResidenceReviewRepository _residenceReviewRepository;
         private readonly IRentRequestRepository _rentRequestRepository;
 
-        public CreateResidenceReviewValidator(IResidenceReviewRepository residenceReviewRepository,
-            IRentRequestRepository rentRequestRepository)
+        public CreateResidenceReviewValidator(IRentRequestRepository rentRequestRepository)
         {
-            _residenceReviewRepository = residenceReviewRepository;
             _rentRequestRepository = rentRequestRepository;
         }
 

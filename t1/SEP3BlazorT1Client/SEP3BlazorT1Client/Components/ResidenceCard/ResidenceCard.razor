@@ -1,10 +1,10 @@
 @using SEP3BlazorT1Client.Models
-@inject NavigationManager NavigationManager
+@inject NavigationManager _navigationManager
 @if (Residence != null)
 {
     <div class="residence-card">
         <div class="residence-card__image">
-            @if (Residence.ImageUrl != null)
+            @if (!string.IsNullOrEmpty(Residence.ImageUrl))
             {
                 <img src="@Residence.ImageUrl" alt="Image of residence" on/>
                 <div class="description">
@@ -13,7 +13,7 @@
             }
             else
             {
-                <img src="assets/1024px-No_image_available.svg.png" alt="No image provided"/>
+                <img src="assets/dirt.jpeg" alt="No image provided"/>
                 <div class="description">
                     <p>@Residence.Description</p>
                 </div>
@@ -34,7 +34,7 @@
                 <span>@Residence.AvailableTo.Value.ToShortDateString()</span>
             </div>
             <div>
-                <MatButton Label="Rent" OnClick="@(() => NavigationManager.NavigateTo($"/rentresidence/{Residence.Id}"))"/>
+                <MatButton Label="Rent" OnClick="@(() => _navigationManager.NavigateTo($"/rentresidence/{Residence.Id}"))"/>
             </div>
         </div>
     </div>

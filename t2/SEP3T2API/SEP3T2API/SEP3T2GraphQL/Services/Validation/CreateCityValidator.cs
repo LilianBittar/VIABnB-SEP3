@@ -16,7 +16,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <exception cref="ArgumentException"> if <c>city</c> is null</exception>
         /// <exception cref="ArgumentException"> if the <c>CityName</c> of <c>city</c> is null or empty</exception>
         /// <exception cref="ArgumentException"> if the <c>CityName</c> of <c>city</c> is not 4 digits or if zipcode is negative</exception>
-        public void Validate(City city)
+        public void ValidateCity(City city)
         {
             if (city == null)
             {

@@ -24,7 +24,7 @@ import java.util.List;
     this.messageDAO = messageDAO;
   }
 
-  @PostMapping("/messages") public ResponseEntity<Message> create(
+  @PostMapping("/messages") public ResponseEntity<Message> createMessage(
       @RequestBody Message message)
   {
     LOGGER.info("POST request received for /messages");
@@ -34,7 +34,7 @@ import java.util.List;
     }
     try
     {
-      Message createdMessage = messageDAO.create(message);
+      Message createdMessage = messageDAO.createMessage(message);
       if (createdMessage == null)
       {
         return ResponseEntity.internalServerError().build();
@@ -48,12 +48,12 @@ import java.util.List;
     }
   }
 
-  @GetMapping("/messages") public ResponseEntity<List<Message>> getAll()
+  @GetMapping("/messages") public ResponseEntity<List<Message>> getAllMessages()
   {
     LOGGER.info("GET request received for /messages");
     try
     {
-      return ResponseEntity.ok(messageDAO.getAll());
+      return ResponseEntity.ok(messageDAO.getAllMessages());
     }
     catch (Exception e)
     {

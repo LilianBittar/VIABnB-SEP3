@@ -1,14 +1,14 @@
 ﻿@page "/BecomeGuest"
 @using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Data
-@inject MatDialogService MatDialogService
-@inject NavigationManager NavigationManager
-@inject IHostService HostService
-@inject IGuestService GuestService
-@inject AuthenticationStateProvider AuthStateProvider
+@inject MatDialogService _matDialogService
+@inject NavigationManager _navigationManager
+@inject IHostService _hostService
+@inject IGuestService _guestService
+@inject AuthenticationStateProvider _authenticationStateProvider
 <AuthorizeView Policy="MustBeApprovedHost">
     <Authorized Context="Auth">
-        <p>@ErrorMessage</p>
+        <p>@_errorMessage</p>
         @if (_newGuest != null && _host != null)
         {
             <div class="mat-layout-grid">
@@ -64,21 +64,21 @@
     private Guest _newGuest;
     private bool _dialogIsOpen = false;
     private string _errorLabel = "";
-    private string ErrorMessage="";
+    private string _errorMessage="";
 
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+            var authState = await _authenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
             Console.WriteLine("\nClaims:");
             foreach (var claim in user.Claims)
             {
                 Console.WriteLine($"{claim.Type.ToString()} {claim.Value}");
             }
-            _host = await HostService.GetHostByEmailAsync((user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value));
+            _host = await _hostService.GetHostByEmailAsync((user.Claims.FirstOrDefault(c => c.Type.ToString() == "email").Value));
 
             _newGuest = new Guest
             {
@@ -100,13 +100,13 @@
 
             if (!user.Identity.IsAuthenticated)
             {
-                NavigationManager.NavigateTo("Login");
+                _navigationManager.NavigateTo("Login");
             }
         }
         catch (Exception e)
         {
-            ErrorMessage = "";
-            ErrorMessage = "Something went wrong.. try refreshing the page";
+            _errorMessage = "";
+            _errorMessage = "Something went wrong.. try refreshing the page";
         }
        
     }
@@ -121,11 +121,11 @@
         try
         {
             _errorLabel = "";
-            await GuestService.CreateGuestAsync(_newGuest);
+            await _guestService.CreateGuestAsync(_newGuest);
             _dialogIsOpen = false;
             ResetModel();
             StateHasChanged();
-            NavigationManager.NavigateTo("Login");
+            _navigationManager.NavigateTo("Login");
         }
         catch (Exception e)
         {
@@ -154,8 +154,4 @@
             ProfileImageUrl = _host.ProfileImageUrl
         };
     }
-
-
-
-
 }

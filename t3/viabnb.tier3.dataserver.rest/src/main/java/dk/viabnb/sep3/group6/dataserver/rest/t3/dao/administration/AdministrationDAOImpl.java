@@ -2,8 +2,6 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.administration;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Administrator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,9 +12,6 @@ import java.util.List;
 
 public class AdministrationDAOImpl extends BaseDao implements AdministrationDAO
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger(
-      AdministrationDAO.class);
-
   @Override public Administrator getAdministratorByEmail(String email)
   {
     try (Connection connection = getConnection())

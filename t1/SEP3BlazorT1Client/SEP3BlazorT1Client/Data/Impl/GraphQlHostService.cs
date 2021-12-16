@@ -169,7 +169,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             };
             var response = await _client.PostQueryAsync<UpdateHostMutationResponseType>(updateHostStatusMutation);
             HandleErrorResponse(response);
-            return response.Data.updateHostStatus;
+            return response.Data.UpdateHostStatus;
         }
         private static void HandleErrorResponse<T>(GqlRequestResponse<T> response)
         {

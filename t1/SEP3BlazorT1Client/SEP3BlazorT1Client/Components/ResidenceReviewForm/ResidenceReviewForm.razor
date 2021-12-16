@@ -1,9 +1,9 @@
 ﻿@using SEP3BlazorT1Client.Models
 @using SEP3BlazorT1Client.Data
 @using System.Text.Json
-@inject IResidenceReviewService ResidenceReviewService
-@inject NavigationManager NavigationManager
-<AuthorizeView Policy="MustBeGuest">
+@inject IResidenceReviewService _residenceReviewService
+@inject NavigationManager _navigationManager
+<AuthorizeView Policy="MustBeApprovedGuest">
     <Authorized>
         <div class="review-container">
             <div class="container-fluid d-flex">
@@ -76,9 +76,9 @@
         try
         {
             Console.WriteLine(JsonSerializer.Serialize(_newReview));
-            await ResidenceReviewService.CreateResidenceReviewAsync(Residence, _newReview);
+            await _residenceReviewService.CreateResidenceReviewAsync(Residence, _newReview);
             _errorMessage = "";
-            NavigationManager.NavigateTo("/");
+            _navigationManager.NavigateTo("/");
         }
         catch (Exception e)
         {
@@ -89,7 +89,7 @@
 
     private void CancelReview()
     {
-        NavigationManager.NavigateTo("/guestrentrequests");
+        _navigationManager.NavigateTo("/guestrentrequests");
     }
 
 }

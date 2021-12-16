@@ -72,10 +72,12 @@ namespace UnitTests.RentalServiceTests
         [Test]
         public void CreateRentRequest_ValidTest_DoesNotThrow()
         {
+            _residence.AvailableFrom = DateTime.Now;
+            _residence.AvailableTo = DateTime.Now.AddDays(30);
             RentRequest request = new()
             {
-                Guest = _validGuest, Id = 1, StartDate = CreateDate("01/12/2021"),
-                Residence = _residence, Status = RentRequestStatus.NOTANSWERED, EndDate = CreateDate("31/12/2021"),
+                Guest = _validGuest, Id = 1, StartDate = DateTime.Now.AddDays(1) ,
+                Residence = _residence, Status = RentRequestStatus.NOTANSWERED, EndDate = DateTime.Now.AddDays(7),
                 NumberOfGuests = 2
             };
             List<RentRequest> emptyRentRequestList = new();

@@ -12,9 +12,7 @@ import java.util.List;
 
 public class AddressDAOImpl extends BaseDao implements AddressDAO
 {
-  private CityDAO cityDAO = new CityDAOImpl();
-
-  @Override public Address creteNewAddress(Address address)
+  @Override public Address createNewAddress(Address address)
   {
     try (Connection connection = getConnection())
     {
@@ -38,7 +36,7 @@ public class AddressDAOImpl extends BaseDao implements AddressDAO
     }
   }
 
-  @Override public List<Address> getAll()
+  @Override public List<Address> getAllAddress()
   {
     try (Connection connection = getConnection())
     {
@@ -52,9 +50,9 @@ public class AddressDAOImpl extends BaseDao implements AddressDAO
         Address address = new Address(result.getInt("addressid"),
             result.getString("streetname"), result.getString("housenumber"),
             result.getString("streetnumber"),
-            new City(cityDAO.getCityById(result.getInt("cityid")).getCityId(),
-                cityDAO.getCityById(result.getInt("cityid")).getCityName(),
-                cityDAO.getCityById(result.getInt("cityid")).getZipCode()));
+            new City(getCityById(result.getInt("cityid")).getCityId(),
+                getCityById(result.getInt("cityid")).getCityName(),
+                getCityById(result.getInt("cityid")).getZipCode()));
         addresses.add(address);
       }
       return addresses;
@@ -62,6 +60,28 @@ public class AddressDAOImpl extends BaseDao implements AddressDAO
     catch (SQLException throwables)
     {
       throwables.printStackTrace();
+      throw new IllegalStateException(throwables.getMessage());
+    }
+  }
+
+  private City getCityById(int id)
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement stm = connection.prepareStatement(
+          "SELECT * FROM city WHERE cityid = ?");
+      stm.setInt(1, id);
+
+      ResultSet result = stm.executeQuery();
+      if (result.next())
+      {
+        return new City(result.getInt("cityId"), result.getString("cityname"),
+            result.getInt("zipcode"));
+      }
+      return null;
+    }
+    catch (SQLException throwables)
+    {
       throw new IllegalStateException(throwables.getMessage());
     }
   }

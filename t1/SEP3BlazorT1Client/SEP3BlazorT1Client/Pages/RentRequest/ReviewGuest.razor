@@ -1,7 +1,7 @@
 @page "/ReviewGuest/{Id:int}"
 <AuthorizeView Policy="MustBeApprovedHost">
     <Authorized>
-        @if (_isloading)
+        @if (_isLoading)
         {
             <h3 class="mat-subtitle1">Loading</h3>
             <MatProgressCircle Indeterminate="true" />
@@ -70,7 +70,7 @@
                     }
                 </div>
             </div>
-            <MatDialog @bind-IsOpen="@dialogIsOpen">
+            <MatDialog @bind-IsOpen="@_dialogIsOpen">
                 <MatDialogTitle>Hello! add your review here</MatDialogTitle>
                 <MatDialogContent>
                     <p>Your opinion matters</p>
@@ -82,11 +82,12 @@
                         <MatOption TValue="double" Value="4">4</MatOption>
                         <MatOption TValue="double" Value="5">5</MatOption>
                     </MatSelect>
-                    <MatTextField @bind-Value="_reviewTest" TextArea="true"></MatTextField>
+                    <MatTextField Label="Description" @bind-Value="_reviewTest" TextArea="true"></MatTextField>
+                    <p>@_errorMessage</p>
                 </MatDialogContent>
                 <MatDialogActions>
-                    <MatButton OnClick="OkClick" Style="background-color: green">Review</MatButton>
-                    <MatButton OnClick="@(e => { dialogIsOpen = false;})" Style="background-color: red">Cancel</MatButton>
+                    <MatButton OnClick="OkClick" Unelevated="true" Style="width: 45em; background-color: green">Review</MatButton>
+                    <MatButton OnClick="@(e => { _dialogIsOpen = false;})"  Unelevated="true" Style="width: 45em; background-color: red">Cancel</MatButton>
                 </MatDialogActions>
             </MatDialog>
         }

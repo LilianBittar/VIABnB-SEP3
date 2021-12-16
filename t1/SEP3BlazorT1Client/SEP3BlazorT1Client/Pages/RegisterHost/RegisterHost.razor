@@ -4,7 +4,7 @@
 @using SEP3BlazorT1Client.Data
 @using SEP3BlazorT1Client.Models
 @inject NavigationManager _navigationManager
-@inject IHostService _hostservice
+@inject IHostService _hostService
 
 <AuthorizeView>
     <NotAuthorized>
@@ -47,7 +47,7 @@
                     </p>
 
 
-                    @foreach (var errorMessage in validationResults)
+                    @foreach (var errorMessage in _validationResults)
                     {
                         <p class="error-label text-danger">@errorMessage</p>
                     }
@@ -75,7 +75,7 @@
         ProfileImageUrl = "",
         HostReviews = new List<HostReview>()
     };
-    private ICollection<ValidationResult> validationResults = new List<ValidationResult>();
+    private ICollection<ValidationResult> _validationResults = new List<ValidationResult>();
     private bool IsShow {get;set;} = true;
     private void ShowLoadingBar()
     {
@@ -87,12 +87,12 @@
     {
        
     //clear error messages
-        validationResults.Clear();
+        _validationResults.Clear();
     // the validator validates in the context of a host object
-        ValidationContext validationContext = new ValidationContext(_newHost);
+        var validationContext = new ValidationContext(_newHost);
 
     //validates all host properties in context of host model
-        bool hostIsValid = Validator.TryValidateObject(_newHost, validationContext, validationResults, true);
+        var hostIsValid = Validator.TryValidateObject(_newHost, validationContext, _validationResults, true);
 
 
     //checks if passwords match
@@ -109,7 +109,7 @@
             {
                 ShowLoadingBar();
     //Throws exception if user already exists.
-                await _hostservice.RegisterHostAsync(_newHost);
+                await _hostService.RegisterHostAsync(_newHost);
             }
             catch (Exception e)
             {

@@ -5,18 +5,17 @@ using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Repositories;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
-using SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl;
 
 namespace SEP3T2GraphQL.Services.Impl
 {
-    public class ResidenceServiceImpl : IResidenceService
+    public class ResidenceService : IResidenceService
     {
         private readonly IResidenceRepository _residenceRepository;
         private readonly IResidenceValidation _residenceValidation;
         private readonly ICityService _cityService;
         private readonly IAddressService _addressService;
 
-        public ResidenceServiceImpl(IResidenceRepository residenceRepository, ICityService cityService,
+        public ResidenceService(IResidenceRepository residenceRepository, ICityService cityService,
             IAddressService addressService)
         {
             _residenceRepository = residenceRepository;

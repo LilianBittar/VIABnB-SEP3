@@ -1,7 +1,5 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.user.UserDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.User;
 import org.slf4j.Logger;
@@ -18,7 +16,6 @@ import java.util.List;
   private static final Logger LOGGER = LoggerFactory.getLogger(
       UserController.class);
   private UserDAO userDAO;
-  private Gson gson = new GsonBuilder().serializeNulls().create();
 
   @Autowired public UserController(UserDAO userDAO)
   {

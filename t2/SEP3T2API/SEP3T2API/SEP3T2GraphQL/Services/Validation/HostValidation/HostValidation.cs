@@ -2,11 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using SEP3T2GraphQL.Models;
-using SEP3T2GraphQL.Repositories;
-using SEP3T2GraphQL.Repositories.Impl;
-using SEP3T2GraphQL.Services.Impl;
 
-namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
+namespace SEP3T2GraphQL.Services.Validation.HostValidation
 {
     public class HostValidation : IHostValidation
     {
@@ -17,7 +14,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             _userService = userService;
         }
 
-        public async Task<bool> IsValidEmail(string email)
+        private async Task<bool> IsValidEmail(string email)
         {
             var user = await _userService.GetUserByEmailAsync(email);
             if (user == null)
@@ -40,7 +37,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             throw new ArgumentException("Email already in use");
         }
 
-        public bool IsValidFirstname(string firstname)
+        private static bool IsValidFirstname(string firstname)
         {
             if (firstname != null && IsLettersOnly(firstname))
             {
@@ -50,7 +47,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             throw new ArgumentException("Invalid firstname");
         }
 
-        public bool IsValidLastname(string lastname)
+        private static bool IsValidLastname(string lastname)
         {
             if (lastname != null && IsLettersOnly(lastname))
             {
@@ -60,7 +57,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             throw new ArgumentException("Invalid lastname");
         }
 
-        public bool IsValidPassword(string passWord)
+        private static bool IsValidPassword(string passWord)
         {
             int validConditions = 0;
             if (passWord == null)
@@ -116,7 +113,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
         }
 
 
-        public bool IsValidPhoneNumber(string phoneNumber)
+        private static bool IsValidPhoneNumber(string phoneNumber)
         {
             if (phoneNumber != null && phoneNumber.All(char.IsDigit))
             {
@@ -126,7 +123,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             throw new ArgumentException("invalid phone number");
         }
 
-        public bool IsValidCprNumber(string cpr)
+        private static bool IsValidCprNumber(string cpr)
         {
             if (cpr != null)
             {
@@ -161,7 +158,7 @@ namespace SEP3T2GraphQL.Services.Validation.HostValidation.Impl
             throw new ArgumentException("Invalid host");
         }
 
-        public bool IsLettersOnly(string arg)
+        private static bool IsLettersOnly(string arg)
         {
             if (arg.All(char.IsLetter))
             {

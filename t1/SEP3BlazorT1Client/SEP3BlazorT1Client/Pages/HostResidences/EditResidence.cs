@@ -29,9 +29,7 @@ namespace SEP3BlazorT1Client.Pages.HostResidences
         private bool _isLoading;
         private bool _isEditable;
         private bool _snackBarIsOpen = false;
-        private bool _dialogIsOpen = false;
         private string _ruleDescription;
-        private int _ruleResidenceId;
 
         protected override async Task OnInitializedAsync()
         {

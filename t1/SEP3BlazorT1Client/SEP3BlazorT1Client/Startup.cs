@@ -41,7 +41,6 @@ namespace SEP3BlazorT1Client
             services.AddScoped<IHostReviewService, GraphQlHostReviewService>();
             services.AddScoped<IResidenceReviewService, GraphQlResidenceReviewService>();
             
-            //TODO add policies here:
             services.AddAuthorization(options =>
                 {
                     options.AddPolicy("MustBeAdmin", apb => 

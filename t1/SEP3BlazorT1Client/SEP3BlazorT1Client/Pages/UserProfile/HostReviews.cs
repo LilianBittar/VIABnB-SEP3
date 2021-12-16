@@ -14,13 +14,11 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
         [Inject] public MatDialogService MatDialogService { get; set; }
         [Inject] public IHostReviewService HostReviewService { get; set; }
         [Inject] public IGuestService GuestService { get; set; }
-        [Inject] public NavigationManager NavigationManager { get; set; }
-        [Inject] public AuthenticationStateProvider AuthStateProvider { get; set; }
         
         [Parameter] public int Id { get; set; }
         private IEnumerable<HostReview> _hostReviewList = new List<HostReview>();
         private List<Guest> _guestList = new List<Guest>();
-        private string ErrorMessage = "";
+        private string _errorMessage = "";
 
         private bool _isLoading;
 
@@ -40,8 +38,8 @@ namespace SEP3BlazorT1Client.Pages.UserProfile
             }
             catch (Exception e)
             {
-                ErrorMessage = "";
-                ErrorMessage = "Something went wrong, try refreshing the page";
+                _errorMessage = "";
+                _errorMessage = "Something went wrong, try refreshing the page";
             }
            
         }

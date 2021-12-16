@@ -23,12 +23,12 @@ import java.util.List;
     this.cityDAO = cityDAO;
   }
 
-  @GetMapping("/cities") public ResponseEntity<List<City>> getAll()
+  @GetMapping("/cities") public ResponseEntity<List<City>> getAllCity()
   {
     try
     {
       LOGGER.info("GET request received for /cities");
-      return ResponseEntity.ok(cityDAO.getAll());
+      return ResponseEntity.ok(cityDAO.getAllCities());
     }
     catch (Exception e)
     {
@@ -38,7 +38,7 @@ import java.util.List;
     }
   }
 
-  @PostMapping("/cities") public ResponseEntity<City> create(
+  @PostMapping("/cities") public ResponseEntity<City> createCity(
       @RequestBody City city)
   {
     if (city == null)

@@ -2,7 +2,7 @@
 @using SEP3BlazorT1Client.Models
 <AuthorizeView Policy="MustBeAdmin">
     <Authorized>
-        <p>@ErrorMessage</p>
+        <p>@_errorMessage</p>
         <div class="d-flex justify-content-center">
             <MatTabGroup Style="width: 500px">
                 <MatTab Label="Hosts Requests">

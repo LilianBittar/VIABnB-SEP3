@@ -17,24 +17,24 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
         [Inject] public IHostService HostService { get; set; }
         [Inject] public IGuestService GuestService { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
-        [Inject] public AuthenticationStateProvider AuthStateProvider { get; set; }
+        [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         
         [Parameter] public int Id { get; set; }
 
         private Host _host = new Host();
         private Guest _guest = new Guest();
         private GuestReview _guestReview = new GuestReview();
-
-        private bool _isloading;
-        private bool dialogIsOpen = false;
+        private string _errorMessage = "";
+        private bool _isLoading;
+        private bool _dialogIsOpen = false;
         private double _rating = 0;
         private string _reviewTest = "";
 
         protected override async Task OnInitializedAsync()
         {
-            _isloading = true;
+            _isLoading = true;
             _guest = await GuestService.GetGuestByIdAsync(Id);
-            var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
             try
             {
@@ -49,18 +49,29 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
             }
             
             StateHasChanged();
-            _isloading = false;
+            _isLoading = false;
         }
 
         private void OpenDialog()
         {
-            dialogIsOpen = true;
+            _dialogIsOpen = true;
         }
 
-        private void OkClick()
+        private async void OkClick()
         {
-            CreateReview();
-            dialogIsOpen = false;
+
+            try
+            {
+                _errorMessage = "";
+                await CreateReview();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                _errorMessage = e.Message;
+                StateHasChanged();
+            }
+            _dialogIsOpen = false;
         }
 
         private async Task CreateReview()
@@ -78,7 +89,7 @@ namespace SEP3BlazorT1Client.Pages.RentRequest
 
         private void ToUserReview()
         {
-            NavigationManager.NavigateTo("userView");
+            NavigationManager.NavigateTo("user");
         }
     }
 }

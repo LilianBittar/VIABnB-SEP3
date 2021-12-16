@@ -2,7 +2,7 @@
 <AuthorizeView Policy="MustBeApprovedHost">
     <Authorized>
     
-        <p>@ErrorMessage</p>
+        <p>@_errorMessage</p>
         @if (_guestReviews == null)
         {
             <h3 class="mat-subtitle1">Loading</h3>

@@ -2,8 +2,6 @@ package dk.viabnb.sep3.group6.dataserver.rest.t3.dao.rentrequest;
 
 import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.BaseDao;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -12,16 +10,12 @@ import java.util.List;
 
 public class RentRequestDAOImpl extends BaseDao implements RentRequestDAO
 {
-  private final Logger LOGGER = LoggerFactory.getLogger(
-      RentRequestDAOImpl.class);
-
   @Override public RentRequest createNewRentRequest(RentRequest request)
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement stm = connection.prepareStatement(
           "insert into rentrequest(startdate, enddate, numberofguests, status, hostid, residenceid, guestid, createdate) values (?,?,?,?,?,?,?,?)");
-      LOGGER.info("statement set");
       stm.setDate(1, Date.valueOf(request.getStartDate()));
       stm.setDate(2, Date.valueOf(request.getEndDate()));
       stm.setInt(3, request.getNumberOfGuests());

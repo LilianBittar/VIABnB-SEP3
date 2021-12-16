@@ -23,12 +23,12 @@ import java.util.List;
     this.addressDAO = addressDAO;
   }
 
-  @GetMapping("/addresses") public ResponseEntity<List<Address>> getAll()
+  @GetMapping("/addresses") public ResponseEntity<List<Address>> getAllAddress()
   {
     try
     {
       LOGGER.info("GET request received for /addresses");
-      return ResponseEntity.ok(addressDAO.getAll());
+      return ResponseEntity.ok(addressDAO.getAllAddress());
     }
     catch (Exception e)
     {
@@ -38,7 +38,7 @@ import java.util.List;
     }
   }
 
-  @PostMapping("/addresses") public ResponseEntity<Address> create(
+  @PostMapping("/addresses") public ResponseEntity<Address> createAddress(
       @RequestBody Address address)
   {
     if (address == null)
@@ -47,7 +47,7 @@ import java.util.List;
     }
     try
     {
-      return ResponseEntity.ok(addressDAO.creteNewAddress(address));
+      return ResponseEntity.ok(addressDAO.createNewAddress(address));
     }
     catch (Exception e)
     {

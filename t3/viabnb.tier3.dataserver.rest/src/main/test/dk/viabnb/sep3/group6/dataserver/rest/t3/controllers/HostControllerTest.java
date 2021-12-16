@@ -1,6 +1,6 @@
 package dk.viabnb.sep3.group6.dataserver.rest.t3.controllers;
 
-import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.Host.HostDAO;
+import dk.viabnb.sep3.group6.dataserver.rest.t3.dao.host.HostDAO;
 import dk.viabnb.sep3.group6.dataserver.rest.t3.models.Host;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +17,6 @@ class HostControllerTest
 {
   private HostDAO hostDAO;
   private HostController controller;
-  private Host host;
 
   @BeforeEach void setup()
   {
@@ -25,7 +24,7 @@ class HostControllerTest
     controller = new HostController(hostDAO);
   }
 
-  @Test public void RegisterHostNullRequestReturnsBadRequest()
+  @Test public void registerHostNullRequestReturnsBadRequest()
   {
     //arrange
     Host host = null;
@@ -35,7 +34,7 @@ class HostControllerTest
         controller.createHost(host));
   }
 
-  @Test void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNull()
+  @Test void controllerReturnsInternalServerErrorWhenRepositoryReturnsNull()
   {
     //arrange
     Host host = new Host(1, "test", "test", "12345678", "email@test.tt",
@@ -47,7 +46,7 @@ class HostControllerTest
         controller.createHost(host));
   }
 
-  @Test void ControllerReturnsInternalServerErrorWhenRepositoryReturnsNullTest()
+  @Test void controllerReturnsInternalServerErrorWhenRepositoryReturnsNullTest()
   {
     //aarange
     Host host = new Host(1, "test", "test", "12345678", "email@test.tt",

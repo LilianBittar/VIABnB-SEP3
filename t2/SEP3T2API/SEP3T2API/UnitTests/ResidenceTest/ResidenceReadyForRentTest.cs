@@ -27,7 +27,7 @@ namespace UnitTests.ResidenceTest
         public void SetUp()
         {
             _residenceRepository = new Mock<IResidenceRepository>();
-            _residenceService = new ResidenceServiceImpl(_residenceRepository.Object,_cityService,_addressService);
+            _residenceService = new ResidenceService(_residenceRepository.Object,_cityService,_addressService);
         }
         
         [TestCase(1,3)]

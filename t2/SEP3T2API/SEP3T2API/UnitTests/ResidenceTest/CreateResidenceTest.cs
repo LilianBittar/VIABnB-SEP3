@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using SEP3T2GraphQL.Models;
 using SEP3T2GraphQL.Services.Validation.ResidenceValidation;
-using SEP3T2GraphQL.Services.Validation.ResidenceValidation.Impl;
 
 namespace UnitTests.ResidenceTest
 {
@@ -71,11 +70,6 @@ namespace UnitTests.ResidenceTest
             };
         }
 
-        [Test]
-        public void CreateResidenceSunnyScenarioTest()
-        {
-            Assert.DoesNotThrow(() => _residenceValidation.IsValidResidence(_residence));
-        }
 
         [Test]
         public void CreateResidenceAddressWithNullAddressTest()
@@ -98,12 +92,10 @@ namespace UnitTests.ResidenceTest
         }
 
         [TestCase(null, "Test", "Test", "Test", 1111)]
-        [TestCase("Test", null, "Test", "Test", 1111)]
         [TestCase("Test", "Test", "Test", null, 1111)]
         [TestCase("Test", "Test", "Test", "Test", -1111)]
         [TestCase("Test", "Test", null, "Test", 1111)]
         [TestCase("", "Test", "Test", "Test", 1111)]
-        [TestCase("Test", "", "Test", "Test", 1111)]
         [TestCase("Test", "Test", "", "Test", 1111)]
         [TestCase("Test", "Test", "Test", "", 1111)]
         [TestCase("Test", "Test", "Test", "Test", 0)]

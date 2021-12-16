@@ -58,7 +58,7 @@ namespace SEP3T2GraphQL.Services
         /// <exception cref="System.ArgumentException">If the Residence's Address's City's name is null or empty string</exception>
         /// <exception cref="System.ArgumentException">If the Residence's Address's City's zip code is less that 1000 and greater that 9999</exception>
         /// <exception cref="System.Exception">If API cant execute the method</exception>
-        Task<Residence>  CreateResidenceAsync(Residence residence); 
+        Task<Residence> CreateResidenceAsync(Residence residence); 
         /// <summary>
         /// Get a list of Residence objects by a given parameter via Repository
         /// </summary>

@@ -6,6 +6,6 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes.HostResponseTypes
     public class UpdateHostMutationResponseType
     {
         [JsonProperty("updateHostStatus")]
-        public Host updateHostStatus { get; set; }
+        public Host UpdateHostStatus { get; set; }
     }
 }

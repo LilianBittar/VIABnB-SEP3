@@ -6,7 +6,7 @@ namespace SEP3BlazorT1Client.Data.Impl.ResponseTypes.RentRequestResponseTypes
 {
     public class RentRequestListResponseType
     {
-        [JsonProperty("allRentRequests")]
+        [JsonProperty("allRentRequestsByHostId")]
         public IEnumerable<RentRequest> RentRequests { get; set; } = new List<RentRequest>();
     }
 }

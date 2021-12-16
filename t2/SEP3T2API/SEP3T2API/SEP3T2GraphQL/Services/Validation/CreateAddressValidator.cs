@@ -19,7 +19,7 @@ namespace SEP3T2GraphQL.Services.Validation
         /// <param name="address"></param>
         /// <exception cref="ArgumentException">If  <c>StreetName</c>, <c>StreetNumber</c>, <c>HouseNumber</c> or <c>City</c>, of <c>address</c> is null or empty </exception>
         /// <exception cref="ArgumentException">If <c>StreetName</c> of <c>address</c> contains any chars that is not letter</exception>
-        public void Validate(Address address)
+        public void ValidateAddress(Address address)
         {
             if (address == null)
             {

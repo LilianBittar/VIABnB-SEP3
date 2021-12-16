@@ -1,7 +1,7 @@
 @page "/RentRequests"
 <AuthorizeView Policy="MustBeApprovedHost">
     <Authorized>
-        <p>@ErrorMessage</p>
+        <p>@_errorMessage</p>
         <div class="d-flex justify-content-center">
             <MatTabGroup Style="width: 500px">
                 <MatTab Label="Active Rent Requests">
@@ -48,6 +48,7 @@
                                         </div>
                                         <div class="form-group">
                                             <p>Guest reviews: @item.Guest.GuestReviews.Count <button class="btn btn-outline-dark" @onclick="(() => ViewGuestReviews(item.Guest.Id))">See details</button></p>
+                                            <MatButton Label="Give review" OnClick="@(() => NavigationManager.NavigateTo($"reviewguest/{item.Guest.Id}"))"/>
                                         </div>
                                         <div class="form-group">
                                             <p>First Name: @item.Guest.FirstName</p>
@@ -122,6 +123,7 @@
                                         </div>
                                         <div class="form-group">
                                             <p>Guest review: @item.Guest.GuestReviews.Count <button class="btn btn-outline-dark" @onclick="(() => ViewGuestReviews(item.Guest.Id))">See details</button></p>
+                                            <MatButton Label="Give guest review" OnClick="@(() => NavigationManager.NavigateTo($"reviewguest/{item.Guest.Id}"))"/>
                                         </div>
                                         <div class="form-group">
                                             <p>First Name: @item.Guest.FirstName</p>

@@ -80,7 +80,7 @@ namespace SEP3BlazorT1Client.Data.Impl
             HandleErrorResponse(graphQlResponse);
             return graphQlResponse.Data.Residence;
         }
-        public async Task<IList<Residence>> GetResidencesByHostIdAsync(int Id)
+        public async Task<IList<Residence>> GetResidencesByHostIdAsync(int id)
         {
             var residenceQuery = new GqlQuery()
             {
@@ -141,7 +141,7 @@ namespace SEP3BlazorT1Client.Data.Impl
                   }
                 }
               ",
-                Variables = new {hostId = Id}
+                Variables = new {hostId = id}
             };
             var graphQlResponse = await _client.PostQueryAsync<ResidenceListQueryResponseType>(residenceQuery);
             HandleErrorResponse(graphQlResponse);

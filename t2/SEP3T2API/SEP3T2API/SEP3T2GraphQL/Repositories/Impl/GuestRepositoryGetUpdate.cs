@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -35,13 +36,18 @@ namespace SEP3T2GraphQL.Repositories.Impl
 
         public async Task<Guest> GetGuestByEmailAsync(string email)
         {
-            var response = await _client.GetAsync($"{Uri}?={email}");
+            var response = await _client.GetAsync($"{Uri}?email={email}");
             await HandleErrorResponse(response);
             var result = await response.Content.ReadAsStringAsync();
+            
             var guestToReturn = JsonSerializer.Deserialize<Guest[]>(result, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
+            if (!guestToReturn.Any())
+            {
+                return null; 
+            }
             return guestToReturn[0];
         }
 

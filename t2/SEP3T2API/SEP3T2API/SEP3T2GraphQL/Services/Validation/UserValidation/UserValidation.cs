@@ -28,23 +28,23 @@ namespace SEP3T2GraphQL.Services.Validation.UserValidation
             throw new ArgumentException("Invalid lastname");
         }
 
-        private static bool IsValidPassword(string passWord)
+        private static bool IsValidPassword(string password)
         {
             int validConditions = 0;
-            if (passWord == null)
+            if (password == null)
             {
                 throw new ArgumentException("invalid password");
             }
 
-            if (passWord.Length < 8)
+            if (password.Length < 8)
             {
                 throw new ArgumentException("password must at least be a length of 8 characters");
             }
 
 
-            foreach (var c in passWord)
+            foreach (var c in password)
             {
-                if (passWord.Any(char.IsLower))
+                if (password.Any(char.IsLower))
                 {
                     validConditions++;
                     break;
@@ -53,9 +53,9 @@ namespace SEP3T2GraphQL.Services.Validation.UserValidation
                 throw new ArgumentException("password must contain at least one lowercase letter");
             }
 
-            foreach (var c in passWord)
+            foreach (var c in password)
             {
-                if (passWord.Any(char.IsUpper))
+                if (password.Any(char.IsUpper))
                 {
                     validConditions++;
                     break;
@@ -64,9 +64,9 @@ namespace SEP3T2GraphQL.Services.Validation.UserValidation
                 throw new ArgumentException("password must contain at least one uppercase letter");
             }
 
-            foreach (var c in passWord)
+            foreach (var c in password)
             {
-                if (passWord.Any(char.IsDigit))
+                if (password.Any(char.IsDigit))
                 {
                     validConditions++;
                     break;
