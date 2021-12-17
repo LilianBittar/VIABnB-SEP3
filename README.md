@@ -9,7 +9,7 @@ The system has been developed from scratch by: <br>
 
 - Michael Bui (https://github.com/michaelbui99)
 - Kutaiba Nezar Kashmar (https://github.com/Kutaiba-Nezar-Kashmar)
-- Lilian Bittar (https://github.com/Kasper-S-Jensen)
+- Lilian Bittar (https://github.com/LilianBittar)
 - Kasper Steinmeyer Jensen (https://github.com/Kasper-S-Jensen)
 
 ## Tech Stack
