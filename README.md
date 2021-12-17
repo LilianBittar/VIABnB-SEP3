@@ -1,7 +1,7 @@
 # VIABnB-SEP3
 
-Third Semester Project as part of the Software Engineering Degree at VIA University College. <br>
-VIA BnB is an AirBnB-like system developed for the students of VIA with the goal of providing affordable tempoary accommodation in relation internships and more.
+Third semester project developed as part of the Software Engineering Degree at VIA University College. <br>
+VIA BnB is an AirBnB-like system developed for the students of VIA with the goal of providing affordable temporary accommodation in relation to internships and more.
 
 ## Contributors
 
