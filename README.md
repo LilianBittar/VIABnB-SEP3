@@ -33,4 +33,4 @@ The system has been developed from scratch by: <br>
 
 ## Video Demo
 
-[![Video Demo](https://i3.ytimg.com/vi/SHCDYEuTTZg/maxresdefault.jpghttp://img.youtube.com/vi/FrDp7ZJk8D0/0.jpg)](https://www.youtube.com/watch?v=SHCDYEuTTZg)
+[![Video Demo](http://i3.ytimg.com/vi/SHCDYEuTTZg/hqdefault.jpg)](https://www.youtube.com/watch?v=SHCDYEuTTZg)
